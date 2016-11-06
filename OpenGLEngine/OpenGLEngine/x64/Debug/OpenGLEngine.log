@@ -1,0 +1,34 @@
+﻿  main.cpp
+  Utility.cpp
+  Generating Code...
+  Compiling...
+  ShaderLibrary.cpp
+  Loader.cpp
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(49): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(52): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(86): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(93): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(100): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(117): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(132): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(179): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\loader.cpp(190): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Interface2D.cpp
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\interface2d.cpp(36): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'string'
+  Generating Code...
+  Compiling...
+  ModelLibrary.cpp
+  Generating Code...
+  Compiling...
+  Texture.cpp
+  RenderableObject.cpp
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\renderableobject.cpp(180): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ObjectInstance.cpp
+  Generating Code...
+  Compiling...
+  PrimitiveCollisions.cpp
+  Generating Code...
+c:\users\dan\desktop\engine\engine\openglengine\openglengine\primitivecollisions.cpp(174): warning C4789: buffer 'normals' of size 72 bytes will be overrun; 12 bytes will be written starting at offset 72
+  OpenGLEngine.vcxproj -> C:\Users\Dan\Desktop\Engine\Engine\OpenGLEngine\x64\Debug\OpenGLEngine.exe
+  OpenGLEngine.vcxproj -> C:\Users\Dan\Desktop\Engine\Engine\OpenGLEngine\x64\Debug\OpenGLEngine.pdb (Full PDB)
