@@ -1,0 +1,34 @@
+﻿main.obj : error LNK2019: unresolved external symbol _SDL_GetError referenced in function "bool __cdecl init(void)" (?init@@YA_NXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_CreateWindow referenced in function "bool __cdecl init(void)" (?init@@YA_NXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_DestroyWindow referenced in function "void __cdecl close(void)" (?close@@YAXXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_GL_SetAttribute referenced in function "bool __cdecl init(void)" (?init@@YA_NXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_GL_CreateContext referenced in function "bool __cdecl init(void)" (?init@@YA_NXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_GL_SetSwapInterval referenced in function "bool __cdecl init(void)" (?init@@YA_NXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_GL_SwapWindow referenced in function _main
+main.obj : error LNK2019: unresolved external symbol _SDL_StartTextInput referenced in function _main
+main.obj : error LNK2019: unresolved external symbol _SDL_StopTextInput referenced in function _main
+main.obj : error LNK2019: unresolved external symbol _SDL_GetMouseState referenced in function _main
+main.obj : error LNK2019: unresolved external symbol _SDL_PollEvent referenced in function _main
+main.obj : error LNK2019: unresolved external symbol _SDL_Init referenced in function "bool __cdecl init(void)" (?init@@YA_NXZ)
+main.obj : error LNK2019: unresolved external symbol _SDL_Quit referenced in function "void __cdecl close(void)" (?close@@YAXXZ)
+main.obj : error LNK2001: unresolved external symbol ___glewAttachShader
+main.obj : error LNK2001: unresolved external symbol ___glewCompileShader
+main.obj : error LNK2001: unresolved external symbol ___glewCreateProgram
+main.obj : error LNK2001: unresolved external symbol ___glewCreateShader
+main.obj : error LNK2001: unresolved external symbol ___glewDeleteProgram
+main.obj : error LNK2001: unresolved external symbol ___glewGetAttribLocation
+main.obj : error LNK2001: unresolved external symbol ___glewGetProgramInfoLog
+main.obj : error LNK2001: unresolved external symbol ___glewGetProgramiv
+main.obj : error LNK2001: unresolved external symbol ___glewGetShaderInfoLog
+main.obj : error LNK2001: unresolved external symbol ___glewGetShaderiv
+main.obj : error LNK2001: unresolved external symbol ___glewIsProgram
+main.obj : error LNK2001: unresolved external symbol ___glewIsShader
+main.obj : error LNK2001: unresolved external symbol ___glewLinkProgram
+main.obj : error LNK2001: unresolved external symbol ___glewShaderSource
+main.obj : error LNK2001: unresolved external symbol _glewExperimental
+C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\3rdParty\SDL\lib\SDL2.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'X86'
+C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\3rdParty\SDL\lib\SDL2main.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'X86'
+C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\3rdParty\SDL\lib\SDL2_mixer.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'X86'
+C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\3rdParty\SDL\lib\SDL2_ttf.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'X86'
+C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\3rdParty\SDL\lib\SDL2_image.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'X86'
+C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\Debug\EasyFrameBuffer.exe : fatal error LNK1120: 28 unresolved externals

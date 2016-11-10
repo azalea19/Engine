@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\dan\desktop\engine\qnd\easyframebuffer\easyframebuffer\main.cpp(301): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  EasyFrameBuffer.vcxproj -> C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\x64\Debug\EasyFrameBuffer.exe
+  EasyFrameBuffer.vcxproj -> C:\Users\Dan\Desktop\Engine\QND\EasyFrameBuffer\x64\Debug\EasyFrameBuffer.pdb (Full PDB)
