@@ -30,6 +30,9 @@
     <Filter Include="Source\Utility">
       <UniqueIdentifier>{2dbd68e9-da2d-4787-99df-65bc5be9d60e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{3e9af873-0ad3-4865-a334-6293867f23cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,6 +79,15 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ExampleScene.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,5 +139,34 @@
     <ClInclude Include="Shader.h">
       <Filter>Source\Libraries</Filter>
     </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ExampleScene.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaultShader.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="defaultShader.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="orthoShader.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="orthoShader.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="textured.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="textured.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
