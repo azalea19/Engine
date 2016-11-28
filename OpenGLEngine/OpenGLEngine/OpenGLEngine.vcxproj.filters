@@ -33,6 +33,15 @@
     <Filter Include="Source\Game">
       <UniqueIdentifier>{3e9af873-0ad3-4865-a334-6293867f23cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\SceneGraph">
+      <UniqueIdentifier>{18741e4f-99e0-459d-b39f-c4ec1692d2bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SceneGraph\Nodes">
+      <UniqueIdentifier>{9779967f-79f9-45bf-9a91-2920f0f0a482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Data Structures">
+      <UniqueIdentifier>{c44c9938-cb18-4f3c-8663-9e866895975e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,6 +97,30 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureNode.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelNode.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshNode.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupNode.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicTextureNode.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicMeshNode.cpp">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="UberShader.cpp">
+      <Filter>Source\Data Structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +180,39 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph.h">
+      <Filter>Source\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicTextureNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicMeshNode.h">
+      <Filter>Source\SceneGraph\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="UberShader.h">
+      <Filter>Source\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

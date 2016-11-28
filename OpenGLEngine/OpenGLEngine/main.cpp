@@ -28,7 +28,6 @@ SDL_Window* screen;
 
 // initializes setting
 void myinit();
-//void Display();
 void GameLoop();
 bool HandleEvents();
 

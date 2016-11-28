@@ -155,13 +155,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="BasicMeshNode.cpp" />
+    <ClCompile Include="BasicTextureNode.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="GroupNode.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeshNode.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLibrary.cpp" />
+    <ClCompile Include="ModelNode.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="ObjectInstance.cpp" />
     <ClCompile Include="PrimitiveCollisions.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
@@ -171,26 +177,39 @@
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureNode.cpp" />
+    <ClCompile Include="UberShader.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="BasicMeshNode.h" />
+    <ClInclude Include="BasicTextureNode.h" />
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="GeometricPrimitives.h" />
+    <ClInclude Include="GroupNode.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Interface2D.h" />
     <ClInclude Include="Loader.h" />
+    <ClInclude Include="MatrixNode.h" />
+    <ClInclude Include="MeshNode.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLibrary.h" />
+    <ClInclude Include="ModelNode.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="ObjectInstance.h" />
     <ClInclude Include="PrimitiveCollisions.h" />
     <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLibrary.h" />
+    <ClInclude Include="UberShader.h" />
+    <ClInclude Include="UniformNode.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureNode.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
