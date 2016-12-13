@@ -7,8 +7,7 @@
 #include <typeinfo>
 #include <GL/glew.h>
 #include <stack>
-
-struct UniformStack;
+#include "UniformStack.h"
 
 struct UberShader
 {
@@ -26,9 +25,6 @@ struct UberShader
 	void Setup();
 
 	
-	void SetupLocations(std::vector<string> custom_attributes, std::vector<string> custom_uniforms);
-
-	
 	unsigned int GetAttributeID(string name) const;
 
 	
@@ -42,45 +38,45 @@ struct UberShader
 
 
 	template<typename T>
-	void transmitUniform(string uniformName, T value) const
+	void TransmitUniform(string uniformName, T value) const
 	{
-		if (hasUniform(uniformName))
-			transmitUniform(uniform(uniformName), value);
+		if (HasUniform(uniformName))
+			TransmitUniform(GetUniformID(uniformName), value);
 		else
 			printf("No uniform with name %s", uniformName.c_str());
 	}
 
 
 	template <typename T>
-	void transmitUniform(int uniformID, T value) const
+	void TransmitUniform(int uniformID, T value) const
 	{
 		printf("Transmit uniform not defined for this type %s", typeid(T).name);
 	}
 
 
 	template <>
-	void transmitUniform(int uniformID, float value) const
+	void TransmitUniform(int uniformID, float value) const
 	{
 		glUniform1f(uniformID, value);
 	}
 
 	
 	template <>
-	void transmitUniform(int uniformID, int value) const
+	void TransmitUniform(int uniformID, int value) const
 	{
 		glUniform1i(uniformID, value);
 	}
 
 	
 	template <>
-	void transmitUniform(int uniformID, mat4 matrix) const
+	void TransmitUniform(int uniformID, mat4 matrix) const
 	{
 		glUniformMatrix4fv(uniformID, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 
 	template <>
-	void transmitUniform(int uniformID, vec3 vector) const
+	void TransmitUniform(int uniformID, vec3 vector) const
 	{
 		glUniform3fv(uniformID, 1, glm::value_ptr(vector));
 	}
@@ -93,6 +89,13 @@ struct UberShader
 
 		UniformStack* st = new UniformStack(defaultValue);
 		m_uniformStacks.emplace(uniformID, st);
+	}
+
+	template<typename T>
+	void AddAttribute(string name)
+	{
+		Gluint attributeID = glGetAttribLocation(m_uid, name.c_str());
+		m_attributes.emplace(name, attributeID);
 	}
 
 	template<typename T>
@@ -131,22 +134,28 @@ struct UberShader
 			{
 				std::stack<int>* st2 = (std::stack<int>*)(st->m_stack);
 				st2->pop();
-				transmitUniform(uniformID, st2->top());
+				TransmitUniform(uniformID, st2->top());
 			}
 			case ut_vec3:
 			{
 				std::stack<vec3>* st2 = (std::stack<vec3>*)(st->m_stack);
 				st2->pop();
-				transmitUniform(uniformID, st2->top());
+				TransmitUniform(uniformID, st2->top());
 			}
 			case ut_mat4:
 			{
 				std::stack<mat4>* st2 = (std::stack<mat4>*)(st->m_stack);
 				st2->pop();
-				transmitUniform(uniformID, st2->top());
+				TransmitUniform(uniformID, st2->top());
 			}
 		}
 	}
+
+	void BindAttribute(GLuint bufferID, string name, GLenum type, GLuint size, GLuint stride = 0);
+
+	void UnbindAttribute(string name);
+
+	void BindTexture(GLuint textureID, string samplerName);
 
 private:
 
@@ -159,72 +168,6 @@ private:
 	std::unordered_map<string, int> m_uniforms;
 	std::unordered_map<int, UniformStack*> m_uniformStacks;
 };
-
-#pragma region UniformStack
-
-enum UniformType
-{
-	ut_int,
-	ut_vec3,
-	ut_mat4
-};
-
-struct UniformStack
-{
-	template <typename T>
-	UniformStack(T const& defaultValue);
-	~UniformStack();
-
-	void* m_stack;
-	UniformType m_type;
-};
-
-template<T>
-UniformStack::UniformStack(T const& defaultValue)
-{
-	printf("Uniform type undefined.");
-	getchar();
-	exit(0);
-}
-
-template<>
-UniformStack::UniformStack(int const& defaultValue)
-	: m_type(ut_int)
-{
-	m_stack = new std::stack<int>();
-}
-
-template<>
-UniformStack::UniformStack(vec3 const& defaultValue)
-	: m_type(ut_vec3)
-{
-	m_stack = new std::stack<vec3>();
-}
-
-template<>
-UniformStack::UniformStack(mat4 const& defaultValue)
-	: m_type(ut_mat4)
-{
-	m_stack = new std::stack<mat4>();
-}
-
-UniformStack::~UniformStack()
-{
-	switch (m_type)
-	{
-		case ut_int:
-			delete ((std::stack<int>*)m_stack);
-			break;
-		case ut_vec3:
-			delete ((std::stack<vec3>*)m_stack);
-			break;
-		case ut_mat4:
-			delete ((std::stack<mat4>*)m_stack);
-			break;
-	}
-}
-
-#pragma endregion
 
 #endif
 

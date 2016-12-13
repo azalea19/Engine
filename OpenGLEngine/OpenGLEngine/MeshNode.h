@@ -15,6 +15,7 @@ struct MeshNode : public Node
 	virtual GLuint GetVertexBufferID() = 0;
 	virtual GLuint GetUVBufferID() = 0;
 	virtual GLuint GetNormalBufferID() = 0;
+	virtual GLuint GetVertexCount() = 0;
 
 };
 

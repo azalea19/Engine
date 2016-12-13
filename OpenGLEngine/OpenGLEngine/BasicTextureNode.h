@@ -3,24 +3,25 @@
 
 #include "GL/glew.h"
 #include "TextureNode.h"
+#include "Types.h"
 
 class SceneGraph;
 
 
 struct BasicTextureNode : TextureNode
 {
-	BasicTextureNode(SceneGraph* scene);
+	BasicTextureNode(SceneGraph* scene, string textureName);
 
 	virtual void enter();
 	virtual void exit();
 
 	virtual GLuint GetTextureID();
 
-	void SetTextureID(GLuint ID);
+	void SetTextureName(string textureName);
 
 private:
 
-	GLuint m_textureID;
+	string m_textureName;
 
 };
 

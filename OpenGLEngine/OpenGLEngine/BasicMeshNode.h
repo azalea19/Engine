@@ -3,10 +3,11 @@
 
 #include "MeshNode.h"
 #include "GL/glew.h"
+#include "Types.h"
 
 struct BasicMeshNode : public MeshNode
 {
-	BasicMeshNode(SceneGraph* scene);
+	BasicMeshNode(SceneGraph* scene, string meshName);
 
 	virtual void enter();
 	virtual void exit();
@@ -14,17 +15,12 @@ struct BasicMeshNode : public MeshNode
 	virtual GLuint GetVertexBufferID();
 	virtual GLuint GetUVBufferID();
 	virtual GLuint GetNormalBufferID();
+	virtual GLuint GetVertexCount();
 
-	void SetVertexBufferID(GLuint ID);
-	void SetUVBufferID(GLuint ID);
-	void SetNormalBufferID(GLuint ID);
+	void SetMesh(string name);
 
 private:
-
-	GLuint m_VertexBufferID;
-	GLuint m_NormalBufferID;
-	GLuint m_UVBUfferID;
-
+	string m_meshName;
 };
 
 #endif

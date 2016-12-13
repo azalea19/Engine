@@ -10,6 +10,16 @@
 #include "SoundManager.h"
 #include "Screen.h"
 #include <GL/glew.h>
+#include "SceneGraph.h"
+#include "ModelNode.h"
+#include "BasicTextureNode.h"
+#include "BasicMeshNode.h"
+#include "HeightMap.h"
+#include "MeshGenerator.h"
+#include "MeshLibrary.h"
+#include "assimp/Importer.hpp"
+#include "assimp\scene.h"
+#include "assimp\postProcess.h"
 
 
 // Important Resources:
@@ -25,11 +35,22 @@
 
 SDL_Window* screen;
 
+SceneGraph* sceneGraph;
+
 
 // initializes setting
 void myinit();
 void GameLoop();
 bool HandleEvents();
+
+ModelNode* CreateModelNode(string meshName)
+{
+	BasicMeshNode* mesh = new BasicMeshNode(sceneGraph, meshName);
+	ModelNode* modelNode = new ModelNode(sceneGraph);
+	modelNode->SetMeshNode(mesh);
+	modelNode->SetTextureNode(nullptr);
+	return modelNode;
+}
 
 bool initSDL()
 {
@@ -81,7 +102,9 @@ void InitGlew()
 
 void myinit()
 {
-
+	Assimp::Importer floja;
+	const aiScene* soldier = floja.ReadFile("soldier.dae", aiProcess_Triangulate);
+	soldier->mMeshes[0]->
 	glClearColor(0, 0, 0, 1.f);
 
 	InitGlew();
@@ -89,6 +112,23 @@ void myinit()
 	ShaderLibrary::getLib()->initShaderLibrary();
 	ModelLibrary::getLib()->initModelLibrary();
 	SoundManager::GetSoundManager()->initSoundManager();
+
+
+
+	WaveSampleArgs margs = { 0, 20, 50 };
+	float* heightMap = CreateHeightMap(512, 512, XWaveSample, &margs);
+	MeshData* meshData = CreateMeshFromHeightMap(512, 512, heightMap);
+	MeshLibrary::GetInstance().AddMesh("XWaveMesh", *meshData);
+
+	free(heightMap);
+	delete meshData;
+
+
+
+
+	sceneGraph = new SceneGraph(90, SCREEN_WIDTH, SCREEN_HEIGHT, 0.1f, 1000.f);
+	sceneGraph->SetRoot(CreateModelNode("XWaveMesh"));
+
 
 }
 
@@ -135,7 +175,7 @@ void Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
+	sceneGraph->Render();
 	// clear buffers 
 
 	glFlush();

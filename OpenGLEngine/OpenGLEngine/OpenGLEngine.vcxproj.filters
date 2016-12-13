@@ -42,6 +42,12 @@
     <Filter Include="Source\Data Structures">
       <UniqueIdentifier>{c44c9938-cb18-4f3c-8663-9e866895975e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Terrain">
+      <UniqueIdentifier>{2514f3fa-5b22-45fc-ad1a-060060c817b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Assimp">
+      <UniqueIdentifier>{da9b0727-482a-4e6b-b195-b5782335d250}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,9 +89,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source\Model Loader</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source\Libraries</Filter>
     </ClCompile>
@@ -93,9 +96,6 @@
       <Filter>Source\Game</Filter>
     </ClCompile>
     <ClCompile Include="ExampleScene.cpp">
-      <Filter>Source\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
     <ClCompile Include="TextureNode.cpp">
@@ -121,6 +121,33 @@
     </ClCompile>
     <ClCompile Include="UberShader.cpp">
       <Filter>Source\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph.cpp">
+      <Filter>Source\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="MCamera.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLibrary.cpp">
+      <Filter>Source\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLibrary.cpp">
+      <Filter>Source\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="HeightMap.cpp">
+      <Filter>Source\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshGenerator.cpp">
+      <Filter>Source\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformStack.cpp">
+      <Filter>Source\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinnedMesh.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +192,6 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Source\Model Loader</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Source\Libraries</Filter>
@@ -214,6 +238,39 @@
     <ClInclude Include="UberShader.h">
       <Filter>Source\Data Structures</Filter>
     </ClInclude>
+    <ClInclude Include="MCamera.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLibrary.h">
+      <Filter>Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLibrary.h">
+      <Filter>Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightMap.h">
+      <Filter>Source\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="MMath.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshGenerator.h">
+      <Filter>Source\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformStack.h">
+      <Filter>Source\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Source\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedMesh.h">
+      <Filter>Source\Assimp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -232,6 +289,12 @@
       <Filter>Source\Shaders</Filter>
     </None>
     <None Include="textured.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="uberShader.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="uberShader.vert">
       <Filter>Source\Shaders</Filter>
     </None>
   </ItemGroup>

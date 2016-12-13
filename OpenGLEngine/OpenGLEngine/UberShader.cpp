@@ -1,7 +1,7 @@
 #include "UberShader.h"
 #include "GL/glew.h"
 
-static GLchar* loadShaderFile(string filePath);
+static GLchar* LoadShaderFile(string filePath);
 static void PrintShaderLog(GLuint shader);
 static void PrintProgramLog(GLuint program);
 
@@ -120,6 +120,31 @@ bool UberShader::HasUniform(string name) const
 	}
 
 	return true;
+}
+
+void UberShader::BindAttribute(GLuint bufferID, string name, GLenum type, GLuint size, GLuint stride)
+{
+	GLuint attributeID = GetAttributeID(name);
+	glEnableVertexAttribArray(attributeID);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+	glVertexAttribPointer(attributeID, size, type, GL_FALSE, stride, NULL);
+}
+
+void UberShader::UnbindAttribute(string name)
+{
+	glDisableVertexAttribArray(GetAttributeID(name));
+}
+
+void UberShader::BindTexture(GLuint textureID, string samplerName)
+{
+	//Set Texture unit 0 as the current texture unit
+	glActiveTexture(GL_TEXTURE0);
+
+	//bind our texture to the current texture unit
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	//Set our sampler to sample the current texure unit
+	TransmitUniform(samplerName, 0);
 }
 
 static GLchar* LoadShaderFile(string filePath)

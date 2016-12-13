@@ -10,9 +10,12 @@ struct Node
 	virtual void enter() = 0;
 	virtual void exit() = 0;
 
+protected:
+	SceneGraph* GetSceneGraph();
+
 private:
 
-	SceneGraph* m_scene;
+	SceneGraph* m_sceneGraph;
 };
 
 #endif

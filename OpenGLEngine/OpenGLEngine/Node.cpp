@@ -2,5 +2,10 @@
 
 Node::Node(SceneGraph * scene)
 {
-	m_scene = scene;
+	m_sceneGraph = scene;
+}
+
+SceneGraph * Node::GetSceneGraph()
+{
+	return m_sceneGraph;
 }

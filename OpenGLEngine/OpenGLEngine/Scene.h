@@ -20,7 +20,7 @@ CHANGE LOG:
 
 #include <vector>
 #include "Agent.h"
-#include "Object.h"
+//#include "Object.h"
 
 class Scene
 {

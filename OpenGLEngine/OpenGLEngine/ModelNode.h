@@ -7,16 +7,19 @@
 struct MeshNode;
 struct TextureNode;
 
-struct ModelNode : Node
+struct ModelNode : public Node
 {
+	ModelNode(SceneGraph* sceneGraph);
 	virtual void enter();
 	virtual void exit();
+
+	void SetMeshNode(MeshNode* node);
+	void SetTextureNode(TextureNode* node);
 
 private:
 
 	MeshNode* m_mesh;
 	TextureNode* m_texture;
-
 };
 
 #endif

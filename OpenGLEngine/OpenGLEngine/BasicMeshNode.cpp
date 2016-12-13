@@ -1,4 +1,5 @@
 #include "BasicMeshNode.h"
+#include "MeshLibrary.h"
 
 void BasicMeshNode::enter()
 {
@@ -10,36 +11,32 @@ void BasicMeshNode::exit()
 
 GLuint BasicMeshNode::GetVertexBufferID()
 {
-	return m_VertexBufferID;
+	return MeshLibrary::GetInstance().GetMesh(m_meshName).m_vertexBufferID;
 }
 
 GLuint BasicMeshNode::GetUVBufferID()
 {
-	return m_UVBUfferID;
+	return MeshLibrary::GetInstance().GetMesh(m_meshName).m_uvBufferID;
 }
 
 GLuint BasicMeshNode::GetNormalBufferID()
 {
-	return m_NormalBufferID;
+	return MeshLibrary::GetInstance().GetMesh(m_meshName).m_normalBufferID;
 }
 
-void BasicMeshNode::SetVertexBufferID(GLuint ID)
+GLuint BasicMeshNode::GetVertexCount()
 {
-	m_VertexBufferID = ID;
+	return MeshLibrary::GetInstance().GetMesh(m_meshName).m_vertexCount;
 }
 
-void BasicMeshNode::SetUVBufferID(GLuint ID)
+void BasicMeshNode::SetMesh(string name)
 {
-	m_UVBUfferID = ID;
+	m_meshName = name;
 }
 
-void BasicMeshNode::SetNormalBufferID(GLuint ID)
-{
-	m_NormalBufferID = ID;
-}
-
-BasicMeshNode::BasicMeshNode(SceneGraph * scene)
+BasicMeshNode::BasicMeshNode(SceneGraph * scene, string meshName)
 	: MeshNode(scene)
+	, m_meshName(meshName)
 {
 
 }
