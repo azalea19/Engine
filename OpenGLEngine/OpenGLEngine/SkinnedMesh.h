@@ -86,6 +86,7 @@ enum VB_TYPES
 
 class SkinnedMesh
 {
+public:
 	SkinnedMesh();
 
 	~SkinnedMesh();
@@ -112,7 +113,7 @@ private:
 	const aiNodeAnim* FindNodeAnim(const aiAnimation* pAnimation, const string nodeName);
 	void ReadNodeHeirarchy(float animationTime, const aiNode* pNode, const mat4& parentTransform);
 	bool InitFromScene(const aiScene* pScene, const string& filename);
-	void InitMesh(int meshIndex, std::vector<vec3>* positions, std::vector<vec3>& normals, std::vector<vec2>& texCoords, std::vector<VertexBoneData>& bones, std::vector<int>& indices);
+	void InitMesh(int meshIndex, const aiMesh* pAiMesh, std::vector<vec3>& positions, std::vector<vec3>& normals, std::vector<vec2>& texCoords, std::vector<VertexBoneData>& bones, std::vector<int>& indices);
 	void LoadBones(int meshIndex, const aiMesh* pAiMesh, std::vector<VertexBoneData>& bones);
 	bool InitMaterials(const aiScene* pScene, const string& filename);
 	

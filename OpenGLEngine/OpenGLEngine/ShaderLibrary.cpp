@@ -36,6 +36,8 @@ void ShaderLibrary::initShaderLibrary()
 
 	//ShaderLibrary::getLib()->addShader("colouredLight", CreateVector(string("mvp"), string("diffuse")), CreateVector(string("position"), string("uvIn")));
 	//ShaderLibrary::getLib()->addShader("orthoShader", CreateVector(string("diffuse"), string("width"), string("height")), CreateVector(string("position"), string("uvIn")));
+
+	ShaderLibrary::getLib()->addShader("skinning", CreateVector(string("mvp"), string("modelMatrix"), string("BONES")), CreateVector(string("Position"), string("TexCoord"), string("Normal"), string("BoneIDs"), string("Weights")));
 }
 
 void ShaderLibrary::addShader(string name, std::vector<string> uniforms, std::vector<string> attributes)

@@ -149,6 +149,30 @@
     <ClCompile Include="SkinnedMesh.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpToGLM.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Bimap.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneKeySequence.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="NewMesh.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="NewModel.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -271,6 +295,20 @@
     <ClInclude Include="SkinnedMesh.h">
       <Filter>Source\Assimp</Filter>
     </ClInclude>
+    <ClInclude Include="NewModel.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="NewMesh.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AssimpToGLM.h" />
+    <ClInclude Include="Bimap.h" />
+    <ClInclude Include="BoneKeySequence.h" />
+    <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Material.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -295,6 +333,12 @@
       <Filter>Source\Shaders</Filter>
     </None>
     <None Include="uberShader.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="skinning.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="skinning.vert">
       <Filter>Source\Shaders</Filter>
     </None>
   </ItemGroup>

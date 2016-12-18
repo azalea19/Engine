@@ -97,6 +97,27 @@ struct Shader
 		glUniform3fv(uniformID, 1, glm::value_ptr(vector));
 	}
 
+	template<typename T>
+	void transmitUniformArray(string uniformName, T* value, int count) const
+	{
+		if (hasUniform(uniformName))
+			transmitUniformArray(uniform(uniformName), value, count);
+		else
+			printf("No uniform with name %s", uniformName.c_str());
+	}
+
+	template <typename T>
+	void transmitUniformArray(int uniformID, T* value, int count) const
+	{
+		printf("Transmit uniform not defined for this type %s", typeid(T).name);
+	}
+
+	template <>
+	void transmitUniformArray(int uniformID, mat4* matrix, int count) const
+	{
+		glUniformMatrix4fv(uniformID, count, GL_FALSE, (GLfloat*)matrix);
+	}
+
 
 private:
 

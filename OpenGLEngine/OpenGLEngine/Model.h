@@ -60,7 +60,6 @@ struct Model
 	float GetTriangleArea(triangle const& tri);
 
 
-	
 	void GenerateSmoothNormals();
 
 	

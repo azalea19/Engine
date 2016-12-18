@@ -109,8 +109,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp-ep64-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,14 +149,18 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp-ep64-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AssimpToGLM.cpp" />
     <ClCompile Include="BasicMeshNode.cpp" />
     <ClCompile Include="BasicTextureNode.cpp" />
+    <ClCompile Include="Bimap.cpp" />
+    <ClCompile Include="BoneKeySequence.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
     <ClCompile Include="GroupNode.cpp" />
     <ClCompile Include="HeightMap.cpp" />
@@ -164,6 +168,7 @@
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MCamera.cpp" />
     <ClCompile Include="MeshGenerator.cpp" />
     <ClCompile Include="MeshLibrary.cpp" />
@@ -171,6 +176,8 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLibrary.cpp" />
     <ClCompile Include="ModelNode.cpp" />
+    <ClCompile Include="NewMesh.cpp" />
+    <ClCompile Include="NewModel.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="ObjectInstance.cpp" />
     <ClCompile Include="PrimitiveCollisions.cpp" />
@@ -179,6 +186,7 @@
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLibrary.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMesh.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -190,6 +198,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AssimpToGLM.h" />
+    <ClInclude Include="Bimap.h" />
+    <ClInclude Include="BoneKeySequence.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="NewMesh.h" />
+    <ClInclude Include="NewModel.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SkinnedMesh.h" />
     <ClInclude Include="BasicMeshNode.h" />
     <ClInclude Include="BasicTextureNode.h" />
@@ -235,6 +251,8 @@
     <None Include="defaultShader.vert" />
     <None Include="orthoShader.frag" />
     <None Include="orthoShader.vert" />
+    <None Include="skinning.frag" />
+    <None Include="skinning.vert" />
     <None Include="textured.frag" />
     <None Include="textured.vert" />
     <None Include="uberShader.frag" />
