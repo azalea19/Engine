@@ -1,91 +1,45 @@
 #ifndef RenderableObject_h__
 #define RenderableObject_h__
 
-
-#include <stdio.h>
-#include "Model.h"
-#include "Loader.h"
-#include "Texture.h"
+#include "GL/glew.h"
 #include "Types.h"
 
-/**
-* @file   RenderableObject.h
-* @Author Maddisen Topaz
-* @date   S2, 2016
-* @brief  The renderable object struct.
-*
-* The renderable object struct takes a model and its data and transforms it in to something that can be rendered.
-* It is a handle to the data on the video card representing a model.
-*/
+class Model;
 
-struct RenderSubObject
+enum BUFFER_TYPES
 {
-	uint32_t firstFace;	
-	uint32_t faceCount;	
-	GLint texture;		
+  BT_INDEX_BUFFER,
+  BT_VERTEX_BUFFER,
+  BT_NORMAL_BUFFER,
+  BT_TEXCOORD_BUFFER,
+  BT_BONE_ID_BUFFER,
+  BT_BONE_WEIGHT_BUFFER,
+  BT_NUM_BUFFERS //Gives back the number of buffer types (5)
 };
 
-
-struct RenderableObject
+class RenderableObject
 {
 public:
-	std::vector<RenderSubObject> subObjects;		
 
+  RenderableObject();
+  RenderableObject(string const& name, string const& filename);
+  ~RenderableObject();
 
-	RenderableObject(string modelPath, bool normalized = false);
+  void UpdateBones(float time);
 
+  void Initialise();
 
-	void GenerateSubObjects();
+  void Render( mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, float time = 0);
 
-
-	int SubObjectCount();
-
-
-	std::vector<glm::vec3> GetVertices(int subIndex);
-
-
-
-	bool IsClimbable(int subIndex);
-
-	
-	bool generateBuffers();
-
-	
-	bool uploadBuffers();
-
-	
-	void UploadMVPMatrix(glm::mat4 projectionMatrix, glm::mat4 viewMatrix, glm::mat4 modelMatrix);
-
-	
-	void Render(glm::mat4 viewMatrix, glm::mat4 projectionMatrix, glm::mat4 modelMatrix);
-
-	
-	string GetModel() const { return model; }
-
-	
-	GLint GetTexture() const { return texture; }
-
-	
-	const Model & GetMyModel() const { return *myModel; }
-
-
-	GLuint GetgVBO() const { return gVBO; }
-
-	
-	GLuint GetgUVBO() const { return gUVBO; }
+  void Destroy();
 
 private:
 
-	string model;		
-	GLint texture;		
-	Model* myModel;		
-
-	GLuint gVBO;		
-	GLuint gUVBO;		
-	GLuint gNBO;		
-
+  Model* m_pModel;
+  GLuint m_VAO;
+  GLuint m_buffers[BT_NUM_BUFFERS];
 
 };
 
 
-#endif // !ModelHandler_h__
+#endif // RenderableObject_h__

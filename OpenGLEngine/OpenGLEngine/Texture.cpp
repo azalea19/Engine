@@ -272,6 +272,10 @@ GLuint loadImage(const char * imagepath)
 	GLuint TextureID = 0;
 
 	SDL_Surface* rawSurface = IMG_Load(imagepath);
+
+	if (!rawSurface)
+		return 1;
+
 	SDL_Surface* convertedSurface = ConvertToRGBA(rawSurface);
 	SDL_Surface* flippedSurface = FlipSurface(convertedSurface);
 

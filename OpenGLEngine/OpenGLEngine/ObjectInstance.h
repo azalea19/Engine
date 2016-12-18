@@ -48,7 +48,7 @@ struct ObjectInstance
 
 
 
-	void Render(glm::mat4 viewMatrix, glm::mat4 projectionMatrix, glm::mat4 parentModelMatrix = glm::mat4());
+	void Render(glm::mat4 worldMatrix, glm::mat4 viewMatrix, glm::mat4 projectionMatrix, float time = 0);
 
 
 

@@ -1,175 +1,136 @@
 #include "Model.h"
-#include "MMath.h"
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+#include "Material.h"
+#include "Skeleton.h"
+#include "Mesh.h"
+#include "Utility.h"
 
-void Model::CenterModel()
+#define ASSIMP_LOAD_FLAGS (aiProcess_Triangulate | aiProcess_GenSmoothNormals /*| aiProcess_FlipUVs*/ | aiProcess_JoinIdenticalVertices | aiProcess_LimitBoneWeights )
+
+
+Model::Model()
 {
-  float minX = FLT_MAX;
-  float minY = FLT_MAX;
-  float minZ = FLT_MAX;
-  float maxX = -FLT_MAX;
-  float maxY = -FLT_MAX;
-  float maxZ = -FLT_MAX;
+}
 
-  for (uint32_t i = 0; i < vertices.size(); i++)
+Model::Model(const string& name, const string& filename)
+  :m_name(name)
+{
+  Assimp::Importer im;
+  const aiScene* pScene = im.ReadFile(filename,ASSIMP_LOAD_FLAGS);
+  LoadAssimpMaterials(pScene);
+  LoadAssimpSkeleton(pScene);
+  LoadAssimpMeshes(pScene);
+  LoadVertexAttributes();
+}
+
+void Model::LoadAssimpMaterials(const aiScene* pScene)
+{
+  char materialName[1024];
+  for (int i = 0; i < pScene->mNumMaterials; i++)
   {
-    minX = std::min(minX, vertices[i].x);
-    minY = std::min(minY, vertices[i].y);
-    minZ = std::min(minZ, vertices[i].z);
-    maxX = std::max(maxX, vertices[i].x);
-    maxY = std::max(maxY, vertices[i].y);
-    maxZ = std::max(maxZ, vertices[i].z);
+    sprintf_s(materialName, "%s_Material%d", m_name.c_str(), i);
+    m_materials.push_back(new Material(materialName, pScene->mMaterials[i]));
   }
-  float xo = (minX + maxX) / 2;
-  float yo = (minY + maxY) / 2;
-  float zo = (minZ + maxZ) / 2;
+}
 
-  for (uint32_t i = 0; i < vertices.size(); i++)
+void Model::LoadAssimpSkeleton(const aiScene* pScene)
+{
+  pSkeleton = new Skeleton(pScene);
+}
+
+void Model::LoadAssimpMeshes(const aiScene* pScene)
+{
+  for (int i = 0; i < pScene->mNumMeshes; i++)
   {
-    vertices[i].x -= xo;
-    vertices[i].y -= yo;
-    vertices[i].z -= zo;
+    m_meshes.push_back(new Mesh(pScene->mMeshes[i], pSkeleton->GetBoneLookup()));
   }
 }
 
-void Model::Normalize()
+void Model::LoadVertexAttributes()
 {
-	float minX = FLT_MAX;
-	float minY = FLT_MAX;
-	float minZ = FLT_MAX;
-	float maxX = -FLT_MAX;
-	float maxY = -FLT_MAX;
-	float maxZ = -FLT_MAX;
-
-	for (uint32_t i = 0; i < vertices.size(); i++)
-	{
-		minX = mMin(minX, vertices[i].x);
-		minY = mMin(minY, vertices[i].y);
-		minZ = mMin(minZ, vertices[i].z);
-		maxX = mMax(maxX, vertices[i].x);
-		maxY = mMax(maxY, vertices[i].y);
-		maxZ = mMax(maxZ, vertices[i].z);
-	}
-
-	float scale = maxX - minX;
-	scale = mMax(scale, maxY - minY);
-	scale = mMax(scale, maxZ - minZ);
-	scale = 1.0f / scale;
-
-	for (uint32_t i = 0; i < vertices.size(); i++)
-	{
-		vertices[i].x = (vertices[i].x - minX) * scale - 0.5f;
-		vertices[i].y = (vertices[i].y - minY) * scale - 0.5f;
-		vertices[i].z = (vertices[i].z - minZ) * scale - 0.5f;
-	}
-}
-
-
-vec3 Model::GetTriangleNormal(triangle const& tri)
-{
-	vec3 a = vertices[tri.vIndex[0] - 1];
-	vec3 b = vertices[tri.vIndex[1] - 1];
-	vec3 c = vertices[tri.vIndex[2] - 1];
-	vec3 normal = glm::normalize(glm::cross(glm::normalize(c - a), glm::normalize(b - a)));
-	return normal;
-}
-
-float Model::GetTriangleArea(triangle const& tri)
-{
-	vec3 corners[] = { vertices[tri.vIndex[0] - 1], vertices[tri.vIndex[1] - 1], vertices[tri.vIndex[2] - 1] };
-	vec3 sides[] = { corners[1] - corners[0], corners[2] - corners[1], corners[0] - corners[2] };
-	float length2s[] = { glm::dot(sides[0], sides[0]), glm::dot(sides[1], sides[1]), glm::dot(sides[2], sides[2]) };
-	return (0.25f)*sqrtf(2 * (length2s[0] * length2s[1] + length2s[0] * length2s[2] + length2s[1] * length2s[2]) - (length2s[0] * length2s[0] + length2s[1] * length2s[1] + length2s[2] * length2s[2]));
-}
-
-void Model::GenerateSmoothNormals()
-{
-	normals.clear();
-	for (uint32_t i = 0; i < vertices.size(); i++)
-		normals.push_back(vec3(0, 0, 0));
-
-	for (uint32_t i = 0; i < faces.size(); i++)
-	{
-		faces[i].normalIndex[0] = faces[i].vIndex[0];
-		faces[i].normalIndex[1] = faces[i].vIndex[1];
-		faces[i].normalIndex[2] = faces[i].vIndex[2];
-	}
-
-	for (uint32_t i = 0; i < faces.size(); i++)
-	{
-		triangle& tri = faces[i];
-
-		vec3 weightedNormal = GetTriangleNormal(tri) * GetTriangleArea(tri);
-		normals[tri.normalIndex[0] - 1] += weightedNormal;
-		normals[tri.normalIndex[1] - 1] += weightedNormal;
-		normals[tri.normalIndex[2] - 1] += weightedNormal;
-	}
-
-	for (uint32_t i = 0; i < normals.size(); i++)
-	{
-		normals[i] = glm::normalize(normals[i]);
-	}
-}
-
-std::vector<float> Model::GetUVArray()
-{
-  std::vector<float> uv;
-  for (size_t face = 0; face < faces.size(); ++face)
+  for (int i = 0; i < m_meshes.size(); i++)
   {
-    for (size_t corner = 0; corner < 3; ++corner)
-    {
-      uv.push_back(uvs[faces[face].uvIndex[corner] - 1].x);
-      uv.push_back(uvs[faces[face].uvIndex[corner] - 1].y);
-    }
+    std::vector<vec3> const& meshVerts = m_meshes[i]->GetVertices();
+    std::vector<vec3> const& meshNorms = m_meshes[i]->GetNormals();
+    std::vector<vec2> const& meshTexCoords = m_meshes[i]->GetTexCoords(TT_Diffuse);
+    std::vector<vec4> const& meshVertColours = m_meshes[i]->GetVertexColours();
+    std::vector<int> const& meshIndices = m_meshes[i]->GetIndices();
+    std::vector<VertexBoneIDs> const& meshBoneIDs = m_meshes[i]->GetBoneIDs();
+    std::vector<VertexBoneWeights> const& meshBoneWeights = m_meshes[i]->GetBoneWeights();
+
+    m_meshIndexRanges.push_back(IndexRange{ int(m_indices.size()), int(m_vertices.size()), int(meshIndices.size()) });
+
+    VectorConcatenate(m_vertices, meshVerts);
+    VectorConcatenate(m_normals, meshNorms);
+    VectorConcatenate(m_texCoords, meshTexCoords);
+    VectorConcatenate(m_vertexColours, meshVertColours);
+    VectorConcatenate(m_indices, meshIndices);
+    VectorConcatenate(m_boneIDs, meshBoneIDs);
+    VectorConcatenate(m_boneWeights, meshBoneWeights);
+
+
   }
-  return uv;
 }
 
-std::vector<float> Model::GetNormalArray()
+std::vector<vec3> const& Model::GetVertices() const
 {
-  std::vector<float> norms;
-  for (size_t face = 0; face < faces.size(); ++face)
-  {
-    for (size_t corner = 0; corner < 3; ++corner)
-    {
-      norms.push_back(normals[faces[face].normalIndex[corner] - 1].x);
-      norms.push_back(normals[faces[face].normalIndex[corner] - 1].y);
-      norms.push_back(normals[faces[face].normalIndex[corner] - 1].z);
-    }
-  }
-  return norms;
+  return m_vertices;
 }
 
-std::vector<vec3> Model::GetVertexArray(int subIndex)
+std::vector<vec3> const& Model::GetNormals() const
 {
-  TextureData &sub = subObjects[subIndex];
-  std::vector<vec3> verts;
-  for (size_t face = sub.firstFace; face < sub.firstFace + sub.faceCount; ++face)
-  {
-    for (size_t corner = 0; corner < 3; ++corner)
-    {
-      verts.push_back(vertices[faces[face].vIndex[corner] - 1]);
-    }
-  }
-  return verts;
+  return m_normals;
 }
 
-std::vector<float> Model::GetVertexArray()
+std::vector<vec2> const& Model::GetTexCoords() const
 {
-  std::vector<float> verts;
-  for (size_t face = 0; face < faces.size(); ++face)
-  {
-    for (size_t corner = 0; corner < 3; ++corner)
-    {
-      verts.push_back(vertices[faces[face].vIndex[corner] - 1].x);
-      verts.push_back(vertices[faces[face].vIndex[corner] - 1].y);
-      verts.push_back(vertices[faces[face].vIndex[corner] - 1].z);
-    }
-  }
-  return verts;
+  return m_texCoords;
 }
 
-bool Model::IsClimbable(int subIndex)
+std::vector<vec4> const& Model::GetVertexColours() const
 {
-	return subObjects[subIndex].climbable;
+  return m_vertexColours;
 }
 
+std::vector<int> const& Model::GetIndices() const
+{
+  return m_indices;
+}
+
+std::vector<VertexBoneIDs> const& Model::GetBoneIDs() const
+{
+  return m_boneIDs;
+}
+
+std::vector<VertexBoneWeights> const& Model::GetBoneWeights() const
+{
+  return m_boneWeights;
+}
+
+std::vector<mat4> Model::GetBoneTransforms(int animationIndex, float time)
+{
+	return pSkeleton->GetBoneTransforms(animationIndex, time);
+}
+
+IndexRange const& Model::GetMeshIndexRange(int meshIndex) const
+{
+  return m_meshIndexRanges[meshIndex];
+}
+
+Material const& Model::GetMeshMaterial(int meshIndex) const
+{
+  int materialIndex = m_meshes[meshIndex]->GetMaterialIndex();
+  return *(m_materials[materialIndex]);
+}
+
+string const& Model::GetMeshTextureName(int meshIndex, TextureType const& type) const
+{
+  return GetMeshMaterial(meshIndex).GetTextureName(type);
+}
+
+int Model::GetMeshCount() const
+{
+  return m_meshes.size();
+}

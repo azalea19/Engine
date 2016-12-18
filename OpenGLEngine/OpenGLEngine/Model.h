@@ -1,73 +1,66 @@
 #ifndef Model_h__
 #define Model_h__
 
-#include <algorithm>
 #include "Types.h"
+#include <unordered_map>
+#include "Mesh.h"
 
-/**
-* @file   Model.h
-* @Author Maddisen Topaz
-* @date   S2, 2016
-* @brief  The model struct.
-*
-* The model struct contains all the data relating to a model.
-*/
+class Mesh;
+class Skeleton;
+class Material;
+struct aiScene;
 
-
-struct triangle
+struct IndexRange
 {
-	uint32_t vIndex[3];			
-	uint32_t uvIndex[3];			
-	uint32_t normalIndex[3];		
+  //the offset to the 0th index for this mesh
+  int firstIndexOffset;  
+  //the first index of the vertex element in the vertex buffer range
+  int firstVertex;
+  //the number of elements in that range
+  int indexCount;
 };
 
-
-struct TextureData
+class Model
 {
-	bool climbable;				
-	uint32_t firstFace;			
-	uint32_t faceCount;			
-	string texturePath;			
-};
+public:
 
-struct Model
-{
-	std::vector<TextureData> subObjects;		
-	std::vector<vec3> vertices;					
-	std::vector<vec3> normals;					
-	std::vector<vec2> uvs;						
-	std::vector<triangle> faces;				
+  Model();
+  Model(const string& name, const string& filename);
 
-												
-	std::vector<float> GetVertexArray();
+  int GetMeshCount() const;
+  std::vector<vec3> const& GetVertices() const;
+  std::vector<vec3> const& GetNormals() const;
+  std::vector<vec2> const& GetTexCoords() const;
+  std::vector<vec4> const& GetVertexColours() const;
+  std::vector<int> const& GetIndices() const;
+  std::vector<VertexBoneIDs> const& GetBoneIDs() const;
+  std::vector<VertexBoneWeights> const& GetBoneWeights() const;
+  std::vector<mat4> GetBoneTransforms(int animationIndex, float time);
 
-	
-	std::vector<vec3> GetVertexArray(int subIndex);
+  IndexRange const& GetMeshIndexRange(int meshIndex) const;
+  Material const& GetMeshMaterial(int meshIndex) const;
+  string const& GetMeshTextureName(int meshIndex, TextureType const& type) const;
+  
 
-	
-	std::vector<float> GetNormalArray();
+private: 
+	string m_name;
+  std::vector<Mesh*> m_meshes;
+  std::vector<IndexRange> m_meshIndexRanges;
+  std::vector<Material*> m_materials;
+  Skeleton* pSkeleton;
 
+  std::vector<vec3> m_vertices;
+  std::vector<vec3> m_normals;
+  std::vector<vec2> m_texCoords;
+  std::vector<vec4> m_vertexColours;
+  std::vector<int> m_indices;
+  std::vector<VertexBoneIDs> m_boneIDs;
+  std::vector<VertexBoneWeights> m_boneWeights;
 
-	std::vector<float> GetUVArray();
-
-
-	bool IsClimbable(int subIndex);
-
-
-	vec3 GetTriangleNormal(triangle const& tri);
-
-	
-	float GetTriangleArea(triangle const& tri);
-
-
-	void GenerateSmoothNormals();
-
-	
-	void CenterModel();
-
-	
-	void Normalize();
+  void LoadAssimpMaterials(const aiScene* pScene);
+  void LoadAssimpSkeleton(const aiScene* pScene);
+  void LoadAssimpMeshes(const aiScene* pScene);
+  void LoadVertexAttributes();
 
 };
-
 #endif // Model_h__

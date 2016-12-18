@@ -54,4 +54,13 @@ std::vector<T> CreateVector(T val1, Args... args)
 }
 
 
+template<typename T>
+void VectorConcatenate(std::vector<T>& target, std::vector<T> const& source)
+{
+	target.reserve(target.size() + source.size());
+    for (int i = 0; i < source.size(); i++)
+      target.push_back(source[i]);
+}
+
+
 #endif // Utility_h__

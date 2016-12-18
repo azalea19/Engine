@@ -9,19 +9,15 @@
 #include "SDL_mixer.h"
 #include "SoundManager.h"
 #include "Screen.h"
+#include "MCamera.h"
 #include <GL/glew.h>
-#include "SceneGraph.h"
-#include "ModelNode.h"
-#include "BasicTextureNode.h"
-#include "BasicMeshNode.h"
-#include "HeightMap.h"
-#include "MeshGenerator.h"
-#include "MeshLibrary.h"
 #include "assimp/Importer.hpp"
 #include "assimp\scene.h"
 #include "assimp\postProcess.h"
 #include "SkinnedMesh.h"
 #include <chrono>
+#include "RenderableObject.h"
+#include "TextureLibrary.h"
 
 
 // Important Resources:
@@ -37,8 +33,9 @@
 
 SDL_Window* screen;
 
-SceneGraph* sceneGraph;
-SkinnedMesh* mesh;
+//SkinnedMesh* mesh;
+
+RenderableObject* pObject;
 
 glm::mat4 projectionMatrix;
 
@@ -150,16 +147,6 @@ void UploadMVPMatrix(glm::mat4 projectionMatrix, glm::mat4 viewMatrix, glm::mat4
 
 }
 
-
-ModelNode* CreateModelNode(string meshName)
-{
-	BasicMeshNode* mesh = new BasicMeshNode(sceneGraph, meshName);
-	ModelNode* modelNode = new ModelNode(sceneGraph);
-	modelNode->SetMeshNode(mesh);
-	modelNode->SetTextureNode(nullptr);
-	return modelNode;
-}
-
 bool initSDL()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -214,8 +201,9 @@ void myinit()
 
 	InitGlew();
 
+	TextureLibrary::GetInstance().initTextureLibrary();
 	ShaderLibrary::getLib()->initShaderLibrary();
-	ModelLibrary::getLib()->initModelLibrary();
+	//ModelLibrary::getLib()->initModelLibrary();
 	SoundManager::GetSoundManager()->initSoundManager();
 
 	projectionMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);
@@ -235,9 +223,13 @@ void myinit()
 	//sceneGraph->SetRoot(CreateModelNode("XWaveMesh"));
 
 	ShaderLibrary::getLib()->bindShader("skinning");
-	mesh = new SkinnedMesh();
+	//mesh = new SkinnedMesh();
 	//mesh->LoadMesh("zombie/zombii.fbx");
-	mesh->LoadMesh("zombie/zombii.fbx");
+	//mesh->LoadMesh("zombie/zombii.fbx");
+
+  pObject = new RenderableObject("zombie", "zombii.fbx");
+
+
 }
 
 bool HandleEvents()
@@ -265,18 +257,6 @@ bool HandleEvents()
 	return true;
 }
 
-void UpdateBones()
-{
-	std::vector<glm::mat4> bones;
-	mesh->BoneTransform(float(clock()) / CLOCKS_PER_SEC, bones);
-
-	//for (int i = 0; i < bones.size(); i++)
-	//{
-	//	bones[i] = glm::mat4();
-	//}
-	ShaderLibrary::getLib()->currentShader()->transmitUniformArray("BONES", bones.data(), bones.size());
-}
-
 bool Update()
 {
 	if (!HandleEvents())
@@ -287,7 +267,7 @@ bool Update()
 	if (InputManager::GetInputManager()->IsKeyDown(SDL_SCANCODE_ESCAPE))
 		return false;
 
-	UpdateBones();
+	//UpdateBones();
 	UpdatePlayer();
 
 	return true;
@@ -299,9 +279,11 @@ void Render()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	UploadMVPMatrix(projectionMatrix, camera.getViewMatrix(), glm::mat4());
-	mesh->Render();
+	//mesh->Render();
 	//sceneGraph->Render();
 	// clear buffers 
+
+  pObject->Render( glm::mat4(), camera.getViewMatrix(), projectionMatrix, clock() / float(CLOCKS_PER_SEC));
 
 	glFlush();
 	SDL_GL_SwapWindow(screen);

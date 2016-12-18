@@ -1,9 +1,12 @@
+#ifndef Skeleton_h__
+#define Skeleton_h__
+
 #include "Types.h"
 #include "Bimap.h"
 
 class Animation;
-class aiScene;
-class aiNode;
+struct aiScene;
+struct aiNode;
 
 struct Bone
 {
@@ -39,3 +42,5 @@ private:
   void LoadAnimations(const aiScene* pScene);
 
 };
+
+#endif

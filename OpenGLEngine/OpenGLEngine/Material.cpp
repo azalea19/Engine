@@ -17,3 +17,8 @@ Material::Material(string name, const aiMaterial* pMaterial)
     m_textures.emplace(TT_Diffuse, texName);
   }
 }
+
+string const& Material::GetTextureName(TextureType const& type) const
+{
+  return m_textures.at(type);
+}

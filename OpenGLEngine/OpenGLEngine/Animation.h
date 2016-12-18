@@ -5,6 +5,8 @@
 #include "BoneKeySequence.h"
 #include "Bimap.h"
 
+struct aiAnimation;
+
 class Animation
 {
 
@@ -15,12 +17,13 @@ public:
   float GetTicksPerSecond() const;
   BoneKeySequence* const& GetBoneKeySequence(int boneID) const;
   mat4 GetBoneTransform(int boneID, float time) const;
+  bool HasBoneTransform(int boneID) const;
 
 private:
   string m_name;
   float m_duration;
   float m_ticksPerSecond;
-  std::vector<BoneKeySequence*> m_boneKeyFrames;
+  std::unordered_map<int, BoneKeySequence*> m_boneKeyFrames;
 
   void LoadKeyFrames(aiAnimation const* pAnimation, Bimap<string, int> const& boneLookup);
   

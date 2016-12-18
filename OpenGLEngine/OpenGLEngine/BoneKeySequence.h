@@ -1,3 +1,6 @@
+#ifndef BoneKeySequence_h__
+#define BoneKeySequence_h__
+
 #include "Types.h"
 #include "Bimap.h"
 
@@ -19,7 +22,7 @@ struct ScaleKey
   vec3 scale;
 };
 
-class aiNodeAnim;
+struct aiNodeAnim;
 
 class BoneKeySequence
 {
@@ -41,3 +44,5 @@ private:
   void LoadRotationKeys(aiNodeAnim const* pAnim);
   void LoadScaleKeys(aiNodeAnim const* pAnim);
 };
+
+#endif

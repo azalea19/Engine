@@ -1,9 +1,9 @@
 #include "ObjectInstance.h"
 #include "ShaderLibrary.h"
 
-void ObjectInstance::Render(glm::mat4 viewMatrix, glm::mat4 projectionMatrix, glm::mat4 parentModelMatrix /*= glm::mat4()*/)
+void ObjectInstance::Render(glm::mat4 worldMatrix, glm::mat4 viewMatrix, glm::mat4 projectionMatrix, float time)
 {
-	m_renderableObject->Render(viewMatrix, projectionMatrix, parentModelMatrix * GetModelMatrix());
+	m_renderableObject->Render(worldMatrix * GetModelMatrix(), viewMatrix, projectionMatrix);
 }
 
 glm::mat4 ObjectInstance::GetModelMatrix()

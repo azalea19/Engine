@@ -1,3 +1,6 @@
+#ifndef AssimpToGLM_h__
+#define AssimpToGLM_h__
+
 #include "Types.h"
 #include "assimp/types.h"
 
@@ -14,3 +17,4 @@ vec4 ASToGLM(const aiColor4D& value);
 
 quat ASToGLM(const aiQuaternion& value);
 
+#endif

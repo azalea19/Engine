@@ -33,20 +33,14 @@
     <Filter Include="Source\Game">
       <UniqueIdentifier>{3e9af873-0ad3-4865-a334-6293867f23cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\SceneGraph">
-      <UniqueIdentifier>{18741e4f-99e0-459d-b39f-c4ec1692d2bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\SceneGraph\Nodes">
-      <UniqueIdentifier>{9779967f-79f9-45bf-9a91-2920f0f0a482}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Data Structures">
       <UniqueIdentifier>{c44c9938-cb18-4f3c-8663-9e866895975e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Terrain">
       <UniqueIdentifier>{2514f3fa-5b22-45fc-ad1a-060060c817b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Assimp">
-      <UniqueIdentifier>{da9b0727-482a-4e6b-b195-b5782335d250}</UniqueIdentifier>
+    <Filter Include="Source\Animation">
+      <UniqueIdentifier>{8490e679-a7bf-40fe-b496-6a98a89bd1fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,16 +59,7 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Source\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Loader.cpp">
-      <Filter>Source\Model Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source\Model Loader</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectInstance.cpp">
-      <Filter>Source\Model Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableObject.cpp">
       <Filter>Source\Model Loader</Filter>
     </ClCompile>
     <ClCompile Include="PrimitiveCollisions.cpp">
@@ -98,33 +83,6 @@
     <ClCompile Include="ExampleScene.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="TextureNode.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelNode.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshNode.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="GroupNode.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicTextureNode.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicMeshNode.cpp">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="UberShader.cpp">
-      <Filter>Source\Data Structures</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph.cpp">
-      <Filter>Source\SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="MCamera.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
@@ -134,44 +92,29 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source\Libraries</Filter>
     </ClCompile>
-    <ClCompile Include="MeshLibrary.cpp">
-      <Filter>Source\Libraries</Filter>
-    </ClCompile>
-    <ClCompile Include="HeightMap.cpp">
-      <Filter>Source\SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshGenerator.cpp">
-      <Filter>Source\SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="UniformStack.cpp">
-      <Filter>Source\SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinnedMesh.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="AssimpToGLM.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Bimap.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source\Animation</Filter>
     </ClCompile>
     <ClCompile Include="BoneKeySequence.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="NewMesh.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="AssimpToGLM.cpp">
+      <Filter>Source\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="NewModel.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Model Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source\Model Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source\Model Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>Source\Model Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,16 +130,7 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Source\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Loader.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectInstance.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableObject.h">
       <Filter>Source\Model Loader</Filter>
     </ClInclude>
     <ClInclude Include="GeometricPrimitives.h">
@@ -229,39 +163,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph.h">
-      <Filter>Source\SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="UniformNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="MatrixNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="GroupNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicTextureNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicMeshNode.h">
-      <Filter>Source\SceneGraph\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="UberShader.h">
-      <Filter>Source\Data Structures</Filter>
-    </ClInclude>
     <ClInclude Include="MCamera.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
@@ -269,9 +170,6 @@
       <Filter>Source\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Source\Libraries</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshLibrary.h">
       <Filter>Source\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
@@ -286,27 +184,37 @@
     <ClInclude Include="MeshGenerator.h">
       <Filter>Source\Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="UniformStack.h">
-      <Filter>Source\Data Structures</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Source\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="SkinnedMesh.h">
-      <Filter>Source\Assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="NewModel.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="NewMesh.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AssimpToGLM.h" />
-    <ClInclude Include="Bimap.h" />
-    <ClInclude Include="BoneKeySequence.h" />
-    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Material.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneKeySequence.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpToGLM.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Bimap.h">
+      <Filter>Source\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
       <Filter>Source\Model Loader</Filter>
     </ClInclude>
   </ItemGroup>

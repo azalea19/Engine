@@ -1,6 +1,6 @@
 #include "AssimpToGLM.h"
 
-mat4 ASToGlm(const aiMatrix4x4& value)
+mat4 ASToGLM(const aiMatrix4x4& value)
 {
   mat4 result;
 
@@ -12,7 +12,7 @@ mat4 ASToGlm(const aiMatrix4x4& value)
   return glm::transpose(result);
 }
 
-mat3 ASToGlm(const aiMatrix3x3& value)
+mat3 ASToGLM(const aiMatrix3x3& value)
 {
   glm::mat3 result;
 

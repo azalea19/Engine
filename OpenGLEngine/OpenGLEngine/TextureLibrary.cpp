@@ -5,6 +5,7 @@
 
 void TextureLibrary::initTextureLibrary()
 {
+	GetInstance().AddTexture("Error", "Error_Texture.jpg");
 }
 
 void TextureLibrary::AddTexture(string name, GLuint textureID)

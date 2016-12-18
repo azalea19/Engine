@@ -27,16 +27,25 @@ float Animation::GetTicksPerSecond() const
 
 BoneKeySequence* const& Animation::GetBoneKeySequence(int boneID) const
 {
-  return m_boneKeyFrames[boneID];
+  return m_boneKeyFrames.at(boneID);
 }
 
 mat4 Animation::GetBoneTransform(int boneID, float time) const
 {
-  return m_boneKeyFrames[boneID]->GetTransform(time);
+  return m_boneKeyFrames.at(boneID)->GetTransform(fmod(time * m_ticksPerSecond, m_duration));
+}
+
+bool Animation::HasBoneTransform(int boneID) const
+{
+	return m_boneKeyFrames.find(boneID) != m_boneKeyFrames.end();
 }
 
 void Animation::LoadKeyFrames(aiAnimation const* pAnimation, Bimap<string, int> const& boneLookup)
 {
-  for (int i = 0; i < pAnimation->mNumChannels; i++)
-    m_boneKeyFrames.push_back(new BoneKeySequence(pAnimation->mChannels[i], boneLookup));
+	for (int i = 0; i < pAnimation->mNumChannels; i++)
+	{
+		int boneIndex = boneLookup.GetValue(pAnimation->mChannels[i]->mNodeName.data);
+		m_boneKeyFrames.emplace(boneIndex, new BoneKeySequence(pAnimation->mChannels[i], boneIndex));
+	}
+
 }
