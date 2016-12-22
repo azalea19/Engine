@@ -17,30 +17,20 @@ const int MAX_BONES = 100;
 
 uniform mat4 mvp;
 uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 uniform mat4 BONES[MAX_BONES];
 
 
-float rand(vec2 co){
-  return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
-
 void main()
 {       
-	float c = rand(Position.xy);
-	color = vec4(c, c, c, 1); 
-
     mat4 BoneTransform = BONES[BoneIDs[0]] * Weights[0];
     BoneTransform     += BONES[BoneIDs[1]] * Weights[1];
     BoneTransform     += BONES[BoneIDs[2]] * Weights[2];
     BoneTransform     += BONES[BoneIDs[3]] * Weights[3];
 
-	//vec3 PosL = Position;
     vec3 PosL    = (BoneTransform * vec4(Position, 1.0)).xyz;
     gl_Position  = mvp * vec4(PosL, 1.0);
-
-
-
-
 
     TexCoord0    = TexCoord;
     vec4 NormalL = BoneTransform * vec4(Normal, 0.0);

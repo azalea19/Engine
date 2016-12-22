@@ -88,13 +88,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib32\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,13 +104,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -122,15 +122,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib32\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,23 +142,29 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdditiveBlendEffect.cpp" />
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AssimpToGLM.cpp" />
+    <ClCompile Include="BloomEffect.cpp" />
+    <ClCompile Include="BlurEffect.cpp" />
     <ClCompile Include="BoneKeySequence.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="FXAAEffect.cpp" />
+    <ClCompile Include="HDRSplitEffect.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="main.cpp" />
@@ -190,11 +196,17 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AssimpToGLM.h" />
     <ClInclude Include="Bimap.h" />
+    <ClInclude Include="BloomEffect.h" />
+    <ClInclude Include="BlurEffect.h" />
     <ClInclude Include="BoneKeySequence.h" />
+    <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="FXAAEffect.h" />
+    <ClInclude Include="HDRSplitEffect.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
@@ -202,12 +214,10 @@
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="ExampleScene.h" />
     <ClInclude Include="GeometricPrimitives.h" />
-    <ClInclude Include="HeightMap.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Interface2D.h" />
     <ClInclude Include="MCamera.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshGenerator.h" />
     <ClInclude Include="MMath.h" />
     <ClInclude Include="ModelLibrary.h" />
     <ClInclude Include="ObjectInstance.h" />
@@ -224,27 +234,27 @@
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AdditiveBlendEffect.frag" />
+    <None Include="AdditiveBlendEffect.vert" />
+    <None Include="BlurEffect.frag" />
+    <None Include="BlurEffect.vert" />
     <None Include="defaultShader.frag" />
     <None Include="defaultShader.vert" />
+    <None Include="FXAAEffect.frag" />
+    <None Include="FXAAEffect.vert" />
+    <None Include="HDRSplitEffect.frag" />
+    <None Include="HDRSplitEffect.vert" />
     <None Include="orthoShader.frag" />
     <None Include="orthoShader.vert" />
     <None Include="skinning.frag" />
     <None Include="skinning.vert" />
     <None Include="textured.frag" />
     <None Include="textured.vert" />
+    <None Include="TextureDisplay.frag" />
+    <None Include="TextureDisplay.vert" />
     <None Include="uberShader.frag" />
     <None Include="uberShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets" Condition="Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" />
-    <Import Project="..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets" Condition="Exists('..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets'))" />
-  </Target>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

@@ -39,7 +39,7 @@ public:
 
   IndexRange const& GetMeshIndexRange(int meshIndex) const;
   Material const& GetMeshMaterial(int meshIndex) const;
-  string const& GetMeshTextureName(int meshIndex, TextureType const& type) const;
+  string GetMeshTextureName(int meshIndex, TextureType const& type) const;
   
 
 private: 

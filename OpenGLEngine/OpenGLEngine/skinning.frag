@@ -8,9 +8,9 @@ in vec3 WorldPos0;
 in vec4 color;   
 in float val;                                                                                                        
                             
-out vec4 FragColor;
+layout (location = 0) out vec4 FragColor;
                                                                 
 void main()
-{                                                                                                                                                                                                         
-	FragColor = texture(diffuse, TexCoord0);   
+{                                                                                                                                                                                                
+	FragColor = vec4(texture(diffuse, TexCoord0).xyz * 3.0, 1.0);   
 }

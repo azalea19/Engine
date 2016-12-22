@@ -1,3 +1,4 @@
+#define GLEW_STATIC
 #include "SDL.h"
 #include "ModelLibrary.h"
 #include "Utility.h"
@@ -14,10 +15,10 @@
 #include "assimp/Importer.hpp"
 #include "assimp\scene.h"
 #include "assimp\postProcess.h"
-#include "SkinnedMesh.h"
 #include <chrono>
 #include "RenderableObject.h"
 #include "TextureLibrary.h"
+#include "FrameBuffer.h"
 
 
 // Important Resources:
@@ -170,6 +171,8 @@ bool initSDL()
 	screen = SDL_CreateWindow("Arch Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 	SDL_GL_CreateContext(screen);
 
+  SDL_GL_SetSwapInterval(-1);
+
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	return true;
@@ -205,6 +208,7 @@ void myinit()
 	ShaderLibrary::getLib()->initShaderLibrary();
 	//ModelLibrary::getLib()->initModelLibrary();
 	SoundManager::GetSoundManager()->initSoundManager();
+  FrameBuffer::Initialize();
 
 	projectionMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);
 
@@ -227,7 +231,7 @@ void myinit()
 	//mesh->LoadMesh("zombie/zombii.fbx");
 	//mesh->LoadMesh("zombie/zombii.fbx");
 
-  pObject = new RenderableObject("zombie", "zombii.fbx");
+  pObject = new RenderableObject("zombie", "bob.md5mesh");
 
 
 }
@@ -275,9 +279,10 @@ bool Update()
 
 void Render()
 {
+  ShaderLibrary::getLib()->bindShader("skinning");
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	UploadMVPMatrix(projectionMatrix, camera.getViewMatrix(), glm::mat4());
 	//mesh->Render();
 	//sceneGraph->Render();

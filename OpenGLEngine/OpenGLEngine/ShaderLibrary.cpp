@@ -37,7 +37,12 @@ void ShaderLibrary::initShaderLibrary()
 	//ShaderLibrary::getLib()->addShader("colouredLight", CreateVector(string("mvp"), string("diffuse")), CreateVector(string("position"), string("uvIn")));
 	//ShaderLibrary::getLib()->addShader("orthoShader", CreateVector(string("diffuse"), string("width"), string("height")), CreateVector(string("position"), string("uvIn")));
 
-	ShaderLibrary::getLib()->addShader("skinning", CreateVector(string("mvp"), string("modelMatrix"), string("BONES")), CreateVector(string("Position"), string("TexCoord"), string("Normal"), string("BoneIDs"), string("Weights")));
+	ShaderLibrary::getLib()->addShader("skinning", CreateVector(string("mvp"), string("modelMatrix"), string("viewMatrix"), string("projectionMatrix"), string("BONES")), CreateVector(string("Position"), string("TexCoord"), string("Normal"), string("BoneIDs"), string("Weights")));
+  ShaderLibrary::getLib()->addShader("HDRSplitEffect", CreateVector(string("inputTex0")), CreateVector(string("Position"), string("TexCoord")));
+  ShaderLibrary::getLib()->addShader("BlurEffect", CreateVector(string("inputTex0"), string("blurRadius")), CreateVector(string("Position"), string("TexCoord")));
+  ShaderLibrary::getLib()->addShader("AdditiveBlendEffect", CreateVector(string("inputTex0"), string("inputTex1")), CreateVector(string("Position"), string("TexCoord")));
+  ShaderLibrary::getLib()->addShader("FXAAEffect", CreateVector(string("inputTex0"), string("FXAA_SPAN")), CreateVector(string("Position"), string("TexCoord")));
+  ShaderLibrary::getLib()->addShader("TextureDisplay", CreateVector(string("inputTex0")), CreateVector(string("Position"), string("TexCoord")));
 }
 
 void ShaderLibrary::addShader(string name, std::vector<string> uniforms, std::vector<string> attributes)

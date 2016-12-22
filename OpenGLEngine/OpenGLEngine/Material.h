@@ -16,7 +16,7 @@ class Material
 {
 public:
   Material(string name, const aiMaterial* pMaterial);
-  string const& GetTextureName(TextureType const& type) const;
+  string GetTextureName(TextureType const& type) const;
 
 private:
   string name;

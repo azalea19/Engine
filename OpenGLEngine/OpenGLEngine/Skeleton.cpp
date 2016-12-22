@@ -30,34 +30,34 @@ void Skeleton::CalculateBoneTransforms(int animationIndex, float time, std::vect
 {
   const Bone& bone = m_bones[boneIndex];
   const Animation* pAnimation = m_animations[animationIndex];
-  
+
   mat4 boneTransform = bone.transform;
   if (pAnimation && pAnimation->HasBoneTransform(boneIndex))
     boneTransform = pAnimation->GetBoneTransform(boneIndex, time);
 
   mat4 globalTransform = parentTransform * boneTransform;
   finalTransforms[boneIndex] = m_globalInverseTransform * globalTransform * m_bones[boneIndex].offsetMatrix;
-  
+
   for (int i = 0; i < m_bones[boneIndex].m_childBoneIDs.size(); i++)
-	  CalculateBoneTransforms(animationIndex, time, finalTransforms, globalTransform, m_bones[boneIndex].m_childBoneIDs[i]);
+    CalculateBoneTransforms(animationIndex, time, finalTransforms, globalTransform, m_bones[boneIndex].m_childBoneIDs[i]);
 }
 
 void Skeleton::CreateBoneLookup(const aiNode* pNode)
 {
-	int boneIndex = m_boneLookup.Count();
+  int boneIndex = m_boneLookup.Count();
   string boneName = pNode->mName.data;
   if (!m_boneLookup.HasKey(boneName))
   {
-    
+
     m_boneLookup.Add(pNode->mName.data, boneIndex);
     m_bones.emplace_back();
     m_bones[boneIndex].m_ID = boneIndex;
     m_bones[boneIndex].transform = ASToGLM(pNode->mTransformation);
-	for (int i = 0; i < pNode->mNumChildren; i++)
-	{
-		CreateBoneLookup(pNode->mChildren[i]);
-		m_bones[boneIndex].m_childBoneIDs.push_back(m_boneLookup.GetValue(pNode->mChildren[i]->mName.data));
-	}
+    for (int i = 0; i < pNode->mNumChildren; i++)
+    {
+      CreateBoneLookup(pNode->mChildren[i]);
+      m_bones[boneIndex].m_childBoneIDs.push_back(m_boneLookup.GetValue(pNode->mChildren[i]->mName.data));
+    }
   }
 
 

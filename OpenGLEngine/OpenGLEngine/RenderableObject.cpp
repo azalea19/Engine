@@ -3,15 +3,11 @@
 #include "Mesh.h"
 #include "ShaderLibrary.h"
 #include "TextureLibrary.h"
-
-enum Attribute_Location
-{
-  AL_Vertices,
-  AL_TexCoords,
-  AL_Normals,
-  AL_BoneIDs,
-  AL_BoneWeights,
-};
+#include "FrameBuffer.h"
+#include "BloomEffect.h"
+#include "FXAAEffect.h"
+#include "Screen.h"
+#include "InputManager.h"
 
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
@@ -35,7 +31,6 @@ void RenderableObject::UpdateBones(float time)
 
 void RenderableObject::Initialise()
 {
-
   std::vector<vec3> const& vertices = m_pModel->GetVertices();
   std::vector<int> const& indices = m_pModel->GetIndices();
   std::vector<vec3> const& normals = m_pModel->GetNormals();
@@ -83,18 +78,57 @@ void RenderableObject::Initialise()
 
 void RenderableObject::Render(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, float time)
 {
+  static bool initialized = false;
+  static bool fxaa = false;
+  static FrameBuffer fb;
+  static BloomEffect bloomEffect;
+  static FXAAEffect fxaaEffect;
+  static GLuint inputTex = CreateColourFTexture();
+  static GLuint tempTex = CreateColourFTexture();
+  static GLuint finalTex = CreateColourFTexture();
+  static GLuint depthTexture = CreateDepthTexture();
+
+  if (!initialized)
+  {
+    fb.Bind();
+    fb.AttachColour(0, inputTex);
+    fb.AttachDepth(depthTexture);
+    initialized = true;
+    fb.Unbind();
+  }
+
 	UpdateBones(time);
 
-  glBindVertexArray(m_VAO);
+  fb.Bind(FBBM_Write);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  glBindVertexArray(m_VAO);
   for (int i = 0; i < m_pModel->GetMeshCount(); i++)
   {
     IndexRange const& range = m_pModel->GetMeshIndexRange(i);
-	glActiveTexture(GL_TEXTURE0 + 0);
-	glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(m_pModel->GetMeshTextureName(i, TT_Diffuse)));
+    glActiveTexture(GL_TEXTURE0 + 0);
+    string texName = m_pModel->GetMeshTextureName(i, TT_Diffuse);
+    glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(texName));
     glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
   }
+  glBindVertexArray(NULL);
 
+  fb.Unbind();
+
+  //bloomEffect.Apply(inputTex, tempTex, 10);
+  if (InputManager::GetInputManager()->IsKeyPressed(SDL_SCANCODE_1))
+    fxaa = !fxaa;
+
+  if (fxaa)
+  {
+    fxaaEffect.Apply(inputTex, finalTex, 16);
+    FrameBuffer::Display(finalTex);
+  }
+  else
+  {
+    FrameBuffer::Display(inputTex);
+  }
+  
 }
 
 void RenderableObject::Destroy()

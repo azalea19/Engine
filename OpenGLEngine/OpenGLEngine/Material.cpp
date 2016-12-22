@@ -18,7 +18,16 @@ Material::Material(string name, const aiMaterial* pMaterial)
   }
 }
 
-string const& Material::GetTextureName(TextureType const& type) const
+string Material::GetTextureName(TextureType const& type) const
 {
-  return m_textures.at(type);
+	auto got = m_textures.find(type);
+	if (got == m_textures.end())
+	{
+		return "Error";
+	}
+	else
+	{
+		return got->second;
+	}
+
 }

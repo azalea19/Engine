@@ -1,1 +1,5 @@
-﻿  OpenGLEngine.vcxproj -> D:\UserFiles\Desktop\Engine\Engine\OpenGLEngine\x64\Debug\OpenGLEngine.exe
+﻿  RenderableObject.cpp
+d:\userfiles\desktop\engine\engine\openglengine\openglengine\hdrspliteffect.h(4): warning C4099: 'Shader': type name first seen using 'struct' now seen using 'class'
+  d:\userfiles\desktop\engine\engine\openglengine\openglengine\shader.h(33): note: see declaration of 'Shader'
+d:\userfiles\desktop\engine\engine\openglengine\openglengine\renderableobject.cpp(29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  OpenGLEngine.vcxproj -> D:\UserFiles\Desktop\Engine\Engine\OpenGLEngine\x64\Debug\OpenGLEngine.exe

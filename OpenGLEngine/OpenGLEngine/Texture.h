@@ -23,4 +23,10 @@ GLuint loadBMP(const char * imagepath);
 
 GLuint loadImage(const char * imagepath);
 
+GLuint CreateColourTexture(int width = 0, int height = 0);
+
+GLuint CreateColourFTexture(int width = 0, int height = 0);
+
+GLuint CreateDepthTexture(int width = 0, int height = 0);
+
 #endif

@@ -20,6 +20,14 @@
 * http://lazyfoo.net/tutorials/OpenGL/29_hello_glsl/index.php
 */
 
+enum Attribute_Location
+{
+  AL_Vertices,
+  AL_TexCoords,
+  AL_Normals,
+  AL_BoneIDs,
+  AL_BoneWeights,
+};
 
 struct Shader
 {

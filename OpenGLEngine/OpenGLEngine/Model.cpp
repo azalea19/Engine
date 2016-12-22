@@ -125,7 +125,7 @@ Material const& Model::GetMeshMaterial(int meshIndex) const
   return *(m_materials[materialIndex]);
 }
 
-string const& Model::GetMeshTextureName(int meshIndex, TextureType const& type) const
+string Model::GetMeshTextureName(int meshIndex, TextureType const& type) const
 {
   return GetMeshMaterial(meshIndex).GetTextureName(type);
 }
