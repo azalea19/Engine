@@ -37,7 +37,7 @@ void ShaderLibrary::initShaderLibrary()
 	//ShaderLibrary::getLib()->addShader("colouredLight", CreateVector(string("mvp"), string("diffuse")), CreateVector(string("position"), string("uvIn")));
 	//ShaderLibrary::getLib()->addShader("orthoShader", CreateVector(string("diffuse"), string("width"), string("height")), CreateVector(string("position"), string("uvIn")));
 
-	ShaderLibrary::getLib()->addShader("skinning", CreateVector(string("mvp"), string("modelMatrix"), string("viewMatrix"), string("projectionMatrix"), string("BONES")), CreateVector(string("Position"), string("TexCoord"), string("Normal"), string("BoneIDs"), string("Weights")));
+	ShaderLibrary::getLib()->addShader("skinning", CreateVector(string("mvp"), string("modelMatrix"), string("viewMatrix"), string("projectionMatrix"), string("BONES"), string("ANIMATION_ENABLED"), string("DIFFUSE_SOURCE"), string("MESH_COLOUR"), string("DIFFUSE_TEXTURE")), CreateVector(string("Position"), string("TexCoord"), string("Normal"), string("BoneIDs"), string("Weights")));
   ShaderLibrary::getLib()->addShader("HDRSplitEffect", CreateVector(string("inputTex0")), CreateVector(string("Position"), string("TexCoord")));
   ShaderLibrary::getLib()->addShader("BlurEffect", CreateVector(string("inputTex0"), string("blurRadius")), CreateVector(string("Position"), string("TexCoord")));
   ShaderLibrary::getLib()->addShader("AdditiveBlendEffect", CreateVector(string("inputTex0"), string("inputTex1")), CreateVector(string("Position"), string("TexCoord")));

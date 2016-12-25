@@ -288,7 +288,7 @@ void Render()
 	//sceneGraph->Render();
 	// clear buffers 
 
-  pObject->Render( glm::mat4(), camera.getViewMatrix(), projectionMatrix, clock() / float(CLOCKS_PER_SEC));
+  pObject->Render( glm::mat4(), camera.getViewMatrix(), projectionMatrix, DS_MeshColour, 0, clock() / float(CLOCKS_PER_SEC));
 
 	glFlush();
 	SDL_GL_SwapWindow(screen);

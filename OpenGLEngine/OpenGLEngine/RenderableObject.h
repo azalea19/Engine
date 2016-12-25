@@ -6,6 +6,18 @@
 
 class Model;
 
+enum TextureLocation
+{
+  TL_Diffuse = 0,
+};
+
+enum DiffuseSource
+{
+  DS_MeshColour = 0b00,
+  DS_VertexColour = 0b01,
+  DS_Texture = 0b10,
+};
+
 enum BUFFER_TYPES
 {
   BT_INDEX_BUFFER,
@@ -14,6 +26,7 @@ enum BUFFER_TYPES
   BT_TEXCOORD_BUFFER,
   BT_BONE_ID_BUFFER,
   BT_BONE_WEIGHT_BUFFER,
+  BT_VERTEX_COLOUR_BUFFER,
   BT_NUM_BUFFERS //Gives back the number of buffer types (5)
 };
 
@@ -25,11 +38,9 @@ public:
   RenderableObject(string const& name, string const& filename);
   ~RenderableObject();
 
-  void UpdateBones(float time);
-
   void Initialise();
 
-  void Render( mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, float time = 0);
+  void Render( mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, DiffuseSource diffuseSource = DS_Texture, int animationIndex = -1, float time = 0);
 
   void Destroy();
 
@@ -38,6 +49,9 @@ private:
   Model* m_pModel;
   GLuint m_VAO;
   GLuint m_buffers[BT_NUM_BUFFERS];
+
+  void BindMaterial(int meshIndex, DiffuseSource diffuseSource);
+  void UpdateAnimation(int animationIndex, float time);
 
 };
 

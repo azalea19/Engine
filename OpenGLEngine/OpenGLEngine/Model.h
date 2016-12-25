@@ -40,6 +40,8 @@ public:
   IndexRange const& GetMeshIndexRange(int meshIndex) const;
   Material const& GetMeshMaterial(int meshIndex) const;
   string GetMeshTextureName(int meshIndex, TextureType const& type) const;
+
+  bool HasAnimation() const;
   
 
 private: 
@@ -56,6 +58,8 @@ private:
   std::vector<int> m_indices;
   std::vector<VertexBoneIDs> m_boneIDs;
   std::vector<VertexBoneWeights> m_boneWeights;
+
+  bool m_hasAnimation;
 
   void LoadAssimpMaterials(const aiScene* pScene);
   void LoadAssimpSkeleton(const aiScene* pScene);

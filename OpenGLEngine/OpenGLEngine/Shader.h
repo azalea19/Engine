@@ -22,11 +22,12 @@
 
 enum Attribute_Location
 {
-  AL_Vertices,
-  AL_TexCoords,
-  AL_Normals,
-  AL_BoneIDs,
-  AL_BoneWeights,
+  AL_Vertices = 0,
+  AL_TexCoords = 1,
+  AL_Normals = 2,
+  AL_BoneIDs = 3,
+  AL_BoneWeights = 4,
+  AL_VertexColours = 5,
 };
 
 struct Shader

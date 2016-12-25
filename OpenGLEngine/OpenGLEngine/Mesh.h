@@ -59,6 +59,8 @@ private:
 	mAABB m_bounds;
   int materialIndex;
 
+  bool m_hasVertexColours;
+
   void LoadTexCoords(aiMesh const *pMesh);
   void LoadVertices(aiMesh const *pMesh);
   void LoadNormals(aiMesh const *pMesh);

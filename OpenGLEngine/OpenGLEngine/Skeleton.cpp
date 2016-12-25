@@ -14,7 +14,8 @@ std::vector<mat4> Skeleton::GetBoneTransforms(int animationIndex, float time) co
 {
   std::vector<mat4> finalTransforms;
   finalTransforms.resize(m_bones.size());
-  CalculateBoneTransforms(animationIndex, time, finalTransforms);
+  if(animationIndex >= 0)
+    CalculateBoneTransforms(animationIndex, time, finalTransforms);
   return finalTransforms;
 }
 

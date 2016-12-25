@@ -10,6 +10,8 @@
 #include "InputManager.h"
 
 
+
+
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
 {
@@ -23,10 +25,21 @@ RenderableObject::~RenderableObject()
   Destroy();
 }
 
-void RenderableObject::UpdateBones(float time)
+void RenderableObject::UpdateAnimation(int animationIndex, float time)
 {
-	std::vector<glm::mat4> bones = m_pModel->GetBoneTransforms(0, time);
-	ShaderLibrary::getLib()->currentShader()->transmitUniformArray("BONES", bones.data(), bones.size());
+  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  if (m_pModel->HasAnimation() && animationIndex >= 0)
+  {
+    std::vector<glm::mat4> bones = m_pModel->GetBoneTransforms(animationIndex, time);
+    ShaderLibrary::getLib()->currentShader()->transmitUniformArray("BONES", bones.data(), bones.size());
+    shader->transmitUniform("ANIMATION_ENABLED", 1);
+  }
+  else
+  {
+    shader->transmitUniform("ANIMATION_ENABLED", 0);
+  }
+
+
 }
 
 void RenderableObject::Initialise()
@@ -37,6 +50,7 @@ void RenderableObject::Initialise()
   std::vector<vec2> const& texCoords = m_pModel->GetTexCoords();
   std::vector<VertexBoneIDs> const& boneIDs = m_pModel->GetBoneIDs();
   std::vector<VertexBoneWeights> const& boneWeights = m_pModel->GetBoneWeights();
+  std::vector<vec4> const& vertexColours = m_pModel->GetVertexColours();
   
   glGenVertexArrays(1, &m_VAO);
   glBindVertexArray(m_VAO);
@@ -69,66 +83,31 @@ void RenderableObject::Initialise()
   glEnableVertexAttribArray(AL_BoneWeights);
   glVertexAttribPointer(AL_BoneWeights, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
+  glBindBuffer(GL_ARRAY_BUFFER, m_buffers[BT_VERTEX_COLOUR_BUFFER]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertexColours[0])*vertexColours.size(), &vertexColours[0], GL_STATIC_DRAW);
+  glEnableVertexAttribArray(AL_VertexColours);
+  glVertexAttribPointer(AL_VertexColours, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_buffers[BT_INDEX_BUFFER]);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_STATIC_DRAW);
+
 
   glBindVertexArray(NULL);
 
 }
 
-void RenderableObject::Render(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, float time)
+void RenderableObject::Render(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, DiffuseSource diffuseSource, int animationIndex, float time)
 {
-  static bool initialized = false;
-  static bool fxaa = false;
-  static FrameBuffer fb;
-  static BloomEffect bloomEffect;
-  static FXAAEffect fxaaEffect;
-  static GLuint inputTex = CreateColourFTexture();
-  static GLuint tempTex = CreateColourFTexture();
-  static GLuint finalTex = CreateColourFTexture();
-  static GLuint depthTexture = CreateDepthTexture();
-
-  if (!initialized)
-  {
-    fb.Bind();
-    fb.AttachColour(0, inputTex);
-    fb.AttachDepth(depthTexture);
-    initialized = true;
-    fb.Unbind();
-  }
-
-	UpdateBones(time);
-
-  fb.Bind(FBBM_Write);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	UpdateAnimation(animationIndex, time);
 
   glBindVertexArray(m_VAO);
   for (int i = 0; i < m_pModel->GetMeshCount(); i++)
   {
+    BindMaterial(i, diffuseSource);
     IndexRange const& range = m_pModel->GetMeshIndexRange(i);
-    glActiveTexture(GL_TEXTURE0 + 0);
-    string texName = m_pModel->GetMeshTextureName(i, TT_Diffuse);
-    glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(texName));
     glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
   }
   glBindVertexArray(NULL);
-
-  fb.Unbind();
-
-  //bloomEffect.Apply(inputTex, finalTex, 10);
-  if (InputManager::GetInputManager()->IsKeyPressed(SDL_SCANCODE_1))
-    fxaa = !fxaa;
-
-  if (fxaa)
-  {
-    fxaaEffect.Apply(inputTex, finalTex, 16);
-    FrameBuffer::Display(finalTex);
-  }
-  else
-  {
-    FrameBuffer::Display(inputTex);
-  }
-  
 }
 
 void RenderableObject::Destroy()
@@ -143,4 +122,24 @@ void RenderableObject::Destroy()
     glDeleteVertexArrays(1, &m_VAO);
     m_VAO = 0;
   }
+}
+
+void RenderableObject::BindMaterial(int meshIndex, DiffuseSource diffuseSource)
+{
+  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  string diffuseTexture;
+  switch (diffuseSource)
+  {
+    case DS_Texture:
+      diffuseTexture = m_pModel->GetMeshTextureName(meshIndex, TT_Diffuse);
+      glActiveTexture(GL_TEXTURE0 + TL_Diffuse);
+      glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(diffuseTexture));
+      shader->transmitUniform("DIFFUSE_TEXTURE", int(TL_Diffuse));
+      break;
+    case DS_VertexColour:
+    case DS_MeshColour:
+      break;
+
+  }
+  shader->transmitUniform("DIFFUSE_SOURCE", int(diffuseSource));
 }

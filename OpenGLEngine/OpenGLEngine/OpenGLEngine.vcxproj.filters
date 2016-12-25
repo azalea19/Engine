@@ -257,7 +257,9 @@
     <ClInclude Include="FXAAEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">

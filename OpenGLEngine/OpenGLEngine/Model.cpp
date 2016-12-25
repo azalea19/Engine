@@ -37,7 +37,15 @@ void Model::LoadAssimpMaterials(const aiScene* pScene)
 
 void Model::LoadAssimpSkeleton(const aiScene* pScene)
 {
-  pSkeleton = new Skeleton(pScene);
+  if (pScene->HasAnimations())
+  {
+    m_hasAnimation = true;
+    pSkeleton = new Skeleton(pScene);
+  }
+  else
+  {
+    m_hasAnimation = false;
+  }
 }
 
 void Model::LoadAssimpMeshes(const aiScene* pScene)
@@ -69,8 +77,6 @@ void Model::LoadVertexAttributes()
     VectorConcatenate(m_indices, meshIndices);
     VectorConcatenate(m_boneIDs, meshBoneIDs);
     VectorConcatenate(m_boneWeights, meshBoneWeights);
-
-
   }
 }
 
@@ -128,6 +134,11 @@ Material const& Model::GetMeshMaterial(int meshIndex) const
 string Model::GetMeshTextureName(int meshIndex, TextureType const& type) const
 {
   return GetMeshMaterial(meshIndex).GetTextureName(type);
+}
+
+bool Model::HasAnimation() const
+{
+  return m_hasAnimation;
 }
 
 int Model::GetMeshCount() const

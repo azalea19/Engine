@@ -110,6 +110,12 @@ void Mesh::LoadVertexColours(aiMesh const *pMesh)
 		for (int i = 0; i < pMesh->mNumVertices; i++)
 			m_vertexColours[i] = ASToGLM(pMesh->mColors[0][i]);
 	}
+  else
+  {
+    m_vertexColours.resize(pMesh->mNumVertices);
+    for (int i = 0; i < pMesh->mNumVertices; i++)
+      m_vertexColours[i] = vec4(1, 0, 1, 1);
+  }
 }
 
 void Mesh::LoadIndices(aiMesh const *pMesh)
