@@ -25,6 +25,26 @@ RenderableObject::~RenderableObject()
   Destroy();
 }
 
+void RenderableObject::RenderMesh(int meshIndex, DiffuseSource diffuseSource)
+{
+  BindMaterial(meshIndex, diffuseSource);
+  IndexRange const& range = m_pModel->GetMeshIndexRange(meshIndex);
+  glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
+}
+
+void RenderableObject::SetFillMode(FillMode fillMode)
+{
+  switch (fillMode)
+  {
+    case FM_Line:
+      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+      break;
+    case FM_Fill:
+      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+      break;
+  }
+}
+
 void RenderableObject::UpdateAnimation(int animationIndex, float time)
 {
   const Shader* shader = ShaderLibrary::getLib()->currentShader();
@@ -40,6 +60,38 @@ void RenderableObject::UpdateAnimation(int animationIndex, float time)
   }
 
 
+}
+
+void RenderableObject::UploadMatrices(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix)
+{
+  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+
+  if (shader->hasUniform("worldMatrix"))
+    shader->transmitUniform("worldMatrix", worldMatrix);
+
+  if (shader->hasUniform("viewMatrix"))
+    shader->transmitUniform("viewMatrix", viewMatrix);
+
+  if (shader->hasUniform("projectionMatrix"))
+    shader->transmitUniform("projectionMatrix", projectionMatrix);
+
+  if (shader->hasUniform("invWorldMatrix"))
+    shader->transmitUniform("invWorldMatrix", glm::inverse(worldMatrix));
+
+  if (shader->hasUniform("invViewMatrix"))
+    shader->transmitUniform("invViewMatrix", glm::inverse(viewMatrix));
+
+  if (shader->hasUniform("invProjectionMatrix"))
+    shader->transmitUniform("invProjectionMatrix", glm::inverse(projectionMatrix));
+
+  if (shader->hasUniform("normalMatrix"))
+    shader->transmitUniform("normalMatrix", glm::transpose(glm::inverse(worldMatrix)));
+
+  if (shader->hasUniform("wvp"))
+  {
+    glm::mat4 wvp = projectionMatrix * viewMatrix * worldMatrix;
+    shader->transmitUniform("wvp", wvp);
+  }
 }
 
 void RenderableObject::Initialise()
@@ -96,17 +148,16 @@ void RenderableObject::Initialise()
 
 }
 
-void RenderableObject::Render(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, DiffuseSource diffuseSource, int animationIndex, float time)
+void RenderableObject::Render(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, FillMode fillMode, DiffuseSource diffuseSource, int animationIndex, float time)
 {
+  UploadMatrices(worldMatrix, viewMatrix, projectionMatrix);
+  SetFillMode(fillMode);
+
 	UpdateAnimation(animationIndex, time);
 
   glBindVertexArray(m_VAO);
   for (int i = 0; i < m_pModel->GetMeshCount(); i++)
-  {
-    BindMaterial(i, diffuseSource);
-    IndexRange const& range = m_pModel->GetMeshIndexRange(i);
-    glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
-  }
+    RenderMesh(i, diffuseSource);
   glBindVertexArray(NULL);
 }
 

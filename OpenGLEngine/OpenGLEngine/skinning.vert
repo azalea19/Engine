@@ -12,8 +12,9 @@ out vec3 Normal0;
 
 const int MAX_BONES = 100;
 
-uniform mat4 mvp;
-uniform mat4 modelMatrix;
+uniform mat4 wvp;
+uniform mat4 worldMatrix;
+uniform mat4 normalMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
@@ -59,8 +60,8 @@ void ApplyAnimation()
 
 void ApplyMVP()
 {
-	gl_Position = mvp * gl_Position;
-	Normal0 = (modelMatrix * vec4(Normal0, 0)).xyz;
+	gl_Position = wvp * gl_Position;
+	Normal0 = (normalMatrix * vec4(Normal0, 0)).xyz;
 }
 
 void Initialize()

@@ -102,52 +102,6 @@ void UpdatePlayer()
 	}
 }
 
-void UploadMVPMatrix(glm::mat4 projectionMatrix, glm::mat4 viewMatrix, glm::mat4 modelMatrix)
-{
-	const Shader* shader = ShaderLibrary::getLib()->currentShader();
-	if (shader->hasUniform("modelMatrix"))
-	{
-		shader->transmitUniform("modelMatrix", modelMatrix);
-	}
-	if (shader->hasUniform("viewMatrix"))
-	{
-		shader->transmitUniform("viewMatrix", viewMatrix);
-	}
-	if (shader->hasUniform("projectionMatrix"))
-	{
-		shader->transmitUniform("projectionMatrix", projectionMatrix);
-	}
-
-	if (shader->hasUniform("invModelMatrix"))
-	{
-		shader->transmitUniform("invModelMatrix", glm::inverse(modelMatrix));
-	}
-	if (shader->hasUniform("invViewMatrix"))
-	{
-		shader->transmitUniform("invViewMatrix", glm::inverse(viewMatrix));
-	}
-	if (shader->hasUniform("invProjectionMatrix"))
-	{
-		shader->transmitUniform("invProjectionMatrix", glm::inverse(projectionMatrix));
-	}
-	if (shader->hasUniform("normMatrix"))
-	{
-		shader->transmitUniform("normMatrix", glm::transpose(glm::inverse(modelMatrix)));
-	}
-	if (shader->hasUniform("campos"))
-	{
-		vec4 campos = glm::inverse(viewMatrix) * vec4(0, 0, 0, 1);
-		shader->transmitUniform("campos", vec3(campos.x, campos.y, campos.z));
-	}
-
-	if (shader->hasUniform("mvp"))
-	{
-		glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
-		shader->transmitUniform("mvp", mvp);
-	}
-
-}
-
 bool initSDL()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -206,34 +160,11 @@ void myinit()
 
 	TextureLibrary::GetInstance().initTextureLibrary();
 	ShaderLibrary::getLib()->initShaderLibrary();
-	//ModelLibrary::getLib()->initModelLibrary();
 	SoundManager::GetSoundManager()->initSoundManager();
   FrameBuffer::Initialize();
 
 	projectionMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);
-
-	//WaveSampleArgs margs = { 0, 20, 50 };
-	//float* heightMap = CreateHeightMap(512, 512, XWaveSample, &margs);
-	//MeshData* meshData = CreateMeshFromHeightMap(512, 512, heightMap);
-	//MeshLibrary::GetInstance().AddMesh("XWaveMesh", *meshData);
-
-	//free(heightMap);
-	//delete meshData;
-
-
-
-
-	//sceneGraph = new SceneGraph(90, SCREEN_WIDTH, SCREEN_HEIGHT, 0.1f, 1000.f);
-	//sceneGraph->SetRoot(CreateModelNode("XWaveMesh"));
-
-	ShaderLibrary::getLib()->bindShader("skinning");
-	//mesh = new SkinnedMesh();
-	//mesh->LoadMesh("zombie/zombii.fbx");
-	//mesh->LoadMesh("zombie/zombii.fbx");
-
   pObject = new RenderableObject("zombie", "bob.md5mesh");
-
-
 }
 
 bool HandleEvents()
@@ -271,7 +202,6 @@ bool Update()
 	if (InputManager::GetInputManager()->IsKeyDown(SDL_SCANCODE_ESCAPE))
 		return false;
 
-	//UpdateBones();
 	UpdatePlayer();
 
 	return true;
@@ -282,13 +212,8 @@ void Render()
   ShaderLibrary::getLib()->bindShader("skinning");
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
-	UploadMVPMatrix(projectionMatrix, camera.getViewMatrix(), glm::mat4());
-	//mesh->Render();
-	//sceneGraph->Render();
-	// clear buffers 
 
-  pObject->Render( glm::mat4(), camera.getViewMatrix(), projectionMatrix, DS_MeshColour, 0, clock() / float(CLOCKS_PER_SEC));
+  pObject->Render( glm::mat4(), camera.getViewMatrix(), projectionMatrix, FM_Fill, DS_Texture, 0, clock() / float(CLOCKS_PER_SEC));
 
 	glFlush();
 	SDL_GL_SwapWindow(screen);

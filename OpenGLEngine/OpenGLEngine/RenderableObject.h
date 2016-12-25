@@ -30,6 +30,12 @@ enum BUFFER_TYPES
   BT_NUM_BUFFERS //Gives back the number of buffer types (5)
 };
 
+enum FillMode
+{
+  FM_Line,
+  FM_Fill,
+};
+
 class RenderableObject
 {
 public:
@@ -40,7 +46,7 @@ public:
 
   void Initialise();
 
-  void Render( mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, DiffuseSource diffuseSource = DS_Texture, int animationIndex = -1, float time = 0);
+  void Render( mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix, FillMode fillMode = FM_Fill, DiffuseSource diffuseSource = DS_Texture, int animationIndex = -1, float time = 0);
 
   void Destroy();
 
@@ -50,9 +56,11 @@ private:
   GLuint m_VAO;
   GLuint m_buffers[BT_NUM_BUFFERS];
 
+  void RenderMesh(int meshIndex, DiffuseSource diffuseSource);
+  void SetFillMode(FillMode fillMode);
   void BindMaterial(int meshIndex, DiffuseSource diffuseSource);
   void UpdateAnimation(int animationIndex, float time);
-
+  void UploadMatrices(mat4 worldMatrix, mat4 viewMatrix, mat4 projectionMatrix);
 };
 
 
