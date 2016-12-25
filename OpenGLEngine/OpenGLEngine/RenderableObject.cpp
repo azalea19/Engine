@@ -115,7 +115,7 @@ void RenderableObject::Render(mat4 worldMatrix, mat4 viewMatrix, mat4 projection
 
   fb.Unbind();
 
-  //bloomEffect.Apply(inputTex, tempTex, 10);
+  //bloomEffect.Apply(inputTex, finalTex, 10);
   if (InputManager::GetInputManager()->IsKeyPressed(SDL_SCANCODE_1))
     fxaa = !fxaa;
 

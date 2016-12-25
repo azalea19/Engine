@@ -4,7 +4,6 @@
 *.opendb
 *.db
 *.suo
-bin/
 int/
 packages/
 .vs/

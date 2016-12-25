@@ -101,60 +101,100 @@ FrameBufferBindMode FrameBuffer::GetBindMode()
 
 FrameBufferStatus FrameBuffer::GetStatus(FrameBufferBindMode bindMode)
 {
+  FrameBufferBindMode currentBindMode = GetBindMode();
+  FrameBufferBindMode checkMode = FrameBufferBindMode(currentBindMode & bindMode);
+
+  if (checkMode == FBBM_Unbound)
+    return FBS_Unbound;
+
   GLenum status;
-  switch (bindMode)
+  switch (checkMode)
   {
     case FBBM_Read:
-      status = glCheckNamedFramebufferStatus(m_fb, GL_READ_FRAMEBUFFER);
+      status = glCheckFramebufferStatus(GL_READ_FRAMEBUFFER);
       break;
     case FBBM_Write:
-      status = glCheckNamedFramebufferStatus(m_fb, GL_DRAW_FRAMEBUFFER);
+      status = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
       break;
     case FBBM_ReadWrite:
-      status = glCheckNamedFramebufferStatus(m_fb, GL_DRAW_FRAMEBUFFER);
+      status = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
       if(status == GL_FRAMEBUFFER_COMPLETE)
-        glCheckNamedFramebufferStatus(m_fb, GL_READ_FRAMEBUFFER);
+        glCheckFramebufferStatus(GL_READ_FRAMEBUFFER);
       break;
   } 
   switch(status)
   {
     case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
     case GL_FRAMEBUFFER_UNSUPPORTED:
-      return FBS_INVALID_ATTACHMENT;
+      return FBS_InvalidAttachment;
     case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-      return FBS_MISSING_ATTACHMENT;
+      return FBS_MissingAttachment;
     case GL_FRAMEBUFFER_COMPLETE:
-      return FBS_COMPLETE;
+      return FBS_Complete;
     default:
-      return FBS_UNKNOWN_ERROR;
+      return FBS_UnknownError;
   }
 }
 
 void FrameBuffer::AttachColour(int location, GLuint texID)
 {
-  if (location >= FrameBuffer::MAX_COLOUR_ATTACHMENTS)
-    throw std::exception("Attempt to bind texture to color attachment >= MAX_COLOUR_ATTACHMENTS");
+  FrameBufferBindMode bindMode = GetBindMode();
+  
+  if (bindMode == FBBM_Unbound)
+    throw std::exception("Attempt to attach texture to FrameBuffer that is not bound");
 
-  glNamedFramebufferTexture(m_fb, GL_COLOR_ATTACHMENT0 + location, texID, 0);
+  if (location >= FrameBuffer::MAX_COLOUR_ATTACHMENTS)
+    throw std::exception("Attempt to attach texture to color attachment >= MAX_COLOUR_ATTACHMENTS");
+
+  if(bindMode | FBBM_Read)
+    glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, texID, 0);
+  else
+    glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, texID, 0);
+  
   AddColourAttachment(location);
   glDrawBuffers(colourAttachments.size(), colourAttachments.data());
 }
 
 void FrameBuffer::AttachDepth(GLuint texID)
 {
-  glNamedFramebufferTexture(m_fb, GL_DEPTH_ATTACHMENT, texID, 0);
+  FrameBufferBindMode bindMode = GetBindMode();
+
+  if (bindMode == FBBM_Unbound)
+    throw std::exception("Attempt to attach texture to FrameBuffer that is not bound");
+
+  if (bindMode | FBBM_Read)
+    glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, texID, 0);
+  else
+    glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, texID, 0);
 }
 
 void FrameBuffer::DetachColour(int location)
 {
-  glNamedFramebufferTexture(m_fb, GL_COLOR_ATTACHMENT0 + location, 0, 0);
+  FrameBufferBindMode bindMode = GetBindMode();
+
+  if (bindMode == FBBM_Unbound)
+    throw std::exception("Attempt to detach texture from FrameBuffer that is not bound");
+
+  if (bindMode | FBBM_Read)
+    glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, 0, 0);
+  else
+    glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, 0, 0);
+
   RemoveColourAttachment(location);
   glDrawBuffers(colourAttachments.size(), colourAttachments.data());
 }
 
 void FrameBuffer::DetachDepth()
 {
-  glNamedFramebufferTexture(m_fb, GL_DEPTH_ATTACHMENT, 0, 0);
+  FrameBufferBindMode bindMode = GetBindMode();
+
+  if (bindMode == FBBM_Unbound)
+    throw std::exception("Attempt to attach texture to FrameBuffer that is not bound");
+
+  if (bindMode | FBBM_Read)
+    glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, 0, 0);
+  else
+    glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, 0, 0);
 }
 
 int FrameBuffer::MAX_COLOUR_ATTACHMENTS = 8;

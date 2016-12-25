@@ -6,19 +6,20 @@
 
 enum FrameBufferBindMode
 {
-  FBBM_Read,
-  FBBM_Write,
-  FBBM_ReadWrite,
-  FBBM_Unbound,
+  FBBM_Unbound = 0,
+  FBBM_Read = 0b01,
+  FBBM_Write = 0b10,
+  FBBM_ReadWrite = FBBM_Read | FBBM_Write,
 };
 
 enum FrameBufferStatus
 {
-  FBS_COMPLETE,
-  FBS_INVALID_ATTACHMENT,
-  FBS_INCONSISTENT_DIMENSIONS,
-  FBS_MISSING_ATTACHMENT,
-  FBS_UNKNOWN_ERROR,
+  FBS_Complete,
+  FBS_InvalidAttachment,
+  FBS_InconsistentDimensions,
+  FBS_MissingAttachment,
+  FBS_Unbound,
+  FBS_UnknownError,
 };
 
 class FrameBuffer
