@@ -1,4 +1,4 @@
- #ifndef ShaderLibrary_h__
+#ifndef ShaderLibrary_h__
 #define ShaderLibrary_h__
 
 #include "Types.h"

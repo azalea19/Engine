@@ -1,3 +1,6 @@
+#ifndef BloomEffect_h__
+#define BloomEffect_h__
+
 #include "GL/glew.h"
 #include "Shader.h"
 #include "FrameBuffer.h"
@@ -19,3 +22,4 @@ private:
   AdditiveBlendEffect m_blendEffect;
   GLuint tempTex[3];
 };
+#endif // BloomEffect_h__

@@ -4,6 +4,8 @@
 #include "Types.h"
 #include <unordered_map>
 #include "Mesh.h"
+#include "IAnimated.h"
+#include "IMeshCollection.h"
 
 class Mesh;
 class Skeleton;
@@ -20,19 +22,14 @@ struct IndexRange
   int indexCount;
 };
 
-class Model
+class Model : public IAnimated, public IMeshCollection
 {
 public:
 
-  Model();
   Model(const string& name, const string& filename);
-
-  int GetMeshCount() const;
-  std::vector<vec3> const& GetVertices() const;
-  std::vector<vec3> const& GetNormals() const;
-  std::vector<vec2> const& GetTexCoords() const;
+  
+  std::vector<vec2> const& GetTexCoords(TextureType type) const;
   std::vector<vec4> const& GetVertexColours() const;
-  std::vector<int> const& GetIndices() const;
   std::vector<VertexBoneIDs> const& GetBoneIDs() const;
   std::vector<VertexBoneWeights> const& GetBoneWeights() const;
   std::vector<mat4> GetBoneTransforms(int animationIndex, float time);
@@ -42,26 +39,29 @@ public:
   string GetMeshTextureName(int meshIndex, TextureType const& type) const;
 
   bool HasAnimation() const;
-  
+  virtual int GetAnimationCount() const override;
+  virtual int GetAnimationIndex(string const& animationName) const override;
+  virtual string const& GetAnimationName(int animationIndex) const override;
 
-private: 
+
+  virtual IMesh const& GetMesh(int meshIndex) const override;
+  virtual int GetMeshCount() const override;
+
+private:
 	string m_name;
   std::vector<Mesh*> m_meshes;
   std::vector<IndexRange> m_meshIndexRanges;
   std::vector<Material*> m_materials;
   Skeleton* pSkeleton;
 
-  std::vector<vec3> m_vertices;
-  std::vector<vec3> m_normals;
-  std::vector<vec2> m_texCoords;
+  std::vector<vec2> m_texCoords[TT_TextureTypeCount];
   std::vector<vec4> m_vertexColours;
-  std::vector<int> m_indices;
   std::vector<VertexBoneIDs> m_boneIDs;
   std::vector<VertexBoneWeights> m_boneWeights;
 
   bool m_hasAnimation;
 
-  void LoadAssimpMaterials(const aiScene* pScene);
+  void LoadAssimpMaterials(const aiScene* pScene, string const& modelDir);
   void LoadAssimpSkeleton(const aiScene* pScene);
   void LoadAssimpMeshes(const aiScene* pScene);
   void LoadVertexAttributes();

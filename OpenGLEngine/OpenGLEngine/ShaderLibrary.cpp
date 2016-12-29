@@ -37,11 +37,13 @@ void ShaderLibrary::initShaderLibrary()
 	//ShaderLibrary::getLib()->addShader("colouredLight", CreateVector(string("mvp"), string("diffuse")), CreateVector(string("position"), string("uvIn")));
 	//ShaderLibrary::getLib()->addShader("orthoShader", CreateVector(string("diffuse"), string("width"), string("height")), CreateVector(string("position"), string("uvIn")));
 
-	ShaderLibrary::getLib()->addShader("skinning", CreateVector(string("wvp"), string("worldMatrix"), string("normalMatrix"), string("viewMatrix"), string("projectionMatrix"), string("BONES"), string("ANIMATION_ENABLED"), string("DIFFUSE_SOURCE"), string("MESH_COLOUR"), string("DIFFUSE_TEXTURE")), CreateVector(string("Position"), string("TexCoord"), string("Normal"), string("BoneIDs"), string("Weights")));
+  ShaderLibrary::getLib()->addShader("SceneDecomposeEffect", CreateVector(string("CAMERA_POSITION"), string("WORLD_VIEW_PROJECTION_MATRIX"), string("WORLD_MATRIX"), string("VIEW_MATRIX"), string("PROJECTION_MATRIX"), string("BONES"), string("ANIMATION_ENABLED"), string("DIFFUSE_SOURCE"), string("MESH_COLOUR"), string("DIFFUSE_MAP"), string("ALPHA_MAP"), string("USE_ALPHA_MAP")), CreateVector(string("VERT_ALPHA_COORD"), string("VERT_POSITION"), string("VERT_DIFFUSE_COORD"), string("VERT_NORMAL"), string("VERT_BONE_IDS"), string("VERT_BONE_WEIGHTS"), string("VERT_COLOUR")));
   ShaderLibrary::getLib()->addShader("HDRSplitEffect", CreateVector(string("inputTex0")), CreateVector(string("Position"), string("TexCoord")));
   ShaderLibrary::getLib()->addShader("BlurEffect", CreateVector(string("inputTex0"), string("blurRadius")), CreateVector(string("Position"), string("TexCoord")));
   ShaderLibrary::getLib()->addShader("AdditiveBlendEffect", CreateVector(string("inputTex0"), string("inputTex1")), CreateVector(string("Position"), string("TexCoord")));
   ShaderLibrary::getLib()->addShader("FXAAEffect", CreateVector(string("inputTex0"), string("FXAA_SPAN")), CreateVector(string("Position"), string("TexCoord")));
+  ShaderLibrary::getLib()->addShader("DepthThresholdEffect", CreateVector(string("inputTex0"), string("threshold")), CreateVector(string("Position"), string("TexCoord")));
+  ShaderLibrary::getLib()->addShader("RayEffect", CreateVector(string("inputTex0"), string("lightPos")), CreateVector(string("Position"), string("TexCoord")));
   ShaderLibrary::getLib()->addShader("TextureDisplay", CreateVector(string("inputTex0")), CreateVector(string("Position"), string("TexCoord")));
 }
 

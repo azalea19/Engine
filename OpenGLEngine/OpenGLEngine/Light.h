@@ -2,6 +2,7 @@
 #define Light_h__
 
 #include "Types.h"
+#include "MMath.h"
 
 /**
 * @file   Light.h
@@ -9,42 +10,97 @@
 * @date   S2, 2016
 * @brief  The various light structs.
 *
-* The light class conntains the various light structs needed for various lighting.
+* The light class contains the various light structs needed for various lighting.
 */
 
 
 enum LightType : int
 {
-	Ambient = 0,
-	Directional = 1,
-	Point = 2
+  LT_Ambient = 0,
+  LT_Directional = 1,
+  LT_Point = 2,
+  LT_Spot = 3,
 };
 
 struct Light
 {
-	bool enabled;	///< whether the light is enabled
+  Light(LightType lightType, bool lightEnabled = true)
+    :enabled(lightEnabled)
+    , type(lightType)
+  {
+  }
+
+	bool enabled;	
 protected:
-	LightType type;		///< the type of light
+	LightType type;		
 };
 
 struct AmbientLight : public Light
 {
-	vec3 colour;		///< the colour of the light
-	float brightness;	///< the lights brightness
+  AmbientLight(vec3 const& lightColor = vec3(1.0f,1.0f,1.0f), bool lightEnabled = true)
+    : Light(LT_Ambient, lightEnabled)
+    , color(lightColor)
+  {
+
+  }
+	vec3 color;		
 };
 
 struct DirectionalLight : public Light
 {
-	vec3 colour;		///< the lights colour
-	float brightness;	///< the lights brightness
-	vec3 direction;		///< the lights direction
+  DirectionalLight(vec3 lightDirection, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
+    : Light(LT_Directional, lightEnabled)
+    , color(lightColor)
+    , direction(lightDirection)
+  {
+
+  }
+	vec3 color;	
+	vec3 direction;		
 };
 
 struct PointLight : public Light
 {
-	vec3 colour;		///< the lights colour
-	float brightness;	///< the lights brightness
-	vec3 position;		///< the lights posistion
+  PointLight(vec3 lightPosition, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
+    : Light(LT_Point, lightEnabled)
+    , color(lightColor)
+    , position(lightPosition)
+  {
+
+  }
+
+	vec3 color;		
+	vec3 position;		
+};
+
+struct SpotLight : public Light 
+{
+  SpotLight(vec3 lightDirection, vec3 lightPosition, float attenuation, float angleInDegrees, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
+    : Light(LT_Spot, lightEnabled)
+    , color(lightColor)
+    , direction(lightDirection)
+    , position(lightPosition)
+    , linearAttenuation(attenuation)
+  {
+    SetConeAngle(angleInDegrees);
+  }
+
+  void SetConeAngle(float angleInDegrees)
+  {
+    coneAngle = angleInDegrees;
+    coneCosine = cos(DegToRad(angleInDegrees));
+  }
+
+  vec3 color;
+  vec3 position;
+  vec3 direction;
+  float linearAttenuation;
+
+private:
+
+  float coneAngle;
+  float coneCosine;
+
 };
 
 

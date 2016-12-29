@@ -32,25 +32,12 @@ std::vector<vec2> const& Mesh::GetTexCoords(TextureType const& texType) const
   return m_texCoords[texType];
 }
 
-std::vector<vec3> const& Mesh::GetVertices() const
-{
-  return m_vertices;
-}
-
-std::vector<vec3> const& Mesh::GetNormals() const
-{
-  return m_normals;
-}
 
 std::vector<vec4> const& Mesh::GetVertexColours() const
 {
   return m_vertexColours;
 }
 
-std::vector<int> const& Mesh::GetIndices() const
-{
-  return m_indices;
-}
 
 std::vector<VertexBoneIDs> const& Mesh::GetBoneIDs() const
 {
@@ -74,16 +61,24 @@ mAABB const& Mesh::GetBounds() const
 
 void Mesh::LoadTexCoords(aiMesh const *pMesh)
 {
-  for (int uvChannel = 0; uvChannel < mMin(pMesh->GetNumUVChannels(), TT_TextureTypeCount); uvChannel++)
+  for (int i = 0; i < TT_TextureTypeCount; i++)
+  {
+    m_texCoords[i].resize(pMesh->mNumVertices);
+  }
+  
+  for (int uvChannel = 0; uvChannel < TT_TextureTypeCount; uvChannel++)
   {
     if (pMesh->HasTextureCoords(uvChannel))
     {
-      m_texCoords[uvChannel].resize(pMesh->mNumVertices);
-      for (int i = 0; i < pMesh->mNumVertices; i++)
+      for (uint i = 0; i < pMesh->mNumVertices; i++)
       {
         vec3 uv = ASToGLM(pMesh->mTextureCoords[uvChannel][i]);
         m_texCoords[uvChannel][i] = vec2(uv.x, uv.y);
       }
+    }
+    else
+    {
+      memcpy(m_texCoords[uvChannel].data(), m_texCoords[0].data(), sizeof(vec2) * m_texCoords[0].size());
     }
   }
 }
@@ -91,14 +86,14 @@ void Mesh::LoadTexCoords(aiMesh const *pMesh)
 void Mesh::LoadVertices(aiMesh const *pMesh)
 {
   m_vertices.resize(pMesh->mNumVertices);
-  for (int i = 0; i < pMesh->mNumVertices; i++)
+  for (uint i = 0; i < pMesh->mNumVertices; i++)
     m_vertices[i] = ASToGLM(pMesh->mVertices[i]);
 }
 
 void Mesh::LoadNormals(aiMesh const * pMesh)
 {
   m_normals.resize(pMesh->mNumVertices);
-  for (int i = 0; i < pMesh->mNumVertices; i++)
+  for (uint i = 0; i < pMesh->mNumVertices; i++)
     m_normals[i] = ASToGLM(pMesh->mNormals[i]);
 }
 
@@ -107,13 +102,13 @@ void Mesh::LoadVertexColours(aiMesh const *pMesh)
 	if (pMesh->HasVertexColors(0))
 	{
 		m_vertexColours.resize(pMesh->mNumVertices);
-		for (int i = 0; i < pMesh->mNumVertices; i++)
+		for (uint i = 0; i < pMesh->mNumVertices; i++)
 			m_vertexColours[i] = ASToGLM(pMesh->mColors[0][i]);
 	}
   else
   {
     m_vertexColours.resize(pMesh->mNumVertices);
-    for (int i = 0; i < pMesh->mNumVertices; i++)
+    for (uint i = 0; i < pMesh->mNumVertices; i++)
       m_vertexColours[i] = vec4(1, 0, 1, 1);
   }
 }
@@ -121,7 +116,7 @@ void Mesh::LoadVertexColours(aiMesh const *pMesh)
 void Mesh::LoadIndices(aiMesh const *pMesh)
 {
   m_indices.resize(pMesh->mNumFaces * 3);
-  for (int i = 0; i < pMesh->mNumFaces; i++)
+  for (uint i = 0; i < pMesh->mNumFaces; i++)
   {
     m_indices[i * 3 + 0] = pMesh->mFaces[i].mIndices[0];
     m_indices[i * 3 + 1] = pMesh->mFaces[i].mIndices[1];
@@ -147,12 +142,12 @@ void Mesh::LoadBones(aiMesh const *pMesh, Bimap<string,int> const& boneLookup)
   m_boneIDs.resize(pMesh->mNumVertices);
   m_boneWeights.resize(pMesh->mNumVertices);
 
-  for (int i = 0; i < pMesh->mNumBones; i++)
+  for (uint i = 0; i < pMesh->mNumBones; i++)
   {
     string boneName = pMesh->mBones[i]->mName.data;
     int boneID = boneLookup.GetValue(boneName);
 
-    for (int j = 0; j < pMesh->mBones[i]->mNumWeights; j++)
+    for (uint j = 0; j < pMesh->mBones[i]->mNumWeights; j++)
     {
       int pos = pMesh->mBones[i]->mWeights[j].mVertexId;
       int nextFree = GetNextWeightSlot(pos);
@@ -184,24 +179,9 @@ void Mesh::CalculateBounds()
   }
 }
 
-int Mesh::GetVertexCount() const
-{
-  return m_vertices.size();
-}
-
-int Mesh::GetNormalCount() const
-{
-  return m_normals.size();
-}
-
 int Mesh::GetVertexColoursCount() const
 {
   return m_vertexColours.size();
-}
-
-int Mesh::GetIndexCount() const
-{
-  return m_indices.size();
 }
 
 int Mesh::GetBoneIDCount() const
@@ -212,4 +192,19 @@ int Mesh::GetBoneIDCount() const
 int Mesh::GetBoneWeightCount() const
 {
   return m_boneWeights.size();
+}
+
+std::vector<vec3> const& Mesh::GetVertices() const
+{
+  return m_vertices;
+}
+
+std::vector<vec3> const& Mesh::GetNormals() const
+{
+  return m_normals;
+}
+
+std::vector<int> const& Mesh::GetIndices() const
+{
+  return m_indices;
 }

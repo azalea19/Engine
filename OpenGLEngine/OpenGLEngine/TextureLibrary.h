@@ -15,7 +15,7 @@ public:
 
 	void AddTexture(string name, GLuint textureID);
 
-	void AddTexture(string name, string filePath);
+	void AddTexture(string name, string filePath, bool useMips = true);
 
 	GLuint GetTexture(string name);
 

@@ -12,7 +12,7 @@ void AdditiveBlendEffect::Apply(GLuint inputTex0, GLuint inputTex1, GLuint outpu
   m_fb.Bind();
 
   m_fb.AttachColour(0, outputTex);
-
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   m_pShader->bind();
   glBindVertexArray(FrameBuffer::FSQuadVAO);
 

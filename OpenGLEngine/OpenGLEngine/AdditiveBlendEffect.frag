@@ -1,7 +1,7 @@
 #version 400
 
 in vec2 TexCoord0;
-layout (location = 0) out vec4 color;
+layout (location = 0) out vec3 color;
 
 uniform sampler2D inputTex0;
 uniform sampler2D inputTex1;
@@ -22,7 +22,7 @@ vec3 ToneMap(vec3 x)
 void main() 
 {
     vec3 tempcolor = ToneMap((texture2D(inputTex0, TexCoord0).xyz + texture2D(inputTex1, TexCoord0).xyz));
-	color = vec4(tempcolor, 1);
+	color = tempcolor;
 }
 
 

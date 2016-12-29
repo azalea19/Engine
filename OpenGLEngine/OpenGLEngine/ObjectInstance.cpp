@@ -1,33 +1,34 @@
 #include "ObjectInstance.h"
 #include "ShaderLibrary.h"
 
-void ObjectInstance::Render(glm::mat4 worldMatrix, glm::mat4 viewMatrix, glm::mat4 projectionMatrix, float time)
+ObjectInstance::ObjectInstance(RenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
+  : m_pRenderableObject(object)
 {
-	m_renderableObject->Render(worldMatrix * GetModelMatrix(), viewMatrix, projectionMatrix);
+  SetTransform(coords, quat(vec3(pitch, yaw, 0)), scaleFactor);
 }
 
-glm::mat4 ObjectInstance::GetModelMatrix()
+void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time) const
 {
-  glm::mat4 scaleMatrix = glm::scale(scale);
-  glm::mat4 YrotationMatrix = glm::rotate(((yaw)* 3.1416f / 180), glm::vec3(0, 1, 0));
-  glm::mat4 XrotationMatrix = glm::rotate(((pitch)* 3.1416f / 180), glm::vec3(1, 0, 0));
-  glm::mat4 translationMatrix = glm::translate(position);
-
-  //rotates and THEN translates
-  return translationMatrix * XrotationMatrix * YrotationMatrix * scaleMatrix;
+	m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
 }
 
-std::vector<glm::vec3> ObjectInstance::GetVertices(int subIndex, glm::mat4 parentModelMatrix /*= glm::mat4()*/)
+mat4 const& ObjectInstance::GetWorldMatrix() const
 {
-  std::vector<glm::vec3> verts;
-  verts = m_renderableObject->GetVertices(subIndex);
-  glm::mat4 modelMatrix = parentModelMatrix * GetModelMatrix();
+  return GetTransform();
+}
 
-  glm::vec4 temp;
+std::vector<vec3> ObjectInstance::GetVertices(mat4 const& parentWorldMatrix) const
+{
+  std::vector<vec3> verts;
+  verts = m_pRenderableObject->GetVertices();
+
+  mat4 worldMatrix = parentWorldMatrix * GetWorldMatrix();
+
+  vec4 temp;
   for (uint32_t i = 0; i < verts.size(); i++)
   {
-    temp = glm::vec4(verts[i], 1);
-    temp = modelMatrix * temp;
+    temp = vec4(verts[i], 1);
+    temp = worldMatrix * temp;
     verts[i].x = temp.x;
     verts[i].y = temp.y;
     verts[i].z = temp.z;
@@ -36,67 +37,28 @@ std::vector<glm::vec3> ObjectInstance::GetVertices(int subIndex, glm::mat4 paren
   return verts;
 }
 
-int ObjectInstance::SubObjectCount()
+void ObjectInstance::SetActiveAnimation(int animationIndex)
 {
-  return m_renderableObject->SubObjectCount();
+  m_activeAnimation = animationIndex;
 }
 
-void ObjectInstance::SetYaw(float degrees)
+int ObjectInstance::GetActiveAnimationIndex() const
 {
-  yaw = degrees;
+  return m_activeAnimation;
 }
 
-void ObjectInstance::SetPitch(float degrees)
+int ObjectInstance::GetAnimationCount() const
 {
-  pitch = degrees;
+  return m_pRenderableObject->GetAnimationCount();
 }
 
-void ObjectInstance::SetScale(glm::vec3 a_scale)
+string const& ObjectInstance::GetAnimationName(int animationIndex) const
 {
-  scale = a_scale;
+  return m_pRenderableObject->GetAnimationName(animationIndex);
 }
 
-void ObjectInstance::SetPosition(glm::vec3 coords)
+int ObjectInstance::GetAnimationIndex(string const& animationName) const
 {
-  position = coords;
+  return m_pRenderableObject->GetAnimationIndex(animationName);
 }
 
-ObjectInstance::ObjectInstance(RenderableObject* object, glm::vec3 coords, glm::vec3 scaleFactor, float a_yaw, float a_pitch)
-{
-	m_renderableObject = object;
-	position = coords;
-	scale = scaleFactor;
-	yaw = a_yaw;
-	pitch = a_pitch;
-}
-
-bool ObjectInstance::IsClimbable(int subIndex)
-{
-	return m_renderableObject->IsClimbable(subIndex);
-}
-
-const RenderableObject & ObjectInstance::GetRenderableObject() const
-{
-	return *m_renderableObject;
-}
-
-glm::vec3 ObjectInstance::GetPosition() const
-{
-	return position;
-}
-
-glm::vec3 ObjectInstance::GetScale() const
-{
-	return scale;
-}
-
-float ObjectInstance::GetYaw() const
-{
-	return yaw;
-
-}
-
-float ObjectInstance::GetPitch() const
-{
-	return pitch;
-}

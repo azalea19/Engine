@@ -17,6 +17,4 @@ private:
   Shader const* m_pShader;
 };
 
-
-
 #endif // BlurEffect_h__

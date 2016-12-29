@@ -7,6 +7,7 @@
 enum TextureType
 {
   TT_Diffuse,
+  TT_Alpha,
   TT_TextureTypeCount,
 };
 
@@ -15,7 +16,7 @@ struct aiMaterial;
 class Material
 {
 public:
-  Material(string name, const aiMaterial* pMaterial);
+  Material(string name, const aiMaterial* pMaterial, string const& modelDir);
   string GetTextureName(TextureType const& type) const;
 
 private:

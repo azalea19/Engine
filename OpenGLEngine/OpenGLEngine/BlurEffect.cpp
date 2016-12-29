@@ -12,7 +12,7 @@ void BlurEffect::Apply(GLuint inputTex, GLuint outputTex, int blurRadius)
   m_fb.Bind();
 
   m_fb.AttachColour(0, outputTex);
-
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   m_pShader->bind();
   m_pShader->transmitUniform("blurRadius", blurRadius);
   glBindVertexArray(FrameBuffer::FSQuadVAO);

@@ -13,9 +13,9 @@ void TextureLibrary::AddTexture(string name, GLuint textureID)
 	textures.emplace(name, textureID);
 }
 
-void TextureLibrary::AddTexture(string name, string filePath)
+void TextureLibrary::AddTexture(string name, string filePath, bool useMips)
 {
-	GLuint textureID = loadImage(filePath.c_str());
+	GLuint textureID = loadImage(filePath.c_str(), useMips);
 	AddTexture(name, textureID);
 
 }

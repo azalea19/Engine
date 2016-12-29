@@ -5,8 +5,8 @@
 Animation::Animation(aiAnimation const* pAnimation, Bimap<string, int> const& boneLookup)
 {
   m_name = pAnimation->mName.data;
-  m_duration = pAnimation->mDuration;
-  m_ticksPerSecond = pAnimation->mTicksPerSecond;
+  m_duration = float(pAnimation->mDuration);
+  m_ticksPerSecond = float(pAnimation->mTicksPerSecond);
   LoadKeyFrames(pAnimation, boneLookup);
 }
 
@@ -42,7 +42,7 @@ bool Animation::HasBoneTransform(int boneID) const
 
 void Animation::LoadKeyFrames(aiAnimation const* pAnimation, Bimap<string, int> const& boneLookup)
 {
-	for (int i = 0; i < pAnimation->mNumChannels; i++)
+	for (uint i = 0; i < pAnimation->mNumChannels; i++)
 	{
 		int boneIndex = boneLookup.GetValue(pAnimation->mChannels[i]->mNodeName.data);
 		m_boneKeyFrames.emplace(boneIndex, new BoneKeySequence(pAnimation->mChannels[i], boneIndex));

@@ -1,3 +1,6 @@
+#ifndef Singleton_h__
+#define Singleton_h__
+
 template <class DerivedClass>
 class Singleton
 {
@@ -15,3 +18,5 @@ protected:
 };
 template <class T>
 T* Singleton<T>::p = nullptr;
+
+#endif

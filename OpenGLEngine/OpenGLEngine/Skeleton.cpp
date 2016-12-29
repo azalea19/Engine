@@ -54,7 +54,7 @@ void Skeleton::CreateBoneLookup(const aiNode* pNode)
     m_bones.emplace_back();
     m_bones[boneIndex].m_ID = boneIndex;
     m_bones[boneIndex].transform = ASToGLM(pNode->mTransformation);
-    for (int i = 0; i < pNode->mNumChildren; i++)
+    for (uint i = 0; i < pNode->mNumChildren; i++)
     {
       CreateBoneLookup(pNode->mChildren[i]);
       m_bones[boneIndex].m_childBoneIDs.push_back(m_boneLookup.GetValue(pNode->mChildren[i]->mName.data));
@@ -67,10 +67,10 @@ void Skeleton::CreateBoneLookup(const aiNode* pNode)
 void Skeleton::LoadBones(const aiScene* pScene)
 {
   CreateBoneLookup(pScene->mRootNode);
-  for (int meshIndex = 0; meshIndex < pScene->mNumMeshes; meshIndex++)
+  for (uint meshIndex = 0; meshIndex < pScene->mNumMeshes; meshIndex++)
   {
     const aiMesh* m = pScene->mMeshes[meshIndex];
-    for (int b = 0; b < m->mNumBones; b++)
+    for (uint b = 0; b < m->mNumBones; b++)
     {
       int boneIndex = m_boneLookup.GetValue(m->mBones[b]->mName.data);
       m_bones[boneIndex].offsetMatrix = ASToGLM(m->mBones[b]->mOffsetMatrix);
@@ -80,7 +80,7 @@ void Skeleton::LoadBones(const aiScene* pScene)
 
 void Skeleton::LoadAnimations(const aiScene* pScene)
 {
-  for (int i = 0; i < pScene->mNumAnimations; i++)
+  for (uint i = 0; i < pScene->mNumAnimations; i++)
     m_animations.push_back(new Animation(pScene->mAnimations[i], m_boneLookup));
 
   for (int i = 0; i < m_animations.size(); i++)
@@ -90,4 +90,19 @@ void Skeleton::LoadAnimations(const aiScene* pScene)
 Bimap<string, int> const& Skeleton::GetBoneLookup() const
 {
   return m_boneLookup;
+}
+
+int Skeleton::GetAnimationCount() const
+{
+  return m_animations.size();
+}
+
+int Skeleton::GetAnimationIndex(string const& animationName) const
+{
+  return m_animationLookup.GetValue(animationName);
+}
+
+string const& Skeleton::GetAnimationName(int animationIndex) const
+{
+  return m_animationLookup.GetKey(animationIndex);
 }

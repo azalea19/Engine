@@ -2,6 +2,9 @@
 #define ObjectInstance_h__
 
 #include "RenderableObject.h"
+#include "IRenderable.h"
+#include "AffineTransformable.h"
+
 
 /**
 * @file   ObjectInstance.h
@@ -13,70 +16,29 @@
 */
 
 
-struct ObjectInstance
+struct ObjectInstance : public IRenderable, public IAnimatable, public AffineTransformable
 {
 
-	
-	ObjectInstance(RenderableObject* object, glm::vec3 coords = glm::vec3(0, 0, 0), glm::vec3 scaleFactor = glm::vec3(1, 1, 1), float a_yaw = 0, float a_pitch = 0);
+public: 
 
-	
+	ObjectInstance(RenderableObject* object, vec3 const& coords = glm::vec3(0, 0, 0), vec3 const& scaleFactor = vec3(1, 1, 1), float yaw = 0, float pitch = 0);
 
-	void SetPosition(glm::vec3 coords);
+	std::vector<vec3> GetVertices(mat4 const& parentModelMatrix = mat4()) const;
 
-	
-	void SetScale(glm::vec3 a_scale);
+	mat4 const& GetWorldMatrix() const;
 
-	
-	void SetPitch(float degrees);
-
-	
-
-	void SetYaw(float degrees);
-
-	
-	int SubObjectCount();
-
-	
-	std::vector<glm::vec3> GetVertices(int subIndex, glm::mat4 parentModelMatrix = glm::mat4());
-
-
-
-	bool IsClimbable(int subIndex);
-
-
-	glm::mat4 GetModelMatrix();
-
-
-
-	void Render(glm::mat4 worldMatrix, glm::mat4 viewMatrix, glm::mat4 projectionMatrix, float time = 0);
-
-
-
-	const RenderableObject & GetRenderableObject() const;
-
-
-
-	glm::vec3 GetPosition() const;
-
-
-
-	glm::vec3 GetScale() const;
-
-
-	float GetYaw() const;
-
-
-	float GetPitch() const;
-
-	
+  virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time = 0) const override;
+  virtual void SetActiveAnimation(int animationIndex) override;
+  virtual int GetActiveAnimationIndex() const override;
+  virtual int GetAnimationCount() const override;
+  virtual string const& GetAnimationName(int animationIndex) const override;
+  virtual int GetAnimationIndex(string const& animationName) const override;
 
 private:
 
-	RenderableObject * m_renderableObject;		
-	glm::vec3 position;				
-	glm::vec3 scale;				
-	float yaw = 0;					
-	float pitch = 0;				
+	RenderableObject * m_pRenderableObject;		
+  int m_activeAnimation;
+
 };
 
 #endif //ObjectInstance_h__

@@ -12,9 +12,6 @@
     <Filter Include="Source\Libraries">
       <UniqueIdentifier>{41198f61-4ebc-4ff4-b750-87706e4902ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Managers">
-      <UniqueIdentifier>{9224ca2e-3e4f-41c5-84bc-80ee0ab539f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Model Loader">
       <UniqueIdentifier>{1ac2fd66-4b6e-4e99-88c7-71b669c544f5}</UniqueIdentifier>
     </Filter>
@@ -44,6 +41,24 @@
     </Filter>
     <Filter Include="Source\Effects">
       <UniqueIdentifier>{1d51c807-1183-48c3-8815-d335de6629a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Lua">
+      <UniqueIdentifier>{77c08998-329c-4689-b3e9-4ee53805db73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Lua\Scripts">
+      <UniqueIdentifier>{93e72492-6193-488f-a5a3-d9af2f8b5669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Lua\APIs">
+      <UniqueIdentifier>{276ace99-e88b-47ca-b4f0-b7ff8d4534cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Lights">
+      <UniqueIdentifier>{3c1fc56b-3d9f-4b3d-b38d-7b38e6df0f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Managers">
+      <UniqueIdentifier>{9224ca2e-3e4f-41c5-84bc-80ee0ab539f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Interfaces">
+      <UniqueIdentifier>{883bda9f-ae66-4f5b-a10b-865612a5c250}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -122,20 +137,56 @@
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Source\FrameBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="HDRSplitEffect.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="BlurEffect.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="AdditiveBlendEffect.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Effects</Filter>
     </ClCompile>
     <ClCompile Include="BloomEffect.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="BlurEffect.cpp">
+      <Filter>Source\Effects</Filter>
     </ClCompile>
     <ClCompile Include="FXAAEffect.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="HDRSplitEffect.cpp">
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneDecomposeEffect.cpp">
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaManager.cpp">
+      <Filter>Source\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaContext.cpp">
+      <Filter>Source\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthThresholdEffect.cpp">
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="GodRaysEffect.cpp">
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RayEffect.cpp">
+      <Filter>Source\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="AffineTransformable.cpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Animatable.cpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IMesh.cpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IMeshCollection.cpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IAnimatedRenderable.cpp">
+      <Filter>Source\Interfaces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +311,65 @@
     <ClInclude Include="Mesh.h">
       <Filter>Source\Model Loader</Filter>
     </ClInclude>
+    <ClInclude Include="SceneDecomposeEffect.h">
+      <Filter>Source\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaManager.h">
+      <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaContext.h">
+      <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Source\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthThresholdEffect.h">
+      <Filter>Source\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="GodRaysEffect.h">
+      <Filter>Source\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RayEffect.h">
+      <Filter>Source\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimatable.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimated.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMesh.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMeshCollection.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="AffineTransformable.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimatedRenderable.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -284,12 +394,6 @@
       <Filter>Source\Shaders</Filter>
     </None>
     <None Include="uberShader.vert">
-      <Filter>Source\Shaders</Filter>
-    </None>
-    <None Include="skinning.frag">
-      <Filter>Source\Shaders</Filter>
-    </None>
-    <None Include="skinning.vert">
       <Filter>Source\Shaders</Filter>
     </None>
     <None Include="HDRSplitEffect.frag">
@@ -320,6 +424,27 @@
       <Filter>Source\Shaders</Filter>
     </None>
     <None Include="FXAAEffect.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="SceneDecomposeEffect.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="SceneDecomposeEffect.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="Game.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="DepthThresholdEffect.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="DepthThresholdEffect.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="RayEffect.vert">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="RayEffect.frag">
       <Filter>Source\Shaders</Filter>
     </None>
   </ItemGroup>

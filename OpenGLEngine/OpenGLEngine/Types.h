@@ -24,6 +24,10 @@ typedef glm::mat4 mat4;
 typedef glm::quat quat;
 typedef std::string string;
 
-
+typedef uint32_t uint;
+typedef uint16_t ushort;
+typedef uint8_t ubyte;
+typedef int8_t byte;
+typedef uint64_t ulong;
 
 #endif

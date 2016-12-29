@@ -23,15 +23,18 @@
 enum Attribute_Location
 {
   AL_Vertices = 0,
-  AL_TexCoords = 1,
-  AL_Normals = 2,
-  AL_BoneIDs = 3,
-  AL_BoneWeights = 4,
-  AL_VertexColours = 5,
+  AL_DiffuseTexCoords = 1,
+  AL_AlphaTexCoords = 2,
+  AL_Normals = 3,
+  AL_BoneIDs = 4,
+  AL_BoneWeights = 5,
+  AL_VertexColours = 6,
 };
 
-struct Shader
+class Shader
 {
+public:
+
 	Shader(string name);
 	Shader(string name, string vertFilePath, string fragFilePath, std::vector<string> attributes, std::vector<string> uniforms);
 	~Shader();
@@ -105,6 +108,12 @@ struct Shader
 	{
 		glUniform3fv(uniformID, 1, glm::value_ptr(vector));
 	}
+
+  template <>
+  void transmitUniform(int uniformID, vec2 vector) const
+  {
+    glUniform2fv(uniformID, 1, glm::value_ptr(vector));
+  }
 
 	template<typename T>
 	void transmitUniformArray(string uniformName, T* value, int count) const

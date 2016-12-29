@@ -1,3 +1,6 @@
+#ifndef AdditiveBlendEffect_h__
+#define AdditiveBlendEffect_h__
+
 #include "FrameBuffer.h"
 #include "Shader.h"
 
@@ -14,3 +17,4 @@ private:
   Shader const* m_pShader;
 };
 
+#endif // AdditiveBlendEffect_h__

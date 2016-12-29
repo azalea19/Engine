@@ -3,6 +3,7 @@
 
 #include "Types.h"
 #include "Bimap.h"
+#include "IAnimated.h"
 
 class Animation;
 struct aiScene;
@@ -16,7 +17,7 @@ struct Bone
   mat4 offsetMatrix;
 };
 
-class Skeleton
+class Skeleton : public IAnimated
 {
 public:
 
@@ -25,6 +26,9 @@ public:
   std::vector<mat4> GetBoneTransforms(string animationName, float time) const;
   
   Bimap<string, int> const& GetBoneLookup() const;
+  virtual int GetAnimationCount() const override;
+  virtual int GetAnimationIndex(string const& animationName) const override;
+  virtual string const& GetAnimationName(int animationIndex) const override;
 
 private:
 

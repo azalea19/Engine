@@ -17,3 +17,19 @@ std::vector<string> split(const string &s, char delim)
 	split(s, delim, elems);
 	return elems;
 }
+
+string GetDirectoryFromFileName(string filename)
+{
+  char const* str = filename.c_str();
+  int dirLength = strlen(str);
+
+  while (dirLength > 0)
+  {
+    if (str[dirLength - 1] != '/' && str[dirLength - 1] != '\\')
+      dirLength--;
+    else
+      break;
+  }
+
+  return filename.substr(0, dirLength);
+}

@@ -3,6 +3,7 @@
 #include "Types.h"
 #include "Shader.h"
 #include "ShaderLibrary.h"
+#include "Screen.h"
 
 GLuint FrameBuffer::FSQuadVAO;
 
@@ -10,6 +11,8 @@ void FrameBuffer::Initialize()
 {
   glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &FrameBuffer::MAX_COLOUR_ATTACHMENTS);
 
+  static float offsetX = 0.5f / SCREEN_WIDTH;
+  static float offsetY = 0.5f / SCREEN_HEIGHT;
 
   static vec2 verts[4] =
   {
@@ -19,8 +22,9 @@ void FrameBuffer::Initialize()
 
   static vec2 uvs[4] =
   {
-    vec2(0, 1), vec2(1, 1),
-    vec2(1, 0), vec2(0, 0)
+
+    vec2(offsetX, 1 - offsetY), vec2(1 - offsetX, 1 - offsetY),
+    vec2(1 - offsetX, offsetY), vec2(offsetX, offsetY)
   };
 
   GLuint quadBuffers[2];
@@ -36,8 +40,8 @@ void FrameBuffer::Initialize()
 
   glBindBuffer(GL_ARRAY_BUFFER, quadBuffers[1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vec2)*4, uvs, GL_STATIC_DRAW);
-  glEnableVertexAttribArray(AL_TexCoords);
-  glVertexAttribPointer(AL_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, 0);
+  glEnableVertexAttribArray(AL_DiffuseTexCoords);
+  glVertexAttribPointer(AL_DiffuseTexCoords, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
   glBindVertexArray(NULL);
 }
@@ -51,9 +55,10 @@ void FrameBuffer::Display(GLuint texture)
 {
   const Shader* shader = ShaderLibrary::getLib()->getShader("TextureDisplay");
 
+  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   FrameBuffer::BindToScreen();
   shader->bind();
-  
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glBindVertexArray(FrameBuffer::FSQuadVAO);
   glActiveTexture(GL_TEXTURE0 + 0);
   glBindTexture(GL_TEXTURE_2D, texture);

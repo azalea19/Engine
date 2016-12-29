@@ -13,7 +13,7 @@ void HDRSplitEffect::Apply(GLuint inputTex, GLuint outLowTex, GLuint outHighTex)
 
   m_fb.AttachColour(0, outLowTex);
   m_fb.AttachColour(1, outHighTex);
-
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   m_pShader->bind();
   glBindVertexArray(FrameBuffer::FSQuadVAO);
   glActiveTexture(GL_TEXTURE0 + 0);

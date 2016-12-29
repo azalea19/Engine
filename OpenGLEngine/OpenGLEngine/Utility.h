@@ -63,4 +63,7 @@ void VectorConcatenate(std::vector<T>& target, std::vector<T> const& source)
 }
 
 
+string GetDirectoryFromFileName(string filename);
+
+
 #endif // Utility_h__

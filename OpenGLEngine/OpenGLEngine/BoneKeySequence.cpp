@@ -112,18 +112,18 @@ mat4 BoneKeySequence::GetTransform(float time) const
 
 void BoneKeySequence::LoadPositionKeys(aiNodeAnim const* pAnim)
 {
-  for (int i = 0; i < pAnim->mNumPositionKeys; i++)
+  for (uint i = 0; i < pAnim->mNumPositionKeys; i++)
 	  m_positionKeys.push_back(PositionKey{ float(pAnim->mPositionKeys[i].mTime), ASToGLM(pAnim->mPositionKeys[i].mValue) });
 }
 
 void BoneKeySequence::LoadRotationKeys(aiNodeAnim const* pAnim)
 {
-  for (int i = 0; i < pAnim->mNumRotationKeys; i++)
+  for (uint i = 0; i < pAnim->mNumRotationKeys; i++)
 	  m_rotationKeys.push_back(RotationKey{ float(pAnim->mRotationKeys[i].mTime), ASToGLM(pAnim->mRotationKeys[i].mValue) });
 }
 
 void BoneKeySequence::LoadScaleKeys(aiNodeAnim const* pAnim)
 {
-  for (int i = 0; i < pAnim->mNumScalingKeys; i++)
+  for (uint i = 0; i < pAnim->mNumScalingKeys; i++)
 	  m_scaleKeys.push_back(ScaleKey{ float(pAnim->mScalingKeys[i].mTime), ASToGLM(pAnim->mScalingKeys[i].mValue) });
 }

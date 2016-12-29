@@ -14,7 +14,7 @@
 * The model library contains all the models used in various scenes
 */
 
-struct RenderableObject; 
+class RenderableObject; 
 struct ObjectInstance; 
 struct ModelLibrary
 {
