@@ -4,7 +4,7 @@
 ObjectInstance::ObjectInstance(RenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
   : m_pRenderableObject(object)
 {
-  SetTransform(coords, quat(vec3(pitch, yaw, 0)), scaleFactor);
+  SetTransform(coords, yaw, pitch, 0, scaleFactor);
 }
 
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time) const

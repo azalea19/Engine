@@ -244,9 +244,6 @@
     <ClInclude Include="Texture.h">
       <Filter>Source\Libraries</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Libraries</Filter>
-    </ClInclude>
     <ClInclude Include="MMath.h">
       <Filter>Source\Utility</Filter>
     </ClInclude>
@@ -369,6 +366,10 @@
     </ClInclude>
     <ClInclude Include="IAnimatedRenderable.h">
       <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Model Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

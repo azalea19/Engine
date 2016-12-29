@@ -82,8 +82,8 @@ void UpdatePlayer()
   InputManager* im = InputManager::GetInputManager();
 
   //Rotation
-  float originalYaw = camera.getYaw();
-  float originalPitch = camera.getPitch();
+  float originalYaw = camera.GetYaw();
+  float originalPitch = camera.GetPitch();
   float deltaYaw = -im->MouseDeltaX() * TURN_SPEED;
   float deltaPitch = -im->MouseDeltaY() * TURN_SPEED;
   camera.SetYaw(originalYaw + deltaYaw);

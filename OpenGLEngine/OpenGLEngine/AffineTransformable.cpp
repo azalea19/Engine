@@ -1,6 +1,20 @@
 #include "AffineTransformable.h"
 #include <glm/gtx/matrix_decompose.hpp>
+#include "MMath.h"
 
+AffineTransformable::AffineTransformable(vec3 const& translation, float yaw, float pitch, float roll, vec3 const& scale)
+{
+  SetTranslation(translation);
+  SetOrientation(yaw, pitch, roll);
+  SetScale(scale);
+}
+
+AffineTransformable::AffineTransformable()
+  : m_translation(0)
+  , m_scale(1, 1, 1)
+{
+  SetOrientation(0, 0, 0);
+}
 
 vec3 const& AffineTransformable::GetTranslation() const
 {
@@ -17,49 +31,46 @@ void AffineTransformable::SetTranslation(float x, float y, float z)
   SetTranslation(vec3{ x, y, z });
 }
 
-quat const& AffineTransformable::GetOrientation() const
+mat4 const& AffineTransformable::GetOrientation() const
 {
-  return m_orientation;
-}
-
-void AffineTransformable::SetOrientation(quat const& orientation)
-{
-  m_orientation = orientation;
+  return mat4(quat(vec3(m_pitch, m_yaw, m_roll)));
 }
 
 void AffineTransformable::SetOrientation(float yaw, float pitch, float roll)
 {
-  m_orientation = quat(vec3(pitch, yaw, roll));
+  SetYaw(yaw);
+  SetPitch(pitch);
+  SetRoll(roll);
 }
 
 float AffineTransformable::GetYaw() const
 {
-  return yaw(m_orientation);
+  return RadToDeg(m_yaw);
 }
 
 void AffineTransformable::SetYaw(float yaw)
 {
-  SetOrientation(GetPitch(), yaw, GetRoll());
+  m_yaw = DegToRad(yaw);
 }
 
 float AffineTransformable::GetPitch() const
 {
-  return pitch(m_orientation);
+  return RadToDeg(m_pitch);
 }
 
 void AffineTransformable::SetPitch(float pitch)
 {
-  SetOrientation(pitch, GetYaw(), GetRoll());
+  m_pitch = DegToRad(pitch);
 }
 
 float AffineTransformable::GetRoll() const
 {
-  return roll(m_orientation);
+  return RadToDeg(m_roll);
 }
 
 void AffineTransformable::SetRoll(float roll)
 {
-  SetOrientation(GetPitch(), GetYaw(), roll);
+  m_roll = DegToRad(roll);
 }
 
 vec3 const& AffineTransformable::GetScale() const
@@ -75,22 +86,25 @@ void AffineTransformable::SetScale(vec3 const& scale)
 mat4 AffineTransformable::GetTransform() const
 {
   mat4 translationMatrix = translate(m_translation);
-  quat temp = m_orientation;
-  mat4 rotationMatrix = mat4(quat(m_orientation));
+  mat4 rotationMatrix = GetOrientation();
   mat4 scaleMatrix = scale(m_scale);
   return translationMatrix * rotationMatrix * scaleMatrix;
 }
 
 void AffineTransformable::SetTransform(mat4 const& transform)
 {
+  quat temp;
   vec3 skew;
   vec4 perspective;
-  glm::decompose(transform, m_scale, m_orientation, m_translation, skew, perspective);
+  glm::decompose(transform, m_scale, temp, m_translation, skew, perspective);
+
+  vec3 eulers = RadToDeg(eulerAngles(temp));
+  SetOrientation(eulers.y, eulers.x, eulers.z);
 }
 
-void AffineTransformable::SetTransform(vec3 const& translation, quat const& orientation, vec3 const& scale)
+void AffineTransformable::SetTransform(vec3 const& translation, float yaw, float pitch, float roll, vec3 const& scale)
 {
-  m_translation = translation;
-  m_orientation = orientation;
-  m_scale = scale;
+  SetTranslation(translation);
+  SetOrientation(yaw, pitch, roll);
+  SetScale(scale);
 }
