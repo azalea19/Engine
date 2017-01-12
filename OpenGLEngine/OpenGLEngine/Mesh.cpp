@@ -109,7 +109,7 @@ void Mesh::LoadVertexColours(aiMesh const *pMesh)
   {
     m_vertexColours.resize(pMesh->mNumVertices);
     for (uint i = 0; i < pMesh->mNumVertices; i++)
-      m_vertexColours[i] = vec4(1, 0, 1, 1);
+      m_vertexColours[i] = vec4(0.43, 0.39, 0.25, 1);
   }
 }
 

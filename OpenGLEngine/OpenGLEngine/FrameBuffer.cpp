@@ -151,7 +151,7 @@ void FrameBuffer::AttachColour(int location, GLuint texID)
   if (location >= FrameBuffer::MAX_COLOUR_ATTACHMENTS)
     throw std::exception("Attempt to attach texture to color attachment >= MAX_COLOUR_ATTACHMENTS");
 
-  if(bindMode | FBBM_Read)
+  if(bindMode & FBBM_Read)
     glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, texID, 0);
   else
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, texID, 0);
@@ -167,7 +167,7 @@ void FrameBuffer::AttachDepth(GLuint texID)
   if (bindMode == FBBM_Unbound)
     throw std::exception("Attempt to attach texture to FrameBuffer that is not bound");
 
-  if (bindMode | FBBM_Read)
+  if (bindMode & FBBM_Read)
     glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, texID, 0);
   else
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, texID, 0);
@@ -180,7 +180,7 @@ void FrameBuffer::DetachColour(int location)
   if (bindMode == FBBM_Unbound)
     throw std::exception("Attempt to detach texture from FrameBuffer that is not bound");
 
-  if (bindMode | FBBM_Read)
+  if (bindMode & FBBM_Read)
     glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, 0, 0);
   else
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + location, 0, 0);
@@ -196,7 +196,7 @@ void FrameBuffer::DetachDepth()
   if (bindMode == FBBM_Unbound)
     throw std::exception("Attempt to attach texture to FrameBuffer that is not bound");
 
-  if (bindMode | FBBM_Read)
+  if (bindMode & FBBM_Read)
     glFramebufferTexture(GL_READ_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, 0, 0);
   else
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, 0, 0);

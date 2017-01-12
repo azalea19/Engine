@@ -1,5 +1,6 @@
 #define GLEW_STATIC
 #include "SDL.h"
+#include "time.h"
 #include "ModelLibrary.h"
 #include "Utility.h"
 #include "ShaderLibrary.h"
@@ -27,8 +28,13 @@
 #include "GodRaysEffect.h"
 #include "BloomEffect.h"
 #include "FXAAEffect.h"
-
-
+#include "ObjectInstance.h"
+#include "MMath.h"
+#include "ForestTerrain.h"
+#include "MultiplicativeBlendEffect.h"
+#include "DirectionalLightingEffect.h"
+#include "RenderManager.h"
+#include "Terrain.h"
 
 
 // Important Resources:
@@ -44,7 +50,16 @@
 
 SDL_Window* screen;
 
-RenderableObject* pObject;
+ObjectInstance* pGround;
+ObjectInstance* pZombie;
+ObjectInstance* pBob;
+ObjectInstance* pPalm;
+
+ObjectInstance* pBambooPalm;
+ObjectInstance* pGroundPalm;
+ObjectInstance* pSmallPlant;
+ObjectInstance* pHighTree;
+ObjectInstance* pRock;
 
 glm::mat4 projectionMatrix;
 
@@ -58,13 +73,15 @@ DepthThresholdEffect* pThresholdEffect;
 GodRaysEffect* pRayEffect;
 BloomEffect* pBloomEffect;
 FXAAEffect* pFXAAEffect;
+MultiplicativeBlendEffect* pBlendEffect;
+DirectionalLightingEffect* pLightingEffect;
 GLuint godRayMaskTexture;
 GLuint sceneTextures[5];
 GLuint finalTex;
 
-vec3 lightPos = vec3(-100, 100, -100);
+vec3 lightPos = vec3(-1000, 0, 0);
 
-
+ForestTerrain* pTerrain;
 
 //Lua stuff
 //https://eliasdaler.wordpress.com/2014/07/18/using-lua-with-cpp-luabridge/
@@ -112,7 +129,10 @@ void UpdatePlayer()
     translation *= MOVE_SPEED;
 
     if (im->IsKeyDown(SDL_SCANCODE_LSHIFT))
-      translation *= 2;
+      translation *= 4;
+
+    if (im->IsKeyDown(SDL_SCANCODE_LCTRL))
+      translation *= 0.25f;
 
     //Clamp Player to room
 
@@ -148,10 +168,9 @@ bool initSDL()
   screen = SDL_CreateWindow("Arch Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
   SDL_GL_CreateContext(screen);
 
-  SDL_GL_SetSwapInterval(-1);
+  int result = SDL_GL_SetSwapInterval(0);
 
   SDL_SetRelativeMouseMode(SDL_TRUE);
-
   return true;
 }
 
@@ -180,6 +199,7 @@ void myinit()
   glClearColor(0, 0, 0, 1.f);
 
   InitGlew();
+  srand(time(NULL));
 
   TextureLibrary::GetInstance().initTextureLibrary();
   ShaderLibrary::getLib()->initShaderLibrary();
@@ -190,13 +210,60 @@ void myinit()
   LuaManager::GetInstance().CreateContext("Game.lua");
 
   projectionMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);
-  pObject = new RenderableObject("zombie", "Assets/Models/SmallPlant/SmallPlant.obj");
+
+  ModelLibrary* modelLibrary = ModelLibrary::getLib();
+  modelLibrary->addModel("Bob", "Assets/Models/Bob/bob.md5mesh", false);
+  modelLibrary->addModel("Zombie", "Assets/Models/Zombie/Zombii.fbx", false);
+  modelLibrary->addModel("Ground", "Assets/Models/Ground/Ground.obj", false);
+  modelLibrary->addModel("PalmTree", "Assets/Models/PalmTree/PalmTree.obj", false);
+  modelLibrary->addModel("BambooPalm", "Assets/Models/BambooPalm/BambooPalm.obj", false);
+  modelLibrary->addModel("GroundPalm", "Assets/Models/GroundPalm/GroundPalm.obj", false);
+  modelLibrary->addModel("SmallPlant", "Assets/Models/SmallPlant/SmallPlant.obj", false);
+  modelLibrary->addModel("HighTree", "Assets/Models/HighTree/HighTree.obj", false);
+  modelLibrary->addModel("Rock", "Assets/Models/Rock/Rock.obj", false);
+  modelLibrary->addModel("Rock", "Assets/Models/Rock/Rock.obj", false);
+
+  pTerrain = new ForestTerrain(5, 40, "Assets/HeightMaps/heightmap.png", 1);
+  pTerrain->SaveTerrainToOBJ("Assets/Models/Terrain/Terrain.obj");
+  ModelLibrary::getLib()->addModel("ForestTerrain", "Assets/Models/Terrain/Terrain.obj", false);
+
+  pBob = modelLibrary->getInstance("Bob");
+  pGround = modelLibrary->getInstance("ForestTerrain");
+  pZombie = modelLibrary->getInstance("Zombie");
+  pPalm = modelLibrary->getInstance("PalmTree");
+
+  pBambooPalm = modelLibrary->getInstance("BambooPalm");
+  pGroundPalm = modelLibrary->getInstance("GroundPalm");
+  pSmallPlant = modelLibrary->getInstance("SmallPlant");
+  pHighTree = modelLibrary->getInstance("HighTree");
+  pRock = modelLibrary->getInstance("Rock");
+
+  pGround->SetTranslation(0, 0, 0);
+  pBob->SetTranslation(-10, 0, 0);
+  pZombie->SetTranslation(0, 0, 0);
+  pPalm->SetTranslation(10, 0, 0);
+
+  pBambooPalm->SetTranslation(15, 0, 5);
+  pHighTree->SetTranslation(25, 0, 10);
+  pRock->SetTranslation(38, 0, -5);
+
+  pGround->SetScale(vec3(1, 1, 1));
+  pBob->SetScale(vec3(0.13f, 0.13f, 0.13f));
+  pZombie->SetScale(vec3(0.05f, 0.05f, 0.05f));
+  pPalm->SetScale(vec3(1.5f, 1.5f, 1.5f));
+
+  pBob->SetActiveAnimation(0);
+  pZombie->SetActiveAnimation(0);
+
+  pBob->SetPitch(-90);
 
   pDecomposeEffect = new SceneDecomposeEffect();
   pThresholdEffect = new DepthThresholdEffect();
   pRayEffect = new GodRaysEffect();
   pBloomEffect = new BloomEffect();
   pFXAAEffect = new FXAAEffect();
+  pBlendEffect = new MultiplicativeBlendEffect();
+  pLightingEffect = new DirectionalLightingEffect();
 
   sceneTextures[0] = CreateColourFTexture();
   sceneTextures[1] = CreateDepthTexture();
@@ -206,6 +273,11 @@ void myinit()
 
   godRayMaskTexture = CreateVec3Texture();
   finalTex = CreateVec3Texture();
+
+
+
+  SoundManager::GetSoundManager()->AddSound("Music", "Assets/Sounds/ambient.wav");
+  SoundManager::GetSoundManager()->PlaySound("Music", INT_MAX);
 
 }
 
@@ -249,23 +321,42 @@ bool Update()
 
 void Render()
 {
-  static bool renderDepth = false;
+  static bool renderDepth = true;
 
-  if (InputManager::GetInputManager()->IsKeyPressed(SDL_SCANCODE_2))
+  glCullFace(GL_BACK);
+  if (InputManager::GetInputManager()->IsKeyPressed(SDL_SCANCODE_1))
   {
     renderDepth = !renderDepth;
   }
-
   glEnable(GL_DEPTH_TEST);
+
+  float time = clock() / float(CLOCKS_PER_SEC);
+  vec3 tr = pZombie->GetTranslation();
+  tr.z = -50 +  1.6f * time;
+  pZombie->SetTranslation(tr);
+
+  lightPos.x = -cos(PI * time / 60) * 10000;
+  lightPos.y = sin(PI * time / 60) * 10000;
 
   pDecomposeEffect->Bind(sceneTextures[0], sceneTextures[1], sceneTextures[2], sceneTextures[3], sceneTextures[4]);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  pObject->RenderB(mat4(), camera.getViewMatrix(), projectionMatrix, clock() / float(CLOCKS_PER_SEC));
+  ////pBob->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pZombie->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pGround->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pPalm->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+
+  ////pBambooPalm->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pSmallPlant->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pRock->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pHighTree->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pGroundPalm->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  ////pTerrain->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  RenderManager::GetInstance().Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
   pDecomposeEffect->Unbind();
 
   float camDist = length(camera.GetPosition() - lightPos);
 
-  //pThresholdEffect->Apply(sceneTextures[2], godRayMaskTexture, camDist);
+  ////pThresholdEffect->Apply(sceneTextures[2], godRayMaskTexture, camDist);
 
   vec4 temp = camera.getViewMatrix() * vec4(lightPos, 1);
   vec3 vsLightPos = vec3(temp.x, temp.y, temp.z);
@@ -275,22 +366,38 @@ void Render()
   temp.y = temp.y / temp.w;
   vec3 ssLightPos = vec3(temp.x, temp.y, lightDist);
 
-
-  pRayEffect->Apply(sceneTextures[0], sceneTextures[2], godRayMaskTexture, ssLightPos);
-  pBloomEffect->Apply(godRayMaskTexture, finalTex, 7);
-  pFXAAEffect->Apply(finalTex, godRayMaskTexture, 16);
-  
-
-  if (renderDepth)
+  if (vsLightPos.z > 0)
   {
-    FrameBuffer::Display(godRayMaskTexture);
+    pLightingEffect->Apply(sceneTextures[3], godRayMaskTexture, vec3(0.5, 0.5, 0.4), normalize(-lightPos));
+    pBlendEffect->Apply(sceneTextures[0], godRayMaskTexture, sceneTextures[4]);
   }
   else
   {
-    FrameBuffer::Display(sceneTextures[0]);
+    pLightingEffect->Apply(sceneTextures[3], godRayMaskTexture, vec3(0.5, 0.5, 0.4), normalize(-lightPos));
+    pBlendEffect->Apply(godRayMaskTexture, sceneTextures[0], sceneTextures[3]);
+    pRayEffect->Apply(sceneTextures[3], sceneTextures[2], sceneTextures[4], ssLightPos);
+  }
+  //pBlendEffect->Apply(sceneTextures[0], godRayMaskTexture, finalTex);
+
+  //pRayEffect->Apply(sceneTextures[0], sceneTextures[2], godRayMaskTexture, ssLightPos);
+  //pBloomEffect->Apply(sceneTextures[4], finalTex, 7);
+  pFXAAEffect->Apply(sceneTextures[4], finalTex, 32);
+  //pFXAAEffect->Apply(godRayMaskTexture, sceneTextures[2], 8);
+
+  if (renderDepth)
+  {
+    FrameBuffer::Display(finalTex);
+  }
+  else
+  {
+    FrameBuffer::Display(sceneTextures[4]);
   }
 
-  glFlush();
+  char frameRate[32];
+  sprintf_s(frameRate, "FPS: %.2f", RenderManager::GetInstance().GetFrameRate());
+  //printf("%s\n", frameRate);
+  drawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
+  //glFlush();
   SDL_GL_SwapWindow(screen);
 }
 

@@ -88,7 +88,7 @@ mat4 AffineTransformable::GetTransform() const
   mat4 translationMatrix = translate(m_translation);
   mat4 rotationMatrix = GetOrientation();
   mat4 scaleMatrix = scale(m_scale);
-  return translationMatrix * rotationMatrix * scaleMatrix;
+  return translationMatrix * scaleMatrix * rotationMatrix;
 }
 
 void AffineTransformable::SetTransform(mat4 const& transform)

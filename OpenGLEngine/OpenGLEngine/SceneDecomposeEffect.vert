@@ -14,7 +14,7 @@ out vec2 FRAG_DIFFUSE_COORD;
 out vec2 FRAG_ALPHA_COORD;
 out vec3 FRAG_VERTEX_NORMAL;
 out vec4 FRAG_VERTEX_COLOUR;
-out vec3 FRAG_WORLD_POS;                                                                   
+out vec3 FRAG_WORLD_POS;                                                                
 out float FRAG_LINEAR_DEPTH;
 
 

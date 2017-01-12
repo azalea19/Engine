@@ -143,13 +143,28 @@ uint32_t* GetPixelData(SDL_Surface* source)
 	uint32_t* dst = data;
 	uint8_t* pixels = (uint8_t*)(source->pixels);
 
-	for (int y = 0; y < source->h; y++)
-	{
-		memcpy(dst, pixels, sizeof(uint32_t) * source->w);
-		dst += source->w;
-		pixels += source->pitch;
-	}
-
+  if (source->format->BytesPerPixel == 4)
+  {
+    for (int y = 0; y < source->h; y++)
+    {
+      memcpy(dst, pixels, sizeof(uint32_t) * source->w);
+      dst += source->w;
+      pixels += source->pitch;
+    }
+  }
+  else
+  {
+    for (int y = 0; y < source->h; y++)
+    {
+      for (int x = 0; x < source->w; x++)
+      {
+        uint32_t val = uint32_t(pixels[x]);
+        dst[x] = 0xFF000000 | (val << 16) | (val << 8) | (val << 0);
+      }
+      dst += source->w;
+      pixels += source->pitch;
+    }
+  }
 	return data;
 }
 
@@ -298,7 +313,7 @@ GLuint loadImage(const char * imagepath, bool useMips)
   }
   else
   {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   }
 
 	SDL_FreeSurface(rawSurface);

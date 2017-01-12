@@ -172,11 +172,14 @@
     <ClCompile Include="BlurEffect.cpp" />
     <ClCompile Include="BoneKeySequence.cpp" />
     <ClCompile Include="DepthThresholdEffect.cpp" />
+    <ClCompile Include="DirectionalLightingEffect.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="ForestTerrain.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="FXAAEffect.cpp" />
     <ClCompile Include="GodRaysEffect.cpp" />
     <ClCompile Include="HDRSplitEffect.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="IAnimatedRenderable.cpp" />
     <ClCompile Include="IMesh.cpp" />
     <ClCompile Include="IMeshCollection.cpp" />
@@ -188,14 +191,16 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MCamera.cpp" />
     <ClCompile Include="ModelLibrary.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="MultiplicativeBlendEffect.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="RayEffect.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="ObjectInstance.cpp">
@@ -205,12 +210,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="PrimitiveCollisions.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="SceneDecomposeEffect.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLibrary.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -219,6 +226,9 @@
     <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="DirectionalLightingEffect.h" />
+    <ClInclude Include="ForestTerrain.h" />
+    <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IAnimatable.h" />
     <ClInclude Include="IAnimated.h" />
     <ClInclude Include="Animation.h" />
@@ -240,12 +250,15 @@
     <ClInclude Include="LuaContext.h" />
     <ClInclude Include="LuaManager.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="MultiplicativeBlendEffect.h" />
+    <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="RayEffect.h" />
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="SceneDecomposeEffect.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="ExampleScene.h" />
@@ -253,7 +266,6 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Interface2D.h" />
     <ClInclude Include="MCamera.h" />
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="MMath.h" />
     <ClInclude Include="ModelLibrary.h" />
     <ClInclude Include="ObjectInstance.h" />
@@ -263,6 +275,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextureLibrary.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Texture.h" />
@@ -278,11 +291,15 @@
     <None Include="defaultShader.vert" />
     <None Include="DepthThresholdEffect.frag" />
     <None Include="DepthThresholdEffect.vert" />
+    <None Include="DirectionalLightingEffect.frag" />
+    <None Include="DirectionalLightingEffect.vert" />
     <None Include="FXAAEffect.frag" />
     <None Include="FXAAEffect.vert" />
     <None Include="Game.lua" />
     <None Include="HDRSplitEffect.frag" />
     <None Include="HDRSplitEffect.vert" />
+    <None Include="MultiplicativeBlendEffect.frag" />
+    <None Include="MultiplicativeBlendEffect.vert" />
     <None Include="orthoShader.frag" />
     <None Include="orthoShader.vert" />
     <None Include="RayEffect.frag" />

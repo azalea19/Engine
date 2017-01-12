@@ -1,3 +1,6 @@
+#ifndef AffineTransformable_h__
+#define AffineTransformable_h__
+
 #include "Types.h"
 
 class AffineTransformable
@@ -34,3 +37,4 @@ public:
   void SetTransform(vec3 const& translation, float yaw, float pitch, float roll, vec3 const& scale);
 
 };
+#endif // AffineTransformable_h__

@@ -25,14 +25,16 @@ public:
 
 	std::vector<vec3> GetVertices(mat4 const& parentModelMatrix = mat4()) const;
 
-	mat4 const& GetWorldMatrix() const;
+	mat4 GetWorldMatrix() const;
 
-  virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time = 0) const override;
+  virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time = 0) override;
   virtual void SetActiveAnimation(int animationIndex) override;
   virtual int GetActiveAnimationIndex() const override;
   virtual int GetAnimationCount() const override;
   virtual string const& GetAnimationName(int animationIndex) const override;
   virtual int GetAnimationIndex(string const& animationName) const override;
+
+  RenderableObject const* GetRenderableObject() const;
 
 private:
 

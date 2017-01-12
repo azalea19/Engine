@@ -22,13 +22,6 @@ RenderableObject::~RenderableObject()
   Destroy();
 }
 
-void RenderableObject::RenderMesh(int meshIndex) const
-{
-  BindMaterial(meshIndex);
-  IndexRange const& range = m_pModel->GetMeshIndexRange(meshIndex);
-  glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
-}
-
 void RenderableObject::SetFillMode(FillMode fillMode) const
 {
   switch (fillMode)
@@ -149,19 +142,15 @@ void RenderableObject::Initialise()
 
   glBindVertexArray(NULL);
 
+
 }
 
 void RenderableObject::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time, int animationIndex) const
 {
   UploadMatrices(worldMatrix, viewMatrix, projectionMatrix);
-  SetFillMode(FM_Fill);
-
   UpdateAnimation(time, animationIndex);
-
-  glBindVertexArray(m_VAO);
-  for (int i = 0; i < m_pModel->GetMeshCount(); i++)
-    RenderMesh(i);
-  glBindVertexArray(NULL);
+  IndexRange const& range = m_pModel->GetMeshIndexRange(boundMeshIndex);
+  glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
 }
 
 void RenderableObject::Destroy()
@@ -200,7 +189,27 @@ IMesh const& RenderableObject::GetMesh(int meshIndex) const
 
 int RenderableObject::GetMeshCount() const
 {
-  throw std::logic_error("The method or operation is not implemented.");
+  return m_pModel->GetMeshCount();
+}
+
+void RenderableObject::BindObject() const
+{
+  
+  glBindVertexArray(m_VAO);
+}
+
+void RenderableObject::BindMesh(int meshIndex) const
+{
+  boundMeshIndex = meshIndex;
+  BindMaterial(meshIndex);
+}
+
+bool RenderableObject::OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
+{
+  if (GetAnimationCount() == 0)
+    return true;
+
+
 }
 
 void RenderableObject::BindMaterial(int meshIndex) const

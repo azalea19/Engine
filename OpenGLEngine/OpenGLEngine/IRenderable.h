@@ -7,7 +7,7 @@ class IRenderable
 {
 public:
 
-  virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time) const
+  virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
   {}
 
 private:

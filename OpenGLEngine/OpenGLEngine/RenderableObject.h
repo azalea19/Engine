@@ -58,14 +58,19 @@ public:
   virtual string const& GetAnimationName(int animationIndex) const override;
   virtual IMesh const& GetMesh(int meshIndex) const override;
   virtual int GetMeshCount() const override;
-
+  void BindObject() const;
+  void BindMesh(int meshIndex) const;
+  void RenderMesh(int meshIndex, mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, int animationIndex, float time) const;
+  bool OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const;
 private:
 
   Model* m_pModel;
   GLuint m_VAO;
   GLuint m_buffers[BT_NUM_BUFFERS];
+  mutable int boundMeshIndex;
+  //mAABB boundingBox;
 
-  void RenderMesh(int meshIndex) const;
+  
   void SetFillMode(FillMode fillMode) const;
   void BindMaterial(int meshIndex) const;
   void UpdateAnimation(float time, int activeAnimation) const;

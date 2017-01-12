@@ -10,8 +10,9 @@ uniform float decay = 0.97;
 uniform float density = 1.0;
 uniform float weight = 1.0;
 uniform vec2 lightPos;
+uniform vec3 lightColor = vec3(1.0, 1.0, 0.8);
 
-const int NUM_SAMPLES = 200;
+const int NUM_SAMPLES = 256;
 
 vec2 halfPixel = vec2(0.5/1280, 0.5/720);
 
@@ -34,7 +35,6 @@ void main()
 
    for(int i=0; i < NUM_SAMPLES; i++)
    {
-		tc += deltaTexCoord;
 		vec2 fragToLight = uvLightPos - tc;
 		fragToLight.x = fragToLight.x * aspectRatio;
 		float distance = length(fragToLight) * 8;
@@ -49,21 +49,15 @@ void main()
 		s *= illuminationDecay;
 		totalWeight += illuminationDecay;
 
-		color += s;
+		color += s * lightColor;
 		illuminationDecay *= decay;
 
-		
+		tc += deltaTexCoord;
    }
 
    color = color / totalWeight;
 
-   color *= exposure;
-
-   if(length(uvLightPos - TexCoord0) < 0.005)
-   {
-		color = vec3(1, 0, 0);
-   }
-   
+   color *= exposure;  
 }
 
 

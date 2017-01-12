@@ -9,11 +9,12 @@ FXAAEffect::FXAAEffect()
 
 void FXAAEffect::Apply(GLuint inputTex, GLuint outputTex, int fxaaSpan)
 {
+  m_pShader->bind();
   m_fb.Bind();
 
   m_fb.AttachColour(0, outputTex);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  m_pShader->bind();
+  
   m_pShader->transmitUniform("FXAA_SPAN", fxaaSpan);
   glBindVertexArray(FrameBuffer::FSQuadVAO);
   glActiveTexture(GL_TEXTURE0 + 0);

@@ -1,18 +1,21 @@
 #include "ObjectInstance.h"
 #include "ShaderLibrary.h"
+#include "RenderManager.h"
 
 ObjectInstance::ObjectInstance(RenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
   : m_pRenderableObject(object)
+  , m_activeAnimation(-1)
 {
   SetTransform(coords, yaw, pitch, 0, scaleFactor);
+  RenderManager::GetInstance().AddObject(this);
 }
 
-void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time) const
+void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
 	m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
 }
 
-mat4 const& ObjectInstance::GetWorldMatrix() const
+mat4 ObjectInstance::GetWorldMatrix() const
 {
   return GetTransform();
 }
@@ -60,5 +63,10 @@ string const& ObjectInstance::GetAnimationName(int animationIndex) const
 int ObjectInstance::GetAnimationIndex(string const& animationName) const
 {
   return m_pRenderableObject->GetAnimationIndex(animationName);
+}
+
+RenderableObject const* ObjectInstance::GetRenderableObject() const
+{
+  return m_pRenderableObject;
 }
 

@@ -11,7 +11,7 @@ void ModelLibrary::initModelLibrary()
 
 void ModelLibrary::addModel(std::string name, std::string path, bool normalized)
 {
-	RenderableObject *newObject = new RenderableObject(path, normalized);
+	RenderableObject *newObject = new RenderableObject(name, path);
 	models.emplace(name, newObject);
 }
 
