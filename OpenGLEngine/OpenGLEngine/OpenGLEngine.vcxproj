@@ -185,6 +185,7 @@
     <ClCompile Include="IMeshCollection.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
+    <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="LuaContext.cpp" />
     <ClCompile Include="LuaManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MultiplicativeBlendEffect.cpp" />
+    <ClCompile Include="ObjectInstanceAPI.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RayEffect.cpp" />
@@ -246,12 +248,14 @@
     <ClInclude Include="IMesh.h" />
     <ClInclude Include="IMeshCollection.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="LuaAPI.h" />
     <ClInclude Include="LuaContext.h" />
     <ClInclude Include="LuaManager.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />
+    <ClInclude Include="ObjectInstanceAPI.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
     <ClInclude Include="Random.h" />

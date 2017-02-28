@@ -215,6 +215,12 @@
     <ClCompile Include="ForestTerrain.cpp">
       <Filter>Source\Terrain</Filter>
     </ClCompile>
+    <ClCompile Include="LuaInstanceManager.cpp">
+      <Filter>Source\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectInstanceAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -304,7 +310,6 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Source\FrameBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
@@ -409,6 +414,12 @@
     </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInstanceManager.h">
+      <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectInstanceAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
