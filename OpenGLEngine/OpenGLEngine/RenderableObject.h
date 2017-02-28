@@ -68,7 +68,6 @@ private:
   GLuint m_VAO;
   GLuint m_buffers[BT_NUM_BUFFERS];
   mutable int boundMeshIndex;
-  //mAABB boundingBox;
 
   
   void SetFillMode(FillMode fillMode) const;

@@ -10,26 +10,37 @@ class Terrain : public IMesh
 {
 public:
 
-  Terrain(float blockScale, float heightScale, string const& filepath);
+  Terrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filepath);
 
   void GenerateTerrainIndices();
 
   void GenerateTerrainVertices();
 
+  void GenerateTerrainVertex();
+
+  void GenerateTerrainIndex();
+
+  void GenerateTerrainTexCoords();
+
+  void GenerateSmoothNormals();
+
   void SaveTerrainToOBJ(const string& filepath);
 
   HeightMap* GetHeightMap();
 
-  float GetBlockScale() const;
-  float GetHeightScale() const;
+  float GetXBlockScale() const;
 
-  float GetHeightValue(vec2i position);
+  float GetYBlockScale() const;
+
+  float GetHeightScale() const;
 
   virtual std::vector<vec3> const& GetVertices() const override;
 
   virtual std::vector<vec3> const& GetNormals() const override;
 
   virtual std::vector<int> const& GetIndices() const override;
+
+  void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time) const;
 
 private:
 
@@ -40,7 +51,14 @@ private:
 
   HeightMap* m_pHeightMap;
   float m_heightScale;
-  float m_blockScale;
+
+  float m_xBlockScale;
+  float m_yBlockScale;
+
+  float m_terrainWidth;
+  float m_terrainHeight;
+
+  float m_textureTileCount;
 
 };
 

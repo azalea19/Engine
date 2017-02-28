@@ -16,7 +16,7 @@ void HeightMap::LoadHeightMap()
   m_pHeightMap = GetPixelData(pHeightMapSurface);
 }
 
-float HeightMap::GetHeightValue(vec2i const& pixelPos)
+float HeightMap::GetHeightValueAtPixel(vec2i const& pixelPos)
 {
   uint pos = (m_heightMapDimensions.x * pixelPos.y) + pixelPos.x;
 
