@@ -1,8 +1,6 @@
 #include "SoundManager.h"
 
 
-
-
 static std::vector<ChannelHandle> channels;
 
 
@@ -14,15 +12,14 @@ void channelFinishedCB(int channel)
 
 void SoundManager::InitSoundManager()
 {
-		m_numChannels = 16;
+		//m_numChannels = 16;
 
-		Mix_AllocateChannels(soundManager->numChannels);
+		Mix_AllocateChannels(16);
 
-		for (int i = 0; i < soundManager->numChannels; i++)
+		for (int i = 0; i < 16; i++)
 		{
 			channels.push_back(i);
-		}
-	}
+		}	
 	
 	Mix_ChannelFinished(channelFinishedCB);
 }
@@ -35,7 +32,7 @@ void SoundManager::AddSound(string name, string filepath)
 	{
 		printf("Mix_LoadWAV: %s\n", Mix_GetError());
 	}
-	soundMap.emplace(name, newEffect);
+	m_soundMap.emplace(name, newEffect);
 }
 
 ChannelHandle SoundManager::PlaySound(string name, int loopCount)
@@ -45,9 +42,9 @@ ChannelHandle SoundManager::PlaySound(string name, int loopCount)
 		return -1;
 	}
 
-	auto got = soundMap.find(name);
+	auto got = m_soundMap.find(name);
 
-	if (got == soundMap.end())
+	if (got == m_soundMap.end())
 	{
 		printf("Sound with name %s not found.", name.c_str());
 		return -1;

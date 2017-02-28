@@ -53,16 +53,16 @@ void FrameBuffer::BindToScreen(FrameBufferBindMode bufferMode /*= FBM_ReadWrite*
 
 void FrameBuffer::Display(GLuint texture)
 {
-  const Shader* shader = ShaderLibrary::getLib()->getShader("TextureDisplay");
+  const Shader* shader = ShaderLibrary::GetInstance().GetShader("TextureDisplay");
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   FrameBuffer::BindToScreen();
-  shader->bind();
+  shader->Bind();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glBindVertexArray(FrameBuffer::FSQuadVAO);
   glActiveTexture(GL_TEXTURE0 + 0);
   glBindTexture(GL_TEXTURE_2D, texture);
-  shader->transmitUniform("inputTex0", 0);
+  shader->TransmitUniform("inputTex0", 0);
   glDrawArrays(GL_QUADS, 0, 4);
   glBindVertexArray(NULL);
 }

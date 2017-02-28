@@ -7,9 +7,9 @@ void ForestTerrain::SaveTerrainToOBJ(const string& filepath) const
   OBJWriter::SaveMeshToOBJ(*this, filepath);
 }
 
-ForestTerrain::ForestTerrain(int blockScale, int heightScale, string const& filePath, int density)
+ForestTerrain::ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filePath, int density)
 {
-  m_pLand = new Terrain(blockScale, heightScale, filePath);
+  m_pLand = new Terrain(terrainWidth, terrainHeight, heightScale, 1, filePath);
   GenerateForest();
 }
 
@@ -20,20 +20,22 @@ void ForestTerrain::GenerateForest()
   int height = m_pLand->GetHeightMap()->GetHeight();
 
   ObjectInstance* pTree;
-  float bs = m_pLand->GetBlockScale();
+  float x_bs = m_pLand->GetXBlockScale();
+  float y_bs = m_pLand->GetYBlockScale();
   float hs = m_pLand->GetHeightScale();
 
   for (int x = 0; x < width; x++)
   {
     for (int y = 0; y < height; y++)
     {
-      float heightAtPixel = m_pLand->GetHeightValue(vec2(x, y));
+		
+      float heightAtPixel = m_pLand->GetHeightMap()->GetHeightValueAtPixel(vec2(x, y));
       float success = RandomFloat(0, 1);
       if (success < pow(heightAtPixel, 1) * 0.1f)
       {
         string treeName = treeNames[RandomInt(0, sizeof(treeNames) / sizeof(treeNames[0]))];
         pTree = ModelLibrary::GetInstance().GetObjectInstance(treeName);
-        pTree->SetTranslation(vec3(x*bs, heightAtPixel*hs, y*bs));
+        pTree->SetTranslation(vec3(x*x_bs, heightAtPixel*hs, y*y_bs));
         float yaw = RandomFloat(0, 360);
         float scale = RandomFloat(0.5f, 1);
         pTree->SetYaw(yaw);

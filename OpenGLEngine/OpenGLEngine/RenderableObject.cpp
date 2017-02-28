@@ -37,51 +37,51 @@ void RenderableObject::SetFillMode(FillMode fillMode) const
 
 void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 {
-  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
   if (m_pModel->HasAnimation() && activeAnimation >= 0)
   {
     std::vector<glm::mat4> bones = m_pModel->GetBoneTransforms(activeAnimation, time);
-    ShaderLibrary::getLib()->currentShader()->transmitUniformArray("BONES", bones.data(), bones.size());
-    shader->transmitUniform("ANIMATION_ENABLED", 1);
+	shader->TransmitUniformArray("BONES", bones.data(), bones.size());    
+    shader->TransmitUniform("ANIMATION_ENABLED", 1);
   }
   else
   {
-    shader->transmitUniform("ANIMATION_ENABLED", 0);
+    shader->TransmitUniform("ANIMATION_ENABLED", 0);
   }
 }
 
 void RenderableObject::UploadMatrices(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
 {
-  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
 
-  if (shader->hasUniform("WORLD_MATRIX"))
-    shader->transmitUniform("WORLD_MATRIX", worldMatrix);
+  if (shader->HasUniform("WORLD_MATRIX"))
+    shader->TransmitUniform("WORLD_MATRIX", worldMatrix);
 
-  if (shader->hasUniform("VIEW_MATRIX"))
-    shader->transmitUniform("VIEW_MATRIX", viewMatrix);
+  if (shader->HasUniform("VIEW_MATRIX"))
+    shader->TransmitUniform("VIEW_MATRIX", viewMatrix);
 
-  if (shader->hasUniform("PROJECTION_MATRIX"))
-    shader->transmitUniform("PROJECTION_MATRIX", projectionMatrix);
+  if (shader->HasUniform("PROJECTION_MATRIX"))
+    shader->TransmitUniform("PROJECTION_MATRIX", projectionMatrix);
 
-  if (shader->hasUniform("INVERSE_WORLD_MATRIX"))
-    shader->transmitUniform("INVERSE_WORLD_MATRIX", glm::inverse(worldMatrix));
+  if (shader->HasUniform("INVERSE_WORLD_MATRIX"))
+    shader->TransmitUniform("INVERSE_WORLD_MATRIX", glm::inverse(worldMatrix));
 
-  if (shader->hasUniform("INVERSE_VIEW_MATRIX"))
-    shader->transmitUniform("INVERSE_VIEW_MATRIX", glm::inverse(viewMatrix));
+  if (shader->HasUniform("INVERSE_VIEW_MATRIX"))
+    shader->TransmitUniform("INVERSE_VIEW_MATRIX", glm::inverse(viewMatrix));
 
-  if (shader->hasUniform("INVERSE_PROJECTION_MATRIX"))
-    shader->transmitUniform("INVERSE_PROJECTION_MATRIX", glm::inverse(projectionMatrix));
+  if (shader->HasUniform("INVERSE_PROJECTION_MATRIX"))
+    shader->TransmitUniform("INVERSE_PROJECTION_MATRIX", glm::inverse(projectionMatrix));
 
-  if (shader->hasUniform("WORLD_VIEW_PROJECTION_MATRIX"))
+  if (shader->HasUniform("WORLD_VIEW_PROJECTION_MATRIX"))
   {
     glm::mat4 wvp = projectionMatrix * viewMatrix * worldMatrix;
-    shader->transmitUniform("WORLD_VIEW_PROJECTION_MATRIX", wvp);
+    shader->TransmitUniform("WORLD_VIEW_PROJECTION_MATRIX", wvp);
   }
 
-  if (shader->hasUniform("CAMERA_POSITION"))
+  if (shader->HasUniform("CAMERA_POSITION"))
   {
 	  vec4 cam =  inverse(viewMatrix) * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-	  shader->transmitUniform("CAMERA_POSITION", vec3(cam.x, cam.y, cam.z));
+	  shader->TransmitUniform("CAMERA_POSITION", vec3(cam.x, cam.y, cam.z));
   }
 
 }
@@ -214,7 +214,7 @@ bool RenderableObject::OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix,
 
 void RenderableObject::BindMaterial(int meshIndex) const
 {
-  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
   
     string diffuseTexture = m_pModel->GetMeshTextureName(meshIndex, TT_Diffuse);
     
@@ -222,12 +222,12 @@ void RenderableObject::BindMaterial(int meshIndex) const
     {
       glActiveTexture(GL_TEXTURE0 + TL_Diffuse);
       glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(diffuseTexture));
-      shader->transmitUniform("DIFFUSE_MAP", int(TL_Diffuse));
-      shader->transmitUniform("DIFFUSE_SOURCE", int(DS_Texture));
+      shader->TransmitUniform("DIFFUSE_MAP", int(TL_Diffuse));
+      shader->TransmitUniform("DIFFUSE_SOURCE", int(DS_Texture));
     }
     else
     {
-      shader->transmitUniform("DIFFUSE_SOURCE", int(DS_VertexColour));
+      shader->TransmitUniform("DIFFUSE_SOURCE", int(DS_VertexColour));
     }
 
     string alphaTexture = m_pModel->GetMeshTextureName(meshIndex, TT_Alpha);
@@ -235,11 +235,11 @@ void RenderableObject::BindMaterial(int meshIndex) const
     {
       glActiveTexture(GL_TEXTURE0 + int(TL_Alpha));
       glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(alphaTexture));
-      shader->transmitUniform("ALPHA_MAP", int(TL_Alpha));
-      shader->transmitUniform("USE_ALPHA_MAP", 1);
+      shader->TransmitUniform("ALPHA_MAP", int(TL_Alpha));
+      shader->TransmitUniform("USE_ALPHA_MAP", 1);
     }
     else
     {
-      shader->transmitUniform("USE_ALPHA_MAP", 0);
+      shader->TransmitUniform("USE_ALPHA_MAP", 0);
     }
 }

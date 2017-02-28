@@ -31,9 +31,6 @@ public:
 	static void InitSoundManager();
 
 	
-	static SoundManager* GetSoundManager();
-
-	
 	void AddSound(string name, string filePath);
 
 
@@ -48,7 +45,7 @@ public:
 private:
 
 	std::unordered_map<string, Mix_Chunk*> m_soundMap;
-	int m_numChannels;
+	//static int m_numChannels;
 
 };
 
