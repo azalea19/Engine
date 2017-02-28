@@ -3,24 +3,24 @@
 
 #define NOT_FOUND GLuint(-1)
 
-void TextureLibrary::initTextureLibrary()
+void TextureLibrary::InitTextureLibrary()
 {
 	GetInstance().AddTexture("Error", "Error_Texture.jpg");
 }
 
-void TextureLibrary::AddTexture(string name, GLuint textureID)
+void TextureLibrary::AddTexture(string const& name, GLuint textureID)
 {
 	textures.emplace(name, textureID);
 }
 
-void TextureLibrary::AddTexture(string name, string filePath, bool useMips)
+void TextureLibrary::AddTexture(string const& name, string const& filePath, bool useMips)
 {
-	GLuint textureID = loadImage(filePath.c_str(), useMips);
+	GLuint textureID = LoadImage(filePath.c_str(), useMips);
 	AddTexture(name, textureID);
 
 }
 
-GLuint TextureLibrary::GetTexture(string name)
+GLuint TextureLibrary::GetTexture(string const& name) const
 {
 	std::unordered_map<string, GLuint>::const_iterator got = textures.find(name);
 	if (got == textures.end())

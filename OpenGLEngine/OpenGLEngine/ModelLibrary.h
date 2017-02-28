@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include "Types.h"
+#include "Singleton.h"
 
 /**
 * @file   ModelLibrary.h
@@ -15,23 +16,21 @@
 */
 
 class RenderableObject; 
-struct ObjectInstance; 
-struct ModelLibrary
+class ObjectInstance; 
+
+class ModelLibrary : public Singleton<ModelLibrary>
 {
-
-	std::unordered_map<std::string, RenderableObject*> models; 
-
-
-	void initModelLibrary();
+public:
+	void InitModelLibrary();
 
 
-	void addModel(std::string name, std::string path, bool normalized = false);
-
-	
-	ObjectInstance* getInstance(std::string name);
+	void AddModel(string const& name, string const& path, bool normalized = false);
 
 
-	static ModelLibrary* getLib();
+	ObjectInstance* GetObjectInstance(string const& name) const;
+private:
+
+	std::unordered_map<string, RenderableObject*> models; 
 
 };
 

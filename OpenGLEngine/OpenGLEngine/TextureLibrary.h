@@ -11,13 +11,13 @@ class TextureLibrary : public Singleton<TextureLibrary>
 
 public:
 
-	void initTextureLibrary();
+	void InitTextureLibrary();
 
-	void AddTexture(string name, GLuint textureID);
+	void AddTexture(string const& name, GLuint textureID);
 
-	void AddTexture(string name, string filePath, bool useMips = true);
+	void AddTexture(string const& name, string const& filePath, bool useMips = true);
 
-	GLuint GetTexture(string name);
+	GLuint GetTexture(string const& name) const;
 
 private:
 

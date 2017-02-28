@@ -4,6 +4,7 @@
 #include "Types.h"
 #include "Shader.h"
 #include <unordered_map>
+#include "Singleton.h"
 
 /**
 * @file   ShaderLibrary.h
@@ -14,37 +15,35 @@
 * The shader library contains all of the various shaders we have access to in the program
 */
 
-struct ShaderLibrary
+struct ShaderLibrary : Singleton<ShaderLibrary>
 {
 
 	std::unordered_map<string, Shader*> shaders; 
 
 
-	void initShaderLibrary();
+	void InitShaderLibrary();
 
 
-	void addShader(string name, std::vector<string> uniforms, std::vector<string> attributes);
-
-	
-	const Shader* getShader(string name) const;
-
-
-	static ShaderLibrary* getLib();
+	void AddShader(string const& name, std::vector<string> const& uniforms, std::vector<string> const& attributes);
 
 	
-	void bindShader(string shaderName);
-
-
-	void bindDefaultShader();
-
-
-	const Shader* currentShader();
+	const Shader* GetShader(string const& name) const;
 
 	
-	const string getCurrentShaderName();
+	void BindShader(string const& shaderName);
+
+
+	void BindDefaultShader();
+
+
+	const Shader* CurrentShader() const;
+
+	
+	const string GetCurrentShaderName() const;
 
 private:
-	string currentShaderName;
+
+	string m_currentShaderName;
 };
 
 

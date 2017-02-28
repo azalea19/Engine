@@ -38,7 +38,7 @@ SDL_Surface* GetSurfaceFromImg(const string& filePath)
   return surface;
 }
 
-uint32_t* GetImgData(const string filePath)
+uint32_t* GetImgData(const string& filePath)
 {
   SDL_Surface* surface = GetSurfaceFromImg(filePath);
 
@@ -59,7 +59,7 @@ vec2 GetImageDimensions(SDL_Surface* surface)
   return dim;
 }
 
-void drawText(int size, string filePath, string text, int xpos, int ypos, vec3 color)
+void DrawText(int size, string const& filePath, string const& text, int xpos, int ypos, vec3 const& color)
 {
   //Load the font
   TTF_Font *font = TTF_OpenFont(filePath.c_str(), size);
@@ -182,7 +182,7 @@ void drawText(int size, string filePath, string text, int xpos, int ypos, vec3 c
   glDeleteBuffers(1, &gUVBO);
 }
 
-void drawImage(string filePath)
+void DrawImage(string const& filePath)
 {
   SDL_Surface* surface;
 
@@ -301,7 +301,7 @@ void drawImage(string filePath)
 
 }
 
-static void breakOnGLError()
+static void BreakOnGLError()
 {
 	int error = glGetError();
 	if (error != 0)

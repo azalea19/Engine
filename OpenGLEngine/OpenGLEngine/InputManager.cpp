@@ -1,7 +1,6 @@
 #include "InputManager.h"
 #include "SDL.h"
 
-static InputManager singleton;
 
 InputManager::InputManager()
 {
@@ -40,9 +39,9 @@ void InputManager::ProcessEventQueue()
 		mouseButtonStates[i].pressed = false;
 		mouseButtonStates[i].released = false;
 	}
-	for (size_t i = 0; i < eventQueue.size(); i++)
+	for (size_t i = 0; i < m_eventQueue.size(); i++)
 	{
-		MouseEvent& nextEvent = eventQueue[i];
+		MouseEvent& nextEvent = m_eventQueue[i];
 		switch (nextEvent.eventType)
 		{
 			case ME_BUTTON:
@@ -52,12 +51,7 @@ void InputManager::ProcessEventQueue()
 				ProcessMotionEvent(nextEvent.mouseEvent.motionEvent);
 		}
 	}
-	eventQueue.clear();
-}
-
-InputManager *InputManager::GetInputManager()
-{
-	return &singleton;
+	m_eventQueue.clear();
 }
 
 void InputManager::Update()
@@ -67,34 +61,34 @@ void InputManager::Update()
 
 	SDL_PumpEvents();
 	memset(lastKeyboardState, 0, 16384);
-	for (int i = 0; i < keyStateSize; i++)
+	for (int i = 0; i < m_keyStateSize; i++)
 	{
 		if (keyboardState[i] != 0)
 		{
 			break;
 		}
 	}
-	memcpy(lastKeyboardState, keyboardState, keyStateSize);
-	const uint8_t* temp = SDL_GetKeyboardState(&keyStateSize);
-	memcpy(keyboardState, temp, keyStateSize);
+	memcpy(lastKeyboardState, keyboardState, m_keyStateSize);
+	const uint8_t* temp = SDL_GetKeyboardState(&m_keyStateSize);
+	memcpy(keyboardState, temp, m_keyStateSize);
 }
 
 void InputManager::PushEvent(MouseEvent const & _event)
 {
-	eventQueue.push_back(_event);
+	m_eventQueue.push_back(_event);
 }
 
-bool InputManager::IsKeyDown(int keyCode)
+bool InputManager::IsKeyDown(int keyCode) const
 {
 	return keyboardState[keyCode] != 0;
 }
 
-bool InputManager::IsKeyUp(int keyCode)
+bool InputManager::IsKeyUp(int keyCode) const
 {
 	return !IsKeyDown(keyCode);
 }
 
-bool InputManager::IsKeyPressed(int keyCode)
+bool InputManager::IsKeyPressed(int keyCode) const
 {
 	if (IsKeyDown(keyCode))
 	{
@@ -107,57 +101,57 @@ bool InputManager::IsKeyPressed(int keyCode)
 
 }
 
-bool InputManager::IsKeyReleased(int keyCode)
+bool InputManager::IsKeyReleased(int keyCode) const
 {
 	return IsKeyUp(keyCode) && (lastKeyboardState[keyCode] != 0);
 }
 
-bool InputManager::IsMouseDownLeft()
+bool InputManager::IsMouseDownLeft() const
 {
 	return mouseButtonStates[SDL_BUTTON_LEFT].down;
 }
 
-bool InputManager::IsMouseUpLeft()
+bool InputManager::IsMouseUpLeft() const
 {
 	return !IsMouseDownLeft();
 }
 
-bool InputManager::IsMousePressedLeft()
+bool InputManager::IsMousePressedLeft() const
 {
 	return mouseButtonStates[SDL_BUTTON_LEFT].pressed;
 }
 
-bool InputManager::IsMouseReleasedLeft()
+bool InputManager::IsMouseReleasedLeft() const
 {
 	return mouseButtonStates[SDL_BUTTON_LEFT].released;
 }
 
-bool InputManager::IsMouseDownRight()
+bool InputManager::IsMouseDownRight() const
 {
 	return mouseButtonStates[SDL_BUTTON_RIGHT].down;
 }
 
-bool InputManager::IsMouseUpRight()
+bool InputManager::IsMouseUpRight() const
 {
 	return !IsMouseDownRight();
 }
 
-bool InputManager::IsMousePressedRight()
+bool InputManager::IsMousePressedRight() const
 {
 	return mouseButtonStates[SDL_BUTTON_RIGHT].pressed;
 }
 
-bool InputManager::IsMouseReleasedRight()
+bool InputManager::IsMouseReleasedRight() const
 {
 	return mouseButtonStates[SDL_BUTTON_RIGHT].released;
 }
 
-int32_t InputManager::MouseDeltaX()
+int32_t InputManager::MouseDeltaX() const
 {
 	return mouseDeltaX;
 }
 
-int32_t InputManager::MouseDeltaY()
+int32_t InputManager::MouseDeltaY() const
 {
 	return mouseDeltaY;
 }

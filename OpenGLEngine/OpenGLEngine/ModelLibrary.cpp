@@ -2,25 +2,18 @@
 #include "RenderableObject.h"
 #include "ObjectInstance.h"
 
-static ModelLibrary modelLib;
 
-void ModelLibrary::initModelLibrary()
+void ModelLibrary::InitModelLibrary()
 {
-
 }
 
-void ModelLibrary::addModel(std::string name, std::string path, bool normalized)
+void ModelLibrary::AddModel(string const& name, string const& path, bool normalized)
 {
 	RenderableObject *newObject = new RenderableObject(name, path);
 	models.emplace(name, newObject);
 }
 
-ObjectInstance* ModelLibrary::getInstance(std::string name)
+ObjectInstance* ModelLibrary::GetObjectInstance(string const& name) const
 {
-	return new ObjectInstance(models[name]);
-}
-
-ModelLibrary* ModelLibrary::getLib()
-{
-	return &modelLib;
+	return new ObjectInstance(models.at(name));
 }

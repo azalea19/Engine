@@ -48,7 +48,7 @@ struct AmbientLight : public Light
 
 struct DirectionalLight : public Light
 {
-  DirectionalLight(vec3 lightDirection, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
+  DirectionalLight(vec3 const& lightDirection, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
     : Light(LT_Directional, lightEnabled)
     , color(lightColor)
     , direction(lightDirection)
@@ -61,7 +61,7 @@ struct DirectionalLight : public Light
 
 struct PointLight : public Light
 {
-  PointLight(vec3 lightPosition, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
+  PointLight(vec3 const& lightPosition, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
     : Light(LT_Point, lightEnabled)
     , color(lightColor)
     , position(lightPosition)
@@ -75,7 +75,7 @@ struct PointLight : public Light
 
 struct SpotLight : public Light 
 {
-  SpotLight(vec3 lightDirection, vec3 lightPosition, float attenuation, float angleInDegrees, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
+  SpotLight(vec3 const& lightDirection, vec3 const& lightPosition, float attenuation, float angleInDegrees, vec3 const& lightColor = vec3(1.0f, 1.0f, 1.0f), bool lightEnabled = true)
     : Light(LT_Spot, lightEnabled)
     , color(lightColor)
     , direction(lightDirection)

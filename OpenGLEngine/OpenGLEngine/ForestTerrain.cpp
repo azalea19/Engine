@@ -32,7 +32,7 @@ void ForestTerrain::GenerateForest()
       if (success < pow(heightAtPixel, 1) * 0.1f)
       {
         string treeName = treeNames[RandomInt(0, sizeof(treeNames) / sizeof(treeNames[0]))];
-        pTree = ModelLibrary::getLib()->getInstance(treeName);
+        pTree = ModelLibrary::GetInstance().GetObjectInstance(treeName);
         pTree->SetTranslation(vec3(x*bs, heightAtPixel*hs, y*bs));
         float yaw = RandomFloat(0, 360);
         float scale = RandomFloat(0.5f, 1);

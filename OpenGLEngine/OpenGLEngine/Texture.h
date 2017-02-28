@@ -19,9 +19,9 @@
 */
 
 
-GLuint loadBMP(const char * imagepath);
+GLuint LoadBMP(const char * imagepath);
 
-GLuint loadImage(const char * imagepath, bool useMips = true);
+GLuint LoadImage(const char * imagepath, bool useMips = true);
 
 GLuint CreateColourTexture(int width = 0, int height = 0);
 

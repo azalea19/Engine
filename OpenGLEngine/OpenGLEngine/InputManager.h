@@ -3,6 +3,7 @@
 #include <cstdint>
 #include "SDL.h"
 #include "Types.h"
+#include "Singleton.h"
 
 /**
 * @file   InputManager.h
@@ -59,20 +60,12 @@ struct MouseButtonState
 	bool down;
 };
 
-class InputManager
+class InputManager : public Singleton<InputManager>
 {
-	std::vector<MouseEvent> eventQueue;
-	int keyStateSize = 0;
-
-	void ProcessButtonEvent(SDL_MouseButtonEvent _event);
-	void ProcessMotionEvent(SDL_MouseMotionEvent _event);
-	void ProcessEventQueue();
 
 public:
 
 	InputManager();
-
-	static InputManager* GetInputManager();
 
 	uint8_t keyboardState[16384];
 	uint8_t lastKeyboardState[16384];
@@ -89,47 +82,55 @@ public:
 	void PushEvent(MouseEvent const& _event);
 
 
-	bool IsKeyDown(int keyCode);
+	bool IsKeyDown(int keyCode) const;
 
 
 	
-	bool IsKeyUp(int keyCode);
+	bool IsKeyUp(int keyCode) const;
 
 	
-	bool IsKeyPressed(int keyCode); 
+	bool IsKeyPressed(int keyCode) const;
 	
 
-	bool IsKeyReleased(int keyCode); 
+	bool IsKeyReleased(int keyCode) const;
 	
 
-	bool IsMouseDownLeft();
+	bool IsMouseDownLeft() const;
 
 	
-	bool IsMouseUpLeft();
+	bool IsMouseUpLeft() const;
 
 	
-	bool IsMousePressedLeft();
+	bool IsMousePressedLeft() const;
 
 	
-	bool IsMouseReleasedLeft();
+	bool IsMouseReleasedLeft() const;
 
 	
-	bool IsMouseDownRight();
+	bool IsMouseDownRight() const;
 
 	
-	bool IsMouseUpRight();
+	bool IsMouseUpRight() const;
 
 	
-	bool IsMousePressedRight();
+	bool IsMousePressedRight() const;
 
 	
-	bool IsMouseReleasedRight();
+	bool IsMouseReleasedRight() const;
 
 
-	int32_t MouseDeltaX();
+	int32_t MouseDeltaX() const;
 
 
-	int32_t MouseDeltaY();
+	int32_t MouseDeltaY() const;
 
+private:
+
+	std::vector<MouseEvent> m_eventQueue;
+	int m_keyStateSize = 0;
+
+	void ProcessButtonEvent(SDL_MouseButtonEvent _event);
+	void ProcessMotionEvent(SDL_MouseMotionEvent _event);
+	void ProcessEventQueue();
 };
 #endif

@@ -19,7 +19,7 @@ std::vector<mat4> Skeleton::GetBoneTransforms(int animationIndex, float time) co
   return finalTransforms;
 }
 
-std::vector<mat4> Skeleton::GetBoneTransforms(string animationName, float time) const
+std::vector<mat4> Skeleton::GetBoneTransforms(string const& animationName, float time) const
 {
   int animationIndex = m_animationLookup.GetValue(animationName);
   std::vector<mat4> finalTransforms;

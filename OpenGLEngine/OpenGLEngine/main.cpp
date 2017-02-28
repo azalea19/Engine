@@ -96,7 +96,7 @@ void UpdatePlayer()
   const float TURN_SPEED = 0.3f;
   const float MOVE_SPEED = 0.5f;
 
-  InputManager* im = InputManager::GetInputManager();
+  //InputManager* im = InputManager::GetInstance();
 
   //Rotation
   float originalYaw = camera.GetYaw();
@@ -201,9 +201,9 @@ void myinit()
   InitGlew();
   srand(time(NULL));
 
-  TextureLibrary::GetInstance().initTextureLibrary();
-  ShaderLibrary::getLib()->initShaderLibrary();
-  SoundManager::GetSoundManager()->initSoundManager();
+  TextureLibrary::GetInstance().InitTextureLibrary();
+  ShaderLibrary::GetInstance().InitShaderLibrary();
+  SoundManager::GetSoundManager()->InitSoundManager();
   FrameBuffer::Initialize();
   LuaManager::Initialize();
 
@@ -211,32 +211,34 @@ void myinit()
 
   projectionMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);
 
-  ModelLibrary* modelLibrary = ModelLibrary::getLib();
-  modelLibrary->addModel("Bob", "Assets/Models/Bob/bob.md5mesh", false);
-  modelLibrary->addModel("Zombie", "Assets/Models/Zombie/Zombii.fbx", false);
-  modelLibrary->addModel("Ground", "Assets/Models/Ground/Ground.obj", false);
-  modelLibrary->addModel("PalmTree", "Assets/Models/PalmTree/PalmTree.obj", false);
-  modelLibrary->addModel("BambooPalm", "Assets/Models/BambooPalm/BambooPalm.obj", false);
-  modelLibrary->addModel("GroundPalm", "Assets/Models/GroundPalm/GroundPalm.obj", false);
-  modelLibrary->addModel("SmallPlant", "Assets/Models/SmallPlant/SmallPlant.obj", false);
-  modelLibrary->addModel("HighTree", "Assets/Models/HighTree/HighTree.obj", false);
-  modelLibrary->addModel("Rock", "Assets/Models/Rock/Rock.obj", false);
-  modelLibrary->addModel("Rock", "Assets/Models/Rock/Rock.obj", false);
+  TextureLibrary::GetInstance().AddTexture("", 1);
+  ModelLibrary& modelLibrary = ModelLibrary::GetInstance();
+  
+  modelLibrary.AddModel("Bob", "Assets/Models/Bob/bob.md5mesh", false);
+  modelLibrary.AddModel("Zombie", "Assets/Models/Zombie/Zombii.fbx", false);
+  modelLibrary.AddModel("Ground", "Assets/Models/Ground/Ground.obj", false);
+  modelLibrary.AddModel("PalmTree", "Assets/Models/PalmTree/PalmTree.obj", false);
+  modelLibrary.AddModel("BambooPalm", "Assets/Models/BambooPalm/BambooPalm.obj", false);
+  modelLibrary.AddModel("GroundPalm", "Assets/Models/GroundPalm/GroundPalm.obj", false);
+  modelLibrary.AddModel("SmallPlant", "Assets/Models/SmallPlant/SmallPlant.obj", false);
+  modelLibrary.AddModel("HighTree", "Assets/Models/HighTree/HighTree.obj", false);
+  modelLibrary.AddModel("Rock", "Assets/Models/Rock/Rock.obj", false);
+  modelLibrary.AddModel("Rock", "Assets/Models/Rock/Rock.obj", false);
 
   pTerrain = new ForestTerrain(5, 40, "Assets/HeightMaps/heightmap.png", 1);
   pTerrain->SaveTerrainToOBJ("Assets/Models/Terrain/Terrain.obj");
-  ModelLibrary::getLib()->addModel("ForestTerrain", "Assets/Models/Terrain/Terrain.obj", false);
+  modelLibrary.AddModel("ForestTerrain", "Assets/Models/Terrain/Terrain.obj", false);
 
-  pBob = modelLibrary->getInstance("Bob");
-  pGround = modelLibrary->getInstance("ForestTerrain");
-  pZombie = modelLibrary->getInstance("Zombie");
-  pPalm = modelLibrary->getInstance("PalmTree");
+  pBob = modelLibrary.GetObjectInstance("Bob");
+  pGround = modelLibrary.GetObjectInstance("ForestTerrain");
+  pZombie = modelLibrary.GetObjectInstance("Zombie");
+  pPalm = modelLibrary.GetObjectInstance("PalmTree");
 
-  pBambooPalm = modelLibrary->getInstance("BambooPalm");
-  pGroundPalm = modelLibrary->getInstance("GroundPalm");
-  pSmallPlant = modelLibrary->getInstance("SmallPlant");
-  pHighTree = modelLibrary->getInstance("HighTree");
-  pRock = modelLibrary->getInstance("Rock");
+  pBambooPalm = modelLibrary.GetObjectInstance("BambooPalm");
+  pGroundPalm = modelLibrary.GetObjectInstance("GroundPalm");
+  pSmallPlant = modelLibrary.GetObjectInstance("SmallPlant");
+  pHighTree = modelLibrary.GetObjectInstance("HighTree");
+  pRock = modelLibrary.GetObjectInstance("Rock");
 
   pGround->SetTranslation(0, 0, 0);
   pBob->SetTranslation(-10, 0, 0);
@@ -291,13 +293,13 @@ bool HandleEvents()
       case SDL_QUIT:
         return false;
       case SDL_MOUSEMOTION:
-        InputManager::GetInputManager()->PushEvent(MouseEvent(event.motion));
+        InputManager::GetInstance().PushEvent(MouseEvent(event.motion));
         break;
       case SDL_MOUSEBUTTONDOWN:
-        InputManager::GetInputManager()->PushEvent(MouseEvent(event.button));
+        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
         break;
       case SDL_MOUSEBUTTONUP:
-        InputManager::GetInputManager()->PushEvent(MouseEvent(event.button));
+        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
         break;
     }
   }
@@ -309,9 +311,9 @@ bool Update()
   if (!HandleEvents())
     return false;
 
-  InputManager::GetInputManager()->Update();
+  InputManager::GetInstance().Update();
 
-  if (InputManager::GetInputManager()->IsKeyDown(SDL_SCANCODE_ESCAPE))
+  if (InputManager::GetInstance().IsKeyDown(SDL_SCANCODE_ESCAPE))
     return false;
 
   UpdatePlayer();
@@ -324,7 +326,7 @@ void Render()
   static bool renderDepth = true;
 
   glCullFace(GL_BACK);
-  if (InputManager::GetInputManager()->IsKeyPressed(SDL_SCANCODE_1))
+  if (InputManager::GetInstance().IsKeyPressed(SDL_SCANCODE_1))
   {
     renderDepth = !renderDepth;
   }
@@ -340,17 +342,7 @@ void Render()
 
   pDecomposeEffect->Bind(sceneTextures[0], sceneTextures[1], sceneTextures[2], sceneTextures[3], sceneTextures[4]);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  ////pBob->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pZombie->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pGround->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pPalm->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-
-  ////pBambooPalm->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pSmallPlant->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pRock->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pHighTree->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pGroundPalm->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
-  ////pTerrain->Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+ 
   RenderManager::GetInstance().Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
   pDecomposeEffect->Unbind();
 
@@ -396,7 +388,7 @@ void Render()
   char frameRate[32];
   sprintf_s(frameRate, "FPS: %.2f", RenderManager::GetInstance().GetFrameRate());
   //printf("%s\n", frameRate);
-  drawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
+  DrawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
   //glFlush();
   SDL_GL_SwapWindow(screen);
 }

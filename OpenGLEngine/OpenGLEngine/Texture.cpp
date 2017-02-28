@@ -21,7 +21,7 @@ float GammaCorrectedAverage(float a, float b, float c, float d, float wa, float 
 	return sqrt((a * a * wa + b * b * wb + c * c * wc + d * d * wd) / (wa + wb + wc + wd));
 }
 
-GLuint loadBMP(const char * imagepath) 
+GLuint LoadBMP(const char * imagepath) 
 {
 
 	//printf("Reading image %s\n", imagepath);
@@ -283,7 +283,7 @@ GLuint UploadTextureMipped(SDL_Surface* source)
 	return textureID;
 }
 
-GLuint loadImage(const char * imagepath, bool useMips)
+GLuint LoadImage(const char * imagepath, bool useMips)
 {
 	GLuint TextureID = 0;
 

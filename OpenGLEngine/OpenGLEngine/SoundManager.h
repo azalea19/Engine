@@ -4,6 +4,7 @@
 #include "Types.h"
 #include <unordered_map>
 #include "SDL_mixer.h"
+#include "Singleton.h"
 
 /**
 * @file   SoundManager.h
@@ -23,38 +24,31 @@
 
 typedef int ChannelHandle;
 
-class SoundManager
+class SoundManager : public Singleton<SoundManager>
 {
-	std::unordered_map<string, Mix_Chunk*> soundMap;
-	int numChannels;
-
-	
-	SoundManager();
-
 public:
-
 	
-	static void initSoundManager();
-
+	static void InitSoundManager();
 
 	
 	static SoundManager* GetSoundManager();
-
 
 	
 	void AddSound(string name, string filePath);
 
 
-
 	ChannelHandle PlaySound(string name, int loopCount);
 
 	
-
 	void PauseChannel(ChannelHandle sound);
 
 	
-
 	void ResumeChannel(ChannelHandle sound);
+
+private:
+
+	std::unordered_map<string, Mix_Chunk*> m_soundMap;
+	int m_numChannels;
 
 };
 

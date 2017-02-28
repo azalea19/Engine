@@ -21,7 +21,7 @@
 
 class SDL_Surface;
 
-void drawImage(string filePath);
+void DrawImage(string const& filePath);
 
 vec2 GetImageDimensions(SDL_Surface* source);
 
@@ -29,10 +29,10 @@ uint32_t* GetPixelData(SDL_Surface* source);
 
 SDL_Surface* GetSurfaceFromImg(const string& filePath);
 
-void drawText(int size, string filePath, string text, int xpos, int ypos, vec3 color = vec3(0, 0, 0));
+void DrawText(int size, string const& filePath, string const& text, int xpos, int ypos, vec3 const& color = vec3(0, 0, 0));
 
-uint32_t* GetImgData(const string filePath);
+uint32_t* GetImgData(const string& filePath);
 
-static void breakOnGLError();
+static void BreakOnGLError();
 
 #endif 

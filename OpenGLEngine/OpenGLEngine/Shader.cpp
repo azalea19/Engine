@@ -1,44 +1,44 @@
 #include "Shader.h"
 #include "GL/glew.h"
 
-static GLchar* loadShaderFile(string filePath);
-static void printShaderLog(GLuint shader);
-static void printProgramLog(GLuint program);
+static GLchar* LoadShaderFile(string const& filePath);
+static void PrintShaderLog(GLuint shader);
+static void PrintProgramLog(GLuint program);
 
-Shader::Shader(string name)
+Shader::Shader(string const& name)
 {
 	m_name = name;
 	m_uid = -1;
-	m_vertex = NULL;
-	m_fragment = NULL;
+	m_pVertex = NULL;
+	m_pFragment = NULL;
 }
 
-Shader::Shader(string name, string vertFilePath, string fragFilePath, std::vector<string> attributes, std::vector<string> uniforms)
+Shader::Shader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms)
 {
 	m_name = name;
-	load(vertFilePath, fragFilePath, attributes, uniforms);
+	Load(vertFilePath, fragFilePath, attributes, uniforms);
 }
 
 Shader::~Shader()
 {
 	m_attributes.clear();
 	m_uniforms.clear();
-	delete[] m_vertex;
-	delete[] m_fragment;
+	delete[] m_pVertex;
+	delete[] m_pFragment;
 }
 
-void Shader::load(string vertFilePath, string fragFilePath, std::vector<string> attributes, std::vector<string> uniforms)
+void Shader::Load(string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms)
 {
-	m_vertex = loadShaderFile(vertFilePath);
-	m_fragment = loadShaderFile(fragFilePath);
+	m_pVertex = LoadShaderFile(vertFilePath);
+	m_pFragment = LoadShaderFile(fragFilePath);
 
-	setup();
-	setupLocations(attributes, uniforms);
+	Setup();
+	SetupLocations(attributes, uniforms);
 }
 
-void Shader::setup()
+void Shader::Setup()
 {
-	if (m_vertex == NULL || m_fragment == NULL)
+	if (m_pVertex == NULL || m_pFragment == NULL)
 	{
 		printf("Unable to load shader %s", m_name.c_str());
 	}
@@ -47,26 +47,26 @@ void Shader::setup()
 	pProgram = glCreateProgram();
 
 	GLint vShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vShader, 1, &m_vertex, NULL);
+	glShaderSource(vShader, 1, &m_pVertex, NULL);
 	glCompileShader(vShader);
 	GLint vShaderCompiled = GL_FALSE;
 	glGetShaderiv(vShader, GL_COMPILE_STATUS, &vShaderCompiled);
 	if (!vShaderCompiled)
 	{
 		printf("Unable to compile vertex shader.");
-		printShaderLog(vShader);
+		PrintShaderLog(vShader);
 		getchar();
 	}
 	GLint fShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-	glShaderSource(fShader, 1, &m_fragment, NULL);
+	glShaderSource(fShader, 1, &m_pFragment, NULL);
 	glCompileShader(fShader);
 	GLint fShaderCompiled = GL_FALSE;
 	glGetShaderiv(fShader, GL_COMPILE_STATUS, &fShaderCompiled);
 	if (!fShaderCompiled)
 	{
 		printf("Unable to compile fragment shader.");
-		printShaderLog(fShader);
+		PrintShaderLog(fShader);
 		getchar();
 	}
 
@@ -79,21 +79,21 @@ void Shader::setup()
 	if (!programSuccess)
 	{
 		printf("Error linking program %d", pProgram);
-		printProgramLog(pProgram);
+		PrintProgramLog(pProgram);
 		getchar();
 	}
 
 	m_uid = pProgram;
 }
 
-void Shader::bind() const
+void Shader::Bind() const
 {
 	glUseProgram(m_uid);
 }
 
-void Shader::setupLocations(std::vector<string> custom_attributes, std::vector<string> custom_uniforms)
+void Shader::SetupLocations(std::vector<string> const& custom_attributes, std::vector<string> const& custom_uniforms)
 {
-	bind();
+	Bind();
 
 	for (uint32_t i = 0; i < custom_attributes.size(); i++)
 	{
@@ -105,22 +105,22 @@ void Shader::setupLocations(std::vector<string> custom_attributes, std::vector<s
 	}
 }
 
-string Shader::getName() const
+string Shader::GetName() const
 {
 	return m_name;
 }
 
-unsigned int Shader::attribute(string name) const
+unsigned int Shader::Attribute(string const& name) const
 {
 	return m_attributes.at(name);
 }
 
-unsigned int Shader::uniform(string name) const
+unsigned int Shader::Uniform(string const& name) const
 {
 	return m_uniforms.at(name);
 }
 
-bool Shader::hasAttribute(string name) const
+bool Shader::HasAttribute(string const& name) const
 {
 	std::unordered_map<string, int>::const_iterator got = m_attributes.find(name);
 	if (got == m_attributes.end())
@@ -131,7 +131,7 @@ bool Shader::hasAttribute(string name) const
 	return true;
 }
 
-bool Shader::hasUniform(string name) const
+bool Shader::HasUniform(string const& name) const
 {
 	std::unordered_map<string, int>::const_iterator got = m_uniforms.find(name);
 	if (got == m_uniforms.end())
@@ -142,7 +142,7 @@ bool Shader::hasUniform(string name) const
 	return true;
 }
 
-static GLchar* loadShaderFile(string filePath)
+static GLchar* LoadShaderFile(string const& filePath)
 {
 	int fileLength;
 	FILE* shader;
@@ -165,7 +165,7 @@ static GLchar* loadShaderFile(string filePath)
 	return data;
 }
 
-static void printShaderLog(GLuint shader)
+static void PrintShaderLog(GLuint shader)
 {
 	//Make sure name is shader
 	if (glIsShader(shader))
@@ -197,7 +197,7 @@ static void printShaderLog(GLuint shader)
 	}
 }
 
-static void printProgramLog(GLuint program)
+static void PrintProgramLog(GLuint program)
 {
 	//Make sure name is shader
 	if (glIsProgram(program))

@@ -23,7 +23,7 @@ public:
 
   Skeleton(const aiScene* pScene);
   std::vector<mat4> GetBoneTransforms(int animationIndex, float time) const;
-  std::vector<mat4> GetBoneTransforms(string animationName, float time) const;
+  std::vector<mat4> GetBoneTransforms(string const& animationName, float time) const;
   
   Bimap<string, int> const& GetBoneLookup() const;
   virtual int GetAnimationCount() const override;

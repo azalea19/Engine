@@ -1,19 +1,10 @@
 #include "SoundManager.h"
 
 
-static SoundManager* soundManager = nullptr;
+
 
 static std::vector<ChannelHandle> channels;
 
-SoundManager::SoundManager()
-{
-
-}
-
-SoundManager* SoundManager::GetSoundManager()
-{
-	return soundManager;
-}
 
 void channelFinishedCB(int channel)
 {
@@ -21,12 +12,9 @@ void channelFinishedCB(int channel)
 }
 
 
-void SoundManager::initSoundManager()
+void SoundManager::InitSoundManager()
 {
-	if (soundManager == nullptr)
-	{
-		soundManager = new SoundManager();
-		soundManager->numChannels = 16;
+		m_numChannels = 16;
 
 		Mix_AllocateChannels(soundManager->numChannels);
 
