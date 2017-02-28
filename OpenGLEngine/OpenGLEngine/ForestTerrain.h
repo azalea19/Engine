@@ -11,7 +11,7 @@ class ForestTerrain : public IRenderable, public IMesh
 {
 public:
 
-  ForestTerrain(int blockScale, int heightScale, string const& filePath, int density);
+  ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filepath, int density);
 
 
   void GenerateForest();

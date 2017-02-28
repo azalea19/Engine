@@ -54,27 +54,27 @@ void Terrain::GenerateTerrainVertices()
   {
     for (int j = 0; j < width; j++)
     {
-      float heightValueL = m_pHeightMap->GetHeightValue(vec2(j, i));
-      float heightValueR = m_pHeightMap->GetHeightValue(vec2((j + 1), i));
-      float heightValueBL = m_pHeightMap->GetHeightValue(vec2(j, (i + 1)));
-      float heightValueBR = m_pHeightMap->GetHeightValue(vec2((j + 1), (i + 1)));
+      float heightValueL = m_pHeightMap->GetHeightValueAtPixel(vec2(j, i));
+      float heightValueR = m_pHeightMap->GetHeightValueAtPixel(vec2((j + 1), i));
+      float heightValueBL = m_pHeightMap->GetHeightValueAtPixel(vec2(j, (i + 1)));
+      float heightValueBR = m_pHeightMap->GetHeightValueAtPixel(vec2((j + 1), (i + 1)));
 
       //Left corner
-      leftCorner.x = j * m_blockScale;
+      leftCorner.x = j * m_xBlockScale;
       leftCorner.y = heightValueL * m_heightScale;
-      leftCorner.z = i * m_blockScale;
+      leftCorner.z = i * m_yBlockScale;
       //Right corner
-      rightCorner.x = (j + 1) * m_blockScale;
+      rightCorner.x = (j + 1) * m_xBlockScale;
       rightCorner.y = heightValueR * m_heightScale;
-      rightCorner.z = i * m_blockScale;
+      rightCorner.z = i * m_yBlockScale;
       //Bottom left corner
-      bottomLeftCorner.x = j * m_blockScale;
+      bottomLeftCorner.x = j * m_xBlockScale;
       bottomLeftCorner.y = heightValueBL * m_heightScale;
-      bottomLeftCorner.z = (i + 1) * m_blockScale;
+      bottomLeftCorner.z = (i + 1) * m_yBlockScale;
       //Bottom right corner
-      bottomRightCorner.x = (j + 1) * m_blockScale;
+      bottomRightCorner.x = (j + 1) * m_xBlockScale;
       bottomRightCorner.y = heightValueBR * m_heightScale;
-      bottomRightCorner.z = (i + 1) * m_blockScale;
+      bottomRightCorner.z = (i + 1) * m_yBlockScale;
 
       m_vertices.push_back(rightCorner);
       m_vertices.push_back(leftCorner);
@@ -136,7 +136,7 @@ void Terrain::GenerateTerrainIndex()
 
 void Terrain::GenerateTerrainTexCoords()
 {
-  for(int i = 0; i < )
+  
 }
 
 void Terrain::SaveTerrainToOBJ(const string& filepath)

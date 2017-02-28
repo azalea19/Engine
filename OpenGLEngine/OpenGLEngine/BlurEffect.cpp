@@ -4,7 +4,7 @@
 
 BlurEffect::BlurEffect()
 {
-  m_pShader = ShaderLibrary::getLib()->getShader("BlurEffect");
+  m_pShader = ShaderLibrary::GetInstance().GetShader("BlurEffect");
 }
 
 void BlurEffect::Apply(GLuint inputTex, GLuint outputTex, int blurRadius)
@@ -13,12 +13,12 @@ void BlurEffect::Apply(GLuint inputTex, GLuint outputTex, int blurRadius)
 
   m_fb.AttachColour(0, outputTex);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  m_pShader->bind();
-  m_pShader->transmitUniform("blurRadius", blurRadius);
+  m_pShader->Bind();
+  m_pShader->TransmitUniform("blurRadius", blurRadius);
   glBindVertexArray(FrameBuffer::FSQuadVAO);
   glActiveTexture(GL_TEXTURE0 + 0);
   glBindTexture(GL_TEXTURE_2D, inputTex);
-  m_pShader->transmitUniform("inputTex0", 0);
+  m_pShader->TransmitUniform("inputTex0", 0);
   glDrawArrays(GL_QUADS, 0, 4);
   glBindVertexArray(NULL);
 

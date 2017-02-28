@@ -101,11 +101,11 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
   //Copy the created image into OpenGL format
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixData);
 
-  string previousShader = ShaderLibrary::getLib()->getCurrentShaderName();
+  string previousShader = ShaderLibrary::GetInstance().GetCurrentShaderName();
 
-  ShaderLibrary::getLib()->bindShader("orthoShader");
+  ShaderLibrary::GetInstance().BindShader("orthoShader");
 
-  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
 
   GLuint gVBO;
   GLuint gUVBO;
@@ -148,20 +148,20 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
   glEnable(GL_TEXTURE_2D);
 
 
-  glEnableVertexAttribArray(shader->attribute("position"));
+  glEnableVertexAttribArray(shader->Attribute("position"));
   glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-  glVertexAttribPointer(shader->attribute("position"), 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  glVertexAttribPointer(shader->Attribute("position"), 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
-  glEnableVertexAttribArray(shader->attribute("uvIn"));
+  glEnableVertexAttribArray(shader->Attribute("uvIn"));
   glBindBuffer(GL_ARRAY_BUFFER, gUVBO);
-  glVertexAttribPointer(shader->attribute("uvIn"), 2, GL_FLOAT, GL_FALSE, 0, NULL);
+  glVertexAttribPointer(shader->Attribute("uvIn"), 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, texId);
 
-  shader->transmitUniform("diffuse", 0);
+  shader->TransmitUniform("diffuse", 0);
 
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -170,7 +170,7 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
   glDisable(GL_TEXTURE_2D);
   glEnable(GL_DEPTH_TEST);
 
-  ShaderLibrary::getLib()->bindShader(previousShader);
+  ShaderLibrary::GetInstance().BindShader(previousShader);
 
   //Cleanup
   TTF_CloseFont(font);
@@ -217,11 +217,11 @@ void DrawImage(string const& filePath)
   //Copy the created image into OpenGL format
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, s->w, s->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixData);
 
-  string previousShader = ShaderLibrary::getLib()->getCurrentShaderName();
+  string previousShader = ShaderLibrary::GetInstance().GetCurrentShaderName();
 
-  ShaderLibrary::getLib()->bindShader("orthoShader");
+  ShaderLibrary::GetInstance().BindShader("orthoShader");
 
-  const Shader* shader = ShaderLibrary::getLib()->currentShader();
+  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
 
   GLuint gVBO;
   GLuint gUVBO;
@@ -265,22 +265,22 @@ void DrawImage(string const& filePath)
 
   glEnable(GL_TEXTURE_2D);
 
-  shader->transmitUniform("width", SCREEN_WIDTH);
-  shader->transmitUniform("height", SCREEN_HEIGHT);
+  shader->TransmitUniform("width", SCREEN_WIDTH);
+  shader->TransmitUniform("height", SCREEN_HEIGHT);
 
-  glEnableVertexAttribArray(shader->attribute("position"));
+  glEnableVertexAttribArray(shader->Attribute("position"));
   glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-  glVertexAttribPointer(shader->attribute("position"), 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  glVertexAttribPointer(shader->Attribute("position"), 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 
-  glEnableVertexAttribArray(shader->attribute("uvIn"));
+  glEnableVertexAttribArray(shader->Attribute("uvIn"));
   glBindBuffer(GL_ARRAY_BUFFER, gUVBO);
-  glVertexAttribPointer(shader->attribute("uvIn"), 2, GL_FLOAT, GL_FALSE, 0, NULL);
+  glVertexAttribPointer(shader->Attribute("uvIn"), 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, texId);
 
-  shader->transmitUniform("diffuse", 0);
+  shader->TransmitUniform("diffuse", 0);
 
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -289,7 +289,7 @@ void DrawImage(string const& filePath)
   glDisable(GL_TEXTURE_2D);
   glEnable(GL_DEPTH_TEST);
 
-  ShaderLibrary::getLib()->bindShader(previousShader);
+  ShaderLibrary::GetInstance().BindShader(previousShader);
 
   //Cleanup
   free(pixData);

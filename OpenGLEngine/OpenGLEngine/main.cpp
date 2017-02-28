@@ -50,7 +50,7 @@
 
 SDL_Window* screen;
 
-ObjectInstance* pGround;
+//ObjectInstance* pGround;
 ObjectInstance* pZombie;
 ObjectInstance* pBob;
 ObjectInstance* pPalm;
@@ -81,7 +81,7 @@ GLuint finalTex;
 
 vec3 lightPos = vec3(-1000, 0, 0);
 
-ForestTerrain* pTerrain;
+//ForestTerrain* pTerrain;
 
 //Lua stuff
 //https://eliasdaler.wordpress.com/2014/07/18/using-lua-with-cpp-luabridge/
@@ -96,13 +96,13 @@ void UpdatePlayer()
   const float TURN_SPEED = 0.3f;
   const float MOVE_SPEED = 0.5f;
 
-  //InputManager* im = InputManager::GetInstance();
+  InputManager im = InputManager::GetInstance();
 
   //Rotation
   float originalYaw = camera.GetYaw();
   float originalPitch = camera.GetPitch();
-  float deltaYaw = -im->MouseDeltaX() * TURN_SPEED;
-  float deltaPitch = -im->MouseDeltaY() * TURN_SPEED;
+  float deltaYaw = -im.MouseDeltaX() * TURN_SPEED;
+  float deltaPitch = -im.MouseDeltaY() * TURN_SPEED;
   camera.SetYaw(originalYaw + deltaYaw);
   camera.SetPitch(originalPitch + deltaPitch);
 
@@ -112,13 +112,13 @@ void UpdatePlayer()
   vec3 right = camera.Right();
   vec3 translation = vec3{ 0, 0, 0 };
 
-  if (im->IsKeyDown(SDL_SCANCODE_W))
+  if (im.IsKeyDown(SDL_SCANCODE_W))
     translation += forward;
-  if (im->IsKeyDown(SDL_SCANCODE_A))
+  if (im.IsKeyDown(SDL_SCANCODE_A))
     translation -= right;
-  if (im->IsKeyDown(SDL_SCANCODE_S))
+  if (im.IsKeyDown(SDL_SCANCODE_S))
     translation -= forward;
-  if (im->IsKeyDown(SDL_SCANCODE_D))
+  if (im.IsKeyDown(SDL_SCANCODE_D))
     translation += right;
 
   if (translation != vec3{ 0, 0, 0 })
@@ -128,10 +128,10 @@ void UpdatePlayer()
 
     translation *= MOVE_SPEED;
 
-    if (im->IsKeyDown(SDL_SCANCODE_LSHIFT))
+    if (im.IsKeyDown(SDL_SCANCODE_LSHIFT))
       translation *= 4;
 
-    if (im->IsKeyDown(SDL_SCANCODE_LCTRL))
+    if (im.IsKeyDown(SDL_SCANCODE_LCTRL))
       translation *= 0.25f;
 
     //Clamp Player to room
@@ -203,7 +203,7 @@ void myinit()
 
   TextureLibrary::GetInstance().InitTextureLibrary();
   ShaderLibrary::GetInstance().InitShaderLibrary();
-  SoundManager::GetSoundManager()->InitSoundManager();
+  SoundManager::GetInstance().InitSoundManager();
   FrameBuffer::Initialize();
   LuaManager::Initialize();
 
@@ -216,7 +216,7 @@ void myinit()
   
   modelLibrary.AddModel("Bob", "Assets/Models/Bob/bob.md5mesh", false);
   modelLibrary.AddModel("Zombie", "Assets/Models/Zombie/Zombii.fbx", false);
-  modelLibrary.AddModel("Ground", "Assets/Models/Ground/Ground.obj", false);
+  //modelLibrary.AddModel("Ground", "Assets/Models/Ground/Ground.obj", false);
   modelLibrary.AddModel("PalmTree", "Assets/Models/PalmTree/PalmTree.obj", false);
   modelLibrary.AddModel("BambooPalm", "Assets/Models/BambooPalm/BambooPalm.obj", false);
   modelLibrary.AddModel("GroundPalm", "Assets/Models/GroundPalm/GroundPalm.obj", false);
@@ -225,12 +225,12 @@ void myinit()
   modelLibrary.AddModel("Rock", "Assets/Models/Rock/Rock.obj", false);
   modelLibrary.AddModel("Rock", "Assets/Models/Rock/Rock.obj", false);
 
-  pTerrain = new ForestTerrain(5, 40, "Assets/HeightMaps/heightmap.png", 1);
-  pTerrain->SaveTerrainToOBJ("Assets/Models/Terrain/Terrain.obj");
-  modelLibrary.AddModel("ForestTerrain", "Assets/Models/Terrain/Terrain.obj", false);
+  //pTerrain = new ForestTerrain(20,20,5,1, "Assets/HeightMaps/heightmap.png", 1);
+  //pTerrain->SaveTerrainToOBJ("Assets/Models/Terrain/Terrain.obj");
+  //modelLibrary.AddModel("ForestTerrain", "Assets/Models/Terrain/Terrain.obj", false);
 
   pBob = modelLibrary.GetObjectInstance("Bob");
-  pGround = modelLibrary.GetObjectInstance("ForestTerrain");
+  //pGround = modelLibrary.GetObjectInstance("ForestTerrain");
   pZombie = modelLibrary.GetObjectInstance("Zombie");
   pPalm = modelLibrary.GetObjectInstance("PalmTree");
 
@@ -240,7 +240,7 @@ void myinit()
   pHighTree = modelLibrary.GetObjectInstance("HighTree");
   pRock = modelLibrary.GetObjectInstance("Rock");
 
-  pGround->SetTranslation(0, 0, 0);
+  //pGround->SetTranslation(0, 0, 0);
   pBob->SetTranslation(-10, 0, 0);
   pZombie->SetTranslation(0, 0, 0);
   pPalm->SetTranslation(10, 0, 0);
@@ -249,7 +249,7 @@ void myinit()
   pHighTree->SetTranslation(25, 0, 10);
   pRock->SetTranslation(38, 0, -5);
 
-  pGround->SetScale(vec3(1, 1, 1));
+  //pGround->SetScale(vec3(1, 1, 1));
   pBob->SetScale(vec3(0.13f, 0.13f, 0.13f));
   pZombie->SetScale(vec3(0.05f, 0.05f, 0.05f));
   pPalm->SetScale(vec3(1.5f, 1.5f, 1.5f));
@@ -277,9 +277,8 @@ void myinit()
   finalTex = CreateVec3Texture();
 
 
-
-  SoundManager::GetSoundManager()->AddSound("Music", "Assets/Sounds/ambient.wav");
-  SoundManager::GetSoundManager()->PlaySound("Music", INT_MAX);
+  SoundManager::GetInstance().AddSound("Music", "Assets/Sounds/ambient.wav");
+  SoundManager::GetInstance().PlaySound("Music", INT_MAX);
 
 }
 

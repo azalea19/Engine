@@ -4,13 +4,13 @@
 
 SceneDecomposeEffect::SceneDecomposeEffect()
 {
-  m_pShader = ShaderLibrary::getLib()->getShader("SceneDecomposeEffect");
+  m_pShader = ShaderLibrary::GetInstance().GetShader("SceneDecomposeEffect");
 }
 
 void SceneDecomposeEffect::Bind(GLuint DiffuseTexture, GLuint DepthTexture, GLuint LinearDepthTexture, GLuint NormalTexture, GLuint WorldPosTexture)
 {
   m_fb.Bind();
-  ShaderLibrary::getLib()->bindShader(m_pShader->getName());
+  ShaderLibrary::GetInstance().BindShader(m_pShader->GetName());
   m_fb.AttachColour(0, DiffuseTexture);
   m_fb.AttachColour(1, NormalTexture);
   m_fb.AttachColour(2, WorldPosTexture);
