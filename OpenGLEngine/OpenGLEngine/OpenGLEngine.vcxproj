@@ -198,6 +198,7 @@
     </ClCompile>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelLoadingAPI.cpp" />
     <ClCompile Include="MultiplicativeBlendEffect.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="LuaManager.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelLoadingAPI.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />

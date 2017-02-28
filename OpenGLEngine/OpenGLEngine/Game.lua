@@ -6,6 +6,7 @@ end
 
 function LoadAPIs()
 	GetAPI(context.handle, 'printAPI', 'printAPI')
+	GetAPI(context.handle, 'ModelLoadingAPI', 'ModelLoadingAPI')
 end
 
 function Initialize()
