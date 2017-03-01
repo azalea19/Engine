@@ -1,6 +1,6 @@
 #include "ObjectInstanceAPI.h"
-#include "LuaInstanceManager.h"
 #include "LuaManager.h"
+
 
 ObjectInstanceAPI::ObjectInstanceAPI()
 {
@@ -12,7 +12,7 @@ ObjectInstanceAPI::~ObjectInstanceAPI()
 }
 
 
-static void SetTranslation(int instanceHandle, vec3 const& translation)
+static void SetTranslation(int instHandle, vec3 const& translation)
 {
 
 }

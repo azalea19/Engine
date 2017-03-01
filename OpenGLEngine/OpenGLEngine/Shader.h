@@ -28,6 +28,8 @@ enum Attribute_Location
   AL_Normals = 3,
   AL_BoneIDs = 4,
   AL_BoneWeights = 5,
+
+
   AL_VertexColours = 6,
 };
 

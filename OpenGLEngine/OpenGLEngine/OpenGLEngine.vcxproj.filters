@@ -206,14 +206,20 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Source\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="ForestTerrain.cpp">
       <Filter>Source\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Source\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectInstanceAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaInstanceManager.cpp">
+      <Filter>Source\Lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,9 +255,6 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Source\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Source\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="Agent.h">
       <Filter>Source\Game</Filter>
@@ -304,7 +307,6 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Source\FrameBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
@@ -409,6 +411,15 @@
     </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>Source\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectInstanceAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInstanceManager.h">
+      <Filter>Source\Lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
