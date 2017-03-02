@@ -1,24 +1,40 @@
 #include "ObjectInstanceAPI.h"
-#include "LuaManager.h"
 
 
-ObjectInstanceAPI::ObjectInstanceAPI()
+void ObjectInstanceAPI::SetTranslation(int instHandle, vec3 const& translation)
 {
+	GetInstance(instHandle)->SetTranslation(translation);
 }
 
+//static MPlayer* player;
+static MCamera* camera;// = player->GetCamera();
 
-ObjectInstanceAPI::~ObjectInstanceAPI()
+
+///Temporary until scene render is exposed to lua.
+void ObjectInstanceAPI::TestRender(int instHandle)
 {
+	ObjectInstance * obj = GetInstance(instHandle);
+
+	
+	mat4 projectionMatrix = camera->getProjectionMatrix();
+	mat4 viewMatrix = camera->getViewMatrix();
+	mat4 worldMatrix = obj->GetWorldMatrix();
+	//mat4 worldMatrix = camera->Get
+
+	ShaderLibrary::GetInstance().BindShader("textured");
+	obj->Render(worldMatrix, viewMatrix, projectionMatrix);
+	ShaderLibrary::GetInstance().BindDefaultShader();
+
 }
 
-
-static void SetTranslation(int instHandle, vec3 const& translation)
+ObjectInstance * ObjectInstanceAPI::GetInstance(int instHandle)
 {
-
+	return LuaInstanceManager::GetInstance(instHandle);
 }
 
 void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "setTranslation", SetTranslation);
+	pContext->ExposeFunction(luaAPIName, "testRender", TestRender);
 }
