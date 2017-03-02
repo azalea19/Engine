@@ -66,6 +66,9 @@
     <Filter Include="Source\OBJWriter">
       <UniqueIdentifier>{f373ce18-9ba8-4482-b156-10f7516e47cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ImGUI">
+      <UniqueIdentifier>{5a8cd5d9-58e6-4e17-b768-2f2e8b512323}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -221,6 +224,18 @@
     <ClCompile Include="LuaInstanceManager.cpp">
       <Filter>Source\Lua</Filter>
     </ClCompile>
+    <ClCompile Include="extra_fonts\binary_to_compressed_c.cpp">
+      <Filter>Source\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Source\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Source\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Source\ImGUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -307,7 +322,6 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Source\FrameBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="BlurEffect.h">
@@ -420,6 +434,27 @@
     </ClInclude>
     <ClInclude Include="LuaInstanceManager.h">
       <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>Source\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Source\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Source\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_rect_pack.h">
+      <Filter>Source\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_textedit.h">
+      <Filter>Source\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_truetype.h">
+      <Filter>Source\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Source\ImGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
