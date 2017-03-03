@@ -1,5 +1,11 @@
 #include "LuaManager.h"
 #include "PrintAPI.h"
+#include "ObjectInstanceAPI.h"
+#include "LuaInstanceManager.h"
+#include "ModelLibraryAPI.h"
+#include "RenderManagerAPI.h"
+
+
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -25,6 +31,10 @@ void LuaManager::Initialize()
 {
   LuaManager& luaManager = LuaManager::GetInstance();
   luaManager.AddAPI("printAPI", PrintAPI::Expose);
+  luaManager.AddAPI("objectInstanceAPI", ObjectInstanceAPI::Expose);
+  luaManager.AddAPI("luaInstanceManager", LuaInstanceManager::Expose);
+  luaManager.AddAPI("modelLibraryAPI", ModelLibraryAPI::Expose);
+  luaManager.AddAPI("renderManagerAPI", RenderManagerAPI::Expose);
 }
 
 void LuaManager::AddAPI(string apiName, LuaAPIExposeFunc exposeFunc)

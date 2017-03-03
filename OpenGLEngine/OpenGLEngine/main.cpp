@@ -7,7 +7,6 @@
 #include "InputManager.h"
 #include "Interface2D.h"
 #include "SDL_ttf.h"
-#include "SDL.h"
 #include "SDL_mixer.h"
 #include "SoundManager.h"
 #include "Screen.h"
@@ -36,6 +35,7 @@
 #include "RenderManager.h"
 #include "Terrain.h"
 
+#include "MVCView.h"
 
 // Important Resources:
 // ... Basically everything you need to know Lazy Foo has you covered...
@@ -61,12 +61,10 @@ ObjectInstance* pSmallPlant;
 ObjectInstance* pHighTree;
 ObjectInstance* pRock;
 
-glm::mat4 projectionMatrix;
 
 glm::vec3 camPos;
 float yaw;
 float pitch;
-MCamera camera;
 
 SceneDecomposeEffect* pDecomposeEffect;
 DepthThresholdEffect* pThresholdEffect;
@@ -99,17 +97,17 @@ void UpdatePlayer()
   InputManager im = InputManager::GetInstance();
 
   //Rotation
-  float originalYaw = camera.GetYaw();
-  float originalPitch = camera.GetPitch();
+  float originalYaw = MVCView::camera->GetYaw();
+  float originalPitch = MVCView::camera->GetPitch();
   float deltaYaw = -im.MouseDeltaX() * TURN_SPEED;
   float deltaPitch = -im.MouseDeltaY() * TURN_SPEED;
-  camera.SetYaw(originalYaw + deltaYaw);
-  camera.SetPitch(originalPitch + deltaPitch);
+  MVCView::camera->SetYaw(originalYaw + deltaYaw);
+  MVCView::camera->SetPitch(originalPitch + deltaPitch);
 
   //Translation
-  vec3 oldPos = camera.GetPosition();
-  vec3 forward = camera.Forward();
-  vec3 right = camera.Right();
+  vec3 oldPos = MVCView::camera->GetPosition();
+  vec3 forward = MVCView::camera->Forward();
+  vec3 right = MVCView::camera->Right();
   vec3 translation = vec3{ 0, 0, 0 };
 
   if (im.IsKeyDown(SDL_SCANCODE_W))
@@ -141,7 +139,7 @@ void UpdatePlayer()
     newPos.x += translation.x;
     newPos.y += translation.y;
     newPos.z += translation.z;
-    camera.SetPosition(newPos);
+    MVCView::camera->SetPosition(newPos);
   }
 }
 
@@ -165,8 +163,8 @@ bool initSDL()
     printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
     return false;
   }
-  screen = SDL_CreateWindow("Arch Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-  SDL_GL_CreateContext(screen);
+  //MVCView::screen = 
+  SDL_GL_CreateContext(MVCView::screen);
 
   int result = SDL_GL_SetSwapInterval(0);
 
@@ -207,9 +205,7 @@ void myinit()
   FrameBuffer::Initialize();
   LuaManager::Initialize();
 
-  LuaManager::GetInstance().CreateContext("Game.lua");
-
-  projectionMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);
+ 
 
   TextureLibrary::GetInstance().AddTexture("", 1);
   ModelLibrary& modelLibrary = ModelLibrary::GetInstance();
@@ -280,6 +276,7 @@ void myinit()
   SoundManager::GetInstance().AddSound("Music", "Assets/Sounds/ambient.wav");
   SoundManager::GetInstance().PlaySound("Music", INT_MAX);
 
+  LuaManager::GetInstance().CreateContext("Game.lua");
 }
 
 bool HandleEvents()
@@ -322,6 +319,7 @@ bool Update()
 
 void Render()
 {
+	/*
   static bool renderDepth = true;
 
   glCullFace(GL_BACK);
@@ -390,6 +388,7 @@ void Render()
   DrawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
   //glFlush();
   SDL_GL_SwapWindow(screen);
+  */
 }
 
 void GameLoop()

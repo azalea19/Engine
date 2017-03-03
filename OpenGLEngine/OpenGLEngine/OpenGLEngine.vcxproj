@@ -199,7 +199,11 @@
     </ClCompile>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelLibraryAPI.cpp" />
+    <ClCompile Include="MPlayer.cpp" />
     <ClCompile Include="MultiplicativeBlendEffect.cpp" />
+    <ClCompile Include="MVCControl.cpp" />
+    <ClCompile Include="MVCModel.cpp" />
     <ClCompile Include="ObjectInstanceAPI.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -213,6 +217,7 @@
     </ClCompile>
     <ClCompile Include="PrimitiveCollisions.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RenderManagerAPI.cpp" />
     <ClCompile Include="SceneDecomposeEffect.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -223,6 +228,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLibrary.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="MVCView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdditiveBlendEffect.h" />
@@ -254,7 +260,10 @@
     <ClInclude Include="LuaManager.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelLibraryAPI.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />
+    <ClInclude Include="MVCControl.h" />
+    <ClInclude Include="MVCModel.h" />
     <ClInclude Include="ObjectInstanceAPI.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
@@ -263,6 +272,7 @@
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="RenderManagerAPI.h" />
     <ClInclude Include="SceneDecomposeEffect.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="ExampleScene.h" />
@@ -285,6 +295,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="MVCView.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AdditiveBlendEffect.frag" />

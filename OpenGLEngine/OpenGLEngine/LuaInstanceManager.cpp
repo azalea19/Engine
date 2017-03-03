@@ -12,12 +12,6 @@ int LuaInstanceManager::AddNewInstance(string const& modelName)
 	ObjectInstance* newInstance = ModelLibrary::GetInstance().GetObjectInstance(modelName);
 	m_instanceMap.emplace(m_lastIndex, newInstance);
 	m_lastIndex += 1;
-
-	//Liz once you have the new instance of the mode and its unique handle
-	//you need to add the new key value pair to the map 
-	//use emplace, insert is trash
-	//i.e. myMap.emplace(myKey, myValue)
-
 	
 	return m_lastIndex;
 }
