@@ -6,7 +6,6 @@
 #include "time.h"
 #include "ModelLibrary.h"
 #include "Utility.h"
-
 #include "Screen.h"
 #include <iostream>
 #include "MMath.h"
