@@ -319,6 +319,7 @@ bool Update()
 
 void Render()
 {
+
 	/*
   static bool renderDepth = true;
 

@@ -16,8 +16,8 @@ function Initialize()
 	LoadAPIs()
 	printAPI.print('Initializing...\n')
 	
-	--modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
-	--plant01 = objectInstanceAPI.AddNewInstance("Plant")
+	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	plant01 = objectInstanceAPI.AddNewInstance("Plant")
 	
 end
 
@@ -37,7 +37,7 @@ end
 
 function Update()
 	count = (count or 0) + 1
-	--renderManagerAPI.updatePlayer()
+	renderManagerAPI.updatePlayer()
 end
 
 function Render()
