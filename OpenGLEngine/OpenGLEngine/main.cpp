@@ -319,6 +319,8 @@ bool Update()
 
 void Render()
 {
+
+	/*
   static bool renderDepth = true;
 
   glCullFace(GL_BACK);
@@ -388,7 +390,7 @@ void Render()
   DrawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
   glFlush();
   SDL_GL_SwapWindow(MVCView::screen);
-  
+  */
 }
 
 void GameLoop()
