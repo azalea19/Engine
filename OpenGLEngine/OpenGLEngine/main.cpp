@@ -164,8 +164,7 @@ bool initSDL()
     return false;
   }
   //MVCView::screen = 
-  SDL_GL_CreateContext(MVCView::screen);
-
+  
   int result = SDL_GL_SetSwapInterval(0);
 
   SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -175,6 +174,7 @@ bool initSDL()
 int main(int argc, char **argv)
 {
   initSDL();
+  MVCView::Initialise();
   myinit();
   GameLoop();
   return(0);
@@ -320,7 +320,7 @@ bool Update()
 void Render()
 {
 
-	/*
+	
   static bool renderDepth = true;
 
   glCullFace(GL_BACK);
@@ -341,17 +341,17 @@ void Render()
   pDecomposeEffect->Bind(sceneTextures[0], sceneTextures[1], sceneTextures[2], sceneTextures[3], sceneTextures[4]);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
-  RenderManager::GetInstance().Render(mat4(), camera.getViewMatrix(), projectionMatrix, time);
+  RenderManager::GetInstance().Render(mat4(), MVCView::camera->getViewMatrix(), MVCView::projectionMatrix, time);
   pDecomposeEffect->Unbind();
 
-  float camDist = length(camera.GetPosition() - lightPos);
+  float camDist = length(MVCView::camera->GetPosition() - lightPos);
 
-  ////pThresholdEffect->Apply(sceneTextures[2], godRayMaskTexture, camDist);
+  //pThresholdEffect->Apply(sceneTextures[2], godRayMaskTexture, camDist);
 
-  vec4 temp = camera.getViewMatrix() * vec4(lightPos, 1);
+  vec4 temp = MVCView::camera->getViewMatrix() * vec4(lightPos, 1);
   vec3 vsLightPos = vec3(temp.x, temp.y, temp.z);
   float lightDist = length(vsLightPos);
-  temp = projectionMatrix * vec4(vsLightPos, 1.0);
+  temp = MVCView::projectionMatrix * vec4(vsLightPos, 1.0);
   temp.x = temp.x / temp.w;
   temp.y = temp.y / temp.w;
   vec3 ssLightPos = vec3(temp.x, temp.y, lightDist);
@@ -367,12 +367,12 @@ void Render()
     pBlendEffect->Apply(godRayMaskTexture, sceneTextures[0], sceneTextures[3]);
     pRayEffect->Apply(sceneTextures[3], sceneTextures[2], sceneTextures[4], ssLightPos);
   }
-  //pBlendEffect->Apply(sceneTextures[0], godRayMaskTexture, finalTex);
+  pBlendEffect->Apply(sceneTextures[0], godRayMaskTexture, finalTex);
 
-  //pRayEffect->Apply(sceneTextures[0], sceneTextures[2], godRayMaskTexture, ssLightPos);
-  //pBloomEffect->Apply(sceneTextures[4], finalTex, 7);
+  pRayEffect->Apply(sceneTextures[0], sceneTextures[2], godRayMaskTexture, ssLightPos);
+  pBloomEffect->Apply(sceneTextures[4], finalTex, 7);
   pFXAAEffect->Apply(sceneTextures[4], finalTex, 32);
-  //pFXAAEffect->Apply(godRayMaskTexture, sceneTextures[2], 8);
+  pFXAAEffect->Apply(godRayMaskTexture, sceneTextures[2], 8);
 
   if (renderDepth)
   {
@@ -385,11 +385,11 @@ void Render()
 
   char frameRate[32];
   sprintf_s(frameRate, "FPS: %.2f", RenderManager::GetInstance().GetFrameRate());
-  //printf("%s\n", frameRate);
+  printf("%s\n", frameRate);
   DrawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
-  //glFlush();
-  SDL_GL_SwapWindow(screen);
-  */
+  glFlush();
+  SDL_GL_SwapWindow(MVCView::screen);
+  
 }
 
 void GameLoop()
