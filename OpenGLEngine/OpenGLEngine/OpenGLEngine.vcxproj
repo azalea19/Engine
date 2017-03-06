@@ -207,6 +207,7 @@
     <ClCompile Include="MVCControl.cpp" />
     <ClCompile Include="MVCModel.cpp" />
     <ClCompile Include="ObjectInstanceAPI.cpp" />
+    <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RayEffect.cpp" />
@@ -269,6 +270,7 @@
     <ClInclude Include="MVCControl.h" />
     <ClInclude Include="MVCModel.h" />
     <ClInclude Include="ObjectInstanceAPI.h" />
+    <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
     <ClInclude Include="Random.h" />
