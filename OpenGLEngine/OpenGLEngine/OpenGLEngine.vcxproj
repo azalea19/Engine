@@ -201,6 +201,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MultiplicativeBlendEffect.cpp" />
     <ClCompile Include="ObjectInstanceAPI.cpp" />
+    <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RayEffect.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />
     <ClInclude Include="ObjectInstanceAPI.h" />
+    <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
     <ClInclude Include="Random.h" />

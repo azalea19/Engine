@@ -35,6 +35,9 @@
 #include "DirectionalLightingEffect.h"
 #include "RenderManager.h"
 #include "Terrain.h"
+#include <vector>
+
+#include "ObjectLoader.h"
 
 
 // Important Resources:
@@ -47,6 +50,7 @@
 // http://lazyfoo.net/tutorials/OpenGL/index.php
 //
 
+ObjectLoader oLoader;
 
 SDL_Window* screen;
 
@@ -54,6 +58,8 @@ SDL_Window* screen;
 ObjectInstance* pZombie;
 ObjectInstance* pBob;
 ObjectInstance* pPalm;
+
+std::vector<ObjectInstance*> objects;
 
 ObjectInstance* pBambooPalm;
 ObjectInstance* pGroundPalm;
@@ -196,6 +202,7 @@ void InitGlew()
 
 void myinit()
 {
+
   glClearColor(0, 0, 0, 1.f);
 
   InitGlew();
@@ -258,6 +265,28 @@ void myinit()
   pZombie->SetActiveAnimation(0);
 
   pBob->SetPitch(-90);
+
+  oLoader.ReadFile("test");
+  for (int i = 0; i < oLoader.m_objectFileData.size(); i++) {
+	  std::cout << oLoader.m_objectFileData.size() << " AND " << i << " ";
+	  std::cout << oLoader.m_objectFileData.at(i).modelName << " ";
+	  objects.push_back(modelLibrary.GetObjectInstance(oLoader.m_objectFileData.at(i).modelName));
+
+	  std::cout << oLoader.m_objectFileData.at(i).pos.x << " " << oLoader.m_objectFileData.at(i).pos.y << " " << oLoader.m_objectFileData.at(i).pos.z << " ";
+	  objects.at(i)->SetTranslation(oLoader.m_objectFileData.at(i).pos.x, 
+									oLoader.m_objectFileData.at(i).pos.y, 
+									oLoader.m_objectFileData.at(i).pos.z);
+
+	  std::cout << oLoader.m_objectFileData.at(i).scale.x << " " << oLoader.m_objectFileData.at(i).scale.y << " " << oLoader.m_objectFileData.at(i).scale.z << " ";
+	  objects.at(i)->SetScale(oLoader.m_objectFileData.at(i).scale);
+
+	  std::cout << oLoader.m_objectFileData.at(i).pitch << " ";
+	  std::cout << oLoader.m_objectFileData.at(i).yaw << " ";
+
+	  std::cout << oLoader.m_objectFileData.at(i).activeAnimation << std::endl;
+	  objects.at(i)->SetActiveAnimation(oLoader.m_objectFileData.at(i).activeAnimation);
+  }
+  
 
   pDecomposeEffect = new SceneDecomposeEffect();
   pThresholdEffect = new DepthThresholdEffect();
