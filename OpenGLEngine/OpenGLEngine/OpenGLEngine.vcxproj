@@ -189,6 +189,8 @@
     <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="LuaManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainAPI.cpp" />
+    <ClCompile Include="MainRename.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MCamera.cpp" />
     <ClCompile Include="ModelLibrary.cpp">
@@ -258,6 +260,8 @@
     <ClInclude Include="LuaContext.h" />
     <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="LuaManager.h" />
+    <ClInclude Include="MainAPI.h" />
+    <ClInclude Include="MainRename.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLibraryAPI.h" />
