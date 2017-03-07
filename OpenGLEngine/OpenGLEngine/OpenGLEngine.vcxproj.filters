@@ -239,6 +239,12 @@
     <ClCompile Include="MPlayer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="MainAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MainRename.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -325,7 +331,6 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Source\FrameBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="BlurEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
@@ -442,6 +447,8 @@
     <ClInclude Include="MVCModel.h" />
     <ClInclude Include="MVCControl.h" />
     <ClInclude Include="MVCView.h" />
+    <ClInclude Include="MainAPI.h" />
+    <ClInclude Include="MainRename.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
