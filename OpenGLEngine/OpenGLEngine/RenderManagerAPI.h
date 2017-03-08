@@ -1,5 +1,3 @@
-
-
 #pragma once
 #include "LuaContext.h"
 #include "LuaManager.h"
@@ -41,7 +39,5 @@ public:
 	static void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time);
 	static void TestRender();
 	static void UpdatePlayer(); // Temporary location to share with lua. move somewhere else (probably write within lua)
-
-
 
 };

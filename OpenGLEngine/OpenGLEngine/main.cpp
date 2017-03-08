@@ -121,7 +121,7 @@ void UpdatePlayer()
 
   if (translation != vec3{ 0, 0, 0 })
   {
-    //Normalize so you dont move faster diagonally
+    //Normalize so you don't move faster diagonally
     translation = normalize(translation);
 
     translation *= MOVE_SPEED;
@@ -205,8 +205,6 @@ void myinit()
   FrameBuffer::Initialize();
   LuaManager::Initialize();
 
- 
-
   TextureLibrary::GetInstance().AddTexture("", 1);
   ModelLibrary& modelLibrary = ModelLibrary::GetInstance();
   
@@ -254,6 +252,8 @@ void myinit()
   pZombie->SetActiveAnimation(0);
 
   pBob->SetPitch(-90);
+
+  pBob->SetVisible(false);
 
   pDecomposeEffect = new SceneDecomposeEffect();
   pThresholdEffect = new DepthThresholdEffect();
@@ -319,8 +319,6 @@ bool Update()
 
 void Render()
 {
-
-	
   static bool renderDepth = true;
 
   glCullFace(GL_BACK);
@@ -341,6 +339,7 @@ void Render()
   pDecomposeEffect->Bind(sceneTextures[0], sceneTextures[1], sceneTextures[2], sceneTextures[3], sceneTextures[4]);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
+  //pBob->Render(mat4(), MVCView::camera->getViewMatrix(), MVCView::projectionMatrix, time);
   RenderManager::GetInstance().Render(mat4(), MVCView::camera->getViewMatrix(), MVCView::projectionMatrix, time);
   pDecomposeEffect->Unbind();
 

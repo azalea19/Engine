@@ -1,5 +1,5 @@
 #include "ObjectInstanceAPI.h"
-
+#include "MVCView.h"
 
 void ObjectInstanceAPI::SetTranslation(int instHandle, vec3 const& translation)
 {
@@ -14,10 +14,9 @@ static MCamera* camera;// = player->GetCamera();
 void ObjectInstanceAPI::TestRender(int instHandle)
 {
 	ObjectInstance * obj = GetInstance(instHandle);
-
 	
-	mat4 projectionMatrix = camera->getProjectionMatrix();
-	mat4 viewMatrix = camera->getViewMatrix();
+  mat4 projectionMatrix = MVCView::camera->getProjectionMatrix();
+  mat4 viewMatrix = MVCView::camera->getViewMatrix();
 	mat4 worldMatrix = obj->GetWorldMatrix();
 	//mat4 worldMatrix = camera->Get
 
