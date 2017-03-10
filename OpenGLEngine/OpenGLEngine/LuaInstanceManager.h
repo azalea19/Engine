@@ -7,6 +7,10 @@
 #include "LuaManager.h"
 #include "ModelLibrary.h"
 
+
+typedef int InstanceHandle;
+
+
 static class LuaInstanceManager : public Singleton<LuaInstanceManager>
 {
 //private:
@@ -15,7 +19,7 @@ static class LuaInstanceManager : public Singleton<LuaInstanceManager>
 
 public:
 	/// Returns handle to new object instance of given model name.
-	static int AddNewInstance(string const& modelName);
+	static InstanceHandle AddNewInstance(string const& modelName);
 
 	static ObjectInstance* GetInstance(int instanceHandle);
 

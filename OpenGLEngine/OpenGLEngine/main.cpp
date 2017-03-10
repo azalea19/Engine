@@ -1,5 +1,4 @@
-#pragma once
-
+ 
 #include "LuaManager.h"
 #include "MainAPI.h"
 

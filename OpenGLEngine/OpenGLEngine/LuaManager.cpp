@@ -6,8 +6,6 @@
 #include "RenderManagerAPI.h"
 #include "MainAPI.h"
 
-
-
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
   return m_contexts.at(contextHandle);

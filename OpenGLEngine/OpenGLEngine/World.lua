@@ -7,25 +7,27 @@ world =
 	
 	bodies = {}
 	
+	scenes = {}
 	
-	local function world:enterScene(sceneToEnter)
+	function world:enterScene(sceneToEnter)
 	{
 	
 	}
 	
-	local function world:loadSceneFromFile(sceneFile) return 'sceneIndex'
+	function world:loadSceneFromFile(sceneFile) return 'sceneIndex'
 	{
+	newScene
+	newScene.id = scenes.count
 	}
 }
 
 scene =
 {
-	bodies = {}
-	
-	local function addStatic()
-	
-	local function addPickUp()
-	
+local id
+
+local function scene:addRigidBody()
+{
+}
 	
 }
 
