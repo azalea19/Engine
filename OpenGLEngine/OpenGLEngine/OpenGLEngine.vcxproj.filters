@@ -66,6 +66,9 @@
     <Filter Include="Source\OBJWriter">
       <UniqueIdentifier>{f373ce18-9ba8-4482-b156-10f7516e47cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Lua\Managers">
+      <UniqueIdentifier>{cc626a22-106f-4b16-80d1-2ae4ed1bf787}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -218,15 +221,6 @@
     <ClCompile Include="ObjectInstanceAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="LuaInstanceManager.cpp">
-      <Filter>Source\Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelLibraryAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderManagerAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MVCModel.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -244,6 +238,24 @@
     </ClCompile>
     <ClCompile Include="MainRename.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceFileLoader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaInstanceManager.cpp">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaInstanceFileLoaderManager.cpp">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceFileLoaderAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLibraryAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManagerAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,7 +346,6 @@
     <ClInclude Include="BlurEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="HDRSplitEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
@@ -347,21 +358,14 @@
     <ClInclude Include="FXAAEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
     <ClInclude Include="SceneDecomposeEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh.h">
       <Filter>Source\Model Loader</Filter>
     </ClInclude>
     <ClInclude Include="LuaManager.h">
-      <Filter>Source\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaContext.h">
       <Filter>Source\Lua</Filter>
     </ClInclude>
     <ClInclude Include="LuaAPI.h">
@@ -439,16 +443,30 @@
     <ClInclude Include="ObjectInstanceAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="LuaInstanceManager.h">
-      <Filter>Source\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelLibraryAPI.h" />
-    <ClInclude Include="RenderManagerAPI.h" />
     <ClInclude Include="MVCModel.h" />
     <ClInclude Include="MVCControl.h" />
     <ClInclude Include="MVCView.h" />
     <ClInclude Include="MainAPI.h" />
     <ClInclude Include="MainRename.h" />
+    <ClInclude Include="InstanceFileLoader.h" />
+    <ClInclude Include="LuaContext.h">
+      <Filter>Source\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInstanceManager.h">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInstanceFileLoaderManager.h">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InstanceFileLoaderAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLibraryAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManagerAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">

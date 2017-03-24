@@ -13,7 +13,7 @@ int LuaInstanceManager::AddNewInstance(string const& modelName)
 	m_instanceMap.emplace(m_lastIndex, newInstance);
 	m_lastIndex += 1;
 	
-	return m_lastIndex;
+	return m_lastIndex-1;
 }
 
 ObjectInstance * LuaInstanceManager::GetInstance(int instanceHandle)

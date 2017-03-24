@@ -14,6 +14,8 @@
 SDL_Window* screen;
 
 //ObjectInstance* pGround;
+
+/*
 ObjectInstance* pZombie;
 ObjectInstance* pBob;
 ObjectInstance* pPalm;
@@ -23,6 +25,7 @@ ObjectInstance* pGroundPalm;
 ObjectInstance* pSmallPlant;
 ObjectInstance* pHighTree;
 ObjectInstance* pRock;
+*/
 
 
 glm::vec3 camPos;
@@ -161,7 +164,7 @@ void MainRename::MyInit()
 	LuaManager::Initialize();
 
 
-
+	/*
 	TextureLibrary::GetInstance().AddTexture("", 1);
 	ModelLibrary& modelLibrary = ModelLibrary::GetInstance();
 
@@ -209,6 +212,8 @@ void MainRename::MyInit()
 	pZombie->SetActiveAnimation(0);
 
 	pBob->SetPitch(-90);
+
+	*/
 
 	pDecomposeEffect = new SceneDecomposeEffect();
 	pThresholdEffect = new DepthThresholdEffect();
@@ -284,11 +289,13 @@ void MainRename::Render()
 	}
 	glEnable(GL_DEPTH_TEST);
 
+	
 	float time = clock() / float(CLOCKS_PER_SEC);
+	/*
 	vec3 tr = pZombie->GetTranslation();
 	tr.z = -50 + 1.6f * time;
 	pZombie->SetTranslation(tr);
-
+	*/
 	lightPos.x = -cos(PI * time / 60) * 10000;
 	lightPos.y = sin(PI * time / 60) * 10000;
 
