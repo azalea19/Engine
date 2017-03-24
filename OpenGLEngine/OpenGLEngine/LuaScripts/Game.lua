@@ -1,3 +1,70 @@
+
+--[[
+-- World --
+World = 
+{
+	player = {},
+	scenes = {},
+	sceneCount = 0
+}
+
+	function World:new(o)-- return 'createdWorld'
+		o = o or {}  
+	    setmetatable(o,World) 
+	    return o
+	end
+	
+	
+	
+	function World:enterScene(sceneToEnter)
+	end
+
+	
+	function World:loadNewSceneFromFile(sceneFile) return 'sceneIndex'
+		--newScene.id = sceneCount
+		--sceneCount = sceneCount+1
+	end
+
+		
+-- Bodies --
+
+RigidBody =
+{
+id
+}
+
+function RigidBody:new(o)-- return 'createdWorld'
+		o = o or {}  
+	    setmetatable(o,RigidBody) 
+	    return o
+	end
+	
+InteractableBody = RigidBody:New()
+NPCBody = InteractableBody:New()
+PickUpBody = InteractableBody:New()
+	
+	]]
+-- Scene --
+Scene =
+{	id,
+	instances = {},
+	instCount = 0
+}
+	
+	function Scene:new(o)
+		o = o or {}
+		local self = setmetatable({}, MyClass)
+		self.__index = self
+		return self
+	end
+
+	function Scene.addRigidBody(instHandle)
+		--instances[instCount] = instHandle
+		--instCount = instCount + 1
+	end
+	
+
+	
 function Run()
 	Initialize()
 	GameLoop()
@@ -12,13 +79,13 @@ function LoadAPIs()
 	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
 	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
 	GetAPI(context.handle, 'mainAPI', 'mainAPI')
-	GetAPI(context.handle, 'instanceFileLoaderAPI', 'mainAPI')
-	GetAPI(context.handle, 'luaInstanceFileLoaderManager', 'mainAPI')
+	GetAPI(context.handle, 'instanceFileLoaderAPI', 'instanceFileLoaderAPI')
+	GetAPI(context.handle, 'luaInstanceFileLoaderManager', 'luaInstanceFileLoaderManager')
 
 end
 
 function Initialize()
-	--scen = Scene.new()
+	
 	LoadAPIs()
 	
 	
@@ -26,27 +93,21 @@ function Initialize()
 	printAPI.print('Initializing...\n')
 	mainAPI.initialise()
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
 	plant01 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant01,10,10,10)
 	plant01 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant01,0,0,0)
 
+	scene01 = Scene:new()
 	
-	--
-	
-	--[[
-	instanceLoader = luaInstanceFileLoaderManager.AddNewInstance()
-	instanceFileLoaderAPI.loadNewSceneFromFile(instanceLoader,"test")
-	
-	for i=0,instanceFileLoaderAPI.getFileLength(instanceLoader) do
+	instanceLoader = luaInstanceFileLoaderManager.addNewInstance()
+	instanceFileLoaderAPI.loadFile(instanceLoader,'test')
+	for i=0,instanceFileLoaderAPI.getFileLength(instanceLoader)-1 do
 		objectHandle = instanceFileLoaderAPI.readFromLoadedFile(instanceLoader, i) -- Adds this instance from the file to lua instance manager. Object instance can be referenced by objectHandle using the objectInstanceAPI. Also sets translation, scale and animation state from file.
-		scene01.addRigidBody(objectHandle)
+		--scene01.addRigidBody(objectHandle)
 		--objectInstanceAPI.SetTranslation(objectHandle,)
-		
-		
-		
 	end
-	]]
 end
 
 function GameLoop()
@@ -77,86 +138,15 @@ end
 
 Run()
 
--- World --
-World = 
-{
-	player = {},
-	scenes = {},
-	sceneCount = 0
-}
-
-	function World:new(o)-- return 'createdWorld'
-		o = o or {}  
-	    setmetatable(o,World) 
-	    return o
-	end
-	
-	
-	
-	function World:enterScene(sceneToEnter)
-	end
 
 	
-	function World:loadNewSceneFromFile(sceneFile) return 'sceneIndex'
-		--newScene.id = sceneCount
-		--sceneCount = sceneCount+1
-	end
-	
--- Scene --
-Scene =
-{}
---[[
-	id,00
-	instances = {},
-	instCount = 0
-]]
-	
---	Scene.__index = Scene
-	
-	function Scene.new()
-		local self = setmetatable({}, MyClass)
-		return self
-	end
-	--[[
-	function Scene:new(scene)
-	   scene = scene or {}     
-	   setmetatable(scene,self)
-	   self.__index = self
-	   return scene
-	end
-	]]
 
-	--[[
-	function Scene.addRigidBody(instHandle)
-		--instHandle = instHandle or {}
-		instances[instCount] = instHandle
-		instCount = instCount + 1
-	end
-	]]
 	
 	
 	
 	
 	
-	
-	
-	
-	
-RigidBody =
-{
-id
-}
 
-function RigidBody:new(o)-- return 'createdWorld'
-		o = o or {}  
-	    setmetatable(o,RigidBody) 
-	    return o
-	end
-	
-InteractableBody = RigidBody:New()
-NPCBody = InteractableBody:New()
-PickUpBody = InteractableBody:New()
-	
 --[[
 
 	
