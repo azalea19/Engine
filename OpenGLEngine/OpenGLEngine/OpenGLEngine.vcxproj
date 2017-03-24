@@ -174,7 +174,7 @@
     <ClCompile Include="DepthThresholdEffect.cpp" />
     <ClCompile Include="DirectionalLightingEffect.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
-    <ClCompile Include="FileObjectLoaderAPI.cpp" />
+    <ClCompile Include="InstanceFileLoaderAPI.cpp" />
     <ClCompile Include="ForestTerrain.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="FXAAEffect.cpp" />
@@ -187,6 +187,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="LuaContext.cpp" />
+    <ClCompile Include="LuaInstanceFileLoaderManager.cpp" />
     <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="LuaManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -208,7 +209,7 @@
     <ClCompile Include="MVCControl.cpp" />
     <ClCompile Include="MVCModel.cpp" />
     <ClCompile Include="ObjectInstanceAPI.cpp" />
-    <ClCompile Include="ObjectLoader.cpp" />
+    <ClCompile Include="InstanceFileLoader.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RayEffect.cpp" />
@@ -239,7 +240,7 @@
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
-    <ClInclude Include="FileObjectLoaderAPI.h" />
+    <ClInclude Include="InstanceFileLoaderAPI.h" />
     <ClInclude Include="ForestTerrain.h" />
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IAnimatable.h" />
@@ -261,6 +262,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="LuaAPI.h" />
     <ClInclude Include="LuaContext.h" />
+    <ClInclude Include="LuaInstanceFileLoaderManager.h" />
     <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="LuaManager.h" />
     <ClInclude Include="MainAPI.h" />
@@ -272,7 +274,7 @@
     <ClInclude Include="MVCControl.h" />
     <ClInclude Include="MVCModel.h" />
     <ClInclude Include="ObjectInstanceAPI.h" />
-    <ClInclude Include="ObjectLoader.h" />
+    <ClInclude Include="InstanceFileLoader.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
     <ClInclude Include="Random.h" />

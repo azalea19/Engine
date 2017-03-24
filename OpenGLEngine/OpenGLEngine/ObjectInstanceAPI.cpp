@@ -1,9 +1,10 @@
 #include "ObjectInstanceAPI.h"
 
 
-void ObjectInstanceAPI::SetTranslation(int instHandle, vec3 const& translation)
+void ObjectInstanceAPI::SetTranslation(int instHandle, float in1,float in2, float in3)
 {
-	GetInstance(instHandle)->SetTranslation(translation);
+	vec3 vec(in1, in2, in3);
+	GetInstance(instHandle)->SetTranslation(vec);
 }
 
 //static MPlayer* player;
