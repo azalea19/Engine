@@ -7,6 +7,6 @@ int main(int argc, char **argv)
 {
 	LuaManager::Initialize();
 	//MainAPI::Initialise();
-	LuaManager::GetInstance().CreateContext("Game.lua");
+	LuaManager::GetInstance().CreateContext("LuaScripts/Game.lua");
   return(0);
 }

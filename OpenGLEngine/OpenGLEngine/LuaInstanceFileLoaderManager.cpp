@@ -7,11 +7,11 @@ static int m_lastIndex = 0;
 LoaderHandle LuaInstanceFileLoaderManager::AddNewInstance()
 {
 
-	InstanceFileLoader* newInstance;
+	InstanceFileLoader* newInstance = new InstanceFileLoader();
 	m_instanceMap.emplace(m_lastIndex, newInstance);
 	m_lastIndex += 1;
 
-	return m_lastIndex;
+	return m_lastIndex-1;
 }
 
 InstanceFileLoader * LuaInstanceFileLoaderManager::GetInstance(int instanceHandle)
