@@ -39,8 +39,10 @@
 #include "DirectionalLightingEffect.h"
 #include "RenderManager.h"
 #include "Terrain.h"
+#include "MPlayer.h"
 
-#include "MVCView.h"
+#include "View.h"
+
 class MainRename
 {
 public:
@@ -51,5 +53,6 @@ public:
 	static void UpdatePlayer();
 	static void InitGlew();
 	static bool InitSDL();
+	static MPlayer * GetPlayer();
 };
 

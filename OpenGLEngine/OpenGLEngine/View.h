@@ -11,9 +11,10 @@
 #include "MMath.h"
 
 
-class MVCView
+class View
 {
 public:
+	// should be private.
 	static SDL_Window *screen;
 	static MCamera *camera; // Placeholder. This should be pointer(s) to player(s) camera
 	static mat4 projectionMatrix;

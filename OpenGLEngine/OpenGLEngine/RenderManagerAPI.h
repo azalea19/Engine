@@ -1,7 +1,6 @@
 #pragma once
 #include "LuaContext.h"
 #include "LuaManager.h"
-#include "MVCView.h"
 #include "RenderManager.h"
 
 class RenderManagerAPI

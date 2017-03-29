@@ -174,6 +174,7 @@
     <ClCompile Include="DepthThresholdEffect.cpp" />
     <ClCompile Include="DirectionalLightingEffect.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="IEngine.cpp" />
     <ClCompile Include="InstanceFileLoaderAPI.cpp" />
     <ClCompile Include="ForestTerrain.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -206,8 +207,7 @@
     <ClCompile Include="ModelLibraryAPI.cpp" />
     <ClCompile Include="MPlayer.cpp" />
     <ClCompile Include="MultiplicativeBlendEffect.cpp" />
-    <ClCompile Include="MVCControl.cpp" />
-    <ClCompile Include="MVCModel.cpp" />
+    <ClCompile Include="View.cpp" />
     <ClCompile Include="ObjectInstanceAPI.cpp" />
     <ClCompile Include="InstanceFileLoader.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
@@ -233,13 +233,13 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLibrary.cpp" />
     <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="MVCView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
+    <ClInclude Include="IEngine.h" />
     <ClInclude Include="InstanceFileLoaderAPI.h" />
     <ClInclude Include="ForestTerrain.h" />
     <ClInclude Include="HeightMap.h" />
@@ -271,8 +271,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLibraryAPI.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />
-    <ClInclude Include="MVCControl.h" />
-    <ClInclude Include="MVCModel.h" />
+    <ClInclude Include="View.h" />
     <ClInclude Include="ObjectInstanceAPI.h" />
     <ClInclude Include="InstanceFileLoader.h" />
     <ClInclude Include="OBJWriter.h" />
@@ -305,7 +304,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utility.h" />
-    <ClInclude Include="MVCView.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AdditiveBlendEffect.frag" />

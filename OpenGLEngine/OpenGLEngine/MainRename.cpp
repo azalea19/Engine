@@ -61,17 +61,17 @@ void MainRename::UpdatePlayer()
 	InputManager im = InputManager::GetInstance();
 
 	//Rotation
-	float originalYaw = MVCView::camera->GetYaw();
-	float originalPitch = MVCView::camera->GetPitch();
+	float originalYaw = View::camera->GetYaw();
+	float originalPitch = View::camera->GetPitch();
 	float deltaYaw = -im.MouseDeltaX() * TURN_SPEED;
 	float deltaPitch = -im.MouseDeltaY() * TURN_SPEED;
-	MVCView::camera->SetYaw(originalYaw + deltaYaw);
-	MVCView::camera->SetPitch(originalPitch + deltaPitch);
+	View::camera->SetYaw(originalYaw + deltaYaw);
+	View::camera->SetPitch(originalPitch + deltaPitch);
 
 	//Translation
-	vec3 oldPos = MVCView::camera->GetPosition();
-	vec3 forward = MVCView::camera->Forward();
-	vec3 right = MVCView::camera->Right();
+	vec3 oldPos = View::camera->GetPosition();
+	vec3 forward = View::camera->Forward();
+	vec3 right = View::camera->Right();
 	vec3 translation = vec3{ 0, 0, 0 };
 
 	if (im.IsKeyDown(SDL_SCANCODE_W))
@@ -103,7 +103,7 @@ void MainRename::UpdatePlayer()
 		newPos.x += translation.x;
 		newPos.y += translation.y;
 		newPos.z += translation.z;
-		MVCView::camera->SetPosition(newPos);
+		View::camera->SetPosition(newPos);
 	}
 }
 
@@ -152,7 +152,7 @@ void MainRename::MyInit()
 {
 
 	glClearColor(0, 0, 0, 1.f);
-	MVCView::Initialise();
+	View::Initialise();
 
 	InitGlew();
 	srand(time(NULL));
@@ -302,17 +302,17 @@ void MainRename::Render()
 	pDecomposeEffect->Bind(sceneTextures[0], sceneTextures[1], sceneTextures[2], sceneTextures[3], sceneTextures[4]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	RenderManager::GetInstance().Render(mat4(), MVCView::camera->getViewMatrix(), MVCView::projectionMatrix, time);
+	RenderManager::GetInstance().Render(mat4(), View::camera->getViewMatrix(), View::projectionMatrix, time);
 	pDecomposeEffect->Unbind();
 
-	float camDist = length(MVCView::camera->GetPosition() - lightPos);
+	float camDist = length(View::camera->GetPosition() - lightPos);
 
 	//pThresholdEffect->Apply(sceneTextures[2], godRayMaskTexture, camDist);
 
-	vec4 temp = MVCView::camera->getViewMatrix() * vec4(lightPos, 1);
+	vec4 temp = View::camera->getViewMatrix() * vec4(lightPos, 1);
 	vec3 vsLightPos = vec3(temp.x, temp.y, temp.z);
 	float lightDist = length(vsLightPos);
-	temp = MVCView::projectionMatrix * vec4(vsLightPos, 1.0);
+	temp = View::projectionMatrix * vec4(vsLightPos, 1.0);
 	temp.x = temp.x / temp.w;
 	temp.y = temp.y / temp.w;
 	vec3 ssLightPos = vec3(temp.x, temp.y, lightDist);
@@ -349,7 +349,7 @@ void MainRename::Render()
 	printf("%s\n", frameRate);
 	DrawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
 	glFlush();
-	SDL_GL_SwapWindow(MVCView::screen);
+	SDL_GL_SwapWindow(View::screen);
 }
 
 /*

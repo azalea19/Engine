@@ -1,3 +1,6 @@
+
+/*
+
 #pragma once
 #include "types.h"
 #Include "Map.h"
@@ -23,3 +26,4 @@ private:
   LuaInstanceManager* m_instanceManager;
 
 };
+*/
