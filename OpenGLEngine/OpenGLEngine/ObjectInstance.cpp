@@ -10,10 +10,29 @@ ObjectInstance::ObjectInstance(RenderableObject* object, vec3 const& coords, vec
   RenderManager::GetInstance().AddObject(this);
 }
 
+void ObjectInstance::SetVisible(bool vis)
+{
+  m_visible = vis;
+}
+
+bool ObjectInstance::GetVisible() const
+{
+  return m_visible;
+}
+
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
-	m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
+  m_pRenderableObject->BindObject();
+  for (int meshIndex = 0; meshIndex < m_pRenderableObject->GetMeshCount(); meshIndex++)
+  {
+    m_pRenderableObject->BindMesh(meshIndex);
+    m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
+  }
+
+	//m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
 }
+
+
 
 mat4 ObjectInstance::GetWorldMatrix() const
 {

@@ -28,6 +28,7 @@ public:
 	mat4 GetWorldMatrix() const;
 
   virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time = 0) override;
+
   virtual void SetActiveAnimation(int animationIndex) override;
   virtual int GetActiveAnimationIndex() const override;
   virtual int GetAnimationCount() const override;
@@ -36,10 +37,16 @@ public:
 
   RenderableObject const* GetRenderableObject() const;
 
+  void SetVisible(bool vis);
+
+  bool GetVisible() const;
+  
+
 private:
 
 	RenderableObject * m_pRenderableObject;		
   int m_activeAnimation;
+  bool m_visible = true;
 
 };
 

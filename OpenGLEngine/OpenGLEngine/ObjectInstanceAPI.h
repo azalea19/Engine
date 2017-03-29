@@ -6,12 +6,14 @@
 #include "MPlayer.h"
 #include "MCamera.h"
 
+typedef int InstanceHandle;
+
 class ObjectInstanceAPI
 {
 public:
-	static ObjectInstance * GetInstance(int instHandle);
-	static void SetTranslation(int instHandle, float in1,float in2,float in3);
-	static void TestRender(int instHandle);
+	static ObjectInstance * GetInstance(InstanceHandle instHandle);
+	static void SetTranslation(InstanceHandle instHandle, float in1, float in2, float in3);
+	static void TestRender(InstanceHandle instHandle);
 
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 

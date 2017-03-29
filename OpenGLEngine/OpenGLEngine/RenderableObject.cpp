@@ -194,7 +194,6 @@ int RenderableObject::GetMeshCount() const
 
 void RenderableObject::BindObject() const
 {
-  
   glBindVertexArray(m_VAO);
 }
 
@@ -203,6 +202,7 @@ void RenderableObject::BindMesh(int meshIndex) const
   boundMeshIndex = meshIndex;
   BindMaterial(meshIndex);
 }
+
 
 bool RenderableObject::OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
 {

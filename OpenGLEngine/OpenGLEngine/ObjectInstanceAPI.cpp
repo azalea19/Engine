@@ -1,7 +1,7 @@
 #include "ObjectInstanceAPI.h"
+#include "MVCView.h"
 
-
-void ObjectInstanceAPI::SetTranslation(int instHandle, float in1,float in2, float in3)
+void ObjectInstanceAPI::SetTranslation(InstanceHandle instHandle, float in1,float in2, float in3)
 {
 	vec3 vec(in1, in2, in3);
 	GetInstance(instHandle)->SetTranslation(vec);
@@ -12,13 +12,12 @@ static MCamera* camera;// = player->GetCamera();
 
 
 ///Temporary until scene render is exposed to lua.
-void ObjectInstanceAPI::TestRender(int instHandle)
+void ObjectInstanceAPI::TestRender(InstanceHandle instHandle)
 {
 	ObjectInstance * obj = GetInstance(instHandle);
-
 	
-	mat4 projectionMatrix = camera->getProjectionMatrix();
-	mat4 viewMatrix = camera->getViewMatrix();
+  mat4 projectionMatrix = MVCView::camera->getProjectionMatrix();
+  mat4 viewMatrix = MVCView::camera->getViewMatrix();
 	mat4 worldMatrix = obj->GetWorldMatrix();
 	//mat4 worldMatrix = camera->Get
 
@@ -28,7 +27,7 @@ void ObjectInstanceAPI::TestRender(int instHandle)
 
 }
 
-ObjectInstance * ObjectInstanceAPI::GetInstance(int instHandle)
+ObjectInstance * ObjectInstanceAPI::GetInstance(InstanceHandle instHandle)
 {
 	return LuaInstanceManager::GetInstance(instHandle);
 }
