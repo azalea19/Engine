@@ -1,29 +1,33 @@
+#ifndef IEngine_h__
+#define IEngine_h__
 
-/*
-
-#pragma once
 #include "types.h"
-#Include "Map.h"
-#include "ObjectInstanceAPI.h"
 
+enum GraphicsAPI
+{
+  API_OPEN_GL,
+  API_DIRECT_X,
+  API_VULKAN
+};
 
-class Engine 
+enum WindowAPI
+{
+  API_SDL,
+  API_GLFW,
+  API_FREEGLUT
+};
+
+class IEngine 
 {
 public:
-  static Engine* Create();
-  void ~Engine();
-  void Initialise(int width, int height);
-  //Screen manipulation
-  void SetDimensions(int width, int height);
-  void LoadModel(string modelName, string filePath);
-  InstanceHandle CreateObjectInstance(string modelName);
-  void BeginRender();
-  void EndRender();
 
-private:
-  SDL_Window* m_screen;
-  void Engine();
-  LuaInstanceManager* m_instanceManager;
+  virtual ~IEngine() = 0 {}
+  virtual void Initialise(int screenWidth, int screenHeight) = 0;
+  virtual void SetScreenDimensions() = 0;
+  virtual void BeginRender() = 0;
+  virtual void EndRender() = 0;
+  virtual bool BeginUpdate() = 0;
+  virtual void EndUpdate() = 0;
 
 };
-*/
+#endif // IEngine_h__

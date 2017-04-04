@@ -1,5 +1,6 @@
 #include "LuaInstanceFileLoaderManager.h"
 
+//Dont need this
 static std::unordered_map<int, InstanceFileLoader*> m_instanceMap;
 static int m_lastIndex = 0;
 

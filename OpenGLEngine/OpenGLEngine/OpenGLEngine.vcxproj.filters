@@ -72,6 +72,9 @@
     <Filter Include="Source\File IO">
       <UniqueIdentifier>{e8a99c3a-35ef-4d25-ba80-07823394c811}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Engine">
+      <UniqueIdentifier>{c4c1544a-d62d-47c5-ba6d-e2a71cf5bf2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -224,9 +227,6 @@
     <ClCompile Include="ObjectInstanceAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="MPlayer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MainRename.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -245,17 +245,20 @@
     <ClCompile Include="RenderManagerAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="IEngine.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MainAPI.cpp">
-      <Filter>Source\Lua\APIs</Filter>
-    </ClCompile>
     <ClCompile Include="InstanceFileLoader.cpp">
       <Filter>Source\File IO</Filter>
     </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="MPlayer.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="DXEngine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GLEngine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,9 +364,6 @@
     <ClInclude Include="SceneDecomposeEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
     <ClInclude Include="LuaManager.h">
       <Filter>Source\Lua</Filter>
     </ClInclude>
@@ -461,15 +461,20 @@
     <ClInclude Include="RenderManagerAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="IEngine.h" />
-    <ClInclude Include="MainAPI.h">
-      <Filter>Source\Lua\APIs</Filter>
-    </ClInclude>
     <ClInclude Include="InstanceFileLoader.h">
       <Filter>Source\File IO</Filter>
     </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="IEngine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GLEngine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DXEngine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,9 +538,6 @@
     <None Include="SceneDecomposeEffect.vert">
       <Filter>Source\Shaders</Filter>
     </None>
-    <None Include="Game.lua">
-      <Filter>Source\Lua\Scripts</Filter>
-    </None>
     <None Include="DepthThresholdEffect.frag">
       <Filter>Source\Shaders</Filter>
     </None>
@@ -559,6 +561,9 @@
     </None>
     <None Include="DirectionalLightingEffect.vert">
       <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="LuaScripts\Engine.lua">
+      <Filter>Source\Lua\Scripts</Filter>
     </None>
   </ItemGroup>
 </Project>

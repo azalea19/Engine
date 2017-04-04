@@ -24,16 +24,25 @@ class InstanceFileLoader
 	std::vector<ObjectData> m_objectFileData;
 	string m_currentFileName;
 
+  //This should not be here, the file loader only needs to know about the object instance data
+  //when we want to create the actual object instances we will use the 
 	std::vector<ObjectInstance*> m_instances;
 
 private:
 
+
 public:
-	 //m_objectFileData;
-	void ReadObjectDataFromFile( std::string fileName);
+
+  //This should be private
+  void ReadObjectDataFromFile(std::string fileName);
+
 	int ReadInstancesFromFile(std::string fileName);
 	void LoadFile(string path);
+
+  //Not sure how you actually use this or what is is meant to do
 	InstanceHandle ReadFromLoadedFile(int i);  
+
 	int GetLength();
+
 };
 #endif

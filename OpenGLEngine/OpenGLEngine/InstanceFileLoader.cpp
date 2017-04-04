@@ -63,6 +63,8 @@ void InstanceFileLoader::LoadFile(string fileName)
 	ReadObjectDataFromFile(fileName);
 }
 
+//Creates an object from some object data that got loaded in the object data vector
+//And gives back its handle
 InstanceHandle InstanceFileLoader::ReadFromLoadedFile(int i)
 {
 	InstanceHandle h = LuaInstanceManager::AddNewInstance(m_objectFileData.at(i).modelName);
@@ -74,41 +76,48 @@ InstanceHandle InstanceFileLoader::ReadFromLoadedFile(int i)
 	return h;
 }
 
+
+
 int InstanceFileLoader::ReadInstancesFromFile(std::string fileName)
 {
-	std::vector<ObjectInstance*> objects;
+  //You never actually do anything with this?
+	//std::vector<ObjectInstance*> objects;
 
 	int newInstanceCount = 0;
 
-	ReadObjectDataFromFile("test");
+  //Does the same thing as LoadFile
+	//ReadObjectDataFromFile("test");
 
+  //Just prints stuff?
 	for (int i = 0; i < m_objectFileData.size(); i++) 
 	{
 		newInstanceCount += 1;
 		std::cout << m_objectFileData.size() << " AND " << i << " ";
 		std::cout << m_objectFileData.at(i).modelName << " ";
-		objects.push_back(ModelLibrary::GetInstance().GetObjectInstance(m_objectFileData.at(i).modelName));
+		//objects.push_back(ModelLibrary::GetInstance().GetObjectInstance(m_objectFileData.at(i).modelName));
 
 		std::cout << m_objectFileData.at(i).pos.x << " " << m_objectFileData.at(i).pos.y << " " << m_objectFileData.at(i).pos.z << " ";
-		objects.at(i)->SetTranslation(m_objectFileData.at(i).pos.x,
+		//objects.at(i)->SetTranslation(m_objectFileData.at(i).pos.x,
 			m_objectFileData.at(i).pos.y,
-			m_objectFileData.at(i).pos.z);
+			m_objectFileData.at(i).pos.z;
 
 		std::cout << m_objectFileData.at(i).scale.x << " " << m_objectFileData.at(i).scale.y << " " << m_objectFileData.at(i).scale.z << " ";
-		objects.at(i)->SetScale(m_objectFileData.at(i).scale);
+		//objects.at(i)->SetScale(m_objectFileData.at(i).scale);
 
 		std::cout << m_objectFileData.at(i).pitch << " ";
 		std::cout << m_objectFileData.at(i).yaw << " ";
 
 		std::cout << m_objectFileData.at(i).activeAnimation << std::endl;
-		objects.at(i)->SetActiveAnimation(m_objectFileData.at(i).activeAnimation);
+		//objects.at(i)->SetActiveAnimation(m_objectFileData.at(i).activeAnimation);
 
 		return newInstanceCount;
 
 	}
+
 }
 
 int InstanceFileLoader::GetLength()
 {
+  //Return the number of object instances
 	return m_objectFileData.size();
 }
