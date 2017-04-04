@@ -25,5 +25,6 @@ private:
 public:
 	std::vector<ObjectData> m_objectFileData;
 	void ReadFile(std::string fileName);
+	void SaveFile(std::string fileName, std::string modelName, vec3 position, vec3 scale, int yaw, int pitch, int activeAnimation);
 };
 #endif
