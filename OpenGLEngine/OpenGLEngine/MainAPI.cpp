@@ -12,9 +12,9 @@ void MainAPI::Initialise()
 	MainRename::MyInit();
 }
 
-void MainAPI::UpdateBase()
+bool MainAPI::UpdateBase()
 {
-	MainRename::Update();
+	return MainRename::Update();
 }
 void MainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {

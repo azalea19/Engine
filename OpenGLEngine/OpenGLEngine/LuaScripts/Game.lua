@@ -53,7 +53,24 @@ Scene =
 	
 	function Scene:new(o)
 		o = o or {}
-		local self = setmetatable({}, MyClass)
+		local self = setmetatable({}, Scene)
+		self.__index = self
+		return self
+	end
+
+	function Scene.addRigidBody(instHandle)
+		--instances[instCount] = instHandle
+		--instCount = instCount + 1
+	end
+	
+-- Player --
+Player =
+{	
+}
+	
+	function Player:new(o)
+		o = o or {}
+		local self = setmetatable({}, Player)
 		self.__index = self
 		return self
 	end
@@ -81,6 +98,7 @@ function LoadAPIs()
 	GetAPI(context.handle, 'mainAPI', 'mainAPI')
 	GetAPI(context.handle, 'instanceFileLoaderAPI', 'instanceFileLoaderAPI')
 	GetAPI(context.handle, 'luaInstanceFileLoaderManager', 'luaInstanceFileLoaderManager')
+	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
 
 end
 
@@ -96,10 +114,13 @@ function Initialize()
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
 	plant01 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant01,10,10,10)
-	plant01 = luaInstanceManager.addNewInstance("Plant")
-	objectInstanceAPI.setTranslation(plant01,0,0,0)
+
+	plant02 = luaInstanceManager.addNewInstance("Plant")
+	objectInstanceAPI.setTranslation(plant02,0,0,0)
 
 	scene01 = Scene:new()
+	
+	player = Player.new()
 	
 	instanceLoader = luaInstanceFileLoaderManager.addNewInstance()
 	instanceFileLoaderAPI.loadFile(instanceLoader,'test')
@@ -111,7 +132,8 @@ function Initialize()
 end
 
 function GameLoop()
-	while true do
+	run = true
+	while run do
 		Update()
 		Render()
 		--if count == 10 then
@@ -124,10 +146,23 @@ function Finalize()
 	printAPI.print('Finalizing...\n')
 end
 
+function TestInputAPI()
+	e = inputManagerAPI.isKeyDown(8)
+	if e then
+		printAPI.print("e")
+		objectInstanceAPI.setTranslation(plant01,0,0,0)
+
+	end
+
+end
 function Update()
 	count = (count or 0) + 1
-	mainAPI.update()
+	run = mainAPI.update()
+	
+	TestInputAPI()
 end
+
+
 
 function Render()
 	--printAPI.print('count = ')

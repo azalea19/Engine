@@ -7,6 +7,7 @@
 #include "MainAPI.h"
 #include "InstanceFileLoaderAPI.h"
 #include "LuaInstanceFileLoaderManager.h"
+#include "InputManagerAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -39,6 +40,8 @@ void LuaManager::Initialize()
   luaManager.AddAPI("mainAPI", MainAPI::Expose);
   luaManager.AddAPI("instanceFileLoaderAPI", InstanceFileLoaderAPI::Expose);
   luaManager.AddAPI("luaInstanceFileLoaderManager", LuaInstanceFileLoaderManager::Expose);
+  luaManager.AddAPI("inputManagerAPI", InputManagerAPI::Expose);
+
   
 }
 

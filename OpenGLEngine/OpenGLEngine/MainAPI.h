@@ -5,7 +5,7 @@ class MainAPI
 public:
 	static void RenderBase();
 	static void Initialise();
-	static void UpdateBase();
+	static bool UpdateBase();
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 };
 

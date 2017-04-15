@@ -270,7 +270,13 @@ bool MainRename::Update()
 	InputManager::GetInstance().Update();
 
 	if (InputManager::GetInstance().IsKeyDown(SDL_SCANCODE_ESCAPE))
+
+		
+	{
+		printf("quit\n");
 		return false;
+
+	}
 
 	UpdatePlayer();
 
@@ -344,10 +350,12 @@ void MainRename::Render()
 		FrameBuffer::Display(sceneTextures[4]);
 	}
 
+	/*
 	char frameRate[32];
 	sprintf_s(frameRate, "FPS: %.2f", RenderManager::GetInstance().GetFrameRate());
 	printf("%s\n", frameRate);
 	DrawText(16, "Assets/Fonts/verdanab.ttf", frameRate, 0, 0, vec3(1, 1, 1));
+	*/
 	glFlush();
 	SDL_GL_SwapWindow(View::screen);
 }

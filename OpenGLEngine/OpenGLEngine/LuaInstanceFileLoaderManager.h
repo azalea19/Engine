@@ -1,12 +1,7 @@
 #pragma once
-#include <unordered_map>
-#include "ObjectInstance.h"
 #include "Singleton.h"
-#include "ModelLibrary.h"
-#include "LuaContext.h"
-#include "LuaManager.h"
-#include "ModelLibrary.h"
 #include "InstanceFileLoader.h"
+#include "InstanceManager.h"
 
 typedef int LoaderHandle;
 

@@ -257,6 +257,24 @@
     <ClCompile Include="View.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="InputManagerAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MCameraLuaManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MCameraAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MCameraInstanceManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceManagerAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -360,9 +378,6 @@
     </ClInclude>
     <ClInclude Include="SceneDecomposeEffect.h">
       <Filter>Source\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
     </ClInclude>
     <ClInclude Include="LuaManager.h">
       <Filter>Source\Lua</Filter>
@@ -471,6 +486,12 @@
     <ClInclude Include="View.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="InputManagerAPI.h" />
+    <ClInclude Include="MCameraLuaManager.h" />
+    <ClInclude Include="MCameraAPI.h" />
+    <ClInclude Include="MCameraInstanceManager.h" />
+    <ClInclude Include="InstanceManager.h" />
+    <ClInclude Include="InstanceManagerAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
