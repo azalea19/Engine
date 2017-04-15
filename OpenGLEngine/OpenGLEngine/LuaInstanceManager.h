@@ -3,18 +3,26 @@
 #include "ObjectInstance.h"
 #include "Singleton.h"
 #include "ModelLibrary.h"
+#include "LuaContext.h"
+#include "LuaManager.h"
+#include "ModelLibrary.h"
 
-class LuaInstanceManager : public Singleton<LuaInstanceManager>
+
+typedef int InstanceHandle;
+
+
+static class LuaInstanceManager : public Singleton<LuaInstanceManager>
 {
-private:
-	std::unordered_map<int,ObjectInstance*> m_instanceMap;
-	int m_lastIndex = 0;
+//private:
+	//static std::unordered_map<int,ObjectInstance*> m_instanceMap;
+	//static int m_lastIndex;
 
 public:
-
 	/// Returns handle to new object instance of given model name.
-	int AddNewInstance(string const& modelName);
+	static InstanceHandle AddNewInstance(string const& modelName);
 
-	ObjectInstance* GetInstance(int instanceHandle);
+	static ObjectInstance* GetInstance(int instanceHandle);
+
+	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
 };

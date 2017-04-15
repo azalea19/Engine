@@ -62,6 +62,7 @@ public:
   void BindMesh(int meshIndex) const;
   void RenderMesh(int meshIndex, mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, int animationIndex, float time) const;
   bool OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const;
+
 private:
 
   Model* m_pModel;
