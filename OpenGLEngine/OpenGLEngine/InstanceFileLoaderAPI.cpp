@@ -20,10 +20,10 @@ void InstanceFileLoaderAPI::LoadFile(LoaderHandle handle, string filePath)
 
 InstanceHandle InstanceFileLoaderAPI::ReadFromLoadedFile(LoaderHandle handle, int index)
 {
-	return LuaInstanceFileLoaderManager().GetInstance(handle)->ReadFromLoadedFile(index);
+	return InstanceManager<InstanceFileLoader>().GetInstance().GetInst(handle)->ReadFromLoadedFile(index);
 }
 
 int InstanceFileLoaderAPI::GetFileLength(LoaderHandle handle)
 {
-	return LuaInstanceFileLoaderManager().GetInstance(handle)->GetLength();
+	return InstanceManager<InstanceFileLoader>().GetInstance().GetInst(handle)->GetLength();
 }
