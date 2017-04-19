@@ -260,6 +260,9 @@
     <ClCompile Include="EngineAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
+    <ClCompile Include="MathAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -373,9 +376,6 @@
     <ClInclude Include="PrintAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Source\Lights</Filter>
     </ClInclude>
@@ -405,9 +405,6 @@
     </ClInclude>
     <ClInclude Include="AffineTransformable.h">
       <Filter>Source\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
     </ClInclude>
     <ClInclude Include="IAnimatedRenderable.h">
       <Filter>Source\Interfaces</Filter>
@@ -474,6 +471,18 @@
       <Filter>Source\Engine</Filter>
     </ClInclude>
     <ClInclude Include="EngineAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="IModelLibrary.h">
+      <Filter>Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderableObject.h">
+      <Filter>Source\Model Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraAPI.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MathAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
   </ItemGroup>

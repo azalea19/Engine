@@ -198,6 +198,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MathAPI.cpp" />
     <ClCompile Include="MCamera.cpp" />
     <ClCompile Include="ModelLibrary.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -240,11 +241,13 @@
     <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="CameraAPI.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
     <ClInclude Include="DXEngine.h" />
     <ClInclude Include="EngineAPI.h" />
     <ClInclude Include="GLEngine.h" />
     <ClInclude Include="IEngine.h" />
+    <ClInclude Include="IModelLibrary.h" />
     <ClInclude Include="InstanceFileLoaderAPI.h" />
     <ClInclude Include="ForestTerrain.h" />
     <ClInclude Include="HeightMap.h" />
@@ -264,6 +267,7 @@
     <ClInclude Include="IAnimatedRenderable.h" />
     <ClInclude Include="IMesh.h" />
     <ClInclude Include="IMeshCollection.h" />
+    <ClInclude Include="IRenderableObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LuaAPI.h" />
     <ClInclude Include="LuaContext.h" />
@@ -274,6 +278,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MathAPI.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLibraryAPI.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />

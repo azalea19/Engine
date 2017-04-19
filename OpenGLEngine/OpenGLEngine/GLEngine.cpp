@@ -93,9 +93,6 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
   InitGlew();
 
 
-
-
-
   //Seed random generator
   srand(uint(time(NULL)));
 

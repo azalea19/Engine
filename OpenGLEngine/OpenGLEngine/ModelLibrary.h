@@ -5,6 +5,7 @@
 #include <string>
 #include "Types.h"
 #include "Singleton.h"
+#include "IModelLibrary.h"
 
 /**
 * @file   ModelLibrary.h
@@ -15,19 +16,23 @@
 * The model library contains all the models used in various scenes
 */
 
-class RenderableObject; 
+class IRenderableObject; 
 class ObjectInstance; 
 
-class ModelLibrary : public Singleton<ModelLibrary>
+class ModelLibrary : public Singleton<ModelLibrary> , public IModelLibrary
 {
+
 public:
-	void InitModelLibrary();
+
+	virtual void Initialise() override;
 
 
-	void AddModel(string const& name, string const& path, bool normalized = false);
+	virtual void AddModel(string const& modelName, string const& path, bool normalized = false) override;
 
 
-	ObjectInstance* GetObjectInstance(string const& name) const;
+	virtual ObjectInstance* GetObjectInstance(string const& modelName) const override;
+
+
 private:
 
 	std::unordered_map<string, RenderableObject*> models; 

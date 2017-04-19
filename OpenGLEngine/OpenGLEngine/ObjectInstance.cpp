@@ -2,7 +2,7 @@
 #include "ShaderLibrary.h"
 #include "RenderManager.h"
 
-ObjectInstance::ObjectInstance(RenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
+ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
   : m_pRenderableObject(object)
   , m_activeAnimation(-1)
 {
@@ -28,8 +28,6 @@ void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatri
     m_pRenderableObject->BindMesh(meshIndex);
     m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
   }
-
-	//m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
 }
 
 
@@ -84,7 +82,7 @@ int ObjectInstance::GetAnimationIndex(string const& animationName) const
   return m_pRenderableObject->GetAnimationIndex(animationName);
 }
 
-RenderableObject const* ObjectInstance::GetRenderableObject() const
+IRenderableObject const* ObjectInstance::GetRenderableObject() const
 {
   return m_pRenderableObject;
 }

@@ -12,7 +12,7 @@ class ObjectInstanceAPI
 {
 public:
 	static ObjectInstance * GetInstance(InstanceHandle instHandle);
-	static void SetTranslation(InstanceHandle instHandle, float in1, float in2, float in3);
+	static void SetTranslation(InstanceHandle instHandle, float x, float y, float z);
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
 };

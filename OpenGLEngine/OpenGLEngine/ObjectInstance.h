@@ -21,7 +21,7 @@ struct ObjectInstance : public IRenderable, public IAnimatable, public AffineTra
 
 public: 
 
-	ObjectInstance(RenderableObject* object, vec3 const& coords = glm::vec3(0, 0, 0), vec3 const& scaleFactor = vec3(1, 1, 1), float yaw = 0, float pitch = 0);
+	ObjectInstance(IRenderableObject* object, vec3 const& coords = glm::vec3(0, 0, 0), vec3 const& scaleFactor = vec3(1, 1, 1), float yaw = 0, float pitch = 0);
 
 	std::vector<vec3> GetVertices(mat4 const& parentModelMatrix = mat4()) const;
 
@@ -35,7 +35,7 @@ public:
   virtual string const& GetAnimationName(int animationIndex) const override;
   virtual int GetAnimationIndex(string const& animationName) const override;
 
-  RenderableObject const* GetRenderableObject() const;
+  IRenderableObject const* GetRenderableObject() const;
 
   void SetVisible(bool vis);
 
@@ -44,7 +44,7 @@ public:
 
 private:
 
-	RenderableObject * m_pRenderableObject;		
+	IRenderableObject * m_pRenderableObject;		
   int m_activeAnimation;
   bool m_visible = true;
 

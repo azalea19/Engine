@@ -6,6 +6,7 @@
 #include "IAnimatedRenderable.h"
 #include "IAnimatable.h"
 #include "IMeshCollection.h"
+#include "IRenderableObject.h"
 
 class Model;
 
@@ -41,27 +42,26 @@ enum FillMode
   FM_Fill,
 };
 
-class RenderableObject : public IAnimatedRenderable, public IMeshCollection
+class RenderableObject : public IRenderableObject
 {
 public:
 
   RenderableObject(string const& name, string const& filename);
   ~RenderableObject();
 
-  void Initialise();
+  void Initialise() override;
 
-  void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time, int animationIndex) const;
-  void Destroy();
+  void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time, int animationIndex) const override;
+  void Destroy() override;
 
   virtual int GetAnimationCount() const override;
   virtual int GetAnimationIndex(string const& animationName) const override;
   virtual string const& GetAnimationName(int animationIndex) const override;
   virtual IMesh const& GetMesh(int meshIndex) const override;
   virtual int GetMeshCount() const override;
-  void BindObject() const;
-  void BindMesh(int meshIndex) const;
-  void RenderMesh(int meshIndex, mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, int animationIndex, float time) const;
-  bool OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const;
+  void BindObject() const override;
+  void BindMesh(int meshIndex) const override;
+  void RenderMesh(int meshIndex, mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, int animationIndex, float time) const override;
 
 private:
 
