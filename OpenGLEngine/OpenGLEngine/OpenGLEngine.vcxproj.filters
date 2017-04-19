@@ -275,6 +275,9 @@
     <ClCompile Include="InstanceManagerAPI.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="LuaVectorUtility.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -388,9 +391,6 @@
     <ClInclude Include="PrintAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Source\Lights</Filter>
     </ClInclude>
@@ -492,6 +492,7 @@
     <ClInclude Include="MCameraInstanceManager.h" />
     <ClInclude Include="InstanceManager.h" />
     <ClInclude Include="InstanceManagerAPI.h" />
+    <ClInclude Include="LuaVectorUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -554,9 +555,6 @@
     <None Include="SceneDecomposeEffect.vert">
       <Filter>Source\Shaders</Filter>
     </None>
-    <None Include="Game.lua">
-      <Filter>Source\Lua\Scripts</Filter>
-    </None>
     <None Include="DepthThresholdEffect.frag">
       <Filter>Source\Shaders</Filter>
     </None>
@@ -580,6 +578,9 @@
     </None>
     <None Include="DirectionalLightingEffect.vert">
       <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="LuaScripts\Game.lua">
+      <Filter>Source\Lua\Scripts</Filter>
     </None>
   </ItemGroup>
 </Project>

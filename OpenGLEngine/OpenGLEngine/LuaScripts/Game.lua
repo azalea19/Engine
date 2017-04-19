@@ -1,4 +1,29 @@
 
+
+
+	
+function Run()
+	Initialize()
+	GameLoop()
+	Finalize()
+end
+
+function LoadAPIs()
+	GetAPI(context.handle, 'printAPI', 'printAPI')
+	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
+	GetAPI(context.handle, 'luaInstanceManager', 'luaInstanceManager')
+	GetAPI(context.handle, 'printAPI', 'printAPI')
+	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
+	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
+	GetAPI(context.handle, 'mainAPI', 'mainAPI')
+	GetAPI(context.handle, 'instanceFileLoaderAPI', 'instanceFileLoaderAPI')
+	GetAPI(context.handle, 'luaInstanceFileLoaderManager', 'luaInstanceFileLoaderManager')
+	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
+    GetAPI(context.handle, 'luaVectorUtility', 'luaVectorUtility')
+
+
+end
+
 --[[
 -- World --
 World = 
@@ -92,86 +117,50 @@ Player =
 	oldPos = cameraAPI.getPosition(camera0);
 	forward = cameraAPI.forward(camera0);
 	right = cameraAPI.right(camera0);
-	translation = { 0, 0, 0 };
+	translation = { x=0, y=0, z=0 };
 	
-	SDL_SCANCODE_W = 
-	SDL_SCANCODE_A = 
+	SDL_SCANCODE_W = 26
+	SDL_SCANCODE_A = 4
 
-	SDL_SCANCODE_S = 
-	SDL_SCANCODE_D = 
-
+	SDL_SCANCODE_S = 22
+	SDL_SCANCODE_D = 7
+    MOVE_SPEED = 1
+    
 	
-	
-	if (im.IsKeyDown(SDL_SCANCODE_W))
+	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_W))
 		translation += forward;
-	if (im.IsKeyDown(SDL_SCANCODE_A))
+	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_A))
 		translation -= right;
-	if (im.IsKeyDown(SDL_SCANCODE_S))
+	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_S))
 		translation -= forward;
-	if (im.IsKeyDown(SDL_SCANCODE_D))
-		translation += right;
-		
-		
-	--[[
-
-	if (im.IsKeyDown(SDL_SCANCODE_W))
-		translation += forward;
-	if (im.IsKeyDown(SDL_SCANCODE_A))
-		translation -= right;
-	if (im.IsKeyDown(SDL_SCANCODE_S))
-		translation -= forward;
-	if (im.IsKeyDown(SDL_SCANCODE_D))
+	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_D))
 		translation += right;
 
-	if (translation != vec3{ 0, 0, 0 })
+        
+    --[[
+	
+		
+    translation *= MOVE_SPEED;
+
+
+    
+	if (not (translation.x == 0 and translation.y ==0 and translation.z == 0))
 	{
 		//Normalize so you dont move faster diagonally
-		translation = normalize(translation);
+		translation = luaVectorUtility.normalize(translation.x,translation.y,translation.z);
 
-		translation *= MOVE_SPEED;
-
-		if (im.IsKeyDown(SDL_SCANCODE_LSHIFT))
-			translation *= 4;
-
-		if (im.IsKeyDown(SDL_SCANCODE_LCTRL))
-			translation *= 0.25f;
 
 		//Clamp Player to room
 
-		vec3 newPos = oldPos;
+		newPos = oldPos;
 
-		newPos.x += translation.x;
-		newPos.y += translation.y;
-		newPos.z += translation.z;
-		View::camera->SetPosition(newPos);
-	}
-}
-	]]
-		--instances[instCount] = instHandle
-		--instCount = instCount + 1
+		newPos.x += translation[0];
+		newPos.y += translation[1];
+		newPos.z += translation[2];
+		]]
 	end
 	
 
-	
-function Run()
-	Initialize()
-	GameLoop()
-	Finalize()
-end
-
-function LoadAPIs()
-	GetAPI(context.handle, 'printAPI', 'printAPI')
-	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
-	GetAPI(context.handle, 'luaInstanceManager', 'luaInstanceManager')
-	GetAPI(context.handle, 'printAPI', 'printAPI')
-	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
-	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
-	GetAPI(context.handle, 'mainAPI', 'mainAPI')
-	GetAPI(context.handle, 'instanceFileLoaderAPI', 'instanceFileLoaderAPI')
-	GetAPI(context.handle, 'luaInstanceFileLoaderManager', 'luaInstanceFileLoaderManager')
-	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
-
-end
 
 function Initialize()
 	

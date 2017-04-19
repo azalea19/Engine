@@ -194,6 +194,7 @@
     <ClCompile Include="LuaInstanceFileLoaderManager.cpp" />
     <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="LuaVectorUtility.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainAPI.cpp" />
     <ClCompile Include="MainRename.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="LuaInstanceFileLoaderManager.h" />
     <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="LuaManager.h" />
+    <ClInclude Include="LuaVectorUtility.h" />
     <ClInclude Include="MainAPI.h" />
     <ClInclude Include="MainRename.h" />
     <ClInclude Include="Material.h" />
@@ -330,9 +332,9 @@
     <None Include="DirectionalLightingEffect.vert" />
     <None Include="FXAAEffect.frag" />
     <None Include="FXAAEffect.vert" />
-    <None Include="Game.lua" />
     <None Include="HDRSplitEffect.frag" />
     <None Include="HDRSplitEffect.vert" />
+    <None Include="LuaScripts\Game.lua" />
     <None Include="MultiplicativeBlendEffect.frag" />
     <None Include="MultiplicativeBlendEffect.vert" />
     <None Include="orthoShader.frag" />
