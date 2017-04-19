@@ -4,6 +4,16 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file AdditiveBlendEffect.h
+* @Author Maddisen Topaz
+* @date   S2, 2017
+* @brief Allows the blending of two textures to create a high dynamic range texture.
+*
+*
+*/
+
 class AdditiveBlendEffect
 {
 public:

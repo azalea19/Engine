@@ -11,7 +11,5 @@ int main(int argc, char **argv)
 
   LuaManager::GetInstance().CreateContext("LuaScripts/Engine.lua");
 
-
-  
   return(0);
 }

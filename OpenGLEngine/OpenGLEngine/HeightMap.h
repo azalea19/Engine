@@ -12,7 +12,7 @@ public:
 
   void LoadHeightMap();
 
-  //Assuming 4 bytes per pixel 32 bit image.
+  //Assuming 4 bytes per pixel 32 bit image depth.
   float GetHeightValueAtPixel(vec2i const& pixelPos);
 
   int GetWidth() const;

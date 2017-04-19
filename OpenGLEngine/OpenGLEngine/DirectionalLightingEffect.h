@@ -3,6 +3,15 @@
 #include "Shader.h"
 #include "Types.h"
 
+
+/**
+* @file DirectionalLightingEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief
+*
+*/
+
 class DirectionalLightingEffect
 {
 public:

@@ -7,33 +7,18 @@
 #include "IAnimatable.h"
 #include "IMeshCollection.h"
 
+/**
+* @file RenderableObject.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief An interface that allows the user to add functionality associated with a renderable object.
+*
+*/
+
+
 class Model;
 
-enum TextureLocation
-{
-  TL_Diffuse = 0,
-  TL_Alpha = 1,
-};
 
-enum DiffuseSource
-{
-  DS_MeshColour = 0,
-  DS_VertexColour = 1,
-  DS_Texture = 2,
-};
-
-enum BUFFER_TYPES
-{
-  BT_INDEX_BUFFER,
-  BT_VERTEX_BUFFER,
-  BT_NORMAL_BUFFER,
-  BT_DIFFUSE_TEXCOORD_BUFFER,
-  BT_ALPHA_TEXCOORD_BUFFER,
-  BT_BONE_ID_BUFFER,
-  BT_BONE_WEIGHT_BUFFER,
-  BT_VERTEX_COLOUR_BUFFER,
-  BT_NUM_BUFFERS //Gives back the number of buffer types
-};
 
 enum FillMode
 {
@@ -46,10 +31,35 @@ class IRenderableObject : public IAnimatedRenderable, public IMeshCollection
 
 public:
 
+  /// <summary>
+  /// Initialises this instance.
+  /// </summary>
   virtual void Initialise() = 0;
-  virtual void Destroy() =0;
+  
+  /// <summary>
+  /// Destroys this instance.
+  /// </summary>
+  virtual void Destroy() = 0;
+
+  /// <summary>
+  /// Binds the object.
+  /// </summary>
   virtual void BindObject() const = 0;
+
+  /// <summary>
+  /// Binds the mesh.
+  /// </summary>
+  /// <param name="meshIndex">Index of the mesh.</param>
   virtual void BindMesh(int meshIndex) const = 0;
+
+  /// <summary>
+  /// The render method.
+  /// </summary>
+  /// <param name="worldMatrix">The world matrix.</param>
+  /// <param name="viewMatrix">The view matrix.</param>
+  /// <param name="projectionMatrix">The projection matrix.</param>
+  /// <param name="time">The time.</param>
+  /// <param name="animationIndex">Index of the animation.</param>
   virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time, int animationIndex) const = 0;
 
 };

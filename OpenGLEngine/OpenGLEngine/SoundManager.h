@@ -9,7 +9,7 @@
 /**
 * @file   SoundManager.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The sound manager.
 *
 * The sound manager uses SDL2's SDL_mixer library to handle multiple channels of sound. 
@@ -28,24 +28,48 @@ class SoundManager : public Singleton<SoundManager>
 {
 public:
 	
-	static void InitSoundManager();
+  /// <summary>
+  /// Initializes the sound manager.
+  /// </summary>
+  static void InitSoundManager();
 
 	
-	void AddSound(string name, string filePath);
+  /// <summary>
+  /// Adds the sound.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="filePath">The file path.</param>
+  void AddSound(string name, string filePath);
 
 
-	ChannelHandle PlaySound(string name, int loopCount);
+  /// <summary>
+  /// Plays the sound.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="loopCount">The loop count.</param>
+  /// <returns>ChannelHandle</returns>
+  ChannelHandle PlaySound(string name, int loopCount);
 
 	
-	void PauseChannel(ChannelHandle sound);
+  /// <summary>
+  /// Pauses the channel.
+  /// </summary>
+  /// <param name="sound">The sound.</param>
+  void PauseChannel(ChannelHandle sound);
 
 	
-	void ResumeChannel(ChannelHandle sound);
+  /// <summary>
+  /// Resumes the channel.
+  /// </summary>
+  /// <param name="sound">The sound.</param>
+  void ResumeChannel(ChannelHandle sound);
 
 private:
 
-	std::unordered_map<string, Mix_Chunk*> m_soundMap;
-	//static int m_numChannels;
+  /// <summary>
+  /// The sound map
+  /// </summary>
+  std::unordered_map<string, Mix_Chunk*> m_soundMap;
 
 };
 

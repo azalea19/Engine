@@ -1,6 +1,15 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file MultiplicativeBlendEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief 
+*
+*/
+
 class MultiplicativeBlendEffect
 {
 public:

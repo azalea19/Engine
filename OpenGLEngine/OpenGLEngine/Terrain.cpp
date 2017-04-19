@@ -1,93 +1,66 @@
 #include "Terrain.h"
+#include "ShaderLibrary.h"
+#include "Texture.h"
+#include "OBJWriter.h"
 
-Terrain::Terrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filepath) 
+Terrain::Terrain(uint terrainWidth, uint terrainHeight, float heightScale, string const& filepath)
   : m_terrainWidth(terrainWidth)
   , m_terrainHeight(terrainHeight)
   , m_heightScale(heightScale)
-  , m_textureTileCount(textureTileCount)
 {
   m_pHeightMap = new HeightMap(filepath);
-  m_xBlockScale = terrainWidth / (m_pHeightMap->GetWidth() - 1);
-  m_yBlockScale = terrainHeight / (m_pHeightMap->GetHeight() - 1);
-  GenerateTerrainVertices();
-  GenerateTerrainIndices();
+  m_xBlockScale = terrainWidth / (float)(m_pHeightMap->GetWidth() - 1);
+  m_yBlockScale = terrainHeight / (float)(m_pHeightMap->GetHeight() - 1);
+  CreateMesh();
 }
 
-void Terrain::GenerateTerrainIndices()
+void Terrain::GenerateTexCoords()
 {
-  /* int numQuads = (m_pHeightMap->GetWidth() - 1) * (m_pHeightMap->GetHeight() - 1);
+  uint width = m_pHeightMap->GetWidth();
+  uint height = m_pHeightMap->GetHeight();
+  uint numVerts = width * height;
+  m_texCoords.resize(numVerts);
 
-   for (int i = 0; i < numQuads; i++)
-   {
-     for (int j = 0; j < 6; j++)
-     {
-       m_indices.push_back((i * 6) + j);
-     }
-   }*/
+  float scaleX = m_textureWidth / m_terrainWidth;
+  float scaleY = m_textureHeight / m_terrainHeight;
 
-
-}
-
-void Terrain::GenerateSmoothNormals()
-{
-
-}
-
-void Terrain::GenerateTerrainVertices()
-{
-  uint width = m_pHeightMap->GetWidth() - 1;
-  uint height = m_pHeightMap->GetHeight() - 1;
-
-  uint numVerts = width * height * 6;
-
-  m_vertices.reserve(numVerts);
-  m_normals.reserve(numVerts);
-  m_texCoords.reserve(numVerts);
-  m_indices.reserve(numVerts);
-
-  vec3 leftCorner;
-  vec3 rightCorner;
-  vec3 bottomLeftCorner;
-  vec3 bottomRightCorner;
-
-  for (int i = 0; i < height; i++)
+  for (uint y = 0; y < height; y++)
   {
-    for (int j = 0; j < width; j++)
+    for (uint x = 0; x < width; x++)
     {
-      float heightValueL = m_pHeightMap->GetHeightValueAtPixel(vec2(j, i));
-      float heightValueR = m_pHeightMap->GetHeightValueAtPixel(vec2((j + 1), i));
-      float heightValueBL = m_pHeightMap->GetHeightValueAtPixel(vec2(j, (i + 1)));
-      float heightValueBR = m_pHeightMap->GetHeightValueAtPixel(vec2((j + 1), (i + 1)));
-
-      //Left corner
-      leftCorner.x = j * m_xBlockScale;
-      leftCorner.y = heightValueL * m_heightScale;
-      leftCorner.z = i * m_yBlockScale;
-      //Right corner
-      rightCorner.x = (j + 1) * m_xBlockScale;
-      rightCorner.y = heightValueR * m_heightScale;
-      rightCorner.z = i * m_yBlockScale;
-      //Bottom left corner
-      bottomLeftCorner.x = j * m_xBlockScale;
-      bottomLeftCorner.y = heightValueBL * m_heightScale;
-      bottomLeftCorner.z = (i + 1) * m_yBlockScale;
-      //Bottom right corner
-      bottomRightCorner.x = (j + 1) * m_xBlockScale;
-      bottomRightCorner.y = heightValueBR * m_heightScale;
-      bottomRightCorner.z = (i + 1) * m_yBlockScale;
-
-      m_vertices.push_back(rightCorner);
-      m_vertices.push_back(leftCorner);
-      m_vertices.push_back(bottomLeftCorner);
-
-      m_vertices.push_back(bottomLeftCorner);
-      m_vertices.push_back(bottomRightCorner);
-      m_vertices.push_back(rightCorner);
+      m_texCoords[(y*width) + x] = vec2(x*scaleX, y*scaleY);
     }
   }
 }
 
-void Terrain::GenerateTerrainVertex()
+void Terrain::GenerateNormals()
+{
+  int height = GetHeightMap()->GetHeight();
+  int width = GetHeightMap()->GetWidth();
+
+  for (int y = 0; y < height; y++)
+  {
+    for (int x = 0; x < width; x++)
+    {
+      float y00 = GetHeightMap()->GetHeightValueAtPixel(vec2(x, y));
+      float y10 = GetHeightMap()->GetHeightValueAtPixel(vec2(x + 1, y));
+      float y11 = GetHeightMap()->GetHeightValueAtPixel(vec2(x + 1, y + 1));
+      float y01 = GetHeightMap()->GetHeightValueAtPixel(vec2(x, y + 1));
+
+      glm::vec3 norm = glm::cross(glm::normalize(glm::vec3(x + 1, y10, y) - glm::vec3(x, y00, y)), glm::normalize(glm::vec3(x, y01, y + 1) - glm::vec3(x, y00, y)));
+      glm::vec3 norm2 = glm::cross(glm::normalize(glm::vec3(x + 1, y11, (y + 1)) - glm::vec3(x + 1, y10, y)), glm::normalize(glm::vec3(x, y01, y + 1) - glm::vec3(x + 1, y10, y)));
+
+      m_normals.push_back(norm);
+      m_normals.push_back(norm);
+      m_normals.push_back(norm);
+      m_normals.push_back(norm2);
+      m_normals.push_back(norm2);
+      m_normals.push_back(norm2);
+    }
+  }
+}
+
+void Terrain::GenerateTerrainVertices()
 {
   uint width = m_pHeightMap->GetWidth();
   uint height = m_pHeightMap->GetHeight();
@@ -96,52 +69,42 @@ void Terrain::GenerateTerrainVertex()
 
   m_vertices.resize(numVerts);
 
-  for (int i = 0; i < height; i++)
+  for (uint y = 0; y < height; y++)
   {
-    for (int j = 0; j < width; j++)
+    for (uint x = 0; x < width; x++)
     {
-      float heightValue = m_pHeightMap->GetHeightValueAtPixel(vec2(j, i));
-      vertex.x = j * m_xBlockScale;
+      float heightValue = m_pHeightMap->GetHeightValueAtPixel(vec2(x, y));
+      vertex.x = x * m_xBlockScale;
       vertex.y = heightValue * m_heightScale;
-      vertex.z = i * m_yBlockScale;
-      m_vertices[(i*width)+j] = vertex;
+      vertex.z = y * m_yBlockScale;
+      m_vertices[(y*width) + x] = vertex;
     }
   }
 }
 
-void Terrain::GenerateTerrainIndex()
+void Terrain::GenerateTerrainIndices()
 {
-  uint width = m_pHeightMap->GetWidth() - 1;
-  uint height = m_pHeightMap->GetHeight() - 1;
+  uint width = m_pHeightMap->GetWidth();
+  uint height = m_pHeightMap->GetHeight();
 
-  for (int i = 0; i < height; i++)
+  for (uint i = 0; i < height - 1; i++)
   {
-    for (int j = 0; j < width; j++)
+    for (uint j = 0; j < width - 1; j++)
     {
       uint indexValueL = ((i*width) + j);
-      float indexValueR = ((i*width) + (j+1));  
-      float indexValueBL = ((i+1)*width) + j;  
-      float indexValueBR = (((i+1)*width) + (j + 1));
+      uint indexValueR = ((i*width) + (j + 1));
+      uint indexValueBL = ((i + 1)*width) + j;
+      uint indexValueBR = (((i + 1)*width) + (j + 1));
 
       m_indices.push_back(indexValueR);
       m_indices.push_back(indexValueL);
       m_indices.push_back(indexValueBL);
-        
+
       m_indices.push_back(indexValueBL);
       m_indices.push_back(indexValueBR);
       m_indices.push_back(indexValueR);
     }
   }
-}
-
-void Terrain::GenerateTerrainTexCoords()
-{
-  
-}
-
-void Terrain::SaveTerrainToOBJ(const string& filepath)
-{
-  OBJWriter::SaveMeshToOBJ(*this, filepath);
 }
 
 HeightMap* Terrain::GetHeightMap()
@@ -178,3 +141,30 @@ std::vector<int> const& Terrain::GetIndices() const
 {
   return m_indices;
 }
+
+void Terrain::CreateMesh()
+{
+  GenerateTerrainVertices();
+  GenerateTerrainIndices();
+  GenerateNormals();
+
+  glGenBuffers(1, &gVBO);
+  glGenBuffers(1, &gNBO);
+  glGenBuffers(1, &gIBO);
+
+  glBindBuffer(GL_ARRAY_BUFFER, gVBO);
+  glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * 3 * sizeof(GLfloat), m_vertices.data(), GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  glBindBuffer(GL_ARRAY_BUFFER, gNBO);
+  glBufferData(GL_ARRAY_BUFFER, m_normals.size() * 3 * sizeof(GLfloat), m_normals.data(), GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  glBindBuffer(GL_ARRAY_BUFFER, gIBO);
+  glBufferData(GL_ARRAY_BUFFER, m_indices.size() * sizeof(GLint), m_indices.data(), GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+}
+
+
+

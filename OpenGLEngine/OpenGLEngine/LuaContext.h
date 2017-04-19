@@ -4,6 +4,16 @@
 #include "Types.h"
 #include "LuaBridge.h"
 
+
+/**
+* @file LuaContext.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief 
+*
+*/
+
+
 extern "C"
 {
 #include "lua.h"
@@ -19,6 +29,11 @@ class LuaContext
 {
 public:
 
+  /// <summary>
+  /// Initializes a new instance of the <see cref="LuaContext"/> class.
+  /// </summary>
+  /// <param name="contextHandle">The context handle.</param>
+  /// <param name="entryScript">The entry script.</param>
   LuaContext(LuaContextHandle contextHandle, string const& entryScript);
 
   void Start();
@@ -59,27 +74,42 @@ void LuaContext::ExposeFunction(string const& functionName, R(*pFunction)(Args..
 template<typename T>
 void LuaContext::AddClass(string const& luaAPIName, string const& className)
 {
-  getGlobalNamespace(m_pLuaState).beginNamespace(luaAPIName).beginClass<T>(className.c_str()).endClass().endNamespace();
+  getGlobalNamespace(m_pLuaState).beginNamespace(luaAPIName.c_str()).beginClass<T>(className.c_str()).endClass().endNamespace();
 }
 
 
 template<typename ClassType, typename DataType>
 void LuaContext::AddClassDataMember(string const& luaAPIName, string const& className, string const& memberName, DataType dataMember)
 {
-  getGlobalNamespace(m_pLuaState).beginNamespace(luaAPIName).beginClass<ClassType>(className).addData(memberName, dataMember).endClass().endNamespace();
+  getGlobalNamespace(m_pLuaState)
+    .beginNamespace(luaAPIName.c_str())
+    .beginClass<ClassType>(className.c_str())
+    .addData(memberName.c_str(), dataMember)
+    .endClass()
+    .endNamespace();
 }
 
 
 template<typename ClassType, typename FunctionType>
 void LuaContext::AddClassFunction(string const& luaAPIName, string const& className, string const& functionName, FunctionType* function)
 {
-  getGlobalNamespace(m_pLuaState).beginNamespace(luaAPIName).beginClass<ClassType>(className).addFunction(functionName, function).endClass().endNamespace();
+  getGlobalNamespace(m_pLuaState)
+    .beginNamespace(luaAPIName.c_str())
+    .beginClass<ClassType>(className.c_str())
+    .addFunction(functionName.c_str(), function)
+    .endClass()
+    .endNamespace();
 }
 
 template<typename ClassType, typename ConstructorType>
 void LuaContext::AddClassConstructor(string const& luaAPIName, string const& className)
 {
-  getGlobalNamespace((m_pLuaState).beginNamespace(luaAPIName).beginClass(className).addConstructor<ConstructorType>().endClass().endNamespace();
+  getGlobalNamespace(m_pLuaState)
+    .beginNamespace(luaAPIName.c_str())
+    .beginClass<ClassType>(className.c_str())
+    .addConstructor<ConstructorType>()
+    .endClass()
+    .endNamespace();
 }
 
 template<typename R, typename ...Args>

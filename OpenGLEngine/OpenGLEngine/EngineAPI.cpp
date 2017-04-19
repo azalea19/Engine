@@ -2,6 +2,9 @@
 #include "DXEngine.h"
 #include "GLEngine.h"
 
+/// <summary>
+/// The s engine{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
+/// </summary>
 IEngine* EngineAPI::s_engine;
 
 static void Create(int graphicsFlag)

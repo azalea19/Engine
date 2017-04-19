@@ -4,8 +4,6 @@
 #include "LuaInstanceManager.h"
 #include "ModelLibraryAPI.h"
 #include "RenderManagerAPI.h"
-#include "InstanceFileLoaderAPI.h"
-#include "LuaInstanceFileLoaderManager.h"
 #include "EngineAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
@@ -36,8 +34,6 @@ void LuaManager::Initialize()
   luaManager.AddAPI("luaInstanceManager", LuaInstanceManager::Expose);
   luaManager.AddAPI("modelLibraryAPI", ModelLibraryAPI::Expose);
   luaManager.AddAPI("renderManagerAPI", RenderManagerAPI::Expose);
-  luaManager.AddAPI("instanceFileLoaderAPI", InstanceFileLoaderAPI::Expose);
-  luaManager.AddAPI("luaInstanceFileLoaderManager", LuaInstanceFileLoaderManager::Expose);
   luaManager.AddAPI("engineAPI", EngineAPI::Expose);
 }
 

@@ -4,31 +4,45 @@
 #include "types.h"
 #include "ObjectInstance.h"
 
-enum GraphicsAPI
-{
-  API_OPEN_GL,
-  API_DIRECT_X,
-  API_VULKAN
-};
+/**
+* @file IModelLibrary.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief An interface that allows the user to add functionality associated with a model library.
+*
+*/
 
-enum WindowAPI
-{
-  API_SDL,
-  API_GLFW,
-  API_FREEGLUT
-};
 
 class IModelLibrary
 {
 
 public:
  
+  /// <summary>
+  /// Initialises this instance.
+  /// </summary>
   virtual void Initialise() = 0;
+
+  /// <summary>
+  /// Finalizes an instance of the <see cref="IModelLibrary" /> class.
+  /// </summary>
   virtual ~IModelLibrary() = 0 {}
-  virtual void AddModel(string const& modelName, string const& filePath, bool normalised) = 0;
+
+
+  /// <summary>
+  /// Gets the object instance.
+  /// </summary>
+  /// <param name="modelName">Name of the model.</param>
+  /// <returns>ObjectInstance</returns>
   virtual ObjectInstance* GetObjectInstance(string const& modelName) const = 0;
 
-private:
+  /// <summary>
+  /// Adds the model.
+  /// </summary>
+  /// <param name="modelName">Name of the model.</param>
+  /// <param name="filePath">The file path.</param>
+  /// <param name="normalised">if set to <c>true</c> [normalised].</param>
+  virtual void AddModel(string const& modelName, string const& filePath, bool normalised) = 0;
 
 
 };
