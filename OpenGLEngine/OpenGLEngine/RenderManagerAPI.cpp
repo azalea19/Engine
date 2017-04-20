@@ -19,6 +19,20 @@ void RenderManagerAPI::AddObject(int object)
 
 }
 
+void RenderManagerAPI::Initialise()
+{
+
+	TextureLibrary::GetInstance().InitTextureLibrary();
+	ShaderLibrary::GetInstance().InitShaderLibrary();
+	//SoundManager::GetInstance().InitSoundManager();
+	FrameBuffer::Initialize();
+
+
+	ShaderLibrary::GetInstance().BindDefaultShader();
+	//LuaManager::Initialize();
+
+}
+
 void RenderManagerAPI::RenderFromCamera(int camID, float time)
 {
 	MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
@@ -27,7 +41,7 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 
 
 
-
+	/*
 		static bool renderDepth = true;
 	
 		glCullFace(GL_BACK);
@@ -35,10 +49,12 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 		glEnable(GL_DEPTH_TEST);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+	*/
 		rend.Render(world, cam->getViewMatrix(), cam->getProjectionMatrix(), time);
 
-		glFlush();
+		//glFlush();
+
+
 		//SDL_GL_SwapWindow(View::screen);
 
 
@@ -56,6 +72,8 @@ void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "render", Render);
 	pContext->ExposeFunction(luaAPIName, "renderFromCamera", RenderFromCamera);
 	pContext->ExposeFunction(luaAPIName, "addObject", AddObject);
+	pContext->ExposeFunction(luaAPIName, "initialise", Initialise);
+
 
 
 	//pContext->ExposeFunction(luaAPIName, "testRender", TestRender);

@@ -214,6 +214,11 @@ function Initialize()
 
     camera0 = cameraAPI.addNewInstance()
 
+    --cameraAPI.setPosition(camera0,0,0,-100)
+
+    printAPI.print('Initialising rendermanager...\n')
+    renderManagerAPI.initialise()
+
     
 
     --[[
