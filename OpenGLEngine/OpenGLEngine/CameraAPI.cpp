@@ -40,10 +40,27 @@ void CameraAPI::SetPosition(InstanceHandle handle, float x, float y, float z)
 
 }
 
+
+LuaRef CameraAPI::GetViewMatrix(InstanceHandle handle)
+{
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->getViewMatrix());
+
+}
+LuaRef CameraAPI::GetProjectionMatrix(InstanceHandle handle)
+{
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->getProjectionMatrix());
+
+}
+
 void CameraAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "addNewInstance", AddNewInstance);
+	pContext->ExposeFunction(luaAPIName, "getProjectionMatrix", GetProjectionMatrix);
+	pContext->ExposeFunction(luaAPIName, "getViewMatrix", GetViewMatrix);
+
+	pContext->ExposeFunction(luaAPIName, "addNewInstance", AddNewInstance);
+
 	pContext->ExposeFunction(luaAPIName, "setYaw", SetYaw);
 	pContext->ExposeFunction(luaAPIName, "getYaw", GetYaw);
 	pContext->ExposeFunction(luaAPIName, "getPitch", GetPitch);

@@ -11,6 +11,7 @@
 #include "LuaVectorUtility.h"
 #include "CameraAPI.h"
 #include "EngineAPI.h"
+#include "TimeAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -44,6 +45,8 @@ void LuaManager::Initialize()
   luaManager.AddAPI("luaVectorUtility", LuaVectorUtility::Expose);
   luaManager.AddAPI("engineAPI", EngineAPI::Expose);
   luaManager.AddAPI("cameraAPI", CameraAPI::Expose);
+  luaManager.AddAPI("timeAPI", TimeAPI::Expose);
+
 }
 
 void LuaManager::AddAPI(string apiName, LuaAPIExposeFunc exposeFunc)

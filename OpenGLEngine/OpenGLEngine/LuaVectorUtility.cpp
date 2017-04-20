@@ -38,6 +38,12 @@ LuaRef LuaVectorUtility::SubtractVector(LuaRef a, LuaRef b)
 	return ToLuaTable(finalVec, LuaManager::GetInstance().GetContext(0)->GetLuaState());//finalVec, state);
 }
 
+LuaRef LuaVectorUtility::GetEmptyMat4()
+{
+	mat4 empty;
+	return ToLuaTable(empty, LuaManager::GetInstance().GetContext(0)->GetLuaState());
+}
+
 
 LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt)
 {
@@ -54,6 +60,7 @@ void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "normalize", Normalize);
 	pContext->ExposeFunction(luaAPIName, "addVector", AddVector);
 	pContext->ExposeFunction(luaAPIName, "subtractVector", SubtractVector);
+	pContext->ExposeFunction(luaAPIName, "getEmptyMat4", GetEmptyMat4);
 
 	pContext->ExposeFunction(luaAPIName, "multiplyFloat", MultiplyFloat);
 

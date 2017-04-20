@@ -1,5 +1,5 @@
 #include "MathAPI.h"
-
+//#include <glm/gtc/type_ptr.hpp>
 
 static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
 {
@@ -24,12 +24,7 @@ LuaRef ToLuaTable(vec3 value, LuaState* luaState)
 LuaRef ToLuaTable(vec3 value)
 {
 	LuaState * state = LuaManager::GetInstance().GetContext(0)->GetLuaState();
-	LuaRef table = newTable(state);
-	table["x"] = value.x;
-	table["y"] = value.y;
-	table["z"] = value.z;
-
-	return table;
+	return ToLuaTable(value, state);
 }
 
 
@@ -37,13 +32,28 @@ LuaRef ToLuaTable(mat4 value, LuaState* luaState)
 {
   LuaRef table = newTable(luaState);
 
+  //table["x"] = "a";
+
+  const float *pSource = (const float*)glm::value_ptr(value);
+ 
+
   for (int i = 0; i < 16; i++)
   {
-    table[i + 1] = value[i];
+	 table[i + i] = pSource[i];
   }
 
   return table;
 }
+
+
+
+LuaRef ToLuaTable(mat4 value)
+{
+	LuaState * state = LuaManager::GetInstance().GetContext(0)->GetLuaState();
+
+	return ToLuaTable(value, state);
+}
+
 
 template<>
 vec3 FromLuaTable<vec3>(LuaRef value)
@@ -57,14 +67,17 @@ vec3 FromLuaTable<vec3>(LuaRef value)
 
 template<> mat4 FromLuaTable<mat4>(LuaRef value)
 {
-  mat4 result;
-
-  for (int i = 1; i < 16; i++)
+	float vals[16];
+  for (int i = 1; i <= 16; i++)
   {
-    result[i - 1] = value[i];
+
+	  LuaRef val = value[i];
+	  //string str = val.to
+	  float num = lua_tonumber(val,1);
+	  vals[i - 1] = num;
   }
 
-  return result;
+  return glm::make_mat4(vals);
 }
 
 void MathAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)

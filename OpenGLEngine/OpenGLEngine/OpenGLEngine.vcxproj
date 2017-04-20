@@ -237,6 +237,7 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLibrary.cpp" />
+    <ClCompile Include="TimeAPI.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +315,7 @@
     <ClInclude Include="TextureLibrary.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TimeAPI.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
@@ -333,6 +335,7 @@
     <None Include="HDRSplitEffect.frag" />
     <None Include="HDRSplitEffect.vert" />
     <None Include="LuaScripts\Engine.lua" />
+    <None Include="LuaScripts\Game.lua" />
     <None Include="MultiplicativeBlendEffect.frag" />
     <None Include="MultiplicativeBlendEffect.vert" />
     <None Include="orthoShader.frag" />

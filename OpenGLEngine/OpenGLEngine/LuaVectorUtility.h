@@ -16,6 +16,8 @@ public:
 	static LuaRef LuaVectorUtility::Normalize(float x, float y, float z);
 	static LuaRef LuaVectorUtility::AddVector(LuaRef a, LuaRef b);
 	static LuaRef LuaVectorUtility::SubtractVector(LuaRef a, LuaRef b);
+	static LuaRef LuaVectorUtility::GetEmptyMat4();
+
 
 	static LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt);
 

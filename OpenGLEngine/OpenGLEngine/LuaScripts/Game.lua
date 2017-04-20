@@ -28,6 +28,8 @@ function LoadAPIs()
     GetAPI(context.handle, 'luaVectorUtility', 'luaVectorUtility')
     GetAPI(context.handle, 'engineAPI', 'engineAPI')
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
+    GetAPI(context.handle, 'timeAPI', 'timeAPI')
+
 
 
 
@@ -177,13 +179,14 @@ function Initialize()
 	
 	printAPI.print('Initializing...\n')
 
-    
+    printAPI.print('Initialising engine...\n')
+
 	engineAPI.Create(0);
 	engineAPI.Initialise(1024,728);
 
-    printAPI.print('Initialised engine...\n')
 
 
+    printAPI.print('Initialising objects...\n')
 
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
@@ -193,18 +196,25 @@ function Initialize()
 	plant02 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant02,0,0,0)
 
-    printAPI.print('Initialised objects...\n')
+    renderManagerAPI.addObject(plant01)
+    renderManagerAPI.addObject(plant02)
+
+
+    printAPI.print('Initialising scene...\n')
 
 
 	scene01 = Scene:new()
 
-    printAPI.print('Initialised scene...\n')
+    printAPI.print('Initialising player...\n')
 
 	
 	player = Player.new()
 
-    printAPI.print('Initialised player...\n')
+    printAPI.print('Initialising camera...\n')
 
+    camera0 = cameraAPI.addNewInstance()
+
+    
 
     --[[
 	
@@ -283,8 +293,30 @@ function Render()
 
     engineAPI.BeginRender()
 
+    printAPI.print("Getting time...\n");
 
+    time = timeAPI.elapsedTimeMs()
+
+    printAPI.print("Getting world matrix...\n");
+
+    worldMatrix = luaVectorUtility.getEmptyMat4()
+
+    printAPI.print("Getting view matrix...\n");
+
+    viewMatrix = cameraAPI.getViewMatrix(camera0)
+
+    printAPI.print("Getting projection matrix...\n");
+
+    projectionmatrix = cameraAPI.getProjectionMatrix(camera0)
+
+    
+    printAPI.print("Rendering...\n");
+
+    renderManagerAPI.renderFromCamera(camera0,time)
 	--Lua render here
+
+    
+    printAPI.print("Render Successful\n");
 
     engineAPI.EndRender()
 

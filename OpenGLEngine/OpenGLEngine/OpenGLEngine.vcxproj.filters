@@ -269,6 +269,9 @@
     <ClCompile Include="CameraAPI.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="TimeAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -485,6 +488,7 @@
     <ClInclude Include="LuaVectorUtility.h" />
     <ClInclude Include="InputManagerAPI.h" />
     <ClInclude Include="InstanceManager.h" />
+    <ClInclude Include="TimeAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -574,5 +578,6 @@
     <None Include="LuaScripts\Engine.lua">
       <Filter>Source\Lua\Scripts</Filter>
     </None>
+    <None Include="LuaScripts\Game.lua" />
   </ItemGroup>
 </Project>

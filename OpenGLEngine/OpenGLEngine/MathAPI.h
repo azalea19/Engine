@@ -1,6 +1,8 @@
 #ifndef MathAPI_h__
 #define MathAPI_h__
 
+#include "LuaBridge.h"
+
 #include "LuaContext.h"
 #include "LuaManager.h"
 #include "Types.h"
@@ -23,6 +25,10 @@ LuaRef ToLuaTable(vec3 value, LuaState * luaState);
 
 template<> mat4 FromLuaTable<mat4>(LuaRef value);
 LuaRef ToLuaTable(mat4 value, LuaState * luaState);
+
+LuaRef ToLuaTable(vec3 value);
+LuaRef ToLuaTable(mat4 value);
+
 
 /// Uses the current lua state
 LuaRef ToLuaTable(vec3 value);
