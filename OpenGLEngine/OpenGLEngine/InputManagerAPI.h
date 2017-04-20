@@ -7,8 +7,9 @@
 class InputManagerAPI
 {
 public:
-	InputManagerAPI();
-	~InputManagerAPI();
+
+	static void InputManagerAPI::Update();
+
 
 	static bool IsKeyDown(int keyCode);
 

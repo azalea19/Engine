@@ -4,7 +4,7 @@
 /**
 * @file   MMath.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The math functions.
 *
 * The various math functions / constants.

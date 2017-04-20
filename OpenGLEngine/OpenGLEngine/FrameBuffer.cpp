@@ -5,6 +5,9 @@
 #include "ShaderLibrary.h"
 #include "Screen.h"
 
+/// <summary>
+/// The fs quad vao{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
+/// </summary>
 GLuint FrameBuffer::FSQuadVAO;
 
 void FrameBuffer::Initialize()
@@ -202,6 +205,9 @@ void FrameBuffer::DetachDepth()
     glFramebufferTexture(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, 0, 0);
 }
 
+/// <summary>
+/// The maximum colour attachments{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
+/// </summary>
 int FrameBuffer::MAX_COLOUR_ATTACHMENTS = 8;
 
 void FrameBuffer::BindFrameBuffer(GLuint buffer, FrameBufferBindMode bufferMode /*= FBBM_ReadWrite*/)

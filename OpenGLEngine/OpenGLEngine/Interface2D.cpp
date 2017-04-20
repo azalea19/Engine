@@ -7,6 +7,7 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 
+
 static uint32_t* GetPixelData(SDL_Surface* source)
 {
   uint32_t* data = (uint32_t*)malloc(sizeof(uint32_t) * source->w * source->h);

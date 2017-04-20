@@ -4,7 +4,7 @@
 /**
 * @file   Screen.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The screen file.
 *
 * The screen file contains constants and functions relating to the screen.

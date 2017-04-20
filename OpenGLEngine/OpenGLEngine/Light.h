@@ -85,6 +85,10 @@ struct SpotLight : public Light
     SetConeAngle(angleInDegrees);
   }
 
+  /// <summary>
+  /// Sets the cone angle.
+  /// </summary>
+  /// <param name="angleInDegrees">The angle in degrees.</param>
   void SetConeAngle(float angleInDegrees)
   {
     coneAngle = angleInDegrees;

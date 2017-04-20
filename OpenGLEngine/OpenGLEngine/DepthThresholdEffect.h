@@ -4,6 +4,15 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file DepthThresholdEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief
+*
+*/
+
 class DepthThresholdEffect
 {
 public:

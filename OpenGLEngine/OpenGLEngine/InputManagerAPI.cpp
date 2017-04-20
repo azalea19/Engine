@@ -2,15 +2,10 @@
 
 
 
-InputManagerAPI::InputManagerAPI()
+void InputManagerAPI::Update()
 {
+	InputManager::GetInstance().Update();
 }
-
-
-InputManagerAPI::~InputManagerAPI()
-{
-}
-
 
 
 bool InputManagerAPI::IsKeyDown(int keyCode) 
@@ -46,6 +41,8 @@ void InputManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "isKeyDown", IsKeyDown);
+	pContext->ExposeFunction(luaAPIName, "update", Update);
+
 	pContext->ExposeFunction(luaAPIName, "isKeyUp", IsKeyUp);
 	pContext->ExposeFunction(luaAPIName, "isKeyPressed", IsKeyPressed);
 	pContext->ExposeFunction(luaAPIName, "isKeyReleased", IsKeyReleased);

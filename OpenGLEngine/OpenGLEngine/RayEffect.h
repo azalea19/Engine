@@ -4,6 +4,15 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file RayEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief Accepts an input texture and generate a ray effect from the specified light position.
+*
+*/
+
 class RayEffect
 {
 public:

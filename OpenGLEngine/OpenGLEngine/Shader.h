@@ -9,7 +9,7 @@
 /**
 * @file   Shader.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The shader struct.
 *
 * The shader struct contains all of the data relating to a particular shader program to be stored in the shader library
@@ -37,35 +37,98 @@ class Shader
 {
 public:
 
-	Shader(string const& name);
-	Shader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
-	~Shader();
+  /// <summary>
+  /// Initializes a new instance of the <see cref="Shader"/> class.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  Shader(string const& name);
+	
+  /// <summary>
+  /// Initializes a new instance of the <see cref="Shader"/> class.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="vertFilePath">The vert file path.</param>
+  /// <param name="fragFilePath">The frag file path.</param>
+  /// <param name="attributes">The attributes.</param>
+  /// <param name="uniforms">The uniforms.</param>
+  Shader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
+	
+  /// <summary>
+  /// Finalizes an instance of the <see cref="Shader"/> class.
+  /// </summary>
+  ~Shader();
 
 
-	void Load(string const& vertFilePath,string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
+  /// <summary>
+  /// Loads the specified shader files.
+  /// </summary>
+  /// <param name="vertFilePath">The vert file path.</param>
+  /// <param name="fragFilePath">The frag file path.</param>
+  /// <param name="attributes">The attributes.</param>
+  /// <param name="uniforms">The uniforms.</param>
+  void Load(string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
 
 
-	void Bind() const;
+  /// <summary>
+  /// Binds this instance.
+  /// </summary>
+  void Bind() const;
 
 
-	void Setup();
+  /// <summary>
+  /// Setups this instance.
+  /// </summary>
+  void Setup();
 
 
-	void SetupLocations(std::vector<string> const& custom_attributes, std::vector<string> const& custom_uniforms);
+  /// <summary>
+  /// Setups the locations.
+  /// </summary>
+  /// <param name="custom_attributes">The custom attributes.</param>
+  /// <param name="custom_uniforms">The custom uniforms.</param>
+  void SetupLocations(std::vector<string> const& custom_attributes, std::vector<string> const& custom_uniforms);
 
 
-	string GetName() const;
+  /// <summary>
+  /// Gets the name.
+  /// </summary>
+  /// <returns></returns>
+  string GetName() const;
 
 
-	unsigned int Attribute(string const& name) const;
+  /// <summary>
+  /// Returns the attribute with the specified name.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>int</returns>
+  unsigned int Attribute(string const& name) const;
 
 
-	unsigned int Uniform(string const& name) const;
+  /// <summary>
+  /// Returns the uniform with the specified name.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>int</returns>
+  unsigned int Uniform(string const& name) const;
 
-	bool HasAttribute(string const& name) const;
+  /// <summary>
+  /// Determines whether the specified shader has attribute.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>
+  ///   <c>true</c> if the specified name has attribute; otherwise, <c>false</c>.
+  /// </returns>
+  bool HasAttribute(string const& name) const;
 
 
-	bool HasUniform(string const& name) const;
+  /// <summary>
+  /// Determines whether the specified shader has uniform.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>
+  ///   <c>true</c> if the specified name has uniform; otherwise, <c>false</c>.
+  /// </returns>
+  bool HasUniform(string const& name) const;
 
 
 	template<typename T>
@@ -141,13 +204,35 @@ public:
 
 private:
 
-	string m_name;
-	unsigned int m_uid;
-	const char* m_pVertex;
-	const char* m_pFragment;
+  /// <summary>
+  /// The m name
+  /// </summary>
+  string m_name;
 
-	std::unordered_map<string, int> m_attributes;
-	std::unordered_map<string, int> m_uniforms;
+  /// <summary>
+  /// The shaders ID
+  /// </summary>
+  unsigned int m_uid;
+
+  /// <summary>
+  /// The vertex shader
+  /// </summary>
+  const char* m_pVertex;
+
+  /// <summary>
+  /// The fragment shader
+  /// </summary>
+  const char* m_pFragment;
+
+  /// <summary>
+  /// The attributes
+  /// </summary>
+  std::unordered_map<string, int> m_attributes;
+
+  /// <summary>
+  /// The uniforms
+  /// </summary>
+  std::unordered_map<string, int> m_uniforms;
 
 };
 

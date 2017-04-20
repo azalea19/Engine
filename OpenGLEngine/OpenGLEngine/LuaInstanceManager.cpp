@@ -6,6 +6,7 @@ static std::unordered_map<int, ObjectInstance*> m_instanceMap;
 static int m_lastIndex = 0;
 
 /// Returns handle to new object instance of given model name.
+
 InstanceHandle LuaInstanceManager::AddNewInstance(string const& modelName)
 {
 

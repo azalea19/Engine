@@ -1,5 +1,14 @@
 
 
+SDL_SCANCODE_W = 26
+SDL_SCANCODE_A = 4
+
+SDL_SCANCODE_S = 22
+SDL_SCANCODE_D = 7
+SDL_SCANCODE_ESCAPE = 41
+
+
+
 
 	
 function Run()
@@ -15,11 +24,11 @@ function LoadAPIs()
 	GetAPI(context.handle, 'printAPI', 'printAPI')
 	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
 	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
-	GetAPI(context.handle, 'mainAPI', 'mainAPI')
-	GetAPI(context.handle, 'instanceFileLoaderAPI', 'instanceFileLoaderAPI')
-	GetAPI(context.handle, 'luaInstanceFileLoaderManager', 'luaInstanceFileLoaderManager')
 	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
     GetAPI(context.handle, 'luaVectorUtility', 'luaVectorUtility')
+    GetAPI(context.handle, 'engineAPI', 'engineAPI')
+    GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
+
 
 
 end
@@ -89,6 +98,8 @@ Scene =
 	end
 	
 -- Player --
+
+
 Player =
 {	
 }
@@ -102,62 +113,58 @@ Player =
 
 	function Player.update()
 	
-	-- written by liz translated from maddys c++ code
-	turnSpeed = 0.3
-	moveSpeed = 0.5
-	camera0 = cameraManager.getInstance(0)
+	    -- written by liz translated from maddys c++ code
+	    turnSpeed = 0.3
+	    moveSpeed = 0.5
+	    camera0 = cameraManager.getInstance(0)
 	
-	origYaw = cameraAPI.getYaw(camera0)
-	origPitch = cameraAPI.getPitch(camera0)
-	deltaYaw = -inputManagerAPI.mouseDeltaX * turnSpeed
-	deltaPitch = -inputManagerAPI.mouseDeltaY * turnSpeed
-	cameraAPI.setYaw(originalYaw + deltaYaw)
-	cameraAPI.setPitch(originalPitch+deltaPitch)
+        --rotation
+	    origYaw = cameraAPI.getYaw(camera0)
+	    origPitch = cameraAPI.getPitch(camera0)
+	    deltaYaw = -inputManagerAPI.mouseDeltaX * turnSpeed
+	    deltaPitch = -inputManagerAPI.mouseDeltaY * turnSpeed
+	    cameraAPI.setYaw(originalYaw + deltaYaw)
+	    cameraAPI.setPitch(originalPitch+deltaPitch)
 
-	oldPos = cameraAPI.getPosition(camera0);
-	forward = cameraAPI.forward(camera0);
-	right = cameraAPI.right(camera0);
-	translation = { x=0, y=0, z=0 };
+        --translation   
+	    oldPos = cameraAPI.getPosition(camera0);
+	    forward = cameraAPI.forward(camera0);
+	    right = cameraAPI.right(camera0);
+	    translation = { x=0, y=0, z=0 };
 	
-	SDL_SCANCODE_W = 26
-	SDL_SCANCODE_A = 4
-
-	SDL_SCANCODE_S = 22
-	SDL_SCANCODE_D = 7
-    MOVE_SPEED = 1
+        MOVE_SPEED = 1
+    
     
 	
-	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_W))
-		translation += forward;
-	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_A))
-		translation -= right;
-	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_S))
-		translation -= forward;
-	if (inputManagerAPI.isKeyDown(SDL_SCANCODE_D))
-		translation += right;
+	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_W) then
+        	translation = luaVectorUtility.addVector(translation,forward)
+        end
 
+        if inputManagerAPI.isKeyDown(SDL_SCANCODE_A) then
+        	translation = luaVectorUtility.subtractVector(translation,right)
+        end
+
+
+	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_S) then
+        	translation = luaVectorUtility.subtractVector(translation,forward)
+        end
+	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_D) then
+        	translation = luaVectorUtility.addVector(translation,right)
+        end
         
-    --[[
-	
-		
-    translation *= MOVE_SPEED;
+        if not luaVectorUtility.equals(translation.x,translation.y,translation.z,0,0,0) then
 
+            translation = luaVectorUtility.normalize(translation.x,translation.y,translation.z)
+            translation = luaVectorUtility.multiplyFloat(translation.x,translation.y,translation.z,MOVE_SPEED)
 
-    
-	if (not (translation.x == 0 and translation.y ==0 and translation.z == 0))
-	{
-		//Normalize so you dont move faster diagonally
-		translation = luaVectorUtility.normalize(translation.x,translation.y,translation.z);
+            
+            newPos = luaVectorUtility.addVector(oldPos,translation)
 
+            cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);
 
-		//Clamp Player to room
+        end
+        
 
-		newPos = oldPos;
-
-		newPos.x += translation[0];
-		newPos.y += translation[1];
-		newPos.z += translation[2];
-		]]
 	end
 	
 
@@ -169,7 +176,15 @@ function Initialize()
 	
 	
 	printAPI.print('Initializing...\n')
-	mainAPI.initialise()
+
+    
+	engineAPI.Create(0);
+	engineAPI.Initialise(1024,728);
+
+    printAPI.print('Initialised engine...\n')
+
+
+
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
 	plant01 = luaInstanceManager.addNewInstance("Plant")
@@ -178,22 +193,38 @@ function Initialize()
 	plant02 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant02,0,0,0)
 
+    printAPI.print('Initialised objects...\n')
+
+
 	scene01 = Scene:new()
+
+    printAPI.print('Initialised scene...\n')
+
 	
 	player = Player.new()
+
+    printAPI.print('Initialised player...\n')
+
+
+    --[[
 	
 	instanceLoader = luaInstanceFileLoaderManager.addNewInstance()
 	instanceFileLoaderAPI.loadFile(instanceLoader,'test')
 	for i=0,instanceFileLoaderAPI.getFileLength(instanceLoader)-1 do
 		objectHandle = instanceFileLoaderAPI.readFromLoadedFile(instanceLoader, i) -- Adds this instance from the file to lua instance manager. Object instance can be referenced by objectHandle using the objectInstanceAPI. Also sets translation, scale and animation state from file.
-		--scene01.addRigidBody(objectHandle)
+		
+        
+        --scene01.addRigidBody(objectHandle)
 		--objectInstanceAPI.SetTranslation(objectHandle,)
 	end
+    ]]
 end
 
 function GameLoop()
 	run = true
 	while run do
+    	--printAPI.print('Running game loop...\n')
+
 		Update()
 		Render()
 		--if count == 10 then
@@ -207,6 +238,8 @@ function Finalize()
 end
 
 function TestInputAPI()
+	--printAPI.print('Testing input...\n')
+
 	e = inputManagerAPI.isKeyDown(8)
 	if e then
 		printAPI.print("e")
@@ -214,12 +247,30 @@ function TestInputAPI()
 
 	end
 
+    esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
+	if esc then
+		printAPI.print("Quitting - pressed Esc.\n")
+        run = false
+	end
+
 end
 function Update()
-	count = (count or 0) + 1
-	run = mainAPI.update()
+
+    engineAPI.BeginUpdate()
+
+    inputManagerAPI.update();
+
+	--Lua update here
+    count = (count or 0) + 1
+	--run = mainAPI.update()
 	
 	TestInputAPI()
+
+    --player.Update();
+
+
+	engineAPI.EndUpdate();
+	
 end
 
 
@@ -228,7 +279,15 @@ function Render()
 	--printAPI.print('count = ')
 	--printAPI.print(count)
 	--printAPI.print('\n')
-	mainAPI.render()
+	--mainAPI.render()
+
+    engineAPI.BeginRender()
+
+
+	--Lua render here
+
+    engineAPI.EndRender()
+
 end
 
 Run()

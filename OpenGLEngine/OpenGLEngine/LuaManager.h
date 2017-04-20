@@ -7,6 +7,15 @@
 #include <unordered_map>
 #include "LuaAPI.h"
 
+
+/**
+* @file LuaManager.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief 
+*
+*/
+
 class LuaManager : public Singleton<LuaManager>
 {
 public:

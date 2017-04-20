@@ -204,14 +204,6 @@ void RenderableObject::BindMesh(int meshIndex) const
 }
 
 
-bool RenderableObject::OnScreen(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
-{
-  if (GetAnimationCount() == 0)
-    return true;
-
-
-}
-
 void RenderableObject::BindMaterial(int meshIndex) const
 {
   const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
