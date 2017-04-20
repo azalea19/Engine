@@ -1,3 +1,7 @@
+
+
+/*
+
 #include "MainAPI.h"
 void MainAPI::RenderBase()
 {
@@ -23,3 +27,4 @@ void MainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "render", RenderBase);
 	pContext->ExposeFunction(luaAPIName, "update", UpdateBase);
 }
+*/

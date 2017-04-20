@@ -1,3 +1,5 @@
+/*
+
 #pragma once
 #include "Singleton.h"
 #include "InstanceFileLoader.h"
@@ -19,3 +21,4 @@ public:
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
 };
+*/

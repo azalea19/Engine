@@ -21,9 +21,6 @@
     <Filter Include="Source\Shaders">
       <UniqueIdentifier>{5f501348-f3b1-4892-b078-7edf31593f2e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\2D Interface">
-      <UniqueIdentifier>{ebbf472d-7cd1-46f5-9b19-b164a93f48bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Utility">
       <UniqueIdentifier>{2dbd68e9-da2d-4787-99df-65bc5be9d60e}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,12 @@
     <Filter Include="Source\File IO">
       <UniqueIdentifier>{e8a99c3a-35ef-4d25-ba80-07823394c811}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Engine">
+      <UniqueIdentifier>{c4c1544a-d62d-47c5-ba6d-e2a71cf5bf2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Image Processing">
+      <UniqueIdentifier>{ebbf472d-7cd1-46f5-9b19-b164a93f48bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -96,7 +99,7 @@
       <Filter>Source\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="Interface2D.cpp">
-      <Filter>Source\2D Interface</Filter>
+      <Filter>Source\Image Processing</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Source\Utility</Filter>
@@ -224,20 +227,11 @@
     <ClCompile Include="ObjectInstanceAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="MPlayer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MainRename.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="LuaInstanceManager.cpp">
       <Filter>Source\Lua\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="LuaInstanceFileLoaderManager.cpp">
-      <Filter>Source\Lua\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="InstanceFileLoaderAPI.cpp">
-      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
     <ClCompile Include="ModelLibraryAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
@@ -245,37 +239,34 @@
     <ClCompile Include="RenderManagerAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="IEngine.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="MPlayer.cpp">
+      <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="MainAPI.cpp">
+    <ClCompile Include="DXEngine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GLEngine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="InstanceFileLoader.cpp">
-      <Filter>Source\File IO</Filter>
+    <ClCompile Include="OBJWriter.cpp">
+      <Filter>Source\OBJWriter</Filter>
     </ClCompile>
-    <ClCompile Include="View.cpp">
+    <ClCompile Include="MathAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaVectorUtility.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="InputManagerAPI.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="MCameraLuaManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MCameraAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MCameraInstanceManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="InstanceManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="InstanceManagerAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="LuaVectorUtility.cpp">
+    <ClCompile Include="CameraAPI.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -302,7 +293,7 @@
       <Filter>Source\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="Interface2D.h">
-      <Filter>Source\2D Interface</Filter>
+      <Filter>Source\Image Processing</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>Source\Utility</Filter>
@@ -421,9 +412,6 @@
     <ClInclude Include="AffineTransformable.h">
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Model Loader</Filter>
-    </ClInclude>
     <ClInclude Include="IAnimatedRenderable.h">
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
@@ -464,35 +452,39 @@
     <ClInclude Include="LuaInstanceManager.h">
       <Filter>Source\Lua\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="LuaInstanceFileLoaderManager.h">
-      <Filter>Source\Lua\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="InstanceFileLoaderAPI.h">
-      <Filter>Source\Lua\APIs</Filter>
-    </ClInclude>
     <ClInclude Include="ModelLibraryAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
     <ClInclude Include="RenderManagerAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="IEngine.h" />
-    <ClInclude Include="MainAPI.h">
+    <ClInclude Include="GLEngine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DXEngine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="InstanceFileLoader.h">
-      <Filter>Source\File IO</Filter>
+    <ClInclude Include="CameraAPI.h">
+      <Filter>Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="MathAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="InputManagerAPI.h" />
-    <ClInclude Include="MCameraLuaManager.h" />
-    <ClInclude Include="MCameraAPI.h" />
-    <ClInclude Include="MCameraInstanceManager.h" />
-    <ClInclude Include="InstanceManager.h" />
-    <ClInclude Include="InstanceManagerAPI.h" />
+    <ClInclude Include="IRenderableObject.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IEngine.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IModelLibrary.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
     <ClInclude Include="LuaVectorUtility.h" />
+    <ClInclude Include="InputManagerAPI.h" />
+    <ClInclude Include="InstanceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -579,7 +571,7 @@
     <None Include="DirectionalLightingEffect.vert">
       <Filter>Source\Shaders</Filter>
     </None>
-    <None Include="LuaScripts\Game.lua">
+    <None Include="LuaScripts\Engine.lua">
       <Filter>Source\Lua\Scripts</Filter>
     </None>
   </ItemGroup>

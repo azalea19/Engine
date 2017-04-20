@@ -1,3 +1,5 @@
+/*
+
 #pragma once
 #include "LuaManager.h"
 #include "InstanceFileLoader.h"
@@ -14,3 +16,4 @@ public:
 
 };
 
+*/
