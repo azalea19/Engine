@@ -24,7 +24,30 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 	MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
 	mat4 world;
 	RenderManager rend = RenderManager::GetInstance();
-	rend.Render(world, cam->getViewMatrix(), cam->getProjectionMatrix(), time);
+
+
+
+
+		static bool renderDepth = true;
+	
+		glCullFace(GL_BACK);
+
+		glEnable(GL_DEPTH_TEST);
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+		rend.Render(world, cam->getViewMatrix(), cam->getProjectionMatrix(), time);
+
+		glFlush();
+		//SDL_GL_SwapWindow(View::screen);
+
+
+
+
+
+
+
+
 }
 
 void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)

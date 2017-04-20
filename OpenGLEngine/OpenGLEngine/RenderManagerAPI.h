@@ -8,6 +8,7 @@
 #include "InstanceManager.h"
 #include "LuaInstanceManager.h"
 
+
 class RenderManagerAPI
 {
 public:
