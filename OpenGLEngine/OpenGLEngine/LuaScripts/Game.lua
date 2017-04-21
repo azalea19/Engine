@@ -288,8 +288,8 @@ function LoadAssets()
 	--modelLibraryAPI.AddModel("tree","tree.obj", false)
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
-	--terrainAPI.generateTerrain(256, 256, 1, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
-	--modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
+	terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
+	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 	
 	printAPI.print('Assets loaded\n')
 end
@@ -312,6 +312,9 @@ function Initialize()
 
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	--LoadInstances("SaveData/NPC_Data.csv", "npc")
+	
+	Terrain01 = luaInstanceManager.addNewInstance("Terrain")
+	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	
 	plant01 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant01,10,10,10)

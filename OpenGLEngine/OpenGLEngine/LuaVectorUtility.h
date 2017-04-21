@@ -7,7 +7,15 @@
 #include <GL/glew.h>
 #include "MathAPI.h"
 
-/// API for handling vectors in Lua
+
+
+/**
+* @file LuaVectorUtility.h
+* @Author Elizabeth Haynes
+* @date   S1, 2017
+* @brief API for handling vectors and mat4 in Lua
+*
+*/
 class LuaVectorUtility
 {
 public:

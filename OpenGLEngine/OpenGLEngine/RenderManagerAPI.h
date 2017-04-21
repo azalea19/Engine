@@ -51,6 +51,12 @@
 #include "LuaInstanceManager.h"
 
 
+/**
+* @file LuaVectorUtility.h
+* @Author Elizabeth Haynes
+* @date   S1, 2017
+* @brief API for rendering with the engine through a Lua interface
+*/
 class RenderManagerAPI
 {
 public:
