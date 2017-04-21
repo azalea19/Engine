@@ -2,10 +2,9 @@
 #include "DXEngine.h"
 #include "GLEngine.h"
 #include "ShaderLibrary.h"
+#include "ModelLibrary.h"
 
-/// <summary>
-/// The s engine{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
-/// </summary>
+
 IEngine* EngineAPI::s_engine;
 
 static void Create(int graphicsFlag)
@@ -30,6 +29,7 @@ static void Initialise(int screenWidth, int screenHeight)
 {
   EngineAPI::s_engine->Initialise(screenWidth, screenHeight);
   ShaderLibrary::InitShaderLibrary(EngineAPI::s_engine);
+  ModelLibrary::Initialise(EngineAPI::s_engine);
 }
 
 static bool BeginUpdate()

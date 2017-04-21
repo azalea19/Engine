@@ -5,7 +5,7 @@
 #include <string>
 #include "Types.h"
 #include "Singleton.h"
-#include "IModelLibrary.h"
+
 
 /**
 * @file   ModelLibrary.h
@@ -18,8 +18,9 @@
 
 class IRenderableObject; 
 class ObjectInstance; 
+class IEngine;
 
-class ModelLibrary : public Singleton<ModelLibrary> , public IModelLibrary
+class ModelLibrary : public Singleton<ModelLibrary> 
 {
 
 public:
@@ -27,7 +28,7 @@ public:
   /// <summary>
   /// Initialises this instance.
   /// </summary>
-  virtual void Initialise() override;
+  static void Initialise(IEngine* pEngine);
 
 
   /// <summary>
@@ -36,7 +37,7 @@ public:
   /// <param name="modelName">Name of the model.</param>
   /// <param name="path">The path.</param>
   /// <param name="normalized">if set to <c>true</c> [normalized].</param>
-  virtual void AddModel(string const& modelName, string const& path, bool normalized = false) override;
+  void AddModel(string const& modelName, string const& path, bool normalized = false);
 
 
   /// <summary>
@@ -44,7 +45,7 @@ public:
   /// </summary>
   /// <param name="modelName">Name of the model.</param>
   /// <returns></returns>
-  virtual ObjectInstance* GetObjectInstance(string const& modelName) const override;
+  ObjectInstance* GetObjectInstance(string const& modelName) const;
 
 
 private:
@@ -52,7 +53,9 @@ private:
   /// <summary>
   /// The models
   /// </summary>
-  std::unordered_map<string, RenderableObject*> models;
+  std::unordered_map<string, IRenderableObject*> models;
+
+  IEngine* m_pEngine;
 
 };
 

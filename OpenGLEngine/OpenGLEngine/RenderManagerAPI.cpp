@@ -36,7 +36,6 @@ void RenderManagerAPI::Initialise()
 {
 
 	TextureLibrary::GetInstance().InitTextureLibrary();
-	ShaderLibrary::GetInstance().InitShaderLibrary();
 	//SoundManager::GetInstance().InitSoundManager();
 	FrameBuffer::Initialize();
 
