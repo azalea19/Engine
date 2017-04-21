@@ -5,7 +5,8 @@
 #include "GL/glew.h"
 #include "LuaManager.h"
 #include "SDL_ttf.h"
-
+#include "Shader.h"
+#include "RenderableObject.h"
 
 IEngine* GLEngine::Create()
 {
@@ -46,6 +47,20 @@ void GLEngine::InitGlew()
     printf("Error initializing GLEW! %s\n", glewGetErrorString(glewError));
     getchar();
   }
+}
+
+IShader* GLEngine::CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const
+{
+  return new Shader(name, vertFilePath, fragFilePath, attributes, uniforms);
+}
+
+IRenderableObject* GLEngine::CreateRenderableObject(string const& name, string const& filename) const
+{
+  return new RenderableObject(name, filename);
+}
+
+GLEngine::GLEngine()
+{
 }
 
 void GLEngine::CreateWindow()
@@ -103,6 +118,8 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 
   //Clear screen for rendering
   glClearColor(0, 0, 0, 1.f);
+
+
 }
 
 void GLEngine::SetScreenDimensions()
@@ -139,11 +156,8 @@ void GLEngine::EndUpdate()
 {
 }
 
-GLEngine::GLEngine()
-{
-}
-
 GLEngine::~GLEngine()
 {
 
 }
+

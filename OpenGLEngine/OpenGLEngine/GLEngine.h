@@ -133,6 +133,10 @@ private:
   /// </summary>
   LuaInstanceManager* m_instanceManager;
 
+  virtual IShader* CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const override;
+
+  virtual IRenderableObject* CreateRenderableObject(string const& name, string const& filename) const override;
+
 };
 
 #endif // GLEngine_h__

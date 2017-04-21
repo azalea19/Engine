@@ -2,6 +2,8 @@
 #define IEngine_h__
 
 #include "types.h"
+#include "IShader.h"
+#include "IRenderableObject.h"
 
 /**
 * @file IEngine.h
@@ -68,6 +70,12 @@ public:
   /// Ends the update.
   /// </summary>
   virtual void EndUpdate() = 0;
+
+
+  virtual IShader* CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const = 0;
+
+  virtual IRenderableObject* CreateRenderableObject(string const& name, string const& filename) const = 0;
+
 
 };
 #endif // IEngine_h__
