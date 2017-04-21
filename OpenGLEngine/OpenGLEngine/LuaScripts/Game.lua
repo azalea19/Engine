@@ -354,7 +354,7 @@ function Initialize()
 
     camera0 = cameraAPI.addNewInstance()
 
-    cameraAPI.setPosition(camera0,0,0,10)
+    cameraAPI.setPosition(camera0,0,25,10)
 
     printAPI.print('Initialising rendermanager...\n')
     renderManagerAPI.initialise()
