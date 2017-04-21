@@ -266,8 +266,8 @@ void DrawImage(string const& filePath)
 
   glEnable(GL_TEXTURE_2D);
 
-  shader->TransmitUniform("width", SCREEN_WIDTH);
-  shader->TransmitUniform("height", SCREEN_HEIGHT);
+  shader->TransmitUniform("width", GetScreenDimensions().x);
+  shader->TransmitUniform("height", GetScreenDimensions().y);
 
   glEnableVertexAttribArray(shader->Attribute("position"));
   glBindBuffer(GL_ARRAY_BUFFER, gVBO);

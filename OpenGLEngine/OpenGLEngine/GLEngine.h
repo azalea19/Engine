@@ -50,12 +50,6 @@ public:
 
 
   /// <summary>
-  /// Sets the screen dimensions.
-  /// </summary>
-  virtual void SetScreenDimensions() override;
-
-
-  /// <summary>
   /// Begins the render.
   /// </summary>
   virtual void BeginRender() override;
