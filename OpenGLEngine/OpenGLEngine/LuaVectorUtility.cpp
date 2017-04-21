@@ -1,68 +1,54 @@
 #include "LuaVectorUtility.h"
 
-LuaRef LuaVectorUtility::Normalize(float x, float y, float z)
+//vec3 * 1/magnitude
+LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHandle)
 {
-	vec3 vec(x, y, z);
+  vec3 vec = FromLuaTable<vec3>(value);
 	vec = normalize(vec);
-	return ToLuaTable(vec, LuaManager::GetInstance().GetContext(0)->GetLuaState());
+	return ToLuaTable(vec, contextHandle);
 }
 
- /*
-LuaRef LuaVectorUtility::Add(float x1, float y1, float z1, float x2, float y2, float z2)
+//vec3 + vec3
+LuaRef LuaVectorUtility::vec3_Sum(LuaRef a, LuaRef b, LuaContextHandle contextHandle)
 {
-	//float val[3];
-	vec3 vec1(x1, y1, z1);
-	vec3 vec2(x2, y2, z2);
-	vec3 finalVec = vec1 + vec2;
-	return ToLuaTable(finalVec, LuaManager::GetInstance().GetContext(0)->GetLuaState());//finalVec, state);
-}
-*/
-
-LuaRef LuaVectorUtility::AddVector(LuaRef a, LuaRef b)
-{
-	//float val[3];
 	vec3 vec1 = FromLuaTable<vec3>(a);
 	vec3 vec2 = FromLuaTable<vec3>(b);
 	vec3 finalVec = vec1 + vec2;
-	return ToLuaTable(finalVec, LuaManager::GetInstance().GetContext(0)->GetLuaState());//finalVec, state);
+	return ToLuaTable(finalVec, contextHandle);
 }
 
 
-/// Removes vec3 b from a
-LuaRef LuaVectorUtility::SubtractVector(LuaRef a, LuaRef b)
+// a - b 
+LuaRef LuaVectorUtility::vec3_Subtract(LuaRef a, LuaRef b, LuaContextHandle contextHandle)
 {
-	//float val[3];
 	vec3 vec1 = FromLuaTable<vec3>(a);
 	vec3 vec2 = FromLuaTable<vec3>(b);
 	vec3 finalVec = vec1 - vec2;
-	return ToLuaTable(finalVec, LuaManager::GetInstance().GetContext(0)->GetLuaState());//finalVec, state);
+  return ToLuaTable(finalVec, contextHandle);
 }
 
-LuaRef LuaVectorUtility::GetEmptyMat4()
+//mat4 identity
+LuaRef LuaVectorUtility::mat4_CreateIdentity(LuaContextHandle contextHandle)
 {
 	mat4 empty;
-	return ToLuaTable(empty, LuaManager::GetInstance().GetContext(0)->GetLuaState());
+	return ToLuaTable(empty, contextHandle);
 }
 
-
-LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt)
+// vec3 * constant
+LuaRef LuaVectorUtility::vec3_ScalarMultiply(LuaRef value, float scalar, LuaContextHandle contextHandle)
 {
-	vec3 vec(x, y, z);
-	vec3 finalVec = vec * flt;
-	return ToLuaTable(finalVec, LuaManager::GetInstance().GetContext(0)->GetLuaState());//finalVec, state);
-
+	vec3 vec = FromLuaTable<vec3>(value);
+  vec3 finalVec = vec * scalar;
+	return ToLuaTable(finalVec, contextHandle);
 }
 
 
 void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
-	pContext->ExposeFunction(luaAPIName, "normalize", Normalize);
-	pContext->ExposeFunction(luaAPIName, "addVector", AddVector);
-	pContext->ExposeFunction(luaAPIName, "subtractVector", SubtractVector);
-	pContext->ExposeFunction(luaAPIName, "getEmptyMat4", GetEmptyMat4);
-
-	pContext->ExposeFunction(luaAPIName, "multiplyFloat", MultiplyFloat);
-
-
+	pContext->ExposeFunction(luaAPIName, "vec3_Normalize", vec3_Normalize);
+	pContext->ExposeFunction(luaAPIName, "vec3_Sum", vec3_Sum);
+	pContext->ExposeFunction(luaAPIName, "vec3_Subtract", vec3_Subtract);
+	pContext->ExposeFunction(luaAPIName, "mat4_CreateIdentity", mat4_CreateIdentity);
+	pContext->ExposeFunction(luaAPIName, "vec3_ScalarMultiply", vec3_ScalarMultiply);
 }

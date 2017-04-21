@@ -24,13 +24,13 @@ void ShaderLibrary::InitShaderLibrary()
 
 void ShaderLibrary::AddShader(string const& name, std::vector<string> const& uniforms, std::vector<string> const& attributes)
 {
-	Shader* myShader = new Shader(name, name + ".vert", name + ".frag", attributes, uniforms);
+	IShader* myShader = new Shader(name, name + ".vert", name + ".frag", attributes, uniforms);
 	shaders.emplace(name, myShader);
 }
 
-const Shader* ShaderLibrary::GetShader(string const& name) const
+const IShader* ShaderLibrary::GetShader(string const& name) const
 {
-	std::unordered_map<string, Shader*>::const_iterator got = shaders.find(name);
+	std::unordered_map<string, IShader*>::const_iterator got = shaders.find(name);
 	if (got == shaders.end())
 	{
 		printf("Shader with name %s not found.", name.c_str());
@@ -42,7 +42,7 @@ const Shader* ShaderLibrary::GetShader(string const& name) const
 
 void ShaderLibrary::BindShader(string const& shaderName)
 {
-	const Shader* myShader = GetShader(shaderName);
+	const IShader* myShader = GetShader(shaderName);
 
 	if (myShader != NULL)
 	{
@@ -57,7 +57,7 @@ void ShaderLibrary::BindDefaultShader()
 	GetShader(m_currentShaderName)->Bind();
 }
 
-const Shader* ShaderLibrary::CurrentShader() const
+const IShader* ShaderLibrary::CurrentShader() const
 {
 	return GetShader(m_currentShaderName);
 }

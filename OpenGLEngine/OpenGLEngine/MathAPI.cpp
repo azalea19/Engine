@@ -10,9 +10,9 @@ static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
   pContext->AddClassConstructor<vec3, void(*) (void)>(luaAPIName, "vec3");
 }
 
-LuaRef ToLuaTable(vec3 value, LuaState* luaState)
+LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
 {
-  LuaRef table = newTable(luaState);
+  LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
   table["x"] = value.x;
   table["y"] = value.y;
   table["z"] = value.z;
@@ -21,19 +21,10 @@ LuaRef ToLuaTable(vec3 value, LuaState* luaState)
 }
 
 
-LuaRef ToLuaTable(vec3 value)
+LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 {
-	LuaState * state = LuaManager::GetInstance().GetContext(0)->GetLuaState();
-	return ToLuaTable(value, state);
-}
-
-
-LuaRef ToLuaTable(mat4 value, LuaState* luaState)
-{
-  LuaRef table = newTable(luaState);
-
-  //table["x"] = "a";
-
+  LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+ 
   const float *pSource = (const float*)glm::value_ptr(value);
  
 
@@ -43,17 +34,8 @@ LuaRef ToLuaTable(mat4 value, LuaState* luaState)
   }
 
   return table;
+ 
 }
-
-
-
-LuaRef ToLuaTable(mat4 value)
-{
-	LuaState * state = LuaManager::GetInstance().GetContext(0)->GetLuaState();
-
-	return ToLuaTable(value, state);
-}
-
 
 template<>
 vec3 FromLuaTable<vec3>(LuaRef value)
@@ -67,18 +49,15 @@ vec3 FromLuaTable<vec3>(LuaRef value)
 
 template<> mat4 FromLuaTable<mat4>(LuaRef value)
 {
-	float vals[16];
+  float result[16];
+
   for (int i = 1; i <= 16; i++)
   {
-
-	  LuaRef val = value[i];
-	  //string str = val.to
-	  float num = lua_tonumber(val,1);
-	  vals[i - 1] = num;
+    result[i - 1] = value[i];
   }
-
-  return glm::make_mat4(vals);
+  return glm::make_mat4(result);
 }
+
 
 void MathAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {

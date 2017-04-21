@@ -6,6 +6,12 @@
 #include "LuaManager.h"
 #include "SDL_ttf.h"
 
+
+IEngine* GLEngine::Create()
+{
+  return new GLEngine();
+}
+
 bool GLEngine::HandleEvents()
 {
   SDL_Event event;
@@ -75,10 +81,6 @@ bool GLEngine::InitSDL()
   return true;
 }
 
-IEngine* GLEngine::Create()
-{
-  return new GLEngine();
-}
 
 void GLEngine::Initialise(int screenWidth, int screenHeight)
 {

@@ -8,8 +8,6 @@ SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
 
 
-
-
 	
 function Run()
 	Initialize()
@@ -29,9 +27,6 @@ function LoadAPIs()
     GetAPI(context.handle, 'engineAPI', 'engineAPI')
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
-
-
-
 
 end
 
@@ -184,8 +179,6 @@ function Initialize()
 	engineAPI.Create(0);
 	engineAPI.Initialise(1024,728);
 
-
-
     printAPI.print('Initialising objects...\n')
 
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
@@ -264,6 +257,8 @@ function TestInputAPI()
 	end
 
 end
+
+
 function Update()
 
     engineAPI.BeginUpdate()
@@ -299,20 +294,20 @@ function Render()
 
     printAPI.print("Getting world matrix...\n");
 
-    worldMatrix = luaVectorUtility.getEmptyMat4()
+    worldMatrix = luaVectorUtility.mat4_CreateIdentity(context.handle)
 
     printAPI.print("Getting view matrix...\n");
 
-    viewMatrix = cameraAPI.getViewMatrix(camera0)
+    viewMatrix = cameraAPI.getViewMatrix(camera0, context.handle)
 
     printAPI.print("Getting projection matrix...\n");
 
-    projectionmatrix = cameraAPI.getProjectionMatrix(camera0)
+    projectionmatrix = cameraAPI.getProjectionMatrix(camera0, context.handle)
 
     
     printAPI.print("Rendering...\n");
 
-    renderManagerAPI.renderFromCamera(camera0,time)
+    --renderManagerAPI.renderFromCamera(camera0,time)
 	--Lua render here
 
     

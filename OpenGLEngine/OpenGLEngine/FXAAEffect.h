@@ -23,6 +23,6 @@ public:
 
 private:
   FrameBuffer m_fb;
-  Shader const* m_pShader;
+  IShader const* m_pShader;
 };
 

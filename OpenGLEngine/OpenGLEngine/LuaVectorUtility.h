@@ -7,21 +7,21 @@
 #include <GL/glew.h>
 #include "MathAPI.h"
 
-/// API for handling vec3 in Lua
+/// API for handling vectors in Lua
 class LuaVectorUtility
 {
+
 public:
 
+  //vec3
+	static LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHandle);
+	static LuaRef LuaVectorUtility::vec3_Sum(LuaRef a, LuaRef b, LuaContextHandle contextHandle);
+	static LuaRef LuaVectorUtility::vec3_Subtract(LuaRef a, LuaRef b, LuaContextHandle contextHandle);
+  static LuaRef LuaVectorUtility::vec3_ScalarMultiply(LuaRef value, float scalar, LuaContextHandle contextHandle);
 
-	static LuaRef LuaVectorUtility::Normalize(float x, float y, float z);
-	static LuaRef LuaVectorUtility::AddVector(LuaRef a, LuaRef b);
-	static LuaRef LuaVectorUtility::SubtractVector(LuaRef a, LuaRef b);
-	static LuaRef LuaVectorUtility::GetEmptyMat4();
+  //mat4
+	static LuaRef LuaVectorUtility::mat4_CreateIdentity(LuaContextHandle contextHandle);
 
-
-	static LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt);
-
-	static void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName);
-
+  static void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName);
 
 };

@@ -6,7 +6,7 @@
 #include "ShaderLibrary.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
-
+#include "Shader.h"
 
 static uint32_t* GetPixelData(SDL_Surface* source)
 {

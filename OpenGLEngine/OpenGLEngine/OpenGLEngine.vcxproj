@@ -272,6 +272,7 @@
     <ClInclude Include="InputManagerAPI.h" />
     <ClInclude Include="InstanceManager.h" />
     <ClInclude Include="IRenderableObject.h" />
+    <ClInclude Include="IShader.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LuaAPI.h" />
     <ClInclude Include="LuaContext.h" />

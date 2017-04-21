@@ -16,7 +16,7 @@ class Shader;
 class HDRSplitEffect
 {
   FrameBuffer m_fb;
-  Shader const* m_pShader;
+  IShader const* m_pShader;
 
 public:
   HDRSplitEffect();

@@ -9,7 +9,7 @@
 typedef int InstanceHandle;
 
 
-template <static class Type> 
+template <class Type> 
 class InstanceManager : public Singleton<InstanceManager<Type>>
 {
 private:
