@@ -28,6 +28,8 @@ enum Attribute_Location
   AL_Normals = 3,
   AL_BoneIDs = 4,
   AL_BoneWeights = 5,
+
+
   AL_VertexColours = 6,
 };
 
@@ -67,7 +69,7 @@ public:
 
 
 	template<typename T>
-	void TransmitUniform(string const& uniformName, T value) const
+	void TransmitUniform(string const& uniformName, T const& value) const
 	{
 		if (HasUniform(uniformName))
 			TransmitUniform(Uniform(uniformName), value);
@@ -77,20 +79,20 @@ public:
 
 
 	template <typename T>
-	void TransmitUniform(int uniformID, T value) const
+	void TransmitUniform(int uniformID, T const& value) const
 	{
-		printf("Transmit uniform not defined for this type %s", typeid(T).name);
+		printf("Transmit uniform not defined for this type %s", typeid(T).name());
 	}
 
 
 	template <>
-	void TransmitUniform(int uniformID, float value) const
+	void TransmitUniform(int uniformID, float const& value) const
 	{
 		glUniform1f(uniformID, value);
 	}
 
 	template <>
-	void TransmitUniform(int uniformID, int value) const
+	void TransmitUniform(int uniformID, int const& value) const
 	{
 		glUniform1i(uniformID, value);
 	}
@@ -127,7 +129,7 @@ public:
 	template <typename T>
 	void TransmitUniformArray(int uniformID, T* value, int count) const
 	{
-		printf("Transmit uniform not defined for this type %s", typeid(T).name);
+		printf("Transmit uniform not defined for this type %s", typeid(T).name());
 	}
 
 	template <>

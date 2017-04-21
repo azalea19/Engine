@@ -2,6 +2,7 @@
 #define PrintAPI_h__
 
 #include "LuaContext.h"
+#include "LuaManager.h"
 
 class PrintAPI
 {

@@ -1,0 +1,4 @@
+ModelName,PosX,PosY,PosZ,ScaleX,ScaleY,ScaleZ,Yaw,Pitch,ActiveAnimation
+Bob,-10,0,0,0.13,0.13,0.13,0,0,0
+Bob,-50,0,0,0.13,0.13,0.13,0,0,0
+Bob,-100,0,0,0.13,0.13,0.13,0,0,0

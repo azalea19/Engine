@@ -1,4 +1,4 @@
-#ifndef InputManager_H__
+ #ifndef InputManager_H__
 #define InputManager_H__
 #include <cstdint>
 #include "SDL.h"

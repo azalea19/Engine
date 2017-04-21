@@ -44,10 +44,13 @@ void RenderManager::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4
       pObject->BindMesh(meshIndex);
       for (int instance = 0; instance < instances.size(); instance++)
       {
-        verticesDrawn += pObject->GetMesh(meshIndex).GetVertexCount();
-        mat4 worldMatrix = instances[instance]->GetTransform();
-        int animationIndex = instances[instance]->GetActiveAnimationIndex();
-        pObject->Render(worldMatrix, viewMatrix, projectionMatrix, time, animationIndex);
+        if (instances[instance]->GetVisible())
+        {
+          verticesDrawn += pObject->GetMesh(meshIndex).GetVertexCount();
+          mat4 worldMatrix = instances[instance]->GetTransform();
+          int animationIndex = instances[instance]->GetActiveAnimationIndex();
+          pObject->Render(worldMatrix, viewMatrix, projectionMatrix, time, animationIndex);
+        }
       }
     }
   }
