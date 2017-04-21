@@ -5,7 +5,7 @@
 #include "Shader.h"
 #include <unordered_map>
 #include "Singleton.h"
-
+#include <memory>
 
 class IEngine;
 
@@ -24,7 +24,7 @@ struct ShaderLibrary : public Singleton<ShaderLibrary>
   /// <summary>
   /// The shaders
   /// </summary>
-  std::unordered_map<string, IShader*> shaders;
+  std::unordered_map<string, std::unique_ptr<IShader>> shaders;
 
 
   /// <summary>
@@ -47,7 +47,7 @@ struct ShaderLibrary : public Singleton<ShaderLibrary>
   /// </summary>
   /// <param name="name">The name.</param>
   /// <returns>Shader</returns>
-  const IShader* GetShader(string const& name) const;
+  std::unique_ptr<IShader> const& GetShader(string const& name) const;
 
 	
   /// <summary>
@@ -83,7 +83,8 @@ private:
   /// </summary>
   string m_currentShaderName;
 
-  IEngine const *m_pEngine;
+  std::unique_ptr<IEngine> const& m_pEngine;
+
 };
 
 

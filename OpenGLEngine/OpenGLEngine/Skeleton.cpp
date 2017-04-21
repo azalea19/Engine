@@ -3,7 +3,7 @@
 #include "assimp/scene.h"
 #include "AssimpToGLM.h"
 
-Skeleton::Skeleton(const aiScene* pScene)
+Skeleton::Skeleton(aiScene const* pScene)
 {
   m_globalInverseTransform = glm::inverse(ASToGLM(pScene->mRootNode->mTransformation));
   LoadBones(pScene);
@@ -30,7 +30,7 @@ std::vector<mat4> Skeleton::GetBoneTransforms(string const& animationName, float
 void Skeleton::CalculateBoneTransforms(int animationIndex, float time, std::vector<mat4> &finalTransforms, mat4 parentTransform, int boneIndex) const
 {
   const Bone& bone = m_bones[boneIndex];
-  const Animation* pAnimation = m_animations[animationIndex];
+  const std::unique_ptr<Animation> &pAnimation = m_animations[animationIndex];
 
   mat4 boneTransform = bone.transform;
   if (pAnimation && pAnimation->HasBoneTransform(boneIndex))
@@ -43,7 +43,7 @@ void Skeleton::CalculateBoneTransforms(int animationIndex, float time, std::vect
     CalculateBoneTransforms(animationIndex, time, finalTransforms, globalTransform, m_bones[boneIndex].m_childBoneIDs[i]);
 }
 
-void Skeleton::CreateBoneLookup(const aiNode* pNode)
+void Skeleton::CreateBoneLookup(aiNode const* pNode)
 {
   int boneIndex = m_boneLookup.Count();
   string boneName = pNode->mName.data;
@@ -64,7 +64,7 @@ void Skeleton::CreateBoneLookup(const aiNode* pNode)
 
 }
 
-void Skeleton::LoadBones(const aiScene* pScene)
+void Skeleton::LoadBones( aiScene const* pScene)
 {
   CreateBoneLookup(pScene->mRootNode);
   for (uint meshIndex = 0; meshIndex < pScene->mNumMeshes; meshIndex++)
@@ -78,13 +78,19 @@ void Skeleton::LoadBones(const aiScene* pScene)
   }
 }
 
-void Skeleton::LoadAnimations(const aiScene* pScene)
+void Skeleton::LoadAnimations(aiScene const* pScene)
 {
   for (uint i = 0; i < pScene->mNumAnimations; i++)
-    m_animations.push_back(new Animation(pScene->mAnimations[i], m_boneLookup));
+  {
+    //Use emplace_back to construct an item in place with this as arguments. 
+    //Cannot create one and push_back since it tries to copy and push in to the vector
+    m_animations.emplace_back(new Animation(pScene->mAnimations[i], m_boneLookup));
+  }
 
   for (int i = 0; i < m_animations.size(); i++)
+  {
     m_animationLookup.Add(m_animations[i]->GetName(), i);
+  }
 }
 
 Bimap<string, int> const& Skeleton::GetBoneLookup() const

@@ -4,6 +4,7 @@
 #include "Types.h"
 #include "Bimap.h"
 #include "IAnimated.h"
+#include <memory>
 
 /**
 * @file Skeleton.h
@@ -38,7 +39,7 @@ public:
   /// See: http://www.assimp.org/lib_html/structai_scene.html
   /// </summary>
   /// <param name="pScene">The pointer to the scene.</param>
-  Skeleton(const aiScene* pScene);
+  Skeleton(aiScene const* pScene);
 
   /// <summary>
   /// Gets the bone transforms.
@@ -92,7 +93,7 @@ private:
   /// <summary>
   /// The animations
   /// </summary>
-  std::vector<Animation*> m_animations;
+  std::vector<std::unique_ptr<Animation>> m_animations;
 
   /// <summary>
   /// The bone lookup
@@ -123,19 +124,19 @@ private:
   /// Creates the bone lookup.
   /// </summary>
   /// <param name="pNode">The p node.</param>
-  void CreateBoneLookup(const aiNode* pNode);
+  void CreateBoneLookup(aiNode const* pNode);
   
   /// <summary>
   /// Loads the bones.
   /// </summary>
   /// <param name="pScene">The pointer to the scene.</param>
-  void LoadBones(const aiScene* pScene);
+  void LoadBones(aiScene const* pScene);
   
   /// <summary>
   /// Loads the animations.
   /// </summary>
   /// <param name="pScene">The pointer to the scene.</param>
-  void LoadAnimations(const aiScene* pScene);
+  void LoadAnimations(aiScene const* pScene);
 
 };
 
