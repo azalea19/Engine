@@ -189,6 +189,8 @@
     <ClCompile Include="IMeshCollection.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputManagerAPI.cpp" />
+    <ClCompile Include="IslandCollision.cpp" />
+    <ClCompile Include="IslandCollisionAPI.cpp" />
     <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="LuaContext.cpp" />
@@ -270,6 +272,8 @@
     <ClInclude Include="IMesh.h" />
     <ClInclude Include="IMeshCollection.h" />
     <ClInclude Include="InputManagerAPI.h" />
+    <ClInclude Include="IslandCollision.h" />
+    <ClInclude Include="IslandCollisionAPI.h" />
     <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="IRenderableObject.h" />
     <ClInclude Include="IShader.h" />
