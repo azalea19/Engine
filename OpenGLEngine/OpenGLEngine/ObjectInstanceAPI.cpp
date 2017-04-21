@@ -27,7 +27,7 @@ void ObjectInstanceAPI::SetAnimation(InstanceHandle instHandle, bool isAnimated)
 
 ObjectInstance * ObjectInstanceAPI::GetInstance(InstanceHandle instHandle)
 {
-	return LuaInstanceManager::GetInstance(instHandle);
+	return LuaObjectInstanceManager::GetInstance(instHandle);
 }
 
 void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)

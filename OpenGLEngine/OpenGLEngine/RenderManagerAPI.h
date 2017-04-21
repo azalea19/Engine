@@ -47,8 +47,8 @@
 
 
 #include "MCamera.h"
-#include "InstanceManager.h"
 #include "LuaInstanceManager.h"
+#include "LuaObjectInstanceManager.h"
 
 
 /**

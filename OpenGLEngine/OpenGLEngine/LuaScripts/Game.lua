@@ -12,6 +12,10 @@ SDL_SCANCODE_A = 4
 SDL_SCANCODE_S = 22
 SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
+SDL_SCANCODE_Q = 20
+SDL_SCANCODE_Z = 29
+
+debug = true
 
 function Run()
 	Initialize()
@@ -22,7 +26,7 @@ end
 function LoadAPIs()
 	GetAPI(context.handle, 'printAPI', 'printAPI')
 	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
-	GetAPI(context.handle, 'luaInstanceManager', 'luaInstanceManager')
+	GetAPI(context.handle, 'luaObjInstManager', 'luaObjectInstanceManager')
 	GetAPI(context.handle, 'printAPI', 'printAPI')
 	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
 	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
@@ -108,7 +112,7 @@ function LoadInstances(filePath, fileType)
 		numRows = numRows + 1
 	end
 	for i = 1, numRows do
-		local instanceID= luaInstanceManager.addNewInstance(fileData[i][2])
+		local instanceID= luaObjInstManager.addNewInstance(fileData[i][2])
 
 		bb = AABoundingBox.new(fileData[i][9],fileData[i][10],fileData[i][11],fileData[i][12],fileData[i][13],fileData[i][14])
 		pos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
@@ -212,6 +216,10 @@ end
 		return instance
 	end
 
+    function PrintVec3(veca)
+        printAPI.print(veca[1] .. "," .. veca[2] .. "," .. veca[3])
+    end
+
 	function Player:update()
 
         --printAPI.print("Updating player.\n")
@@ -225,8 +233,10 @@ end
 	    origPitch = cameraAPI.getPitch(camera0,context.handle)
         
 	    deltaYaw =  - inputManagerAPI.mouseDeltaX() * turnSpeed
-       
+        --PrintVec3(deltaYaw)
+
 	    deltaPitch = -inputManagerAPI.mouseDeltaY() * turnSpeed
+        printAPI.print(deltaYaw .. "," .. deltaPitch .. "\n")
 
 	    cameraAPI.setYaw(camera0,origYaw + deltaYaw)
 	    cameraAPI.setPitch(camera0,origPitch+deltaPitch)
@@ -239,7 +249,8 @@ end
         oldPos = cameraAPI.getPosition(camera0,context.handle);
 	    forward = cameraAPI.forward(camera0,context.handle);
 	    right = cameraAPI.right(camera0,context.handle);
-        
+        up = cameraAPI.up(camera0,context.handle);
+
   	    translation = luaVectorUtility.vec3_CreateEmpty(context.handle)
 
         --printAPI.print(translation[1] .. translation[2] .. translation[3] .. "\n")
@@ -259,6 +270,16 @@ end
         end
 	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_D) then
         	translation = luaVectorUtility.vec3_Sum(translation,right,context.handle)
+        end
+        if debug then
+
+            if inputManagerAPI.isKeyDown(SDL_SCANCODE_Q) then
+        	    translation = luaVectorUtility.vec3_Sum(translation,up,context.handle)
+            end
+
+	        if inputManagerAPI.isKeyDown(SDL_SCANCODE_Z) then
+        	    translation = luaVectorUtility.vec3_Subtract(translation,up,context.handle)
+            end
         end
         
         emptyvec = luaVectorUtility.vec3_CreateEmpty(context.handle)
@@ -310,13 +331,13 @@ function Initialize()
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	--LoadInstances("SaveData/NPC_Data.csv", "npc")
 	
-	Terrain01 = luaInstanceManager.addNewInstance("Terrain")
+	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	
-	plant01 = luaInstanceManager.addNewInstance("Plant")
+	plant01 = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant01,10,10,10)
 
-	plant02 = luaInstanceManager.addNewInstance("Plant")
+	plant02 = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant02,0,0,0)
 
     renderManagerAPI.addObject(plant01)
@@ -343,19 +364,8 @@ function Initialize()
 	
 	player0 = Player.new()
 
+    printAPI.print('Initialization finished.\n')
 
-    --[[
-	
-	instanceLoader = luaInstanceFileLoaderManager.addNewInstance()
-	instanceFileLoaderAPI.loadFile(instanceLoader,'test')
-	for i=0,instanceFileLoaderAPI.getFileLength(instanceLoader)-1 do
-		objectHandle = instanceFileLoaderAPI.readFromLoadedFile(instanceLoader, i) -- Adds this instance from the file to lua instance manager. Object instance can be referenced by objectHandle using the objectInstanceAPI. Also sets translation, scale and animation state from file.
-		
-        
-        --scene01.addRigidBody(objectHandle)
-		--objectInstanceAPI.SetTranslation(objectHandle,)
-	end
-    ]]
 end
 
 function GameLoop()
@@ -398,7 +408,9 @@ function Update()
 
     engineAPI.BeginUpdate()
 
-    inputManagerAPI.update();
+    --engineAPI.handleEvents()
+
+    --inputManagerAPI.update();
 
 	--Lua update here
     count = (count or 0) + 1
@@ -407,7 +419,6 @@ function Update()
 	TestInputAPI()
 
     player0.update();
-
 
 	engineAPI.EndUpdate();
 	

@@ -146,9 +146,6 @@ bool GLEngine::BeginUpdate()
 
   InputManager::GetInstance().Update();
 
-  if (InputManager::GetInstance().IsKeyDown(SDL_SCANCODE_ESCAPE))
-    return false;
-
   return true;
 }
 
