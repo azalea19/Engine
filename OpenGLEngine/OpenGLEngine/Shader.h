@@ -137,7 +137,7 @@ public:
 		if (HasUniform(uniformName))
 			TransmitUniform(Uniform(uniformName), value);
 		else
-			printf("No uniform with name %s", uniformName.c_str());
+			printf("No uniform with name %s\n", uniformName.c_str());
 	}
 
 

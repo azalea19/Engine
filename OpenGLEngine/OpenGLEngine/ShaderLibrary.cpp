@@ -9,6 +9,9 @@ void ShaderLibrary::InitShaderLibrary()
 {
 	ShaderLibrary& shaderLibrary = ShaderLibrary::GetInstance();
 
+
+	shaderLibrary.AddShader("defaultShader", CreateVector(string("mvp")), CreateVector(string("position")));
+
 	shaderLibrary.AddShader("orthoShader", CreateVector(string("diffuse"), string("width"), string("height")), CreateVector(string("position"), string("uvIn")));
 	shaderLibrary.AddShader("SceneDecomposeEffect", CreateVector(string("CAMERA_POSITION"), string("WORLD_VIEW_PROJECTION_MATRIX"), string("WORLD_MATRIX"), string("VIEW_MATRIX"), string("PROJECTION_MATRIX"), string("BONES"), string("ANIMATION_ENABLED"), string("DIFFUSE_SOURCE"), string("MESH_COLOUR"), string("DIFFUSE_MAP"), string("ALPHA_MAP"), string("USE_ALPHA_MAP")), CreateVector(string("VERT_ALPHA_COORD"), string("VERT_POSITION"), string("VERT_DIFFUSE_COORD"), string("VERT_NORMAL"), string("VERT_BONE_IDS"), string("VERT_BONE_WEIGHTS"), string("VERT_COLOUR")));
 	shaderLibrary.AddShader("HDRSplitEffect", CreateVector(string("inputTex0")), CreateVector(string("Position"), string("TexCoord")));
