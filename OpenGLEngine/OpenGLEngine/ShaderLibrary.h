@@ -6,44 +6,80 @@
 #include <unordered_map>
 #include "Singleton.h"
 
+
 /**
 * @file   ShaderLibrary.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The shader library.
 *
-* The shader library contains all of the various shaders we have access to in the program
+* The shader library contains all of the various shaders we have access to in the program.
 */
 
-struct ShaderLibrary : Singleton<ShaderLibrary>
+struct ShaderLibrary : public Singleton<ShaderLibrary>
 {
 
-	std::unordered_map<string, Shader*> shaders; 
+  /// <summary>
+  /// The shaders
+  /// </summary>
+  std::unordered_map<string, IShader*> shaders;
 
 
-	void InitShaderLibrary();
+  /// <summary>
+  /// Initializes the shader library.
+  /// </summary>
+  void InitShaderLibrary();
 
 
-	void AddShader(string const& name, std::vector<string> const& uniforms, std::vector<string> const& attributes);
+  /// <summary>
+  /// Adds the shader.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="uniforms">The uniforms.</param>
+  /// <param name="attributes">The attributes.</param>
+  void AddShader(string const& name, std::vector<string> const& uniforms, std::vector<string> const& attributes);
 
 	
-	const Shader* GetShader(string const& name) const;
+  /// <summary>
+  /// Gets the shader.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>Shader</returns>
+  const IShader* GetShader(string const& name) const;
 
 	
-	void BindShader(string const& shaderName);
+  /// <summary>
+  /// Binds the shader.
+  /// </summary>
+  /// <param name="shaderName">Name of the shader.</param>
+  void BindShader(string const& shaderName);
 
 
-	void BindDefaultShader();
+  /// <summary>
+  /// Binds the default shader.
+  /// </summary>
+  void BindDefaultShader();
 
 
-	const Shader* CurrentShader() const;
+  /// <summary>
+  /// Return the current shader bound.
+  /// </summary>
+  /// <returns>Shader</returns>
+  const IShader* CurrentShader() const;
 
 	
-	const string GetCurrentShaderName() const;
+  /// <summary>
+  /// Gets the name of the current shader.
+  /// </summary>
+  /// <returns>string</returns>
+  const string GetCurrentShaderName() const;
 
 private:
 
-	string m_currentShaderName;
+  /// <summary>
+  /// The name of the current shader.
+  /// </summary>
+  string m_currentShaderName;
 };
 
 

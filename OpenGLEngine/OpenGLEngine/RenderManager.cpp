@@ -5,7 +5,7 @@
 
 void RenderManager::AddObject(ObjectInstance const* pObject)
 {
-  RenderableObject const* rObject = pObject->GetRenderableObject();
+ IRenderableObject const* rObject = pObject->GetRenderableObject();
   auto i = m_objectMap.find(rObject);
   if (i == m_objectMap.end())
     m_objectMap.emplace(rObject, CreateVector(pObject));
@@ -15,7 +15,7 @@ void RenderManager::AddObject(ObjectInstance const* pObject)
 
 void RenderManager::RemoveObject(ObjectInstance const* pObject)
 {
-  RenderableObject const* rObject = pObject->GetRenderableObject();
+  IRenderableObject const* rObject = pObject->GetRenderableObject();
   auto i = m_objectMap.find(rObject);
   if (i != m_objectMap.end())
   {
@@ -36,7 +36,7 @@ void RenderManager::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4
   int verticesDrawn = 0;
   for (auto i : m_objectMap)
   {
-    RenderableObject const* pObject = i.first;
+    IRenderableObject const* pObject = i.first;
     std::vector<ObjectInstance const*>& instances = i.second;
     pObject->BindObject();
     for (int meshIndex = 0; meshIndex < pObject->GetMeshCount(); meshIndex++)

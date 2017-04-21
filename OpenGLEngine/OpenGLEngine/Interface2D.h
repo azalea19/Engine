@@ -19,7 +19,7 @@
 *
 */
 
-class SDL_Surface;
+struct SDL_Surface;
 
 void DrawImage(string const& filePath);
 

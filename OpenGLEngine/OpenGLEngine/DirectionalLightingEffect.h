@@ -3,6 +3,15 @@
 #include "Shader.h"
 #include "Types.h"
 
+
+/**
+* @file DirectionalLightingEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief
+*
+*/
+
 class DirectionalLightingEffect
 {
 public:
@@ -13,5 +22,5 @@ public:
 
 private:
   FrameBuffer m_fb;
-  Shader const* m_pShader;
+  IShader const* m_pShader;
 };

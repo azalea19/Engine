@@ -3,7 +3,7 @@
 #include "ObjectInstance.h"
 
 
-void ModelLibrary::InitModelLibrary()
+void ModelLibrary::Initialise()
 {
 }
 

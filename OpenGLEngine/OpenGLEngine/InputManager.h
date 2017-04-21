@@ -8,7 +8,7 @@
 /**
 * @file   InputManager.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The input manager.
 *
 * The input manager uses the SDL2 library to create an event queue of mouse button and mouse motion events
@@ -65,72 +65,204 @@ class InputManager : public Singleton<InputManager>
 
 public:
 
-	InputManager();
+  /// <summary>
+  /// Initializes a new instance of the <see cref="InputManager"/> class.
+  /// </summary>
+  InputManager();
 
-	uint8_t keyboardState[16384];
-	uint8_t lastKeyboardState[16384];
+  /// <summary>
+  /// The keyboard state
+  /// </summary>
+  uint8_t keyboardState[16384];
 
-	MouseButtonState mouseButtonStates[4];
+  /// <summary>
+  /// The last keyboard state
+  /// </summary>
+  uint8_t lastKeyboardState[16384];
 
-	int32_t mouseDeltaX;
-	int32_t mouseDeltaY;
+  /// <summary>
+  /// The mouse button states
+  /// </summary>
+  MouseButtonState mouseButtonStates[4];
 
-	
-	void Update();
+  /// <summary>
+  /// The mouse delta x
+  /// </summary>
+  int32_t mouseDeltaX;
 
-	
-	void PushEvent(MouseEvent const& _event);
-
-
-	bool IsKeyDown(int keyCode) const;
-
-
-	
-	bool IsKeyUp(int keyCode) const;
-
-	
-	bool IsKeyPressed(int keyCode) const;
-	
-
-	bool IsKeyReleased(int keyCode) const;
-	
-
-	bool IsMouseDownLeft() const;
+  /// <summary>
+  /// The mouse delta y
+  /// </summary>
+  int32_t mouseDeltaY;
 
 	
-	bool IsMouseUpLeft() const;
+  /// <summary>
+  /// Updates this instance.
+  /// </summary>
+  void Update();
 
 	
-	bool IsMousePressedLeft() const;
+  /// <summary>
+  /// Pushes the event.
+  /// </summary>
+  /// <param name="_event">The event.</param>
+  void PushEvent(MouseEvent const& _event);
+
+
+  /// <summary>
+  /// Determines whether [is key down] [the specified key code].
+  /// </summary>
+  /// <param name="keyCode">The key code.</param>
+  /// <returns>
+  ///   <c>true</c> if [is key down] [the specified key code]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsKeyDown(int keyCode) const;
+
 
 	
-	bool IsMouseReleasedLeft() const;
+  /// <summary>
+  /// Determines whether [is key up] [the specified key code].
+  /// </summary>
+  /// <param name="keyCode">The key code.</param>
+  /// <returns>
+  ///   <c>true</c> if [is key up] [the specified key code]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsKeyUp(int keyCode) const;
 
 	
-	bool IsMouseDownRight() const;
+  /// <summary>
+  /// Determines whether [is key pressed] [the specified key code].
+  /// </summary>
+  /// <param name="keyCode">The key code.</param>
+  /// <returns>
+  ///   <c>true</c> if [is key pressed] [the specified key code]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsKeyPressed(int keyCode) const;
+	
+
+  /// <summary>
+  /// Determines whether [is key released] [the specified key code].
+  /// </summary>
+  /// <param name="keyCode">The key code.</param>
+  /// <returns>
+  ///   <c>true</c> if [is key released] [the specified key code]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsKeyReleased(int keyCode) const;
+	
+
+  /// <summary>
+  /// Determines whether [is mouse down left].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse down left]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMouseDownLeft() const;
 
 	
-	bool IsMouseUpRight() const;
+  /// <summary>
+  /// Determines whether [is mouse up left].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse up left]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMouseUpLeft() const;
 
 	
-	bool IsMousePressedRight() const;
+  /// <summary>
+  /// Determines whether [is mouse pressed left].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse pressed left]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMousePressedLeft() const;
 
 	
-	bool IsMouseReleasedRight() const;
+  /// <summary>
+  /// Determines whether [is mouse released left].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse released left]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMouseReleasedLeft() const;
+
+	
+  /// <summary>
+  /// Determines whether [is mouse down right].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse down right]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMouseDownRight() const;
+
+	
+  /// <summary>
+  /// Determines whether [is mouse up right].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse up right]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMouseUpRight() const;
+
+	
+  /// <summary>
+  /// Determines whether [is mouse pressed right].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse pressed right]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMousePressedRight() const;
+
+	
+  /// <summary>
+  /// Determines whether [is mouse released right].
+  /// </summary>
+  /// <returns>
+  ///   <c>true</c> if [is mouse released right]; otherwise, <c>false</c>.
+  /// </returns>
+  bool IsMouseReleasedRight() const;
 
 
-	int32_t MouseDeltaX() const;
+  /// <summary>
+  /// Gets the change in x.
+  /// </summary>
+  /// <returns>int32_t</returns>
+  int32_t MouseDeltaX() const;
 
 
-	int32_t MouseDeltaY() const;
+  /// <summary>
+  /// Gets the change in y.
+  /// </summary>
+  /// <returns>int32_t</returns>
+  int32_t MouseDeltaY() const;
 
 private:
 
-	std::vector<MouseEvent> m_eventQueue;
-	int m_keyStateSize = 0;
+  /// <summary>
+  /// The event queue
+  /// </summary>
+  std::vector<MouseEvent> m_eventQueue;
 
-	void ProcessButtonEvent(SDL_MouseButtonEvent _event);
-	void ProcessMotionEvent(SDL_MouseMotionEvent _event);
-	void ProcessEventQueue();
+  /// <summary>
+  /// The key state size
+  /// </summary>
+  int m_keyStateSize = 0;
+
+  /// <summary>
+  /// Processes the button event.
+  /// </summary>
+  /// <param name="_event">The event.</param>
+  void ProcessButtonEvent(SDL_MouseButtonEvent _event);
+
+  /// <summary>
+  /// Processes the motion event.
+  /// </summary>
+  /// <param name="_event">The event.</param>
+  void ProcessMotionEvent(SDL_MouseMotionEvent _event);
+
+  /// <summary>
+  /// Processes the event queue.
+  /// </summary>
+  void ProcessEventQueue();
+
 };
 #endif

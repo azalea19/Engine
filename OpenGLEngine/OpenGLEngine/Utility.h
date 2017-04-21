@@ -6,7 +6,7 @@
 /**
 * @file   Utility.h
 * @Author Maddisen Topaz, Elizabeth Haynes
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The model loader.
 *
 * The utility file contains the various utility functions required for various classes.

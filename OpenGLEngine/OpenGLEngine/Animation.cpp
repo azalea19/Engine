@@ -25,9 +25,9 @@ float Animation::GetTicksPerSecond() const
   return m_ticksPerSecond;
 }
 
-BoneKeySequence* const& Animation::GetBoneKeySequence(int boneID) const
+BoneKeySequence const& Animation::GetBoneKeySequence(int boneID) const
 {
-  return m_boneKeyFrames.at(boneID);
+  return *m_boneKeyFrames.at(boneID);
 }
 
 mat4 Animation::GetBoneTransform(int boneID, float time) const

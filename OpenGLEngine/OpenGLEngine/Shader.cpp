@@ -105,7 +105,7 @@ void Shader::SetupLocations(std::vector<string> const& custom_attributes, std::v
 	}
 }
 
-string Shader::GetName() const
+string const& Shader::GetName() const
 {
 	return m_name;
 }

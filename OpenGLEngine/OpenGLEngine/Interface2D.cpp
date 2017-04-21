@@ -6,6 +6,7 @@
 #include "ShaderLibrary.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include "Shader.h"
 
 static uint32_t* GetPixelData(SDL_Surface* source)
 {
@@ -105,7 +106,7 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
 
   ShaderLibrary::GetInstance().BindShader("orthoShader");
 
-  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
 
   GLuint gVBO;
   GLuint gUVBO;
@@ -221,7 +222,7 @@ void DrawImage(string const& filePath)
 
   ShaderLibrary::GetInstance().BindShader("orthoShader");
 
-  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
 
   GLuint gVBO;
   GLuint gUVBO;

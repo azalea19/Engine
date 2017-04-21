@@ -1,3 +1,7 @@
+
+
+/*
+
 #include "MainAPI.h"
 void MainAPI::RenderBase()
 {
@@ -12,9 +16,9 @@ void MainAPI::Initialise()
 	MainRename::MyInit();
 }
 
-void MainAPI::UpdateBase()
+bool MainAPI::UpdateBase()
 {
-	MainRename::Update();
+	return MainRename::Update();
 }
 void MainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
@@ -23,3 +27,4 @@ void MainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "render", RenderBase);
 	pContext->ExposeFunction(luaAPIName, "update", UpdateBase);
 }
+*/

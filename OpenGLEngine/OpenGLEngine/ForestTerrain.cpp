@@ -9,7 +9,7 @@ void ForestTerrain::SaveTerrainToOBJ(const string& filepath) const
 
 ForestTerrain::ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filePath, int density)
 {
-  m_pLand = new Terrain(terrainWidth, terrainHeight, heightScale, 1, filePath);
+  m_pLand = new Terrain(terrainWidth, terrainHeight, heightScale, filePath);
   GenerateForest();
 }
 

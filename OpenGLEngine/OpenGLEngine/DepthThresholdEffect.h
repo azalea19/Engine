@@ -4,6 +4,15 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file DepthThresholdEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief
+*
+*/
+
 class DepthThresholdEffect
 {
 public:
@@ -14,7 +23,7 @@ public:
 
 private:
 	FrameBuffer m_fb;
-	Shader const* m_pShader;
+	IShader const* m_pShader;
 };
 
 #endif // DepthThresholdEffect_h__

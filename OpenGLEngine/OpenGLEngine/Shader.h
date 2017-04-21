@@ -5,11 +5,12 @@
 #include <unordered_map>
 #include <typeinfo>
 #include <GL/glew.h>
+#include "IShader.h"
 
 /**
 * @file   Shader.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The shader struct.
 *
 * The shader struct contains all of the data relating to a particular shader program to be stored in the shader library
@@ -33,121 +34,175 @@ enum Attribute_Location
   AL_VertexColours = 6,
 };
 
-class Shader
+class Shader : public IShader
 {
 public:
 
-	Shader(string const& name);
-	Shader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
-	~Shader();
+  /// <summary>
+  /// Initializes a new instance of the <see cref="Shader"/> class.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  Shader(string const& name);
+	
+  /// <summary>
+  /// Initializes a new instance of the <see cref="Shader"/> class.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="vertFilePath">The vert file path.</param>
+  /// <param name="fragFilePath">The frag file path.</param>
+  /// <param name="attributes">The attributes.</param>
+  /// <param name="uniforms">The uniforms.</param>
+  Shader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
+	
+  /// <summary>
+  /// Finalizes an instance of the <see cref="Shader"/> class.
+  /// </summary>
+  ~Shader();
 
 
-	void Load(string const& vertFilePath,string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
+  /// <summary>
+  /// Loads the specified shader files.
+  /// </summary>
+  /// <param name="vertFilePath">The vert file path.</param>
+  /// <param name="fragFilePath">The frag file path.</param>
+  /// <param name="attributes">The attributes.</param>
+  /// <param name="uniforms">The uniforms.</param>
+  void Load(string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms);
 
 
-	void Bind() const;
+  /// <summary>
+  /// Binds this instance.
+  /// </summary>
+  virtual void Bind() const override;
 
 
-	void Setup();
+  /// <summary>
+  /// Setups this instance.
+  /// </summary>
+  void Setup();
 
 
-	void SetupLocations(std::vector<string> const& custom_attributes, std::vector<string> const& custom_uniforms);
+  /// <summary>
+  /// Setups the locations.
+  /// </summary>
+  /// <param name="custom_attributes">The custom attributes.</param>
+  /// <param name="custom_uniforms">The custom uniforms.</param>
+  void SetupLocations(std::vector<string> const& custom_attributes, std::vector<string> const& custom_uniforms);
 
 
-	string GetName() const;
+  /// <summary>
+  /// Gets the name.
+  /// </summary>
+  /// <returns></returns>
+  virtual string const& GetName() const override;
 
 
-	unsigned int Attribute(string const& name) const;
+  /// <summary>
+  /// Returns the attribute with the specified name.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>int</returns>
+  virtual unsigned int Attribute(string const& name) const override;
 
 
-	unsigned int Uniform(string const& name) const;
+  /// <summary>
+  /// Returns the uniform with the specified name.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>int</returns>
+  virtual unsigned int Uniform(string const& name) const override;
 
-	bool HasAttribute(string const& name) const;
+  /// <summary>
+  /// Determines whether the specified shader has attribute.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>
+  ///   <c>true</c> if the specified name has attribute; otherwise, <c>false</c>.
+  /// </returns>
+  virtual bool HasAttribute(string const& name) const override;
 
 
-	bool HasUniform(string const& name) const;
+  /// <summary>
+  /// Determines whether the specified shader has uniform.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <returns>
+  ///   <c>true</c> if the specified name has uniform; otherwise, <c>false</c>.
+  /// </returns>
+  virtual bool HasUniform(string const& name) const override;
 
 
-	template<typename T>
-	void TransmitUniform(string const& uniformName, T const& value) const
+	virtual void TransmitUniform(string const& uniformID, float const& value) const override
 	{
-		if (HasUniform(uniformName))
-			TransmitUniform(Uniform(uniformName), value);
-		else
-			printf("No uniform with name %s", uniformName.c_str());
+    int uniformIDint = Uniform(uniformID);
+		glUniform1f(uniformIDint, value);
+	}
+
+	virtual void TransmitUniform(string const& uniformID, int const& value) const override
+	{
+    int uniformIDint = Uniform(uniformID);
+		glUniform1i(uniformIDint, value);
 	}
 
 
-	template <typename T>
-	void TransmitUniform(int uniformID, T const& value) const
+	virtual void TransmitUniform(string const& uniformID, mat4 const& matrix) const override
 	{
-		printf("Transmit uniform not defined for this type %s", typeid(T).name());
+    int uniformIDint = Uniform(uniformID);
+		glUniformMatrix4fv(uniformIDint,1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 
-	template <>
-	void TransmitUniform(int uniformID, float const& value) const
+	virtual void TransmitUniform(string const& uniformID, vec3 const& vector) const override
 	{
-		glUniform1f(uniformID, value);
+    int uniformIDint = Uniform(uniformID);
+		glUniform3fv(uniformIDint, 1, glm::value_ptr(vector));
 	}
 
-	template <>
-	void TransmitUniform(int uniformID, int const& value) const
-	{
-		glUniform1i(uniformID, value);
-	}
-
-
-	template <>
-	void TransmitUniform(int uniformID, mat4 const& matrix) const
-	{
-		glUniformMatrix4fv(uniformID,1, GL_FALSE, glm::value_ptr(matrix));
-	}
-
-
-	template <>
-	void TransmitUniform(int uniformID, vec3 const& vector) const
-	{
-		glUniform3fv(uniformID, 1, glm::value_ptr(vector));
-	}
-
-  template <>
-  void TransmitUniform(int uniformID, vec2 const& vector) const
+  virtual void TransmitUniform(string const& uniformID, vec2 const& vector) const override
   {
-    glUniform2fv(uniformID, 1, glm::value_ptr(vector));
+    int uniformIDint = Uniform(uniformID);
+    glUniform2fv(uniformIDint, 1, glm::value_ptr(vector));
   }
 
-	template<typename T>
-	void TransmitUniformArray(string const& uniformName, T* value, int count) const
+	virtual void TransmitUniformArray(string const& uniformID, mat4* matrix, int count) const override
 	{
-		if (HasUniform(uniformName))
-			TransmitUniformArray(Uniform(uniformName), value, count);
-		else
-			printf("No uniform with name %s", uniformName.c_str());
-	}
 
-	template <typename T>
-	void TransmitUniformArray(int uniformID, T* value, int count) const
-	{
-		printf("Transmit uniform not defined for this type %s", typeid(T).name());
-	}
-
-	template <>
-	void TransmitUniformArray(int uniformID, mat4* matrix, int count) const
-	{
-		glUniformMatrix4fv(uniformID, count, GL_FALSE, (GLfloat*)matrix);
+    int uniformIDint = Uniform(uniformID);
+		glUniformMatrix4fv(uniformIDint, count, GL_FALSE, (GLfloat*)matrix);
 	}
 
 
 private:
 
-	string m_name;
-	unsigned int m_uid;
-	const char* m_pVertex;
-	const char* m_pFragment;
+  /// <summary>
+  /// The m name
+  /// </summary>
+  string m_name;
 
-	std::unordered_map<string, int> m_attributes;
-	std::unordered_map<string, int> m_uniforms;
+  /// <summary>
+  /// The shaders ID
+  /// </summary>
+  unsigned int m_uid;
+
+  /// <summary>
+  /// The vertex shader
+  /// </summary>
+  const char* m_pVertex;
+
+  /// <summary>
+  /// The fragment shader
+  /// </summary>
+  const char* m_pFragment;
+
+  /// <summary>
+  /// The attributes
+  /// </summary>
+  std::unordered_map<string, int> m_attributes;
+
+  /// <summary>
+  /// The uniforms
+  /// </summary>
+  std::unordered_map<string, int> m_uniforms;
 
 };
 

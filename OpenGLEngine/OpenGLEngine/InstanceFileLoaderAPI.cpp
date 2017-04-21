@@ -14,15 +14,16 @@ void InstanceFileLoaderAPI::Expose(LuaContextHandle contextHandle, string luaAPI
 
 void InstanceFileLoaderAPI::LoadFile(LoaderHandle handle, string filePath)
 {
-	LuaInstanceFileLoaderManager().GetInstance(handle)->LoadFile(filePath);
+	InstanceManager<InstanceFileLoader>().GetInstance().GetInst(handle)->LoadFile(filePath);
+	//LuaInstanceFileLoaderManager().GetInstance(handle)->LoadFile(filePath);
 }
 
 InstanceHandle InstanceFileLoaderAPI::ReadFromLoadedFile(LoaderHandle handle, int index)
 {
-	return LuaInstanceFileLoaderManager().GetInstance(handle)->ReadFromLoadedFile(index);
+	return InstanceManager<InstanceFileLoader>().GetInstance().GetInst(handle)->ReadFromLoadedFile(index);
 }
 
 int InstanceFileLoaderAPI::GetFileLength(LoaderHandle handle)
 {
-	return LuaInstanceFileLoaderManager().GetInstance(handle)->GetLength();
+	return InstanceManager<InstanceFileLoader>().GetInstance().GetInst(handle)->GetLength();
 }

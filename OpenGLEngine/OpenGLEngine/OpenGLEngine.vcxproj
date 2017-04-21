@@ -111,7 +111,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -149,7 +149,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -171,11 +171,13 @@
     <ClCompile Include="BloomEffect.cpp" />
     <ClCompile Include="BlurEffect.cpp" />
     <ClCompile Include="BoneKeySequence.cpp" />
+    <ClCompile Include="CameraAPI.cpp" />
     <ClCompile Include="DepthThresholdEffect.cpp" />
     <ClCompile Include="DirectionalLightingEffect.cpp" />
+    <ClCompile Include="DXEngine.cpp" />
+    <ClCompile Include="EngineAPI.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
-    <ClCompile Include="IEngine.cpp" />
-    <ClCompile Include="InstanceFileLoaderAPI.cpp" />
+    <ClCompile Include="GLEngine.cpp" />
     <ClCompile Include="ForestTerrain.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="FXAAEffect.cpp" />
@@ -186,15 +188,19 @@
     <ClCompile Include="IMesh.cpp" />
     <ClCompile Include="IMeshCollection.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InputManagerAPI.cpp" />
+    <ClCompile Include="InstanceManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="LuaContext.cpp" />
-    <ClCompile Include="LuaInstanceFileLoaderManager.cpp" />
     <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="LuaVectorUtility.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainAPI.cpp" />
-    <ClCompile Include="MainRename.cpp" />
+    <ClCompile Include="MainRename.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MathAPI.cpp" />
     <ClCompile Include="MCamera.cpp" />
     <ClCompile Include="ModelLibrary.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -207,9 +213,8 @@
     <ClCompile Include="ModelLibraryAPI.cpp" />
     <ClCompile Include="MPlayer.cpp" />
     <ClCompile Include="MultiplicativeBlendEffect.cpp" />
-    <ClCompile Include="View.cpp" />
     <ClCompile Include="ObjectInstanceAPI.cpp" />
-    <ClCompile Include="InstanceFileLoader.cpp" />
+    <ClCompile Include="OBJWriter.cpp" />
     <ClCompile Include="PrintAPI.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RayEffect.cpp" />
@@ -232,15 +237,20 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLibrary.cpp" />
+    <ClCompile Include="TimeAPI.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="CameraAPI.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
+    <ClInclude Include="DXEngine.h" />
+    <ClInclude Include="EngineAPI.h" />
+    <ClInclude Include="GLEngine.h" />
     <ClInclude Include="IEngine.h" />
-    <ClInclude Include="InstanceFileLoaderAPI.h" />
+    <ClInclude Include="IModelLibrary.h" />
     <ClInclude Include="ForestTerrain.h" />
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IAnimatable.h" />
@@ -259,21 +269,25 @@
     <ClInclude Include="IAnimatedRenderable.h" />
     <ClInclude Include="IMesh.h" />
     <ClInclude Include="IMeshCollection.h" />
+    <ClInclude Include="InputManagerAPI.h" />
+    <ClInclude Include="InstanceManager.h" />
+    <ClInclude Include="IRenderableObject.h" />
+    <ClInclude Include="IShader.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LuaAPI.h" />
     <ClInclude Include="LuaContext.h" />
-    <ClInclude Include="LuaInstanceFileLoaderManager.h" />
     <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="LuaManager.h" />
-    <ClInclude Include="MainAPI.h" />
-    <ClInclude Include="MainRename.h" />
+    <ClInclude Include="LuaVectorUtility.h" />
+    <ClInclude Include="MainRename.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MathAPI.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLibraryAPI.h" />
     <ClInclude Include="MultiplicativeBlendEffect.h" />
-    <ClInclude Include="View.h" />
     <ClInclude Include="ObjectInstanceAPI.h" />
-    <ClInclude Include="InstanceFileLoader.h" />
     <ClInclude Include="OBJWriter.h" />
     <ClInclude Include="PrintAPI.h" />
     <ClInclude Include="Random.h" />
@@ -302,6 +316,7 @@
     <ClInclude Include="TextureLibrary.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TimeAPI.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
@@ -318,9 +333,10 @@
     <None Include="DirectionalLightingEffect.vert" />
     <None Include="FXAAEffect.frag" />
     <None Include="FXAAEffect.vert" />
-    <None Include="Game.lua" />
     <None Include="HDRSplitEffect.frag" />
     <None Include="HDRSplitEffect.vert" />
+    <None Include="LuaScripts\Engine.lua" />
+    <None Include="LuaScripts\Game.lua" />
     <None Include="MultiplicativeBlendEffect.frag" />
     <None Include="MultiplicativeBlendEffect.vert" />
     <None Include="orthoShader.frag" />

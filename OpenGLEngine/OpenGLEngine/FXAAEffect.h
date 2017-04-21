@@ -3,6 +3,16 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file FXAAEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief Accepts an input texture and applies a fast approximate anti aliasing effect to smooth edges.
+*
+*
+*/
+
 class FXAAEffect
 {
 public:
@@ -13,6 +23,6 @@ public:
 
 private:
   FrameBuffer m_fb;
-  Shader const* m_pShader;
+  IShader const* m_pShader;
 };
 

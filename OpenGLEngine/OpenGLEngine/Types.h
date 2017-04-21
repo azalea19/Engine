@@ -8,7 +8,7 @@
 /**
 * @file   Types.h
 * @Author Maddisen Topaz
-* @date   S2, 2016
+* @date   S1, 2017
 * @brief  The 
 *
 * The types file contains the various types required in various files.

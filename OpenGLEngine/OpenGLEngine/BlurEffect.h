@@ -4,6 +4,16 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 
+
+/**
+* @file BlurEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief Accepts an input texture and creates a box blur effect of the specified radius.
+*
+*
+*/
+
 class BlurEffect
 {
 public:
@@ -14,7 +24,7 @@ public:
 
 private:
   FrameBuffer m_fb;
-  Shader const* m_pShader;
+  IShader const* m_pShader;
 };
 
 #endif // BlurEffect_h__

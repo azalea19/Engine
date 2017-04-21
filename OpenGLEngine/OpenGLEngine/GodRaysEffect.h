@@ -8,6 +8,14 @@
 #include "Shader.h"
 
 
+/**
+* @file GodRaysEffect.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief Accepts an input texture and uses a combination of effects to simulate a god rays effect.
+*
+*/
+
 class GodRaysEffect
 {
 public:
@@ -23,7 +31,7 @@ private:
 	RayEffect m_rayEffect;
 	AdditiveBlendEffect m_additiveBlendEffect;
 
-	Shader const* m_pShader;
+	IShader const* m_pShader;
 
 	GLuint depthMaskTex;
 	GLuint rayTex;

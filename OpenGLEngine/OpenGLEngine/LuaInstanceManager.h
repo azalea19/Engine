@@ -8,21 +8,44 @@
 #include "ModelLibrary.h"
 
 
+/**
+* @file LuaInstanceManager.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief The lua instance manager keeps track of local copies of object instances that have been created by the lua.
+*
+*/
+
 typedef int InstanceHandle;
 
 
-static class LuaInstanceManager : public Singleton<LuaInstanceManager>
+class LuaInstanceManager : public Singleton<LuaInstanceManager>
 {
 //private:
 	//static std::unordered_map<int,ObjectInstance*> m_instanceMap;
 	//static int m_lastIndex;
 
 public:
-	/// Returns handle to new object instance of given model name.
-	static InstanceHandle AddNewInstance(string const& modelName);
 
-	static ObjectInstance* GetInstance(int instanceHandle);
+  /// <summary>
+  /// Adds the new instance.
+  /// </summary>
+  /// <param name="modelName">Name of the model.</param>
+  /// <returns>InstanceHandle</returns>.
+  static InstanceHandle AddNewInstance(string const& modelName);
 
-	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
+  /// <summary>
+  /// Gets the instance.
+  /// </summary>
+  /// <param name="instanceHandle">The instance handle.</param>
+  /// <returns></returns>
+  static ObjectInstance* GetInstance(int instanceHandle);
+
+  /// <summary>
+  /// Exposes the API function.
+  /// </summary>
+  /// <param name="contextHandle">The context handle.</param>
+  /// <param name="luaAPIName">Name of the lua API.</param>
+  static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
 };
