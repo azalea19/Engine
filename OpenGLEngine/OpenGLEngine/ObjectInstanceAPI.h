@@ -21,6 +21,10 @@ class ObjectInstanceAPI
 {
 public:
 
+	static void SetOrientation(InstanceHandle instHandle, float in1, float in2, float in3);
+	static void SetScale(InstanceHandle instHandle, float in1, float in2, float in3);
+	static void SetAnimation(InstanceHandle instHandle, bool isAnimated);
+
   /// <summary>
   /// Gets the instance.
   /// </summary>

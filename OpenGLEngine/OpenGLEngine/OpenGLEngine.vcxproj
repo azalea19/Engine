@@ -235,6 +235,7 @@
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TerrainAPI.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLibrary.cpp" />
     <ClCompile Include="TimeAPI.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TerrainAPI.h" />
     <ClInclude Include="TextureLibrary.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Texture.h" />

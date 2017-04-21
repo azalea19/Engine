@@ -12,6 +12,7 @@
 #include "CameraAPI.h"
 #include "EngineAPI.h"
 #include "TimeAPI.h"
+#include "TerrainAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -46,6 +47,7 @@ void LuaManager::Initialize()
   luaManager.AddAPI("engineAPI", EngineAPI::Expose);
   luaManager.AddAPI("cameraAPI", CameraAPI::Expose);
   luaManager.AddAPI("timeAPI", TimeAPI::Expose);
+  luaManager.AddAPI("terrainAPI", TerrainAPI::Expose);
 
 }
 
