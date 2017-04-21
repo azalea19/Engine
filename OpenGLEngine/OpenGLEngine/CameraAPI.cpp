@@ -1,4 +1,5 @@
 #include "CameraAPI.h"
+#include "MCamera.h"
 
 InstanceHandle CameraAPI::AddNewInstance()
 {
@@ -25,48 +26,51 @@ void CameraAPI::SetPitch(InstanceHandle handle, float pitch)
 	InstanceManager<MCamera>().GetInstance().GetInst(handle)->SetPitch(pitch);
 
 }
+
 float CameraAPI::GetYaw(InstanceHandle handle)
 {
 	return InstanceManager<MCamera>().GetInstance().GetInst(handle)->GetYaw();
 
 }
+
 float CameraAPI::GetPitch(InstanceHandle handle)
 {
 	return InstanceManager<MCamera>().GetInstance().GetInst(handle)->GetPitch();
 
 }
-LuaRef CameraAPI::Forward(InstanceHandle handle)
+
+LuaRef CameraAPI::Forward(InstanceHandle handle, LuaContextHandle contextHandle)
 {
-	vec3 forward = InstanceManager<MCamera>().GetInstance().GetInst(handle)->Forward();
-	return ToLuaTable(forward);
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->Forward(), contextHandle);
 
 }
-LuaRef CameraAPI::Right(InstanceHandle handle)
+
+LuaRef CameraAPI::Right(InstanceHandle handle, LuaContextHandle contextHandle)
 {
-	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->Right());
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->Right(), contextHandle);
 
 }
+
 void CameraAPI::SetPosition(InstanceHandle handle, float x, float y, float z)
 {
 	InstanceManager<MCamera>().GetInstance().GetInst(handle)->SetPosition( vec3(x,y,z));
 
 }
-
-LuaRef CameraAPI::GetPosition(InstanceHandle handle)
+LuaRef CameraAPI::GetPosition(InstanceHandle handle, LuaContextHandle contextHandle)
 {
-	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->GetTranslation());
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->GetTranslation(),contextHandle);
 
 }
 
-
-LuaRef CameraAPI::GetViewMatrix(InstanceHandle handle)
+LuaRef CameraAPI::GetViewMatrix(InstanceHandle handle, LuaContextHandle contextHandle)
 {
-	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->getViewMatrix());
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->getViewMatrix(), contextHandle);
 
 }
-LuaRef CameraAPI::GetProjectionMatrix(InstanceHandle handle)
+
+LuaRef CameraAPI::GetProjectionMatrix(InstanceHandle handle, LuaContextHandle contextHandle)
 {
-	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->getProjectionMatrix());
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->getProjectionMatrix(), contextHandle);
 
 }
 

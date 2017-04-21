@@ -56,7 +56,7 @@ void FrameBuffer::BindToScreen(FrameBufferBindMode bufferMode /*= FBM_ReadWrite*
 
 void FrameBuffer::Display(GLuint texture)
 {
-  const Shader* shader = ShaderLibrary::GetInstance().GetShader("TextureDisplay");
+  const IShader* shader = ShaderLibrary::GetInstance().GetShader("TextureDisplay");
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   FrameBuffer::BindToScreen();

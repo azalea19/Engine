@@ -170,12 +170,6 @@
     <ClCompile Include="SceneDecomposeEffect.cpp">
       <Filter>Source\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="LuaManager.cpp">
-      <Filter>Source\Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="LuaContext.cpp">
-      <Filter>Source\Lua</Filter>
-    </ClCompile>
     <ClCompile Include="PrintAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
@@ -257,20 +251,26 @@
     <ClCompile Include="MathAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="LuaVectorUtility.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManagerAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="InstanceManager.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="TimeAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
     <ClCompile Include="CameraAPI.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="TimeAPI.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="InputManagerAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceManager.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaVectorUtility.cpp">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaManager.cpp">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaContext.cpp">
+      <Filter>Source\Lua\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,9 +376,6 @@
     <ClInclude Include="SceneDecomposeEffect.h">
       <Filter>Source\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="LuaManager.h">
-      <Filter>Source\Lua</Filter>
-    </ClInclude>
     <ClInclude Include="LuaAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
@@ -449,9 +446,6 @@
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
     <ClInclude Include="MainRename.h" />
-    <ClInclude Include="LuaContext.h">
-      <Filter>Source\Lua</Filter>
-    </ClInclude>
     <ClInclude Include="LuaInstanceManager.h">
       <Filter>Source\Lua\Managers</Filter>
     </ClInclude>
@@ -485,10 +479,27 @@
     <ClInclude Include="IModelLibrary.h">
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="LuaVectorUtility.h" />
-    <ClInclude Include="InputManagerAPI.h" />
-    <ClInclude Include="InstanceManager.h" />
-    <ClInclude Include="TimeAPI.h" />
+    <ClInclude Include="InputManagerAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="InstanceManager.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaVectorUtility.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeAPI.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaManager.h">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaContext.h">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IShader.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -578,6 +589,8 @@
     <None Include="LuaScripts\Engine.lua">
       <Filter>Source\Lua\Scripts</Filter>
     </None>
-    <None Include="LuaScripts\Game.lua" />
+    <None Include="LuaScripts\Game.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include "Singleton.h"
 
+
 /**
 * @file   ShaderLibrary.h
 * @Author Maddisen Topaz
@@ -15,13 +16,13 @@
 * The shader library contains all of the various shaders we have access to in the program.
 */
 
-struct ShaderLibrary : Singleton<ShaderLibrary>
+struct ShaderLibrary : public Singleton<ShaderLibrary>
 {
 
   /// <summary>
   /// The shaders
   /// </summary>
-  std::unordered_map<string, Shader*> shaders;
+  std::unordered_map<string, IShader*> shaders;
 
 
   /// <summary>
@@ -44,7 +45,7 @@ struct ShaderLibrary : Singleton<ShaderLibrary>
   /// </summary>
   /// <param name="name">The name.</param>
   /// <returns>Shader</returns>
-  const Shader* GetShader(string const& name) const;
+  const IShader* GetShader(string const& name) const;
 
 	
   /// <summary>
@@ -61,10 +62,10 @@ struct ShaderLibrary : Singleton<ShaderLibrary>
 
 
   /// <summary>
-  /// Currents the shader bound.
+  /// Return the current shader bound.
   /// </summary>
   /// <returns>Shader</returns>
-  const Shader* CurrentShader() const;
+  const IShader* CurrentShader() const;
 
 	
   /// <summary>

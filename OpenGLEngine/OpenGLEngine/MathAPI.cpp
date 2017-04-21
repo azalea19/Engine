@@ -13,51 +13,21 @@ static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
   pContext->AddClassConstructor<vec3, void(*) (void)>(luaAPIName, "vec3");
 }
 
-LuaRef ToLuaTable(vec3 value, LuaState* luaState)
+LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
 {
+  LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  table[1] = value.x;
+  table[2] = value.y;
+  table[3] = value.z;
 
-	LuaRef table = newTable(luaState);
-
-	table[1] = value.x;
-	table[2] = value.y;
-	table[3] = value.z;
-	/*
-	//table["x"] = "a";
-
-	const float *pSource = (const float*)glm::value_ptr(value);
-
-
-	for (int i = 0; i < 3; i++)
-	{
-		table[i + i] = pSource[i];
-	}
-	*/
-	return table;
-
-	/*
-  LuaRef table = newTable(luaState);
-  table[0] = value.x;
-  table[1] = value.y;
-  table[2] = value.z;
-
-  return table;*/
+  return table;
 }
 
 
-LuaRef ToLuaTable(vec3 value)
+LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 {
-	LuaState * state = LuaManager::GetInstance().GetContext(0)->GetLuaState();
-
-	return ToLuaTable(value, state);
-}
-
-
-LuaRef ToLuaTable(mat4 value, LuaState* luaState)
-{
-  LuaRef table = newTable(luaState);
-
-  //table["x"] = "a";
-
+  LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+ 
   const float *pSource = (const float*)glm::value_ptr(value);
  
 
@@ -67,45 +37,31 @@ LuaRef ToLuaTable(mat4 value, LuaState* luaState)
   }
 
   return table;
+ 
 }
-
-
-
-LuaRef ToLuaTable(mat4 value)
-{
-	LuaState * state = LuaManager::GetInstance().GetContext(0)->GetLuaState();
-
-	return ToLuaTable(value, state);
-}
-
 
 template<>
 vec3 FromLuaTable<vec3>(LuaRef value)
 {
 	vec3 result;
-
-	result[i - 1] = values[i];
-	//float num = lua_tonumber(value, -1);
-	//vals[i - 1] = 0;
-}
-  return glm::make_vec3(vals);
+	for (int i = 0; i < 3; i++)
+	{
+		result[i] = value[i + 1];
+	}
+	return result;
 }
 
 template<> mat4 FromLuaTable<mat4>(LuaRef value)
 {
-	float vals[16];
+  float result[16];
+
   for (int i = 1; i <= 16; i++)
   {
-	  printf(value[i]);
-	  float num = lua_tonumber(value,-1);
-	  vals[i - 1] = num;
+    result[i - 1] = value[i];
   }
-
-  return glm::make_mat4(vals);
-
-
-
+  return glm::make_mat4(result);
 }
+
 
 void MathAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {

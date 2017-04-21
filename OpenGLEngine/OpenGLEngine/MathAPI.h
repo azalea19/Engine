@@ -21,18 +21,10 @@ T FromLuaTable(LuaRef value)
 }
 
 template<> vec3 FromLuaTable<vec3>(LuaRef value);
-LuaRef ToLuaTable(vec3 value, LuaState * luaState);
+LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle);
 
 template<> mat4 FromLuaTable<mat4>(LuaRef value);
-LuaRef ToLuaTable(mat4 value, LuaState * luaState);
-
-LuaRef ToLuaTable(vec3 value);
-LuaRef ToLuaTable(mat4 value);
-
-
-/// Uses the current lua state
-LuaRef ToLuaTable(vec3 value);
-
+LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle);
 
 
 #endif // MathAPI_h__

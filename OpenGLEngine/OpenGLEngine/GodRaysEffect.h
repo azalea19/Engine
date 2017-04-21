@@ -31,7 +31,7 @@ private:
 	RayEffect m_rayEffect;
 	AdditiveBlendEffect m_additiveBlendEffect;
 
-	Shader const* m_pShader;
+	IShader const* m_pShader;
 
 	GLuint depthMaskTex;
 	GLuint rayTex;

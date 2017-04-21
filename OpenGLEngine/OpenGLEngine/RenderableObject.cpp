@@ -37,7 +37,7 @@ void RenderableObject::SetFillMode(FillMode fillMode) const
 
 void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 {
-  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
   if (m_pModel->HasAnimation() && activeAnimation >= 0)
   {
     std::vector<glm::mat4> bones = m_pModel->GetBoneTransforms(activeAnimation, time);
@@ -52,7 +52,7 @@ void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 
 void RenderableObject::UploadMatrices(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
 {
-  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
 
   if (shader->HasUniform("WORLD_MATRIX"))
     shader->TransmitUniform("WORLD_MATRIX", worldMatrix);
@@ -206,7 +206,7 @@ void RenderableObject::BindMesh(int meshIndex) const
 
 void RenderableObject::BindMaterial(int meshIndex) const
 {
-  const Shader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
   
     string diffuseTexture = m_pModel->GetMeshTextureName(meshIndex, TT_Diffuse);
     
