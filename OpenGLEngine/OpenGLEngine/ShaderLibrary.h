@@ -7,6 +7,8 @@
 #include "Singleton.h"
 
 
+class IEngine;
+
 /**
 * @file   ShaderLibrary.h
 * @Author Maddisen Topaz
@@ -28,7 +30,7 @@ struct ShaderLibrary : public Singleton<ShaderLibrary>
   /// <summary>
   /// Initializes the shader library.
   /// </summary>
-  void InitShaderLibrary();
+  static void InitShaderLibrary(IEngine const *pEngine);
 
 
   /// <summary>
@@ -80,6 +82,8 @@ private:
   /// The name of the current shader.
   /// </summary>
   string m_currentShaderName;
+
+  IEngine const *m_pEngine;
 };
 
 

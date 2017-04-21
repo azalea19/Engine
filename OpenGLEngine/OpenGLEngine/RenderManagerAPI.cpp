@@ -1,8 +1,6 @@
 
 #include "RenderManagerAPI.h"
 
-
-
 SceneDecomposeEffect* pDecomposeEffect;
 DepthThresholdEffect* pThresholdEffect;
 GodRaysEffect* pRayEffect;
@@ -28,15 +26,12 @@ void RenderManagerAPI::AddObject(int object)
 {
 	ObjectInstance * obj = LuaInstanceManager::GetInstance(object);
 	RenderManager::GetInstance().AddObject(obj);
-
-
 }
 
 void RenderManagerAPI::Initialise()
 {
 
 	TextureLibrary::GetInstance().InitTextureLibrary();
-	ShaderLibrary::GetInstance().InitShaderLibrary();
 	//SoundManager::GetInstance().InitSoundManager();
 	FrameBuffer::Initialize();
 
@@ -67,24 +62,17 @@ void RenderManagerAPI::Initialise()
 
 void RenderManagerAPI::RenderFromCamera(int camID, float time)
 {
-	MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
-	mat4 world;
+	    MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
+	    mat4 world;
 
-	RenderManager rend = RenderManager::GetInstance();
-
+	    RenderManager rend = RenderManager::GetInstance();
 
 
 			static bool renderDepth = true;
 		
 		
-			
 			vec3 lightPos;
-			//float PI = 3.14;
-			/*
-			vec3 tr = pZombie->GetTranslation();
-			tr.z = -50 + 1.6f * time;
-			pZombie->SetTranslation(tr);
-			*/
+
 			lightPos.x = -cos(PI * time / 60) * 10000;
 			lightPos.y = sin(PI * time / 60) * 10000;
 		
@@ -133,8 +121,6 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 				FrameBuffer::Display(sceneTextures[4]);
 			}
 		
-
-
 }
 
 void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
@@ -144,8 +130,6 @@ void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "renderFromCamera", RenderFromCamera);
 	pContext->ExposeFunction(luaAPIName, "addObject", AddObject);
 	pContext->ExposeFunction(luaAPIName, "initialise", Initialise);
-
-
 
 	//pContext->ExposeFunction(luaAPIName, "testRender", TestRender);
 	//pContext->ExposeFunction(luaAPIName, "updatePlayer", UpdatePlayer);

@@ -5,7 +5,9 @@
 #include "GL/glew.h"
 #include "LuaManager.h"
 #include "SDL_ttf.h"
-
+#include "Shader.h"
+#include "RenderableObject.h"
+#include "Screen.h"
 
 IEngine* GLEngine::Create()
 {
@@ -48,6 +50,20 @@ void GLEngine::InitGlew()
   }
 }
 
+IShader* GLEngine::CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const
+{
+  return new Shader(name, vertFilePath, fragFilePath, attributes, uniforms);
+}
+
+IRenderableObject* GLEngine::CreateRenderableObject(string const& name, string const& filename) const
+{
+  return new RenderableObject(name, filename);
+}
+
+GLEngine::GLEngine()
+{
+}
+
 void GLEngine::CreateWindow()
 {
   m_screen = SDL_CreateWindow("Arch Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_screenWidth, m_screenHeight, SDL_WINDOW_OPENGL);
@@ -86,6 +102,9 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 {
   m_screenWidth = screenWidth;
   m_screenHeight = screenHeight;
+  vec2i xy = vec2i(screenWidth, screenHeight);
+  SetScreenDimensions(xy);
+  
   //Init SDL & create a window
   InitSDL();
 
@@ -103,12 +122,10 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 
   //Clear screen for rendering
   glClearColor(0, 0, 0, 1.f);
-}
 
-void GLEngine::SetScreenDimensions()
-{
 
 }
+
 
 void GLEngine::BeginRender()
 {
@@ -139,11 +156,8 @@ void GLEngine::EndUpdate()
 {
 }
 
-GLEngine::GLEngine()
-{
-}
-
 GLEngine::~GLEngine()
 {
 
 }
+

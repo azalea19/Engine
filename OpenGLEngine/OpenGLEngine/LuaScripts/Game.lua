@@ -219,10 +219,7 @@ end
 	    -- written by liz translated from maddys c++ code
 	    turnSpeed = 0.3
 	    moveSpeed = 0.5
-	
-
-        
-      
+	      
         --rotation
 	    origYaw = cameraAPI.getYaw(camera0,context.handle)
 	    origPitch = cameraAPI.getPitch(camera0,context.handle)
@@ -234,7 +231,7 @@ end
 	    cameraAPI.setYaw(camera0,origYaw + deltaYaw)
 	    cameraAPI.setPitch(camera0,origPitch+deltaPitch)
    
---translation   
+		--translation   
 	
 
         MOVE_SPEED = 1

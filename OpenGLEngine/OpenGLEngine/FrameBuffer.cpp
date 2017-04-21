@@ -14,8 +14,8 @@ void FrameBuffer::Initialize()
 {
   glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &FrameBuffer::MAX_COLOUR_ATTACHMENTS);
 
-  static float offsetX = 0.5f / SCREEN_WIDTH;
-  static float offsetY = 0.5f / SCREEN_HEIGHT;
+  static float offsetX = 0.5f / GetScreenDimensions().x;
+  static float offsetY = 0.5f / GetScreenDimensions().y;
 
   static vec2 verts[4] =
   {

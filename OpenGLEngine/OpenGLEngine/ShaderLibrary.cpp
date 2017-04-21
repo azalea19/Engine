@@ -1,13 +1,15 @@
 #include "ShaderLibrary.h"
 #include "Utility.h"
+#include "IEngine.h"
 
 
 static ShaderLibrary shaderLib;
 
 
-void ShaderLibrary::InitShaderLibrary()
+void ShaderLibrary::InitShaderLibrary(IEngine const *pEngine)
 {
 	ShaderLibrary& shaderLibrary = ShaderLibrary::GetInstance();
+  shaderLibrary.m_pEngine = pEngine;
 
 
 	shaderLibrary.AddShader("defaultShader", CreateVector(string("mvp")), CreateVector(string("position")));
@@ -27,8 +29,9 @@ void ShaderLibrary::InitShaderLibrary()
 
 void ShaderLibrary::AddShader(string const& name, std::vector<string> const& uniforms, std::vector<string> const& attributes)
 {
-	IShader* myShader = new Shader(name, name + ".vert", name + ".frag", attributes, uniforms);
-	shaders.emplace(name, myShader);
+	//IShader* myShader = new Shader(name, name + ".vert", name + ".frag", attributes, uniforms);
+  IShader* pShader = m_pEngine->CreateShader(name, name + ".vert", name + ".frag", attributes, uniforms);
+	shaders.emplace(name, pShader);
 }
 
 const IShader* ShaderLibrary::GetShader(string const& name) const

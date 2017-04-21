@@ -5,6 +5,7 @@ InstanceHandle CameraAPI::AddNewInstance()
 {
 	InstanceManager<MCamera> camMan = InstanceManager<MCamera>().GetInstance();
 	InstanceHandle handle = camMan.AddNewInstance();
+
 	camMan.GetInst(handle)->SetPosition(vec3(0,0,1));
 	camMan.GetInst(handle)->Forward();
 	camMan.GetInst(handle)->Left();

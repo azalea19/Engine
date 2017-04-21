@@ -326,10 +326,10 @@ GLuint LoadImage(const char * imagepath, bool useMips)
 GLuint CreateColourTexture(int width, int height)
 {
   if (width == 0)
-    width = SCREEN_WIDTH;
+    width = GetScreenDimensions().x;
 
   if (height == 0)
-    height = SCREEN_HEIGHT;
+    height = GetScreenDimensions().y;
 
   GLuint result = 0;
   glGenTextures(1, &result);
@@ -349,10 +349,10 @@ GLuint CreateColourTexture(int width, int height)
 GLuint CreateColourFTexture(int width, int height)
 {
   if (width == 0)
-    width = SCREEN_WIDTH;
+    width = GetScreenDimensions().x;
 
   if (height == 0)
-    height = SCREEN_HEIGHT;
+    height = GetScreenDimensions().y;
 
   GLuint result = 0;
   glGenTextures(1, &result);
@@ -372,10 +372,10 @@ GLuint CreateColourFTexture(int width, int height)
 GLuint CreateDepthTexture(int width, int height)
 {
   if (width == 0)
-    width = SCREEN_WIDTH;
+    width = GetScreenDimensions().x;
 
   if (height == 0)
-    height = SCREEN_HEIGHT;
+    height = GetScreenDimensions().y;
 
   GLuint result = 0;
   glGenTextures(1, &result);
@@ -397,10 +397,10 @@ GLuint CreateDepthTexture(int width, int height)
 GLuint CreateVec3Texture(int width, int height)
 {
   if (width == 0)
-    width = SCREEN_WIDTH;
+    width = GetScreenDimensions().x;
 
   if (height == 0)
-    height = SCREEN_HEIGHT;
+    height = GetScreenDimensions().y;
 
   GLuint result = 0;
   glGenTextures(1, &result);

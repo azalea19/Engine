@@ -479,9 +479,6 @@
     <ClInclude Include="IEngine.h">
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="IModelLibrary.h">
-      <Filter>Source\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="InputManagerAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>

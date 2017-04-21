@@ -251,7 +251,6 @@
     <ClInclude Include="EngineAPI.h" />
     <ClInclude Include="GLEngine.h" />
     <ClInclude Include="IEngine.h" />
-    <ClInclude Include="IModelLibrary.h" />
     <ClInclude Include="ForestTerrain.h" />
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IAnimatable.h" />
