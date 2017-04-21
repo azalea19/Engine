@@ -272,6 +272,9 @@
     <ClCompile Include="LuaContext.cpp">
       <Filter>Source\Lua\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="TerrainAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -497,6 +500,7 @@
     <ClInclude Include="IShader.h">
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="TerrainAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">

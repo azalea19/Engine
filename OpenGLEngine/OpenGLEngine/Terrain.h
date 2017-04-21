@@ -5,6 +5,8 @@
 #include "HeightMap.h"
 #include <GL/glew.h>
 #include "IMesh.h"
+#include "OBJWriter.h"
+#include <string>
 
 
 /**
@@ -74,7 +76,6 @@ public:
   /// </summary>
   /// <returns>std::vector<int></returns>
   virtual std::vector<int> const& GetIndices() const override;
-
 
 private:
 

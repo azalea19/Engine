@@ -1,3 +1,11 @@
+local Vector3 = require 'LuaScripts/Vector3'
+local gameObject = require 'LuaScripts/gameObject'
+local AABoundingBox = require 'LuaScripts/AABoundingBox'
+local npc = require 'LuaScripts/npc'
+require 'LuaScripts/FileIO'
+
+gameObjects = {}
+
 SDL_SCANCODE_W = 26
 SDL_SCANCODE_A = 4
 
@@ -23,6 +31,7 @@ function LoadAPIs()
     GetAPI(context.handle, 'engineAPI', 'engineAPI')
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
+    GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
 
 end
 
@@ -90,6 +99,101 @@ Scene =
 		--instances[instCount] = instHandle
 		--instCount = instCount + 1
 	end
+	
+function LoadInstances(filePath, fileType)
+	local fileData= read(filePath, ',')
+	local numRows = 0
+
+	for k,v in next, fileData do 
+		numRows = numRows + 1
+	end
+	for i = 1, numRows do
+		local instanceID= luaInstanceManager.addNewInstance(fileData[i][2])
+
+		bb = AABoundingBox.new(fileData[i][9],fileData[i][10],fileData[i][11],fileData[i][12],fileData[i][13],fileData[i][14])
+		pos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
+		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
+		sca = Vector3.new(fileData[i][15], fileData[i][16], fileData[i][17])
+		if(fileData[i][18] == 1) then
+			anim = true
+		else
+			anim = false
+		end
+
+		if(fileType == "gameObject") then
+			n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID)
+		else
+			if(fileType == "npc") then
+				n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20])
+			end
+		end
+		
+		table.insert(gameObjects, n)
+		objectInstanceAPI.setTranslation(instanceID,pos.X,pos.Y,pos.Z)
+		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
+		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
+		--objectInstanceAPI.setAnimation(instanceID,anim)
+		renderManagerAPI.addObject(instanceID)
+	end
+end
+	
+function SaveInstances(filePath, data, fileType)
+	local numRows = 0
+	
+	for k,v in next, data do 
+		numRows = numRows + 1
+	end
+
+	for i = 1, numRows do
+		if(fileType == "gameObject") then
+			--[[tmp = gameObjects[i]["name"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["model"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["position"]["X"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["position"]["Y"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["position"]["Z"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["direction"]["X"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["direction"]["Y"]
+			write(filePath, tmp)
+			write(filePath, ",")
+			
+			--tmp = gameObjects[i]["direction"]["Z"]
+			write(filePath, tmp)
+			write(filePath, "\n")]]
+		else
+			if(fileType == "npc") then
+				write(filePath, gameObjects[i]["model"])
+				write(filePath, ",")
+			end
+		end
+	end
+	
+	if(fileType == "gameObject") then
+		printAPI.print(numRows .. ' game objects loaded.\n')
+	else
+		if(fileType == "npc") then
+			printAPI.print(numRows .. ' NPCs loaded.\n')
+		end
+	end
+	
+end
 	
 -- Player --
 	Player = 
@@ -175,6 +279,17 @@ Scene =
         
 	end
 	
+	
+function LoadAssets()
+	--modelLibraryAPI.AddModel("ground","Assets/Models/Ground/Ground.obj",false)
+	--modelLibraryAPI.AddModel("tree","tree.obj", false)
+	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
+	terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
+	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
+	
+	printAPI.print('Assets loaded\n')
+end
 
 function Initialize()
 
@@ -188,10 +303,16 @@ function Initialize()
 	engineAPI.Create(0);
 	engineAPI.Initialise(1024,728);
 
+	LoadAssets()
+	
     printAPI.print('Initialising objects...\n')
 
-	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
-	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
+	LoadInstances("SaveData/GO_Data.csv", "gameObject")
+	--LoadInstances("SaveData/NPC_Data.csv", "npc")
+	
+	Terrain01 = luaInstanceManager.addNewInstance("Terrain")
+	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
+	
 	plant01 = luaInstanceManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant01,10,10,10)
 

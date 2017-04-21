@@ -46,11 +46,6 @@ public:
   virtual ~IEngine() = 0 {}
 
   /// <summary>
-  /// Sets the screen dimensions.
-  /// </summary>
-  virtual void SetScreenDimensions() = 0;
-
-  /// <summary>
   /// Begins the render.
   /// </summary>
   virtual void BeginRender() = 0;

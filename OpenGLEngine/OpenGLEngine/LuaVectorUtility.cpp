@@ -1,5 +1,7 @@
 #include "LuaVectorUtility.h"
 
+
+
 //vec3 * 1/magnitude
 LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHandle)
 {
@@ -44,8 +46,8 @@ LuaRef LuaVectorUtility::vec3_ScalarMultiply(LuaRef value, float scalar, LuaCont
 
 bool LuaVectorUtility::vec3_Equals(LuaRef a, LuaRef b)
 {
-	if (FromLuaTable<vec3>(a) == FromLuaTable<vec3>(b))
-		return true;
+    if (FromLuaTable<vec3>(a) == FromLuaTable<vec3>(b))
+      return true;
 	return false;
 }
 

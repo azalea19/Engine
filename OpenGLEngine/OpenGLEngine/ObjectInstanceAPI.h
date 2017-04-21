@@ -13,13 +13,37 @@ typedef int InstanceHandle;
 * @file ObjectInstanceAPI.h
 * @Author Maddisen Topaz
 * @date   S1, 2017
-* @brief An API that allows the user to expose the required functions to the Lua.
-*
+* @brief An API that exposes the required Object Instance functions to the Lua.
+* Comments - maddy & liz
+* API funcs SetAnimation - nathan
 */
 
 class ObjectInstanceAPI
 {
 public:
+	/// <summary>
+	/// Sets affine transformable orientation of object instance.
+	/// </summary>
+	/// <param name="instHandle">The instance handle.</param>
+	/// <param name="in1">x value.</param>
+	/// <param name="in2">The instance handle.</param>
+	/// <param name="in3">The instance handle.</param>
+
+
+	static void SetOrientation(InstanceHandle instHandle, float in1, float in2, float in3);
+	/// <summary>
+	/// Sets the scale.
+	/// </summary>
+	/// <param name="in1">Scale x value.</param>
+	/// <param name="in2">Scale y value.</param>
+	/// <param name="in3">Scale z value.</param>
+	static void SetScale(InstanceHandle instHandle, float in1, float in2, float in3);
+
+	/// <summary>
+	/// Sets the active animation.
+	/// </summary>
+	/// <param name="animationIndex">Index of the animation.</param>
+	static void SetAnimation(InstanceHandle instHandle, bool isAnimated);
 
   /// <summary>
   /// Gets the instance.

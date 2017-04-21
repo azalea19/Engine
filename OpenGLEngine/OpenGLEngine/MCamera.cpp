@@ -6,7 +6,7 @@
 MCamera::MCamera()
   : AffineTransformable()
 {
-	projectionMatrix = glm::perspective(DegToRad(90.f), (float)SCREEN_WIDTH / SCREEN_HEIGHT, NEAR_PLANE, FAR_PLANE);
+	projectionMatrix = glm::perspective(DegToRad(60.f), (float)GetScreenDimensions().x / (float)GetScreenDimensions().y, GetNearPlane(), GetFarPlane());
 }
 
 MCamera::MCamera(float fov, int screenwidth, int screenheight, float nearplane, float farplane)
@@ -16,7 +16,7 @@ MCamera::MCamera(float fov, int screenwidth, int screenheight, float nearplane, 
 
 void MCamera::SetClipPlanes(float near, float far)
 {
-  projectionMatrix = glm::perspective(DegToRad(90.f), (float)SCREEN_WIDTH / SCREEN_HEIGHT, near, far);
+  projectionMatrix = glm::perspective(DegToRad(60.f), (float)GetScreenDimensions().x / (float)GetScreenDimensions().y, near, far);
 }
 
 vec3 MCamera::Forward() const
