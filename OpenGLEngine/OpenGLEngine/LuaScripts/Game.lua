@@ -117,43 +117,47 @@ Scene =
 
 	function Player:update()
 	
-    
+        --printAPI.print("Updating player.\n")
+
 	    -- written by liz translated from maddys c++ code
 	    turnSpeed = 0.3
 	    moveSpeed = 0.5
 	
-      --[[
+      
         --rotation
 	    origYaw = cameraAPI.getYaw(camera0)
 	    origPitch = cameraAPI.getPitch(camera0)
-        mouseX = inputManagerAPI.mouseDeltaX
-        --printAPI.print(tostring(mouseX).."\n")
         
-	    deltaYaw =  - mouseX * turnSpeed
-      
-	    deltaPitch = -1 *inputManagerAPI.mouseDeltaY * turnSpeed
-	    cameraAPI.setYaw(originalYaw + deltaYaw)
-	    cameraAPI.setPitch(originalPitch+deltaPitch)
-          
+	    deltaYaw =  - inputManagerAPI.mouseDeltaX() * turnSpeed
+       
+	    deltaPitch = -inputManagerAPI.mouseDeltaY() * turnSpeed
+
+              
+
+	    cameraAPI.setYaw(camera0,origYaw + deltaYaw)
+	    cameraAPI.setPitch(camera0,origPitch+deltaPitch)
    
         --translation   
-	    
 	
         MOVE_SPEED = 1
-    ]]
-
+   
         oldPos = cameraAPI.getPosition(camera0);
 	    forward = cameraAPI.forward(camera0);
 	    right = cameraAPI.right(camera0);
 
-  	    translation = { x=0, y=0, z=0 };
+  	    translation = luaVectorUtility.getEmptyVec3()
 
+        --printAPI.print(translation[1] .. translation[2] .. translation[3] .. "\n")
 	
+
 	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_W) then
         	translation = luaVectorUtility.addVector(translation,forward)
+            printAPI.print(translation[1] .. translation[2] .. translation[3] .. "\n")
+
         end
 
-        --[[
+       
+
         if inputManagerAPI.isKeyDown(SDL_SCANCODE_A) then
         	translation = luaVectorUtility.subtractVector(translation,right)
         end
@@ -165,9 +169,8 @@ Scene =
 	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_D) then
         	translation = luaVectorUtility.addVector(translation,right)
         end
-        ]]
-            --[[
-        if not luaVectorUtility.equals(translation,luaVectorUtility.emptyVec3) then
+
+        if not luaVectorUtility.equals(translation,luaVectorUtility.getEmptyVec3) then
 
     
             translation = luaVectorUtility.normalize(translation.x,translation.y,translation.z)
@@ -179,7 +182,9 @@ Scene =
             cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);
           
 
-        end  ]]
+        end 
+
+        --printAPI.print("Completed player update.\n")
         
 	end
 	
@@ -332,6 +337,7 @@ function Render()
     
    -- printAPI.print("Rendering...\n");
 
+    --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
     renderManagerAPI.renderFromCamera(camera0,time)
 	--Lua render here
 

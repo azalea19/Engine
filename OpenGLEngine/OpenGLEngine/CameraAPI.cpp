@@ -2,7 +2,18 @@
 
 InstanceHandle CameraAPI::AddNewInstance()
 {
-	return InstanceManager<MCamera>().GetInstance().AddNewInstance();
+	InstanceManager<MCamera> camMan = InstanceManager<MCamera>().GetInstance();
+	InstanceHandle handle = camMan.AddNewInstance();
+	camMan.GetInst(handle)->SetPosition(vec3(0,0,1));
+	camMan.GetInst(handle)->Forward();
+	camMan.GetInst(handle)->Left();
+	camMan.GetInst(handle)->Up();
+	camMan.GetInst(handle)->Right();
+	camMan.GetInst(handle)->Down();
+
+
+	return handle;
+
 }
 
 void CameraAPI::SetYaw(InstanceHandle handle, float yaw)
@@ -26,7 +37,8 @@ float CameraAPI::GetPitch(InstanceHandle handle)
 }
 LuaRef CameraAPI::Forward(InstanceHandle handle)
 {
-	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->Forward());
+	vec3 forward = InstanceManager<MCamera>().GetInstance().GetInst(handle)->Forward();
+	return ToLuaTable(forward);
 
 }
 LuaRef CameraAPI::Right(InstanceHandle handle)

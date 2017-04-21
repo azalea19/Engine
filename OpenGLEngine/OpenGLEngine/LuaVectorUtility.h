@@ -18,6 +18,7 @@ public:
 	static LuaRef LuaVectorUtility::SubtractVector(LuaRef a, LuaRef b);
 	static LuaRef LuaVectorUtility::GetEmptyMat4();
 	static LuaRef LuaVectorUtility::GetEmptyVec3();
+	static bool LuaVectorUtility::Equals(LuaRef a, LuaRef b);
 
 
 	static LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt);

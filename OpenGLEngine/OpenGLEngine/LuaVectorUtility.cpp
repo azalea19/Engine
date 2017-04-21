@@ -61,11 +61,20 @@ LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt)
 
 }
 
+bool LuaVectorUtility::Equals(LuaRef a, LuaRef b)
+{
+	if (FromLuaTable<vec3>(a) == FromLuaTable<vec3>(b))
+		return true;
+	return false;
+}
+
 
 void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "normalize", Normalize);
+	pContext->ExposeFunction(luaAPIName, "equals", Equals);
+
 	pContext->ExposeFunction(luaAPIName, "addVector", AddVector);
 	pContext->ExposeFunction(luaAPIName, "subtractVector", SubtractVector);
 	pContext->ExposeFunction(luaAPIName, "getEmptyMat4", GetEmptyMat4);

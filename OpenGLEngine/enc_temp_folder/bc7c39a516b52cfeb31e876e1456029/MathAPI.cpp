@@ -82,11 +82,13 @@ LuaRef ToLuaTable(mat4 value)
 template<>
 vec3 FromLuaTable<vec3>(LuaRef value)
 {
-	vec3 result;
 
-	result[i - 1] = values[i];
+float vals[3];
+for (int i = 1; i <= 3; i++)
+{
+	//LuaRef val = value[i];
 	//float num = lua_tonumber(value, -1);
-	//vals[i - 1] = 0;
+	vals[i - 1] = 0;
 }
   return glm::make_vec3(vals);
 }
