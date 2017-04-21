@@ -32,7 +32,6 @@ function LoadAPIs()
 
 
 
-
 end
 
 --[[
@@ -82,7 +81,8 @@ PickUpBody = InteractableBody:New()
 	]]
 -- Scene --
 Scene =
-{	id,
+{	
+    id,
 	instances = {},
 	instCount = 0
 }
@@ -100,48 +100,60 @@ Scene =
 	end
 	
 -- Player --
-
-
-Player =
-{	
-}
+	Player = 
+	{
+	}
+	Player.__index = Player
 	
-	function Player:new(o)
-		o = o or {}
-		local self = setmetatable({}, Player)
-		self.__index = self
-		return self
+	function Player.new()
+		local instance = 
+		{
+			id = 0
+		}
+	
+		setmetatable(instance, Player)
+		return instance
 	end
 
-	function Player.update()
+	function Player:update()
 	
+    
 	    -- written by liz translated from maddys c++ code
 	    turnSpeed = 0.3
 	    moveSpeed = 0.5
-	    camera0 = cameraManager.getInstance(0)
 	
+      --[[
         --rotation
 	    origYaw = cameraAPI.getYaw(camera0)
 	    origPitch = cameraAPI.getPitch(camera0)
-	    deltaYaw = -inputManagerAPI.mouseDeltaX * turnSpeed
-	    deltaPitch = -inputManagerAPI.mouseDeltaY * turnSpeed
+        mouseX = inputManagerAPI.mouseDeltaX
+        --printAPI.print(tostring(mouseX).."\n")
+        
+	    deltaYaw =  - mouseX * turnSpeed
+      
+	    deltaPitch = -1 *inputManagerAPI.mouseDeltaY * turnSpeed
 	    cameraAPI.setYaw(originalYaw + deltaYaw)
 	    cameraAPI.setPitch(originalPitch+deltaPitch)
-
+          
+   
         --translation   
-	    oldPos = cameraAPI.getPosition(camera0);
-	    forward = cameraAPI.forward(camera0);
-	    right = cameraAPI.right(camera0);
-	    translation = { x=0, y=0, z=0 };
+	    
 	
         MOVE_SPEED = 1
-    
-    
+    ]]
+
+        oldPos = cameraAPI.getPosition(camera0);
+	    forward = cameraAPI.forward(camera0);
+	    right = cameraAPI.right(camera0);
+
+  	    translation = { x=0, y=0, z=0 };
+
 	
 	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_W) then
         	translation = luaVectorUtility.addVector(translation,forward)
         end
 
+        --[[
         if inputManagerAPI.isKeyDown(SDL_SCANCODE_A) then
         	translation = luaVectorUtility.subtractVector(translation,right)
         end
@@ -153,9 +165,11 @@ Player =
 	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_D) then
         	translation = luaVectorUtility.addVector(translation,right)
         end
-        
-        if not luaVectorUtility.equals(translation.x,translation.y,translation.z,0,0,0) then
+        ]]
+            --[[
+        if not luaVectorUtility.equals(translation,luaVectorUtility.emptyVec3) then
 
+    
             translation = luaVectorUtility.normalize(translation.x,translation.y,translation.z)
             translation = luaVectorUtility.multiplyFloat(translation.x,translation.y,translation.z,MOVE_SPEED)
 
@@ -163,16 +177,16 @@ Player =
             newPos = luaVectorUtility.addVector(oldPos,translation)
 
             cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);
+          
 
-        end
+        end  ]]
         
-
 	end
 	
 
 
 function Initialize()
-	
+
 	LoadAPIs()
 	
 	
@@ -205,21 +219,21 @@ function Initialize()
 
 	scene01 = Scene:new()
 
-    printAPI.print('Initialising player...\n')
-
-	
-	player = Player.new()
-
+    
     printAPI.print('Initialising camera...\n')
 
     camera0 = cameraAPI.addNewInstance()
 
-    --cameraAPI.setPosition(camera0,0,0,-100)
+    cameraAPI.setPosition(camera0,0,0,10)
 
     printAPI.print('Initialising rendermanager...\n')
     renderManagerAPI.initialise()
 
-    
+    printAPI.print('Initialising player...\n')
+
+	
+	player0 = Player.new()
+
 
     --[[
 	
@@ -233,6 +247,26 @@ function Initialize()
 		--objectInstanceAPI.SetTranslation(objectHandle,)
 	end
     ]]
+end
+
+function Update()
+
+    engineAPI.BeginUpdate()
+
+    inputManagerAPI.update();
+
+	--Lua update here
+    count = (count or 0) + 1
+	--run = mainAPI.update()
+	
+	TestInputAPI()
+    player0.update()
+
+    engineAPI.EndUpdate();
+
+
+
+	
 end
 
 function GameLoop()
@@ -267,30 +301,11 @@ function TestInputAPI()
 		printAPI.print("Quitting - pressed Esc.\n")
         run = false
 	end
-
 end
-function Update()
-
-    engineAPI.BeginUpdate()
-
-    inputManagerAPI.update();
-
-	--Lua update here
-    count = (count or 0) + 1
-	--run = mainAPI.update()
-	
-	TestInputAPI()
-
-    --player.Update();
-
-
-	engineAPI.EndUpdate();
-	
-end
-
 
 
 function Render()
+
 	--printAPI.print('count = ')
 	--printAPI.print(count)
 	--printAPI.print('\n')
@@ -298,32 +313,33 @@ function Render()
 
     engineAPI.BeginRender()
 
-    printAPI.print("Getting time...\n");
+    --printAPI.print("Getting time...\n");
 
     time = timeAPI.elapsedTimeMs()
 
-    printAPI.print("Getting world matrix...\n");
+    --printAPI.print("Getting world matrix...\n");
 
     worldMatrix = luaVectorUtility.getEmptyMat4()
 
-    printAPI.print("Getting view matrix...\n");
+    --printAPI.print("Getting view matrix...\n");
 
     viewMatrix = cameraAPI.getViewMatrix(camera0)
 
-    printAPI.print("Getting projection matrix...\n");
+    --printAPI.print("Getting projection matrix...\n");
 
     projectionmatrix = cameraAPI.getProjectionMatrix(camera0)
 
     
-    printAPI.print("Rendering...\n");
+   -- printAPI.print("Rendering...\n");
 
     renderManagerAPI.renderFromCamera(camera0,time)
 	--Lua render here
 
     
-    printAPI.print("Render Successful\n");
+    --printAPI.print("Render Successful\n");
 
     engineAPI.EndRender()
+
 
 end
 

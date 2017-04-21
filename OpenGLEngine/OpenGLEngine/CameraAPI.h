@@ -23,6 +23,8 @@ public:
 	static LuaRef Forward(InstanceHandle handle);
 	static LuaRef Right(InstanceHandle handle);
 	static void SetPosition(InstanceHandle handle, float x, float y, float z);
+	static LuaRef CameraAPI::GetPosition(InstanceHandle handle);
+
 
 
 

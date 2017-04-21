@@ -40,6 +40,12 @@ void CameraAPI::SetPosition(InstanceHandle handle, float x, float y, float z)
 
 }
 
+LuaRef CameraAPI::GetPosition(InstanceHandle handle)
+{
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->GetTranslation());
+
+}
+
 
 LuaRef CameraAPI::GetViewMatrix(InstanceHandle handle)
 {
@@ -68,5 +74,7 @@ void CameraAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "forward", Forward);
 	pContext->ExposeFunction(luaAPIName, "right", Right);
 	pContext->ExposeFunction(luaAPIName, "setPosition", SetPosition);
+	pContext->ExposeFunction(luaAPIName, "getPosition", GetPosition);
+
 
 }

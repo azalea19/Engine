@@ -21,6 +21,7 @@ LuaRef LuaVectorUtility::Add(float x1, float y1, float z1, float x2, float y2, f
 LuaRef LuaVectorUtility::AddVector(LuaRef a, LuaRef b)
 {
 	//float val[3];
+	// todo error checking for invalid vectors in "FromLuaTable"
 	vec3 vec1 = FromLuaTable<vec3>(a);
 	vec3 vec2 = FromLuaTable<vec3>(b);
 	vec3 finalVec = vec1 + vec2;
@@ -44,6 +45,13 @@ LuaRef LuaVectorUtility::GetEmptyMat4()
 	return ToLuaTable(empty, LuaManager::GetInstance().GetContext(0)->GetLuaState());
 }
 
+LuaRef LuaVectorUtility::GetEmptyVec3()
+{
+	vec3 empty;
+	return ToLuaTable(empty);
+
+}
+
 
 LuaRef LuaVectorUtility::MultiplyFloat(float x, float y, float z, float flt)
 {
@@ -61,6 +69,7 @@ void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "addVector", AddVector);
 	pContext->ExposeFunction(luaAPIName, "subtractVector", SubtractVector);
 	pContext->ExposeFunction(luaAPIName, "getEmptyMat4", GetEmptyMat4);
+	pContext->ExposeFunction(luaAPIName, "getEmptyVec3", GetEmptyVec3);
 
 	pContext->ExposeFunction(luaAPIName, "multiplyFloat", MultiplyFloat);
 

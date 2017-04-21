@@ -7,7 +7,16 @@ void InputManagerAPI::Update()
 	InputManager::GetInstance().Update();
 }
 
+int InputManagerAPI::MouseDeltaX()
+{
+	return InputManager::GetInstance().MouseDeltaX();
+}
 
+int InputManagerAPI::MouseDeltaY()
+{
+	return InputManager::GetInstance().MouseDeltaY();
+
+}
 bool InputManagerAPI::IsKeyDown(int keyCode) 
 {
 	return InputManager::GetInstance().keyboardState[keyCode] != 0;
@@ -46,4 +55,7 @@ void InputManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "isKeyUp", IsKeyUp);
 	pContext->ExposeFunction(luaAPIName, "isKeyPressed", IsKeyPressed);
 	pContext->ExposeFunction(luaAPIName, "isKeyReleased", IsKeyReleased);
+
+	pContext->ExposeFunction(luaAPIName, "mouseDeltaX", MouseDeltaX);
+	pContext->ExposeFunction(luaAPIName, "mouseDeltaY", MouseDeltaY);
 }
