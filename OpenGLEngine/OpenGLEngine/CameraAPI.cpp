@@ -17,7 +17,10 @@ InstanceHandle CameraAPI::AddNewInstance()
 	return handle;
 
 }
-
+LuaRef CameraAPI::Up(InstanceHandle handle, LuaContextHandle contextHandle)
+{
+	return ToLuaTable(InstanceManager<MCamera>().GetInstance().GetInst(handle)->Up(),contextHandle);
+}
 void CameraAPI::SetYaw(InstanceHandle handle, float yaw)
 {
 	InstanceManager<MCamera>().GetInstance().GetInst(handle)->SetYaw(yaw);
@@ -90,6 +93,8 @@ void CameraAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "setPitch", SetPitch);
 	pContext->ExposeFunction(luaAPIName, "forward", Forward);
 	pContext->ExposeFunction(luaAPIName, "right", Right);
+	pContext->ExposeFunction(luaAPIName, "up", Up);
+
 	pContext->ExposeFunction(luaAPIName, "setPosition", SetPosition);
 	pContext->ExposeFunction(luaAPIName, "getPosition", GetPosition);
 

@@ -3,6 +3,15 @@
 #include "LuaManager.h"
 #include "OBJWriter.h"
 
+
+/**
+* @file   TerrainAPI.h
+* @Author Nathan Game
+* @date   S1, 2017
+* @brief  Lua API for the Terrain class.
+*
+*/
+
 class TerrainAPI
 {
 public:

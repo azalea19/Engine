@@ -2,6 +2,15 @@
 
 #include "LuaContext.h"
 #include "LuaManager.h"
+
+
+/**
+* @file   InputManagerAPI.h
+* @Author Elizabeth Haynes
+* @date   S1, 2017
+* @brief  Lua API for C++ time.
+*
+*/
 class TimeAPI
 {
 public:

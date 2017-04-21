@@ -7,6 +7,14 @@
 #include "LuaManager.h"
 #include "Types.h"
 
+
+/**
+* @file   InputManagerAPI.h
+* @Author Maddie Topaz
+* @date   S1, 2017
+* @brief  Lua API for math functions
+*
+*/
 class MathAPI
 {
 public:

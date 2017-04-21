@@ -5,8 +5,6 @@
 #include "ModelLibraryAPI.h"
 #include "RenderManagerAPI.h"
 #include "MainAPI.h"
-#include "InstanceFileLoaderAPI.h"
-#include "LuaInstanceFileLoaderManager.h"
 #include "InputManagerAPI.h"
 #include "LuaVectorUtility.h"
 #include "CameraAPI.h"
@@ -39,7 +37,7 @@ void LuaManager::Initialize()
   LuaManager& luaManager = LuaManager::GetInstance();
   luaManager.AddAPI("printAPI", PrintAPI::Expose);
   luaManager.AddAPI("objectInstanceAPI", ObjectInstanceAPI::Expose);
-  luaManager.AddAPI("luaInstanceManager", LuaInstanceManager::Expose);
+  luaManager.AddAPI("luaObjectInstanceManager", LuaObjectInstanceManager::Expose);
   luaManager.AddAPI("modelLibraryAPI", ModelLibraryAPI::Expose);
   luaManager.AddAPI("renderManagerAPI", RenderManagerAPI::Expose);
   luaManager.AddAPI("inputManagerAPI", InputManagerAPI::Expose);

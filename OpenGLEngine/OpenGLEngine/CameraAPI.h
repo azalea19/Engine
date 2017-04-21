@@ -4,7 +4,7 @@
 
 #include "types.h"
 #include "LuaContext.h"
-#include "InstanceManager.h"
+#include "LuaInstanceManager.h"
 #include "MathAPI.h"
 
 class CameraAPI
@@ -21,6 +21,7 @@ public:
 	static LuaRef GetProjectionMatrix(InstanceHandle handle, LuaContextHandle contextHandle);
 	static LuaRef Forward(InstanceHandle handle, LuaContextHandle contextHandle);
 	static LuaRef Right(InstanceHandle handle, LuaContextHandle contextHandle);
+	static LuaRef Up(InstanceHandle handle, LuaContextHandle contextHandle);
 	static void SetPosition(InstanceHandle handle, float x, float y, float z);
 	static LuaRef CameraAPI::GetPosition(InstanceHandle handle, LuaContextHandle contextHandle);
 

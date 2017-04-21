@@ -24,7 +24,7 @@
 */
 
 struct SDL_Window;
-class LuaInstanceManager;
+class LuaObjectInstanceManager;
 
 
 
@@ -125,7 +125,7 @@ private:
   /// <summary>
   /// The instance manager
   /// </summary>
-  LuaInstanceManager* m_instanceManager;
+  LuaObjectInstanceManager* m_instanceManager;
 
   virtual IShader* CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const override;
 

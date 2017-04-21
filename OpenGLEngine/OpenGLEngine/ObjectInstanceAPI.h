@@ -1,10 +1,11 @@
 #pragma once
 #include "LuaContext.h"
-#include "LuaInstanceManager.h"
+#include "LuaObjectInstanceManager.h"
 #include "LuaManager.h"
 #include "ShaderLibrary.h"
 #include "MPlayer.h"
 #include "MCamera.h"
+#include "ObjectInstance.h"
 
 typedef int InstanceHandle;
 

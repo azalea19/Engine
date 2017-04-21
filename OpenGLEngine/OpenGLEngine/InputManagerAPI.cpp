@@ -2,14 +2,14 @@
 
 
 
-void InputManagerAPI::Update()
-{
-	InputManager::GetInstance().Update();
-}
-
 int InputManagerAPI::MouseDeltaX()
 {
-	return InputManager::GetInstance().MouseDeltaX();
+	int val = InputManager::GetInstance().MouseDeltaX();
+	if (val > 0)
+	{
+		return val;
+	}
+	return val;
 }
 
 int InputManagerAPI::MouseDeltaY()
@@ -50,7 +50,6 @@ void InputManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "isKeyDown", IsKeyDown);
-	pContext->ExposeFunction(luaAPIName, "update", Update);
 
 	pContext->ExposeFunction(luaAPIName, "isKeyUp", IsKeyUp);
 	pContext->ExposeFunction(luaAPIName, "isKeyPressed", IsKeyPressed);

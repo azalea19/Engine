@@ -24,7 +24,7 @@ void RenderManagerAPI::Render(LuaRef worldMatrix,LuaRef viewMatrix, LuaRef proje
 
 void RenderManagerAPI::AddObject(int object)
 {
-	ObjectInstance * obj = LuaInstanceManager::GetInstance(object);
+	ObjectInstance * obj = LuaObjectInstanceManager::GetInstance(object);
 	RenderManager::GetInstance().AddObject(obj);
 }
 

@@ -224,9 +224,6 @@
     <ClCompile Include="MainRename.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="LuaInstanceManager.cpp">
-      <Filter>Source\Lua\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ModelLibraryAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
@@ -260,9 +257,6 @@
     <ClCompile Include="InputManagerAPI.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="InstanceManager.cpp">
-      <Filter>Source\Lua\APIs</Filter>
-    </ClCompile>
     <ClCompile Include="LuaVectorUtility.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
@@ -274,6 +268,12 @@
     </ClCompile>
     <ClCompile Include="TerrainAPI.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaObjectInstanceManager.cpp">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaInstanceManager.cpp">
+      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +449,6 @@
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
     <ClInclude Include="MainRename.h" />
-    <ClInclude Include="LuaInstanceManager.h">
-      <Filter>Source\Lua\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="ModelLibraryAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
@@ -482,9 +479,6 @@
     <ClInclude Include="InputManagerAPI.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="InstanceManager.h">
-      <Filter>Source\Lua\APIs</Filter>
-    </ClInclude>
     <ClInclude Include="LuaVectorUtility.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
@@ -501,6 +495,12 @@
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="TerrainAPI.h" />
+    <ClInclude Include="LuaObjectInstanceManager.h">
+      <Filter>Source\Lua\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInstanceManager.h">
+      <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
