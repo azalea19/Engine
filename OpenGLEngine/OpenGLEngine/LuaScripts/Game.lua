@@ -165,11 +165,9 @@ Player =
 	end
 	
 
-
 function Initialize()
 	
 	LoadAPIs()
-	
 	
 	
 	printAPI.print('Initializing...\n')

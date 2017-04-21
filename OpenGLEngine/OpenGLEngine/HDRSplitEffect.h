@@ -1,7 +1,7 @@
 #include "FrameBuffer.h"
 
 
-class Shader;
+class IShader;
 
 
 /**
