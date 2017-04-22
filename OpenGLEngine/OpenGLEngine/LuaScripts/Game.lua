@@ -112,7 +112,7 @@ function LoadInstances(filePath, fileType)
 		numRows = numRows + 1
 	end
 	for i = 1, numRows do
-		local instanceID= luaObjInstManager.addNewInstance(fileData[i][2])
+		instanceID = luaObjInstManager.addNewInstance(fileData[i][2])
 
 		bb = AABoundingBox.new(fileData[i][9],fileData[i][10],fileData[i][11],fileData[i][12],fileData[i][13],fileData[i][14])
 		pos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
@@ -128,7 +128,7 @@ function LoadInstances(filePath, fileType)
 			n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID)
 		else
 			if(fileType == "npc") then
-				n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20])
+				n = npc.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20])
 			end
 		end
 		
@@ -148,39 +148,59 @@ function SaveInstances(filePath, data, fileType)
 		numRows = numRows + 1
 	end
 
+	clearFile(filePath)
+	
 	for i = 1, numRows do
 		if(fileType == "gameObject") then
-			--[[tmp = gameObjects[i]["name"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["model"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["position"]["X"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["position"]["Y"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["position"]["Z"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["direction"]["X"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["direction"]["Y"]
-			write(filePath, tmp)
-			write(filePath, ",")
-			
-			--tmp = gameObjects[i]["direction"]["Z"]
-			write(filePath, tmp)
-			write(filePath, "\n")]]
+			if gameObjects[i]["currentHealth"] == nil then
+				write(filePath, gameObjects[i]["name"])
+				write(filePath, ",")
+				
+				write(filePath, gameObjects[i]["model"])
+				write(filePath, ",")
+				
+				write(filePath, gameObjects[i]["position"]["X"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["position"]["Y"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["position"]["Z"])
+				write(filePath, ",")
+				
+				write(filePath, gameObjects[i]["direction"]["X"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["direction"]["Y"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["direction"]["Z"])
+				write(filePath, ",")
+				
+				write(filePath, gameObjects[i]["boundingBox"]["minX"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["boundingBox"]["maxX"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["boundingBox"]["minY"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["boundingBox"]["maxY"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["boundingBox"]["minZ"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["boundingBox"]["maxZ"])
+				write(filePath, ",")
+				
+				write(filePath, gameObjects[i]["scale"]["X"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["scale"]["Y"])
+				write(filePath, ",")
+				write(filePath, gameObjects[i]["scale"]["Z"])
+				write(filePath, ",")
+				
+				if(gameObjects[i]["animation"] == true) then
+					ani = 1
+				else
+					ani = 0
+				end
+				write(filePath, ani)
+				write(filePath, "\n")
+			end
 		else
 			if(fileType == "npc") then
 				write(filePath, gameObjects[i]["model"])
@@ -195,9 +215,9 @@ function SaveInstances(filePath, data, fileType)
 		if(fileType == "npc") then
 			printAPI.print(numRows .. ' NPCs loaded.\n')
 		end
-	end
-	
+	end	
 end
+
 	
 -- Player --
 	Player = 
@@ -217,7 +237,7 @@ end
 	end
 
     function PrintVec3(veca)
-        printAPI.print(veca[1] .. "," .. veca[2] .. "," .. veca[3])
+        --printAPI.print(veca[1] .. "," .. veca[2] .. "," .. veca[3])
     end
 
 	function Player:update()
@@ -236,7 +256,7 @@ end
         --PrintVec3(deltaYaw)
 
 	    deltaPitch = -inputManagerAPI.mouseDeltaY() * turnSpeed
-        printAPI.print(deltaYaw .. "," .. deltaPitch .. "\n")
+        --printAPI.print(deltaYaw .. "," .. deltaPitch .. "\n")
 
 	    cameraAPI.setYaw(camera0,origYaw + deltaYaw)
 	    cameraAPI.setPitch(camera0,origPitch+deltaPitch)
@@ -306,7 +326,7 @@ function LoadAssets()
 	--modelLibraryAPI.AddModel("tree","tree.obj", false)
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
-	terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
+	--terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 	
 	printAPI.print('Assets loaded\n')
@@ -329,7 +349,9 @@ function Initialize()
     printAPI.print('Initialising objects...\n')
 
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
-	--LoadInstances("SaveData/NPC_Data.csv", "npc")
+	LoadInstances("SaveData/NPC_Data.csv", "npc")
+	
+	SaveInstances("SaveData/TestSave.csv", gameObjects, "gameObject")
 	
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)

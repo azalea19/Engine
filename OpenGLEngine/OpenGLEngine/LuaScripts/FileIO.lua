@@ -64,3 +64,8 @@ function write(path, data)					--Append a piece of data to a file
   file:write(data)							--Write the data to the file
   file:close()								--Close the file
 end
+
+function clearFile(path)
+	local file = assert(io.open(path, "w+"))
+	file:close()
+end

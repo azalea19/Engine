@@ -33,9 +33,9 @@ public:
   /// <returns>std::vector<vec3></returns>
   virtual std::vector<int> const& GetIndices() const = 0;
 
-  //virtual std::vector<vec2> const& GetTexCoords(int index) const = 0;
+  virtual std::vector<vec2> const& GetTexCoords() const = 0;
 
-  //int GetTexCoordsCount() const;
+  int GetTexCoordsCount() const;
 
 
   /// <summary>

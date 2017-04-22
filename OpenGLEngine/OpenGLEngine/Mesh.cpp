@@ -32,6 +32,10 @@ std::vector<vec2> const& Mesh::GetTexCoords(TextureType const& texType) const
   return m_texCoords[texType];
 }
 
+std::vector<vec2> const& Mesh::GetTexCoords() const
+{
+	return m_texCoords[0];
+}
 
 std::vector<vec4> const& Mesh::GetVertexColours() const
 {

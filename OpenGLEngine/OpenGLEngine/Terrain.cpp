@@ -21,8 +21,8 @@ void Terrain::GenerateTexCoords()
   uint numVerts = width * height;
   m_texCoords.resize(numVerts);
 
-  float scaleX = m_textureWidth / m_terrainWidth;
-  float scaleY = m_textureHeight / m_terrainHeight;
+  float scaleX = 1.f / (width - 1);
+	 float scaleY = 1.f / (height - 1);
 
   for (uint y = 0; y < height; y++)
   {
@@ -142,15 +142,22 @@ std::vector<int> const& Terrain::GetIndices() const
   return m_indices;
 }
 
+std::vector<vec2> const& Terrain::GetTexCoords() const
+{
+	return m_texCoords;
+}
+
 void Terrain::CreateMesh()
 {
   GenerateTerrainVertices();
   GenerateTerrainIndices();
   GenerateNormals();
+  GenerateTexCoords();
 
   glGenBuffers(1, &gVBO);
   glGenBuffers(1, &gNBO);
   glGenBuffers(1, &gIBO);
+  glGenBuffers(1, &m_texture);
 
   glBindBuffer(GL_ARRAY_BUFFER, gVBO);
   glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * 3 * sizeof(GLfloat), m_vertices.data(), GL_STATIC_DRAW);
@@ -162,6 +169,10 @@ void Terrain::CreateMesh()
 
   glBindBuffer(GL_ARRAY_BUFFER, gIBO);
   glBufferData(GL_ARRAY_BUFFER, m_indices.size() * sizeof(GLint), m_indices.data(), GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  glBindBuffer(GL_ARRAY_BUFFER, m_texture);
+  glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * 3 * sizeof(GLfloat), m_texCoords.data(), GL_STATIC_DRAW);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 }
