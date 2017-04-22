@@ -17,7 +17,6 @@ bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox, LuaRef manyList, int 
 		manyBB.push_back(bbox);
 	}
 	
-	
 	return IslandCollision::Check(toMoveBB, manyBB, listSize);
 
 	//todo write
@@ -26,18 +25,24 @@ bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox, LuaRef manyList, int 
 
 }
 
-LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBMin, LuaRef toMoveBBMax, LuaRef staticBBMin, LuaRef staticBBMax, LuaContextHandle handle)
+LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBi, LuaRef manyList, int listSize, float incSize, LuaContextHandle handle)
 {
 
 	mAABB toMoveBB;
-	toMoveBB.max = FromLuaTable<vec3>(toMoveBBMax);
-	toMoveBB.min = FromLuaTable<vec3>(toMoveBBMax);
+	toMoveBB.max = FromLuaTable<vec3>(toMoveBBi["max"]);
+	toMoveBB.min = FromLuaTable<vec3>(toMoveBBi["min"]);
 
-	mAABB staticBB;
-	staticBB.max = FromLuaTable<vec3>(toMoveBBMax);
-	staticBB.min = FromLuaTable<vec3>(toMoveBBMax);
+	std::vector<mAABB> manyBB;
+	mAABB bbox;
+	for (int i = 0; i < listSize; i++)
+	{
+		bbox.max = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["max"]);
+		bbox.min = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["min"]);
+		manyBB.push_back(bbox);
+	}
 
-	vec3 newOrigin = IslandCollision::Resolve(FromLuaTable<vec3>(toMoveOrigin), toMoveBB, staticBB, 1);
+
+	vec3 newOrigin = IslandCollision::Resolve(FromLuaTable<vec3>(toMoveOrigin), toMoveBB, manyBB, listSize, incSize);
 
 
 	return ToLuaTable(newOrigin, handle);

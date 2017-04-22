@@ -31,7 +31,7 @@ LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 
   for (int i = 0; i < 16; i++)
   {
-	 table[i + i] = pSource[i];
+	 table[i + 1] = pSource[i];
   }
 
   return table;

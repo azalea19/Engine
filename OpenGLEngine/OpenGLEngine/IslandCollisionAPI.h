@@ -29,11 +29,13 @@ public:
 	/// Exposes Resolve function through Lua API.
 	/// </summary>
 	/// <param name="toMoveOrigin">Origin of current bounding box to move when colliding</param>
-	/// <param name="toMoveBB">Current bounding box to move when colliding</param>
-	/// <param name="staticBB">Static bounding box</param>
-	/// <param name="inc">Size of movement increments</param>
+	/// <param name="toMoveBBi">Current bounding box to move when colliding</param>
+	/// <param name="manyList">Table of many Vec3, in pairs of min and then max of AABBs.</param>
+	/// <param name="listSize">Number of AABBs in the manyList table (half the number of values)</param>
+	/// <param name="incSize">Size of movement increments</param>
+	/// <param name="handle">Lua context handle</param>
 	/// <returns>LuaRef</returns>
-	static LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBMin, LuaRef toMoveBBMax, LuaRef staticBBMin, LuaRef staticBBMax, LuaContextHandle handle);
+	static LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBi, LuaRef manyList, int listSize, float incSize, LuaContextHandle handle);
 
 	/// <summary>
 	/// Check if one AABB is colliding with any in a list. todo Probably should be in AABB class instead.

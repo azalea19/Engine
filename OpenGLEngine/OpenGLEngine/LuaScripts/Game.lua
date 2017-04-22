@@ -332,7 +332,7 @@ end
         --printAPI.print("Updating player location...\n")
         
         
-        newPos = pos
+        newPos = self.pos
         
         --printAPI.print("Updating player location...\n")
 
@@ -376,11 +376,39 @@ end
         manyList[2] = plantBBox
         count = 2
 
+        --[[
+        errorBBox = {min = self.bbox.min, max = self.bbox.max}
+        errorBBox.min.x =  errorBBox.min.x * 0.9
+        errorBBox.min.y =  errorBBox.min.y * 0.9
+        errorBBox.min.z =  errorBBox.min.z * 0.9
+        errorBBox.max.x =  errorBBox.max.x * 0.9
+        errorBBox.max.y =  errorBBox.max.y * 0.9
+        errorBBox.max.z =  errorBBox.max.z * 0.9
+
+        PrintVec3s(errorBBox.min,self.bbox.min)
+        printAPI.print("+")
+        PrintVec3s(errorBBox.max,self.bbox.max)
+        printAPI.print("\n")
+        ]]
+        --PrintVec3s(self.bbox.min,self.bbox.max)
+        --printAPI.print("\n")
         collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
+
+
         
 
         if collides then
-           printAPI.print("Collision!\n")
+           --printAPI.print("Collision!\n")
+           --PrintVec3(self.pos)
+           --PrintVec3s(self.bbox.min,self.bbox.max)
+
+           self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,count,2,context.handle)
+           cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
+
+           PrintVec3(self.pos)
+           PrintVec3s(self.bbox.min,self.bbox.max)
+
+
         end
 
 
