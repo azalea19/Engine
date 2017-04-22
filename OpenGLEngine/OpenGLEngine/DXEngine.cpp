@@ -40,6 +40,11 @@ IRenderableObject* DXEngine::CreateRenderableObject(string const& name, string c
   throw std::logic_error("The method or operation is not implemented.");
 }
 
+IInputHandler* DXEngine::CreateInputHandler()
+{
+  throw std::logic_error("The method or operation is not implemented.");
+}
+
 DXEngine::DXEngine()
 {
 

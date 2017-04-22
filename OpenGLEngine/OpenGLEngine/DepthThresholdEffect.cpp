@@ -3,8 +3,9 @@
 
 
 DepthThresholdEffect::DepthThresholdEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("DepthThresholdEffect"))
 {
-	m_pShader = ShaderLibrary::GetInstance().GetShader("DepthThresholdEffect");
+	
 }
 
 void DepthThresholdEffect::Apply(GLuint inputTex, GLuint outputTex, float threshold)

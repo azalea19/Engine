@@ -8,6 +8,7 @@
 #include "FXAAEffect.h"
 #include "Screen.h"
 #include "InputManager.h"
+#include <memory>
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
@@ -37,7 +38,8 @@ void RenderableObject::SetFillMode(FillMode fillMode) const
 
 void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 {
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
+
   if (m_pModel->HasAnimation() && activeAnimation >= 0)
   {
     std::vector<glm::mat4> bones = m_pModel->GetBoneTransforms(activeAnimation, time);
@@ -52,7 +54,7 @@ void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 
 void RenderableObject::UploadMatrices(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
 {
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
 
   if (shader->HasUniform("WORLD_MATRIX"))
     shader->TransmitUniform("WORLD_MATRIX", worldMatrix);
@@ -206,7 +208,7 @@ void RenderableObject::BindMesh(int meshIndex) const
 
 void RenderableObject::BindMaterial(int meshIndex) const
 {
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+    std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
   
     string diffuseTexture = m_pModel->GetMeshTextureName(meshIndex, TT_Diffuse);
     

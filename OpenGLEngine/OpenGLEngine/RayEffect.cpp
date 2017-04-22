@@ -3,8 +3,8 @@
 
 
 RayEffect::RayEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("RayEffect"))
 {
-	m_pShader = ShaderLibrary::GetInstance().GetShader("RayEffect");
 }
 
 void RayEffect::Apply(GLuint inputTex, GLuint outputTex, vec2 ssLightPos)

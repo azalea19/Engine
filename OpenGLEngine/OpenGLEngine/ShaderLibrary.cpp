@@ -1,7 +1,7 @@
 #include "ShaderLibrary.h"
 #include "Utility.h"
 #include "IEngine.h"
-
+#include <memory>
 
 static ShaderLibrary shaderLib;
 
@@ -10,7 +10,6 @@ void ShaderLibrary::InitShaderLibrary(IEngine const *pEngine)
 {
 	ShaderLibrary& shaderLibrary = ShaderLibrary::GetInstance();
   shaderLibrary.m_pEngine = pEngine;
-
 
 	shaderLibrary.AddShader("defaultShader", CreateVector(string("mvp")), CreateVector(string("position")));
 
@@ -34,9 +33,9 @@ void ShaderLibrary::AddShader(string const& name, std::vector<string> const& uni
 	shaders.emplace(name, pShader);
 }
 
-const IShader* ShaderLibrary::GetShader(string const& name) const
+std::unique_ptr<IShader> const& ShaderLibrary::GetShader(string const& name) const
 {
-	std::unordered_map<string, IShader*>::const_iterator got = shaders.find(name);
+	std::unordered_map<string, std::unique_ptr<IShader>>::const_iterator got = shaders.find(name);
 	if (got == shaders.end())
 	{
 		printf("Shader with name %s not found.", name.c_str());
@@ -48,7 +47,7 @@ const IShader* ShaderLibrary::GetShader(string const& name) const
 
 void ShaderLibrary::BindShader(string const& shaderName)
 {
-	const IShader* myShader = GetShader(shaderName);
+  std::unique_ptr<IShader> const& myShader = GetShader(shaderName);
 
 	if (myShader != NULL)
 	{
@@ -63,12 +62,12 @@ void ShaderLibrary::BindDefaultShader()
 	GetShader(m_currentShaderName)->Bind();
 }
 
-const IShader* ShaderLibrary::CurrentShader() const
+std::unique_ptr<IShader> const& ShaderLibrary::CurrentShader() const
 {
 	return GetShader(m_currentShaderName);
 }
 
-const string ShaderLibrary::GetCurrentShaderName() const
+string const& ShaderLibrary::GetCurrentShaderName() const
 {
 	return m_currentShaderName;
 }

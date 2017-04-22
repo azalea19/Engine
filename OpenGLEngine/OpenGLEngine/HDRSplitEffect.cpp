@@ -3,8 +3,9 @@
 #include "ShaderLibrary.h"
 
 HDRSplitEffect::HDRSplitEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("HDRSplitEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("HDRSplitEffect");
+
 }
 
 void HDRSplitEffect::Apply(GLuint inputTex, GLuint outLowTex, GLuint outHighTex)

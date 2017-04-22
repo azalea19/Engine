@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "ShaderLibrary.h"
 #include "Screen.h"
+#include <memory>
 
 /// <summary>
 /// The fs quad vao{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
@@ -56,7 +57,7 @@ void FrameBuffer::BindToScreen(FrameBufferBindMode bufferMode /*= FBM_ReadWrite*
 
 void FrameBuffer::Display(GLuint texture)
 {
-  const IShader* shader = ShaderLibrary::GetInstance().GetShader("TextureDisplay");
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().GetShader("TextureDisplay");
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   FrameBuffer::BindToScreen();

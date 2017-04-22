@@ -2,6 +2,7 @@
 
 #include "FrameBuffer.h"
 #include "Shader.h"
+#include <memory>
 
 
 /**
@@ -22,7 +23,9 @@ public:
   void Apply(GLuint inputTex, GLuint outputTex, int fxaaSpan);
 
 private:
+
   FrameBuffer m_fb;
-  IShader const* m_pShader;
+
+  std::unique_ptr<IShader> const& m_pShader;
 };
 

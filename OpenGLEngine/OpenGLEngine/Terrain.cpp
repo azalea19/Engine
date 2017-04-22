@@ -21,8 +21,8 @@ void Terrain::GenerateTexCoords()
   uint numVerts = width * height;
   m_texCoords.resize(numVerts);
 
-  float scaleX = m_textureWidth / m_terrainWidth;
-  float scaleY = m_textureHeight / m_terrainHeight;
+  float scaleX = 1.f / (width - 1);
+  float scaleY = 1.f / (height - 1);
 
   for (uint y = 0; y < height; y++)
   {

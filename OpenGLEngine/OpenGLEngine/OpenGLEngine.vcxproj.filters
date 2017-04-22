@@ -275,6 +275,9 @@
     <ClCompile Include="LuaInstanceManager.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
+    <ClCompile Include="GLInputHandler.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -500,6 +503,12 @@
     </ClInclude>
     <ClInclude Include="LuaInstanceManager.h">
       <Filter>Source\Lua\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputHandler.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="GLInputHandler.h">
+      <Filter>Source\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

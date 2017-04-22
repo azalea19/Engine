@@ -6,7 +6,7 @@
 #include "RayEffect.h"
 #include "FrameBuffer.h"
 #include "Shader.h"
-
+#include <memory>
 
 /**
 * @file GodRaysEffect.h
@@ -31,7 +31,7 @@ private:
 	RayEffect m_rayEffect;
 	AdditiveBlendEffect m_additiveBlendEffect;
 
-	IShader const* m_pShader;
+  std::unique_ptr<IShader> const& m_pShader;
 
 	GLuint depthMaskTex;
 	GLuint rayTex;

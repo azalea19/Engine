@@ -3,8 +3,9 @@
 
 
 SceneDecomposeEffect::SceneDecomposeEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("SceneDecomposeEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("SceneDecomposeEffect");
+
 }
 
 void SceneDecomposeEffect::Bind(GLuint DiffuseTexture, GLuint DepthTexture, GLuint LinearDepthTexture, GLuint NormalTexture, GLuint WorldPosTexture)

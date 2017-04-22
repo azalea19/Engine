@@ -131,6 +131,8 @@ private:
 
   virtual IRenderableObject* CreateRenderableObject(string const& name, string const& filename) const override;
 
+  virtual IInputHandler* CreateInputHandler();
+
 };
 
 #endif // GLEngine_h__
