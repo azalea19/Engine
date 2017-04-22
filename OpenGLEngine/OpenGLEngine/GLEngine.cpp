@@ -108,6 +108,7 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 {
   m_screenWidth = screenWidth;
   m_screenHeight = screenHeight;
+
   vec2i xy = vec2i(screenWidth, screenHeight);
   SetScreenDimensions(xy);
   

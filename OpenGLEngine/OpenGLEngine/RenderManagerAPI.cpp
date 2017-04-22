@@ -64,7 +64,6 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 {
 	    MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
 	    mat4 world;
-
 	    RenderManager rend = RenderManager::GetInstance();
 
 

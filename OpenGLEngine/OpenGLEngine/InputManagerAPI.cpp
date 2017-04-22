@@ -41,7 +41,6 @@ bool InputManagerAPI::IsKeyReleased(int keyCode)
 	return IsKeyUp(keyCode) && (InputManager::GetInstance().LastKeyboardState(keyCode) != 0);
 }
 
-
 void InputManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);

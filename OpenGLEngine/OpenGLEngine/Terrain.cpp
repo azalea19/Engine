@@ -147,6 +147,7 @@ void Terrain::CreateMesh()
   GenerateTerrainVertices();
   GenerateTerrainIndices();
   GenerateNormals();
+  GenerateTexCoords();
 
   glGenBuffers(1, &gVBO);
   glGenBuffers(1, &gNBO);

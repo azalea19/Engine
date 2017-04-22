@@ -1,8 +1,8 @@
---local Vector3 = require 'LuaScripts/Vector3'
---local gameObject = require 'LuaScripts/gameObject'
---local AABoundingBox = require 'LuaScripts/AABoundingBox'
---local npc = require 'LuaScripts/npc'
---require 'LuaScripts/FileIO'
+local Vector3 = require 'LuaScripts/Vector3'
+local gameObject = require 'LuaScripts/gameObject'
+local AABoundingBox = require 'LuaScripts/AABoundingBox'
+local npc = require 'LuaScripts/npc'
+require 'LuaScripts/FileIO'
 
 OPEN_GL = 0
 
@@ -309,7 +309,6 @@ function LoadAssets()
 	printAPI.print('plant loaded\n')
 
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
-
 		
 	printAPI.print('bob loaded\n')
 
@@ -335,7 +334,7 @@ function Initialize()
 		
 	printAPI.print('Creating...\n')
 
-	engineAPI.Initialise(1024,728);
+	engineAPI.Initialise(1280,720);
 
 	LoadAssets()
 	
