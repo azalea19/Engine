@@ -217,6 +217,16 @@ function SaveInstances(filePath, data, fileType)
 	end
 	
 end
+
+
+function PrintVec3(veca)
+    printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
+end
+
+function PrintVec3s(vecc,vecb)
+    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
+end
+
 	
 -- Player --
 	Player = 
@@ -235,10 +245,6 @@ end
         self.__index = self
 		return o
 	end
-
-    function PrintVec3(veca)
-        printAPI.print(veca[1] .. "," .. veca[2] .. "," .. veca[3])
-    end
 
     function Player:setAABB(minx,miny,minz,maxx,maxy,maxz)
         printAPI.print("Setting player AABB...\n");
@@ -323,12 +329,12 @@ end
         
         emptyvec = luaVectorUtility.vec3_CreateEmpty(context.handle)
 
-        printAPI.print("Updating player location...\n")
+        --printAPI.print("Updating player location...\n")
         
         
         newPos = pos
         
-        printAPI.print("Updating player location...\n")
+        --printAPI.print("Updating player location...\n")
 
         if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
        
@@ -340,45 +346,41 @@ end
             cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);
          
         else
-            printAPI.print("Player has not moved.\n")
+            --printAPI.print("Player has not moved.\n")
 
         end 
         -- Movement update finished
 
-       printAPI.print("Moving player bounding box...\n")
+      -- printAPI.print("Moving player bounding box...\n")
 
-        self.pos = newPos
+        self.pos = cameraAPI.getPosition(camera0,context.handle)
         
-        printAPI.print("Moving player bounding box1...\n")
 
-        printAPI.print(self.bbox.min.x .. " is minx \n");
+        --PrintVec3s(self.bbox.min, self.bbox.max)
 
-        printAPI.print("Moving player bounding box2...\n")
 
         --value = AABBBAPI.move(emptyv,emptyb,emptyc,context.handle)
 
         self.bbox = AABBAPI.move(self.bbox,self.lastpos,self.pos,context.handle)
         
-        printAPI.print(self.bbox.min.x .. " is minx \n");
-
-        printAPI.print("Moving player bounding box3...\n")
 
 
-        self.lastpos = newPos
+        self.lastpos = self.pos
              
         --printAPI.print("Completed player update.\n")
 
-        printAPI.print("Moving player bounding box3...\n")
 
 
+        manyList = {}
+        manyList[1] = plantBBox
+        manyList[2] = plantBBox
+        count = 2
 
-        manyList = { plantBBox }
-        count = 1
-        --collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
-        printAPI.print("Moving player bounding box3...\n")
+        collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
+        
 
         if collides then
-           printAPI.print("Collision!")
+           printAPI.print("Collision!\n")
         end
 
 
@@ -428,7 +430,6 @@ function Initialize()
 
 	plant02 = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant02,0,0,0)
-
     
 	giantPlant = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(giantPlant,100,20,100)
@@ -436,7 +437,19 @@ function Initialize()
 
     printAPI.print('Initialising AABBs...\n')
 
+    plantScale = objectInstanceAPI.getScale(giantPlant, context.handle)
+    plantLoc = objectInstanceAPI.getTranslation(giantPlant, context.handle)
+
     plantBBox = AABBAPI.getAABB(giantPlant, context.handle)
+    printAPI.print(plantScale.x .. "\n")
+    plantBBox.min = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
+    plantBBox.min = luaVectorUtility.vec3_Sum(plantBBox.min,plantLoc,context.handle)
+    plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
+    plantBBox.max = luaVectorUtility.vec3_Sum(plantBBox.max,plantLoc,context.handle)
+
+    -- plantBBox.min = objectInstanceAPI.getScale(giantPlant)
+    -- plantBBox.max *= objectInstanceAPI.getScale(giantPlant)
+    -- plantBBox.max *= objectInstanceAPI.getScale(giantPlant)
 
 
     renderManagerAPI.addObject(plant01)
@@ -462,7 +475,7 @@ function Initialize()
 
 	
 	player0 = Player:new()
-    player0:setAABB(-100,-100,-100,100,100,100)
+    player0:setAABB(-5,-5,-5,5,5,5)
 
     printAPI.print('Initialization finished.\n')
 end
@@ -557,9 +570,10 @@ function Render()
 
 end
 
-Run()
-
-
+local status, err = pcall(Run)
+if not status then
+    printAPI.print(err)
+end
 	
 
 	

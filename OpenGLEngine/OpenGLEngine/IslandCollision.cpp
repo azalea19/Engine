@@ -10,7 +10,7 @@ bool IslandCollision::Check(mAABB a, mAABB b)
 	return false;
 }
 
-bool IslandCollision::Check(mAABB a, mAABB * list, int listSize)
+bool IslandCollision::Check(mAABB a, std::vector<mAABB> list, int listSize)
 {
 	for (int i = 0; i < listSize; i++)
 	{

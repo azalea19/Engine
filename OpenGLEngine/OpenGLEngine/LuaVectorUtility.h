@@ -25,6 +25,8 @@ public:
 	static LuaRef LuaVectorUtility::vec3_Sum(LuaRef a, LuaRef b, LuaContextHandle contextHandle);
 	static LuaRef LuaVectorUtility::vec3_Subtract(LuaRef a, LuaRef b, LuaContextHandle contextHandle);
 	static LuaRef LuaVectorUtility::vec3_ScalarMultiply(LuaRef value, float scalar, LuaContextHandle contextHandle);
+	static LuaRef LuaVectorUtility::vec3_Multiply(LuaRef vec1, LuaRef vec2, LuaContextHandle contextHandle);
+
 	static LuaRef LuaVectorUtility::vec3_CreateEmpty(LuaContextHandle contextHandle);
 	static bool LuaVectorUtility::vec3_Equals(LuaRef a, LuaRef b);
 

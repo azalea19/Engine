@@ -27,7 +27,7 @@ public:
 	/// <param name="listSize">Size of AABB list</param>
 
 	/// <returns>bool</returns>
-	static bool Check(mAABB box, mAABB * list, int listSize);
+	static bool Check(mAABB box, std::vector<mAABB> list, int listSize);
 
 	/// <summary>
 	/// Given the current origin of a colliding AABB, returns the new origin for it

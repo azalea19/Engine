@@ -122,9 +122,22 @@ bool Intersects(LineSegment1D const & a, LineSegment1D const & b)
 
 bool Intersects(mAABB const & a, mAABB const & b)
 {
-	vec3 cornersA[8];
-	vec3 cornersB[8];
+	//vec3 cornersA[8];
+	//vec3 cornersB[8];
 
+	if (a.min.x < b.max.x &&
+		a.max.x > b.min.x &&
+		a.min.y < b.max.y &&
+		a.max.y > b.min.y &&
+		a.min.z < b.max.z &&
+		a.max.z > b.min.z)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+	/*
 	cornersA[0] = vec3(a.min.x, a.min.y, a.min.z);
 	cornersA[1] = vec3(a.min.x, a.min.y, a.max.z);
 	cornersA[2] = vec3(a.min.x, a.max.y, a.min.z);
@@ -149,7 +162,7 @@ bool Intersects(mAABB const & a, mAABB const & b)
 	normals[1] = vec3(0, 1, 0);
 	normals[2] = vec3(0, 0, 1);
 
-	return SeperatingAxisTest(cornersA, 8, cornersB, 8, normals, 3);
+	return SeperatingAxisTest(cornersA, 8, cornersB, 8, normals, 3);*/
 }
 
 bool Intersects(mAABB const & aabb, mOBB const & obb)

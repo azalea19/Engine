@@ -8,11 +8,13 @@ bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox, LuaRef manyList, int 
 	toMoveBB.max = FromLuaTable<vec3>(thisbox["max"]);
 	toMoveBB.min = FromLuaTable<vec3>(thisbox["min"]);
 
-	mAABB * manyBB;
+	std::vector<mAABB> manyBB;
+	mAABB bbox;
 	for (int i = 0; i < listSize; i++)
 	{
-		manyBB[i].max = FromLuaTable<vec3>(manyList[i+1]["max"]);
-		manyBB[i].min = FromLuaTable<vec3>(manyList[i+1]["min"]);
+		bbox.max = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["max"]);
+		bbox.min = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["min"]);
+		manyBB.push_back(bbox);
 	}
 	
 	
