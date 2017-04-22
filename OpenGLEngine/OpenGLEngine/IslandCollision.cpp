@@ -31,10 +31,15 @@ static std::vector<vec3> dirs; // directions
 
 vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAABB> list, int listSize, float incSize)
 {
+	// Increment between checks - initial distance and distance increase that occurs 
+	// when repeating the check in all directions when no escape is found.
 	float increment = incSize;
+
+	// The increment 
 	float dist = increment;
 
-
+	// Set static var dirs if they have not been set up.
+	// These are all the directions in which to check for an "escape route" from the collision.
 	if (dirs.empty())
 	{
 		// y = 0 layer
@@ -69,42 +74,46 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAA
 	}
 
 	bool cont;
-	// Stop if there's no collision currently
-
-//#include <iostream>
-//	std::cout << "Checking collision to determine whether to resolve.\n";
+	// If there is no collision to begin with
 	if (!Check(toMoveBB, list, listSize))
 	{
-		cont = false;
+		// Return the same position that was passed in
 		return toMoveOrigin;
-
 	}
 	else
 	{
+		// Else continue
 		cont = true;
 	}
 
 	while (cont == true)
 	{
-		dist += increment;
-		vec3 position = toMoveOrigin;
-
-		for (int i = 1; i <= dirs.size(); i++)
+		// Go through each direction and check if you can find a way out of the collision in size increments, 
+		// increasing the size increment once you've checked the previous one in every direction.
+		for (int i = 0; i < dirs.size(); i++)
 		{
-			position += (dirs[i] * increment * dist);
-			toMoveBB.min += position; 
-			toMoveBB.max += position;
+			// set final position to initial position
+			vec3 position = toMoveOrigin;
+			// get total difference to move the object and bounding box
+			vec3 diff = (dirs[i] * dist); 
 
+			// move object by difference									  
+			position += diff;
+			// move bounding box by difference
+			toMoveBB.min += diff; 
+			toMoveBB.max += diff;
+
+			// If the object now isnt colliding with anything
 			if (!Check(toMoveBB, list, listSize))
 			{
-				vec3 diff = position - toMoveOrigin;
-				std::cout << "Item moved by " << diff.x << "," << diff.y << "," << diff.z << "\n";
+				//vec3 diff2 = position - toMoveOrigin;
+				//std::cout << "Item moved by " << diff2.x << "," << diff2.y << "," << diff2.z << "\n";
 
+				// Return the final position
 				return (position);
 			}
-
-			position = toMoveOrigin;
 		}
+		dist += increment;
 
 
 		if (dist > increment * 1000)

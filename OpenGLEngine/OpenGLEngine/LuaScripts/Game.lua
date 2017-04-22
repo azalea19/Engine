@@ -246,7 +246,7 @@ end
 		return o
 	end
 
-    function Player:setAABB(minx,miny,minz,maxx,maxy,maxz)
+    function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
         printAPI.print("Setting player AABB...\n");
 
         
@@ -398,15 +398,11 @@ end
         
 
         if collides then
-           --printAPI.print("Collision!\n")
-           --PrintVec3(self.pos)
-           --PrintVec3s(self.bbox.min,self.bbox.max)
-
+           --printAPI.print("Collision! Resolved to: ")
            self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,count,2,context.handle)
            cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
 
-           PrintVec3(self.pos)
-           PrintVec3s(self.bbox.min,self.bbox.max)
+           --PrintVec3(self.pos)
 
 
         end
@@ -472,7 +468,7 @@ function Initialize()
     printAPI.print(plantScale.x .. "\n")
     plantBBox.min = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
     plantBBox.min = luaVectorUtility.vec3_Sum(plantBBox.min,plantLoc,context.handle)
-    plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
+    plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.max,plantScale,context.handle)
     plantBBox.max = luaVectorUtility.vec3_Sum(plantBBox.max,plantLoc,context.handle)
 
     -- plantBBox.min = objectInstanceAPI.getScale(giantPlant)
@@ -503,7 +499,7 @@ function Initialize()
 
 	
 	player0 = Player:new()
-    player0:setAABB(-5,-5,-5,5,5,5)
+    player0:setAABB(-5,5,-50,50,-5,5) -- Y values higher than X and Z so the player doesn't jump above things with the island collisions. -- todo reduce if we implement jumping
 
     printAPI.print('Initialization finished.\n')
 end
