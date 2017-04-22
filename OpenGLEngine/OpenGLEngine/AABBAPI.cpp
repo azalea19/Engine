@@ -7,16 +7,15 @@ LuaRef AABBAPI::GetAABB(int handle, LuaContextHandle cHandle)
 	LuaRef AABBtable = luabridge::newTable(LuaManager::GetInstance().GetContext(cHandle)->GetLuaState());
 	std::vector<vec3> bbox = LuaObjectInstanceManager::GetInstance(cHandle)->GetRenderableObject()->GetAABB();
 
-	AABBtable["min"] = bbox[0];
-	AABBtable["max"] = bbox[1];
+	AABBtable["min"] = ToLuaTable(bbox[0],cHandle);
+	AABBtable["max"] = ToLuaTable(bbox[1],cHandle);
 
 	return AABBtable;
 }
 
 LuaRef AABBAPI::Move(LuaRef bbox, LuaRef oldPos, LuaRef newPos, LuaContextHandle cHandle)
 {
-	LuaRef min = bbox["min"];
-	vec3 bboxmin = FromLuaTable<vec3> (min);
+	vec3 bboxmin = FromLuaTable<vec3> (bbox["min"]);
 	vec3 bboxmax = FromLuaTable<vec3>(bbox["max"]);
 	vec3 oldposvec = FromLuaTable<vec3>(oldPos);
 	vec3 newposvec = FromLuaTable<vec3>(newPos);
@@ -28,8 +27,8 @@ LuaRef AABBAPI::Move(LuaRef bbox, LuaRef oldPos, LuaRef newPos, LuaContextHandle
 
 	LuaRef newAABB = luabridge::newTable(LuaManager::GetInstance().GetContext(cHandle)->GetLuaState());
 
-	newAABB["min"] = newMin;
-	newAABB["max"] = newMax;
+	newAABB["min"] = ToLuaTable(newMin,cHandle);
+	newAABB["max"] = ToLuaTable(newMax,cHandle);
 
 	return newAABB;
 }

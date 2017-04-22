@@ -7,6 +7,9 @@
 #include "LuaContext.h"
 #include "LuaManager.h"
 
+#include "MathAPI.h"
+#include "IslandCollision.h"
+
 
 #pragma once
 class IslandCollisionAPI
@@ -30,10 +33,10 @@ public:
 	/// <param name="staticBB">Static bounding box</param>
 	/// <param name="inc">Size of movement increments</param>
 	/// <returns>LuaRef</returns>
-	static LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBMin, LuaRef toMoveBBMax, LuaRef staticBBMin, LuaRef staticBBMax);
-	
+	static LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBMin, LuaRef toMoveBBMax, LuaRef staticBBMin, LuaRef staticBBMax, LuaContextHandle handle);
+
 	/// <summary>
-	/// Check if one AABB is colliding with any in a list.
+	/// Check if one AABB is colliding with any in a list. todo Probably should be in AABB class instead.
 	/// Exposes Check function through Lua API.
 	/// </summary>
 	/// <param name="min">Table vec3 min point of AABB</param>
@@ -41,7 +44,7 @@ public:
 	/// <param name="manyList">Table of many Vec3, in pairs of min and then max of AABBs.</param>
 	/// <param name="listSize">Number of AABBs in the manyList table (half the number of values)</param>
 	/// <param name="handle">Lua context handle</param>
-	static void IslandCollisionAPI::CheckAnyCollision(LuaRef min, LuaRef max, LuaRef manyList, int listSize, LuaContextHandle handle);
+	static bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox, LuaRef manyList, int listSize);
 
 };
 

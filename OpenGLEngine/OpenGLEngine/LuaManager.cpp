@@ -12,7 +12,7 @@
 #include "TimeAPI.h"
 #include "TerrainAPI.h"
 #include "AABBAPI.h"
-
+#include "IslandCollisionAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -49,6 +49,8 @@ void LuaManager::Initialize()
   luaManager.AddAPI("timeAPI", TimeAPI::Expose);
   luaManager.AddAPI("terrainAPI", TerrainAPI::Expose);
   luaManager.AddAPI("AABBAPI", AABBAPI::Expose);
+  luaManager.AddAPI("islandCollisionAPI", IslandCollisionAPI::Expose);
+
 
 
 }

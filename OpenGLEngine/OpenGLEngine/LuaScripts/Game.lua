@@ -37,6 +37,8 @@ function LoadAPIs()
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
     GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
     GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
+    GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
+
 
 
 end
@@ -142,10 +144,9 @@ function LoadInstances(filePath, fileType)
 		renderManagerAPI.addObject(instanceID)
 	end
 end
-
+--[[
 function MoveAABB(aabb,inittpos,finalpos)
 {
-    --[[
 	vec3 diff = (newposvec - oldposvec);
 	vec3 newMin = bboxmin + diff;
 	vec3 newMax = bboxmax + diff;
@@ -155,17 +156,18 @@ function MoveAABB(aabb,inittpos,finalpos)
 
 	newAABB["min"] = newMin;
 	newAABB["max"] = newMax;
-    ]]
+ 
 }
-	
+]]
+
 function SaveInstances(filePath, data, fileType)
 	local numRows = 0
 	
 	for k,v in next, data do 
 		numRows = numRows + 1
 	end
-
 	for i = 1, numRows do
+   
 		if(fileType == "gameObject") then
 			--[[tmp = gameObjects[i]["name"]
 			write(filePath, tmp)
@@ -222,7 +224,7 @@ end
         instanceid =0,
         bbox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
         pos = {x=0,y=0,z=0},
-        lastpos
+        lastpos = {x=0,y=0,z=0}
 	}
 
 	Player.__index = Player
@@ -321,7 +323,13 @@ end
         
         emptyvec = luaVectorUtility.vec3_CreateEmpty(context.handle)
 
-        --printAPI.print(transltion[1] .. translation[2] .. translation[3])
+        printAPI.print("Updating player location...\n")
+        
+        
+        newPos = pos
+        
+        printAPI.print("Updating player location...\n")
+
         if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
        
             translation = luaVectorUtility.vec3_Normalize(translation,context.handle)
@@ -329,19 +337,55 @@ end
 
             newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
   
-            cameraAPI.setPosition(camera0,newPos[1],newPos[2],newPos[3]);
+            cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);
          
+        else
+            printAPI.print("Player has not moved.\n")
+
         end 
         -- Movement update finished
 
        printAPI.print("Moving player bounding box...\n")
 
-        pos = newPos
-        bbox = AABBAPI.move(bbox,lastpos,pos,context.handle)
+        self.pos = newPos
+        
+        printAPI.print("Moving player bounding box1...\n")
 
-        lastpos = newPos
+        printAPI.print(self.bbox.min.x .. " is minx \n");
+
+        printAPI.print("Moving player bounding box2...\n")
+
+        --value = AABBBAPI.move(emptyv,emptyb,emptyc,context.handle)
+
+        self.bbox = AABBAPI.move(self.bbox,self.lastpos,self.pos,context.handle)
+        
+        printAPI.print(self.bbox.min.x .. " is minx \n");
+
+        printAPI.print("Moving player bounding box3...\n")
+
+
+        self.lastpos = newPos
              
         --printAPI.print("Completed player update.\n")
+
+        printAPI.print("Moving player bounding box3...\n")
+
+
+
+        manyList = { plantBBox }
+        count = 1
+        --collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
+        printAPI.print("Moving player bounding box3...\n")
+
+        if collides then
+           printAPI.print("Collision!")
+        end
+
+
+
+
+
+
         
 	end
 	
@@ -421,7 +465,6 @@ function Initialize()
     player0:setAABB(-100,-100,-100,100,100,100)
 
     printAPI.print('Initialization finished.\n')
-
 end
 
 function GameLoop()
@@ -467,7 +510,7 @@ function Update()
         run = false
 	end
 
-    player0.update();
+    player0:update();
 
 	engineAPI.EndUpdate();
 	
