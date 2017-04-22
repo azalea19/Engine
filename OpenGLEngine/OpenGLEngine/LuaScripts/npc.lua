@@ -16,13 +16,12 @@ function npc.new(newName, newModel, newPos, newDir, newBBox, newScale, newAnim, 
 		id = newID,
 		characterName = newCharacterName,
 		scale = newScale,
-		animation = newAnim
+		animation = newAnim,
+		alive = true
 	}
 	setmetatable(instance, npc)
 	return instance
 end
-
-
 
 function npc:Update()
 	self.currentHealth = self.currentHealth - 1
@@ -33,9 +32,11 @@ function npc:Update()
 end
 
 function npc:Die()
+	
+	renderManagerAPI.removeObject(self.id)
 	--luaObjInstManager.deleteInstance(self.id)
-	--renderManagerAPI.deleteObject(self.id)
-	self = nil
+	--self = nil
+	self.alive = false
 end
 
 setmetatable(npc,{__index = gameObject})

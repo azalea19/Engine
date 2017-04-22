@@ -6,9 +6,11 @@ require 'LuaScripts/FileIO'
 
 gameObjects = {}
 
+--SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
+
 SDL_SCANCODE_W = 26
 SDL_SCANCODE_A = 4
-
+SDL_SCANCODE_P = 19
 SDL_SCANCODE_S = 22
 SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
@@ -136,7 +138,7 @@ function LoadInstances(filePath, fileType)
 		objectInstanceAPI.setTranslation(instanceID,pos.X,pos.Y,pos.Z)
 		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
 		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
-		objectInstanceAPI.setAnimation(instanceID,anim)
+		--objectInstanceAPI.setAnimation(instanceID,anim)
 		renderManagerAPI.addObject(instanceID)
 	end
 	
@@ -214,7 +216,7 @@ function SaveInstances(filePath, data, fileType)
 			end
 		else
 			if(fileType == "npc") then
-				if gameObjects[i]["currentHealth"] ~= nil then
+				if gameObjects[i]["currentHealth"] ~= nil and gameObjects[i]["alive"] == true then
 					total = total + 1
 					write(filePath, gameObjects[i]["name"])
 					write(filePath, ",")
@@ -416,9 +418,6 @@ function Initialize()
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	LoadInstances("SaveData/NPC_Data.csv", "npc")
 	
-	SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
-	SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
-	
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	
@@ -500,6 +499,11 @@ function Update()
 
     --inputManagerAPI.update();
 
+	if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
+		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
+		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
+	end
+	
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
