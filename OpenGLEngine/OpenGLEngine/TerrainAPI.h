@@ -2,6 +2,8 @@
 #include "Terrain.h"
 #include "LuaManager.h"
 #include "OBJWriter.h"
+#include <vector>
+#include "mathAPI.h"
 
 
 /**
@@ -16,6 +18,6 @@ class TerrainAPI
 {
 public:
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
-	static void GenerateTerrain(uint terrainWidth, uint terrainHeight, float heightScale, string const& heightMapPath, string const& objPath);
+	static LuaRef GenerateTerrain(uint terrainWidth, uint terrainHeight, uint heightMapSize, float heightScale, string const& heightMapPath, string const& objPath, LuaContextHandle contextHandle);
 };
 

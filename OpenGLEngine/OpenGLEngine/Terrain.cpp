@@ -157,7 +157,6 @@ void Terrain::CreateMesh()
   glGenBuffers(1, &gVBO);
   glGenBuffers(1, &gNBO);
   glGenBuffers(1, &gIBO);
-  glGenBuffers(1, &m_texture);
 
   glBindBuffer(GL_ARRAY_BUFFER, gVBO);
   glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * 3 * sizeof(GLfloat), m_vertices.data(), GL_STATIC_DRAW);
@@ -170,11 +169,6 @@ void Terrain::CreateMesh()
   glBindBuffer(GL_ARRAY_BUFFER, gIBO);
   glBufferData(GL_ARRAY_BUFFER, m_indices.size() * sizeof(GLint), m_indices.data(), GL_STATIC_DRAW);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-  glBindBuffer(GL_ARRAY_BUFFER, m_texture);
-  glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * 3 * sizeof(GLfloat), m_texCoords.data(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 }
 
 

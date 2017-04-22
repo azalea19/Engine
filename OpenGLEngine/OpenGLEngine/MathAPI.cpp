@@ -23,6 +23,23 @@ LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
   return table;
 }
 
+LuaRef ToLuaTable(std::vector<float> data, int width, int height, LuaContextHandle contextHandle)
+{
+	LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+	LuaRef tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+
+	for (int i = 1; i <= width; i++)
+	{
+		tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+		for (int k = 1; k <= height; k++) 
+		{
+			tempTable[k] = data.at(((i - 1) * width) + k - 1);
+		}
+		table[i] = tempTable;
+	}
+
+	return table;
+}
 
 LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 {

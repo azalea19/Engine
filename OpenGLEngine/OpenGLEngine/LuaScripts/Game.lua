@@ -138,7 +138,7 @@ function LoadInstances(filePath, fileType)
 		objectInstanceAPI.setTranslation(instanceID,pos.X,pos.Y,pos.Z)
 		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
 		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
-		--objectInstanceAPI.setAnimation(instanceID,anim)
+		objectInstanceAPI.setAnimation(instanceID,anim)
 		renderManagerAPI.addObject(instanceID)
 	end
 	
@@ -297,7 +297,8 @@ end
 	function Player.new()
 		local instance = 
 		{
-			id = 0
+			id = 0,
+			height = 5
 		}
 	
 		setmetatable(instance, Player)
@@ -314,7 +315,7 @@ end
 
 	    -- written by liz translated from maddys c++ code
 	    turnSpeed = 0.3
-	    moveSpeed = 0.5
+	    moveSpeed = 0.3
 	      
         --rotation
 	    origYaw = cameraAPI.getYaw(camera0,context.handle)
@@ -331,8 +332,6 @@ end
    
 		--translation   
 	
-
-        MOVE_SPEED = 1
    
         oldPos = cameraAPI.getPosition(camera0,context.handle);
 	    forward = cameraAPI.forward(camera0,context.handle);
@@ -351,7 +350,6 @@ end
         if inputManagerAPI.isKeyDown(SDL_SCANCODE_A) then
         	translation = luaVectorUtility.vec3_Subtract(translation,right,context.handle)
         end
-
 
 	    if inputManagerAPI.isKeyDown(SDL_SCANCODE_S) then
         	translation = luaVectorUtility.vec3_Subtract(translation,forward,context.handle)
@@ -376,10 +374,10 @@ end
         if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
        
             translation = luaVectorUtility.vec3_Normalize(translation,context.handle)
-            translation = luaVectorUtility.vec3_ScalarMultiply(translation,MOVE_SPEED,context.handle)
+            translation = luaVectorUtility.vec3_ScalarMultiply(translation,moveSpeed,context.handle)
 
             newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
-  
+			newPos[2] = GetHeightAtPoint(newPos[1], newPos[3]) + 5
             cameraAPI.setPosition(camera0,newPos[1],newPos[2],newPos[3]);
          
         end 
@@ -388,16 +386,89 @@ end
         
 	end
 	
-	
+terrainSizeX = 1000
+terrainSizeY = 1000
+heightMapSize = 256
 function LoadAssets()
 	--modelLibraryAPI.AddModel("ground","Assets/Models/Ground/Ground.obj",false)
 	--modelLibraryAPI.AddModel("tree","tree.obj", false)
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
-	--terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, 50, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 	
 	printAPI.print('Assets loaded\n')
+end
+
+function GetHeightAtPoint(x, y)
+	if(x < 0) then
+		x = 0
+	end
+	if(x > terrainSizeX) then
+		x = terrainSizeX - 1
+	end
+	if(y < 0) then
+		y = 0
+	end
+	if(y > terrainSizeY) then
+		y = terrainSizeY - 1
+	end
+	xScale = terrainSizeX / heightMapSize
+	yScale = terrainSizeY / heightMapSize
+
+	xPixel = (x / terrainSizeX) * heightMapSize
+	yPixel = (y / terrainSizeY) * heightMapSize
+	BottomLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 1]
+	BottomRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 1]
+	TopLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 2]
+	TopRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 2]
+	if(x + y <= xPixel * xScale + yScale * yScale ) then
+		z1 = TopLeft
+		z2 = BottomRight
+		z3 = BottomLeft
+		x1 = (math.floor(xPixel) + 1) * xScale
+		x2 = (math.floor(xPixel) + 2) * xScale
+		x3 = (math.floor(xPixel) + 1) * xScale
+		y1 = (math.floor(yPixel) + 2) * yScale
+		y2 = (math.floor(yPixel) + 1) * yScale
+		y3 = (math.floor(yPixel) + 1) * yScale
+
+		first = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
+		second = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
+		third = 1 - first - second
+		resultHeight = first * z1 + second * z2 + third * z3
+	else
+		z1 = TopLeft
+		z2 = TopRight
+		z3 = BottomRight
+		x1 = (math.floor(xPixel) + 1) * xScale
+		x2 = (math.floor(xPixel) + 2) * xScale
+		x3 = (math.floor(xPixel) + 2) * xScale
+		y1 = (math.floor(yPixel) + 2) * yScale
+		y2 = (math.floor(yPixel) + 2) * yScale
+		y3 = (math.floor(yPixel) + 1) * yScale
+
+		first = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
+		second = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
+		third = 1 - first - second
+		resultHeight = first * z1 + second * z2 + third * z3
+	end
+			--[[differenceInHeight = TopLeft - BottomLeft
+		decimalPart = yPixel - math.floor(yPixel)
+		changeBy = differenceInHeight * decimalPart
+		leftSide = BottomLeft + changeBy
+
+		differenceInHeight = TopRight - BottomRight
+		decimalPart = yPixel - math.floor(yPixel)
+		changeBy = differenceInHeight * decimalPart
+		rightSide = BottomRight + changeBy
+
+		differenceInHeight = leftSide - rightSide
+		decimalPart = xPixel - math.floor(xPixel)
+		changeBy = differenceInHeight * decimalPart
+		resultHeight = leftSide + changeBy]]
+
+	return resultHeight
 end
 
 function Initialize()
@@ -571,9 +642,10 @@ function Render()
 
 end
 
-Run()
-
-
+local status, err = pcall(Run)
+if not status then
+   printAPI.print(err)
+end
 	
 
 	
