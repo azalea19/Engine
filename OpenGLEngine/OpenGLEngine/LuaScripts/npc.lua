@@ -22,6 +22,22 @@ function npc.new(newName, newModel, newPos, newDir, newBBox, newScale, newAnim, 
 	return instance
 end
 
+
+
+function npc:Update()
+	self.currentHealth = self.currentHealth - 1
+	if(self.currentHealth <= 0) then
+		self:Die()
+	end
+	printAPI.print(self.currentHealth .. '\n')
+end
+
+function npc:Die()
+	--luaObjInstManager.deleteInstance(self.id)
+	--renderManagerAPI.deleteObject(self.id)
+	self = nil
+end
+
 setmetatable(npc,{__index = gameObject})
 
 return npc

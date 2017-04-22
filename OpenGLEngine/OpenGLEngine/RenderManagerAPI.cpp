@@ -28,6 +28,12 @@ void RenderManagerAPI::AddObject(int object)
 	RenderManager::GetInstance().AddObject(obj);
 }
 
+void RenderManagerAPI::RemoveObject(int object)
+{
+	ObjectInstance * obj = LuaObjectInstanceManager::GetInstance(object);
+	RenderManager::GetInstance().RemoveObject(obj);
+}
+
 void RenderManagerAPI::Initialise()
 {
 
@@ -129,6 +135,7 @@ void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "render", Render);
 	pContext->ExposeFunction(luaAPIName, "renderFromCamera", RenderFromCamera);
 	pContext->ExposeFunction(luaAPIName, "addObject", AddObject);
+	pContext->ExposeFunction(luaAPIName, "removeObject", RemoveObject);
 	pContext->ExposeFunction(luaAPIName, "initialise", Initialise);
 
 	//pContext->ExposeFunction(luaAPIName, "testRender", TestRender);

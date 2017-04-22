@@ -402,7 +402,6 @@ function Initialize()
 
 	LoadAPIs()
 	
-	
 	printAPI.print('Initializing...\n')
 
     printAPI.print('Initialising engine...\n')
@@ -501,6 +500,17 @@ function Update()
 
     --inputManagerAPI.update();
 
+	local numRows = 0
+	for k,v in next, gameObjects do 
+		numRows = numRows + 1
+	end
+
+	for i = 1, numRows do
+		if gameObjects[i]["currentHealth"] ~= nil then
+			gameObjects[i]:Update()
+		end
+	end
+	
 	--Lua update here
     count = (count or 0) + 1
 	--run = mainAPI.update()
