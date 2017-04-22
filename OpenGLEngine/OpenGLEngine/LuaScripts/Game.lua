@@ -216,7 +216,7 @@ function SaveInstances(filePath, data, fileType)
 			end
 		else
 			if(fileType == "npc") then
-				if gameObjects[i]["currentHealth"] ~= nil and gameObjects[i]["alive"] == true then
+				if gameObjects[i]["currentHealth"] ~= nil then
 					total = total + 1
 					write(filePath, gameObjects[i]["name"])
 					write(filePath, ",")
@@ -512,6 +512,9 @@ function Update()
 	for i = 1, numRows do
 		if gameObjects[i]["currentHealth"] ~= nil then
 			gameObjects[i]:Update()
+			if gameObjects[i]["alive"] == false then
+				gameObjects[i] = nil
+			end
 		end
 	end
 	

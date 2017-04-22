@@ -6,7 +6,7 @@
 
 /**
 * @file   TerrainAPI.h
-* @Author Nathan Game
+* @Author Nathan Gane
 * @date   S1, 2017
 * @brief  Lua API for the Terrain class.
 *
