@@ -49,7 +49,7 @@ struct ShaderLibrary : public Singleton<ShaderLibrary>
   /// <returns>Shader</returns>
   std::unique_ptr<IShader> const& GetShader(string const& name) const;
 
-	
+
   /// <summary>
   /// Binds the shader.
   /// </summary>
@@ -67,14 +67,14 @@ struct ShaderLibrary : public Singleton<ShaderLibrary>
   /// Return the current shader bound.
   /// </summary>
   /// <returns>Shader</returns>
-  const IShader* CurrentShader() const;
+  std::unique_ptr<IShader> const& ShaderLibrary::CurrentShader() const;
 
 	
   /// <summary>
   /// Gets the name of the current shader.
   /// </summary>
   /// <returns>string</returns>
-  const string GetCurrentShaderName() const;
+  string const& GetCurrentShaderName() const;
 
 private:
 
@@ -83,7 +83,7 @@ private:
   /// </summary>
   string m_currentShaderName;
 
-  std::unique_ptr<IEngine> const& m_pEngine;
+  IEngine const *m_pEngine;
 
 };
 

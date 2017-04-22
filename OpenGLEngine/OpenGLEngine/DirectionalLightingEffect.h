@@ -2,7 +2,7 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
 #include "Types.h"
-
+#include <memory>
 
 /**
 * @file DirectionalLightingEffect.h
@@ -22,5 +22,6 @@ public:
 
 private:
   FrameBuffer m_fb;
-  IShader const* m_pShader;
+
+  std::unique_ptr<IShader> const& m_pShader;
 };

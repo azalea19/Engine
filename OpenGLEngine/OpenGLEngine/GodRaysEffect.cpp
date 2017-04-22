@@ -3,9 +3,8 @@
 #include "Texture.h"
 
 GodRaysEffect::GodRaysEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("RayEffect"))
 {
-	m_pShader = ShaderLibrary::GetInstance().GetShader("RayEffect");
-
 	depthMaskTex = CreateVec3Texture();
 	rayTex = CreateVec3Texture();
 }

@@ -106,7 +106,7 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
 
   ShaderLibrary::GetInstance().BindShader("orthoShader");
 
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
 
   GLuint gVBO;
   GLuint gUVBO;
@@ -222,7 +222,7 @@ void DrawImage(string const& filePath)
 
   ShaderLibrary::GetInstance().BindShader("orthoShader");
 
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
 
   GLuint gVBO;
   GLuint gUVBO;

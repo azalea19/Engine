@@ -1,8 +1,10 @@
-local Vector3 = require 'LuaScripts/Vector3'
-local gameObject = require 'LuaScripts/gameObject'
-local AABoundingBox = require 'LuaScripts/AABoundingBox'
-local npc = require 'LuaScripts/npc'
-require 'LuaScripts/FileIO'
+--local Vector3 = require 'LuaScripts/Vector3'
+--local gameObject = require 'LuaScripts/gameObject'
+--local AABoundingBox = require 'LuaScripts/AABoundingBox'
+--local npc = require 'LuaScripts/npc'
+--require 'LuaScripts/FileIO'
+
+OPEN_GL = 0
 
 gameObjects = {}
 
@@ -36,7 +38,6 @@ function LoadAPIs()
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
     GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
-
 end
 
 --[[
@@ -302,11 +303,20 @@ end
 	
 	
 function LoadAssets()
-	--modelLibraryAPI.AddModel("ground","Assets/Models/Ground/Ground.obj",false)
-	--modelLibraryAPI.AddModel("tree","tree.obj", false)
+
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	
+	printAPI.print('plant loaded\n')
+
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
+
+		
+	printAPI.print('bob loaded\n')
+
 	terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
+		
+	printAPI.print('terrain loaded\n')
+
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 	
 	printAPI.print('Assets loaded\n')
@@ -321,14 +331,17 @@ function Initialize()
 
     printAPI.print('Initialising engine...\n')
 
-	engineAPI.Create(0);
+	engineAPI.Create(OPEN_GL);
+		
+	printAPI.print('Creating...\n')
+
 	engineAPI.Initialise(1024,728);
 
 	LoadAssets()
 	
     printAPI.print('Initialising objects...\n')
 
-	LoadInstances("SaveData/GO_Data.csv", "gameObject")
+	--LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	--LoadInstances("SaveData/NPC_Data.csv", "npc")
 	
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
@@ -408,10 +421,6 @@ function Update()
 
     engineAPI.BeginUpdate()
 
-    --engineAPI.handleEvents()
-
-    --inputManagerAPI.update();
-
 	--Lua update here
     count = (count or 0) + 1
 	--run = mainAPI.update()
@@ -427,31 +436,26 @@ end
 
 function Render()
 
-	--printAPI.print('count = ')
-	--printAPI.print(count)
-	--printAPI.print('\n')
-	--mainAPI.render()
-
     engineAPI.BeginRender()
 
-    --printAPI.print("Getting time...\n");
+    printAPI.print("Getting time...\n");
 
     time = timeAPI.elapsedTimeMs()
 
-    --printAPI.print("Getting world matrix...\n");
+    printAPI.print("Getting world matrix...\n");
 
     worldMatrix = luaVectorUtility.mat4_CreateIdentity(context.handle)
 
-    --printAPI.print("Getting view matrix...\n");
+    printAPI.print("Getting view matrix...\n");
 
     viewMatrix = cameraAPI.getViewMatrix(camera0, context.handle)
 
-    --printAPI.print("Getting projection matrix...\n");
+    printAPI.print("Getting projection matrix...\n");
 
     projectionmatrix = cameraAPI.getProjectionMatrix(camera0, context.handle)
 
     
-   -- printAPI.print("Rendering...\n");
+    printAPI.print("Rendering...\n");
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
     renderManagerAPI.renderFromCamera(camera0,time)

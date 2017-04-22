@@ -181,6 +181,7 @@
     <ClCompile Include="ForestTerrain.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="FXAAEffect.cpp" />
+    <ClCompile Include="GLInputHandler.cpp" />
     <ClCompile Include="GodRaysEffect.cpp" />
     <ClCompile Include="HDRSplitEffect.cpp" />
     <ClCompile Include="HeightMap.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="DXEngine.h" />
     <ClInclude Include="EngineAPI.h" />
     <ClInclude Include="GLEngine.h" />
+    <ClInclude Include="GLInputHandler.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="ForestTerrain.h" />
     <ClInclude Include="HeightMap.h" />
@@ -267,6 +269,7 @@
     <ClInclude Include="GodRaysEffect.h" />
     <ClInclude Include="HDRSplitEffect.h" />
     <ClInclude Include="IAnimatedRenderable.h" />
+    <ClInclude Include="IInputHandler.h" />
     <ClInclude Include="IMesh.h" />
     <ClInclude Include="IMeshCollection.h" />
     <ClInclude Include="InputManagerAPI.h" />

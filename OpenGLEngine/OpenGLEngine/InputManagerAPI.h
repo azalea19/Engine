@@ -12,6 +12,7 @@
 * @brief  Lua API for the input manager.
 *
 */
+
 class InputManagerAPI
 {
 public:
@@ -21,13 +22,13 @@ public:
 	/// Get mouse delta X through lua API.
 	/// </summary>
 	/// <returns>int</returns>
-	static int InputManagerAPI::MouseDeltaX();
+	static int MouseDeltaX();
 
 	/// <summary>
 	/// Get mouse delta Y through lua API.
 	/// </summary>
 	/// <returns>int</returns>
-	static int InputManagerAPI::MouseDeltaY();
+	static int MouseDeltaY();
 
 	/// <summary>
 	/// Checks if key is down in input through lua API.
@@ -65,6 +66,10 @@ public:
 	/// <param name="luaAPIName">Name of the API</param>
 	/// <returns>int</returns>
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
+
+private:
+
+  std::unique_ptr<IInputHandler> input;
 
 };
 

@@ -3,7 +3,7 @@
 #include "ObjectInstance.h"
 #include "IEngine.h"
 
-void ModelLibrary::Initialise(IEngine* pEngine)
+void ModelLibrary::Initialise(IEngine const *pEngine)
 {
   ModelLibrary::GetInstance().m_pEngine = pEngine;
 }

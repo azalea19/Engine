@@ -3,8 +3,9 @@
 
 
 MultiplicativeBlendEffect::MultiplicativeBlendEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("MultiplicativeBlendEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("MultiplicativeBlendEffect");
+  
 }
 
 void MultiplicativeBlendEffect::Apply(GLuint inputTex0, GLuint inputTex1, GLuint outputTex)

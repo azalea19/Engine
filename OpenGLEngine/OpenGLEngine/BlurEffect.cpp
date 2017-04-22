@@ -3,8 +3,9 @@
 
 
 BlurEffect::BlurEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("BlurEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("BlurEffect");
+  
 }
 
 void BlurEffect::Apply(GLuint inputTex, GLuint outputTex, int blurRadius)

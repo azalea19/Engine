@@ -8,34 +8,35 @@
 #include "Shader.h"
 #include "RenderableObject.h"
 #include "Screen.h"
+#include "GLInputHandler.h"
 
 IEngine* GLEngine::Create()
 {
   return new GLEngine();
 }
 
-bool GLEngine::HandleEvents()
-{
-  SDL_Event event;
-  while (SDL_PollEvent(&event))
-  {
-    switch (event.type)
-    {
-      case SDL_QUIT:
-        return false;
-      case SDL_MOUSEMOTION:
-        InputManager::GetInstance().PushEvent(MouseEvent(event.motion));
-        break;
-      case SDL_MOUSEBUTTONDOWN:
-        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
-        break;
-      case SDL_MOUSEBUTTONUP:
-        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
-        break;
-    }
-  }
-  return true;
-}
+//bool GLEngine::HandleEvents()
+//{
+//  SDL_Event event;
+//  while (SDL_PollEvent(&event))
+//  {
+//    switch (event.type)
+//    {
+//      case SDL_QUIT:
+//        return false;
+//      case SDL_MOUSEMOTION:
+//        InputManager::GetInstance().PushEvent(MouseEvent(event.motion));
+//        break;
+//      case SDL_MOUSEBUTTONDOWN:
+//        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
+//        break;
+//      case SDL_MOUSEBUTTONUP:
+//        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
+//        break;
+//    }
+//  }
+//  return true;
+//}
 
 void GLEngine::InitGlew()
 {
@@ -58,6 +59,11 @@ IShader* GLEngine::CreateShader(string const& name, string const& vertFilePath, 
 IRenderableObject* GLEngine::CreateRenderableObject(string const& name, string const& filename) const
 {
   return new RenderableObject(name, filename);
+}
+
+IInputHandler* GLEngine::CreateInputHandler()
+{
+  return new GLInputHandler();
 }
 
 GLEngine::GLEngine()
@@ -141,8 +147,8 @@ void GLEngine::EndRender()
 
 bool GLEngine::BeginUpdate()
 {
-  if (!HandleEvents())
-    return false;
+  //if (!HandleEvents())
+  //  return false;
 
   InputManager::GetInstance().Update();
 
