@@ -281,6 +281,9 @@
     <ClCompile Include="IslandCollisionAPI.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="AABBAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -509,6 +512,7 @@
     </ClInclude>
     <ClInclude Include="IslandCollision.h" />
     <ClInclude Include="IslandCollisionAPI.h" />
+    <ClInclude Include="AABBAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">

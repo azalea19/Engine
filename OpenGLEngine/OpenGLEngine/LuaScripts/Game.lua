@@ -36,6 +36,8 @@ function LoadAPIs()
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
     GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
+    GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
+
 
 end
 
@@ -115,7 +117,7 @@ function LoadInstances(filePath, fileType)
 		local instanceID= luaObjInstManager.addNewInstance(fileData[i][2])
 
 		bb = AABoundingBox.new(fileData[i][9],fileData[i][10],fileData[i][11],fileData[i][12],fileData[i][13],fileData[i][14])
-		pos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
+		objpos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
 		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
 		sca = Vector3.new(fileData[i][15], fileData[i][16], fileData[i][17])
 		if(fileData[i][18] == 1) then
@@ -125,21 +127,36 @@ function LoadInstances(filePath, fileType)
 		end
 
 		if(fileType == "gameObject") then
-			n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID)
+			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, bb, sca, anim, instanceID)
 		else
 			if(fileType == "npc") then
-				n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20])
+				n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20])
 			end
 		end
 		
 		table.insert(gameObjects, n)
-		objectInstanceAPI.setTranslation(instanceID,pos.X,pos.Y,pos.Z)
+		objectInstanceAPI.setTranslation(instanceID,objpos.X,objpos.Y,objpos.Z)
 		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
 		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
 		--objectInstanceAPI.setAnimation(instanceID,anim)
 		renderManagerAPI.addObject(instanceID)
 	end
 end
+
+function MoveAABB(aabb,inittpos,finalpos)
+{
+    --[[
+	vec3 diff = (newposvec - oldposvec);
+	vec3 newMin = bboxmin + diff;
+	vec3 newMax = bboxmax + diff;
+
+
+	LuaRef newAABB = luabridge::newTable(LuaManager::GetInstance().GetContext(cHandle)->GetLuaState());
+
+	newAABB["min"] = newMin;
+	newAABB["max"] = newMax;
+    ]]
+}
 	
 function SaveInstances(filePath, data, fileType)
 	local numRows = 0
@@ -202,25 +219,45 @@ end
 -- Player --
 	Player = 
 	{
+        instanceid =0,
+        bbox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
+        pos = {x=0,y=0,z=0},
+        lastpos
 	}
 
 	Player.__index = Player
 	
-	function Player.new()
-		local instance = 
-		{
-			id = 0
-		}
-	
-		setmetatable(instance, Player)
-		return instance
+	function Player:new(o)
+        o = o or {}
+        setmetatable(o, self)
+        self.__index = self
+		return o
 	end
 
     function PrintVec3(veca)
         printAPI.print(veca[1] .. "," .. veca[2] .. "," .. veca[3])
     end
 
+    function Player:setAABB(minx,miny,minz,maxx,maxy,maxz)
+        printAPI.print("Setting player AABB...\n");
+
+        
+        self.bbox.min = {x=self.pos.x+minx,y=self.pos.y+miny,z=self.pos.z+minz}
+        self.bbox.max = {x=self.pos.x+maxx,y=self.pos.y+maxy,z=self.pos.z+maxz}
+
+        --[[
+        {
+        min = {pos.x+minx, pos.y+miny, pos.z+minz}, 
+        max = {pos.x+maxx, pos.y+maxy, pos.z+maxz}
+        }
+        ]]
+        printAPI.print("Player AABB set.\n");
+
+    end
+
 	function Player:update()
+        
+        -- Start movement update
 
         --printAPI.print("Updating player.\n")
 
@@ -236,7 +273,7 @@ end
         --PrintVec3(deltaYaw)
 
 	    deltaPitch = -inputManagerAPI.mouseDeltaY() * turnSpeed
-        printAPI.print(deltaYaw .. "," .. deltaPitch .. "\n")
+        --printAPI.print(deltaYaw .. "," .. deltaPitch .. "\n")
 
 	    cameraAPI.setYaw(camera0,origYaw + deltaYaw)
 	    cameraAPI.setPitch(camera0,origPitch+deltaPitch)
@@ -295,6 +332,14 @@ end
             cameraAPI.setPosition(camera0,newPos[1],newPos[2],newPos[3]);
          
         end 
+        -- Movement update finished
+
+       printAPI.print("Moving player bounding box...\n")
+
+        pos = newPos
+        bbox = AABBAPI.move(bbox,lastpos,pos,context.handle)
+
+        lastpos = newPos
              
         --printAPI.print("Completed player update.\n")
         
@@ -340,6 +385,16 @@ function Initialize()
 	plant02 = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant02,0,0,0)
 
+    
+	giantPlant = luaObjInstManager.addNewInstance("Plant")
+	objectInstanceAPI.setTranslation(giantPlant,100,20,100)
+    objectInstanceAPI.setScale(giantPlant,10,10,10)
+
+    printAPI.print('Initialising AABBs...\n')
+
+    plantBBox = AABBAPI.getAABB(giantPlant, context.handle)
+
+
     renderManagerAPI.addObject(plant01)
     renderManagerAPI.addObject(plant02)
 
@@ -362,7 +417,8 @@ function Initialize()
     printAPI.print('Initialising player...\n')
 
 	
-	player0 = Player.new()
+	player0 = Player:new()
+    player0:setAABB(-100,-100,-100,100,100,100)
 
     printAPI.print('Initialization finished.\n')
 
@@ -385,25 +441,6 @@ function Finalize()
 	printAPI.print('Finalizing...\n')
 end
 
-function TestInputAPI()
-	--printAPI.print('Testing input...\n')
-
-	e = inputManagerAPI.isKeyDown(8)
-	if e then
-		printAPI.print("e")
-		objectInstanceAPI.setTranslation(plant01,0,0,0)
-
-	end
-
-    esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
-	if esc then
-		printAPI.print("Quitting - pressed Esc.\n")
-        run = false
-	end
-
-end
-
-
 function Update()
 
     engineAPI.BeginUpdate()
@@ -416,7 +453,19 @@ function Update()
     count = (count or 0) + 1
 	--run = mainAPI.update()
 	
-	TestInputAPI()
+	
+	e = inputManagerAPI.isKeyDown(8)
+	if e then
+		printAPI.print("e")
+		objectInstanceAPI.setTranslation(plant01,0,0,0)
+
+	end
+
+    esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
+	if esc then
+		printAPI.print("Quitting - pressed Esc.\n")
+        run = false
+	end
 
     player0.update();
 

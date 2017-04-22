@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABBAPI.cpp" />
     <ClCompile Include="AdditiveBlendEffect.cpp" />
     <ClCompile Include="AffineTransformable.cpp" />
     <ClCompile Include="Agent.cpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABBAPI.h" />
     <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />

@@ -10,7 +10,7 @@ bool IslandCollision::Check(mAABB a, mAABB b)
 	return false;
 }
 
-static bool Check(mAABB a, mAABB * list, int listSize)
+bool IslandCollision::Check(mAABB a, mAABB * list, int listSize)
 {
 	for (int i = 0; i < listSize; i++)
 	{
@@ -31,7 +31,7 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, mAABB staticBB,
 	float dist = increment;
 
 
-	if (dirs.empty)
+	if (dirs.empty())
 	{
 		// y = 0 layer
 		dirs.push_back(vec3(1, 0, 0)); // x 
@@ -72,7 +72,7 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, mAABB staticBB,
 		dist += increment;
 		vec3 position = toMoveOrigin;
 
-		for (int i = 1; i <= dirs.size; i++)
+		for (int i = 1; i <= dirs.size(); i++)
 		{
 			position += (dirs[i] * increment * dist);
 			toMoveBB.min += position;
