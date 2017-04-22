@@ -38,7 +38,8 @@ function LoadAPIs()
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
     GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
-
+    GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
+    GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
 end
 
 --[[
@@ -117,7 +118,7 @@ function LoadInstances(filePath, fileType)
 		instanceID = luaObjInstManager.addNewInstance(fileData[i][2])
 
 		bb = AABoundingBox.new(fileData[i][9],fileData[i][10],fileData[i][11],fileData[i][12],fileData[i][13],fileData[i][14])
-		pos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
+		objpos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
 		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
 		sca = Vector3.new(fileData[i][15], fileData[i][16], fileData[i][17])
 		if(fileData[i][18] == 1) then
@@ -127,7 +128,7 @@ function LoadInstances(filePath, fileType)
 		end
 
 		if(fileType == "gameObject") then
-			n = gameObject.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID)
+			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, bb, sca, anim, instanceID)
 		else
 			if(fileType == "npc") then
 				n = npc.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20], fileData[i][21])
@@ -135,7 +136,7 @@ function LoadInstances(filePath, fileType)
 		end
 		
 		table.insert(gameObjects, n)
-		objectInstanceAPI.setTranslation(instanceID,pos.X,pos.Y,pos.Z)
+		objectInstanceAPI.setTranslation(instanceID,objpos.X,objpos.Y,objpos.Z)
 		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
 		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
 		objectInstanceAPI.setAnimation(instanceID,anim)
@@ -151,7 +152,22 @@ function LoadInstances(filePath, fileType)
 	end	
 	
 end
-	
+--[[
+function MoveAABB(aabb,inittpos,finalpos)
+{
+	vec3 diff = (newposvec - oldposvec);
+	vec3 newMin = bboxmin + diff;
+	vec3 newMax = bboxmax + diff;
+
+
+	LuaRef newAABB = luabridge::newTable(LuaManager::GetInstance().GetContext(cHandle)->GetLuaState());
+
+	newAABB["min"] = newMin;
+	newAABB["max"] = newMax;
+ 
+}
+]]
+
 function SaveInstances(filePath, data, fileType)
 	local numRows = 0
 	local total = 0
@@ -161,8 +177,9 @@ function SaveInstances(filePath, data, fileType)
 	end
 
 	clearFile(filePath)
-	
+
 	for i = 1, numRows do
+   
 		if(fileType == "gameObject") then
 			if gameObjects[i]["currentHealth"] == nil then
 				total = total + 1
@@ -286,30 +303,52 @@ function SaveInstances(filePath, data, fileType)
 	end	
 end
 
+function PrintVec3(veca)
+    printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
+end
+
+function PrintVec3s(vecc,vecb)
+    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
+end
 	
 -- Player --
 	Player = 
 	{
+        instanceid =0,
+        bbox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
+        pos = {x=0,y=0,z=0},
+        lastpos = {x=0,y=0,z=0}
 	}
 
 	Player.__index = Player
 	
-	function Player.new()
-		local instance = 
-		{
-			id = 0,
-			height = 5
-		}
-	
-		setmetatable(instance, Player)
-		return instance
+	function Player:new(o)
+        o = o or {}
+        setmetatable(o, self)
+        self.__index = self
+		return o
 	end
 
-    function PrintVec3(veca)
-        --printAPI.print(veca[1] .. "," .. veca[2] .. "," .. veca[3])
+    function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
+        printAPI.print("Setting player AABB...\n");
+
+        
+        self.bbox.min = {x=self.pos.x+minx,y=self.pos.y+miny,z=self.pos.z+minz}
+        self.bbox.max = {x=self.pos.x+maxx,y=self.pos.y+maxy,z=self.pos.z+maxz}
+
+        --[[
+        {
+        min = {pos.x+minx, pos.y+miny, pos.z+minz}, 
+        max = {pos.x+maxx, pos.y+maxy, pos.z+maxz}
+        }
+        ]]
+        printAPI.print("Player AABB set.\n");
+
     end
 
 	function Player:update()
+        
+        -- Start movement update
 
         --printAPI.print("Updating player.\n")
 
@@ -370,19 +409,89 @@ end
         
         emptyvec = luaVectorUtility.vec3_CreateEmpty(context.handle)
 
-        --printAPI.print(transltion[1] .. translation[2] .. translation[3])
+        --printAPI.print("Updating player location...\n")
+        
+        
+        newPos = self.pos
+        
+        --printAPI.print("Updating player location...\n")
+
         if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
        
             translation = luaVectorUtility.vec3_Normalize(translation,context.handle)
             translation = luaVectorUtility.vec3_ScalarMultiply(translation,moveSpeed,context.handle)
 
             newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
-			newPos[2] = GetHeightAtPoint(newPos[1], newPos[3]) + 5
-            cameraAPI.setPosition(camera0,newPos[1],newPos[2],newPos[3]);
-         
+
+			newPos.y = GetHeightAtPoint(newPos.x, newPos.z) + 5
+            cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
+        else
+            --printAPI.print("Player has not moved.\n")
+
         end 
+        -- Movement update finished
+
+      -- printAPI.print("Moving player bounding box...\n")
+
+        self.pos = cameraAPI.getPosition(camera0,context.handle)
+        
+
+        --PrintVec3s(self.bbox.min, self.bbox.max)
+
+
+        --value = AABBBAPI.move(emptyv,emptyb,emptyc,context.handle)
+
+        self.bbox = AABBAPI.move(self.bbox,self.lastpos,self.pos,context.handle)
+        
+
+
+        self.lastpos = self.pos
              
         --printAPI.print("Completed player update.\n")
+
+
+
+        manyList = {}
+        manyList[1] = plantBBox
+        manyList[2] = plantBBox
+        count = 2
+
+        --[[
+        errorBBox = {min = self.bbox.min, max = self.bbox.max}
+        errorBBox.min.x =  errorBBox.min.x * 0.9
+        errorBBox.min.y =  errorBBox.min.y * 0.9
+        errorBBox.min.z =  errorBBox.min.z * 0.9
+        errorBBox.max.x =  errorBBox.max.x * 0.9
+        errorBBox.max.y =  errorBBox.max.y * 0.9
+        errorBBox.max.z =  errorBBox.max.z * 0.9
+
+        PrintVec3s(errorBBox.min,self.bbox.min)
+        printAPI.print("+")
+        PrintVec3s(errorBBox.max,self.bbox.max)
+        printAPI.print("\n")
+        ]]
+        --PrintVec3s(self.bbox.min,self.bbox.max)
+        --printAPI.print("\n")
+        collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
+
+
+        
+
+        if collides then
+           --printAPI.print("Collision! Resolved to: ")
+           self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,count,2,context.handle)
+           cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
+
+           --PrintVec3(self.pos)
+
+
+        end
+
+
+
+
+
+
         
 	end
 	
@@ -497,6 +606,27 @@ function Initialize()
 
 	plant02 = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(plant02,0,0,0)
+    
+	giantPlant = luaObjInstManager.addNewInstance("Plant")
+	objectInstanceAPI.setTranslation(giantPlant,100,20,100)
+    objectInstanceAPI.setScale(giantPlant,10,10,10)
+
+    printAPI.print('Initialising AABBs...\n')
+
+    plantScale = objectInstanceAPI.getScale(giantPlant, context.handle)
+    plantLoc = objectInstanceAPI.getTranslation(giantPlant, context.handle)
+
+    plantBBox = AABBAPI.getAABB(giantPlant, context.handle)
+    printAPI.print(plantScale.x .. "\n")
+    plantBBox.min = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
+    plantBBox.min = luaVectorUtility.vec3_Sum(plantBBox.min,plantLoc,context.handle)
+    plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.max,plantScale,context.handle)
+    plantBBox.max = luaVectorUtility.vec3_Sum(plantBBox.max,plantLoc,context.handle)
+
+    -- plantBBox.min = objectInstanceAPI.getScale(giantPlant)
+    -- plantBBox.max *= objectInstanceAPI.getScale(giantPlant)
+    -- plantBBox.max *= objectInstanceAPI.getScale(giantPlant)
+
 
     renderManagerAPI.addObject(plant01)
     renderManagerAPI.addObject(plant02)
@@ -520,10 +650,10 @@ function Initialize()
     printAPI.print('Initialising player...\n')
 
 	
-	player0 = Player.new()
+	player0 = Player:new()
+    player0:setAABB(-5,5,-50,50,-5,5) -- Y values higher than X and Z so the player doesn't jump above things with the island collisions. -- todo reduce if we implement jumping
 
     printAPI.print('Initialization finished.\n')
-
 end
 
 function GameLoop()
@@ -543,9 +673,19 @@ function Finalize()
 	printAPI.print('Finalizing...\n')
 end
 
-function TestInputAPI()
-	--printAPI.print('Testing input...\n')
+function Update()
 
+    engineAPI.BeginUpdate()
+
+    --engineAPI.handleEvents()
+
+    --inputManagerAPI.update();
+
+	--Lua update here
+    count = (count or 0) + 1
+	--run = mainAPI.update()
+	
+	
 	e = inputManagerAPI.isKeyDown(8)
 	if e then
 		printAPI.print("e")
@@ -558,18 +698,7 @@ function TestInputAPI()
 		printAPI.print("Quitting - pressed Esc.\n")
         run = false
 	end
-
-end
-
-
-function Update()
-
-    engineAPI.BeginUpdate()
-
-    --engineAPI.handleEvents()
-
-    --inputManagerAPI.update();
-
+	
 	if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
 		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
@@ -588,15 +717,8 @@ function Update()
 			end
 		end
 	end
-	
-	--Lua update here
-    count = (count or 0) + 1
-	--run = mainAPI.update()
-	
-	TestInputAPI()
 
-    player0.update();
-
+    player0:update();
 	engineAPI.EndUpdate();
 	
 end
@@ -644,7 +766,7 @@ end
 
 local status, err = pcall(Run)
 if not status then
-   printAPI.print(err)
+	printAPI.print(err)
 end
 	
 

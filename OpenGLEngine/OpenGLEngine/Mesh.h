@@ -52,8 +52,6 @@ public:
 
   virtual std::vector<int> const& GetIndices() const override;
 
-  virtual std::vector<vec2> const& GetTexCoords() const override;
-
 private:
 	string m_name;
 	std::vector<vec2> m_texCoords[TT_TextureTypeCount];

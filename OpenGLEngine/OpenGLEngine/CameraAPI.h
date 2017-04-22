@@ -7,6 +7,12 @@
 #include "LuaInstanceManager.h"
 #include "MathAPI.h"
 
+/**
+* @file   CameraAPI.h
+* @Author Elizabeth Haynes
+* @date   S1, 2017
+* @brief  Lua API for camera
+*/
 class CameraAPI
 {
 public:

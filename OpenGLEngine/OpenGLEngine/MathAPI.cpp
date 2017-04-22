@@ -1,7 +1,5 @@
 #include "MathAPI.h"
 
-#include <iostream>
-#include <fstream>
 //#include <glm/gtc/type_ptr.hpp>
 
 static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
@@ -16,9 +14,9 @@ static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
 LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-  table[1] = value.x;
-  table[2] = value.y;
-  table[3] = value.z;
+  table["x"] = value.x;
+  table["y"] = value.y;
+  table["z"] = value.z;
 
   return table;
 }
@@ -50,7 +48,7 @@ LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 
   for (int i = 0; i < 16; i++)
   {
-	 table[i + i] = pSource[i];
+	 table[i + 1] = pSource[i];
   }
 
   return table;
@@ -61,10 +59,11 @@ template<>
 vec3 FromLuaTable<vec3>(LuaRef value)
 {
 	vec3 result;
-	for (int i = 0; i < 3; i++)
-	{
-		result[i] = value[i + 1];
-	}
+
+	result.x = value["x"];
+	result.y = value["y"];
+	result.z = value["z"];
+
 	return result;
 }
 

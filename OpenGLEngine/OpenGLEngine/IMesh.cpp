@@ -14,8 +14,3 @@ int IMesh::GetIndexCount() const
 {
   return GetIndices().size();
 }
-
-int IMesh::GetTexCoordsCount() const
-{
-	return GetTexCoords().size();
-}

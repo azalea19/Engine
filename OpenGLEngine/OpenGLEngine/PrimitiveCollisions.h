@@ -12,6 +12,8 @@
 * The various methods for testing collisions among geometric primitives.
 */
 
+
+/// AABB collision by Nathan
 bool Intersects(mAABB const& a, mAABB const& b);
 
 bool Intersects(mAABB const& aabb, mOBB const& obb);

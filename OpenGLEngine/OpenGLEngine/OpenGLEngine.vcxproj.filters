@@ -275,6 +275,15 @@
     <ClCompile Include="LuaInstanceManager.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
+    <ClCompile Include="IslandCollision.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IslandCollisionAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AABBAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -501,6 +510,9 @@
     <ClInclude Include="LuaInstanceManager.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
+    <ClInclude Include="IslandCollision.h" />
+    <ClInclude Include="IslandCollisionAPI.h" />
+    <ClInclude Include="AABBAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">

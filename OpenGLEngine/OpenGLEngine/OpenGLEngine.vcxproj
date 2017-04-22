@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABBAPI.cpp" />
     <ClCompile Include="AdditiveBlendEffect.cpp" />
     <ClCompile Include="AffineTransformable.cpp" />
     <ClCompile Include="Agent.cpp" />
@@ -189,6 +190,8 @@
     <ClCompile Include="IMeshCollection.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputManagerAPI.cpp" />
+    <ClCompile Include="IslandCollision.cpp" />
+    <ClCompile Include="IslandCollisionAPI.cpp" />
     <ClCompile Include="LuaInstanceManager.cpp" />
     <ClCompile Include="Interface2D.cpp" />
     <ClCompile Include="LuaContext.cpp" />
@@ -242,6 +245,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABBAPI.h" />
     <ClInclude Include="AdditiveBlendEffect.h" />
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
@@ -270,6 +274,8 @@
     <ClInclude Include="IMesh.h" />
     <ClInclude Include="IMeshCollection.h" />
     <ClInclude Include="InputManagerAPI.h" />
+    <ClInclude Include="IslandCollision.h" />
+    <ClInclude Include="IslandCollisionAPI.h" />
     <ClInclude Include="LuaInstanceManager.h" />
     <ClInclude Include="IRenderableObject.h" />
     <ClInclude Include="IShader.h" />

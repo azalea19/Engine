@@ -20,6 +20,17 @@ LuaRef LuaVectorUtility::vec3_Sum(LuaRef a, LuaRef b, LuaContextHandle contextHa
 }
 
 
+
+LuaRef LuaVectorUtility::vec3_Multiply(LuaRef vec1, LuaRef vec2, LuaContextHandle contextHandle)
+{
+	vec3 veca = FromLuaTable<vec3>(vec1);
+	vec3 vecb = FromLuaTable<vec3>(vec2);
+
+	vec3 finalVec = veca * vecb;
+	return ToLuaTable(finalVec, contextHandle);
+}
+
+
 // a - b 
 LuaRef LuaVectorUtility::vec3_Subtract(LuaRef a, LuaRef b, LuaContextHandle contextHandle)
 {
@@ -71,4 +82,6 @@ void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "vec3_Subtract", vec3_Subtract);
 	pContext->ExposeFunction(luaAPIName, "mat4_CreateIdentity", mat4_CreateIdentity);
 	pContext->ExposeFunction(luaAPIName, "vec3_ScalarMultiply", vec3_ScalarMultiply);
+	pContext->ExposeFunction(luaAPIName, "vec3_Multiply", vec3_Multiply);
+
 }
