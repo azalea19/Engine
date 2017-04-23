@@ -77,6 +77,12 @@ public:
   /// <returns>std::vector<int></returns>
   virtual std::vector<int> const& GetIndices() const override;
 
+  /// <summary>
+  /// Gets the indices.
+  /// </summary>
+  /// <returns>std::vector<int></returns>
+  virtual std::vector<vec2> const& GetTexCoords() const override;
+
 private:
 
   /// <summary>

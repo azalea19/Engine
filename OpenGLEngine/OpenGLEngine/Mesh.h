@@ -54,7 +54,7 @@ public:
 
 private:
 	string m_name;
-	std::vector<vec2> m_texCoords[TT_TextureTypeCount];
+	std::vector<vec2> m_texCoords[2];
 	std::vector<vec3> m_vertices;
 	std::vector<vec3> m_normals;
   std::vector<vec4> m_vertexColours;

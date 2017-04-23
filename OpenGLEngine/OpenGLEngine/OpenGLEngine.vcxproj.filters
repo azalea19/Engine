@@ -266,9 +266,6 @@
     <ClCompile Include="LuaContext.cpp">
       <Filter>Source\Lua\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="TerrainAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="LuaObjectInstanceManager.cpp">
       <Filter>Source\Lua\Managers</Filter>
     </ClCompile>
@@ -277,6 +274,12 @@
     </ClCompile>
     <ClCompile Include="GLInputHandler.cpp">
       <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainAPI.cpp">
+      <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -510,6 +513,12 @@
     <ClInclude Include="GLInputHandler.h">
       <Filter>Source\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="GBuffer.h">
+      <Filter>Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainEffect.h">
+      <Filter>Source\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -601,6 +610,12 @@
     </None>
     <None Include="LuaScripts\Game.lua">
       <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="colored.frag">
+      <Filter>Source\Shaders</Filter>
+    </None>
+    <None Include="colored.vert">
+      <Filter>Source\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

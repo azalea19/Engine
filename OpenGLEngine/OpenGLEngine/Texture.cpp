@@ -158,7 +158,7 @@ uint32_t* GetPixelData(SDL_Surface* source)
     {
       for (int x = 0; x < source->w; x++)
       {
-        uint32_t val = uint32_t(pixels[x]);
+        uint32_t val = uint32_t(pixels[x * source->format->BytesPerPixel]);
         dst[x] = 0xFF000000 | (val << 16) | (val << 8) | (val << 0);
       }
       dst += source->w;

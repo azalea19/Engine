@@ -63,7 +63,7 @@ void Model::LoadVertexAttributes()
 
     m_meshIndexRanges.push_back(IndexRange{ indexCount, vertexCount, int(mesh.GetIndexCount()) });
 
-    VectorConcatenate(m_texCoords[TT_Diffuse], mesh.GetTexCoords(TT_Diffuse));
+    VectorConcatenate(m_texCoords[TT_Diffuse0], mesh.GetTexCoords(TT_Diffuse0));
     VectorConcatenate(m_texCoords[TT_Alpha], mesh.GetTexCoords(TT_Alpha));
     VectorConcatenate(m_vertexColours, mesh.GetVertexColours());
     VectorConcatenate(m_boneIDs, mesh.GetBoneIDs());

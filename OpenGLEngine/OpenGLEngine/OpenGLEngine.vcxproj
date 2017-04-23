@@ -177,6 +177,7 @@
     <ClCompile Include="DXEngine.cpp" />
     <ClCompile Include="EngineAPI.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="GBuffer.cpp" />
     <ClCompile Include="GLEngine.cpp" />
     <ClCompile Include="ForestTerrain.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="DirectionalLightingEffect.h" />
     <ClInclude Include="DXEngine.h" />
     <ClInclude Include="EngineAPI.h" />
+    <ClInclude Include="GBuffer.h" />
     <ClInclude Include="GLEngine.h" />
     <ClInclude Include="GLInputHandler.h" />
     <ClInclude Include="IEngine.h" />
@@ -317,6 +319,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainAPI.h" />
+    <ClInclude Include="TerrainEffect.h" />
     <ClInclude Include="TextureLibrary.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Texture.h" />
@@ -329,6 +332,8 @@
     <None Include="AdditiveBlendEffect.vert" />
     <None Include="BlurEffect.frag" />
     <None Include="BlurEffect.vert" />
+    <None Include="colored.frag" />
+    <None Include="colored.vert" />
     <None Include="defaultShader.frag" />
     <None Include="defaultShader.vert" />
     <None Include="DepthThresholdEffect.frag" />

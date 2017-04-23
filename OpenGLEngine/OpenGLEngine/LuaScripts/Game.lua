@@ -16,6 +16,7 @@ SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
 SDL_SCANCODE_Z = 29
+SDL_SCANCODE_LSHIFT = 225
 
 debug = true
 
@@ -246,6 +247,10 @@ end
 	
 
         MOVE_SPEED = 1
+
+		if inputManagerAPI.isKeyDown(SDL_SCANCODE_LSHIFT) then
+			MOVE_SPEED = MOVE_SPEED * 5
+		end
    
         oldPos = cameraAPI.getPosition(camera0,context.handle);
 	    forward = cameraAPI.forward(camera0,context.handle);
@@ -312,7 +317,7 @@ function LoadAssets()
 		
 	printAPI.print('bob loaded\n')
 
-	terrainAPI.generateTerrain(256, 256, 20, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj")
+	terrainAPI.generateTerrain(1024, 1024, 100, "Assets/HeightMaps/hmap.png", "Assets/Models/Terrain/Terrain.obj")
 		
 	printAPI.print('terrain loaded\n')
 
@@ -435,7 +440,9 @@ end
 
 function Render()
 
-    engineAPI.BeginRender()
+    renderManagerAPI.beginRender()
+
+	--Lua render here
 
     printAPI.print("Getting time...\n");
 
@@ -457,18 +464,24 @@ function Render()
     printAPI.print("Rendering...\n");
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-    renderManagerAPI.renderFromCamera(camera0,time)
-	--Lua render here
+    --renderManagerAPI.renderFromCamera(camera0,time)
+	renderManagerAPI.renderObject(camera0,time,Terrain01)
+	renderManagerAPI.renderObject(camera0,time,plant01)
+	renderManagerAPI.renderObject(camera0,time,plant02)
+	renderManagerAPI.present()
+	
 
     
-    --printAPI.print("Render Successful\n");
+    printAPI.print("Render Successful\n");
 
-    engineAPI.EndRender()
-
-
+    renderManagerAPI.endRender()
 end
 
-Run()
+local status, err = pcall(Run)
+if not status then
+	printAPI.print(err)
+end
+	
 
 
 	

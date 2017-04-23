@@ -170,7 +170,7 @@ private:
   /// <summary>
   /// The m texture coords
   /// </summary>
-  std::vector<vec2> m_texCoords[TT_TextureTypeCount];
+  std::vector<vec2> m_texCoords[2];
 
   /// <summary>
   /// The m vertex colours
