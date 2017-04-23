@@ -66,12 +66,12 @@ static void SetEffect(string const& shader)
   
 }
 
-void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle)
+void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle, int lightingApplied)
 {
   MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
   mat4 world;
 
-  pDecomposeEffect->Bind(*buffers);
+  pDecomposeEffect->Bind(*buffers, lightingApplied);
 
   LuaObjectInstanceManager::GetInstance(instanceHandle)->Render(mat4(), cam->getViewMatrix(), cam->getProjectionMatrix());
 
@@ -79,7 +79,7 @@ void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle)
 
 void RenderManagerAPI::BeginRender()
 {
-  pDecomposeEffect->Bind(*buffers);
+  pDecomposeEffect->Bind(*buffers, 1);
   EngineAPI::GetEngine()->BeginRender();
 }
 
@@ -115,7 +115,7 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 			lightPos.x = -cos(PI * time / 60) * 10000;
 			lightPos.y = sin(PI * time / 60) * 10000;
 		
-			pDecomposeEffect->Bind(*buffers);
+			pDecomposeEffect->Bind(*buffers, 1);
 			
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		

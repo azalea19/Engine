@@ -13,10 +13,10 @@ OPEN_GL = 0
 
 gameObjects = {}
 debug = true
-terrainSizeX = 1000
-terrainSizeY = 1000
-heightMapSize = 512
-heightMapHeight = 50
+terrainSizeX = 1024
+terrainSizeY = 1024
+heightMapSize = 1024
+heightMapHeight = 100
 
 --SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
 SDL_SCANCODE_W = 26
@@ -84,13 +84,20 @@ function LoadAssets()
 	printAPI.print('plant loaded\n')
 
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/hmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
 		
 	printAPI.print('terrain loaded\n')
 
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 	
+	printAPI.print('skybox loaded\n')
+
+	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
 	
+	printAPI.print('cactus loaded\n')
+
+	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus/cactus00.fbx",false)
+
 end
 
 function Initialize()
@@ -118,6 +125,14 @@ function Initialize()
 	giantPlant = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(giantPlant,100,20,100)
     objectInstanceAPI.setScale(giantPlant,10,10,10)
+
+	skybox = luaObjInstManager.addNewInstance("Skybox")
+	objectInstanceAPI.setTranslation(skybox, 0,0,0);
+	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
+
+	cactus = luaObjInstManager.addNewInstance("Cactus")
+	objectInstanceAPI.setTranslation(cactus, 15,45,15)
+	
 
     printAPI.print('Initialising AABBs...\n')
 
@@ -147,7 +162,8 @@ function Initialize()
 
     printAPI.print('Initialising player...\n')
 	player0 = Player:new()
-    player0:setAABB(-5,5,-50,50,-5,5) -- Y values higher than X and Z so the player doesn't jump above things with the island collisions. -- todo reduce if we implement jumping
+	cameraAPI.setPosition(camera0,0,0,0)
+    player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) -- Y values higher than X and Z so the player doesn't jump above things with the island collisions. -- todo reduce if we implement jumping
 
     printAPI.print('Initialization finished.\n')
 end
@@ -245,8 +261,10 @@ function Render()
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
     --renderManagerAPI.renderFromCamera(camera0,time)
-	renderManagerAPI.renderObject(camera0,time,Terrain01)
-	renderManagerAPI.renderObject(camera0,time,giantPlant)
+	renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
+	renderManagerAPI.renderObject(camera0,time,giantPlant, 1)
+	renderManagerAPI.renderObject(camera0,time,skybox, 0)
+	renderManagerAPI.renderObject(camera0,time,cactus, 1)
 	renderManagerAPI.present()
     
     --printAPI.print("Render Successful\n");

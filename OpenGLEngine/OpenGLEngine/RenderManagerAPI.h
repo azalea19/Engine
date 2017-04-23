@@ -64,7 +64,7 @@ public:
 
 	static void RenderManagerAPI::Initialise();
 	static void RenderManagerAPI::Render(LuaRef worldMatrix, LuaRef viewMatrix, LuaRef projectionMatrix, float time);
-  static void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle);
+  static void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle, int lightingApplied);
 	static void RenderManagerAPI::RenderFromCamera(int camID, float time);
 	static void RenderManagerAPI::AddObject(int object);
 	static void RenderManagerAPI::RemoveObject(int object);
