@@ -69,7 +69,7 @@ ObjectInstance* pRock;
 //	vec3 right = View::camera->Right();
 //	vec3 translation = vec3{ 0, 0, 0 };
 //
-//	if (im.IsKeyDown(SDL_SCANCODE_W))
+//if (im.IsKeyDown(SDL_SCANCODE_W))
 //		translation += forward;
 //	if (im.IsKeyDown(SDL_SCANCODE_A))
 //		translation -= right;

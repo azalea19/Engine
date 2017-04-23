@@ -142,11 +142,17 @@ std::vector<int> const& Terrain::GetIndices() const
   return m_indices;
 }
 
+std::vector<vec2> const& Terrain::GetTexCoords() const
+{
+  return m_texCoords;
+}
+
 void Terrain::CreateMesh()
 {
   GenerateTerrainVertices();
   GenerateTerrainIndices();
-  GenerateNormals();
+  //GenerateNormals();
+  GenerateTexCoords();
 
   glGenBuffers(1, &gVBO);
   glGenBuffers(1, &gNBO);

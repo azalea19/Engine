@@ -43,15 +43,6 @@ static void EndUpdate()
   EngineAPI::GetEngine()->EndUpdate();
 }
 
-static void BeginRender()
-{
-  EngineAPI::GetEngine()->BeginRender();
-}
-
-static void EndRender()
-{
-  EngineAPI::GetEngine()->EndRender();
-}
 
 void EngineAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
@@ -60,8 +51,7 @@ void EngineAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "Initialise", Initialise);
   pContext->ExposeFunction(luaAPIName, "BeginUpdate", BeginUpdate);
   pContext->ExposeFunction(luaAPIName, "EndUpdate", EndUpdate);
-  pContext->ExposeFunction(luaAPIName, "BeginRender", BeginRender);
-  pContext->ExposeFunction(luaAPIName, "EndRender", EndRender);
+
 }
 
 IEngine* EngineAPI::GetEngine()

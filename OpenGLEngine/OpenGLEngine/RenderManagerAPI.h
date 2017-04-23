@@ -64,9 +64,15 @@ public:
 
 	static void RenderManagerAPI::Initialise();
 	static void RenderManagerAPI::Render(LuaRef worldMatrix, LuaRef viewMatrix, LuaRef projectionMatrix, float time);
+  static void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle);
 	static void RenderManagerAPI::RenderFromCamera(int camID, float time);
 	static void RenderManagerAPI::AddObject(int object);
 
+  static void RenderManagerAPI::BeginRender();
+  static void RenderManagerAPI::EndRender();
+
+  static void SetShader(string const& shader);
+  static void Present();
 
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 

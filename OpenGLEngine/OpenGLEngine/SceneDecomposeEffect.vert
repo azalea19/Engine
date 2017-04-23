@@ -41,6 +41,9 @@ void CalculateDiffuse()
 		case 2:
 			FRAG_DIFFUSE_COORD = VERT_DIFFUSE_COORD;
 			break;
+		case 3:
+			FRAG_DIFFUSE_COORD = VERT_DIFFUSE_COORD;
+			break;
 	}
 }
 

@@ -10,15 +10,16 @@
 * @brief
 */
 
+class GBuffer;
+
 class SceneDecomposeEffect
 {
 public:
 
   SceneDecomposeEffect();
-  void Bind(GLuint DiffuseTexture, GLuint DepthTexture, GLuint LinearDepthTexture, GLuint NormalTexture, GLuint WorldPosTexture);
+  void Bind(GBuffer const& buffers);
   void Unbind();
 
 private:
   FrameBuffer m_fb;
-  std::unique_ptr<IShader> const& m_pShader;
 };

@@ -61,12 +61,12 @@ mAABB const& Mesh::GetBounds() const
 
 void Mesh::LoadTexCoords(aiMesh const *pMesh)
 {
-  for (int i = 0; i < TT_TextureTypeCount; i++)
+  for (int i = 0; i < 2; i++)
   {
     m_texCoords[i].resize(pMesh->mNumVertices);
   }
   
-  for (int uvChannel = 0; uvChannel < TT_TextureTypeCount; uvChannel++)
+  for (int uvChannel = 0; uvChannel < 2; uvChannel++)
   {
     if (pMesh->HasTextureCoords(uvChannel))
     {

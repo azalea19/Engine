@@ -3,8 +3,8 @@
 
 BloomEffect::BloomEffect()
 {
-  for(int i = 0; i < 3; i++)
-    tempTex[i] = CreateColourFTexture();
+  for (int i = 0; i < 3; i++)
+    tempTex[i] = CreateVec3Texture();
 }
 
 void BloomEffect::Apply(GLuint inputTex, GLuint outputTex, int bloomRadius)

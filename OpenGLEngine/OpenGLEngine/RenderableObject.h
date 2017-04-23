@@ -21,8 +21,8 @@ class Model;
 
 enum TextureLocation
 {
-  TL_Diffuse = 0,
-  TL_Alpha = 1,
+  TL_Alpha = 0,
+  TL_Diffuse0 = 1,
 };
 
 enum DiffuseSource
@@ -30,6 +30,7 @@ enum DiffuseSource
   DS_MeshColour = 0,
   DS_VertexColour = 1,
   DS_Texture = 2,
+  DS_MultiTexture = 3,
 };
 
 enum BUFFER_TYPES

@@ -108,6 +108,7 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 {
   m_screenWidth = screenWidth;
   m_screenHeight = screenHeight;
+
   vec2i xy = vec2i(screenWidth, screenHeight);
   SetScreenDimensions(xy);
   
@@ -135,6 +136,7 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 
 void GLEngine::BeginRender()
 {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glCullFace(GL_BACK);
   glEnable(GL_DEPTH_TEST);
 }
