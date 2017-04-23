@@ -13,6 +13,7 @@
 #include "TerrainAPI.h"
 #include "AABBAPI.h"
 #include "IslandCollisionAPI.h"
+#include "LuaDisplay2DAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -50,6 +51,8 @@ void LuaManager::Initialize()
   luaManager.AddAPI("terrainAPI", TerrainAPI::Expose);
   luaManager.AddAPI("AABBAPI", AABBAPI::Expose);
   luaManager.AddAPI("islandCollisionAPI", IslandCollisionAPI::Expose);
+  luaManager.AddAPI("display2DAPI", LuaDisplay2DAPI::Expose);
+
 
 
 

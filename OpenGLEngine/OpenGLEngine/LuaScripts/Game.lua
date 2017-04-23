@@ -51,23 +51,9 @@ function LoadAPIs()
     GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
     GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
     GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
+    GetAPI(context.handle, 'display2DAPI', 'display2DAPI')
+
 end
-	
---[[
-function MoveAABB(aabb,inittpos,finalpos)
-{
-	vec3 diff = (newposvec - oldposvec);
-	vec3 newMin = bboxmin + diff;
-	vec3 newMax = bboxmax + diff;
-
-
-	LuaRef newAABB = luabridge::newTable(LuaManager::GetInstance().GetContext(cHandle)->GetLuaState());
-
-	newAABB["min"] = newMin;
-	newAABB["max"] = newMax;
- 
-}
-]]
 
 function PrintVec3(veca)
     printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
@@ -155,13 +141,8 @@ end
 function GameLoop()
 	run = true
 	while run do
-    	--printAPI.print('Running game loop...\n')
-
 		Update()
 		Render()
-		--if count == 10 then
-			--return
-		--end
 	end
 end
 
@@ -173,30 +154,16 @@ function Update()
 
     engineAPI.BeginUpdate()
 
-    
+    --Lua update here
     --printAPI.print("Getting time...\n");
-
     time = timeAPI.elapsedTimeMs()
-
-    --engineAPI.handleEvents()
-
-    --inputManagerAPI.update();
-
-	--Lua update here
-    count = (count or 0) + 1
-	--run = mainAPI.update()
 	
-	e = inputManagerAPI.isKeyDown(8)
-	if e then
-		printAPI.print("e")
-		--objectInstanceAPI.setTranslation(plant01,0,0,0)
-
-	end
-
     esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
 	if esc then
-		printAPI.print("Quitting - pressed Esc.\n")
-        run = false
+		printAPI.print("Quitting - pressed input to quit.\n")
+
+        quitting = true
+        --run = false
 	end
 	
 	if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
@@ -225,9 +192,7 @@ end
 
 function Render()
     renderManagerAPI.beginRender()
-
-	--Lua render here
-
+    --Lua render here
 
     --printAPI.print("Getting world matrix...\n");
 
@@ -248,7 +213,7 @@ function Render()
 	renderManagerAPI.renderObject(camera0,time,Terrain01)
 	renderManagerAPI.renderObject(camera0,time,giantPlant)
 	renderManagerAPI.present()
-    
+    display2DAPI.drawFullScreen("faces.png")
     --printAPI.print("Render Successful\n");
 
     renderManagerAPI.endRender()

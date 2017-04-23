@@ -175,6 +175,7 @@
     <ClCompile Include="CameraAPI.cpp" />
     <ClCompile Include="DepthThresholdEffect.cpp" />
     <ClCompile Include="DirectionalLightingEffect.cpp" />
+    <ClCompile Include="LuaDisplay2DAPI.cpp" />
     <ClCompile Include="DXEngine.cpp" />
     <ClCompile Include="EngineAPI.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="Agent.h" />
     <ClInclude Include="CameraAPI.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
+    <ClInclude Include="LuaDisplay2DAPI.h" />
     <ClInclude Include="DXEngine.h" />
     <ClInclude Include="EngineAPI.h" />
     <ClInclude Include="GBuffer.h" />

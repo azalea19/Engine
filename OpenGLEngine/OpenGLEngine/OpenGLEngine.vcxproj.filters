@@ -284,6 +284,15 @@
     <ClCompile Include="AABBAPI.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GLInputHandler.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaDisplay2DAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -513,6 +522,11 @@
     <ClInclude Include="IslandCollision.h" />
     <ClInclude Include="IslandCollisionAPI.h" />
     <ClInclude Include="AABBAPI.h" />
+    <ClInclude Include="GBuffer.h" />
+    <ClInclude Include="GLInputHandler.h" />
+    <ClInclude Include="IInputHandler.h" />
+    <ClInclude Include="TerrainEffect.h" />
+    <ClInclude Include="LuaDisplay2DAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -605,5 +619,7 @@
     <None Include="LuaScripts\Game.lua">
       <Filter>Source\Lua\Scripts</Filter>
     </None>
+    <None Include="colored.frag" />
+    <None Include="colored.vert" />
   </ItemGroup>
 </Project>
