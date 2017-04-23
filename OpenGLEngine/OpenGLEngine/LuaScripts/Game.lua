@@ -79,6 +79,20 @@ function LoadAssets()
 	
 end
 
+
+function BBToLocal(bb,scalea,loca)
+    bb.min = luaVectorUtility.vec3_Multiply(bb.min,scalea,context.handle)
+    bb.min = luaVectorUtility.vec3_Sum(bb.min,loca,context.handle)
+    bb.max = luaVectorUtility.vec3_Multiply(bb.max,scalea,context.handle)
+    bb.max = luaVectorUtility.vec3_Sum(bb.max,loca,context.handle)
+
+    if bb == null then
+        printAPI.print('ERROR Tried to get null local AABB\n')
+    end
+
+    return bb
+end
+
 function Initialize()
 	LoadAPIs()
 	printAPI.print('Initializing...\n')
@@ -97,24 +111,33 @@ function Initialize()
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	LoadInstances("SaveData/NPC_Data.csv", "npc")
 
+    local numRows = 0
+    for k,v in next, gameObjects do
+        numRows = numRows + 1
+    end
+
+
+    for i = 1, numRows do
+        gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"]+5)
+        local gid = gameObjects[i]["id"]
+        
+        objectInstanceAPI.setTranslation(gid,gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
+        
+        local nscale = objectInstanceAPI.getScale(gid, context.handle)
+        local nloc = objectInstanceAPI.getTranslation(gid, context.handle)
+        local abox = AABBAPI.getAABB(gid, context.handle)
+        gameObjects[i]["boundingbox"] = BBToLocal(abox,nscale,nloc)
+
+    end
+
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
     
-	giantPlant = luaObjInstManager.addNewInstance("Plant")
-	objectInstanceAPI.setTranslation(giantPlant,100,20,100)
-    objectInstanceAPI.setScale(giantPlant,10,10,10)
+	--giantPlant = luaObjInstManager.addNewInstance("Plant")
+	--objectInstanceAPI.setTranslation(giantPlant,100,20,100)
+    --objectInstanceAPI.setScale(giantPlant,10,10,10)
 
     printAPI.print('Initialising AABBs...\n')
-
-    plantScale = objectInstanceAPI.getScale(giantPlant, context.handle)
-    plantLoc = objectInstanceAPI.getTranslation(giantPlant, context.handle)
-
-    plantBBox = AABBAPI.getAABB(giantPlant, context.handle)
-    printAPI.print(plantScale.x .. "\n")
-    plantBBox.min = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
-    plantBBox.min = luaVectorUtility.vec3_Sum(plantBBox.min,plantLoc,context.handle)
-    plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.max,plantScale,context.handle)
-    plantBBox.max = luaVectorUtility.vec3_Sum(plantBBox.max,plantLoc,context.handle)
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
@@ -129,6 +152,7 @@ function Initialize()
 
     printAPI.print('Initialization finished.\n')
 end
+
 
 function GameLoop()
 	run = true
@@ -145,6 +169,8 @@ end
 function Update()
 
     engineAPI.BeginUpdate()
+    	
+    
 
     --Lua update here
     --printAPI.print("Getting time...\n");
@@ -162,7 +188,7 @@ function Update()
 		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
 	end
-	
+
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
@@ -177,8 +203,19 @@ function Update()
 		end
 	end
 
+    --printAPI.print(gameObjects[7]["position"]["Y"] .. "\n")
+
+    if(quitting) then
+        if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
+            run = false
+
+        end
+
+    end
+
     player0:update();
 	engineAPI.EndUpdate();
+
 end
 
 
@@ -210,9 +247,14 @@ function Render()
 		renderManagerAPI.renderObject(camera0,time,gameObjects[i]["id"])
 	end
 	renderManagerAPI.renderObject(camera0,time,Terrain01)
-	renderManagerAPI.renderObject(camera0,time,giantPlant)
+	--renderManagerAPI.renderObject(camera0,time,giantPlant)
 	renderManagerAPI.present()
-    display2DAPI.drawFullScreen("faces.png")
+
+
+
+    if(quitting) then
+        display2DAPI.drawFullScreen("faces.png")
+    end
     --printAPI.print("Render Successful\n");
 
     renderManagerAPI.endRender()
