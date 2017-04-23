@@ -72,6 +72,7 @@ end
 function PrintVec3s(vecc,vecb)
     printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
 end
+
 	
 function LoadAssets()
 	--modelLibraryAPI.AddModel("ground","Assets/Models/Ground/Ground.obj",false)

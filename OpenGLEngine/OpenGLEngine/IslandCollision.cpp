@@ -43,55 +43,50 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAA
 	if (dirs.empty())
 	{
 		// y = 0 layer
-		dirs.push_back(vec3(1, 0, 0)); // x 
-		dirs.push_back(vec3(-1, 0, 0)); // -x
-		dirs.push_back(vec3(0, 0, 1)); // z
-		dirs.push_back(vec3(0, 0, -1)); //-z
-		dirs.push_back(vec3(1, 0, 1)); // x z
-		dirs.push_back(vec3(-1, 0, 1)); // -x z
-		dirs.push_back(vec3(1, 0, -1)); // x -z
-		dirs.push_back(vec3(-1, 0, -1)); // -x -z
+		dirs.push_back(normalize(vec3(1, 0, 0))); // x 
+		dirs.push_back(normalize(vec3(-1, 0, 0))); // -x
+		dirs.push_back(normalize(vec3(0, 0, 1))); // z
+		dirs.push_back(normalize(vec3(0, 0, -1))); //-z
+		dirs.push_back(normalize(vec3(1, 0, 1))); // x z
+		dirs.push_back(normalize(vec3(-1, 0, 1))); // -x z
+		dirs.push_back(normalize(vec3(1, 0, -1))); // x -z
+		dirs.push_back(normalize(vec3(-1, 0, -1))); // -x -z
 
 		// y = 1 layer
-		dirs.push_back(vec3(1, 1, 0)); // x 
-		dirs.push_back(vec3(-1, 1, 0)); // -x
-		dirs.push_back(vec3(0, 1, 1)); // z
-		dirs.push_back(vec3(0, 1, -1)); //-z
-		dirs.push_back(vec3(1, 1, 1)); // x z
-		dirs.push_back(vec3(-1, 1, 1)); // -x z
-		dirs.push_back(vec3(1, 1, -1)); // x -z
-		dirs.push_back(vec3(-1, 1, -1)); // -x -z
+		dirs.push_back(normalize(vec3(1, 1, 0))); // x 
+		dirs.push_back(normalize(vec3(-1, 1, 0))); // -x
+		dirs.push_back(normalize(vec3(0, 1, 1))); // z
+		dirs.push_back(normalize(vec3(0, 1, -1))); //-z
+		dirs.push_back(normalize(vec3(1, 1, 1))); // x z
+		dirs.push_back(normalize(vec3(-1, 1, 1))); // -x z
+		dirs.push_back(normalize(vec3(1, 1, -1))); // x -z
+		dirs.push_back(normalize(vec3(-1, 1, -1))); // -x -z
 
 		// y = -1 layer
-		dirs.push_back(vec3(1, -1, 0)); // x 
-		dirs.push_back(vec3(-1, -1, 0)); // -x
-		dirs.push_back(vec3(0, -1, 1)); // z
-		dirs.push_back(vec3(0, -1, -1)); //-z
-		dirs.push_back(vec3(1, -1, 1)); // x z
-		dirs.push_back(vec3(-1, -1, 1)); // -x z
-		dirs.push_back(vec3(1, -1, -1)); // x -z
-		dirs.push_back(vec3(-1, -1, -1)); // -x -z
+		dirs.push_back(normalize(vec3(1, -1, 0))); // x 
+		dirs.push_back(normalize(vec3(-1, -1, 0))); // -x
+		dirs.push_back(normalize(vec3(0, -1, 1))); // z
+		dirs.push_back(normalize(vec3(0, -1, -1))); //-z
+		dirs.push_back(normalize(vec3(1, -1, 1))); // x z
+		dirs.push_back(normalize(vec3(-1, -1, 1))); // -x z
+		dirs.push_back(normalize(vec3(1, -1, -1))); // x -z
+		dirs.push_back(normalize(vec3(-1, -1, -1))); // -x -z
 	}
 
-	bool cont;
 	// If there is no collision to begin with
 	if (!Check(toMoveBB, list, listSize))
 	{
 		// Return the same position that was passed in
 		return toMoveOrigin;
 	}
-	else
-	{
-		// Else continue
-		cont = true;
-	}
 
-	while (cont == true)
+	while (true)
 	{
 		// Go through each direction and check if you can find a way out of the collision in size increments, 
 		// increasing the size increment once you've checked the previous one in every direction.
 		for (int i = 0; i < dirs.size(); i++)
 		{
+			mAABB box = toMoveBB;
 			// set final position to initial position
 			vec3 position = toMoveOrigin;
 			// get total difference to move the object and bounding box
@@ -100,14 +95,13 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAA
 			// move object by difference									  
 			position += diff;
 			// move bounding box by difference
-			toMoveBB.min += diff; 
-			toMoveBB.max += diff;
+			box.min += diff; 
+			box.max += diff;
 
 			// If the object now isnt colliding with anything
-			if (!Check(toMoveBB, list, listSize))
+			if (!Check(box, list, listSize))
 			{
-				//vec3 diff2 = position - toMoveOrigin;
-				//std::cout << "Item moved by " << diff2.x << "," << diff2.y << "," << diff2.z << "\n";
+				std::cout << "Item moved by " << diff.x << "," << diff.y << "," << diff.z << "\n";
 
 				// Return the final position
 				return (position);
@@ -119,7 +113,7 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAA
 		if (dist > increment * 1000)
 		{
 			printf("Collision handling failed.\n");
-			break;
+			return toMoveOrigin;
 		}
 
 	}
