@@ -1,4 +1,6 @@
 -- Player --
+
+
 local Player = 
 {
 	instanceid =0,
@@ -38,10 +40,11 @@ function Player:update()
 
 	--printAPI.print("Updating player.\n")
 	self.pos = cameraAPI.getPosition(camera0,context.handle)
+
 	-- written by liz translated from maddys c++ code
 	turnSpeed = 0.3
-	moveSpeed = 0.3
-	  
+	moveSpeed = 0.5
+	gravitySpeed = 1 
 	--rotation
 	origYaw = cameraAPI.getYaw(camera0,context.handle)
 	origPitch = cameraAPI.getPitch(camera0,context.handle)
@@ -99,86 +102,21 @@ function Player:update()
 	newPos = self.pos
 	
 	--printAPI.print("Updating player location...\n")
-		newPos.y = oldPos.y
+
+	--if moving
 	if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
-   
 		translation = luaVectorUtility.vec3_Normalize(translation,context.handle)
-		newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
-		alterSpeed = moveSpeed
-		climbSpeed = 1
-		loop = true
-		--while loop do
-			translation = luaVectorUtility.vec3_ScalarMultiply(translation,alterSpeed,context.handle)
-			newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
-			desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
-			dif = desiredHeight - oldPos.y
-			if(dif == 0) then
-				newPos.y = oldPos.y
-				loop = false
-				printAPI.print("Stable Y\n")
-			else
-				if(dif > climbSpeed) then
-					alterSpeed = alterSpeed - 0.1
-					printAPI.print("Diff: " .. desiredHeight .. "\n" .. "climbSpeed: " .. oldPos.y .. "\n")
-				else
-					if(desiredHeight  <  oldPos.y ) then
-						if(desiredHeight + moveSpeed >=  oldPos.y) then
-							newPos.y = desiredHeight
-							printAPI.print("fall to point\n")
-							loop = false
-						else
-							newPos.y = oldPos.y - moveSpeed
-							loop = false
-							printAPI.print("fall\n")
-						end
-					else
-						if (dif <= moveSpeed) then
-							--printAPI.print("climb \n")
-							desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
-							newPos.y = desiredHeight
-							loop = false
-						end
-					end
-				end
-				if(alterSpeed <= 0) then
-					loop = false
-					printAPI.print("tooSteep\n")
-					alterSpeed = 1
-					translation = luaVectorUtility.vec3_ScalarMultiply(translation,alterSpeed,context.handle)
-					newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
-					desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
-					newPos.y = desiredHeight
-					loop = false
-				end
-			end
-		--end
-	else
-		desiredHeight = GetHeightAtPoint(oldPos.x, oldPos.z) + 5
-		dif = desiredHeight - oldPos.y
-		printAPI.print("NotMoving\n")
-		if(dif == 0) then
-			newPos.y = oldPos.y
-		else
-			if(desiredHeight  <  oldPos.y ) then
-				if(desiredHeight + moveSpeed >=  oldPos.y) then
-					newPos.y = desiredHeight
-					printAPI.print("fall to point\n")
-					loop = false
-				else
-					newPos.y = oldPos.y - moveSpeed
-					loop = false
-					printAPI.print("fall\n")
-				end
-			else
-				if (dif <= moveSpeed) then
-					printAPI.print("climb \n")
-					desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
-					newPos.y = desiredHeight
-					loop = false
-				end
-			end
-		end
 	end
+
+	translation = luaVectorUtility.vec3_ScalarMultiply(translation,moveSpeed,context.handle)
+	translation.y = translation.y - gravitySpeed
+
+	newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
+
+	desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
+
+	newPos.y = math.max(newPos.y, desiredHeight)		
+				
 	printAPI.print(newPos.x .. "\n")	
 	cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 

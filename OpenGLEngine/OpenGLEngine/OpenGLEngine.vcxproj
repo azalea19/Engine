@@ -352,6 +352,8 @@
     <None Include="HDRSplitEffect.vert" />
     <None Include="LuaScripts\Engine.lua" />
     <None Include="LuaScripts\Game.lua" />
+    <None Include="LuaScripts\Player.lua" />
+    <None Include="LuaScripts\Terrain.lua" />
     <None Include="MultiplicativeBlendEffect.frag" />
     <None Include="MultiplicativeBlendEffect.vert" />
     <None Include="orthoShader.frag" />
