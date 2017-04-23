@@ -373,8 +373,7 @@ end
 
         manyList = {}
         manyList[1] = plantBBox
-        manyList[2] = plantBBox
-        count = 2
+        count = 1
 
         --[[
         errorBBox = {min = self.bbox.min, max = self.bbox.max}
@@ -392,20 +391,20 @@ end
         ]]
         --PrintVec3s(self.bbox.min,self.bbox.max)
         --printAPI.print("\n")
-        collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
+        --collides = islandCollisionAPI.checkAnyCollision(self.bbox,manyList,count)
 
 
         
 
-        if collides then
+        --if collides then
            --printAPI.print("Collision! Resolved to: ")
-           self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,count,2,context.handle)
+           self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,count,0.01,context.handle)
            cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
 
            --PrintVec3(self.pos)
 
 
-        end
+        --end
 
 
 
