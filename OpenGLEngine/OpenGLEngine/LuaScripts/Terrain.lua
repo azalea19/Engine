@@ -3,13 +3,13 @@ function GetHeightAtPoint(x, y)
 		x = 0
 	end
 	if(x > terrainSizeX) then
-		x = terrainSizeX - 1
+		x = terrainSizeX - 2
 	end
 	if(y < 0) then
 		y = 0
 	end
 	if(y > terrainSizeY) then
-		y = terrainSizeY - 1
+		y = terrainSizeY - 2
 	end
 	xScale = terrainSizeX / heightMapSize
 	yScale = terrainSizeY / heightMapSize
