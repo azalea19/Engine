@@ -13,16 +13,17 @@ OPEN_GL = 0
 
 gameObjects = {}
 debug = true
-terrainSizeX = 256
-terrainSizeY = 256
-heightMapSize = 256
-heightMapHeight = 10
+terrainSizeX = 1000
+terrainSizeY = 1000
+heightMapSize = 512
+heightMapHeight = 50
 
 --SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
 SDL_SCANCODE_W = 26
 SDL_SCANCODE_A = 4
 SDL_SCANCODE_P = 19
 SDL_SCANCODE_S = 22
+SDL_SCANCODE_E = 8
 SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
@@ -172,6 +173,11 @@ function Update()
 
     engineAPI.BeginUpdate()
 
+    
+    --printAPI.print("Getting time...\n");
+
+    time = timeAPI.elapsedTimeMs()
+
     --engineAPI.handleEvents()
 
     --inputManagerAPI.update();
@@ -183,7 +189,7 @@ function Update()
 	e = inputManagerAPI.isKeyDown(8)
 	if e then
 		printAPI.print("e")
-		objectInstanceAPI.setTranslation(plant01,0,0,0)
+		--objectInstanceAPI.setTranslation(plant01,0,0,0)
 
 	end
 
@@ -222,32 +228,28 @@ function Render()
 
 	--Lua render here
 
-    printAPI.print("Getting time...\n");
 
-    time = timeAPI.elapsedTimeMs()
-
-    printAPI.print("Getting world matrix...\n");
+    --printAPI.print("Getting world matrix...\n");
 
     worldMatrix = luaVectorUtility.mat4_CreateIdentity(context.handle)
 
-    printAPI.print("Getting view matrix...\n");
+    --printAPI.print("Getting view matrix...\n");
 
     viewMatrix = cameraAPI.getViewMatrix(camera0, context.handle)
 
-    printAPI.print("Getting projection matrix...\n");
+    --printAPI.print("Getting projection matrix...\n");
 
     projectionmatrix = cameraAPI.getProjectionMatrix(camera0, context.handle)
     
-    printAPI.print("Rendering...\n");
+    --printAPI.print("Rendering...\n");
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
     --renderManagerAPI.renderFromCamera(camera0,time)
 	renderManagerAPI.renderObject(camera0,time,Terrain01)
-	renderManagerAPI.renderObject(camera0,time,plant01)
-	renderManagerAPI.renderObject(camera0,time,plant02)
+	renderManagerAPI.renderObject(camera0,time,giantPlant)
 	renderManagerAPI.present()
     
-    printAPI.print("Render Successful\n");
+    --printAPI.print("Render Successful\n");
 
     renderManagerAPI.endRender()
 end
