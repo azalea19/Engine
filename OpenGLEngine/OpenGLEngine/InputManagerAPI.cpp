@@ -36,6 +36,16 @@ bool InputManagerAPI::IsKeyPressed(int keyCode)
 
 }
 
+bool InputManagerAPI::IsMousePressedLeft()
+{
+	if (InputManager::GetInstance().IsMousePressedLeft())
+	{
+		return true;
+	}
+	return false;
+
+}
+
 bool InputManagerAPI::IsKeyReleased(int keyCode) 
 {
 	return IsKeyUp(keyCode) && (InputManager::GetInstance().LastKeyboardState(keyCode) != 0);
@@ -52,4 +62,6 @@ void InputManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 
 	pContext->ExposeFunction(luaAPIName, "mouseDeltaX", MouseDeltaX);
 	pContext->ExposeFunction(luaAPIName, "mouseDeltaY", MouseDeltaY);
+	pContext->ExposeFunction(luaAPIName, "isMousePressedLeft", IsMousePressedLeft);
+
 }

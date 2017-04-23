@@ -60,6 +60,13 @@ public:
 	static bool IsKeyReleased(int keyCode);
 
 	/// <summary>
+	/// Checks if mouse button is pressed in input through lua API.
+	/// </summary>
+	/// <param name="keyCode">sdl key code</param>
+	/// <returns>int</returns>
+	static bool InputManagerAPI::IsMousePressedLeft();
+
+	/// <summary>
 	/// Exposes class to lua as API
 	/// </summary>
 	/// <param name="contextHandle">Lua context handle</param

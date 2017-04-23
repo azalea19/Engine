@@ -136,23 +136,11 @@ function Player:update()
 		 
 	--printAPI.print("Completed player update.\n")
 
-	--[[
-	local numRows = 0
-   for k,v in next, gameObjects do
-       numRows = numRows + 1
-   end
-
-   for i = 1, numRows do
-       printAPI.print(gameObjects[i]["position"]["X"])
-   end
-   ]]
 	manyList = {}
     local numRows = 0
     for k,v in next, gameObjects do
         numRows = numRows + 1
     end
-    printAPI.print('pcheck1\n')
-
     for i = 1, numRows do
 		local bbo = gameObjects[i]["boundingbox"]
 		if bbo ~= nil then
@@ -160,7 +148,6 @@ function Player:update()
 		end	
     end
 	
-	printAPI.print('pcheck2\n')
 	self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,numRows,0.01,context.handle)
 	cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
 

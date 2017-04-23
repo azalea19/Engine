@@ -28,6 +28,8 @@ SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
 SDL_SCANCODE_Z = 29
+SDL_SCANCODE_X = 27
+
 SDL_SCANCODE_LSHIFT = 225
 
 function Run()
@@ -75,6 +77,9 @@ function LoadAssets()
 	printAPI.print('terrain loaded\n')
 
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
+
+    modelLibraryAPI.addModel("Cactus1","Assets/Models/Airship/tree1.obj",false)
+
 	
 	
 end
@@ -130,6 +135,8 @@ function Initialize()
 
     end
 
+    --objectInstanceAPI.setScale(6,100,100,100)
+
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
     
@@ -176,12 +183,10 @@ function Update()
     --printAPI.print("Getting time...\n");
     time = timeAPI.elapsedTimeMs()
 	
-    esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
-	if esc then
+    local quitIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_X)
+	if quitIn then
 		printAPI.print("Quitting - pressed input to quit.\n")
-
         quitting = true
-        --run = false
 	end
 	
 	if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
@@ -206,7 +211,7 @@ function Update()
     --printAPI.print(gameObjects[7]["position"]["Y"] .. "\n")
 
     if(quitting) then
-        if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
+        if inputManagerAPI.isMousePressedLeft() then
             run = false
 
         end
@@ -221,24 +226,9 @@ end
 
 function Render()
     renderManagerAPI.beginRender()
-    --Lua render here
-
-    --printAPI.print("Getting world matrix...\n");
-
-    worldMatrix = luaVectorUtility.mat4_CreateIdentity(context.handle)
-
-    --printAPI.print("Getting view matrix...\n");
-
-    viewMatrix = cameraAPI.getViewMatrix(camera0, context.handle)
-
-    --printAPI.print("Getting projection matrix...\n");
-
-    projectionmatrix = cameraAPI.getProjectionMatrix(camera0, context.handle)
     
     --printAPI.print("Rendering...\n");
 
-    --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-    --renderManagerAPI.renderFromCamera(camera0,time)
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
@@ -247,10 +237,7 @@ function Render()
 		renderManagerAPI.renderObject(camera0,time,gameObjects[i]["id"])
 	end
 	renderManagerAPI.renderObject(camera0,time,Terrain01)
-	--renderManagerAPI.renderObject(camera0,time,giantPlant)
 	renderManagerAPI.present()
-
-
 
     if(quitting) then
         display2DAPI.drawFullScreen("faces.png")
@@ -263,4 +250,5 @@ end
 local status, err = pcall(Run)
 if not status then
 	printAPI.print(err)
+    read(1)
 end
