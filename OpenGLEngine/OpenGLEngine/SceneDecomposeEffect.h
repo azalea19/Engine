@@ -1,6 +1,6 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
-
+#include <memory>
 
 
 /**
@@ -10,15 +10,16 @@
 * @brief
 */
 
+class GBuffer;
+
 class SceneDecomposeEffect
 {
 public:
 
   SceneDecomposeEffect();
-  void Bind(GLuint DiffuseTexture, GLuint DepthTexture, GLuint LinearDepthTexture, GLuint NormalTexture, GLuint WorldPosTexture);
+  void Bind(GBuffer const& buffers);
   void Unbind();
 
 private:
   FrameBuffer m_fb;
-  IShader const* m_pShader;
 };

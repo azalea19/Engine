@@ -9,6 +9,8 @@ require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
 
+OPEN_GL = 0
+
 gameObjects = {}
 debug = true
 terrainSizeX = 256
@@ -25,6 +27,7 @@ SDL_SCANCODE_D = 7
 SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
 SDL_SCANCODE_Z = 29
+SDL_SCANCODE_LSHIFT = 225
 
 function Run()
 	Initialize()
@@ -72,14 +75,18 @@ end
 function PrintVec3s(vecc,vecb)
     printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
 end
-
 	
 function LoadAssets()
-	--modelLibraryAPI.AddModel("ground","Assets/Models/Ground/Ground.obj",false)
-	--modelLibraryAPI.AddModel("tree","tree.obj", false)
+
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	
+	printAPI.print('plant loaded\n')
+
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/perlin_noise.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/hmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
+		
+	printAPI.print('terrain loaded\n')
+
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 	
 	
@@ -90,13 +97,17 @@ function Initialize()
 	printAPI.print('Initializing...\n')
     printAPI.print('Initialising engine...\n')
 
-	engineAPI.Create(0);
-	engineAPI.Initialise(1024,728);
+	engineAPI.Create(OPEN_GL);
+		
+	printAPI.print('Creating...\n')
+
+	engineAPI.Initialise(1280,720);
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
 	
     printAPI.print('Initialising objects...\n')
+
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	LoadInstances("SaveData/NPC_Data.csv", "npc")
 	
@@ -207,42 +218,41 @@ end
 
 
 function Render()
-	--printAPI.print('count = ')
-	--printAPI.print(count)
-	--printAPI.print('\n')
-	--mainAPI.render()
+    renderManagerAPI.beginRender()
 
-    engineAPI.BeginRender()
+	--Lua render here
 
-    --printAPI.print("Getting time...\n");
+    printAPI.print("Getting time...\n");
 
     time = timeAPI.elapsedTimeMs()
 
-    --printAPI.print("Getting world matrix...\n");
+    printAPI.print("Getting world matrix...\n");
 
     worldMatrix = luaVectorUtility.mat4_CreateIdentity(context.handle)
 
-    --printAPI.print("Getting view matrix...\n");
+    printAPI.print("Getting view matrix...\n");
 
     viewMatrix = cameraAPI.getViewMatrix(camera0, context.handle)
 
-    --printAPI.print("Getting projection matrix...\n");
+    printAPI.print("Getting projection matrix...\n");
 
     projectionmatrix = cameraAPI.getProjectionMatrix(camera0, context.handle)
-
-   -- printAPI.print("Rendering...\n");
+    
+    printAPI.print("Rendering...\n");
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-    renderManagerAPI.renderFromCamera(camera0,time)
-	--Lua render here
+    --renderManagerAPI.renderFromCamera(camera0,time)
+	renderManagerAPI.renderObject(camera0,time,Terrain01)
+	renderManagerAPI.renderObject(camera0,time,plant01)
+	renderManagerAPI.renderObject(camera0,time,plant02)
+	renderManagerAPI.present()
+    
+    printAPI.print("Render Successful\n");
 
-    --printAPI.print("Render Successful\n");
-
-    engineAPI.EndRender()
+    renderManagerAPI.endRender()
 end
 
 local status, err = pcall(Run)
 if not status then
 	printAPI.print(err)
 end
-	

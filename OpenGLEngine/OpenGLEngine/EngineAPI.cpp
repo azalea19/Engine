@@ -3,54 +3,46 @@
 #include "GLEngine.h"
 #include "ShaderLibrary.h"
 #include "ModelLibrary.h"
+#include "InputManager.h"
 
+std::unique_ptr<IEngine> EngineAPI::s_engine;
 
-IEngine* EngineAPI::s_engine;
-
-static void Create(int graphicsFlag)
+void EngineAPI::Create(int api)
 {
-  if (graphicsFlag == API_OPEN_GL)
-  {
-    EngineAPI::s_engine = GLEngine::Create();
-  }
-  if (graphicsFlag == API_DIRECT_X)
-  {
-    EngineAPI::s_engine = DXEngine::Create();
-  }
+  if (api == API_OPEN_GL)
+    s_engine = std::unique_ptr<IEngine>(GLEngine::Create());
+  else if (api == API_DIRECT_X)
+    throw std::exception("API not supported.");
+  else if (api == API_VULKAN)
+    throw std::exception("API not supported.");
+  else
+    throw std::exception("API not supported.");
 }
 
 static void CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms)
 {
-  EngineAPI::s_engine->CreateShader(name, vertFilePath, fragFilePath, attributes, uniforms);
+  EngineAPI::GetEngine()->CreateShader(name, vertFilePath, fragFilePath, attributes, uniforms);
 }
-
 
 static void Initialise(int screenWidth, int screenHeight)
 {
-  EngineAPI::s_engine->Initialise(screenWidth, screenHeight);
-  ShaderLibrary::InitShaderLibrary(EngineAPI::s_engine);
-  ModelLibrary::Initialise(EngineAPI::s_engine);
+  EngineAPI::GetEngine()->Initialise(screenWidth, screenHeight);
+  ShaderLibrary::InitShaderLibrary(EngineAPI::GetEngine());
+  ModelLibrary::Initialise(EngineAPI::GetEngine());
+  
+  InputManager::GetInstance().Initialise(EngineAPI::GetEngine()->CreateInputHandler());
 }
 
 static bool BeginUpdate()
 {
-  return EngineAPI::s_engine->BeginUpdate();
+  return EngineAPI::GetEngine()->BeginUpdate();
 }
 
 static void EndUpdate()
 {
-  EngineAPI::s_engine->EndUpdate();
+  EngineAPI::GetEngine()->EndUpdate();
 }
 
-static void BeginRender()
-{
-  EngineAPI::s_engine->BeginRender();
-}
-
-static void EndRender()
-{
-  EngineAPI::s_engine->EndRender();
-}
 
 void EngineAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
@@ -59,6 +51,10 @@ void EngineAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "Initialise", Initialise);
   pContext->ExposeFunction(luaAPIName, "BeginUpdate", BeginUpdate);
   pContext->ExposeFunction(luaAPIName, "EndUpdate", EndUpdate);
-  pContext->ExposeFunction(luaAPIName, "BeginRender", BeginRender);
-  pContext->ExposeFunction(luaAPIName, "EndRender", EndRender);
+
+}
+
+IEngine* EngineAPI::GetEngine()
+{
+  return s_engine.get();
 }

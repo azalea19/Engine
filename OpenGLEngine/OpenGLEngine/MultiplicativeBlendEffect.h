@@ -1,6 +1,6 @@
 #include "FrameBuffer.h"
 #include "Shader.h"
-
+#include <memory>
 
 /**
 * @file MultiplicativeBlendEffect.h
@@ -20,5 +20,6 @@ public:
 
 private:
   FrameBuffer m_fb;
-  IShader const* m_pShader;
+  std::unique_ptr<IShader> const& m_pShader;
+
 };

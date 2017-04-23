@@ -5,7 +5,7 @@
 #include <string>
 #include "Types.h"
 #include "Singleton.h"
-
+#include <memory>
 
 /**
 * @file   ModelLibrary.h
@@ -20,6 +20,7 @@ class IRenderableObject;
 class ObjectInstance; 
 class IEngine;
 
+
 class ModelLibrary : public Singleton<ModelLibrary> 
 {
 
@@ -28,7 +29,7 @@ public:
   /// <summary>
   /// Initialises this instance.
   /// </summary>
-  static void Initialise(IEngine* pEngine);
+  static void Initialise(IEngine const *pEngine);
 
 
   /// <summary>
@@ -55,7 +56,7 @@ private:
   /// </summary>
   std::unordered_map<string, IRenderableObject*> models;
 
-  IEngine* m_pEngine;
+  IEngine const *m_pEngine;
 
 };
 

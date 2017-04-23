@@ -3,8 +3,9 @@
 
 
 DirectionalLightingEffect::DirectionalLightingEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("DirectionalLightingEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("DirectionalLightingEffect");
+
 }
 
 void DirectionalLightingEffect::Apply(GLuint normalTex, GLuint outputTex, vec3 colour, vec3 direction)

@@ -16,9 +16,9 @@
 
 enum TextureType
 {
-  TT_Diffuse,
   TT_Alpha,
-  TT_TextureTypeCount,
+  //TT_TextureTypeCount,
+  TT_Diffuse0,
 };
 
 struct aiMaterial;
@@ -42,12 +42,16 @@ public:
   /// <returns></returns>
   string GetTextureName(TextureType const& type) const;
 
+  uint GetDiffuseTextureCount() const;
+
 private:
 
   /// <summary>
   /// The name
   /// </summary>
   string name;
+
+  uint diffuseTextureCount;
   
   /// <summary>
   /// The textures

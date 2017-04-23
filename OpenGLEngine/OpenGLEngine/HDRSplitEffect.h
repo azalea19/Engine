@@ -1,5 +1,5 @@
 #include "FrameBuffer.h"
-
+#include <memory>
 
 class IShader;
 
@@ -16,7 +16,7 @@ class IShader;
 class HDRSplitEffect
 {
   FrameBuffer m_fb;
-  IShader const* m_pShader;
+  std::unique_ptr<IShader> const& m_pShader;
 
 public:
   HDRSplitEffect();

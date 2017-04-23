@@ -3,8 +3,9 @@
 
 
 AdditiveBlendEffect::AdditiveBlendEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("AdditiveBlendEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("AdditiveBlendEffect");
+
 }
 
 void AdditiveBlendEffect::Apply(GLuint inputTex0, GLuint inputTex1, GLuint outputTex)

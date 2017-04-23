@@ -4,7 +4,7 @@
 #include "Types.h"
 #include "BoneKeySequence.h"
 #include "Bimap.h"
-
+#include <memory>
 
 /**
 * @file  Animation.h
@@ -34,6 +34,8 @@ public:
   /// <param name="boneLookup">The bone lookup.</param>
   Animation(aiAnimation const* pAnimation, Bimap<string, int> const& boneLookup);
   
+  ~Animation();
+
   /// <summary>
   /// Gets the name.
   /// </summary>
@@ -96,7 +98,7 @@ private:
   /// <summary>
   /// The bone key frames.
   /// </summary>
-  std::unordered_map<int, BoneKeySequence*> m_boneKeyFrames;
+  std::unordered_map<int, std::unique_ptr<BoneKeySequence>> m_boneKeyFrames;
 
 
   /// <summary>

@@ -4,12 +4,7 @@
 
 int InputManagerAPI::MouseDeltaX()
 {
-	int val = InputManager::GetInstance().MouseDeltaX();
-	if (val > 0)
-	{
-		return val;
-	}
-	return val;
+	return InputManager::GetInstance().MouseDeltaX();
 }
 
 int InputManagerAPI::MouseDeltaY()
@@ -17,9 +12,10 @@ int InputManagerAPI::MouseDeltaY()
 	return InputManager::GetInstance().MouseDeltaY();
 
 }
+
 bool InputManagerAPI::IsKeyDown(int keyCode) 
 {
-	return InputManager::GetInstance().keyboardState[keyCode] != 0;
+  return InputManager::GetInstance().KeyboardState(keyCode);
 }
 
 bool InputManagerAPI::IsKeyUp(int keyCode) 
@@ -31,7 +27,7 @@ bool InputManagerAPI::IsKeyPressed(int keyCode)
 {
 	if (IsKeyDown(keyCode))
 	{
-		if (InputManager::GetInstance().lastKeyboardState[keyCode] == 0)
+		if (InputManager::GetInstance().LastKeyboardState(keyCode) == 0)
 		{
 			return true;
 		}
@@ -42,9 +38,8 @@ bool InputManagerAPI::IsKeyPressed(int keyCode)
 
 bool InputManagerAPI::IsKeyReleased(int keyCode) 
 {
-	return IsKeyUp(keyCode) && (InputManager::GetInstance().lastKeyboardState[keyCode] != 0);
+	return IsKeyUp(keyCode) && (InputManager::GetInstance().LastKeyboardState(keyCode) != 0);
 }
-
 
 void InputManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {

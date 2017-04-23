@@ -1,21 +1,21 @@
 #include "SceneDecomposeEffect.h"
 #include "ShaderLibrary.h"
-
+#include "GBuffer.h"
 
 SceneDecomposeEffect::SceneDecomposeEffect()
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("SceneDecomposeEffect");
+
 }
 
-void SceneDecomposeEffect::Bind(GLuint DiffuseTexture, GLuint DepthTexture, GLuint LinearDepthTexture, GLuint NormalTexture, GLuint WorldPosTexture)
+void SceneDecomposeEffect::Bind(GBuffer const& buffers)
 {
   m_fb.Bind();
-  ShaderLibrary::GetInstance().BindShader(m_pShader->GetName());
-  m_fb.AttachColour(0, DiffuseTexture);
-  m_fb.AttachColour(1, NormalTexture);
-  m_fb.AttachColour(2, WorldPosTexture);
-  m_fb.AttachColour(3, LinearDepthTexture);
-  m_fb.AttachDepth(DepthTexture);
+  ShaderLibrary::GetInstance().BindShader("SceneDecomposeEffect");
+  m_fb.AttachColour(0, buffers.GetColorBuffer());
+  m_fb.AttachColour(1, buffers.GetNormalBuffer());
+  m_fb.AttachColour(2, buffers.GetWSPositionBuffer());
+  m_fb.AttachColour(3, buffers.GetLinearDepthBuffer());
+  m_fb.AttachDepth(buffers.GetDepthBuffer());
 }
 
 void SceneDecomposeEffect::Unbind()

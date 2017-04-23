@@ -8,34 +8,35 @@
 #include "Shader.h"
 #include "RenderableObject.h"
 #include "Screen.h"
+#include "GLInputHandler.h"
 
 IEngine* GLEngine::Create()
 {
   return new GLEngine();
 }
 
-bool GLEngine::HandleEvents()
-{
-  SDL_Event event;
-  while (SDL_PollEvent(&event))
-  {
-    switch (event.type)
-    {
-      case SDL_QUIT:
-        return false;
-      case SDL_MOUSEMOTION:
-        InputManager::GetInstance().PushEvent(MouseEvent(event.motion));
-        break;
-      case SDL_MOUSEBUTTONDOWN:
-        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
-        break;
-      case SDL_MOUSEBUTTONUP:
-        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
-        break;
-    }
-  }
-  return true;
-}
+//bool GLEngine::HandleEvents()
+//{
+//  SDL_Event event;
+//  while (SDL_PollEvent(&event))
+//  {
+//    switch (event.type)
+//    {
+//      case SDL_QUIT:
+//        return false;
+//      case SDL_MOUSEMOTION:
+//        InputManager::GetInstance().PushEvent(MouseEvent(event.motion));
+//        break;
+//      case SDL_MOUSEBUTTONDOWN:
+//        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
+//        break;
+//      case SDL_MOUSEBUTTONUP:
+//        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
+//        break;
+//    }
+//  }
+//  return true;
+//}
 
 void GLEngine::InitGlew()
 {
@@ -58,6 +59,11 @@ IShader* GLEngine::CreateShader(string const& name, string const& vertFilePath, 
 IRenderableObject* GLEngine::CreateRenderableObject(string const& name, string const& filename) const
 {
   return new RenderableObject(name, filename);
+}
+
+IInputHandler* GLEngine::CreateInputHandler()
+{
+  return new GLInputHandler();
 }
 
 GLEngine::GLEngine()
@@ -102,6 +108,7 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 {
   m_screenWidth = screenWidth;
   m_screenHeight = screenHeight;
+
   vec2i xy = vec2i(screenWidth, screenHeight);
   SetScreenDimensions(xy);
   
@@ -129,6 +136,7 @@ void GLEngine::Initialise(int screenWidth, int screenHeight)
 
 void GLEngine::BeginRender()
 {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glCullFace(GL_BACK);
   glEnable(GL_DEPTH_TEST);
 }
@@ -141,8 +149,8 @@ void GLEngine::EndRender()
 
 bool GLEngine::BeginUpdate()
 {
-  if (!HandleEvents())
-    return false;
+  //if (!HandleEvents())
+  //  return false;
 
   InputManager::GetInstance().Update();
 

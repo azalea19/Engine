@@ -1,7 +1,12 @@
-#pragma once
-#include "TerrainAPI.h"
+#ifndef TerrainAPI_h__
+#define TerrainAPI_h__
 
-void TerrainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName) {
+#include "TerrainAPI.h"
+#include "Terrain.h"
+#include "OBJWriter.h"
+
+void TerrainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName) 
+{
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "generateTerrain", GenerateTerrain);
 }
@@ -24,3 +29,5 @@ LuaRef TerrainAPI::GenerateTerrain(uint terrainWidth, uint terrainHeight, uint h
 
 	return result;
 }
+
+#endif // TerrainAPI_h__

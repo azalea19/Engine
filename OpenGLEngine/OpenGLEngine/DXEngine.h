@@ -63,6 +63,9 @@ public:
 
   virtual IRenderableObject* CreateRenderableObject(string const& name, string const& filename) const override;
 
+
+  virtual IInputHandler* CreateInputHandler() override;
+
 private:
 
   /// <summary>

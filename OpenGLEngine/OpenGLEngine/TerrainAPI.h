@@ -1,5 +1,3 @@
-#pragma once
-#include "Terrain.h"
 #include "LuaManager.h"
 #include "OBJWriter.h"
 #include <vector>

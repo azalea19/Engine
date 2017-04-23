@@ -10,6 +10,11 @@ Animation::Animation(aiAnimation const* pAnimation, Bimap<string, int> const& bo
   LoadKeyFrames(pAnimation, boneLookup);
 }
 
+Animation::~Animation()
+{
+
+}
+
 string const& Animation::GetName() const
 {
   return m_name;

@@ -4,6 +4,7 @@
 #include "types.h"
 #include "IShader.h"
 #include "IRenderableObject.h"
+#include "IInputHandler.h"
 
 /**
 * @file IEngine.h
@@ -15,12 +16,7 @@
 * while being able to implement the implantation using a different API.
 */
 
-enum GraphicsAPI
-{
-  API_OPEN_GL,
-  API_DIRECT_X,
-  API_VULKAN
-};
+
 
 enum WindowAPI
 {
@@ -70,6 +66,8 @@ public:
   virtual IShader* CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const = 0;
 
   virtual IRenderableObject* CreateRenderableObject(string const& name, string const& filename) const = 0;
+
+  virtual IInputHandler* CreateInputHandler() = 0;
 
 
 };

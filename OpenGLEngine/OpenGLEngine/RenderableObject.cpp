@@ -8,6 +8,7 @@
 #include "FXAAEffect.h"
 #include "Screen.h"
 #include "InputManager.h"
+#include <memory>
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
@@ -37,7 +38,8 @@ void RenderableObject::SetFillMode(FillMode fillMode) const
 
 void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 {
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
+
   if (m_pModel->HasAnimation() && activeAnimation >= 0)
   {
     std::vector<glm::mat4> bones = m_pModel->GetBoneTransforms(activeAnimation, time);
@@ -52,7 +54,7 @@ void RenderableObject::UpdateAnimation(float time, int activeAnimation) const
 
 void RenderableObject::UploadMatrices(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const
 {
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+  std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
 
   if (shader->HasUniform("WORLD_MATRIX"))
     shader->TransmitUniform("WORLD_MATRIX", worldMatrix);
@@ -91,7 +93,7 @@ void RenderableObject::Initialise()
   std::vector<vec3> const& vertices = m_pModel->GetVertices();
   std::vector<int> const& indices = m_pModel->GetIndices();
   std::vector<vec3> const& normals = m_pModel->GetNormals();
-  std::vector<vec2> const& diffuseTexCoords = m_pModel->GetTexCoords(TT_Diffuse);
+  std::vector<vec2> const& diffuseTexCoords = m_pModel->GetTexCoords(TT_Diffuse0);
   std::vector<vec2> const& alphaTexCoords = m_pModel->GetTexCoords(TT_Alpha);
   std::vector<VertexBoneIDs> const& boneIDs = m_pModel->GetBoneIDs();
   std::vector<VertexBoneWeights> const& boneWeights = m_pModel->GetBoneWeights();
@@ -206,18 +208,27 @@ void RenderableObject::BindMesh(int meshIndex) const
 
 void RenderableObject::BindMaterial(int meshIndex) const
 {
-  const IShader* shader = ShaderLibrary::GetInstance().CurrentShader();
+    std::unique_ptr<IShader> const& shader = ShaderLibrary::GetInstance().CurrentShader();
   
-    string diffuseTexture = m_pModel->GetMeshTextureName(meshIndex, TT_Diffuse);
     
-    if (diffuseTexture != "Texture not supplied.")
+    Material const& material = m_pModel->GetMeshMaterial(meshIndex);
+    shader->TransmitUniform("DIFFUSE_COUNT", (int)material.GetDiffuseTextureCount());
+
+    if (material.GetDiffuseTextureCount() > 1)
     {
-      glActiveTexture(GL_TEXTURE0 + TL_Diffuse);
-      glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(diffuseTexture));
-      shader->TransmitUniform("DIFFUSE_MAP", int(TL_Diffuse));
+      shader->TransmitUniform("DIFFUSE_SOURCE", int(DS_MultiTexture));
+    }
+    if(material.GetDiffuseTextureCount() == 1)
+    {
       shader->TransmitUniform("DIFFUSE_SOURCE", int(DS_Texture));
     }
-    else
+    for (int i = 0; i < material.GetDiffuseTextureCount(); i++)
+    {
+      glActiveTexture(GL_TEXTURE0 + TL_Diffuse0 + i);
+      glBindTexture(GL_TEXTURE_2D, TextureLibrary::GetInstance().GetTexture(material.GetTextureName(TextureType(TT_Diffuse0 + i))));
+      shader->TransmitUniform("DIFFUSE_MAP" + std::to_string(i), int(TL_Diffuse0 + i));
+    }
+    if(material.GetDiffuseTextureCount() == 0)
     {
       shader->TransmitUniform("DIFFUSE_SOURCE", int(DS_VertexColour));
     }

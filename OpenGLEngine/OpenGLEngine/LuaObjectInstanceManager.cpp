@@ -1,5 +1,6 @@
 #include "LuaObjectInstanceManager.h"
-
+#include "MCamera.h"
+#include "LuaInstanceManager.h"
 
 static std::unordered_map<int, ObjectInstance*> m_instanceMap;
 

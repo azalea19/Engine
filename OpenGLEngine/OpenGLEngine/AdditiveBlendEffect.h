@@ -3,7 +3,7 @@
 
 #include "FrameBuffer.h"
 #include "Shader.h"
-
+#include <memory>
 
 /**
 * @file AdditiveBlendEffect.h
@@ -23,8 +23,9 @@ public:
   void Apply(GLuint inputTex0, GLuint inputTex1, GLuint outputTex);
 
 private:
+
   FrameBuffer m_fb;
-  IShader const* m_pShader;
+  std::unique_ptr<IShader> const& m_pShader;
 };
 
 #endif // AdditiveBlendEffect_h__

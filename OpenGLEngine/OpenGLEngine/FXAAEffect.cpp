@@ -3,8 +3,9 @@
 
 
 FXAAEffect::FXAAEffect()
+  : m_pShader(ShaderLibrary::GetInstance().GetShader("FXAAEffect"))
 {
-  m_pShader = ShaderLibrary::GetInstance().GetShader("FXAAEffect");
+
 }
 
 void FXAAEffect::Apply(GLuint inputTex, GLuint outputTex, int fxaaSpan)
