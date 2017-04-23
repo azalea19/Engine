@@ -2,23 +2,19 @@
 local gameObject = {}
 gameObject.__index = character
 
-function gameObject.new(newName, newModel, newPos, newDir, newBBox, newScale, newAnim, newID)
+function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim, newID)
 	local instance = {}	
-	setmetatable(instance, gameObject)
+	
 	instance.model = newModel
-	instance.boundingBox = newBBox
 	instance.position = newPos
 	instance.direction = newDir
 	instance.name = newName
 	instance.id = newID
 	instance.scale = newScale
 	instance.animation = newAnim
+	setmetatable(instance, gameObject)
 
 	return instance
-end
-
-function gameObject:GetBoundingBox()
-	return self.boundingBox
 end
 
 function gameObject:getPos()
