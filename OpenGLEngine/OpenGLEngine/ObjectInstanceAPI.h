@@ -81,6 +81,8 @@ public:
   /// <param name="z">The z.</param>
   static void SetTranslation(InstanceHandle instHandle, float x, float y, float z);
 	
+
+
   /// <summary>
   /// Exposes the API functions.
   /// </summary>

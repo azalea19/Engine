@@ -58,12 +58,31 @@ public:
 
 
 
+  /// <summary>
+  /// Creates the shader.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="vertFilePath">The vert file path.</param>
+  /// <param name="fragFilePath">The frag file path.</param>
+  /// <param name="attributes">The attributes.</param>
+  /// <param name="uniforms">The uniforms.</param>
+  /// <returns></returns>
   virtual IShader* CreateShader(string const& name, string const& vertFilePath, string const& fragFilePath, std::vector<string> const& attributes, std::vector<string> const& uniforms) const override;
 
 
+  /// <summary>
+  /// Creates the renderable object.
+  /// </summary>
+  /// <param name="name">The name.</param>
+  /// <param name="filename">The filename.</param>
+  /// <returns></returns>
   virtual IRenderableObject* CreateRenderableObject(string const& name, string const& filename) const override;
 
 
+  /// <summary>
+  /// Creates the input handler.
+  /// </summary>
+  /// <returns></returns>
   virtual IInputHandler* CreateInputHandler() override;
 
 private:

@@ -56,6 +56,9 @@ private:
   /// </summary>
   std::unordered_map<string, IRenderableObject*> models;
 
+  /// <summary>
+  /// The engine
+  /// </summary>
   IEngine const *m_pEngine;
 
 };

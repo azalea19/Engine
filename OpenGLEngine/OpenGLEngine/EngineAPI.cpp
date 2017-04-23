@@ -5,6 +5,9 @@
 #include "ModelLibrary.h"
 #include "InputManager.h"
 
+/// <summary>
+/// The s engine{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
+/// </summary>
 std::unique_ptr<IEngine> EngineAPI::s_engine;
 
 void EngineAPI::Create(int api)

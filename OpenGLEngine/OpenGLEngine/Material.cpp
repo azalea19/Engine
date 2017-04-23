@@ -7,51 +7,71 @@
 Material::Material(string name, const aiMaterial* pMaterial, string const& modelDir)
 {
   this->name = name;
-  diffuseTextureCount = pMaterial->GetTextureCount(aiTextureType_DIFFUSE);
 
-  for (int i = 0; i < diffuseTextureCount; i++)
+  if (name == "Terrain_Material1")
   {
-    aiString path;
-    pMaterial->GetTexture(aiTextureType_DIFFUSE, i, &path);
+    diffuseTextureCount = pMaterial->GetTextureCount(aiTextureType_DIFFUSE);
 
-    string texName = name + "_diffuse" + std::to_string(i);
-    TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
-    m_textures.emplace(TextureType(TT_Diffuse0 + i), texName);
+    for (int i = 0; i < diffuseTextureCount; i++)
+    {
+      aiString path;
+      pMaterial->GetTexture(aiTextureType_DIFFUSE, i, &path);
+
+      string texName = name + "_diffuse" + std::to_string(i);
+      TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
+      m_textures.emplace(TextureType(TT_Diffuse0 + i), texName);
+    }
+    if (pMaterial->GetTextureCount(aiTextureType_SPECULAR) > 0)
+    {
+      aiString path;
+      pMaterial->GetTexture(aiTextureType_SPECULAR, 0, &path);
+
+      string texName = name + "_diffuse" + std::to_string(diffuseTextureCount);
+      TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
+      m_textures.emplace(TextureType(TT_Diffuse0 + diffuseTextureCount), texName);
+
+      diffuseTextureCount++;
+    }
+    if (pMaterial->GetTextureCount(aiTextureType_AMBIENT) > 0)
+    {
+      aiString path;
+      pMaterial->GetTexture(aiTextureType_AMBIENT, 0, &path);
+
+      string texName = name + "_diffuse" + std::to_string(diffuseTextureCount);
+      TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
+      m_textures.emplace(TextureType(TT_Diffuse0 + diffuseTextureCount), texName);
+
+      diffuseTextureCount++;
+
+    }
+    if (pMaterial->GetTextureCount(aiTextureType_HEIGHT))
+    {
+      aiString path;
+      pMaterial->GetTexture(aiTextureType_HEIGHT, 0, &path);
+
+      string texName = name + "_diffuse" + std::to_string(diffuseTextureCount);
+      TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
+      m_textures.emplace(TextureType(TT_Diffuse0 + diffuseTextureCount), texName);
+
+      diffuseTextureCount++;
+    }
   }
-
-  if (pMaterial->GetTextureCount(aiTextureType_SPECULAR) > 0)
+  else
   {
-    aiString path;
-    pMaterial->GetTexture(aiTextureType_SPECULAR, 0, &path);
+    if (pMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0)
+    {
+      diffuseTextureCount = 1;
+      aiString path;
+      pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &path);
 
-    string texName = name + "_diffuse" + std::to_string(diffuseTextureCount);
-    TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
-    m_textures.emplace(TextureType(TT_Diffuse0 + diffuseTextureCount), texName);
-
-    diffuseTextureCount++;
-  }
-  if (pMaterial->GetTextureCount(aiTextureType_AMBIENT) > 0)
-  {
-    aiString path;
-    pMaterial->GetTexture(aiTextureType_AMBIENT, 0, &path);
-
-    string texName = name + "_diffuse" + std::to_string(diffuseTextureCount);
-    TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
-    m_textures.emplace(TextureType(TT_Diffuse0 + diffuseTextureCount), texName);
-
-    diffuseTextureCount++;
-
-  }
-  if (pMaterial->GetTextureCount(aiTextureType_HEIGHT))
-  {
-    aiString path;
-    pMaterial->GetTexture(aiTextureType_HEIGHT, 0, &path);
-
-    string texName = name + "_diffuse" + std::to_string(diffuseTextureCount);
-    TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
-    m_textures.emplace(TextureType(TT_Diffuse0 + diffuseTextureCount), texName);
-
-    diffuseTextureCount++;
+      string texName = name + "_diffuse" + std::to_string(0);
+      TextureLibrary::GetInstance().AddTexture(texName, modelDir + string(path.data));
+      m_textures.emplace(TextureType(TT_Diffuse0), texName);
+    }
+    else
+    {
+      diffuseTextureCount = 0;
+    }
   }
 
   if (pMaterial->GetTextureCount(aiTextureType_OPACITY) > 0)

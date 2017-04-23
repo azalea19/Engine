@@ -52,6 +52,7 @@ public:
   /// <param name="meshIndex">Index of the mesh.</param>
   virtual void BindMesh(int meshIndex) const = 0;
 
+
   /// <summary>
   /// The render method.
   /// </summary>

@@ -290,6 +290,9 @@
     <ClCompile Include="GLInputHandler.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="IRenderableObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">

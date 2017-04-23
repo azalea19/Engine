@@ -16,7 +16,7 @@ GBuffer* buffers;
 GLuint finalTex;
 GLuint tempTex;
 GLuint tempTex2;
-
+int fillmode;
 /// todo fix broken
 void RenderManagerAPI::Render(LuaRef worldMatrix,LuaRef viewMatrix, LuaRef projectionMatrix, float time)
 {
@@ -61,17 +61,13 @@ void RenderManagerAPI::Initialise()
 
 }
 
-static void SetEffect(string const& shader)
-{
-  
-}
 
-void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle)
+void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle, int lightingApplied)
 {
   MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
   mat4 world;
 
-  pDecomposeEffect->Bind(*buffers);
+  pDecomposeEffect->Bind(*buffers, lightingApplied);
 
   LuaObjectInstanceManager::GetInstance(instanceHandle)->Render(mat4(), cam->getViewMatrix(), cam->getProjectionMatrix());
 
@@ -79,7 +75,7 @@ void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle)
 
 void RenderManagerAPI::BeginRender()
 {
-  pDecomposeEffect->Bind(*buffers);
+  pDecomposeEffect->Bind(*buffers, 1);
   EngineAPI::GetEngine()->BeginRender();
 }
 
@@ -91,14 +87,33 @@ void RenderManagerAPI::EndRender()
 
 void RenderManagerAPI::Present()
 {
-  pDecomposeEffect->Unbind();
-  pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.5), vec3(1, -1, 1));
-  
-  pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);
-  
-  pBloomEffect->Apply(tempTex2,finalTex, 1);
+  if (fillmode == 0)
+  {
+    FrameBuffer::Display(buffers->GetColorBuffer());
+  }
+  else
+  {
+    pDecomposeEffect->Unbind();
+    pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.5), vec3(1, -1, 1));
+    pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);
+    pBloomEffect->Apply(tempTex2,finalTex, 1);
+    FrameBuffer::Display(tempTex2);
+  }
+}
 
-  FrameBuffer::Display(finalTex);
+void RenderManagerAPI::SetFillMode(int fillMode)
+{
+  fillmode = fillMode;
+
+  switch (fillMode)
+  {
+    case FM_Line:
+      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+      break;
+    case FM_Fill:
+      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+      break;
+  }
 }
 
 void RenderManagerAPI::RenderFromCamera(int camID, float time)
@@ -115,7 +130,7 @@ void RenderManagerAPI::RenderFromCamera(int camID, float time)
 			lightPos.x = -cos(PI * time / 60) * 10000;
 			lightPos.y = sin(PI * time / 60) * 10000;
 		
-			pDecomposeEffect->Bind(*buffers);
+			pDecomposeEffect->Bind(*buffers, 1);
 			
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
@@ -167,6 +182,7 @@ void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "present", Present);
   pContext->ExposeFunction(luaAPIName, "beginRender", BeginRender);
   pContext->ExposeFunction(luaAPIName, "endRender", EndRender);
+  pContext->ExposeFunction(luaAPIName, "setFillMode", SetFillMode);
 }
 //MCamera cam;
 //glm::mat4 projMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);

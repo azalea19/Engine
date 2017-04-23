@@ -23,6 +23,7 @@ layout (location = 4) uniform sampler2D DIFFUSE_MAP3;
 uniform int DIFFUSE_SOURCE = 0;
 uniform vec4 MESH_COLOUR = vec4(1, 1, 1, 1);
 uniform int DIFFUSE_COUNT = 1;
+uniform int zeroNormals;
 
 //ALPHA
 uniform int USE_ALPHA_MAP = 0;
@@ -77,7 +78,7 @@ vec4 CalculateDiffuse()
 
 			float slope = abs(dot(normalize(FRAG_VERTEX_NORMAL), vec3(0, 1, 0)));
 			slope = slope * slope;
-			float distance = clamp(logb(FRAG_LINEAR_DEPTH / 30, 4), 0, 1);
+			float distance = clamp(logb(FRAG_LINEAR_DEPTH / 30,2), 0, 1);
 			vec4 grassColor = mix(detailgrass, grass, distance);
 			vec4 stoneColor = mix(detailstone, stone, distance);
 			vec4 result = mix(grassColor, stoneColor, slope);
@@ -91,7 +92,11 @@ vec4 CalculateDiffuse()
 
 vec3 CalculateNormal()
 {
-	return (normalize(FRAG_VERTEX_NORMAL) + vec3(1, 1, 1)) * 0.5;
+	if(zeroNormals == 0)
+	{
+		return vec3(0,0,0);
+	}
+	return (normalize(FRAG_VERTEX_NORMAL) + vec3(1, 1, 1)) * 0.5;	
 }
 
 vec3 CalculateWorldPos()

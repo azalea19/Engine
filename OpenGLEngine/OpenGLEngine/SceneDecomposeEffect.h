@@ -16,10 +16,27 @@ class SceneDecomposeEffect
 {
 public:
 
+  /// <summary>
+  /// Initializes a new instance of the <see cref="SceneDecomposeEffect"/> class.
+  /// </summary>
   SceneDecomposeEffect();
-  void Bind(GBuffer const& buffers);
+
+  /// <summary>
+  /// Binds the specified buffers.
+  /// </summary>
+  /// <param name="buffers">The buffers.</param>
+  /// <param name="lightingApplied">The lighting applied.</param>
+  void Bind(GBuffer const& buffers, int lightingApplied);
+
+  /// <summary>
+  /// Unbinds this instance.
+  /// </summary>
   void Unbind();
 
 private:
+
+  /// <summary>
+  /// The frame buffer
+  /// </summary>
   FrameBuffer m_fb;
 };

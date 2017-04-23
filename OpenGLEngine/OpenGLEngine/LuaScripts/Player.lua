@@ -18,6 +18,7 @@ function Player:new(o)
 	return o
 end
 
+
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
 	printAPI.print("Setting player AABB...\n");
 
@@ -43,7 +44,7 @@ function Player:update()
 
 	-- written by liz translated from maddys c++ code
 	turnSpeed = 0.3
-	moveSpeed = 0.5
+	moveSpeed = 0.1
 	gravitySpeed = 1 
 	--rotation
 	origYaw = cameraAPI.getYaw(camera0,context.handle)
@@ -113,7 +114,10 @@ function Player:update()
 
 	newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
 
-	desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
+	newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
+	newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
+
+	desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
 
 	newPos.y = math.max(newPos.y, desiredHeight)		
 				

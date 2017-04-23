@@ -8,8 +8,6 @@
 * @date   S1, 2017
 * @brief A template class for creating Classes of the singleton pattern.
 *
-*
-*
 */
 
 template <class DerivedClass>

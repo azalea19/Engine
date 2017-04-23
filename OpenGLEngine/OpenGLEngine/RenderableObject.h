@@ -127,6 +127,7 @@ public:
   /// <param name="meshIndex">Index of the mesh.</param>
   void BindMesh(int meshIndex) const override;
 
+
 private:
 
   /// <summary>
@@ -149,18 +150,17 @@ private:
   /// </summary>
   mutable int boundMeshIndex;
 
-  
-  /// <summary>
-  /// Sets the fill mode.
-  /// </summary>
-  /// <param name="fillMode">The fill mode.</param>
-  void SetFillMode(FillMode fillMode) const;
-
   /// <summary>
   /// Binds the material.
   /// </summary>
   /// <param name="meshIndex">Index of the mesh.</param>
   void BindMaterial(int meshIndex) const;
+
+  /// <summary>
+  /// Sets the fill mode.
+  /// </summary>
+  /// <param name="fillMode">The fill mode.</param>
+  void SetFillMode(FillMode fillMode) const;
 
   /// <summary>
   /// Updates the animation.

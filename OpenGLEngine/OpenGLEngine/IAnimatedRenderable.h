@@ -18,9 +18,6 @@ class IAnimatedRenderable : public IAnimated
 
 public:
 
-  void RenderB(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time) const;
-
-
   /// <summary>
   /// The render method of an animated renderable object.
   /// </summary>
