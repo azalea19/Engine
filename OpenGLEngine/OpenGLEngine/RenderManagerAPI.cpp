@@ -73,7 +73,7 @@ void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle)
 
   pDecomposeEffect->Bind(*buffers);
 
-  LuaObjectInstanceManager::GetInstance(instanceHandle)->Render(mat4(), cam->getViewMatrix(), cam->getProjectionMatrix());
+  LuaObjectInstanceManager::GetInstance(instanceHandle)->Render(mat4(), cam->getViewMatrix(), cam->getProjectionMatrix(), time);
 
 }
 

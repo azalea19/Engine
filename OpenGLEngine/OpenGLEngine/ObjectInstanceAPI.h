@@ -63,7 +63,7 @@ public:
 	/// Sets the active animation.
 	/// </summary>
 	/// <param name="animationIndex">Index of the animation.</param>
-	static void SetAnimation(InstanceHandle instHandle, bool isAnimated);
+	static void SetAnimation(InstanceHandle instHandle, int isAnimated);
 
   /// <summary>
   /// Gets the object instance.

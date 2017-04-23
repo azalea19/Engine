@@ -20,7 +20,7 @@ void ObjectInstanceAPI::SetScale(InstanceHandle instHandle, float in1, float in2
 	GetInstance(instHandle)->SetScale(vec);
 }
 
-void ObjectInstanceAPI::SetAnimation(InstanceHandle instHandle, bool isAnimated)
+void ObjectInstanceAPI::SetAnimation(InstanceHandle instHandle, int isAnimated)
 {
 	GetInstance(instHandle)->SetActiveAnimation(isAnimated);
 }

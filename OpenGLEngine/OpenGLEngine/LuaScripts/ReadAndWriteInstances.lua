@@ -128,9 +128,9 @@ function LoadInstances(filePath, fileType)
 		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
 		sca = Vector3.new(fileData[i][9], fileData[i][10], fileData[i][11])
 		if(fileData[i][12] == 1) then
-			anim = true
+			anim = 1
 		else
-			anim = false
+			anim = 0
 		end
 
 		if(fileType == "gameObject") then
@@ -145,7 +145,7 @@ function LoadInstances(filePath, fileType)
 		objectInstanceAPI.setTranslation(instanceID,objpos.X,objpos.Y,objpos.Z)
 		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
 		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
-		--objectInstanceAPI.setAnimation(instanceID,anim)
+		objectInstanceAPI.setAnimation(instanceID,0)
 		renderManagerAPI.addObject(instanceID)
 	end
 	
