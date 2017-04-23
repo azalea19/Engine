@@ -33,6 +33,12 @@ void RenderManagerAPI::AddObject(int object)
 	RenderManager::GetInstance().AddObject(obj);
 }
 
+void RenderManagerAPI::RemoveObject(int object)
+{
+	ObjectInstance * obj = LuaObjectInstanceManager::GetInstance(object);
+	RenderManager::GetInstance().RemoveObject(obj);
+}
+
 void RenderManagerAPI::Initialise()
 {
 
@@ -155,12 +161,12 @@ void RenderManagerAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "render", Render);
   pContext->ExposeFunction(luaAPIName, "renderFromCamera", RenderFromCamera);
   pContext->ExposeFunction(luaAPIName, "renderObject", RenderObject);
+  pContext->ExposeFunction(luaAPIName, "removeObject", RemoveObject);
   pContext->ExposeFunction(luaAPIName, "addObject", AddObject);
   pContext->ExposeFunction(luaAPIName, "initialise", Initialise);
   pContext->ExposeFunction(luaAPIName, "present", Present);
   pContext->ExposeFunction(luaAPIName, "beginRender", BeginRender);
   pContext->ExposeFunction(luaAPIName, "endRender", EndRender);
-
 }
 //MCamera cam;
 //glm::mat4 projMatrix = glm::perspective(3.1416f / 2, SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 10000.f);

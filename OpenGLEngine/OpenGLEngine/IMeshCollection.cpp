@@ -80,3 +80,57 @@ int IMeshCollection::GetIndexCount() const
 
   return count;
 }
+
+std::vector<vec3> IMeshCollection::GetAABB() const
+{
+
+	std::vector<vec3> aabb;
+
+	int meshCount = GetMeshCount();
+
+	for (int i = 0; i < meshCount; i++)
+	{
+		std::vector<vec3> verts = GetMesh(i).GetVertices();
+
+		for (int a = 0; a < verts.size(); a++)
+		{
+			// Set up min and max to the first values to initialise
+			if (i == 0 && a == 0)
+			{
+				aabb.push_back(verts[a]);
+				aabb.push_back(verts[a]);
+			}
+
+			// Check for new min and max values
+			if (verts[a].x < aabb[0].x)
+			{
+				aabb[0].x = verts[a].x;
+			}
+			if (verts[a].y < aabb[0].y)
+			{
+				aabb[0].y = verts[a].y;
+			}
+			if (verts[a].z < aabb[0].z)
+			{
+				aabb[0].z = verts[a].z;
+			}
+
+			if (verts[a].x > aabb[1].x)
+			{
+				aabb[1].x = verts[a].x;
+			}
+			if (verts[a].y > aabb[1].y)
+			{
+				aabb[1].y = verts[a].y;
+			}
+			if (verts[a].z > aabb[1].z)
+			{
+				aabb[1].z = verts[a].z;
+			}
+		}
+		
+	}
+
+
+	return aabb;
+}

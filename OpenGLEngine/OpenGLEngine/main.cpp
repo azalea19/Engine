@@ -13,4 +13,5 @@ int main(int argc, char **argv)
 	//SDL_SCANCODE_Q;
 	//SDL_SCANCODE_Z;
   //return(0);
+	getchar();
 }

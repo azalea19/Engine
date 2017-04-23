@@ -49,4 +49,9 @@ public:
   /// <param name="luaAPIName">Name of the lua API.</param>
   static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
+  /// <summary>
+  /// Deletes a specified object instance from the map.
+  /// </summary>
+  /// <param name="instanceHandle">The instance handle of the instance to delete.</param>
+  static void DeleteInstance(int instanceHandle);
 };

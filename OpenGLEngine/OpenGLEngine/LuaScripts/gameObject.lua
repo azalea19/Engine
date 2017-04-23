@@ -17,25 +17,36 @@ function gameObject.new(newName, newModel, newPos, newDir, newBBox, newScale, ne
 	return instance
 end
 
+function gameObject:GetBoundingBox()
+	return self.boundingBox
+end
+
+function gameObject:getPos()
+	return gameObject.position
+end
+
+function gameObject:getDir()
+	return gameObject.direction
+end
+
+function gameObject:getScale()
+	return gameObject.scale
+end
+
+function gameObject:getAnim()
+	return gameObject.animation
+end
+
+function gameObject:getID()
+	return gameObject.id
+end
+
+function gameObject:getName()
+	return gameObject.name
+end
+
 function gameObject:getModel()
-	return self.model
+	return gameObject.model
 end
-
-function gameObject:getMaxHealth()
-	return gameObject.maxHealth
-end
-
-function gameObject:getCurrentHealth()
-	return gameObject.currentHealth
-end
-
-function gameObject:outOfHealth()
-	if gameObject.currentHealth < 0 then
-		return true
-	else
-		return false
-	end
-end
-
 
 return gameObject

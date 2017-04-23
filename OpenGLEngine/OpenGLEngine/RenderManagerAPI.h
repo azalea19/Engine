@@ -67,6 +67,7 @@ public:
   static void RenderManagerAPI::RenderObject(int camID, float time, int instanceHandle);
 	static void RenderManagerAPI::RenderFromCamera(int camID, float time);
 	static void RenderManagerAPI::AddObject(int object);
+	static void RenderManagerAPI::RemoveObject(int object);
 
   static void RenderManagerAPI::BeginRender();
   static void RenderManagerAPI::EndRender();

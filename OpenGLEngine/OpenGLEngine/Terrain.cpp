@@ -169,7 +169,6 @@ void Terrain::CreateMesh()
   glBindBuffer(GL_ARRAY_BUFFER, gIBO);
   glBufferData(GL_ARRAY_BUFFER, m_indices.size() * sizeof(GLint), m_indices.data(), GL_STATIC_DRAW);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 }
 
 

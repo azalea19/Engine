@@ -30,6 +30,12 @@ public:
   std::vector<vec3> GetNormals() const;
 
   /// <summary>
+  /// Gets Axis aligned bounding box - index 0=min, 1=max.
+  /// </summary>
+  /// <returns></returns>
+  std::vector<vec3> GetAABB() const;
+
+  /// <summary>
   /// Gets the indices.
   /// </summary>
   /// <returns></returns>

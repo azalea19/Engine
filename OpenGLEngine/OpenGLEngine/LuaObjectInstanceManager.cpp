@@ -18,6 +18,21 @@ InstanceHandle LuaObjectInstanceManager::AddNewInstance(string const& modelName)
 	return m_lastIndex-1;
 }
 
+void LuaObjectInstanceManager::DeleteInstance(int instanceHandle)
+{
+
+	auto got = m_instanceMap.find(instanceHandle);
+
+	if (got == m_instanceMap.end())
+	{
+		printf("Instance with name %n not found.", instanceHandle);
+	}
+	else {
+		m_instanceMap.erase(instanceHandle);
+	}
+
+}
+
 ObjectInstance * LuaObjectInstanceManager::GetInstance(int instanceHandle)
 {
 
@@ -37,4 +52,5 @@ void LuaObjectInstanceManager::Expose(LuaContextHandle contextHandle, string lua
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "addNewInstance", AddNewInstance);
+	pContext->ExposeFunction(luaAPIName, "deleteInstance", DeleteInstance);
 }

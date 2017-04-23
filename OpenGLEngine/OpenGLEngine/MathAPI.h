@@ -33,6 +33,6 @@ LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle);
 
 template<> mat4 FromLuaTable<mat4>(LuaRef value);
 LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle);
-
+LuaRef ToLuaTable(std::vector<float> data, int width, int height, LuaContextHandle contextHandle);
 
 #endif // MathAPI_h__

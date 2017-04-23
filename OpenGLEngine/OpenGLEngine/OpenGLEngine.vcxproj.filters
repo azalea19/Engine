@@ -266,20 +266,29 @@
     <ClCompile Include="LuaContext.cpp">
       <Filter>Source\Lua\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="TerrainAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="LuaObjectInstanceManager.cpp">
       <Filter>Source\Lua\Managers</Filter>
     </ClCompile>
     <ClCompile Include="LuaInstanceManager.cpp">
       <Filter>Source\Lua\APIs</Filter>
     </ClCompile>
-    <ClCompile Include="GLInputHandler.cpp">
-      <Filter>Source\Engine</Filter>
+    <ClCompile Include="IslandCollision.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="IslandCollisionAPI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AABBAPI.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="GBuffer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="TerrainAPI.cpp">
-      <Filter>Source\Lua\APIs</Filter>
+    <ClCompile Include="GLInputHandler.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -507,18 +516,13 @@
     <ClInclude Include="LuaInstanceManager.h">
       <Filter>Source\Lua\APIs</Filter>
     </ClInclude>
-    <ClInclude Include="IInputHandler.h">
-      <Filter>Source\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="GLInputHandler.h">
-      <Filter>Source\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="GBuffer.h">
-      <Filter>Source\Libraries</Filter>
-    </ClInclude>
-    <ClInclude Include="TerrainEffect.h">
-      <Filter>Source\Effects</Filter>
-    </ClInclude>
+    <ClInclude Include="IslandCollision.h" />
+    <ClInclude Include="IslandCollisionAPI.h" />
+    <ClInclude Include="AABBAPI.h" />
+    <ClInclude Include="GBuffer.h" />
+    <ClInclude Include="GLInputHandler.h" />
+    <ClInclude Include="IInputHandler.h" />
+    <ClInclude Include="TerrainEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -611,11 +615,13 @@
     <None Include="LuaScripts\Game.lua">
       <Filter>Source\Lua\Scripts</Filter>
     </None>
-    <None Include="colored.frag">
-      <Filter>Source\Shaders</Filter>
+    <None Include="colored.frag" />
+    <None Include="colored.vert" />
+    <None Include="LuaScripts\Terrain.lua">
+      <Filter>Source\Lua\Scripts</Filter>
     </None>
-    <None Include="colored.vert">
-      <Filter>Source\Shaders</Filter>
+    <None Include="LuaScripts\Player.lua">
+      <Filter>Source\Lua\Scripts</Filter>
     </None>
   </ItemGroup>
 </Project>
