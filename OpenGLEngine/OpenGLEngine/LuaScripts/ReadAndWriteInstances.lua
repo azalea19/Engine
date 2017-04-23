@@ -172,7 +172,7 @@ function LoadInstances(filePath, fileType)
 		objectInstanceAPI.setTranslation(instanceID,objpos.X,objpos.Y,objpos.Z)
 		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
 		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
-		objectInstanceAPI.setAnimation(instanceID,anim)
+		--objectInstanceAPI.setAnimation(instanceID,anim)
 		renderManagerAPI.addObject(instanceID)
 	end
 	

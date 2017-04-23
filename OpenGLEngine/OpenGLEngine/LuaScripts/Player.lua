@@ -37,7 +37,7 @@ function Player:update()
 	-- Start movement update
 
 	--printAPI.print("Updating player.\n")
-
+	self.pos = cameraAPI.getPosition(camera0,context.handle)
 	-- written by liz translated from maddys c++ code
 	turnSpeed = 0.3
 	moveSpeed = 0.3
@@ -112,46 +112,73 @@ function Player:update()
 			newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
 			desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
 			dif = desiredHeight - oldPos.y
-
-			if(dif > climbSpeed) then
-				alterSpeed = alterSpeed - 0.1
-				printAPI.print("Diff: " .. desiredHeight .. "\n" .. "climbSpeed: " .. oldPos.y .. "\n")
+			if(dif == 0) then
+				newPos.y = oldPos.y
+				loop = false
 			else
-				if(desiredHeight <  oldPos.y) then
-					newPos.y = oldPos.y - moveSpeed
-					loop = false
-					--printAPI.print("fall\n")
+				if(dif > climbSpeed) then
+					alterSpeed = alterSpeed - 0.1
+					printAPI.print("Diff: " .. desiredHeight .. "\n" .. "climbSpeed: " .. oldPos.y .. "\n")
 				else
-					if(desiredHeight + moveSpeed <  oldPos.y) then
-						newPos.y = desiredHeight
-						--printAPI.print("fall to point\n")
-						loop = false
+					if(desiredHeight  <  oldPos.y ) then
+						if(desiredHeight + moveSpeed >=  oldPos.y) then
+							newPos.y = desiredHeight
+							printAPI.print("fall to point\n")
+							loop = false
+						else
+							newPos.y = oldPos.y - moveSpeed
+							loop = false
+							printAPI.print("fall\n")
+						end
 					else
-						if (dif < moveSpeed) then
-							--printAPI.print("climb \n")
+						if (dif <= moveSpeed) then
+							printAPI.print("climb \n")
 							desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
 							newPos.y = desiredHeight
 							loop = false
 						end
 					end
 				end
-			end
-			if(alterSpeed <= 0) then
-				alterSpeed = 0.1
-				translation = luaVectorUtility.vec3_ScalarMultiply(translation,alterSpeed,context.handle)
-				newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
-				desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
-				newPos.y = desiredHeight
-				loop = false
+				if(alterSpeed <= 0) then
+					alterSpeed = 0.1
+					translation = luaVectorUtility.vec3_ScalarMultiply(translation,alterSpeed,context.handle)
+					newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
+					desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
+					newPos.y = desiredHeight
+					loop = false
+				end
 			end
 		end
-		
-		--Player.goToHeight(desiredHeight)
-		
-		cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 	else
-		--printAPI.print("Player has not moved.\n")
-	end 
+		desiredHeight = GetHeightAtPoint(oldPos.x, oldPos.z) + 5
+		dif = desiredHeight - oldPos.y
+		
+		if(dif == 0) then
+			newPos.y = oldPos.y
+		else
+			if(desiredHeight  <  oldPos.y ) then
+				if(desiredHeight + moveSpeed >=  oldPos.y) then
+					newPos.y = desiredHeight
+					printAPI.print("fall to point\n")
+					loop = false
+				else
+					newPos.y = oldPos.y - moveSpeed
+					loop = false
+					printAPI.print("fall\n")
+				end
+			else
+				if (dif <= moveSpeed) then
+					printAPI.print("climb \n")
+					desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
+					newPos.y = desiredHeight
+					loop = false
+				end
+			end
+		end
+	end
+		
+	cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
+
 	-- Movement update finished
 
   -- printAPI.print("Moving player bounding box...\n")
