@@ -1,5 +1,5 @@
 local AABoundingBox = {}
-
+--A bounding box object, contains all data for an AABB
 function AABoundingBox.new(NewMinX, NewMaxX, NewMinY, NewMaxY, NewMinZ, NewMaxZ)
 	local instance = {
 		minX = NewMinX,

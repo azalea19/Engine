@@ -1,7 +1,7 @@
 
 local World = {}
 World.__index = World
-
+--The world, contains all game data, stored in scenes, also stores the player which is constant across scenes
 function World.new(newPlayer, newScenes)
 	local instance = {
 	Player = newPlayer,

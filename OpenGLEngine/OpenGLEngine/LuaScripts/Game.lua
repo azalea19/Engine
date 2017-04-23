@@ -10,7 +10,7 @@ require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
 
 OPEN_GL = 0
-
+--all global functions, here for easy variable changes
 gameObjects = {}
 debug = true
 terrainSizeX = 1000
@@ -18,6 +18,7 @@ terrainSizeY = 1000
 heightMapSize = 512
 heightMapHeight = 100
 
+--SDL scane codes, used to detect what key is pressed
 --SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
 SDL_SCANCODE_W = 26
 SDL_SCANCODE_A = 4
@@ -31,12 +32,14 @@ SDL_SCANCODE_Q = 20
 SDL_SCANCODE_Z = 29
 SDL_SCANCODE_LSHIFT = 225
 
+--run the game
 function Run()
 	Initialize()
 	GameLoop()
 	Finalize()
 end
 
+--load all engine APi's
 function LoadAPIs()
 	GetAPI(context.handle, 'printAPI', 'printAPI')
 	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
@@ -69,15 +72,16 @@ function MoveAABB(aabb,inittpos,finalpos)
  
 }
 ]]
-
+--print a vec3 to the console
 function PrintVec3(veca)
     printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
 end
-
+--print 2 vec 3s
 function PrintVec3s(vecc,vecb)
     printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
 end
 	
+	--load in all models and generate the terrain
 function LoadAssets()
 
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
@@ -108,6 +112,7 @@ function LoadAssets()
 	
 end
 
+--initialise the game
 function Initialize()
 	LoadAPIs()
 	printAPI.print('Initializing...\n')
@@ -116,21 +121,23 @@ function Initialize()
 	engineAPI.Create(OPEN_GL);
 		
 	printAPI.print('Creating...\n')
-
+	--resolution
 	engineAPI.Initialise(1280,720);
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
 	
+	--load in game dta from files
     printAPI.print('Initialising objects...\n')
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	LoadInstances("SaveData/NPC_Data.csv", "npc")
 	printAPI.print('Data Loaded...\n')
+	--get number of game objects
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
 	end
-
+--for every game object, if the initial height was 0, then set the objects height to the terrains height at the x  and z points
 	for i = 1, numRows do
 		if(gameObjects[i]["position"]["Y"] == 0) then
 			gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"])
@@ -138,6 +145,7 @@ function Initialize()
 		objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
 	end
 
+	--randomly spawn in objects over the terrain
 	for k = 0, 100 do
 		local xRand = math.random(5, terrainSizeX - 5)
 		local zRand = math.random(5, terrainSizeY - 5)
@@ -152,10 +160,10 @@ function Initialize()
 		table.insert(gameObjects, item)
 		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
 	end
-
+	--load in the terrain and set it up
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-    
+    --create a giant plant
 	giantPlant = luaObjInstManager.addNewInstance("Plant")
 	objectInstanceAPI.setTranslation(giantPlant,100,20,100)
     objectInstanceAPI.setScale(giantPlant,10,10,10)
@@ -164,21 +172,21 @@ function Initialize()
 
     plantScale = objectInstanceAPI.getScale(giantPlant, context.handle)
     plantLoc = objectInstanceAPI.getTranslation(giantPlant, context.handle)
-
+	--set up the plants bounding boxes
     plantBBox = AABBAPI.getAABB(giantPlant, context.handle)
     printAPI.print(plantScale.x .. "\n")
     plantBBox.min = luaVectorUtility.vec3_Multiply(plantBBox.min,plantScale,context.handle)
     plantBBox.min = luaVectorUtility.vec3_Sum(plantBBox.min,plantLoc,context.handle)
     plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.max,plantScale,context.handle)
     plantBBox.max = luaVectorUtility.vec3_Sum(plantBBox.max,plantLoc,context.handle)
-
+	--create the camera
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
     cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
 
     printAPI.print('Initialising rendermanager...\n')
     renderManagerAPI.initialise()
-
+	--create the player
     printAPI.print('Initialising player...\n')
 	player0 = Player:new()
     player0:setAABB(-5,5,-50,50,-5,5) -- Y values higher than X and Z so the player doesn't jump above things with the island collisions. -- todo reduce if we implement jumping
@@ -186,6 +194,7 @@ function Initialize()
     printAPI.print('Initialization finished.\n')
 end
 
+--looped every frame until exit
 function GameLoop()
 	run = true
 	while run do
@@ -199,15 +208,14 @@ function GameLoop()
 	end
 end
 
+--things to do when quitting the game
 function Finalize()
 	printAPI.print('Finalizing...\n')
 end
 
+--update function
 function Update()
-
-    engineAPI.BeginUpdate()
-
-    
+    engineAPI.BeginUpdate() 
     --printAPI.print("Getting time...\n");
 
     time = timeAPI.elapsedTimeMs()
@@ -219,7 +227,7 @@ function Update()
 	--Lua update here
     count = (count or 0) + 1
 	--run = mainAPI.update()
-	
+	--if the user oresses e, then spawn an object at their position
 	e = inputManagerAPI.isKeyPressed(8)
 	if e then
 		local newX = player0["pos"]["x"] 
@@ -240,18 +248,19 @@ function Update()
 		renderManagerAPI.addObject(tempID)
 	end
 
-	printAPI.print(gameObjects[7]["position"]["Y"] .. "\n")
-
+	--if the user pressed escape then quit
     esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
 	if esc then
 		printAPI.print("Quitting - pressed Esc.\n")
         run = false
 	end
 	
+	--if the user pressed p then save the scene
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
 		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
 	end
+	--if the user pressed l then load in the saved scene
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
 		local numRows = 0
 		for k,v in next, gameObjects do 
@@ -271,11 +280,12 @@ function Update()
 		LoadInstances("SaveData/NPC_Save.csv", "npc")
 	end
 	
+	--get number of game objects
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
 	end
-
+--for every game object check if an npc is below 0 health and has died
 	for i = 1, numRows do
 		if gameObjects[i]["currentHealth"] ~= nil then
 			gameObjects[i]:Update()
@@ -284,12 +294,12 @@ function Update()
 			end
 		end
 	end
-
+--update the player
     player0:update();
 	engineAPI.EndUpdate();
 end
 
-
+--redner all objects in scene
 function Render()
     renderManagerAPI.beginRender()
 
@@ -312,14 +322,18 @@ function Render()
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
     --renderManagerAPI.renderFromCamera(camera0,time)
+	--get number of game objects
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
 	end
+	--render all game objects
 	for i = 1, numRows do
 		renderManagerAPI.renderObject(camera0,time,gameObjects[i]["id"])
 	end
+	--render terrain
 	renderManagerAPI.renderObject(camera0,time,Terrain01)
+	--render giant plant
 	renderManagerAPI.renderObject(camera0,time,giantPlant)
 	renderManagerAPI.present()
     
@@ -328,6 +342,7 @@ function Render()
     renderManagerAPI.endRender()
 end
 
+--if an error occurred in lua, put a message to console
 local status, err = pcall(Run)
 if not status then
 	printAPI.print(err)

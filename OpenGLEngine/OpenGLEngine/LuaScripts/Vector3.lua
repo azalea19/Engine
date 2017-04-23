@@ -1,5 +1,5 @@
 local Vector3 = {}
-
+--A basic vector 3 class
 function Vector3.new(x, y, z)
 	local instance = {
 		X = x,

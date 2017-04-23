@@ -1,6 +1,6 @@
 local Scene = {}
 Scene.__index = Scene
-
+--A scene, contains all objects, terrain and relevant data specific to this scene
 function Scene.new(newSceneName, newSceneObjects, newSceneTerrain, newPlayerStartPos)
 	local instance = {
 	name = newSceneName,

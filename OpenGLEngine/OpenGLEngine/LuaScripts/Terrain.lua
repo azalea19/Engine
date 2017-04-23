@@ -23,6 +23,7 @@ function WSToHeightMapSpace(wsX,wsZ)
 	return hmX,hmY
 end
 
+--Gets height at a specific point on the terrain
 function GetHeightAtPoint(x,y)
 
 	--returned as floating value
@@ -44,7 +45,7 @@ function GetHeightAtPoint(x,y)
 	return biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
 end
 
-
+--Gets the height at a point on the terrain, uses barycentric coordinates
 function GetHeightAtPointNathan(x, y)
 	
 	if(x < 0) then

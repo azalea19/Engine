@@ -2,7 +2,7 @@ local gameObject = require 'LuaScripts/gameObject'
 
 local npc = {}
 npc.__index = npc
-	
+--The npc class, it is a subclass of gameObject, storing the same variables, but also additional data
 function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newID, newCurrentHealth, newMaxHealth, newCharacterName)
 	local instance = {}
 	
@@ -23,7 +23,7 @@ function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newID, ne
 
 	return instance
 end
-
+--An update function, called once per frame for each NPC
 function npc:Update()
 	if self.alive == true then
 		self.currentHealth = self.currentHealth - 1
@@ -32,7 +32,7 @@ function npc:Update()
 		end
 	end
 end
-
+--kill the npc by deleting them
 function npc:Die()
 	
 	renderManagerAPI.removeObject(self.id)

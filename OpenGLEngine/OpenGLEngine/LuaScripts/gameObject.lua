@@ -1,7 +1,7 @@
 
 local gameObject = {}
 gameObject.__index = character
-
+--The gameObject class, contains the data stored by all game objects
 function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim, newID)
 	local instance = {}	
 	
