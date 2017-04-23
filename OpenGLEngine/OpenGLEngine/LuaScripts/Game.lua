@@ -25,6 +25,7 @@ SDL_SCANCODE_P = 19
 SDL_SCANCODE_S = 22
 SDL_SCANCODE_E = 8
 SDL_SCANCODE_D = 7
+SDL_SCANCODE_L = 15
 SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
 SDL_SCANCODE_Z = 29
@@ -80,10 +81,24 @@ end
 function LoadAssets()
 
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
-	
-	printAPI.print('plant loaded\n')
-
+	modelLibraryAPI.addModel("Horse","Assets/Models/Horse/horse.3ds",false)
+	modelLibraryAPI.addModel("Drone","Assets/Models/Drone/PA_drone.fbx",false)
+	modelLibraryAPI.addModel("Bomber","Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
+	modelLibraryAPI.addModel("DropPod","Assets/Models/DropPod/PA_DropPod.fbx",false)
+	modelLibraryAPI.addModel("Tank","Assets/Models/Tank/PA_ArchfireTank.fbx",false)
+	modelLibraryAPI.addModel("Warrior","Assets/Models/Warrior/PA_Warrior.fbx",false)
+	modelLibraryAPI.addModel("Rabbit","Assets/Models/Rabbit/rabbit.fbx",false)
+	modelLibraryAPI.addModel("Spider","Assets/Models/Spider/spider.fbx",false)
+	--modelLibraryAPI.addModel("Cactus1","Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
+	--modelLibraryAPI.addModel("Cactus2","Assets/Models/DesertPlants/Cactus/cactus_02.FBX",false)BROKEN
+	--modelLibraryAPI.addModel("Cactus3","Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
+	modelLibraryAPI.addModel("Rock","Assets/Models/Rocks/Boulder/Rock.obj",false)
+	--modelLibraryAPI.addModel("Stone","Assets/Models/Rocks/SmallRock/stone.fbx",false)BROKEN
+	modelLibraryAPI.addModel("Airship","Assets/Models/Airship/airship.lwo",false)
+	modelLibraryAPI.addModel("Cart","Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
+	modelLibraryAPI.addModel("Saloon","Assets/Models/Saloon/saloon exterior-interior.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Bob/bob.md5mesh",false)
+
 	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/hmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
 		
 	printAPI.print('terrain loaded\n')
@@ -110,6 +125,33 @@ function Initialize()
     printAPI.print('Initialising objects...\n')
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	LoadInstances("SaveData/NPC_Data.csv", "npc")
+	printAPI.print('Data Loaded...\n')
+	local numRows = 0
+	for k,v in next, gameObjects do 
+		numRows = numRows + 1
+	end
+
+	for i = 1, numRows do
+		if(gameObjects[i]["position"]["Y"] == 0) then
+			gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"])
+		end
+		objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
+	end
+
+	for k = 0, 100 do
+		local xRand = math.random(5, terrainSizeX - 5)
+		local zRand = math.random(5, terrainSizeY - 5)
+		local xRotRand = math.random(360)
+		local yRand = GetHeightAtPoint(xRand , zRand)
+		local tempID = luaObjInstManager.addNewInstance("Plant")
+		local objPosTemp = Vector3.new(xRand, yRand, zRand )
+		local dirTemp = Vector3.new(xRotRand, 0, 0)
+		local scaTemp = Vector3.new(1, 1, 1)
+
+		item = gameObject.new("Plant", "Plant", objPosTemp, dirTemp, scaTemp, 0, tempID)
+		table.insert(gameObjects, item)
+		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
+	end
 
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
@@ -178,12 +220,27 @@ function Update()
     count = (count or 0) + 1
 	--run = mainAPI.update()
 	
-	e = inputManagerAPI.isKeyDown(8)
+	e = inputManagerAPI.isKeyPressed(8)
 	if e then
-		printAPI.print("e")
-		--objectInstanceAPI.setTranslation(plant01,0,0,0)
+		local newX = player0["pos"]["x"] 
+		local newZ = player0["pos"]["z"]
+		local newY = GetHeightAtPoint(newX , newZ)
+		local xRotRand = math.random(360)
+		local tempID = luaObjInstManager.addNewInstance("Bob")
+		local objPosTemp = Vector3.new(newX, newY, newZ )
+		local dirTemp = Vector3.new(xRotRand, 270, 0)
+		local scaTemp = Vector3.new(0.1, 0.1, 0.1)
 
+		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
+		table.insert(gameObjects, item)
+		objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
+		objectInstanceAPI.setOrientation(tempID,dirTemp.X,dirTemp.Y,dirTemp.Z)
+		objectInstanceAPI.setScale(tempID,scaTemp.X,scaTemp.Y,scaTemp.Z)
+		objectInstanceAPI.setAnimation(tempID,0)
+		renderManagerAPI.addObject(tempID)
 	end
+
+	printAPI.print(gameObjects[7]["position"]["Y"] .. "\n")
 
     esc = inputManagerAPI.isKeyDown(SDL_SCANCODE_ESCAPE)
 	if esc then
@@ -191,9 +248,27 @@ function Update()
         run = false
 	end
 	
-	if inputManagerAPI.isKeyDown(SDL_SCANCODE_P) then
+	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
 		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
+	end
+	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
+		local numRows = 0
+		for k,v in next, gameObjects do 
+			numRows = numRows + 1
+		end
+
+		for i = 1, numRows do
+			 gameObjects[i] = nil
+		end
+
+		player0["pos"]["x"] = 500
+		player0["pos"]["z"] = 500
+		player0["pos"]["y"] = GetHeightAtPoint(500 , 500)
+
+		printAPI.print('Initialising objects...\n')
+		LoadInstances("SaveData/GO_Save.csv", "gameObject")
+		LoadInstances("SaveData/NPC_Save.csv", "npc")
 	end
 	
 	local numRows = 0

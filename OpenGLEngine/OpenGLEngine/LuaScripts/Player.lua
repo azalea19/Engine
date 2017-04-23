@@ -117,7 +117,7 @@ function Player:update()
 
 	newPos.y = math.max(newPos.y, desiredHeight)		
 				
-	printAPI.print(newPos.x .. "\n")	
+	printAPI.print(newPos.x .. "    " .. newPos.z .. "\n")	
 	cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 
 	-- Movement update finished

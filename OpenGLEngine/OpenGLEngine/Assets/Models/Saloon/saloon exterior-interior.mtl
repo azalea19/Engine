@@ -1,0 +1,134 @@
+# Blender MTL File: 'saloon exterior-interior.blend'
+# Material Count: 12
+
+newmtl 1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\blender\Textures\saloon tektr.png
+
+newmtl Material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\blender\Textures\maski indiski.jpg
+
+newmtl Material.001
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.505347 0.505347 0.505347
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\Textures expert\wood_41.jpg
+
+newmtl Material.002
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\blender\Textures\wild west picture 1.png
+
+newmtl Material.003
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\Textures expert\wood bezshov.jpg
+
+newmtl Material.004
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.406372 0.406372 0.406372
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\blender\Textures\bohka wood.jpg
+
+newmtl Material.005
+Ns 96.078431
+Ka 0.104762 0.104762 0.104762
+Kd 0.001864 0.037988 0.006988
+Ks 0.328571 0.328571 0.328571
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.847619
+illum 6
+map_Kd  C:\\Users\\Оксана\\Desktop\\Books\\blender\\Textures\\sklo stare.jpg
+
+newmtl Material.006
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\Textures expert\wood bezshov.jpg
+
+newmtl Material.008
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Оксана\Desktop\Books\blender\Textures\grunt.jpg
+
+newmtl Material.009
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  C:\\Users\\Оксана\\Desktop\\Books\\blender\\Textures\\apple txtr.jpg
+
+newmtl Material.010
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd  C:\\Users\\Оксана\\Desktop\\Books\\blender\\Textures\\tekstura_derevo_kora_1872.jpg
+
+newmtl Material.012
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd -s 5.000000 5.000000 5.000000 C:\\Users\\Оксана\\Desktop\\Books\\Textures expert\\tkan yellow.jpg

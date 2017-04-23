@@ -28,10 +28,9 @@ function npc:Update()
 	if self.alive == true then
 		self.currentHealth = self.currentHealth - 1
 		if(self.currentHealth <= 0) then
-			self:Die()
+			--self:Die()
 		end
 	end
-	printAPI.print(self.currentHealth .. '\n')
 end
 
 function npc:Die()

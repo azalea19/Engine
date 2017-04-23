@@ -16,7 +16,6 @@ function SaveInstances(filePath, data, fileType)
 	clearFile(filePath)
 
 	for i = 1, numRows do
-   
 		if(fileType == "gameObject") then
 			if gameObjects[i]["currentHealth"] == nil then
 				total = total + 1
