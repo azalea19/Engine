@@ -40,19 +40,6 @@ function SaveInstances(filePath, data, fileType)
 				write(filePath, gameObjects[i]["direction"]["Z"])
 				write(filePath, ",")
 				
-				write(filePath, gameObjects[i]["boundingBox"]["minX"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["boundingBox"]["maxX"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["boundingBox"]["minY"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["boundingBox"]["maxY"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["boundingBox"]["minZ"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["boundingBox"]["maxZ"])
-				write(filePath, ",")
-				
 				write(filePath, gameObjects[i]["scale"]["X"])
 				write(filePath, ",")
 				write(filePath, gameObjects[i]["scale"]["Y"])
@@ -90,19 +77,6 @@ function SaveInstances(filePath, data, fileType)
 					write(filePath, gameObjects[i]["direction"]["Y"])
 					write(filePath, ",")
 					write(filePath, gameObjects[i]["direction"]["Z"])
-					write(filePath, ",")
-					
-					write(filePath, gameObjects[i]["boundingBox"]["minX"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["boundingBox"]["maxX"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["boundingBox"]["minY"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["boundingBox"]["maxY"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["boundingBox"]["minZ"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["boundingBox"]["maxZ"])
 					write(filePath, ",")
 					
 					write(filePath, gameObjects[i]["scale"]["X"])
@@ -150,21 +124,20 @@ function LoadInstances(filePath, fileType)
 	for i = 1, numRows do
 		instanceID = luaObjInstManager.addNewInstance(fileData[i][2])
 
-		bb = AABoundingBox.new(fileData[i][9],fileData[i][10],fileData[i][11],fileData[i][12],fileData[i][13],fileData[i][14])
 		objpos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
 		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
-		sca = Vector3.new(fileData[i][15], fileData[i][16], fileData[i][17])
-		if(fileData[i][18] == 1) then
+		sca = Vector3.new(fileData[i][9], fileData[i][10], fileData[i][11])
+		if(fileData[i][12] == 1) then
 			anim = true
 		else
 			anim = false
 		end
 
 		if(fileType == "gameObject") then
-			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, bb, sca, anim, instanceID)
+			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim, instanceID)
 		else
 			if(fileType == "npc") then
-				n = npc.new(fileData[i][1], fileData[i][2], pos, dir, bb, sca, anim, instanceID, fileData[i][19], fileData[i][20], fileData[i][21])
+				n = npc.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim, instanceID, fileData[i][13], fileData[i][14], fileData[i][15])
 			end
 		end
 		
@@ -183,5 +156,4 @@ function LoadInstances(filePath, fileType)
 			printAPI.print(numRows .. ' NPCs loaded.\n')
 		end
 	end	
-	
 end

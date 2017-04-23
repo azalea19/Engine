@@ -11,10 +11,13 @@ void TerrainAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "generateTerrain", GenerateTerrain);
 }
 
-LuaRef TerrainAPI::GenerateTerrain(uint terrainWidth, uint terrainHeight, uint heightMapSize, float heightScale, string const& heightMapPath, string const& objPath, LuaContextHandle contextHandle) {
-	Terrain tempTerrain(terrainWidth, terrainHeight, heightScale, heightMapPath);
+LuaRef TerrainAPI::GenerateTerrain(uint terrainWidth, uint terrainHeight, uint heightMapSize, float heightScale, string const& heightMapPath, string const& objPath, LuaContextHandle contextHandle) 
+{
+	
+  Terrain tempTerrain(terrainWidth, terrainHeight, heightScale, heightMapPath);
 	std::vector<float> data;
-	float temp;
+	
+  float temp;
 	for (int i = 0; i < heightMapSize; i++)
 	{
 		for(int k = 0; k < heightMapSize; k++)

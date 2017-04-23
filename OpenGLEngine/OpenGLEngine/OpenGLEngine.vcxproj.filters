@@ -290,9 +290,6 @@
     <ClCompile Include="GLInputHandler.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="LuaDisplay2DAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelLibrary.h">
@@ -526,7 +523,6 @@
     <ClInclude Include="GLInputHandler.h" />
     <ClInclude Include="IInputHandler.h" />
     <ClInclude Include="TerrainEffect.h" />
-    <ClInclude Include="LuaDisplay2DAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultShader.frag">
@@ -621,5 +617,29 @@
     </None>
     <None Include="colored.frag" />
     <None Include="colored.vert" />
+    <None Include="LuaScripts\Terrain.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\Player.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\ReadAndWriteInstances.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\gameObject.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\FileIO.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\npc.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\Vector3.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="LuaScripts\AABoundingBox.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

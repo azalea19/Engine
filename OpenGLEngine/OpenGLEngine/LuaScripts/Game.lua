@@ -16,7 +16,7 @@ debug = true
 terrainSizeX = 1000
 terrainSizeY = 1000
 heightMapSize = 512
-heightMapHeight = 50
+heightMapHeight = 100
 
 --SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
 SDL_SCANCODE_W = 26
@@ -94,10 +94,9 @@ function Initialize()
 	LoadAssets()
 	
     printAPI.print('Initialising objects...\n')
-
 	LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	LoadInstances("SaveData/NPC_Data.csv", "npc")
-	
+
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
     
@@ -116,13 +115,6 @@ function Initialize()
     plantBBox.min = luaVectorUtility.vec3_Sum(plantBBox.min,plantLoc,context.handle)
     plantBBox.max = luaVectorUtility.vec3_Multiply(plantBBox.max,plantScale,context.handle)
     plantBBox.max = luaVectorUtility.vec3_Sum(plantBBox.max,plantLoc,context.handle)
-
-    -- plantBBox.min = objectInstanceAPI.getScale(giantPlant)
-    -- plantBBox.max *= objectInstanceAPI.getScale(giantPlant)
-    -- plantBBox.max *= objectInstanceAPI.getScale(giantPlant)
-
-    --printAPI.print('Initialising scene...\n')
-	--scene01 = Scene:new()
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
@@ -210,6 +202,13 @@ function Render()
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
     --renderManagerAPI.renderFromCamera(camera0,time)
+	local numRows = 0
+	for k,v in next, gameObjects do 
+		numRows = numRows + 1
+	end
+	for i = 1, numRows do
+		renderManagerAPI.renderObject(camera0,time,gameObjects[i]["id"])
+	end
 	renderManagerAPI.renderObject(camera0,time,Terrain01)
 	renderManagerAPI.renderObject(camera0,time,giantPlant)
 	renderManagerAPI.present()

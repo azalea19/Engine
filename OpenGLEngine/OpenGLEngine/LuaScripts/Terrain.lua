@@ -1,4 +1,52 @@
-function GetHeightAtPoint(x, y)
+function lerp(a, b, t)
+
+	return a * (1-t) + b * t
+end
+
+function biLerp(p00, p10, p01, p11, tx,ty)
+	local h0 = lerp(p00,p10,tx);
+	local h1 = lerp(p01,p11,tx);
+
+	return lerp(h0,h1,ty);
+end
+
+function mapRange(u1,u2,v1,v2, value)
+
+	local lerpFactor = (value-u1)/(u2-u1)
+	return lerp(v1,v2,lerpFactor)
+end
+
+function WSToHeightMapSpace(wsX,wsZ)
+	local hmX = mapRange(0,terrainSizeX, 0.5, heightMapSize-0.5, wsX)
+	local hmY = mapRange(0, terrainSizeY, 0.5, heightMapSize-0.5, wsZ)
+
+	return hmX,hmY
+end
+
+function GetHeightAtPoint(x,y)
+
+	--returned as floating value
+	local hmX, hmY = WSToHeightMapSpace(x,y)
+	hmX = hmX - 0.5	+ 1
+	hmY = hmY - 0.5 + 1
+
+	local sampleX = math.floor(hmX) 
+	local sampleY = math.floor(hmY) 
+
+	local lerpFactorX = hmX - sampleX
+	local lerpFactorY = hmY - sampleY
+
+	local h00 = terrainHeightData[sampleX][sampleY]
+	local h10 = terrainHeightData[sampleX+1][sampleY]
+    local h01 = terrainHeightData[sampleX][sampleY + 1]
+	local h11 = terrainHeightData[sampleX + 1][sampleY + 1]	
+	
+	return biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
+end
+
+
+function GetHeightAtPointNathan(x, y)
+	
 	if(x < 0) then
 		x = 0
 	end
@@ -14,8 +62,9 @@ function GetHeightAtPoint(x, y)
 	xScale = terrainSizeX / heightMapSize
 	yScale = terrainSizeY / heightMapSize
 
-	xPixel = (x / terrainSizeX) * heightMapSize
-	yPixel = (y / terrainSizeY) * heightMapSize
+	xPixel = (x / terrainSizeX) * heightMapSize - 1
+	yPixel = (y / terrainSizeY) * heightMapSize - 1
+
 	BottomLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 1]
 	BottomRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 1]
 	TopLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 2]
