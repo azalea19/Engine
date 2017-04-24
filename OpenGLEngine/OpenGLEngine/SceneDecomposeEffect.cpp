@@ -7,10 +7,12 @@ SceneDecomposeEffect::SceneDecomposeEffect()
 
 }
 
-void SceneDecomposeEffect::Bind(GBuffer const& buffers)
+void SceneDecomposeEffect::Bind(GBuffer const& buffers, int lightingApplied)
 {
   m_fb.Bind();
   ShaderLibrary::GetInstance().BindShader("SceneDecomposeEffect");
+  ShaderLibrary::GetInstance().CurrentShader()->TransmitUniform("zeroNormals", lightingApplied);
+
   m_fb.AttachColour(0, buffers.GetColorBuffer());
   m_fb.AttachColour(1, buffers.GetNormalBuffer());
   m_fb.AttachColour(2, buffers.GetWSPositionBuffer());

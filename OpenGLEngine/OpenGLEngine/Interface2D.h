@@ -17,6 +17,7 @@
 * See this link for using an SDL surface as an OpenGL texture:
 * http://www.sdltutorials.com/sdl-tip-sdl-surface-to-opengl-texture
 *
+*
 */
 
 struct SDL_Surface;

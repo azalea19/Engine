@@ -63,7 +63,7 @@ public:
 	/// Sets the active animation.
 	/// </summary>
 	/// <param name="animationIndex">Index of the animation.</param>
-	static void SetAnimation(InstanceHandle instHandle, bool isAnimated);
+	static void SetAnimation(InstanceHandle instHandle, int isAnimated);
 
   /// <summary>
   /// Gets the object instance.
@@ -80,6 +80,9 @@ public:
   /// <param name="y">The y.</param>
   /// <param name="z">The z.</param>
   static void SetTranslation(InstanceHandle instHandle, float x, float y, float z);
+
+  static void SetRotation(InstanceHandle instHandle, float x, float y, float z);
+
 	
   /// <summary>
   /// Exposes the API functions.

@@ -175,6 +175,7 @@
     <ClCompile Include="CameraAPI.cpp" />
     <ClCompile Include="DepthThresholdEffect.cpp" />
     <ClCompile Include="DirectionalLightingEffect.cpp" />
+    <ClCompile Include="LuaDisplay2DAPI.cpp" />
     <ClCompile Include="DXEngine.cpp" />
     <ClCompile Include="EngineAPI.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="Agent.h" />
     <ClInclude Include="CameraAPI.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
+    <ClInclude Include="LuaDisplay2DAPI.h" />
     <ClInclude Include="DXEngine.h" />
     <ClInclude Include="EngineAPI.h" />
     <ClInclude Include="GBuffer.h" />
@@ -350,10 +352,16 @@
     <None Include="FXAAEffect.vert" />
     <None Include="HDRSplitEffect.frag" />
     <None Include="HDRSplitEffect.vert" />
+    <None Include="LuaScripts\AABoundingBox.lua" />
     <None Include="LuaScripts\Engine.lua" />
+    <None Include="LuaScripts\FileIO.lua" />
     <None Include="LuaScripts\Game.lua" />
+    <None Include="LuaScripts\gameObject.lua" />
+    <None Include="LuaScripts\npc.lua" />
     <None Include="LuaScripts\Player.lua" />
+    <None Include="LuaScripts\ReadAndWriteInstances.lua" />
     <None Include="LuaScripts\Terrain.lua" />
+    <None Include="LuaScripts\Vector3.lua" />
     <None Include="MultiplicativeBlendEffect.frag" />
     <None Include="MultiplicativeBlendEffect.vert" />
     <None Include="orthoShader.frag" />

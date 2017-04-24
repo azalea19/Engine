@@ -17,7 +17,7 @@ class SceneDecomposeEffect
 public:
 
   SceneDecomposeEffect();
-  void Bind(GBuffer const& buffers);
+  void Bind(GBuffer const& buffers, int lightingApplied);
   void Unbind();
 
 private:

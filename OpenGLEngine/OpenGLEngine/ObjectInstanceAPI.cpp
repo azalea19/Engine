@@ -20,7 +20,7 @@ void ObjectInstanceAPI::SetScale(InstanceHandle instHandle, float in1, float in2
 	GetInstance(instHandle)->SetScale(vec);
 }
 
-void ObjectInstanceAPI::SetAnimation(InstanceHandle instHandle, bool isAnimated)
+void ObjectInstanceAPI::SetAnimation(InstanceHandle instHandle, int isAnimated)
 {
 	GetInstance(instHandle)->SetActiveAnimation(isAnimated);
 }
@@ -50,6 +50,14 @@ void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName
 	pContext->ExposeFunction(luaAPIName, "setScale", SetScale);
 	pContext->ExposeFunction(luaAPIName, "getScale", GetScale);
 	pContext->ExposeFunction(luaAPIName, "getTranslation", GetTranslation);
+	pContext->ExposeFunction(luaAPIName, "setRotation", SetRotation);
 
 	pContext->ExposeFunction(luaAPIName, "setAnimation", SetAnimation);
+}
+
+void ObjectInstanceAPI::SetRotation(InstanceHandle instHandle, float roll, float pit, float yaw)
+{
+	GetInstance(instHandle)->SetRoll(roll);
+	GetInstance(instHandle)->SetPitch(pit);
+	GetInstance(instHandle)->SetYaw(yaw);
 }

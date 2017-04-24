@@ -101,7 +101,7 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAA
 			// If the object now isnt colliding with anything
 			if (!Check(box, list, listSize))
 			{
-				std::cout << "Item moved by " << diff.x << "," << diff.y << "," << diff.z << "\n";
+				//std::cout << "Item moved by " << diff.x << "," << diff.y << "," << diff.z << "\n";
 
 				// Return the final position
 				return (position);
