@@ -31,6 +31,8 @@ SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
 SDL_SCANCODE_Z = 29
 SDL_SCANCODE_X = 27
+SDL_SCANCODE_M = 16
+
 
 SDL_SCANCODE_LSHIFT = 225
 
@@ -265,7 +267,7 @@ function Update()
     end
         --printAPI.print("helpmenu1...\n");
 
-    local helpIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_H)
+    local helpIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_M)
 	if helpIn then
         helpMenu = true
     end
@@ -309,7 +311,8 @@ function Update()
 	end
 
                 --printAPI.print("l..\n");
-
+                
+                --[[  -- this crashes - liz
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
 		local numRows = 0
 		for k,v in next, gameObjects do 
@@ -328,6 +331,7 @@ function Update()
 		LoadInstances("SaveData/GO_Save.csv", "gameObject")
 		LoadInstances("SaveData/NPC_Save.csv", "npc")
 	end
+    ]]
 
     --printAPI.print("checkdeath..\n");
 
