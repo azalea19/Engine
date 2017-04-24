@@ -17,7 +17,6 @@ GLuint finalTex;
 GLuint tempTex;
 GLuint tempTex2;
 int fillmode;
-/// todo fix broken
 void RenderManagerAPI::Render(LuaRef worldMatrix,LuaRef viewMatrix, LuaRef projectionMatrix, float time)
 {
 	mat4 world = FromLuaTable<mat4>(worldMatrix);

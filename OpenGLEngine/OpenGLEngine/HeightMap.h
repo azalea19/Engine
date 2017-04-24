@@ -8,22 +8,50 @@ class HeightMap
 {
 public:
 
-  HeightMap(string const& filePath);
+	/// <summary>
+	/// Initializes a new instance of the <see cref="HeightMap"/> class.
+	/// </summary>
+	/// <param name="filePath">The file path.</param>
+	HeightMap(string const& filePath);
 
-  void LoadHeightMap();
+	/// <summary>
+	/// Loads the height map.
+	/// </summary>
+	void LoadHeightMap();
 
-  //Assuming 4 bytes per pixel 32 bit image depth.
-  float GetHeightValueAtPixel(vec2i const& pixelPos);
+/// <summary>
+/// Gets the height value at pixel.  Assuming 4 bytes per pixel 32 bit image depth.
+/// </summary>
+/// <param name="pixelPos">The pixel position.</param>
+/// <returns></returns>
+	float GetHeightValueAtPixel(vec2i const& pixelPos);
 
-  int GetWidth() const;
+	/// <summary>
+	/// Gets the width.
+	/// </summary>
+	/// <returns></returns>
+	int GetWidth() const;
 
-  int GetHeight() const;
+	/// <summary>
+	/// Gets the height.
+	/// </summary>
+	/// <returns></returns>
+	int GetHeight() const;
 
 private:
 
-  uint* m_pHeightMap;
-  vec2 m_heightMapDimensions;
-  string m_heightMapFile;
+	/// <summary>
+	/// The height map
+	/// </summary>
+	uint* m_pHeightMap;
+	/// <summary>
+	/// The height map dimensions
+	/// </summary>
+	vec2 m_heightMapDimensions;
+	/// <summary>
+	/// The height map file
+	/// </summary>
+	string m_heightMapFile;
 
 };
 

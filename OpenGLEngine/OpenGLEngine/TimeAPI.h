@@ -14,8 +14,17 @@
 class TimeAPI
 {
 public:
-	/// Elapsed time in milliseconds
+	/// <summary>
+	/// Elapseds time in milliseconds.
+	/// </summary>
+	/// <returns>float</returns>
 	static float ElapsedTimeMs();
+
+	/// <summary>
+	/// Exposes the API
+	/// </summary>
+	/// <param name="contextHandle">The context handle.</param>
+	/// <param name="luaAPIName">Name of the lua API.</param>
 	static void TimeAPI::Expose(LuaContextHandle contextHandle, string luaAPIName);
 
 };

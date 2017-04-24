@@ -15,6 +15,7 @@ GLuint GBuffer::GetColorBuffer() const
   return color;
 }
 
+
 GLuint GBuffer::GetDepthBuffer() const
 {
   return depth;

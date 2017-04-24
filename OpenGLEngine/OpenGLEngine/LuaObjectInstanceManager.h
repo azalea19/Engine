@@ -28,7 +28,7 @@ class LuaObjectInstanceManager : public Singleton<LuaObjectInstanceManager>
 public:
 
   /// <summary>
-  /// Adds the new instance.
+  /// Adds the new object instance.
   /// </summary>
   /// <param name="modelName">Name of the model.</param>
   /// <returns>InstanceHandle</returns>.
@@ -36,14 +36,14 @@ public:
   static InstanceHandle AddNewInstance(string const& modelName);
 
   /// <summary>
-  /// Gets the instance.
+  /// Gets the object instance.
   /// </summary>
   /// <param name="instanceHandle">The instance handle.</param>
   /// <returns></returns>
   static ObjectInstance* GetInstance(int instanceHandle);
 
   /// <summary>
-  /// Exposes the API function.
+  /// Exposes the API functions.
   /// </summary>
   /// <param name="contextHandle">The context handle.</param>
   /// <param name="luaAPIName">Name of the lua API.</param>

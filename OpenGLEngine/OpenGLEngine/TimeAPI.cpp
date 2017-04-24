@@ -2,6 +2,7 @@
 #include <time.h>
 
 
+
 float TimeAPI::ElapsedTimeMs()
 {
 	float time = clock() / float(CLOCKS_PER_SEC);

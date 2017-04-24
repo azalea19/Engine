@@ -9,19 +9,54 @@ public:
 
   GBuffer();
 
+  /// <summary>
+  /// Gets the color buffer.
+  /// </summary>
+  /// <returns></returns>
   GLuint GetColorBuffer() const;
+  /// <summary>
+  /// Gets the depth buffer.
+  /// </summary>
+  /// <returns></returns>
   GLuint GetDepthBuffer() const;
+  /// <summary>
+  /// Gets the linear depth buffer.
+  /// </summary>
+  /// <returns></returns>
   GLuint GetLinearDepthBuffer() const;
+  /// <summary>
+  /// Gets the ws position buffer.
+  /// </summary>
+  /// <returns></returns>
   GLuint GetWSPositionBuffer() const;
+  /// <summary>
+  /// Gets the normal buffer.
+  /// </summary>
+  /// <returns></returns>
   GLuint GetNormalBuffer() const;
 
 private:
 
-  GLuint color;
-  GLuint depth;
-  GLuint linearDepth;
-  GLuint wsPosition;
-  GLuint normal;
+	/// <summary>
+	/// The color
+	/// </summary>
+	GLuint color;
+	/// <summary>
+	/// The depth
+	/// </summary>
+	GLuint depth;
+	/// <summary>
+	/// The linear depth
+	/// </summary>
+	GLuint linearDepth;
+	/// <summary>
+	/// The ws position
+	/// </summary>
+	GLuint wsPosition;
+	/// <summary>
+	/// The normal
+	/// </summary>
+	GLuint normal;
 
 };
 
