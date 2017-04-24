@@ -85,19 +85,26 @@ void RenderManagerAPI::EndRender()
 }
 
 
-void RenderManagerAPI::Present()
+void RenderManagerAPI::Present(int camID)
 {
+  MCamera *cam = InstanceManager<MCamera>().GetInstance().GetInst(camID);
+
   if (fillmode == 0)
   {
     FrameBuffer::Display(buffers->GetColorBuffer());
   }
   else
   {
+    vec3 sunPosition = vec3(10000,10000,10000);
+    vec4 projectedSun = cam->getProjectionMatrix() * cam->getViewMatrix() * vec4(sunPosition,1);
+    projectedSun.x /= projectedSun.z;
+    projectedSun.y /= projectedSun.z;
     pDecomposeEffect->Unbind();
-    pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.5), vec3(1, -1, 1));
+    pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.3), normalize(-sunPosition));
     pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);
-    pBloomEffect->Apply(tempTex2,finalTex, 1);
-    FrameBuffer::Display(tempTex2);
+    pRayEffect->Apply(tempTex2, buffers->GetLinearDepthBuffer(), tempTex,vec3(projectedSun.x, projectedSun.y, projectedSun.z));
+    pBloomEffect->Apply(tempTex, finalTex, 1);
+    FrameBuffer::Display(finalTex);
   }
 }
 

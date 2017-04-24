@@ -106,6 +106,10 @@ vec3 CalculateWorldPos()
 
 vec3 CalculateLinearDepth()
 {
+	if(zeroNormals == 0)
+	{
+		return vec3(0,0,0);
+	}
 	return vec3(1/FRAG_LINEAR_DEPTH, 1/FRAG_LINEAR_DEPTH, 1/FRAG_LINEAR_DEPTH);
 }
 

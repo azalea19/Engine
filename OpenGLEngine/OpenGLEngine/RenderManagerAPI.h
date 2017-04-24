@@ -69,7 +69,7 @@ public:
   static void RenderManagerAPI::EndRender();
   static void RenderManagerAPI::SetFillMode(int fillMode);
 
-  static void Present();
+  static void Present(int camID);
 
 	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
