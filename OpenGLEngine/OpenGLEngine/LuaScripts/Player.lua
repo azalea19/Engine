@@ -18,6 +18,7 @@ function Player:new(o)
 	return o
 end
 
+
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
 	printAPI.print("Setting player AABB...\n");
 
@@ -37,13 +38,18 @@ end
 
 function Player:update()
 	-- Start movement update
-
+	--printAPI.print(1)
 	--printAPI.print("Updating player.\n")
 	self.pos = cameraAPI.getPosition(camera0,context.handle)
 
 	-- written by liz translated from maddys c++ code
 	turnSpeed = 0.3
-	moveSpeed = 0.5
+	
+	if(inputManagerAPI.isKeyDown(SDL_SCANCODE_LSHIFT)) then
+	moveSpeed = 0.2
+	else
+	moveSpeed = 0.1
+	end
 	gravitySpeed = 1 
 	--rotation
 	origYaw = cameraAPI.getYaw(camera0,context.handle)
@@ -57,6 +63,7 @@ function Player:update()
 
 	cameraAPI.setYaw(camera0,origYaw + deltaYaw)
 	cameraAPI.setPitch(camera0,origPitch+deltaPitch)
+	--printAPI.print(2)
 
 	--translation   
 
@@ -68,6 +75,7 @@ function Player:update()
 	translation = luaVectorUtility.vec3_CreateEmpty(context.handle)
 
 	--printAPI.print(translation[1] .. translation[2] .. translation[3] .. "\n")
+	--printAPI.print(3)
 
 	if inputManagerAPI.isKeyDown(SDL_SCANCODE_W) then
 		translation = luaVectorUtility.vec3_Sum(translation,forward,context.handle)
@@ -103,6 +111,8 @@ function Player:update()
 	
 	--printAPI.print("Updating player location...\n")
 
+		--printAPI.print(4)
+
 	--if moving
 	if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
 		translation = luaVectorUtility.vec3_Normalize(translation,context.handle)
@@ -113,36 +123,59 @@ function Player:update()
 
 	newPos = luaVectorUtility.vec3_Sum(oldPos,translation, context.handle)
 
-	desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 5
+	newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
+	newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
+	--printAPI.print(5)
+
+	desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
 
 	newPos.y = math.max(newPos.y, desiredHeight)		
 				
-	printAPI.print(newPos.x .. "\n")	
+	--printAPI.print(newPos.x .. "    " .. newPos.z .. "\n")	
 	cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 
 	-- Movement update finished
 
   -- printAPI.print("Moving player bounding box...\n")
+	--printAPI.print(6)
 
-	self.pos = cameraAPI.getPosition(camera0,context.handle)
+	self.pos = newPos
 	
 	--PrintVec3s(self.bbox.min, self.bbox.max)
 
 	--value = AABBBAPI.move(emptyv,emptyb,emptyc,context.handle)
+	--printAPI.print(7)
 
 	self.bbox = AABBAPI.move(self.bbox,self.lastpos,self.pos,context.handle)
-	
+	--printAPI.print(8)
+
 	self.lastpos = self.pos
 		 
 	--printAPI.print("Completed player update.\n")
 
 	manyList = {}
-	manyList[1] = plantBBox
-	manyList[2] = plantBBox
-	count = 2
+    anumRows = 0
+    for k,v in next, gameObjects do
+        anumRows = anumRows + 1
+    end
+	--printAPI.print("rows " .. anumRows)
 
-	self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,count,0.01,context.handle)
+    for i = 1, anumRows do
+		local bbo = gameObjects[i]["boundingbox"]
+		if bbo ~= nil then
+			manyList[i] = bbo
+		else
+			printAPI.print("nil aabb\n")
+
+		end
+    end
+	--printAPI.print(9)
+
+	self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,anumRows,0.01,context.handle)
+	--printAPI.print(9.1)
+	
 	cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
+	--printAPI.print(10)
 
 end
 
