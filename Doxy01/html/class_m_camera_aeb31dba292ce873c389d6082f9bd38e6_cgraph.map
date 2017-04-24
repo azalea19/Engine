@@ -1,0 +1,7 @@
+<map id="MCamera::MCamera" name="MCamera::MCamera">
+<area shape="rect" id="node2" href="$class_affine_transformable.html#a54fbbe0cdde13ea581dce04ec0de8545" title="Initializes a new instance of the AffineTransformable class. " alt="" coords="196,71,339,112"/>
+<area shape="rect" id="node3" href="$class_affine_transformable.html#a9565967f58321117e198b6925c4200d6" title="Sets the orientation. " alt="" coords="387,71,521,112"/>
+<area shape="rect" id="node4" href="$class_affine_transformable.html#a8413b02e25aec2a759d5fd269d13fc02" title="Sets the pitch. " alt="" coords="569,5,704,47"/>
+<area shape="rect" id="node5" href="$class_affine_transformable.html#a9db54f563d9db087b43b64a371200264" title="Sets the roll. " alt="" coords="569,71,704,112"/>
+<area shape="rect" id="node6" href="$class_affine_transformable.html#a47ab5b07df1ee77ae2e63dc0804c5caa" title="Sets the yaw. " alt="" coords="569,136,704,177"/>
+</map>

@@ -1,0 +1,3 @@
+<map id="MCamera::ForwardNoPitch" name="MCamera::ForwardNoPitch">
+<area shape="rect" id="node2" href="$class_m_camera.html#a5a65b30d471acdfa172adf0fb5ac163b" title="Gets the backwards direction of the camera, but disregard changes in the pitch of the camera..." alt="" coords="232,5,421,32"/>
+</map>

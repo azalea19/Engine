@@ -1,0 +1,8 @@
+<map id="UploadTextureMipped" name="UploadTextureMipped">
+<area shape="rect" id="node2" href="$_texture_8cpp.html#ab5f4a4fc8ae1e532a05b4b9a5da21582" title="ConvertToFloatColors" alt="" coords="200,5,345,32"/>
+<area shape="rect" id="node3" href="$_texture_8cpp.html#a5727d3340488e4c65baffe87a276af08" title="ConvertToIntColors" alt="" coords="207,56,338,83"/>
+<area shape="rect" id="node4" href="$_texture_8cpp.html#a62bbe49f4bcd6c093e946e4bbc46df6e" title="GenerateMip" alt="" coords="225,107,321,133"/>
+<area shape="rect" id="node6" href="$_texture_8cpp.html#ad718f5335c8ffff16a647bb8b0b4d441" title="GetPixelData" alt="" coords="223,157,322,184"/>
+<area shape="rect" id="node7" href="$_texture_8cpp.html#a743116454e95edef0653da2cafa9d5c7" title="ThresholdAlpha" alt="" coords="217,208,328,235"/>
+<area shape="rect" id="node5" href="$_texture_8cpp.html#a40052d02573630e6db6b92078c220613" title="GammaCorrectedAverage" alt="" coords="393,107,564,133"/>
+</map>

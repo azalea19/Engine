@@ -1,0 +1,5 @@
+<map id="AffineTransformable::GetTranslation" name="AffineTransformable::GetTranslation">
+<area shape="rect" id="node2" href="$class_m_camera.html#ac553d9ca4e16e421fe2ce9366c1f237e" title="Get the position of the camera. " alt="" coords="188,5,343,32"/>
+<area shape="rect" id="node4" href="$class_object_instance_a_p_i.html#a7b2c11754d2679e27221691238becdd4" title="Gets the translation. " alt="" coords="196,57,335,98"/>
+<area shape="rect" id="node3" href="$class_m_player.html#af357bfec947db56384c5b1dcc989faab" title="Get&#39;s the player&#39;s Ray. " alt="" coords="391,5,556,32"/>
+</map>

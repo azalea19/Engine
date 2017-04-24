@@ -1,0 +1,4 @@
+<map id="IAnimatable" name="IAnimatable">
+<area shape="rect" id="node3" href="$class_object_instance.html" title="{ObjectInstance\n|&#45; m_pRenderableObject\l&#45; m_activeAnimation\l&#45; m_visible\l|+ ObjectInstance()\l+ GetVertices()\l+ GetWorldMatrix()\l+ Render()\l+ SetActiveAnimation()\l+ GetActiveAnimationIndex()\l+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l+ GetRenderableObject()\l+ SetVisible()\l+ GetVisible()\l}" alt="" coords="7,329,194,597"/>
+<area shape="rect" id="node2" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="23,5,178,112"/>
+</map>

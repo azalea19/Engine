@@ -393,7 +393,7 @@ function Render()
 	renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 	renderManagerAPI.renderObject(camera0,time,skybox, 0)
 	--renderManagerAPI.renderObject(camera0,time,cactus, 1)
-	renderManagerAPI.present()
+	renderManagerAPI.present(camera0)
 
     if(quitting) then
         display2DAPI.drawFullScreen("faces.png")

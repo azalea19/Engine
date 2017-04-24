@@ -1,0 +1,152 @@
+\hypertarget{class_object_loader}{}\section{Object\+Loader Class Reference}
+\label{class_object_loader}\index{Object\+Loader@{Object\+Loader}}
+
+
+{\ttfamily \#include $<$Object\+Loader.\+h$>$}
+
+
+
+Collaboration diagram for Object\+Loader\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_object_loader__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_object_loader_a3638b2958cb2ff6cd204a2cbcbaf2fd3}{Read\+File} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{std\+::string} file\+Name)
+\item 
+void \hyperlink{class_object_loader_a92e3f603901802a85c29819b3b9acc79}{Save\+File} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{std\+::string} file\+Name, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{std\+::string} model\+Name, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} position, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} scale, int yaw, int pitch, int active\+Animation)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{struct_object_data}{Object\+Data} $>$ \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\+\_\+object\+File\+Data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file Object\+Loader.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Object\+Loader@{Object\+Loader}!Read\+File@{Read\+File}}
+\index{Read\+File@{Read\+File}!Object\+Loader@{Object\+Loader}}
+\subsubsection[{\texorpdfstring{Read\+File(std\+::string file\+Name)}{ReadFile(std::string fileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Loader\+::\+Read\+File (
+\begin{DoxyParamCaption}
+\item[{{\bf std\+::string}}]{file\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object_loader_a3638b2958cb2ff6cd204a2cbcbaf2fd3}{}\label{class_object_loader_a3638b2958cb2ff6cd204a2cbcbaf2fd3}
+
+
+Definition at line 6 of file Object\+Loader.\+cpp.
+
+
+\begin{DoxyCode}
+6                                               \{
+7     std::ifstream m\_dataFile;
+8     \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{std::string} temp;
+9     m\_dataFile.open(\textcolor{stringliteral}{"Assets/Data/"} + fileName + \textcolor{stringliteral}{".csv"});
+10     \textcolor{keywordtype}{int} vectorIndex = 0;
+11     \hyperlink{struct_object_data}{ObjectData} oData;
+12 
+13     \textcolor{keywordflow}{if} (!m\_dataFile) \{
+14         \textcolor{comment}{//error text here}
+15     \}
+16 
+17     std:getline(m\_dataFile, temp);  \textcolor{comment}{//removes the headers of the csv}
+18 
+19     \textcolor{keywordflow}{while} (!m\_dataFile.eof())   \textcolor{comment}{//reads in data till the file is empty}
+20     \{
+21         std::cout << \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.size() << \textcolor{stringliteral}{"    "};
+22 
+23         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.push\_back(oData);
+24 
+25 
+26         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});    \textcolor{comment}{//Get modelName}
+27         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).modelName = temp;
+28 
+29         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});                                        \textcolor{comment}{//Get Position}
+30         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).pos.x = atof(temp.c\_str());
+31         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});
+32         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).pos.y = atof(temp.c\_str());
+33         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});
+34         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).pos.z = atof(temp.c\_str());
+35 
+36         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});                                        \textcolor{comment}{//Get Scale}
+37         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).scale.x = atof(temp.c\_str());
+38         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});
+39         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).scale.y = atof(temp.c\_str());
+40         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});
+41         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).scale.z = atof(temp.c\_str());
+42 
+43         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});
+44         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).yaw = atof(temp.c\_str());
+45 
+46         std::getline(m\_dataFile, temp, \textcolor{charliteral}{','});
+47         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).pitch = atof(temp.c\_str());
+48 
+49         std::getline(m\_dataFile, temp);
+50         \hyperlink{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{m\_objectFileData}.at(vectorIndex).activeAnimation = atoi(temp.c\_str());
+51 
+52         vectorIndex += 1;
+53     \}
+54 
+55     m\_dataFile.close();
+56 
+57 \}
+\end{DoxyCode}
+\index{Object\+Loader@{Object\+Loader}!Save\+File@{Save\+File}}
+\index{Save\+File@{Save\+File}!Object\+Loader@{Object\+Loader}}
+\subsubsection[{\texorpdfstring{Save\+File(std\+::string file\+Name, std\+::string model\+Name, vec3 position, vec3 scale, int yaw, int pitch, int active\+Animation)}{SaveFile(std::string fileName, std::string modelName, vec3 position, vec3 scale, int yaw, int pitch, int activeAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Loader\+::\+Save\+File (
+\begin{DoxyParamCaption}
+\item[{{\bf std\+::string}}]{file\+Name, }
+\item[{{\bf std\+::string}}]{model\+Name, }
+\item[{{\bf vec3}}]{position, }
+\item[{{\bf vec3}}]{scale, }
+\item[{int}]{yaw, }
+\item[{int}]{pitch, }
+\item[{int}]{active\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object_loader_a92e3f603901802a85c29819b3b9acc79}{}\label{class_object_loader_a92e3f603901802a85c29819b3b9acc79}
+
+
+Definition at line 59 of file Object\+Loader.\+cpp.
+
+
+\begin{DoxyCode}
+59                                                                                                            
+                                  \{
+60     \{
+61         ofstream myfile;
+62         myfile.open(\textcolor{stringliteral}{"example.csv"});
+63         myfile << \textcolor{stringliteral}{"This is the first cell in the first column.\(\backslash\)n"};
+64         myfile << \textcolor{stringliteral}{"a,b,c,\(\backslash\)n"};
+65         myfile << \textcolor{stringliteral}{"c,s,v,\(\backslash\)n"};
+66         myfile << \textcolor{stringliteral}{"1,2,3.456\(\backslash\)n"};
+67         myfile << \textcolor{stringliteral}{"semi;colon"};
+68         myfile.close();
+69         \textcolor{keywordflow}{return} 0;
+70     \}
+71 \}\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Object\+Loader@{Object\+Loader}!m\+\_\+object\+File\+Data@{m\+\_\+object\+File\+Data}}
+\index{m\+\_\+object\+File\+Data@{m\+\_\+object\+File\+Data}!Object\+Loader@{Object\+Loader}}
+\subsubsection[{\texorpdfstring{m\+\_\+object\+File\+Data}{m_objectFileData}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Object\+Data}$>$ Object\+Loader\+::m\+\_\+object\+File\+Data}\hypertarget{class_object_loader_a3110eee250161ee33d7ac24f23489d11}{}\label{class_object_loader_a3110eee250161ee33d7ac24f23489d11}
+
+
+Definition at line 26 of file Object\+Loader.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_object_loader_8h}{Object\+Loader.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_object_loader_8cpp}{Object\+Loader.\+cpp}\end{DoxyCompactItemize}

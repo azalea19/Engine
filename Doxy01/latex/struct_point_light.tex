@@ -1,0 +1,125 @@
+\hypertarget{struct_point_light}{}\section{Point\+Light Struct Reference}
+\label{struct_point_light}\index{Point\+Light@{Point\+Light}}
+
+
+{\ttfamily \#include $<$Light.\+h$>$}
+
+
+
+Inheritance diagram for Point\+Light\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=155pt]{struct_point_light__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Point\+Light\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=155pt]{struct_point_light__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_point_light_a0f855fe2861bb2372accfc6b93889067}{Point\+Light} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&light\+Position, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&light\+Color=\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(1.\+0f, 1.\+0f, 1.\+0f), bool light\+Enabled=true)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{struct_point_light_ab5b56bbc015365ca09c09b564dbeb7f2}{color}
+\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{struct_point_light_a5dcffe608a4724ce024a3a3bc96c7585}{position}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 62 of file Light.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Point\+Light@{Point\+Light}!Point\+Light@{Point\+Light}}
+\index{Point\+Light@{Point\+Light}!Point\+Light@{Point\+Light}}
+\subsubsection[{\texorpdfstring{Point\+Light(vec3 const \&light\+Position, vec3 const \&light\+Color=vec3(1.\+0f, 1.\+0f, 1.\+0f), bool light\+Enabled=true)}{PointLight(vec3 const &lightPosition, vec3 const &lightColor=vec3(1.0f, 1.0f, 1.0f), bool lightEnabled=true)}}]{\setlength{\rightskip}{0pt plus 5cm}Point\+Light\+::\+Point\+Light (
+\begin{DoxyParamCaption}
+\item[{{\bf vec3} const \&}]{light\+Position, }
+\item[{{\bf vec3} const \&}]{light\+Color = {\ttfamily {\bf vec3}(1.0f,~1.0f,~1.0f)}, }
+\item[{bool}]{light\+Enabled = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_point_light_a0f855fe2861bb2372accfc6b93889067}{}\label{struct_point_light_a0f855fe2861bb2372accfc6b93889067}
+
+
+Definition at line 64 of file Light.\+h.
+
+
+
+References Light\+::\+Light(), L\+T\+\_\+\+Point, Point\+Light(), and position.
+
+
+
+Referenced by Point\+Light().
+
+
+\begin{DoxyCode}
+65     : \hyperlink{struct_light_a0df5e58af351bd13c996da2880be0dee}{Light}(\hyperlink{_light_8h_a3336214f41ddc8acd932fa9be957047daf1480cd9e1bf8184b89fcd32113e7d36}{LT\_Point}, lightEnabled)
+66     , \hyperlink{struct_point_light_ab5b56bbc015365ca09c09b564dbeb7f2}{color}(lightColor)
+67     , \hyperlink{struct_point_light_a5dcffe608a4724ce024a3a3bc96c7585}{position}(lightPosition)
+68   \{
+69 
+70   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{struct_point_light_a0f855fe2861bb2372accfc6b93889067_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{struct_point_light_a0f855fe2861bb2372accfc6b93889067_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Point\+Light@{Point\+Light}!color@{color}}
+\index{color@{color}!Point\+Light@{Point\+Light}}
+\subsubsection[{\texorpdfstring{color}{color}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Point\+Light\+::color}\hypertarget{struct_point_light_ab5b56bbc015365ca09c09b564dbeb7f2}{}\label{struct_point_light_ab5b56bbc015365ca09c09b564dbeb7f2}
+
+
+Definition at line 72 of file Light.\+h.
+
+\index{Point\+Light@{Point\+Light}!position@{position}}
+\index{position@{position}!Point\+Light@{Point\+Light}}
+\subsubsection[{\texorpdfstring{position}{position}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Point\+Light\+::position}\hypertarget{struct_point_light_a5dcffe608a4724ce024a3a3bc96c7585}{}\label{struct_point_light_a5dcffe608a4724ce024a3a3bc96c7585}
+
+
+Definition at line 73 of file Light.\+h.
+
+
+
+Referenced by Point\+Light().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_light_8h}{Light.\+h}\end{DoxyCompactItemize}

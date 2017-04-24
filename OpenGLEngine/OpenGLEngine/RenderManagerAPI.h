@@ -115,7 +115,7 @@ public:
 	/// <summary>
 	/// Applies post processing and displays resulting texture on screen
 	/// </summary>
-	static void Present();
+  static void Present(int camID);
 
 	/// <summary>
 	/// Exposes the lua API

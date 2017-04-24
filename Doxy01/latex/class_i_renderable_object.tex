@@ -1,0 +1,203 @@
+\hypertarget{class_i_renderable_object}{}\section{I\+Renderable\+Object Class Reference}
+\label{class_i_renderable_object}\index{I\+Renderable\+Object@{I\+Renderable\+Object}}
+
+
+{\ttfamily \#include $<$I\+Renderable\+Object.\+h$>$}
+
+
+
+Inheritance diagram for I\+Renderable\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_i_renderable_object__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for I\+Renderable\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{class_i_renderable_object__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_i_renderable_object_a2d52e4ff9309bfa2f1ae1905d67d8691}{Initialise} ()=0
+\begin{DoxyCompactList}\small\item\em Initialises this instance. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_i_renderable_object_a07941bb2f71252ce61bc007bb41e44c7}{Destroy} ()=0
+\begin{DoxyCompactList}\small\item\em Destroys this instance. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_i_renderable_object_ab44c017819f2e57a9b4b4ba40961d9eb}{Bind\+Object} () const  =0
+\begin{DoxyCompactList}\small\item\em Binds the object. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_i_renderable_object_ac0db472961e13dbbdc5cd36f14a87fae}{Bind\+Mesh} (int mesh\+Index) const  =0
+\begin{DoxyCompactList}\small\item\em Binds the mesh. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_i_renderable_object_a6f47f692684ec70b5b776c0884495059}{Render} (\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&world\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&view\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&projection\+Matrix, float time, int animation\+Index) const  =0
+\begin{DoxyCompactList}\small\item\em The render method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 29 of file I\+Renderable\+Object.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{I\+Renderable\+Object@{I\+Renderable\+Object}!Bind\+Mesh@{Bind\+Mesh}}
+\index{Bind\+Mesh@{Bind\+Mesh}!I\+Renderable\+Object@{I\+Renderable\+Object}}
+\subsubsection[{\texorpdfstring{Bind\+Mesh(int mesh\+Index) const  =0}{BindMesh(int meshIndex) const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void I\+Renderable\+Object\+::\+Bind\+Mesh (
+\begin{DoxyParamCaption}
+\item[{int}]{mesh\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_renderable_object_ac0db472961e13dbbdc5cd36f14a87fae}{}\label{class_i_renderable_object_ac0db472961e13dbbdc5cd36f14a87fae}
+
+
+Binds the mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh\+Index} & Index of the mesh.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_renderable_object_a17742c27c09c1b1bbd3509db1a80f836}{Renderable\+Object}.
+
+
+
+Referenced by Object\+Instance\+::\+Render().
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_renderable_object_ac0db472961e13dbbdc5cd36f14a87fae_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Renderable\+Object@{I\+Renderable\+Object}!Bind\+Object@{Bind\+Object}}
+\index{Bind\+Object@{Bind\+Object}!I\+Renderable\+Object@{I\+Renderable\+Object}}
+\subsubsection[{\texorpdfstring{Bind\+Object() const  =0}{BindObject() const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void I\+Renderable\+Object\+::\+Bind\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_renderable_object_ab44c017819f2e57a9b4b4ba40961d9eb}{}\label{class_i_renderable_object_ab44c017819f2e57a9b4b4ba40961d9eb}
+
+
+Binds the object. 
+
+
+
+Implemented in \hyperlink{class_renderable_object_a2102e7d00fe32a573437b09f4f0bc2ba}{Renderable\+Object}.
+
+
+
+Referenced by Object\+Instance\+::\+Render().
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_renderable_object_ab44c017819f2e57a9b4b4ba40961d9eb_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Renderable\+Object@{I\+Renderable\+Object}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!I\+Renderable\+Object@{I\+Renderable\+Object}}
+\subsubsection[{\texorpdfstring{Destroy()=0}{Destroy()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void I\+Renderable\+Object\+::\+Destroy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_renderable_object_a07941bb2f71252ce61bc007bb41e44c7}{}\label{class_i_renderable_object_a07941bb2f71252ce61bc007bb41e44c7}
+
+
+Destroys this instance. 
+
+
+
+Implemented in \hyperlink{class_renderable_object_abf03a9d657815d24fbf0e49d3a80a5a4}{Renderable\+Object}.
+
+\index{I\+Renderable\+Object@{I\+Renderable\+Object}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!I\+Renderable\+Object@{I\+Renderable\+Object}}
+\subsubsection[{\texorpdfstring{Initialise()=0}{Initialise()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void I\+Renderable\+Object\+::\+Initialise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_renderable_object_a2d52e4ff9309bfa2f1ae1905d67d8691}{}\label{class_i_renderable_object_a2d52e4ff9309bfa2f1ae1905d67d8691}
+
+
+Initialises this instance. 
+
+
+
+Implemented in \hyperlink{class_renderable_object_a82c94dda816b7b43ff74714c7e91b92d}{Renderable\+Object}.
+
+\index{I\+Renderable\+Object@{I\+Renderable\+Object}!Render@{Render}}
+\index{Render@{Render}!I\+Renderable\+Object@{I\+Renderable\+Object}}
+\subsubsection[{\texorpdfstring{Render(mat4 const \&world\+Matrix, mat4 const \&view\+Matrix, mat4 const \&projection\+Matrix, float time, int animation\+Index) const  =0}{Render(mat4 const &worldMatrix, mat4 const &viewMatrix, mat4 const &projectionMatrix, float time, int animationIndex) const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void I\+Renderable\+Object\+::\+Render (
+\begin{DoxyParamCaption}
+\item[{{\bf mat4} const \&}]{world\+Matrix, }
+\item[{{\bf mat4} const \&}]{view\+Matrix, }
+\item[{{\bf mat4} const \&}]{projection\+Matrix, }
+\item[{float}]{time, }
+\item[{int}]{animation\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_renderable_object_a6f47f692684ec70b5b776c0884495059}{}\label{class_i_renderable_object_a6f47f692684ec70b5b776c0884495059}
+
+
+The render method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Matrix} & The world matrix.\\
+\hline
+{\em view\+Matrix} & The view matrix.\\
+\hline
+{\em projection\+Matrix} & The projection matrix.\\
+\hline
+{\em time} & The time.\\
+\hline
+{\em animation\+Index} & Index of the animation.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_i_animated_renderable_ad8e9696de83337bc71dbc5d6111679e5}{I\+Animated\+Renderable}.
+
+
+
+Implemented in \hyperlink{class_renderable_object_a5e56c1423e5c59a2b8858645b5b7936d}{Renderable\+Object}.
+
+
+
+Referenced by Object\+Instance\+::\+Render().
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_renderable_object_a6f47f692684ec70b5b776c0884495059_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_i_renderable_object_8h}{I\+Renderable\+Object.\+h}\end{DoxyCompactItemize}

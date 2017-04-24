@@ -1,0 +1,4 @@
+<map id="InputManagerAPI::IsKeyDown" name="InputManagerAPI::IsKeyDown">
+<area shape="rect" id="node2" href="$class_input_manager_a_p_i.html#ae9d2da474cf31a7d36bbdc1b2e787e1d" title="Checks if key is pressed in input through lua API. " alt="" coords="248,5,459,32"/>
+<area shape="rect" id="node3" href="$class_input_manager_a_p_i.html#aebcfc59983f58615bcc0e4bb3540343a" title="Checks if key is up in input through lua API. " alt="" coords="264,56,443,83"/>
+</map>

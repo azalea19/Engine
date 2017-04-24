@@ -1,0 +1,13 @@
+<map id="TerrainAPI::GenerateTerrain" name="TerrainAPI::GenerateTerrain">
+<area shape="rect" id="node2" href="$class_terrain.html#a50392203c65b6d8d0b2b243effc07053" title="Initializes a new instance of the Terrain class. " alt="" coords="236,175,344,201"/>
+<area shape="rect" id="node3" href="$class_terrain.html#ae7bafb8ba2f656805c07fbef600a35c4" title="Creates the mesh. " alt="" coords="400,135,539,161"/>
+<area shape="rect" id="node5" href="$class_height_map.html#a4c1243d24a8c5d039ea967a57a7bf462" title="Gets the height. " alt="" coords="827,73,977,100"/>
+<area shape="rect" id="node6" href="$class_height_map.html#a85709e10bb08442730bfddb649a86e0b" title="Gets the width. " alt="" coords="829,160,975,187"/>
+<area shape="rect" id="node9" href="$class_height_map.html#a5a81f55f25aca424c9b9afddab239596" title="Initializes a new instance of the HeightMap class. " alt="" coords="392,289,547,316"/>
+<area shape="rect" id="node4" href="$class_terrain.html#a6d4038969c8f9db67de07f03b2ac6b9a" title="Generates the terrain indices. " alt="" coords="606,33,767,74"/>
+<area shape="rect" id="node7" href="$class_terrain.html#a7b82fc680b5747dadda8477bdcf33cf9" title="Generates the terrain vertices. " alt="" coords="606,98,767,139"/>
+<area shape="rect" id="node8" href="$class_terrain.html#a39c46be48d267589430a97b00cd3399d" title="Generates the texture coords. " alt="" coords="595,164,779,191"/>
+<area shape="rect" id="node10" href="$class_height_map.html#af4faa63fa0dfe8386342e45127d708d4" title="Loads the height map. " alt="" coords="595,289,778,316"/>
+<area shape="rect" id="node11" href="$_interface2_d_8cpp.html#a402c4feb9594fd3a9d206b0a1bd8e239" title="GetImageDimensions" alt="" coords="829,264,975,291"/>
+<area shape="rect" id="node12" href="$_texture_8cpp.html#ad718f5335c8ffff16a647bb8b0b4d441" title="GetPixelData" alt="" coords="853,315,951,341"/>
+</map>

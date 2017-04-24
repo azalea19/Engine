@@ -1,0 +1,167 @@
+\hypertarget{class_a_a_b_b_a_p_i}{}\section{A\+A\+B\+B\+A\+PI Class Reference}
+\label{class_a_a_b_b_a_p_i}\index{A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}}
+
+
+{\ttfamily \#include $<$A\+A\+B\+B\+A\+P\+I.\+h$>$}
+
+
+
+Collaboration diagram for A\+A\+B\+B\+A\+PI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{class_a_a_b_b_a_p_i__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_a_a_b_b_a_p_i_ad3b7d97acd59d1a83b1cc1ecc1d6f3a3}{Get\+A\+A\+BB} (int handle, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} c\+Handle)
+\begin{DoxyCompactList}\small\item\em Gets the aabb from an object instance handle. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_a_a_b_b_a_p_i_aa832a0bc68a14f90c48ac4cd85663371}{Move} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} bbox, \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} old\+Pos, \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} new\+Pos, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} c\+Handle)
+\begin{DoxyCompactList}\small\item\em Moves the specified bbox. \end{DoxyCompactList}\item 
+static void \hyperlink{class_a_a_b_b_a_p_i_a42a1a851b7ade27307e59ae2717bee02}{Expose} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} lua\+A\+P\+I\+Name)
+\begin{DoxyCompactList}\small\item\em Exposes the specified context handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file A\+A\+B\+B\+A\+P\+I.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}!Expose@{Expose}}
+\index{Expose@{Expose}!A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}}
+\subsubsection[{\texorpdfstring{Expose(\+Lua\+Context\+Handle context\+Handle, string lua\+A\+P\+I\+Name)}{Expose(LuaContextHandle contextHandle, string luaAPIName)}}]{\setlength{\rightskip}{0pt plus 5cm}void A\+A\+B\+B\+A\+P\+I\+::\+Expose (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle, }
+\item[{{\bf string}}]{lua\+A\+P\+I\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_a_a_b_b_a_p_i_a42a1a851b7ade27307e59ae2717bee02}{}\label{class_a_a_b_b_a_p_i_a42a1a851b7ade27307e59ae2717bee02}
+
+
+Exposes the specified context handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context\+Handle} & The context handle.\\
+\hline
+{\em lua\+A\+P\+I\+Name} & Name of the lua A\+PI.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file A\+A\+B\+B\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+38 \{
+39 
+40         \hyperlink{class_lua_context}{LuaContext}* pContext = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().
+      \hyperlink{class_lua_manager_a68592b46a59219d130cf4f637c977378}{GetContext}(contextHandle);
+41         pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"getAABB"}, \hyperlink{class_a_a_b_b_a_p_i_ad3b7d97acd59d1a83b1cc1ecc1d6f3a3}{GetAABB});
+42         pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"move"}, \hyperlink{class_a_a_b_b_a_p_i_aa832a0bc68a14f90c48ac4cd85663371}{Move});
+43 
+44 \}\end{DoxyCode}
+\index{A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}!Get\+A\+A\+BB@{Get\+A\+A\+BB}}
+\index{Get\+A\+A\+BB@{Get\+A\+A\+BB}!A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}}
+\subsubsection[{\texorpdfstring{Get\+A\+A\+B\+B(int handle, Lua\+Context\+Handle c\+Handle)}{GetAABB(int handle, LuaContextHandle cHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} A\+A\+B\+B\+A\+P\+I\+::\+Get\+A\+A\+BB (
+\begin{DoxyParamCaption}
+\item[{int}]{handle, }
+\item[{{\bf Lua\+Context\+Handle}}]{c\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_a_a_b_b_a_p_i_ad3b7d97acd59d1a83b1cc1ecc1d6f3a3}{}\label{class_a_a_b_b_a_p_i_ad3b7d97acd59d1a83b1cc1ecc1d6f3a3}
+
+
+Gets the aabb from an object instance handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & The object instance handle.\\
+\hline
+{\em c\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 5 of file A\+A\+B\+B\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+6 \{
+7     \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{LuaRef} AABBtable = luabridge::newTable(\hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().
+      GetContext(cHandle)->GetLuaState());
+8     std::vector<vec3> bbox = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaObjectInstanceManager::GetInstance}(
+      cHandle)->GetRenderableObject()->GetAABB();
+9 
+10     AABBtable[\textcolor{stringliteral}{"min"}] = \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(bbox[0],cHandle);
+11     AABBtable[\textcolor{stringliteral}{"max"}] = \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(bbox[1],cHandle);
+12 
+13     \textcolor{keywordflow}{return} AABBtable;
+14 \}
+\end{DoxyCode}
+\index{A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}!Move@{Move}}
+\index{Move@{Move}!A\+A\+B\+B\+A\+PI@{A\+A\+B\+B\+A\+PI}}
+\subsubsection[{\texorpdfstring{Move(\+Lua\+Ref bbox, Lua\+Ref old\+Pos, Lua\+Ref new\+Pos, Lua\+Context\+Handle c\+Handle)}{Move(LuaRef bbox, LuaRef oldPos, LuaRef newPos, LuaContextHandle cHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} A\+A\+B\+B\+A\+P\+I\+::\+Move (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{bbox, }
+\item[{{\bf Lua\+Ref}}]{old\+Pos, }
+\item[{{\bf Lua\+Ref}}]{new\+Pos, }
+\item[{{\bf Lua\+Context\+Handle}}]{c\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_a_a_b_b_a_p_i_aa832a0bc68a14f90c48ac4cd85663371}{}\label{class_a_a_b_b_a_p_i_aa832a0bc68a14f90c48ac4cd85663371}
+
+
+Moves the specified bbox. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & The bbox.\\
+\hline
+{\em old\+Pos} & The old position.\\
+\hline
+{\em new\+Pos} & The new position.\\
+\hline
+{\em c\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 16 of file A\+A\+B\+B\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+17 \{
+18     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} bboxmin = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>} (bbox[\textcolor{stringliteral}{"min"}]);
+19     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} bboxmax = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(bbox[\textcolor{stringliteral}{"max"}]);
+20     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} oldposvec = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(oldPos);
+21     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} newposvec = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(newPos);
+22 
+23     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} diff = (newposvec - oldposvec);
+24     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} newMin = bboxmin + diff;
+25     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} newMax = bboxmax + diff;
+26 
+27 
+28     \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{LuaRef} newAABB = luabridge::newTable(\hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().GetContext(
+      cHandle)->GetLuaState());
+29 
+30     newAABB[\textcolor{stringliteral}{"min"}] = \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(newMin,cHandle);
+31     newAABB[\textcolor{stringliteral}{"max"}] = \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(newMax,cHandle);
+32 
+33     \textcolor{keywordflow}{return} newAABB;
+34 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_a_a_b_b_a_p_i_8h}{A\+A\+B\+B\+A\+P\+I.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_a_a_b_b_a_p_i_8cpp}{A\+A\+B\+B\+A\+P\+I.\+cpp}\end{DoxyCompactItemize}

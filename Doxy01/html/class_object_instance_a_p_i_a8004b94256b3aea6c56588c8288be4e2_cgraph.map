@@ -1,0 +1,5 @@
+<map id="ObjectInstanceAPI::SetAnimation" name="ObjectInstanceAPI::SetAnimation">
+<area shape="rect" id="node2" href="$class_object_instance_a_p_i.html#ad5097ac5c9231e23c5f7f08a6bf6de84" title="Gets the object instance. " alt="" coords="209,5,347,47"/>
+<area shape="rect" id="node4" href="$class_object_instance.html#a9628216a9ea2cd68f3b2163718517fa4" title="Sets the active animation. " alt="" coords="192,71,364,112"/>
+<area shape="rect" id="node3" href="$class_lua_object_instance_manager.html#a62e842ba254f119752b29e8b5d56010f" title="Gets the object instance. " alt="" coords="412,5,592,47"/>
+</map>

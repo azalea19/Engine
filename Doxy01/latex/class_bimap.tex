@@ -1,0 +1,223 @@
+\hypertarget{class_bimap}{}\section{Bimap$<$ Key, Value $>$ Class Template Reference}
+\label{class_bimap}\index{Bimap$<$ Key, Value $>$@{Bimap$<$ Key, Value $>$}}
+
+
+{\ttfamily \#include $<$Bimap.\+h$>$}
+
+
+
+Inheritance diagram for Bimap$<$ Key, Value $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{class_bimap__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Bimap$<$ Key, Value $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{class_bimap__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Key \& \hyperlink{class_bimap_a287bee82ecf52e0addf01188e845b3b4}{Get\+Key} (const Value \&value)
+\item 
+Value \& \hyperlink{class_bimap_a38d190f4016ae28f415014ef4e6c08da}{Get\+Value} (const Key \&key)
+\item 
+Key const \& \hyperlink{class_bimap_a36a74e2ba009c5bc72dc3175db626395}{Get\+Key} (const Value \&value) const 
+\item 
+Value const \& \hyperlink{class_bimap_a094513ddbc939755ea3c26afa26c3975}{Get\+Value} (const Key \&key) const 
+\item 
+bool \hyperlink{class_bimap_acb0e0a0d4e926680f047edd90ee15f7b}{Has\+Key} (const Key \&key) const 
+\item 
+bool \hyperlink{class_bimap_a6aa7600cc5324041ba977670d85bbe4c}{Has\+Value} (const Value \&value) const 
+\item 
+void \hyperlink{class_bimap_a6c80d80555ca8318ee53845d83a81628}{Add} (const Key \&key, const Value \&value)
+\item 
+int \hyperlink{class_bimap_aef1a42d79e8c66d5453b655dc17ccc07}{Count} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ Key, Value $>$ \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\+\_\+\+Value\+Lookup}
+\item 
+std\+::unordered\+\_\+map$<$ Value, Key $>$ \hyperlink{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{m\+\_\+\+Key\+Lookup}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Key, typename Value$>$\\*
+class Bimap$<$ Key, Value $>$}
+
+
+
+Definition at line 7 of file Bimap.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Bimap@{Bimap}!Add@{Add}}
+\index{Add@{Add}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Add(const Key \&key, const Value \&value)}{Add(const Key &key, const Value &value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key, typename Value$>$ void {\bf Bimap}$<$ Key, Value $>$\+::Add (
+\begin{DoxyParamCaption}
+\item[{const Key \&}]{key, }
+\item[{const Value \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_bimap_a6c80d80555ca8318ee53845d83a81628}{}\label{class_bimap_a6c80d80555ca8318ee53845d83a81628}
+
+
+Definition at line 30 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+31 \{
+32     \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\_ValueLookup}.emplace(key, value);
+33     \hyperlink{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{m\_KeyLookup}.emplace(value, key);
+34 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Count@{Count}}
+\index{Count@{Count}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Count() const }{Count() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , typename Value $>$ int {\bf Bimap}$<$ Key, Value $>$\+::Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bimap_aef1a42d79e8c66d5453b655dc17ccc07}{}\label{class_bimap_aef1a42d79e8c66d5453b655dc17ccc07}
+
+
+Definition at line 73 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+74 \{
+75     \textcolor{keywordflow}{return} \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\_ValueLookup}.size();
+76 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Get\+Key@{Get\+Key}}
+\index{Get\+Key@{Get\+Key}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Get\+Key(const Value \&value)}{GetKey(const Value &value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , typename Value$>$ Key \& {\bf Bimap}$<$ Key, Value $>$\+::Get\+Key (
+\begin{DoxyParamCaption}
+\item[{const Value \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_bimap_a287bee82ecf52e0addf01188e845b3b4}{}\label{class_bimap_a287bee82ecf52e0addf01188e845b3b4}
+
+
+Definition at line 67 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+68 \{
+69     \textcolor{keywordflow}{return} \hyperlink{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{m\_KeyLookup}[value];
+70 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Get\+Key@{Get\+Key}}
+\index{Get\+Key@{Get\+Key}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Get\+Key(const Value \&value) const }{GetKey(const Value &value) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , typename Value$>$ Key const \& {\bf Bimap}$<$ Key, Value $>$\+::Get\+Key (
+\begin{DoxyParamCaption}
+\item[{const Value \&}]{value}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bimap_a36a74e2ba009c5bc72dc3175db626395}{}\label{class_bimap_a36a74e2ba009c5bc72dc3175db626395}
+
+
+Definition at line 55 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+56 \{
+57     \textcolor{keywordflow}{return} \hyperlink{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{m\_KeyLookup}.at(value);
+58 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Get\+Value(const Key \&key)}{GetValue(const Key &key)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key, typename Value $>$ Value \& {\bf Bimap}$<$ Key, Value $>$\+::Get\+Value (
+\begin{DoxyParamCaption}
+\item[{const Key \&}]{key}
+\end{DoxyParamCaption}
+)}\hypertarget{class_bimap_a38d190f4016ae28f415014ef4e6c08da}{}\label{class_bimap_a38d190f4016ae28f415014ef4e6c08da}
+
+
+Definition at line 61 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+62 \{
+63     \textcolor{keywordflow}{return} \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\_ValueLookup}[key];
+64 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Get\+Value(const Key \&key) const }{GetValue(const Key &key) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key, typename Value $>$ Value const \& {\bf Bimap}$<$ Key, Value $>$\+::Get\+Value (
+\begin{DoxyParamCaption}
+\item[{const Key \&}]{key}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bimap_a094513ddbc939755ea3c26afa26c3975}{}\label{class_bimap_a094513ddbc939755ea3c26afa26c3975}
+
+
+Definition at line 49 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+50 \{
+51     \textcolor{keywordflow}{return} \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\_ValueLookup}.at(key);
+52 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Has\+Key@{Has\+Key}}
+\index{Has\+Key@{Has\+Key}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Has\+Key(const Key \&key) const }{HasKey(const Key &key) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key, typename Value $>$ bool {\bf Bimap}$<$ Key, Value $>$\+::Has\+Key (
+\begin{DoxyParamCaption}
+\item[{const Key \&}]{key}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bimap_acb0e0a0d4e926680f047edd90ee15f7b}{}\label{class_bimap_acb0e0a0d4e926680f047edd90ee15f7b}
+
+
+Definition at line 43 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+44 \{
+45     \textcolor{keywordflow}{return} \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\_ValueLookup}.find(key) != \hyperlink{class_bimap_ae27127063317d62ce8b44281e0804bb6}{m\_ValueLookup}.end();
+46 \}
+\end{DoxyCode}
+\index{Bimap@{Bimap}!Has\+Value@{Has\+Value}}
+\index{Has\+Value@{Has\+Value}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{Has\+Value(const Value \&value) const }{HasValue(const Value &value) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , typename Value$>$ bool {\bf Bimap}$<$ Key, Value $>$\+::Has\+Value (
+\begin{DoxyParamCaption}
+\item[{const Value \&}]{value}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bimap_a6aa7600cc5324041ba977670d85bbe4c}{}\label{class_bimap_a6aa7600cc5324041ba977670d85bbe4c}
+
+
+Definition at line 37 of file Bimap.\+h.
+
+
+\begin{DoxyCode}
+38 \{
+39     \textcolor{keywordflow}{return} \hyperlink{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{m\_KeyLookup}.find(value) != \hyperlink{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{m\_KeyLookup}.end();
+40 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Bimap@{Bimap}!m\+\_\+\+Key\+Lookup@{m\+\_\+\+Key\+Lookup}}
+\index{m\+\_\+\+Key\+Lookup@{m\+\_\+\+Key\+Lookup}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{m\+\_\+\+Key\+Lookup}{m_KeyLookup}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key, typename Value$>$ std\+::unordered\+\_\+map$<$Value, Key$>$ {\bf Bimap}$<$ Key, Value $>$\+::m\+\_\+\+Key\+Lookup\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bimap_acc45f88d39f38379f4caf7a776b53f96}{}\label{class_bimap_acc45f88d39f38379f4caf7a776b53f96}
+
+
+Definition at line 26 of file Bimap.\+h.
+
+\index{Bimap@{Bimap}!m\+\_\+\+Value\+Lookup@{m\+\_\+\+Value\+Lookup}}
+\index{m\+\_\+\+Value\+Lookup@{m\+\_\+\+Value\+Lookup}!Bimap@{Bimap}}
+\subsubsection[{\texorpdfstring{m\+\_\+\+Value\+Lookup}{m_ValueLookup}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key, typename Value$>$ std\+::unordered\+\_\+map$<$Key, Value$>$ {\bf Bimap}$<$ Key, Value $>$\+::m\+\_\+\+Value\+Lookup\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bimap_ae27127063317d62ce8b44281e0804bb6}{}\label{class_bimap_ae27127063317d62ce8b44281e0804bb6}
+
+
+Definition at line 25 of file Bimap.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_bimap_8h}{Bimap.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,199 @@
+\hypertarget{class_i_animatable}{}\section{I\+Animatable Class Reference}
+\label{class_i_animatable}\index{I\+Animatable@{I\+Animatable}}
+
+
+{\ttfamily \#include $<$I\+Animatable.\+h$>$}
+
+
+
+Inheritance diagram for I\+Animatable\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{class_i_animatable__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for I\+Animatable\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{class_i_animatable__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_i_animatable_a8fc55643f6808cbd37d4656ac58f8581}{Set\+Active\+Animation} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&animation\+Name)
+\begin{DoxyCompactList}\small\item\em Sets the active animation. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \& \hyperlink{class_i_animatable_a10933b5200d1b8a6c5463921ecf00e0f}{Get\+Active\+Animation\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Gets the name of the active animation. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_i_animatable_a7bbd254fa9982deeae933ed0be38764b}{Set\+Active\+Animation} (int animation\+Index)=0
+\begin{DoxyCompactList}\small\item\em Sets the active animation. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_i_animatable_aabaf112657c85beabd1639cd99b52274}{Get\+Active\+Animation\+Index} () const  =0
+\begin{DoxyCompactList}\small\item\em Gets the index of the active animation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file I\+Animatable.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{I\+Animatable@{I\+Animatable}!Get\+Active\+Animation\+Index@{Get\+Active\+Animation\+Index}}
+\index{Get\+Active\+Animation\+Index@{Get\+Active\+Animation\+Index}!I\+Animatable@{I\+Animatable}}
+\subsubsection[{\texorpdfstring{Get\+Active\+Animation\+Index() const  =0}{GetActiveAnimationIndex() const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual int I\+Animatable\+::\+Get\+Active\+Animation\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_animatable_aabaf112657c85beabd1639cd99b52274}{}\label{class_i_animatable_aabaf112657c85beabd1639cd99b52274}
+
+
+Gets the index of the active animation. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_object_instance_a8012a0c7dbe376714997c9a4848d1dca}{Object\+Instance}.
+
+
+
+Referenced by Get\+Active\+Animation\+Name().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_animatable_aabaf112657c85beabd1639cd99b52274_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Animatable@{I\+Animatable}!Get\+Active\+Animation\+Name@{Get\+Active\+Animation\+Name}}
+\index{Get\+Active\+Animation\+Name@{Get\+Active\+Animation\+Name}!I\+Animatable@{I\+Animatable}}
+\subsubsection[{\texorpdfstring{Get\+Active\+Animation\+Name() const }{GetActiveAnimationName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string} const \& I\+Animatable\+::\+Get\+Active\+Animation\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_animatable_a10933b5200d1b8a6c5463921ecf00e0f}{}\label{class_i_animatable_a10933b5200d1b8a6c5463921ecf00e0f}
+
+
+Gets the name of the active animation. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 10 of file Animatable.\+cpp.
+
+
+
+References Get\+Active\+Animation\+Index(), and I\+Animated\+::\+Get\+Animation\+Name().
+
+
+\begin{DoxyCode}
+11 \{
+12   \textcolor{keywordflow}{return} \hyperlink{class_i_animated_a4840f3a1bbcc5e0050bdb0dde1191704}{GetAnimationName}(\hyperlink{class_i_animatable_aabaf112657c85beabd1639cd99b52274}{GetActiveAnimationIndex}());
+13 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_animatable_a10933b5200d1b8a6c5463921ecf00e0f_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Animatable@{I\+Animatable}!Set\+Active\+Animation@{Set\+Active\+Animation}}
+\index{Set\+Active\+Animation@{Set\+Active\+Animation}!I\+Animatable@{I\+Animatable}}
+\subsubsection[{\texorpdfstring{Set\+Active\+Animation(string const \&animation\+Name)}{SetActiveAnimation(string const &animationName)}}]{\setlength{\rightskip}{0pt plus 5cm}void I\+Animatable\+::\+Set\+Active\+Animation (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{animation\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_i_animatable_a8fc55643f6808cbd37d4656ac58f8581}{}\label{class_i_animatable_a8fc55643f6808cbd37d4656ac58f8581}
+
+
+Sets the active animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Name} & Name of the animation.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Animatable.\+cpp.
+
+
+
+References I\+Animated\+::\+Get\+Animation\+Index(), and Set\+Active\+Animation().
+
+
+\begin{DoxyCode}
+6 \{
+7   \textcolor{keywordflow}{return} \hyperlink{class_i_animatable_a8fc55643f6808cbd37d4656ac58f8581}{SetActiveAnimation}(\hyperlink{class_i_animated_a33e7b0dd04727e5dc9311c60730ad6e5}{GetAnimationIndex}(animationName));
+8 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_animatable_a8fc55643f6808cbd37d4656ac58f8581_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Animatable@{I\+Animatable}!Set\+Active\+Animation@{Set\+Active\+Animation}}
+\index{Set\+Active\+Animation@{Set\+Active\+Animation}!I\+Animatable@{I\+Animatable}}
+\subsubsection[{\texorpdfstring{Set\+Active\+Animation(int animation\+Index)=0}{SetActiveAnimation(int animationIndex)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void I\+Animatable\+::\+Set\+Active\+Animation (
+\begin{DoxyParamCaption}
+\item[{int}]{animation\+Index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_animatable_a7bbd254fa9982deeae933ed0be38764b}{}\label{class_i_animatable_a7bbd254fa9982deeae933ed0be38764b}
+
+
+Sets the active animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Index} & Index of the animation.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_object_instance_a9628216a9ea2cd68f3b2163718517fa4}{Object\+Instance}.
+
+
+
+Referenced by Set\+Active\+Animation().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_animatable_a7bbd254fa9982deeae933ed0be38764b_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_i_animatable_8h}{I\+Animatable.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_animatable_8cpp}{Animatable.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,101 @@
+\hypertarget{_agent_8h}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Agent.h File Reference}
+\label{_agent_8h}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Agent.\+h@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Agent.\+h}}
+
+
+The agent class.  
+
+
+{\ttfamily \#include \char`\"{}M\+Math.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Types.\+h\char`\"{}}\\*
+Include dependency graph for Agent.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{_agent_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_agent_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_agent}{Agent}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{Agent\+Property} \+: uint32\+\_\+t \{ \\*
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5ade4e5c4406ea8a4e4f8056fd5c611464}{A\+P\+\_\+collidable} = 1, 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a767d565158291dd0a1a3f09e5658aeac}{A\+P\+\_\+climbable} = 2, 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a55b60cf0a5ba325bf42dbcda0457513e}{A\+P\+\_\+interactable} = 4, 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5aa7305f72095f7b8685d64bd48fcc1583}{A\+P\+\_\+colour\+Red} = 8, 
+\\*
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a27178483b8546a33c19af91734c22b95}{A\+P\+\_\+colour\+Blue} = 16, 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a3c9a98ce5b6dc37a65ffef5e2d80d4b9}{A\+P\+\_\+colour\+Yellow} = 32, 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a8da56d25f900caf2a4a8040c6a16a1ae}{A\+P\+\_\+colour\+Purple} = 64, 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5abd174f1b63f27dcae17af290862aad6b}{A\+P\+\_\+moving} = 128
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The agent class. 
+
+Maddisen Topaz \begin{DoxyDate}{Date}
+S2, 2016 The base agent class used by other more specific agents to inherit from. 
+\end{DoxyDate}
+
+
+\subsection{Enumeration Type Documentation}
+\index{Agent.\+h@{Agent.\+h}!Agent\+Property@{Agent\+Property}}
+\index{Agent\+Property@{Agent\+Property}!Agent.\+h@{Agent.\+h}}
+\subsubsection[{\texorpdfstring{Agent\+Property}{AgentProperty}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Agent\+Property} \+: uint32\+\_\+t}\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{A\+P\+\_\+collidable@{A\+P\+\_\+collidable}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+collidable@{A\+P\+\_\+collidable}}\item[{\em 
+A\+P\+\_\+collidable\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5ade4e5c4406ea8a4e4f8056fd5c611464}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5ade4e5c4406ea8a4e4f8056fd5c611464}
+}]\index{A\+P\+\_\+climbable@{A\+P\+\_\+climbable}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+climbable@{A\+P\+\_\+climbable}}\item[{\em 
+A\+P\+\_\+climbable\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a767d565158291dd0a1a3f09e5658aeac}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a767d565158291dd0a1a3f09e5658aeac}
+}]\index{A\+P\+\_\+interactable@{A\+P\+\_\+interactable}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+interactable@{A\+P\+\_\+interactable}}\item[{\em 
+A\+P\+\_\+interactable\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a55b60cf0a5ba325bf42dbcda0457513e}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a55b60cf0a5ba325bf42dbcda0457513e}
+}]\index{A\+P\+\_\+colour\+Red@{A\+P\+\_\+colour\+Red}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+colour\+Red@{A\+P\+\_\+colour\+Red}}\item[{\em 
+A\+P\+\_\+colour\+Red\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5aa7305f72095f7b8685d64bd48fcc1583}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5aa7305f72095f7b8685d64bd48fcc1583}
+}]\index{A\+P\+\_\+colour\+Blue@{A\+P\+\_\+colour\+Blue}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+colour\+Blue@{A\+P\+\_\+colour\+Blue}}\item[{\em 
+A\+P\+\_\+colour\+Blue\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a27178483b8546a33c19af91734c22b95}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a27178483b8546a33c19af91734c22b95}
+}]\index{A\+P\+\_\+colour\+Yellow@{A\+P\+\_\+colour\+Yellow}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+colour\+Yellow@{A\+P\+\_\+colour\+Yellow}}\item[{\em 
+A\+P\+\_\+colour\+Yellow\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a3c9a98ce5b6dc37a65ffef5e2d80d4b9}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a3c9a98ce5b6dc37a65ffef5e2d80d4b9}
+}]\index{A\+P\+\_\+colour\+Purple@{A\+P\+\_\+colour\+Purple}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+colour\+Purple@{A\+P\+\_\+colour\+Purple}}\item[{\em 
+A\+P\+\_\+colour\+Purple\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a8da56d25f900caf2a4a8040c6a16a1ae}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a8da56d25f900caf2a4a8040c6a16a1ae}
+}]\index{A\+P\+\_\+moving@{A\+P\+\_\+moving}!Agent.\+h@{Agent.\+h}}\index{Agent.\+h@{Agent.\+h}!A\+P\+\_\+moving@{A\+P\+\_\+moving}}\item[{\em 
+A\+P\+\_\+moving\hypertarget{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5abd174f1b63f27dcae17af290862aad6b}{}\label{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5abd174f1b63f27dcae17af290862aad6b}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 20 of file Agent.\+h.
+
+
+\begin{DoxyCode}
+20                    : uint32\_t
+21 \{
+22     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5ade4e5c4406ea8a4e4f8056fd5c611464}{AP\_collidable} = 1,
+23     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a767d565158291dd0a1a3f09e5658aeac}{AP\_climbable} = 2,
+24     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a55b60cf0a5ba325bf42dbcda0457513e}{AP\_interactable} = 4,
+25     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5aa7305f72095f7b8685d64bd48fcc1583}{AP\_colourRed} = 8,
+26     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a27178483b8546a33c19af91734c22b95}{AP\_colourBlue} = 16,
+27     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a3c9a98ce5b6dc37a65ffef5e2d80d4b9}{AP\_colourYellow} = 32,
+28     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5a8da56d25f900caf2a4a8040c6a16a1ae}{AP\_colourPurple} = 64,
+29     \hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5abd174f1b63f27dcae17af290862aad6b}{AP\_moving} = 128
+30 
+31     \textcolor{comment}{//AP\_collidable = 0b00000001,}
+32     \textcolor{comment}{//AP\_climbable = 0b00000010,}
+33     \textcolor{comment}{//AP\_interactable = 0b00000100,}
+34 
+35 \};
+\end{DoxyCode}

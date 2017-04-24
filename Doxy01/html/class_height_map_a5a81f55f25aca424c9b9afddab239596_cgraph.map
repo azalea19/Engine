@@ -1,0 +1,5 @@
+<map id="HeightMap::HeightMap" name="HeightMap::HeightMap">
+<area shape="rect" id="node2" href="$class_height_map.html#af4faa63fa0dfe8386342e45127d708d4" title="Loads the height map. " alt="" coords="208,31,391,57"/>
+<area shape="rect" id="node3" href="$_interface2_d_8cpp.html#a402c4feb9594fd3a9d206b0a1bd8e239" title="GetImageDimensions" alt="" coords="439,5,585,32"/>
+<area shape="rect" id="node4" href="$_texture_8cpp.html#ad718f5335c8ffff16a647bb8b0b4d441" title="GetPixelData" alt="" coords="463,56,561,83"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ShaderLibrary" name="ShaderLibrary">
+<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; ShaderLibrary \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="165,505,345,597"/>
+<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="5,307,180,399"/>
+<area shape="rect" id="node5" href="$class_i_engine.html" title="{IEngine\n||+ Initialise()\l+ ~IEngine()\l+ BeginRender()\l+ EndRender()\l+ BeginUpdate()\l+ EndUpdate()\l+ CreateShader()\l+ CreateRenderableObject()\l+ CreateInputHandler()\l}" alt="" coords="203,5,385,200"/>
+</map>

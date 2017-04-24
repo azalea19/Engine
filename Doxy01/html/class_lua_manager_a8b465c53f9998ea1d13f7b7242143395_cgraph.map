@@ -1,0 +1,4 @@
+<map id="LuaManager::CreateContext" name="LuaManager::CreateContext">
+<area shape="rect" id="node2" href="$class_lua_manager.html#a0e01a877be1de2604b4f9cd8ce9f4ac4" title="Reserves the context handle. " alt="" coords="237,5,429,47"/>
+<area shape="rect" id="node3" href="$class_lua_context.html#a9a21dfe0dc89a3611eb13a7470a87acf" title="LuaContext::Start" alt="" coords="271,71,395,98"/>
+</map>

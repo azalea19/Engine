@@ -1,0 +1,3 @@
+<map id="IInputHandler" name="IInputHandler">
+<area shape="rect" id="node2" href="$class_g_l_input_handler.html" title="{GLInputHandler\n|&#45; m_eventQueue\l&#45; m_keyStateSize\l&#45; keyboardState\l&#45; lastKeyboardState\l&#45; mouseButtonStates\l&#45; mouseDeltaX\l&#45; mouseDeltaY\l|+ GLInputHandler()\l+ Update()\l+ IsKeyDown()\l+ IsKeyUp()\l+ IsKeyPressed()\l+ IsKeyReleased()\l+ IsMouseDownLeft()\l+ IsMouseUpLeft()\l+ IsMousePressedLeft()\l+ IsMouseReleasedLeft()\land 8 more...\l&#45; ProcessButtonEvent()\l&#45; ProcessMotionEvent()\l&#45; ProcessEventQueue()\l&#45; PushEvent()\l&#45; HandleEvents()\l}" alt="" coords="5,277,172,663"/>
+</map>

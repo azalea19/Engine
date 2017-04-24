@@ -1,0 +1,4 @@
+<map id="Terrain::Terrain" name="Terrain::Terrain">
+<area shape="rect" id="node2" href="$class_forest_terrain.html#a2cfcbadbae4c5904c40f52636cd16118" title="Initializes a new instance of the ForestTerrain class. " alt="" coords="161,5,344,32"/>
+<area shape="rect" id="node3" href="$class_terrain_a_p_i.html#a77f6f3df5ae85964a74eed00b76e1154" title="Generates the terrain. " alt="" coords="161,56,344,83"/>
+</map>

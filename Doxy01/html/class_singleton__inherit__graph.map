@@ -1,0 +1,20 @@
+<map id="Singleton&lt; DerivedClass &gt;" name="Singleton&lt; DerivedClass &gt;">
+<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; InstanceManager\l\&lt; Type \&gt; \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="5,175,192,281"/>
+<area shape="rect" id="node4" href="$class_singleton.html" title="{Singleton\&lt; LuaManager \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="216,182,387,274"/>
+<area shape="rect" id="node6" href="$class_singleton.html" title="{Singleton\&lt; LuaObjectInstance\lManager \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="411,175,607,281"/>
+<area shape="rect" id="node8" href="$class_singleton.html" title="{Singleton\&lt; ShaderLibrary \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="631,182,811,274"/>
+<area shape="rect" id="node10" href="$class_singleton.html" title="{Singleton\&lt; ModelLibrary \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="835,182,1010,274"/>
+<area shape="rect" id="node12" href="$class_singleton.html" title="{Singleton\&lt; RenderManager \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="1034,182,1225,274"/>
+<area shape="rect" id="node14" href="$class_singleton.html" title="{Singleton\&lt; SoundManager \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="1249,182,1436,274"/>
+<area shape="rect" id="node16" href="$class_singleton.html" title="{Singleton\&lt; InputManager \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="1460,182,1639,274"/>
+<area shape="rect" id="node18" href="$class_singleton.html" title="{Singleton\&lt; TextureLibrary \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="1663,182,1846,274"/>
+<area shape="rect" id="node3" href="$class_instance_manager.html" title="{InstanceManager\&lt; Type \&gt;\n|&#45; m_lastIndx\l|+ InstanceManager()\l+ InstanceManager()\l+ InstanceManager()\l+ InstanceManager()\l}" alt="" coords="12,382,185,503"/>
+<area shape="rect" id="node5" href="$class_lua_manager.html" title="{LuaManager\n|&#45; m_contexts\l&#45; m_apiExposeFunctions\l&#45; nextHandle\l|+ GetContext()\l+ CreateContext()\l+ ExposeAPI()\l+ AddAPI()\l+ Initialize()\l&#45; ReserveContextHandle()\l}" alt="" coords="217,353,386,533"/>
+<area shape="rect" id="node7" href="$class_lua_object_instance_manager.html" title="{LuaObjectInstanceManager\n||+ AddNewInstance()\l+ GetInstance()\l+ Expose()\l+ DeleteInstance()\l}" alt="" coords="419,382,599,503"/>
+<area shape="rect" id="node9" href="$struct_shader_library.html" title="{ShaderLibrary\n|+ shaders\l&#45; m_currentShaderName\l&#45; m_pEngine\l|+ AddShader()\l+ GetShader()\l+ BindShader()\l+ BindDefaultShader()\l+ CurrentShader()\l+ GetCurrentShaderName()\l+ InitShaderLibrary()\l}" alt="" coords="631,345,811,540"/>
+<area shape="rect" id="node11" href="$class_model_library.html" title="{ModelLibrary\n|&#45; models\l&#45; m_pEngine\l|+ AddModel()\l+ GetObjectInstance()\l+ Initialise()\l}" alt="" coords="847,382,998,503"/>
+<area shape="rect" id="node13" href="$class_render_manager.html" title="{RenderManager\n|&#45; m_objectMap\l&#45; m_renderTimes\l&#45; m_frameRate\l|+ AddObject()\l+ RemoveObject()\l+ Render()\l+ GetFrameRate()\l&#45; UpdateFrameRate()\l}" alt="" coords="1058,360,1201,525"/>
+<area shape="rect" id="node15" href="$class_sound_manager.html" title="{SoundManager\n|&#45; m_soundMap\l|+ AddSound()\l+ PlaySound()\l+ PauseChannel()\l+ ResumeChannel()\l+ InitSoundManager()\l}" alt="" coords="1269,375,1416,511"/>
+<area shape="rect" id="node17" href="$class_input_manager.html" title="{InputManager\n|&#45; input\l|+ Initialise()\l+ Update()\l+ IsKeyDown()\l+ IsKeyUp()\l+ IsKeyPressed()\l+ IsKeyReleased()\l+ IsMouseDownLeft()\l+ IsMouseUpLeft()\l+ IsMousePressedLeft()\l+ IsMouseReleasedLeft()\land 8 more...\l}" alt="" coords="1466,331,1633,555"/>
+<area shape="rect" id="node19" href="$class_texture_library.html" title="{TextureLibrary\n|&#45; textures\l|+ InitTextureLibrary()\l+ AddTexture()\l+ AddTexture()\l+ GetTexture()\l}" alt="" coords="1684,382,1825,503"/>
+</map>

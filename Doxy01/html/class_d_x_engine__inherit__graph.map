@@ -1,0 +1,3 @@
+<map id="DXEngine" name="DXEngine">
+<area shape="rect" id="node2" href="$class_i_engine.html" title="{IEngine\n||+ Initialise()\l+ ~IEngine()\l+ BeginRender()\l+ EndRender()\l+ BeginUpdate()\l+ EndUpdate()\l+ CreateShader()\l+ CreateRenderableObject()\l+ CreateInputHandler()\l}" alt="" coords="5,5,188,200"/>
+</map>

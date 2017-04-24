@@ -1,0 +1,9 @@
+<map id="ObjectInstance::Render" name="ObjectInstance::Render">
+<area shape="rect" id="node2" href="$class_i_renderable_object.html#ac0db472961e13dbbdc5cd36f14a87fae" title="Binds the mesh. " alt="" coords="231,5,367,47"/>
+<area shape="rect" id="node3" href="$class_i_renderable_object.html#ab44c017819f2e57a9b4b4ba40961d9eb" title="Binds the object. " alt="" coords="231,71,367,112"/>
+<area shape="rect" id="node4" href="$class_i_mesh_collection.html#adf67edfc7e63ed993082714cfc9de7e2" title="Gets the mesh count. " alt="" coords="212,136,387,177"/>
+<area shape="rect" id="node5" href="$class_object_instance.html#aa9a660435b76ef436a5dcdb24d897c4f" title="Gets the world matrix. " alt="" coords="213,201,385,243"/>
+<area shape="rect" id="node8" href="$class_i_renderable_object.html#a6f47f692684ec70b5b776c0884495059" title="The render method. " alt="" coords="231,267,367,308"/>
+<area shape="rect" id="node6" href="$class_affine_transformable.html#a3eb990ab0b75ad30d3bb667e437d8606" title="Gets the transform. " alt="" coords="435,201,569,243"/>
+<area shape="rect" id="node7" href="$class_affine_transformable.html#a891419484ac01da747f832e5a84e8e37" title="Gets the orientation. " alt="" coords="617,201,752,243"/>
+</map>

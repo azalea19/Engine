@@ -1,0 +1,4 @@
+<map id="Model::GetMeshMaterial" name="Model::GetMeshMaterial">
+<area shape="rect" id="node2" href="$class_renderable_object.html#ac13b7599ac581dcb0ad6f7bf90b0aa2c" title="Binds the material. " alt="" coords="217,5,423,32"/>
+<area shape="rect" id="node3" href="$class_renderable_object.html#a17742c27c09c1b1bbd3509db1a80f836" title="Binds the mesh. " alt="" coords="471,5,661,32"/>
+</map>

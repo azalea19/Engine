@@ -1,0 +1,5 @@
+<map id="ObjectInstance::GetWorldMatrix" name="ObjectInstance::GetWorldMatrix">
+<area shape="rect" id="node2" href="$class_object_instance.html#ab9de0b3252e0df4c15129876163dad6d" title="Gets the vertices. " alt="" coords="225,5,412,32"/>
+<area shape="rect" id="node3" href="$class_object_instance.html#a5aab17f4111ca91e123f9485c616aa6f" title="The render method. " alt="" coords="239,56,398,83"/>
+<area shape="rect" id="node4" href="$class_render_manager_a_p_i.html#a3d10854e7ddcbb9b77ef23cad6267b67" title="Renders the object. " alt="" coords="460,49,643,90"/>
+</map>

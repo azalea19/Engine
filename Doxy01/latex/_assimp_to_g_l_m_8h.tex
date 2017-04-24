@@ -1,0 +1,150 @@
+\hypertarget{_assimp_to_g_l_m_8h}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Assimp\+To\+G\+LM.h File Reference}
+\label{_assimp_to_g_l_m_8h}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Assimp\+To\+G\+L\+M.\+h@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Assimp\+To\+G\+L\+M.\+h}}
+{\ttfamily \#include \char`\"{}Types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}assimp/types.\+h\char`\"{}}\\*
+Include dependency graph for Assimp\+To\+G\+L\+M.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{_assimp_to_g_l_m_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_assimp_to_g_l_m_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} \hyperlink{_assimp_to_g_l_m_8h_a1b03f2444f2a24982dd5a2c84b50cf98}{A\+S\+To\+G\+LM} (const ai\+Matrix4x4 \&value)
+\item 
+\hyperlink{_types_8h_a456be013bdf687ab454bdf8bb211474e}{mat3} \hyperlink{_assimp_to_g_l_m_8h_a65fe04271a23b55f971ae234ea0572ff}{A\+S\+To\+G\+LM} (const ai\+Matrix3x3 \&value)
+\item 
+\hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2} \hyperlink{_assimp_to_g_l_m_8h_a33a897ad015144d031a061780ca354d2}{A\+S\+To\+G\+LM} (const ai\+Vector2D \&value)
+\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{_assimp_to_g_l_m_8h_a76b753e9f20bc386158a1505cfbdb63a}{A\+S\+To\+G\+LM} (const ai\+Vector3D \&value)
+\item 
+\hyperlink{_types_8h_ac54e849f8b2339f592307eaf6cdbba77}{vec4} \hyperlink{_assimp_to_g_l_m_8h_ae6f40f5d173e2ed5c7df95a4c69bf383}{A\+S\+To\+G\+LM} (const ai\+Color4D \&value)
+\item 
+\hyperlink{_types_8h_a02abcac728eae225e929e9e0dc427f28}{quat} \hyperlink{_assimp_to_g_l_m_8h_aca154dc89a1f691e436a119482ddbcdf}{A\+S\+To\+G\+LM} (const ai\+Quaternion \&value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}!A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}}
+\index{A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}!Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}}
+\subsubsection[{\texorpdfstring{A\+S\+To\+G\+L\+M(const ai\+Matrix4x4 \&value)}{ASToGLM(const aiMatrix4x4 &value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat4} A\+S\+To\+G\+LM (
+\begin{DoxyParamCaption}
+\item[{const ai\+Matrix4x4 \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{_assimp_to_g_l_m_8h_a1b03f2444f2a24982dd5a2c84b50cf98}{}\label{_assimp_to_g_l_m_8h_a1b03f2444f2a24982dd5a2c84b50cf98}
+
+
+Definition at line 3 of file Assimp\+To\+G\+L\+M.\+cpp.
+
+
+\begin{DoxyCode}
+4 \{
+5   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} result;
+6 
+7   result[0][0] = value.a1; result[0][1] = value.a2; result[0][2] = value.a3; result[0][3] = value.a4;
+8   result[1][0] = value.b1; result[1][1] = value.b2; result[1][2] = value.b3; result[1][3] = value.b4;
+9   result[2][0] = value.c1; result[2][1] = value.c2; result[2][2] = value.c3; result[2][3] = value.c4;
+10   result[3][0] = value.d1; result[3][1] = value.d2; result[3][2] = value.d3; result[3][3] = value.d4;
+11 
+12   \textcolor{keywordflow}{return} glm::transpose(result);
+13 \}
+\end{DoxyCode}
+\index{Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}!A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}}
+\index{A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}!Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}}
+\subsubsection[{\texorpdfstring{A\+S\+To\+G\+L\+M(const ai\+Matrix3x3 \&value)}{ASToGLM(const aiMatrix3x3 &value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat3} A\+S\+To\+G\+LM (
+\begin{DoxyParamCaption}
+\item[{const ai\+Matrix3x3 \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{_assimp_to_g_l_m_8h_a65fe04271a23b55f971ae234ea0572ff}{}\label{_assimp_to_g_l_m_8h_a65fe04271a23b55f971ae234ea0572ff}
+
+
+Definition at line 15 of file Assimp\+To\+G\+L\+M.\+cpp.
+
+
+\begin{DoxyCode}
+16 \{
+17   \hyperlink{_types_8h_a456be013bdf687ab454bdf8bb211474e}{glm::mat3} result;
+18 
+19   result[0][0] = value.a1; result[0][1] = value.a2; result[0][2] = value.a3;
+20   result[1][0] = value.b1; result[1][1] = value.b2; result[1][2] = value.b3;
+21   result[2][0] = value.c1; result[2][1] = value.c2; result[2][2] = value.c3;
+22 
+23   \textcolor{keywordflow}{return} glm::transpose(result);
+24 \}
+\end{DoxyCode}
+\index{Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}!A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}}
+\index{A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}!Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}}
+\subsubsection[{\texorpdfstring{A\+S\+To\+G\+L\+M(const ai\+Vector2\+D \&value)}{ASToGLM(const aiVector2D &value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec2} A\+S\+To\+G\+LM (
+\begin{DoxyParamCaption}
+\item[{const ai\+Vector2D \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{_assimp_to_g_l_m_8h_a33a897ad015144d031a061780ca354d2}{}\label{_assimp_to_g_l_m_8h_a33a897ad015144d031a061780ca354d2}
+
+
+Definition at line 26 of file Assimp\+To\+G\+L\+M.\+cpp.
+
+
+\begin{DoxyCode}
+27 \{
+28   \textcolor{keywordflow}{return} \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2}(value.x, value.y);
+29 \}
+\end{DoxyCode}
+\index{Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}!A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}}
+\index{A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}!Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}}
+\subsubsection[{\texorpdfstring{A\+S\+To\+G\+L\+M(const ai\+Vector3\+D \&value)}{ASToGLM(const aiVector3D &value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} A\+S\+To\+G\+LM (
+\begin{DoxyParamCaption}
+\item[{const ai\+Vector3D \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{_assimp_to_g_l_m_8h_a76b753e9f20bc386158a1505cfbdb63a}{}\label{_assimp_to_g_l_m_8h_a76b753e9f20bc386158a1505cfbdb63a}
+
+
+Definition at line 31 of file Assimp\+To\+G\+L\+M.\+cpp.
+
+
+\begin{DoxyCode}
+32 \{
+33   \textcolor{keywordflow}{return} \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(value.x, value.y, value.z);
+34 \}
+\end{DoxyCode}
+\index{Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}!A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}}
+\index{A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}!Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}}
+\subsubsection[{\texorpdfstring{A\+S\+To\+G\+L\+M(const ai\+Color4\+D \&value)}{ASToGLM(const aiColor4D &value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec4} A\+S\+To\+G\+LM (
+\begin{DoxyParamCaption}
+\item[{const ai\+Color4D \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{_assimp_to_g_l_m_8h_ae6f40f5d173e2ed5c7df95a4c69bf383}{}\label{_assimp_to_g_l_m_8h_ae6f40f5d173e2ed5c7df95a4c69bf383}
+
+
+Definition at line 41 of file Assimp\+To\+G\+L\+M.\+cpp.
+
+
+\begin{DoxyCode}
+42 \{
+43   \textcolor{keywordflow}{return} \hyperlink{_types_8h_ac54e849f8b2339f592307eaf6cdbba77}{vec4}(value.r, value.g, value.b, value.a);
+44 \}\end{DoxyCode}
+\index{Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}!A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}}
+\index{A\+S\+To\+G\+LM@{A\+S\+To\+G\+LM}!Assimp\+To\+G\+L\+M.\+h@{Assimp\+To\+G\+L\+M.\+h}}
+\subsubsection[{\texorpdfstring{A\+S\+To\+G\+L\+M(const ai\+Quaternion \&value)}{ASToGLM(const aiQuaternion &value)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf quat} A\+S\+To\+G\+LM (
+\begin{DoxyParamCaption}
+\item[{const ai\+Quaternion \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{_assimp_to_g_l_m_8h_aca154dc89a1f691e436a119482ddbcdf}{}\label{_assimp_to_g_l_m_8h_aca154dc89a1f691e436a119482ddbcdf}
+
+
+Definition at line 36 of file Assimp\+To\+G\+L\+M.\+cpp.
+
+
+\begin{DoxyCode}
+37 \{
+38   \textcolor{keywordflow}{return} \hyperlink{_types_8h_a02abcac728eae225e929e9e0dc427f28}{quat}(value.w, value.x, value.y, value.z);
+39 \}
+\end{DoxyCode}

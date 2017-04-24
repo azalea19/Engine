@@ -1,0 +1,504 @@
+\hypertarget{class_i_mesh_collection}{}\section{I\+Mesh\+Collection Class Reference}
+\label{class_i_mesh_collection}\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+
+
+{\ttfamily \#include $<$I\+Mesh\+Collection.\+h$>$}
+
+
+
+Inheritance diagram for I\+Mesh\+Collection\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_i_mesh_collection__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for I\+Mesh\+Collection\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{class_i_mesh_collection__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} $>$ \hyperlink{class_i_mesh_collection_af3ad8b8f405ae37eaff19f9965ea6148}{Get\+Vertices} () const 
+\begin{DoxyCompactList}\small\item\em Gets the vertices. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} $>$ \hyperlink{class_i_mesh_collection_a752157903d879f04676e2515b8922947}{Get\+Normals} () const 
+\begin{DoxyCompactList}\small\item\em Gets the normals. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} $>$ \hyperlink{class_i_mesh_collection_a9220e6bdd01ac0b8026149918ea73c41}{Get\+A\+A\+BB} () const 
+\begin{DoxyCompactList}\small\item\em Gets Axis aligned bounding box -\/ index 0=min, 1=max. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{class_i_mesh_collection_ab5ef69beb5b87b0d791ade776dfd3ad0}{Get\+Indices} () const 
+\begin{DoxyCompactList}\small\item\em Gets the indices. \end{DoxyCompactList}\item 
+int \hyperlink{class_i_mesh_collection_a10bb5dc252b1dbebcebf8580806b3998}{Get\+Vertex\+Count} () const 
+\begin{DoxyCompactList}\small\item\em Gets the vertex count. \end{DoxyCompactList}\item 
+int \hyperlink{class_i_mesh_collection_acde6f34cd34609bacdc9c1357cc2ee33}{Get\+Normal\+Count} () const 
+\begin{DoxyCompactList}\small\item\em Gets the normal count. \end{DoxyCompactList}\item 
+int \hyperlink{class_i_mesh_collection_a8faa65b395e1068252c7943bbcd54d3c}{Get\+Index\+Count} () const 
+\begin{DoxyCompactList}\small\item\em Gets the index count. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_i_mesh}{I\+Mesh} const \& \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{Get\+Mesh} (int mesh\+Index) const  =0
+\begin{DoxyCompactList}\small\item\em Gets the mesh at the specified index. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{Get\+Mesh\+Count} () const  =0
+\begin{DoxyCompactList}\small\item\em Gets the mesh count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 16 of file I\+Mesh\+Collection.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+A\+A\+BB@{Get\+A\+A\+BB}}
+\index{Get\+A\+A\+BB@{Get\+A\+A\+BB}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+A\+A\+B\+B() const }{GetAABB() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf vec3} $>$ I\+Mesh\+Collection\+::\+Get\+A\+A\+BB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_a9220e6bdd01ac0b8026149918ea73c41}{}\label{class_i_mesh_collection_a9220e6bdd01ac0b8026149918ea73c41}
+
+
+Gets Axis aligned bounding box -\/ index 0=min, 1=max. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 84 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References Get\+Mesh\+Count().
+
+
+\begin{DoxyCode}
+85 \{
+86 
+87     std::vector<vec3> aabb;
+88 
+89     \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+90 
+91     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+92     \{
+93         std::vector<vec3> verts = \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_afb0bb17c66970b42cd883cf7ea2c6199}{GetVertices}();
+94 
+95         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} a = 0; a < verts.size(); a++)
+96         \{
+97             \textcolor{comment}{// Set up min and max to the first values to initialise}
+98             \textcolor{keywordflow}{if} (i == 0 && a == 0)
+99             \{
+100                 aabb.push\_back(verts[a]);
+101                 aabb.push\_back(verts[a]);
+102             \}
+103 
+104             \textcolor{comment}{// Check for new min and max values}
+105             \textcolor{keywordflow}{if} (verts[a].x < aabb[0].x)
+106             \{
+107                 aabb[0].x = verts[a].x;
+108             \}
+109             \textcolor{keywordflow}{if} (verts[a].y < aabb[0].y)
+110             \{
+111                 aabb[0].y = verts[a].y;
+112             \}
+113             \textcolor{keywordflow}{if} (verts[a].z < aabb[0].z)
+114             \{
+115                 aabb[0].z = verts[a].z;
+116             \}
+117 
+118             \textcolor{keywordflow}{if} (verts[a].x > aabb[1].x)
+119             \{
+120                 aabb[1].x = verts[a].x;
+121             \}
+122             \textcolor{keywordflow}{if} (verts[a].y > aabb[1].y)
+123             \{
+124                 aabb[1].y = verts[a].y;
+125             \}
+126             \textcolor{keywordflow}{if} (verts[a].z > aabb[1].z)
+127             \{
+128                 aabb[1].z = verts[a].z;
+129             \}
+130         \}
+131         
+132     \}
+133 
+134 
+135     \textcolor{keywordflow}{return} aabb;
+136 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_a9220e6bdd01ac0b8026149918ea73c41_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Index\+Count@{Get\+Index\+Count}}
+\index{Get\+Index\+Count@{Get\+Index\+Count}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Index\+Count() const }{GetIndexCount() const }}]{\setlength{\rightskip}{0pt plus 5cm}int I\+Mesh\+Collection\+::\+Get\+Index\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_a8faa65b395e1068252c7943bbcd54d3c}{}\label{class_i_mesh_collection_a8faa65b395e1068252c7943bbcd54d3c}
+
+
+Gets the index count. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 71 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References I\+Mesh\+::\+Get\+Index\+Count(), Get\+Mesh(), and Get\+Mesh\+Count().
+
+
+\begin{DoxyCode}
+72 \{
+73   \textcolor{keywordtype}{int} count = 0;
+74   \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+75 
+76   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+77   \{
+78     count += \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_af017d9682b2b9d9caef0a81f616be47d}{GetIndexCount}();
+79   \}
+80 
+81   \textcolor{keywordflow}{return} count;
+82 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_a8faa65b395e1068252c7943bbcd54d3c_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Indices@{Get\+Indices}}
+\index{Get\+Indices@{Get\+Indices}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Indices() const }{GetIndices() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ I\+Mesh\+Collection\+::\+Get\+Indices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_ab5ef69beb5b87b0d791ade776dfd3ad0}{}\label{class_i_mesh_collection_ab5ef69beb5b87b0d791ade776dfd3ad0}
+
+
+Gets the indices. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 32 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References Get\+Mesh\+Count().
+
+
+\begin{DoxyCode}
+33 \{
+34   std::vector<int> indices;
+35   \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+36   indices.reserve(\hyperlink{class_i_mesh_collection_acde6f34cd34609bacdc9c1357cc2ee33}{GetNormalCount}());
+37 
+38   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+39   \{
+40     \hyperlink{_utility_8h_a1ba347936108dbbe6b156bdd171634f2}{VectorConcatenate}(indices, \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_collection_ab5ef69beb5b87b0d791ade776dfd3ad0}{GetIndices}());
+41   \}
+42   \textcolor{keywordflow}{return} indices;
+43 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_ab5ef69beb5b87b0d791ade776dfd3ad0_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Mesh@{Get\+Mesh}}
+\index{Get\+Mesh@{Get\+Mesh}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Mesh(int mesh\+Index) const  =0}{GetMesh(int meshIndex) const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\+Mesh} const\& I\+Mesh\+Collection\+::\+Get\+Mesh (
+\begin{DoxyParamCaption}
+\item[{int}]{mesh\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{}\label{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}
+
+
+Gets the mesh at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh\+Index} & Index of the mesh.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_model_a0734ce48bc8e28cdc3853cad7610b9c7}{Model}, and \hyperlink{class_renderable_object_acda89656ba51e82065b187545b84c3c1}{Renderable\+Object}.
+
+
+
+Referenced by Get\+Index\+Count(), Get\+Normal\+Count(), and Get\+Vertex\+Count().
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Mesh\+Count@{Get\+Mesh\+Count}}
+\index{Get\+Mesh\+Count@{Get\+Mesh\+Count}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Mesh\+Count() const  =0}{GetMeshCount() const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual int I\+Mesh\+Collection\+::\+Get\+Mesh\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{}\label{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}
+
+
+Gets the mesh count. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_model_a82eaeee2c42d9aa32980853a13a44157}{Model}, and \hyperlink{class_renderable_object_a94f9b0b23548e7c48abfe2898b7dc678}{Renderable\+Object}.
+
+
+
+Referenced by Get\+A\+A\+B\+B(), Get\+Index\+Count(), Get\+Indices(), Get\+Normal\+Count(), Get\+Normals(), Get\+Vertex\+Count(), Get\+Vertices(), and Object\+Instance\+::\+Render().
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Normal\+Count@{Get\+Normal\+Count}}
+\index{Get\+Normal\+Count@{Get\+Normal\+Count}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Normal\+Count() const }{GetNormalCount() const }}]{\setlength{\rightskip}{0pt plus 5cm}int I\+Mesh\+Collection\+::\+Get\+Normal\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_acde6f34cd34609bacdc9c1357cc2ee33}{}\label{class_i_mesh_collection_acde6f34cd34609bacdc9c1357cc2ee33}
+
+
+Gets the normal count. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 58 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References Get\+Mesh(), Get\+Mesh\+Count(), and I\+Mesh\+::\+Get\+Normal\+Count().
+
+
+\begin{DoxyCode}
+59 \{
+60   \textcolor{keywordtype}{int} count = 0;
+61   \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+62 
+63   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+64   \{
+65     count += \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_a7e864f6150eaf58479087897a0ad9df2}{GetNormalCount}();
+66   \}
+67 
+68   \textcolor{keywordflow}{return} count;
+69 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_acde6f34cd34609bacdc9c1357cc2ee33_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Normals@{Get\+Normals}}
+\index{Get\+Normals@{Get\+Normals}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Normals() const }{GetNormals() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf vec3} $>$ I\+Mesh\+Collection\+::\+Get\+Normals (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_a752157903d879f04676e2515b8922947}{}\label{class_i_mesh_collection_a752157903d879f04676e2515b8922947}
+
+
+Gets the normals. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 19 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References Get\+Mesh\+Count().
+
+
+\begin{DoxyCode}
+20 \{
+21   std::vector<vec3> normals;
+22   \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+23   normals.reserve(\hyperlink{class_i_mesh_collection_acde6f34cd34609bacdc9c1357cc2ee33}{GetNormalCount}());
+24 
+25   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+26   \{
+27     \hyperlink{_utility_8h_a1ba347936108dbbe6b156bdd171634f2}{VectorConcatenate}(normals, \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_collection_a752157903d879f04676e2515b8922947}{GetNormals}());
+28   \}
+29   \textcolor{keywordflow}{return} normals;
+30 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_a752157903d879f04676e2515b8922947_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Vertex\+Count@{Get\+Vertex\+Count}}
+\index{Get\+Vertex\+Count@{Get\+Vertex\+Count}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Vertex\+Count() const }{GetVertexCount() const }}]{\setlength{\rightskip}{0pt plus 5cm}int I\+Mesh\+Collection\+::\+Get\+Vertex\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_a10bb5dc252b1dbebcebf8580806b3998}{}\label{class_i_mesh_collection_a10bb5dc252b1dbebcebf8580806b3998}
+
+
+Gets the vertex count. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 45 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References Get\+Mesh(), Get\+Mesh\+Count(), and I\+Mesh\+::\+Get\+Vertex\+Count().
+
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keywordtype}{int} count = 0;
+48   \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+49 
+50   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+51   \{
+52     count += \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_aff814631d73a51d364824632beabe147}{GetVertexCount}();
+53   \}
+54 
+55   \textcolor{keywordflow}{return} count;
+56 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_a10bb5dc252b1dbebcebf8580806b3998_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{I\+Mesh\+Collection@{I\+Mesh\+Collection}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!I\+Mesh\+Collection@{I\+Mesh\+Collection}}
+\subsubsection[{\texorpdfstring{Get\+Vertices() const }{GetVertices() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf vec3} $>$ I\+Mesh\+Collection\+::\+Get\+Vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_i_mesh_collection_af3ad8b8f405ae37eaff19f9965ea6148}{}\label{class_i_mesh_collection_af3ad8b8f405ae37eaff19f9965ea6148}
+
+
+Gets the vertices. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 6 of file I\+Mesh\+Collection.\+cpp.
+
+
+
+References Get\+Mesh\+Count().
+
+
+\begin{DoxyCode}
+7 \{
+8   std::vector<vec3> vertices;
+9   \textcolor{keywordtype}{int} meshCount = \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}();
+10   vertices.reserve(\hyperlink{class_i_mesh_collection_a10bb5dc252b1dbebcebf8580806b3998}{GetVertexCount}());
+11 
+12   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < meshCount; i++)
+13   \{
+14     \hyperlink{_utility_8h_a1ba347936108dbbe6b156bdd171634f2}{VectorConcatenate}(vertices, \hyperlink{class_i_mesh_collection_a69a697dbe55af35db69dc056aef900a5}{GetMesh}(i).\hyperlink{class_i_mesh_collection_af3ad8b8f405ae37eaff19f9965ea6148}{GetVertices}());
+15   \}
+16   \textcolor{keywordflow}{return} vertices;
+17 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_mesh_collection_af3ad8b8f405ae37eaff19f9965ea6148_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_i_mesh_collection_8h}{I\+Mesh\+Collection.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_i_mesh_collection_8cpp}{I\+Mesh\+Collection.\+cpp}\end{DoxyCompactItemize}

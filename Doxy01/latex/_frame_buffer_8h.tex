@@ -1,0 +1,122 @@
+\hypertarget{_frame_buffer_8h}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Frame\+Buffer.h File Reference}
+\label{_frame_buffer_8h}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Frame\+Buffer.\+h@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Frame\+Buffer.\+h}}
+
+
+The frame buffer allows for higher level post processing effects.  
+
+
+{\ttfamily \#include \char`\"{}G\+L/glew.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Types.\+h\char`\"{}}\\*
+Include dependency graph for Frame\+Buffer.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{_frame_buffer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_frame_buffer_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_frame_buffer}{Frame\+Buffer}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742}{Frame\+Buffer\+Bind\+Mode} \{ \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae31c8735e79d8dbbb9fab918f4de1089}{F\+B\+B\+M\+\_\+\+Unbound} = 0, 
+\hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742a4ef9947282b3e4054af7d0719aa119b5}{F\+B\+B\+M\+\_\+\+Read} = 0b01, 
+\hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae25ce268dda344d3d5a1cf4b3b061723}{F\+B\+B\+M\+\_\+\+Write} = 0b10, 
+\hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae77f3997d632fbdbe50556a908b53be1}{F\+B\+B\+M\+\_\+\+Read\+Write} = F\+B\+B\+M\+\_\+\+Read $\vert$ F\+B\+B\+M\+\_\+\+Write
+ \}
+\item 
+enum \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472}{Frame\+Buffer\+Status} \{ \\*
+\hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a2a8a93779575ad00f07f4689356781ca}{F\+B\+S\+\_\+\+Complete}, 
+\hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a9cd57978f6e4baff8b5e986dd3f33cb9}{F\+B\+S\+\_\+\+Invalid\+Attachment}, 
+\hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a8608d72e49dd9e30b2f4698ee92b0c86}{F\+B\+S\+\_\+\+Inconsistent\+Dimensions}, 
+\hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a3843028129435d0b91325bf84f6e7e23}{F\+B\+S\+\_\+\+Missing\+Attachment}, 
+\\*
+\hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a50790bb3c44d0d653462bcae9b31ffe4}{F\+B\+S\+\_\+\+Unbound}, 
+\hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472af771e357b2f91d45a7d60f090a1d124a}{F\+B\+S\+\_\+\+Unknown\+Error}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The frame buffer allows for higher level post processing effects. 
+
+Maddisen Topaz \begin{DoxyDate}{Date}
+S1, 2017 The frame buffer takes the output rendered to the window and creates a texture (texture buffer) for the data such as normals and depth information (known as rendering to a texture / off screen rendering). By creating texture buffers to store data for use in the shaders we can create higher level effects that are applied to the screen output to a two dimensional texture with three dimensional data (depth, normals etc). See\+: \href{https://learnopengl.com/#!Advanced-OpenGL/Framebuffers}{\tt https\+://learnopengl.\+com/\#!\+Advanced-\/\+Open\+G\+L/\+Framebuffers} \href{http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-14-render-to-texture/}{\tt http\+://www.\+opengl-\/tutorial.\+org/intermediate-\/tutorials/tutorial-\/14-\/render-\/to-\/texture/} 
+\end{DoxyDate}
+
+
+\subsection{Enumeration Type Documentation}
+\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!Frame\+Buffer\+Bind\+Mode@{Frame\+Buffer\+Bind\+Mode}}
+\index{Frame\+Buffer\+Bind\+Mode@{Frame\+Buffer\+Bind\+Mode}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}
+\subsubsection[{\texorpdfstring{Frame\+Buffer\+Bind\+Mode}{FrameBufferBindMode}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Frame\+Buffer\+Bind\+Mode}}\hypertarget{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742}{}\label{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+B\+B\+M\+\_\+\+Unbound@{F\+B\+B\+M\+\_\+\+Unbound}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+B\+M\+\_\+\+Unbound@{F\+B\+B\+M\+\_\+\+Unbound}}\item[{\em 
+F\+B\+B\+M\+\_\+\+Unbound\hypertarget{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae31c8735e79d8dbbb9fab918f4de1089}{}\label{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae31c8735e79d8dbbb9fab918f4de1089}
+}]\index{F\+B\+B\+M\+\_\+\+Read@{F\+B\+B\+M\+\_\+\+Read}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+B\+M\+\_\+\+Read@{F\+B\+B\+M\+\_\+\+Read}}\item[{\em 
+F\+B\+B\+M\+\_\+\+Read\hypertarget{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742a4ef9947282b3e4054af7d0719aa119b5}{}\label{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742a4ef9947282b3e4054af7d0719aa119b5}
+}]\index{F\+B\+B\+M\+\_\+\+Write@{F\+B\+B\+M\+\_\+\+Write}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+B\+M\+\_\+\+Write@{F\+B\+B\+M\+\_\+\+Write}}\item[{\em 
+F\+B\+B\+M\+\_\+\+Write\hypertarget{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae25ce268dda344d3d5a1cf4b3b061723}{}\label{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae25ce268dda344d3d5a1cf4b3b061723}
+}]\index{F\+B\+B\+M\+\_\+\+Read\+Write@{F\+B\+B\+M\+\_\+\+Read\+Write}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+B\+M\+\_\+\+Read\+Write@{F\+B\+B\+M\+\_\+\+Read\+Write}}\item[{\em 
+F\+B\+B\+M\+\_\+\+Read\+Write\hypertarget{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae77f3997d632fbdbe50556a908b53be1}{}\label{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae77f3997d632fbdbe50556a908b53be1}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 22 of file Frame\+Buffer.\+h.
+
+
+\begin{DoxyCode}
+23 \{
+24   \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae31c8735e79d8dbbb9fab918f4de1089}{FBBM\_Unbound} = 0,
+25   \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742a4ef9947282b3e4054af7d0719aa119b5}{FBBM\_Read} = 0b01,
+26   \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae25ce268dda344d3d5a1cf4b3b061723}{FBBM\_Write} = 0b10,
+27   \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae77f3997d632fbdbe50556a908b53be1}{FBBM\_ReadWrite} = \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742a4ef9947282b3e4054af7d0719aa119b5}{FBBM\_Read} | \hyperlink{_frame_buffer_8h_a3318e72469ce5bc8393bd02d39bc3742ae25ce268dda344d3d5a1cf4b3b061723}{FBBM\_Write},
+28 \};
+\end{DoxyCode}
+\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!Frame\+Buffer\+Status@{Frame\+Buffer\+Status}}
+\index{Frame\+Buffer\+Status@{Frame\+Buffer\+Status}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}
+\subsubsection[{\texorpdfstring{Frame\+Buffer\+Status}{FrameBufferStatus}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Frame\+Buffer\+Status}}\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+B\+S\+\_\+\+Complete@{F\+B\+S\+\_\+\+Complete}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+S\+\_\+\+Complete@{F\+B\+S\+\_\+\+Complete}}\item[{\em 
+F\+B\+S\+\_\+\+Complete\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472a2a8a93779575ad00f07f4689356781ca}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472a2a8a93779575ad00f07f4689356781ca}
+}]\index{F\+B\+S\+\_\+\+Invalid\+Attachment@{F\+B\+S\+\_\+\+Invalid\+Attachment}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+S\+\_\+\+Invalid\+Attachment@{F\+B\+S\+\_\+\+Invalid\+Attachment}}\item[{\em 
+F\+B\+S\+\_\+\+Invalid\+Attachment\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472a9cd57978f6e4baff8b5e986dd3f33cb9}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472a9cd57978f6e4baff8b5e986dd3f33cb9}
+}]\index{F\+B\+S\+\_\+\+Inconsistent\+Dimensions@{F\+B\+S\+\_\+\+Inconsistent\+Dimensions}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+S\+\_\+\+Inconsistent\+Dimensions@{F\+B\+S\+\_\+\+Inconsistent\+Dimensions}}\item[{\em 
+F\+B\+S\+\_\+\+Inconsistent\+Dimensions\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472a8608d72e49dd9e30b2f4698ee92b0c86}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472a8608d72e49dd9e30b2f4698ee92b0c86}
+}]\index{F\+B\+S\+\_\+\+Missing\+Attachment@{F\+B\+S\+\_\+\+Missing\+Attachment}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+S\+\_\+\+Missing\+Attachment@{F\+B\+S\+\_\+\+Missing\+Attachment}}\item[{\em 
+F\+B\+S\+\_\+\+Missing\+Attachment\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472a3843028129435d0b91325bf84f6e7e23}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472a3843028129435d0b91325bf84f6e7e23}
+}]\index{F\+B\+S\+\_\+\+Unbound@{F\+B\+S\+\_\+\+Unbound}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+S\+\_\+\+Unbound@{F\+B\+S\+\_\+\+Unbound}}\item[{\em 
+F\+B\+S\+\_\+\+Unbound\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472a50790bb3c44d0d653462bcae9b31ffe4}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472a50790bb3c44d0d653462bcae9b31ffe4}
+}]\index{F\+B\+S\+\_\+\+Unknown\+Error@{F\+B\+S\+\_\+\+Unknown\+Error}!Frame\+Buffer.\+h@{Frame\+Buffer.\+h}}\index{Frame\+Buffer.\+h@{Frame\+Buffer.\+h}!F\+B\+S\+\_\+\+Unknown\+Error@{F\+B\+S\+\_\+\+Unknown\+Error}}\item[{\em 
+F\+B\+S\+\_\+\+Unknown\+Error\hypertarget{_frame_buffer_8h_aad031fc418d1287580825400860cd472af771e357b2f91d45a7d60f090a1d124a}{}\label{_frame_buffer_8h_aad031fc418d1287580825400860cd472af771e357b2f91d45a7d60f090a1d124a}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 30 of file Frame\+Buffer.\+h.
+
+
+\begin{DoxyCode}
+31 \{
+32   \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a2a8a93779575ad00f07f4689356781ca}{FBS\_Complete},
+33   \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a9cd57978f6e4baff8b5e986dd3f33cb9}{FBS\_InvalidAttachment},
+34   \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a8608d72e49dd9e30b2f4698ee92b0c86}{FBS\_InconsistentDimensions},
+35   \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a3843028129435d0b91325bf84f6e7e23}{FBS\_MissingAttachment},
+36   \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472a50790bb3c44d0d653462bcae9b31ffe4}{FBS\_Unbound},
+37   \hyperlink{_frame_buffer_8h_aad031fc418d1287580825400860cd472af771e357b2f91d45a7d60f090a1d124a}{FBS\_UnknownError},
+38 \};
+\end{DoxyCode}

@@ -1,0 +1,4 @@
+<map id="SceneDecomposeEffect::Unbind" name="SceneDecomposeEffect::Unbind">
+<area shape="rect" id="node2" href="$class_render_manager_a_p_i.html#a23ef04f5e7a2af15296e7cb948055eae" title="Applies post processing and displays resulting texture on screen " alt="" coords="215,5,401,32"/>
+<area shape="rect" id="node3" href="$class_render_manager_a_p_i.html#aa7db1e8156b186062c635debf2d8776d" title="Renders from camera. " alt="" coords="217,57,399,98"/>
+</map>

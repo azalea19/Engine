@@ -1,0 +1,546 @@
+\hypertarget{class_input_manager}{}\section{Input\+Manager Class Reference}
+\label{class_input_manager}\index{Input\+Manager@{Input\+Manager}}
+
+
+{\ttfamily \#include $<$Input\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Input\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{class_input_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Input\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_manager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_input_manager_af93398faf21d795debc76b79ad2d5201}{Initialise} (\hyperlink{class_i_input_handler}{I\+Input\+Handler} $\ast$input\+Handler)
+\item 
+void \hyperlink{class_input_manager_aa5480931dba2720e7d80dd00a53adae0}{Update} ()
+\begin{DoxyCompactList}\small\item\em Updates this instance. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_aea5fcd05a755cd08dea87daab3b877ed}{Is\+Key\+Down} (int key\+Code) const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is key down\mbox{]} \mbox{[}the specified key code\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_ae0ba18a9ccbc1de2ab20b110fb96a2e4}{Is\+Key\+Up} (int key\+Code) const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is key up\mbox{]} \mbox{[}the specified key code\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a0bb7417608ed9f4a9e5d27f3f65b7af7}{Is\+Key\+Pressed} (int key\+Code) const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is key pressed\mbox{]} \mbox{[}the specified key code\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a8ca0de87bf6b06e42329adad0475f70a}{Is\+Key\+Released} (int key\+Code) const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is key released\mbox{]} \mbox{[}the specified key code\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a4e89e13b8b49be92a5f50c6c117a6ea9}{Is\+Mouse\+Down\+Left} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse down left\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a9b2f41752e74cac3dd26b3e289c0d1e2}{Is\+Mouse\+Up\+Left} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse up left\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_ac5336f30037da9913a0da969841af8af}{Is\+Mouse\+Pressed\+Left} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse pressed left\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a9a29ed43728778bc13ddf57b1542f81c}{Is\+Mouse\+Released\+Left} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse released left\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a8e473bfc51f360c6fa47c485aa3a6f60}{Is\+Mouse\+Down\+Right} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse down right\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a287b246f096f95f3a31676388e1216f8}{Is\+Mouse\+Up\+Right} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse up right\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_a79bd1a1e2ccbfb61e596c9211e3e85bc}{Is\+Mouse\+Pressed\+Right} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse pressed right\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_input_manager_ae00dc448b06ad64d49922b1a948acdbe}{Is\+Mouse\+Released\+Right} () const 
+\begin{DoxyCompactList}\small\item\em Determines whether \mbox{[}is mouse released right\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{class_input_manager_af760fc59b17e6fdef177d52abc40c12c}{Mouse\+DeltaX} () const 
+\begin{DoxyCompactList}\small\item\em Gets the change in x. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{class_input_manager_ab08ce42932b1f829fcaa89229b5dd15a}{Mouse\+DeltaY} () const 
+\begin{DoxyCompactList}\small\item\em Gets the change in y. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_input_manager_a6c0adba353990a1b44ee0d0f4e9a1463}{Keyboard\+State} (int key\+Code) const 
+\begin{DoxyCompactList}\small\item\em Current keyboard state. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_input_manager_a6bddc390f0c5cc8a0baba250e5c73fe8}{Last\+Keyboard\+State} (int key\+Code) const 
+\begin{DoxyCompactList}\small\item\em Last keyboard state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{class_i_input_handler}{I\+Input\+Handler} $>$ \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file Input\+Manager.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Input\+Manager@{Input\+Manager}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Initialise(\+I\+Input\+Handler $\ast$input\+Handler)}{Initialise(IInputHandler *inputHandler)}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Initialise (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+Input\+Handler} $\ast$}]{input\+Handler}
+\end{DoxyParamCaption}
+)}\hypertarget{class_input_manager_af93398faf21d795debc76b79ad2d5201}{}\label{class_input_manager_af93398faf21d795debc76b79ad2d5201}
+
+
+Definition at line 6 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+7 \{
+8   \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input} = std::unique\_ptr<IInputHandler>(inputHandler);
+9 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Key\+Down@{Is\+Key\+Down}}
+\index{Is\+Key\+Down@{Is\+Key\+Down}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Key\+Down(int key\+Code) const }{IsKeyDown(int keyCode) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Key\+Down (
+\begin{DoxyParamCaption}
+\item[{int}]{key\+Code}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_aea5fcd05a755cd08dea87daab3b877ed}{}\label{class_input_manager_aea5fcd05a755cd08dea87daab3b877ed}
+
+
+Determines whether \mbox{[}is key down\mbox{]} \mbox{[}the specified key code\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Code} & The key code.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is key down\mbox{]} \mbox{[}the specified key code\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 17 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+18 \{
+19   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsKeyDown(keyCode);
+20 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Key\+Pressed@{Is\+Key\+Pressed}}
+\index{Is\+Key\+Pressed@{Is\+Key\+Pressed}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Key\+Pressed(int key\+Code) const }{IsKeyPressed(int keyCode) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Key\+Pressed (
+\begin{DoxyParamCaption}
+\item[{int}]{key\+Code}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a0bb7417608ed9f4a9e5d27f3f65b7af7}{}\label{class_input_manager_a0bb7417608ed9f4a9e5d27f3f65b7af7}
+
+
+Determines whether \mbox{[}is key pressed\mbox{]} \mbox{[}the specified key code\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Code} & The key code.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is key pressed\mbox{]} \mbox{[}the specified key code\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 27 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+28 \{
+29   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsKeyPressed(keyCode);
+30 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Key\+Released@{Is\+Key\+Released}}
+\index{Is\+Key\+Released@{Is\+Key\+Released}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Key\+Released(int key\+Code) const }{IsKeyReleased(int keyCode) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Key\+Released (
+\begin{DoxyParamCaption}
+\item[{int}]{key\+Code}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a8ca0de87bf6b06e42329adad0475f70a}{}\label{class_input_manager_a8ca0de87bf6b06e42329adad0475f70a}
+
+
+Determines whether \mbox{[}is key released\mbox{]} \mbox{[}the specified key code\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Code} & The key code.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is key released\mbox{]} \mbox{[}the specified key code\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 32 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+33 \{
+34   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsKeyReleased(keyCode);
+35 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Key\+Up@{Is\+Key\+Up}}
+\index{Is\+Key\+Up@{Is\+Key\+Up}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Key\+Up(int key\+Code) const }{IsKeyUp(int keyCode) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Key\+Up (
+\begin{DoxyParamCaption}
+\item[{int}]{key\+Code}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_ae0ba18a9ccbc1de2ab20b110fb96a2e4}{}\label{class_input_manager_ae0ba18a9ccbc1de2ab20b110fb96a2e4}
+
+
+Determines whether \mbox{[}is key up\mbox{]} \mbox{[}the specified key code\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Code} & The key code.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is key up\mbox{]} \mbox{[}the specified key code\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 22 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+23 \{
+24   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsKeyUp(keyCode);
+25 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Down\+Left@{Is\+Mouse\+Down\+Left}}
+\index{Is\+Mouse\+Down\+Left@{Is\+Mouse\+Down\+Left}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Down\+Left() const }{IsMouseDownLeft() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Down\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a4e89e13b8b49be92a5f50c6c117a6ea9}{}\label{class_input_manager_a4e89e13b8b49be92a5f50c6c117a6ea9}
+
+
+Determines whether \mbox{[}is mouse down left\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse down left\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+38 \{
+39   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMouseDownLeft();
+40 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Down\+Right@{Is\+Mouse\+Down\+Right}}
+\index{Is\+Mouse\+Down\+Right@{Is\+Mouse\+Down\+Right}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Down\+Right() const }{IsMouseDownRight() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Down\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a8e473bfc51f360c6fa47c485aa3a6f60}{}\label{class_input_manager_a8e473bfc51f360c6fa47c485aa3a6f60}
+
+
+Determines whether \mbox{[}is mouse down right\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse down right\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+58 \{
+59   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMouseDownRight();
+60 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Pressed\+Left@{Is\+Mouse\+Pressed\+Left}}
+\index{Is\+Mouse\+Pressed\+Left@{Is\+Mouse\+Pressed\+Left}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Pressed\+Left() const }{IsMousePressedLeft() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Pressed\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_ac5336f30037da9913a0da969841af8af}{}\label{class_input_manager_ac5336f30037da9913a0da969841af8af}
+
+
+Determines whether \mbox{[}is mouse pressed left\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse pressed left\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+48 \{
+49   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMousePressedLeft();
+50 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Pressed\+Right@{Is\+Mouse\+Pressed\+Right}}
+\index{Is\+Mouse\+Pressed\+Right@{Is\+Mouse\+Pressed\+Right}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Pressed\+Right() const }{IsMousePressedRight() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Pressed\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a79bd1a1e2ccbfb61e596c9211e3e85bc}{}\label{class_input_manager_a79bd1a1e2ccbfb61e596c9211e3e85bc}
+
+
+Determines whether \mbox{[}is mouse pressed right\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse pressed right\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+68 \{
+69   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMousePressedRight();
+70 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Released\+Left@{Is\+Mouse\+Released\+Left}}
+\index{Is\+Mouse\+Released\+Left@{Is\+Mouse\+Released\+Left}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Released\+Left() const }{IsMouseReleasedLeft() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Released\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a9a29ed43728778bc13ddf57b1542f81c}{}\label{class_input_manager_a9a29ed43728778bc13ddf57b1542f81c}
+
+
+Determines whether \mbox{[}is mouse released left\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse released left\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+53 \{
+54   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMouseReleasedLeft();
+55 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Released\+Right@{Is\+Mouse\+Released\+Right}}
+\index{Is\+Mouse\+Released\+Right@{Is\+Mouse\+Released\+Right}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Released\+Right() const }{IsMouseReleasedRight() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Released\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_ae00dc448b06ad64d49922b1a948acdbe}{}\label{class_input_manager_ae00dc448b06ad64d49922b1a948acdbe}
+
+
+Determines whether \mbox{[}is mouse released right\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse released right\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 72 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+73 \{
+74   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMouseReleasedRight();
+75 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Up\+Left@{Is\+Mouse\+Up\+Left}}
+\index{Is\+Mouse\+Up\+Left@{Is\+Mouse\+Up\+Left}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Up\+Left() const }{IsMouseUpLeft() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Up\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a9b2f41752e74cac3dd26b3e289c0d1e2}{}\label{class_input_manager_a9b2f41752e74cac3dd26b3e289c0d1e2}
+
+
+Determines whether \mbox{[}is mouse up left\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse up left\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+43 \{
+44   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMouseUpLeft();
+45 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Is\+Mouse\+Up\+Right@{Is\+Mouse\+Up\+Right}}
+\index{Is\+Mouse\+Up\+Right@{Is\+Mouse\+Up\+Right}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Mouse\+Up\+Right() const }{IsMouseUpRight() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Is\+Mouse\+Up\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a287b246f096f95f3a31676388e1216f8}{}\label{class_input_manager_a287b246f096f95f3a31676388e1216f8}
+
+
+Determines whether \mbox{[}is mouse up right\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \mbox{[}is mouse up right\mbox{]}; otherwise, {\ttfamily false}. 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+63 \{
+64   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->IsMouseUpRight();
+65 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Keyboard\+State@{Keyboard\+State}}
+\index{Keyboard\+State@{Keyboard\+State}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Keyboard\+State(int key\+Code) const }{KeyboardState(int keyCode) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Input\+Manager\+::\+Keyboard\+State (
+\begin{DoxyParamCaption}
+\item[{int}]{key\+Code}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a6c0adba353990a1b44ee0d0f4e9a1463}{}\label{class_input_manager_a6c0adba353990a1b44ee0d0f4e9a1463}
+
+
+Current keyboard state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Code} & The key code.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 87 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+88 \{
+89   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->KeyboardState(keyCode);
+90 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Last\+Keyboard\+State@{Last\+Keyboard\+State}}
+\index{Last\+Keyboard\+State@{Last\+Keyboard\+State}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Last\+Keyboard\+State(int key\+Code) const }{LastKeyboardState(int keyCode) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Input\+Manager\+::\+Last\+Keyboard\+State (
+\begin{DoxyParamCaption}
+\item[{int}]{key\+Code}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_a6bddc390f0c5cc8a0baba250e5c73fe8}{}\label{class_input_manager_a6bddc390f0c5cc8a0baba250e5c73fe8}
+
+
+Last keyboard state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Code} & The key code.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 92 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+93 \{
+94   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->LastKeyboardState(keyCode);
+95 \}\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Mouse\+DeltaX@{Mouse\+DeltaX}}
+\index{Mouse\+DeltaX@{Mouse\+DeltaX}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Mouse\+Delta\+X() const }{MouseDeltaX() const }}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t Input\+Manager\+::\+Mouse\+DeltaX (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_af760fc59b17e6fdef177d52abc40c12c}{}\label{class_input_manager_af760fc59b17e6fdef177d52abc40c12c}
+
+
+Gets the change in x. 
+
+\begin{DoxyReturn}{Returns}
+int32\+\_\+t
+\end{DoxyReturn}
+
+
+Definition at line 77 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+78 \{
+79   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->MouseDeltaX();
+80 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Mouse\+DeltaY@{Mouse\+DeltaY}}
+\index{Mouse\+DeltaY@{Mouse\+DeltaY}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Mouse\+Delta\+Y() const }{MouseDeltaY() const }}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t Input\+Manager\+::\+Mouse\+DeltaY (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_input_manager_ab08ce42932b1f829fcaa89229b5dd15a}{}\label{class_input_manager_ab08ce42932b1f829fcaa89229b5dd15a}
+
+
+Gets the change in y. 
+
+\begin{DoxyReturn}{Returns}
+int32\+\_\+t
+\end{DoxyReturn}
+
+
+Definition at line 82 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+83 \{
+84   \textcolor{keywordflow}{return} \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->MouseDeltaY();
+85 \}
+\end{DoxyCode}
+\index{Input\+Manager@{Input\+Manager}!Update@{Update}}
+\index{Update@{Update}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_input_manager_aa5480931dba2720e7d80dd00a53adae0}{}\label{class_input_manager_aa5480931dba2720e7d80dd00a53adae0}
+
+
+Updates this instance. 
+
+
+
+Definition at line 11 of file Input\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+12 \{
+13   \hyperlink{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{input}->Update();
+14 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Input\+Manager@{Input\+Manager}!input@{input}}
+\index{input@{input}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{input}{input}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf I\+Input\+Handler}$>$ Input\+Manager\+::input\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}{}\label{class_input_manager_ab378e443c8fc8c1827ee3fddcc65490c}
+
+
+Definition at line 177 of file Input\+Manager.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_input_manager_8h}{Input\+Manager.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_input_manager_8cpp}{Input\+Manager.\+cpp}\end{DoxyCompactItemize}

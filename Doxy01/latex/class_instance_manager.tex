@@ -1,0 +1,164 @@
+\hypertarget{class_instance_manager}{}\section{Instance\+Manager$<$ Type $>$ Class Template Reference}
+\label{class_instance_manager}\index{Instance\+Manager$<$ Type $>$@{Instance\+Manager$<$ Type $>$}}
+
+
+{\ttfamily \#include $<$Lua\+Instance\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Instance\+Manager$<$ Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{class_instance_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Instance\+Manager$<$ Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{class_instance_manager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_instance_manager_ab3980fd66aa58b578f717153ead48cff}{Instance\+Manager} ()
+\item 
+\hyperlink{_lua_object_instance_manager_8h_a317edebd09c13058779c942342947a0d}{Instance\+Handle} \hyperlink{class_instance_manager_aae464dea5086936eab94526a249bd658}{Instance\+Manager} ()
+\item 
+Type $\ast$ \hyperlink{class_instance_manager_a0db6720e777da4a044c071eb4127495f}{Instance\+Manager} (int instance\+Handle)
+\item 
+void \hyperlink{class_instance_manager_ab3308701202e2b9ce924e940fd29cc8e}{Instance\+Manager} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} lua\+A\+P\+I\+Name)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}{m\+\_\+last\+Indx}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Type$>$\\*
+class Instance\+Manager$<$ Type $>$}
+
+
+
+Definition at line 13 of file Lua\+Instance\+Manager.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\subsubsection[{\texorpdfstring{Instance\+Manager()}{InstanceManager()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Type$>$ {\bf Instance\+Manager}$<$ Type $>$\+::{\bf Instance\+Manager} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_instance_manager_ab3980fd66aa58b578f717153ead48cff}{}\label{class_instance_manager_ab3980fd66aa58b578f717153ead48cff}
+
+
+Definition at line 25 of file Lua\+Instance\+Manager.\+h.
+
+
+\begin{DoxyCode}
+26     \{
+27         \hyperlink{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}{m\_lastIndx} = 0;
+28     \}
+\end{DoxyCode}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\subsubsection[{\texorpdfstring{Instance\+Manager()}{InstanceManager()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Type$>$ {\bf Instance\+Handle} {\bf Instance\+Manager}$<$ Type $>$\+::{\bf Instance\+Manager} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_instance_manager_aae464dea5086936eab94526a249bd658}{}\label{class_instance_manager_aae464dea5086936eab94526a249bd658}
+
+
+Definition at line 30 of file Lua\+Instance\+Manager.\+h.
+
+
+\begin{DoxyCode}
+31     \{
+32 
+33         Type * newInstance = \textcolor{keyword}{new} Type();
+34         \hyperlink{_lua_object_instance_manager_8cpp_aa5bb1ea4530844bee28442aede3ffe22}{m\_instanceMap}.emplace(\hyperlink{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}{m\_lastIndx}, newInstance);
+35 
+36         \textcolor{comment}{//m\_instanceMap.push\_back(newInstance);}
+37         \hyperlink{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}{m\_lastIndx} += 1;
+38 
+39         \textcolor{keywordflow}{return} \hyperlink{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}{m\_lastIndx} - 1;
+40     \}
+\end{DoxyCode}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\subsubsection[{\texorpdfstring{Instance\+Manager(int instance\+Handle)}{InstanceManager(int instanceHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Type$>$ Type$\ast$ {\bf Instance\+Manager}$<$ Type $>$\+::{\bf Instance\+Manager} (
+\begin{DoxyParamCaption}
+\item[{int}]{instance\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_instance_manager_a0db6720e777da4a044c071eb4127495f}{}\label{class_instance_manager_a0db6720e777da4a044c071eb4127495f}
+
+
+Definition at line 42 of file Lua\+Instance\+Manager.\+h.
+
+
+\begin{DoxyCode}
+43     \{
+44         \textcolor{comment}{//return & m\_instanceMap[instanceHandle];}
+45     
+46 
+47         \textcolor{keyword}{auto} got = \hyperlink{_lua_object_instance_manager_8cpp_aa5bb1ea4530844bee28442aede3ffe22}{m\_instanceMap}.find(instanceHandle);
+48 
+49         \textcolor{keywordflow}{if} (got == \hyperlink{_lua_object_instance_manager_8cpp_aa5bb1ea4530844bee28442aede3ffe22}{m\_instanceMap}.end())
+50         \{
+51             \textcolor{comment}{//printf("Instance with name %n not found.", instanceHandle); //this crashes}
+52             printf(\textcolor{stringliteral}{"Instance not found\(\backslash\)n"});
+53             \textcolor{comment}{//getChar();}
+54             Type * nullInst;
+55             \textcolor{keywordflow}{return} nullInst;
+56         \}
+57 
+58         \textcolor{keywordflow}{return} got->second;
+59         \textcolor{comment}{//return new Type;}
+60 
+61         
+62     \}
+\end{DoxyCode}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\index{Instance\+Manager@{Instance\+Manager}!Instance\+Manager@{Instance\+Manager}}
+\subsubsection[{\texorpdfstring{Instance\+Manager(\+Lua\+Context\+Handle context\+Handle, string lua\+A\+P\+I\+Name)}{InstanceManager(LuaContextHandle contextHandle, string luaAPIName)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Type$>$ void {\bf Instance\+Manager}$<$ Type $>$\+::{\bf Instance\+Manager} (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle, }
+\item[{{\bf string}}]{lua\+A\+P\+I\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_instance_manager_ab3308701202e2b9ce924e940fd29cc8e}{}\label{class_instance_manager_ab3308701202e2b9ce924e940fd29cc8e}
+
+
+Definition at line 64 of file Lua\+Instance\+Manager.\+h.
+
+
+\begin{DoxyCode}
+65     \{
+66         \hyperlink{class_lua_context}{LuaContext}* pContext = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().
+      \hyperlink{class_lua_manager_a68592b46a59219d130cf4f637c977378}{GetContext}(contextHandle);
+67         pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"addNewInstance"}, AddNewInstance);
+68     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Instance\+Manager@{Instance\+Manager}!m\+\_\+last\+Indx@{m\+\_\+last\+Indx}}
+\index{m\+\_\+last\+Indx@{m\+\_\+last\+Indx}!Instance\+Manager@{Instance\+Manager}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Indx}{m_lastIndx}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Type$>$ int {\bf Instance\+Manager}$<$ T $>$\+::m\+\_\+last\+Indx\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}{}\label{class_instance_manager_a2a5daf3836fbfe69acefd87064a974a2}
+
+
+Definition at line 20 of file Lua\+Instance\+Manager.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_lua_instance_manager_8h}{Lua\+Instance\+Manager.\+h}\end{DoxyCompactItemize}

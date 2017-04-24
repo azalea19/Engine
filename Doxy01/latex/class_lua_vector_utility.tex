@@ -1,0 +1,491 @@
+\hypertarget{class_lua_vector_utility}{}\section{Lua\+Vector\+Utility Class Reference}
+\label{class_lua_vector_utility}\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+
+
+{\ttfamily \#include $<$Lua\+Vector\+Utility.\+h$>$}
+
+
+
+Collaboration diagram for Lua\+Vector\+Utility\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{class_lua_vector_utility__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_ad56035d71fe5c7ed373f998aa176faa0}{vec3\+\_\+\+Normalize} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} value, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Vec3 normalize. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_aaa2a96f3165c794d050ec530681dedd0}{vec3\+\_\+\+Sum} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} a, \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} b, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Vec3 sum. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_ad2caa5ad229b47ee90c54ea003aeeac2}{vec3\+\_\+\+Subtract} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} a, \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} b, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Vec3 subtract. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_a5d267e8cff5915434bfa00f8ff2bf687}{vec3\+\_\+\+Scalar\+Multiply} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} value, float scalar, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Vec3 scalar multiply. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_aab330a267a08b73d440b55699fd03474}{vec3\+\_\+\+Multiply} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} vec1, \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2}, \hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Vec3 multiply. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_a0bddf491591f4be0d0f860362bce33f5}{vec3\+\_\+\+Create\+Empty} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Vec3 create empty. \end{DoxyCompactList}\item 
+static bool \hyperlink{class_lua_vector_utility_a274aa51abd10dadf88643b52e8ffbd93}{vec3\+\_\+\+Equals} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} a, \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} b)
+\begin{DoxyCompactList}\small\item\em Vec3 equals. \end{DoxyCompactList}\item 
+static \hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} \hyperlink{class_lua_vector_utility_a58aa97a5050a5d1133f22e3404ba405d}{mat4\+\_\+\+Create\+Identity} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle)
+\begin{DoxyCompactList}\small\item\em Mat4 create identity. \end{DoxyCompactList}\item 
+static void \hyperlink{class_lua_vector_utility_acbe73ba3691461ae049cd1ff934ff120}{Expose} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} lua\+A\+P\+I\+Name)
+\begin{DoxyCompactList}\small\item\em Exposes the A\+PI to lua. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Lua\+Vector\+Utility.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!Expose@{Expose}}
+\index{Expose@{Expose}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{Expose(\+Lua\+Context\+Handle context\+Handle, string lua\+A\+P\+I\+Name)}{Expose(LuaContextHandle contextHandle, string luaAPIName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lua\+Vector\+Utility\+::\+Expose (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle, }
+\item[{{\bf string}}]{lua\+A\+P\+I\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_acbe73ba3691461ae049cd1ff934ff120}{}\label{class_lua_vector_utility_acbe73ba3691461ae049cd1ff934ff120}
+
+
+Exposes the A\+PI to lua. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context\+Handle} & The context handle.\\
+\hline
+{\em lua\+A\+P\+I\+Name} & Name of the lua A\+PI.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file Lua\+Vector\+Utility.\+cpp.
+
+
+\begin{DoxyCode}
+74 \{
+75     \hyperlink{class_lua_context}{LuaContext}* pContext = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().
+      \hyperlink{class_lua_manager_a68592b46a59219d130cf4f637c977378}{GetContext}(contextHandle);
+76     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_Equals"}, 
+      \hyperlink{class_lua_vector_utility_a274aa51abd10dadf88643b52e8ffbd93}{vec3\_Equals});
+77 
+78     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_CreateEmpty"}, 
+      \hyperlink{class_lua_vector_utility_a0bddf491591f4be0d0f860362bce33f5}{vec3\_CreateEmpty});
+79 
+80     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_Normalize"}, 
+      \hyperlink{class_lua_vector_utility_ad56035d71fe5c7ed373f998aa176faa0}{vec3\_Normalize});
+81     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_Sum"}, \hyperlink{class_lua_vector_utility_aaa2a96f3165c794d050ec530681dedd0}{vec3\_Sum});
+82     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_Subtract"}, 
+      \hyperlink{class_lua_vector_utility_ad2caa5ad229b47ee90c54ea003aeeac2}{vec3\_Subtract});
+83     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"mat4\_CreateIdentity"}, 
+      \hyperlink{class_lua_vector_utility_a58aa97a5050a5d1133f22e3404ba405d}{mat4\_CreateIdentity});
+84     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_ScalarMultiply"}, 
+      \hyperlink{class_lua_vector_utility_a5d267e8cff5915434bfa00f8ff2bf687}{vec3\_ScalarMultiply});
+85     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"vec3\_Multiply"}, 
+      \hyperlink{class_lua_vector_utility_aab330a267a08b73d440b55699fd03474}{vec3\_Multiply});
+86 
+87 \}\end{DoxyCode}
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!mat4\+\_\+\+Create\+Identity@{mat4\+\_\+\+Create\+Identity}}
+\index{mat4\+\_\+\+Create\+Identity@{mat4\+\_\+\+Create\+Identity}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{mat4\+\_\+\+Create\+Identity(\+Lua\+Context\+Handle context\+Handle)}{mat4_CreateIdentity(LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::mat4\+\_\+\+Create\+Identity (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_a58aa97a5050a5d1133f22e3404ba405d}{}\label{class_lua_vector_utility_a58aa97a5050a5d1133f22e3404ba405d}
+
+
+Mat4 create identity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 44 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+45 \{
+46     \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} empty;
+47     \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(empty, contextHandle);
+48 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{class_lua_vector_utility_a58aa97a5050a5d1133f22e3404ba405d_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Create\+Empty@{vec3\+\_\+\+Create\+Empty}}
+\index{vec3\+\_\+\+Create\+Empty@{vec3\+\_\+\+Create\+Empty}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Create\+Empty(\+Lua\+Context\+Handle context\+Handle)}{vec3_CreateEmpty(LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::vec3\+\_\+\+Create\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_a0bddf491591f4be0d0f860362bce33f5}{}\label{class_lua_vector_utility_a0bddf491591f4be0d0f860362bce33f5}
+
+
+Vec3 create empty. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lua\+Ref
+\end{DoxyReturn}
+
+
+Definition at line 65 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+66 \{
+67     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} empty;
+68     \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(empty, contextHandle);
+69 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_lua_vector_utility_a0bddf491591f4be0d0f860362bce33f5_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Equals@{vec3\+\_\+\+Equals}}
+\index{vec3\+\_\+\+Equals@{vec3\+\_\+\+Equals}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Equals(\+Lua\+Ref a, Lua\+Ref b)}{vec3_Equals(LuaRef a, LuaRef b)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Lua\+Vector\+Utility\+::vec3\+\_\+\+Equals (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{a, }
+\item[{{\bf Lua\+Ref}}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_a274aa51abd10dadf88643b52e8ffbd93}{}\label{class_lua_vector_utility_a274aa51abd10dadf88643b52e8ffbd93}
+
+
+Vec3 equals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & a.\\
+\hline
+{\em b} & The b.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool
+\end{DoxyReturn}
+
+
+Definition at line 58 of file Lua\+Vector\+Utility.\+cpp.
+
+
+\begin{DoxyCode}
+59 \{
+60     \textcolor{keywordflow}{if} (\hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(a) == \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(b))
+61       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+62     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+63 \}
+\end{DoxyCode}
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Multiply@{vec3\+\_\+\+Multiply}}
+\index{vec3\+\_\+\+Multiply@{vec3\+\_\+\+Multiply}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Multiply(\+Lua\+Ref vec1, Lua\+Ref vec2, Lua\+Context\+Handle context\+Handle)}{vec3_Multiply(LuaRef vec1, LuaRef vec2, LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::vec3\+\_\+\+Multiply (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{vec1, }
+\item[{{\bf Lua\+Ref}}]{vec2, }
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_aab330a267a08b73d440b55699fd03474}{}\label{class_lua_vector_utility_aab330a267a08b73d440b55699fd03474}
+
+
+Vec3 multiply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec1} & A vec3 to multiply.\\
+\hline
+{\em vec2} & Second vec3 to multiply.\\
+\hline
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lua\+Ref
+\end{DoxyReturn}
+
+
+Definition at line 24 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+25 \{
+26     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} veca = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(vec1);
+27     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} vecb = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(\hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2});
+28 
+29     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} finalVec = veca * vecb;
+30     \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(finalVec, contextHandle);
+31 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_lua_vector_utility_aab330a267a08b73d440b55699fd03474_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Normalize@{vec3\+\_\+\+Normalize}}
+\index{vec3\+\_\+\+Normalize@{vec3\+\_\+\+Normalize}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Normalize(\+Lua\+Ref value, Lua\+Context\+Handle context\+Handle)}{vec3_Normalize(LuaRef value, LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::vec3\+\_\+\+Normalize (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{value, }
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_ad56035d71fe5c7ed373f998aa176faa0}{}\label{class_lua_vector_utility_ad56035d71fe5c7ed373f998aa176faa0}
+
+
+Vec3 normalize. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to normaliz.\\
+\hline
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lua\+Ref
+\end{DoxyReturn}
+
+
+Definition at line 6 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+7 \{
+8   \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} vec = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(value);
+9     vec = normalize(vec);
+10     \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(vec, contextHandle);
+11 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_lua_vector_utility_ad56035d71fe5c7ed373f998aa176faa0_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Scalar\+Multiply@{vec3\+\_\+\+Scalar\+Multiply}}
+\index{vec3\+\_\+\+Scalar\+Multiply@{vec3\+\_\+\+Scalar\+Multiply}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Scalar\+Multiply(\+Lua\+Ref value, float scalar, Lua\+Context\+Handle context\+Handle)}{vec3_ScalarMultiply(LuaRef value, float scalar, LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::vec3\+\_\+\+Scalar\+Multiply (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{value, }
+\item[{float}]{scalar, }
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_a5d267e8cff5915434bfa00f8ff2bf687}{}\label{class_lua_vector_utility_a5d267e8cff5915434bfa00f8ff2bf687}
+
+
+Vec3 scalar multiply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The vec3 to multiply.\\
+\hline
+{\em scalar} & The scalar to multiply.\\
+\hline
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lua\+Ref
+\end{DoxyReturn}
+
+
+Definition at line 51 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+52 \{
+53     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} vec = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(value);
+54   \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} finalVec = vec * scalar;
+55     \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(finalVec, contextHandle);
+56 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_lua_vector_utility_a5d267e8cff5915434bfa00f8ff2bf687_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Subtract@{vec3\+\_\+\+Subtract}}
+\index{vec3\+\_\+\+Subtract@{vec3\+\_\+\+Subtract}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Subtract(\+Lua\+Ref a, Lua\+Ref b, Lua\+Context\+Handle context\+Handle)}{vec3_Subtract(LuaRef a, LuaRef b, LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::vec3\+\_\+\+Subtract (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{a, }
+\item[{{\bf Lua\+Ref}}]{b, }
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_ad2caa5ad229b47ee90c54ea003aeeac2}{}\label{class_lua_vector_utility_ad2caa5ad229b47ee90c54ea003aeeac2}
+
+
+Vec3 subtract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Value 1 to subtract.\\
+\hline
+{\em b} & Value 2 to subtract.\\
+\hline
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lua\+Ref
+\end{DoxyReturn}
+
+
+Definition at line 35 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+36 \{
+37     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} vec1 = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(a);
+38     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2} = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(b);
+39     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} finalVec = vec1 - \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2};
+40   \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(finalVec, contextHandle);
+41 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_lua_vector_utility_ad2caa5ad229b47ee90c54ea003aeeac2_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Lua\+Vector\+Utility@{Lua\+Vector\+Utility}!vec3\+\_\+\+Sum@{vec3\+\_\+\+Sum}}
+\index{vec3\+\_\+\+Sum@{vec3\+\_\+\+Sum}!Lua\+Vector\+Utility@{Lua\+Vector\+Utility}}
+\subsubsection[{\texorpdfstring{vec3\+\_\+\+Sum(\+Lua\+Ref a, Lua\+Ref b, Lua\+Context\+Handle context\+Handle)}{vec3_Sum(LuaRef a, LuaRef b, LuaContextHandle contextHandle)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lua\+Ref} Lua\+Vector\+Utility\+::vec3\+\_\+\+Sum (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{a, }
+\item[{{\bf Lua\+Ref}}]{b, }
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_vector_utility_aaa2a96f3165c794d050ec530681dedd0}{}\label{class_lua_vector_utility_aaa2a96f3165c794d050ec530681dedd0}
+
+
+Vec3 sum. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Value 1 to sum.\\
+\hline
+{\em b} & Value 2 to sum.\\
+\hline
+{\em context\+Handle} & The context handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lua\+Ref
+\end{DoxyReturn}
+
+
+Definition at line 14 of file Lua\+Vector\+Utility.\+cpp.
+
+
+
+References To\+Lua\+Table().
+
+
+\begin{DoxyCode}
+15 \{
+16     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} vec1 = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(a);
+17     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2} = \hyperlink{_math_a_p_i_8h_a57e551c31a30e104a0c0ca525557f265}{FromLuaTable<vec3>}(b);
+18     \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} finalVec = vec1 + \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2};
+19     \textcolor{keywordflow}{return} \hyperlink{_math_a_p_i_8h_a6d4bdd6987400be64a6a029dbf3e5fb2}{ToLuaTable}(finalVec, contextHandle);
+20 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{class_lua_vector_utility_aaa2a96f3165c794d050ec530681dedd0_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_lua_vector_utility_8h}{Lua\+Vector\+Utility.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_lua_vector_utility_8cpp}{Lua\+Vector\+Utility.\+cpp}\end{DoxyCompactItemize}

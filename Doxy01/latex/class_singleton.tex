@@ -1,0 +1,104 @@
+\hypertarget{class_singleton}{}\section{Singleton$<$ Derived\+Class $>$ Class Template Reference}
+\label{class_singleton}\index{Singleton$<$ Derived\+Class $>$@{Singleton$<$ Derived\+Class $>$}}
+
+
+{\ttfamily \#include $<$Singleton.\+h$>$}
+
+
+
+Inheritance diagram for Singleton$<$ Derived\+Class $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_singleton__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Singleton$<$ Derived\+Class $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{class_singleton__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Derived\+Class \& \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{Get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_singleton_aa5f910786b43cf9731b0408913843dfa}{Singleton} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static Derived\+Class $\ast$ \hyperlink{class_singleton_a3e624b61d8f814347f92cd326105b378}{p} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Derived\+Class$>$\\*
+class Singleton$<$ Derived\+Class $>$}
+
+
+
+Definition at line 14 of file Singleton.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Singleton@{Singleton}!Singleton@{Singleton}}
+\index{Singleton@{Singleton}!Singleton@{Singleton}}
+\subsubsection[{\texorpdfstring{Singleton()}{Singleton()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Derived\+Class$>$ {\bf Singleton}$<$ Derived\+Class $>$\+::{\bf Singleton} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{class_singleton_aa5f910786b43cf9731b0408913843dfa}{}\label{class_singleton_aa5f910786b43cf9731b0408913843dfa}
+
+
+Definition at line 26 of file Singleton.\+h.
+
+
+\begin{DoxyCode}
+26 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Singleton@{Singleton}!Get\+Instance@{Get\+Instance}}
+\index{Get\+Instance@{Get\+Instance}!Singleton@{Singleton}}
+\subsubsection[{\texorpdfstring{Get\+Instance()}{GetInstance()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Derived\+Class$>$ static Derived\+Class\& {\bf Singleton}$<$ Derived\+Class $>$\+::Get\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{}\label{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}
+
+
+Definition at line 17 of file Singleton.\+h.
+
+
+\begin{DoxyCode}
+18     \{
+19         \textcolor{keywordflow}{if} (\hyperlink{class_singleton_a3e624b61d8f814347f92cd326105b378}{p} == \textcolor{keyword}{nullptr})
+20             \hyperlink{class_singleton_a3e624b61d8f814347f92cd326105b378}{p} = \textcolor{keyword}{new} DerivedClass();
+21         \textcolor{keywordflow}{return} *\hyperlink{class_singleton_a3e624b61d8f814347f92cd326105b378}{p};
+22     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Singleton@{Singleton}!p@{p}}
+\index{p@{p}!Singleton@{Singleton}}
+\subsubsection[{\texorpdfstring{p}{p}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Derived\+Class$>$ T $\ast$ {\bf Singleton}$<$ T $>$\+::p = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{class_singleton_a3e624b61d8f814347f92cd326105b378}{}\label{class_singleton_a3e624b61d8f814347f92cd326105b378}
+
+
+Definition at line 25 of file Singleton.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_singleton_8h}{Singleton.\+h}\end{DoxyCompactItemize}

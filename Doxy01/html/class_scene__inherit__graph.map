@@ -1,0 +1,3 @@
+<map id="Scene" name="Scene">
+<area shape="rect" id="node2" href="$class_example_scene.html" title="{ExampleScene\n|&#45; player\l&#45; room\l&#45; lilRabbit\l&#45; finishPlatform\l|+ ExampleScene()\l+ Initialise()\l+ Finished()\l+ Update()\l+ Render()\l&#45; UpdatePlayer()\l}" alt="" coords="5,204,136,399"/>
+</map>

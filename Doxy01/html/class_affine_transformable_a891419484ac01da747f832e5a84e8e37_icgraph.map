@@ -1,0 +1,7 @@
+<map id="AffineTransformable::GetOrientation" name="AffineTransformable::GetOrientation">
+<area shape="rect" id="node2" href="$class_affine_transformable.html#a3eb990ab0b75ad30d3bb667e437d8606" title="Gets the transform. " alt="" coords="188,31,323,72"/>
+<area shape="rect" id="node3" href="$class_object_instance.html#aa9a660435b76ef436a5dcdb24d897c4f" title="Gets the world matrix. " alt="" coords="371,31,543,72"/>
+<area shape="rect" id="node4" href="$class_object_instance.html#a5aab17f4111ca91e123f9485c616aa6f" title="The render method. " alt="" coords="605,13,763,39"/>
+<area shape="rect" id="node6" href="$class_object_instance.html#ab9de0b3252e0df4c15129876163dad6d" title="Gets the vertices. " alt="" coords="591,63,777,90"/>
+<area shape="rect" id="node5" href="$class_render_manager_a_p_i.html#a3d10854e7ddcbb9b77ef23cad6267b67" title="Renders the object. " alt="" coords="825,5,1008,47"/>
+</map>

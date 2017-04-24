@@ -1,0 +1,11 @@
+<map id="C:/Users/elizabeth/Documents/GitHub/Engine/OpenGLEngine/OpenGLEngine/Bimap.h" name="C:/Users/elizabeth/Documents/GitHub/Engine/OpenGLEngine/OpenGLEngine/Bimap.h">
+<area shape="rect" id="node2" href="$_animation_8h.html" title="The Animation class contains the data to get back information about an animation. ..." alt="" coords="115,124,321,195"/>
+<area shape="rect" id="node5" href="$_mesh_8h.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine/Mesh.h" alt="" coords="577,131,830,187"/>
+<area shape="rect" id="node10" href="$_skeleton_8h.html" title="The skeleton of the model (its bones) and its animations. Each bone has an ID and each child bone of ..." alt="" coords="345,124,552,195"/>
+<area shape="rect" id="node3" href="$_animation_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/Animation.cpp" alt="" coords="5,243,212,313"/>
+<area shape="rect" id="node4" href="$_skeleton_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/Skeleton.cpp" alt="" coords="236,243,443,313"/>
+<area shape="rect" id="node6" href="$_mesh_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/Mesh.cpp" alt="" coords="800,243,1007,313"/>
+<area shape="rect" id="node7" href="$_model_8h.html" title="The model stores all of the data needed to create a model object. It contains all of the data but no ..." alt="" coords="569,243,776,313"/>
+<area shape="rect" id="node8" href="$_model_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/Model.cpp" alt="" coords="428,361,635,432"/>
+<area shape="rect" id="node9" href="$_renderable_object_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/RenderableObject.cpp" alt="" coords="800,361,1007,432"/>
+</map>

@@ -1,0 +1,243 @@
+\hypertarget{class_sound_manager}{}\section{Sound\+Manager Class Reference}
+\label{class_sound_manager}\index{Sound\+Manager@{Sound\+Manager}}
+
+
+{\ttfamily \#include $<$Sound\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Sound\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_sound_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sound\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_sound_manager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_sound_manager_ad56a7065047a87b29ddc43c9d3519adf}{Add\+Sound} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} name, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} file\+Path)
+\begin{DoxyCompactList}\small\item\em Adds the sound. \end{DoxyCompactList}\item 
+\hyperlink{_sound_manager_8h_a79c9822645ca72b4270fd14bdadbb699}{Channel\+Handle} \hyperlink{class_sound_manager_ac08b9c4aadde6c9f4a53d34cacce9085}{Play\+Sound} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} name, int loop\+Count)
+\begin{DoxyCompactList}\small\item\em Plays the sound. \end{DoxyCompactList}\item 
+void \hyperlink{class_sound_manager_ae0739bfef9dac54b77da95977235252c}{Pause\+Channel} (\hyperlink{_sound_manager_8h_a79c9822645ca72b4270fd14bdadbb699}{Channel\+Handle} sound)
+\begin{DoxyCompactList}\small\item\em Pauses the channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_sound_manager_a49049a8c11d28616f2a4cfdccbfeb739}{Resume\+Channel} (\hyperlink{_sound_manager_8h_a79c9822645ca72b4270fd14bdadbb699}{Channel\+Handle} sound)
+\begin{DoxyCompactList}\small\item\em Resumes the channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_sound_manager_a71a04bb67e3eb8b360ebcf0c6583c552}{Init\+Sound\+Manager} ()
+\begin{DoxyCompactList}\small\item\em Initializes the sound manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string}, Mix\+\_\+\+Chunk $\ast$ $>$ \hyperlink{class_sound_manager_a5780cd0eef57837ec5649aa0cf471224}{m\+\_\+sound\+Map}
+\begin{DoxyCompactList}\small\item\em The sound map \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file Sound\+Manager.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Sound\+Manager@{Sound\+Manager}!Add\+Sound@{Add\+Sound}}
+\index{Add\+Sound@{Add\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Sound(string name, string file\+Path)}{AddSound(string name, string filePath)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Add\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf string}}]{name, }
+\item[{{\bf string}}]{file\+Path}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sound_manager_ad56a7065047a87b29ddc43c9d3519adf}{}\label{class_sound_manager_ad56a7065047a87b29ddc43c9d3519adf}
+
+
+Adds the sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name.\\
+\hline
+{\em file\+Path} & The file path.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file Sound\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+28 \{
+29     Mix\_Chunk* newEffect = Mix\_LoadWAV(filepath.c\_str());
+30     
+31     \textcolor{keywordflow}{if} (!newEffect) 
+32     \{
+33         printf(\textcolor{stringliteral}{"Mix\_LoadWAV: %s\(\backslash\)n"}, Mix\_GetError());
+34     \}
+35     \hyperlink{class_sound_manager_a5780cd0eef57837ec5649aa0cf471224}{m\_soundMap}.emplace(name, newEffect);
+36 \}
+\end{DoxyCode}
+\index{Sound\+Manager@{Sound\+Manager}!Init\+Sound\+Manager@{Init\+Sound\+Manager}}
+\index{Init\+Sound\+Manager@{Init\+Sound\+Manager}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Init\+Sound\+Manager()}{InitSoundManager()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Init\+Sound\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_sound_manager_a71a04bb67e3eb8b360ebcf0c6583c552}{}\label{class_sound_manager_a71a04bb67e3eb8b360ebcf0c6583c552}
+
+
+Initializes the sound manager. 
+
+
+
+Definition at line 13 of file Sound\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+14 \{
+15         \textcolor{comment}{//m\_numChannels = 16;}
+16 
+17         Mix\_AllocateChannels(16);
+18 
+19         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 16; i++)
+20         \{
+21             \hyperlink{_sound_manager_8cpp_ab542b869b2d28ec54203ba11c2372e93}{channels}.push\_back(i);
+22         \}   
+23     
+24     Mix\_ChannelFinished(\hyperlink{_sound_manager_8cpp_a99497a18a7b1e44c14cf6e3274392ad9}{channelFinishedCB});
+25 \}
+\end{DoxyCode}
+\index{Sound\+Manager@{Sound\+Manager}!Pause\+Channel@{Pause\+Channel}}
+\index{Pause\+Channel@{Pause\+Channel}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Pause\+Channel(\+Channel\+Handle sound)}{PauseChannel(ChannelHandle sound)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Pause\+Channel (
+\begin{DoxyParamCaption}
+\item[{{\bf Channel\+Handle}}]{sound}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sound_manager_ae0739bfef9dac54b77da95977235252c}{}\label{class_sound_manager_ae0739bfef9dac54b77da95977235252c}
+
+
+Pauses the channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sound} & The sound.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 66 of file Sound\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+67 \{
+68   Mix\_HaltChannel(myChannel);
+69 \}
+\end{DoxyCode}
+\index{Sound\+Manager@{Sound\+Manager}!Play\+Sound@{Play\+Sound}}
+\index{Play\+Sound@{Play\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Play\+Sound(string name, int loop\+Count)}{PlaySound(string name, int loopCount)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Channel\+Handle} Sound\+Manager\+::\+Play\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf string}}]{name, }
+\item[{int}]{loop\+Count}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sound_manager_ac08b9c4aadde6c9f4a53d34cacce9085}{}\label{class_sound_manager_ac08b9c4aadde6c9f4a53d34cacce9085}
+
+
+Plays the sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name.\\
+\hline
+{\em loop\+Count} & The loop count.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Channel\+Handle
+\end{DoxyReturn}
+
+
+Definition at line 38 of file Sound\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+39 \{
+40     \textcolor{keywordflow}{if} (\hyperlink{_sound_manager_8cpp_ab542b869b2d28ec54203ba11c2372e93}{channels}.size() == 0)
+41     \{
+42         \textcolor{keywordflow}{return} -1;
+43     \}
+44 
+45     \textcolor{keyword}{auto} got = \hyperlink{class_sound_manager_a5780cd0eef57837ec5649aa0cf471224}{m\_soundMap}.find(name);
+46 
+47     \textcolor{keywordflow}{if} (got == \hyperlink{class_sound_manager_a5780cd0eef57837ec5649aa0cf471224}{m\_soundMap}.end())
+48     \{
+49         printf(\textcolor{stringliteral}{"Sound with name %s not found."}, name.c\_str());
+50         \textcolor{keywordflow}{return} -1;
+51     \}
+52 
+53     \hyperlink{_sound_manager_8h_a79c9822645ca72b4270fd14bdadbb699}{ChannelHandle} channel = \hyperlink{_sound_manager_8cpp_ab542b869b2d28ec54203ba11c2372e93}{channels}[\hyperlink{_sound_manager_8cpp_ab542b869b2d28ec54203ba11c2372e93}{channels}.size() - 1];
+54     \hyperlink{_sound_manager_8cpp_ab542b869b2d28ec54203ba11c2372e93}{channels}.pop\_back();
+55 
+56     Mix\_PlayChannel(channel, got->second, loopCount);
+57 
+58     \textcolor{keywordflow}{return} channel;
+59 \}
+\end{DoxyCode}
+\index{Sound\+Manager@{Sound\+Manager}!Resume\+Channel@{Resume\+Channel}}
+\index{Resume\+Channel@{Resume\+Channel}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Resume\+Channel(\+Channel\+Handle sound)}{ResumeChannel(ChannelHandle sound)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Resume\+Channel (
+\begin{DoxyParamCaption}
+\item[{{\bf Channel\+Handle}}]{sound}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sound_manager_a49049a8c11d28616f2a4cfdccbfeb739}{}\label{class_sound_manager_a49049a8c11d28616f2a4cfdccbfeb739}
+
+
+Resumes the channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sound} & The sound.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 61 of file Sound\+Manager.\+cpp.
+
+
+\begin{DoxyCode}
+62 \{
+63   Mix\_Resume(sound);
+64 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Sound\+Manager@{Sound\+Manager}!m\+\_\+sound\+Map@{m\+\_\+sound\+Map}}
+\index{m\+\_\+sound\+Map@{m\+\_\+sound\+Map}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{m\+\_\+sound\+Map}{m_soundMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<${\bf string}, Mix\+\_\+\+Chunk$\ast$$>$ Sound\+Manager\+::m\+\_\+sound\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_sound_manager_a5780cd0eef57837ec5649aa0cf471224}{}\label{class_sound_manager_a5780cd0eef57837ec5649aa0cf471224}
+
+
+The sound map 
+
+
+
+Definition at line 72 of file Sound\+Manager.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_sound_manager_8h}{Sound\+Manager.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_sound_manager_8cpp}{Sound\+Manager.\+cpp}\end{DoxyCompactItemize}

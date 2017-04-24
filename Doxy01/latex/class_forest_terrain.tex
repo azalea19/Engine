@@ -1,0 +1,389 @@
+\hypertarget{class_forest_terrain}{}\section{Forest\+Terrain Class Reference}
+\label{class_forest_terrain}\index{Forest\+Terrain@{Forest\+Terrain}}
+
+
+{\ttfamily \#include $<$Forest\+Terrain.\+h$>$}
+
+
+
+Inheritance diagram for Forest\+Terrain\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{class_forest_terrain__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Forest\+Terrain\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_forest_terrain__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_forest_terrain_a2cfcbadbae4c5904c40f52636cd16118}{Forest\+Terrain} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} terrain\+Width, \hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} terrain\+Height, float height\+Scale, float texture\+Tile\+Count, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&filepath, int density)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_forest_terrain}{Forest\+Terrain} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_forest_terrain_a00b38761747044c6b5b786082671548e}{Generate\+Forest} ()
+\begin{DoxyCompactList}\small\item\em Generates the forest. \end{DoxyCompactList}\item 
+void \hyperlink{class_forest_terrain_a04c699a9e59086ea267d01387a9fd918}{Save\+Terrain\+To\+O\+BJ} (const \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} \&filepath) const 
+\begin{DoxyCompactList}\small\item\em Saves the terrain to object. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_forest_terrain_a6bd4f25a6efd0e1b4b77755c227ad3f7}{Render} (\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&world\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&view\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&projection\+Matrix, float time) override
+\begin{DoxyCompactList}\small\item\em Renders the specified world matrix. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} $>$ const \& \hyperlink{class_forest_terrain_a9d00b6d342c76831c2353a278f41a3e8}{Get\+Vertices} () const  override
+\begin{DoxyCompactList}\small\item\em Gets the vertices. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} $>$ const \& \hyperlink{class_forest_terrain_a4468dfa3bf8afe31382e0aac4f0a15af}{Get\+Normals} () const  override
+\begin{DoxyCompactList}\small\item\em Gets the normals. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ int $>$ const \& \hyperlink{class_forest_terrain_a565602d0a4ebdb6a8fe30563d5e1f1e0}{Get\+Indices} () const  override
+\begin{DoxyCompactList}\small\item\em Gets the indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{class_object_instance}{Object\+Instance} $\ast$ $>$ \hyperlink{class_forest_terrain_a4e5d3e48f4b6169c7feda855d3b104b2}{m\+\_\+trees}
+\begin{DoxyCompactList}\small\item\em The m trees \end{DoxyCompactList}\item 
+\hyperlink{class_terrain}{Terrain} $\ast$ \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\+\_\+p\+Land}
+\begin{DoxyCompactList}\small\item\em The m p land \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Forest\+Terrain.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Forest\+Terrain@{Forest\+Terrain}!Forest\+Terrain@{Forest\+Terrain}}
+\index{Forest\+Terrain@{Forest\+Terrain}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Forest\+Terrain(uint terrain\+Width, uint terrain\+Height, float height\+Scale, float texture\+Tile\+Count, string const \&filepath, int density)}{ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const &filepath, int density)}}]{\setlength{\rightskip}{0pt plus 5cm}Forest\+Terrain\+::\+Forest\+Terrain (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{terrain\+Width, }
+\item[{{\bf uint}}]{terrain\+Height, }
+\item[{float}]{height\+Scale, }
+\item[{float}]{texture\+Tile\+Count, }
+\item[{{\bf string} const \&}]{filepath, }
+\item[{int}]{density}
+\end{DoxyParamCaption}
+)}\hypertarget{class_forest_terrain_a2cfcbadbae4c5904c40f52636cd16118}{}\label{class_forest_terrain_a2cfcbadbae4c5904c40f52636cd16118}
+
+
+Initializes a new instance of the \hyperlink{class_forest_terrain}{Forest\+Terrain} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em terrain\+Width} & Width of the terrain.\\
+\hline
+{\em terrain\+Height} & Height of the terrain.\\
+\hline
+{\em height\+Scale} & The height scale.\\
+\hline
+{\em texture\+Tile\+Count} & The texture tile count.\\
+\hline
+{\em filepath} & The filepath.\\
+\hline
+{\em density} & The density.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file Forest\+Terrain.\+cpp.
+
+
+
+References Generate\+Forest(), m\+\_\+p\+Land, and Terrain\+::\+Terrain().
+
+
+\begin{DoxyCode}
+11 \{
+12   \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand} = \textcolor{keyword}{new} \hyperlink{class_terrain}{Terrain}(terrainWidth, terrainHeight, heightScale, filePath);
+13   \hyperlink{class_forest_terrain_a00b38761747044c6b5b786082671548e}{GenerateForest}();
+14 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_forest_terrain_a2cfcbadbae4c5904c40f52636cd16118_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Forest\+Terrain@{Forest\+Terrain}!Generate\+Forest@{Generate\+Forest}}
+\index{Generate\+Forest@{Generate\+Forest}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Generate\+Forest()}{GenerateForest()}}]{\setlength{\rightskip}{0pt plus 5cm}void Forest\+Terrain\+::\+Generate\+Forest (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_forest_terrain_a00b38761747044c6b5b786082671548e}{}\label{class_forest_terrain_a00b38761747044c6b5b786082671548e}
+
+
+Generates the forest. 
+
+
+
+Definition at line 16 of file Forest\+Terrain.\+cpp.
+
+
+
+References Height\+Map\+::\+Get\+Height(), Terrain\+::\+Get\+Height\+Map(), Terrain\+::\+Get\+Height\+Scale(), Height\+Map\+::\+Get\+Width(), Terrain\+::\+Get\+X\+Block\+Scale(), Terrain\+::\+Get\+Y\+Block\+Scale(), m\+\_\+p\+Land, Random\+Float(), and Affine\+Transformable\+::\+Set\+Yaw().
+
+
+
+Referenced by Forest\+Terrain().
+
+
+\begin{DoxyCode}
+17 \{
+18   \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* treeNames[] = \{ \textcolor{stringliteral}{"PalmTree"}, \textcolor{stringliteral}{"BambooPalm"}, \textcolor{stringliteral}{"GroundPalm"}, \textcolor{stringliteral}{"SmallPlant"}, \textcolor{stringliteral}{"HighTree"} \};
+19   \textcolor{keywordtype}{int} width = \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_a7572ad49b7cb4afa13985ee6a03b8f3b}{GetHeightMap}()->\hyperlink{class_height_map_a85709e10bb08442730bfddb649a86e0b}{GetWidth}();
+20   \textcolor{keywordtype}{int} height = \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_a7572ad49b7cb4afa13985ee6a03b8f3b}{GetHeightMap}()->\hyperlink{class_height_map_a4c1243d24a8c5d039ea967a57a7bf462}{GetHeight}();
+21 
+22   \hyperlink{class_object_instance}{ObjectInstance}* pTree;
+23   \textcolor{keywordtype}{float} x\_bs = \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_ac84a3495e2f0f8246bf1beb2c2729969}{GetXBlockScale}();
+24   \textcolor{keywordtype}{float} y\_bs = \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_a516ec45b81582973a7620eae202425d8}{GetYBlockScale}();
+25   \textcolor{keywordtype}{float} hs = \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_aa1794b225571f41c330ff3b88fa3d48b}{GetHeightScale}();
+26 
+27   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} x = 0; x < width; x++)
+28   \{
+29     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} y = 0; y < height; y++)
+30     \{
+31         
+32       \textcolor{keywordtype}{float} heightAtPixel = \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_a7572ad49b7cb4afa13985ee6a03b8f3b}{GetHeightMap}()->
+      \hyperlink{class_height_map_a895733b01397c21c3562e748267da822}{GetHeightValueAtPixel}(\hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2}(x, y));
+33       \textcolor{keywordtype}{float} success = \hyperlink{_random_8h_a9f58d4bd6816fa021e202738ae24020f}{RandomFloat}(0, 1);
+34       \textcolor{keywordflow}{if} (success < pow(heightAtPixel, 1) * 0.1f)
+35       \{
+36         \textcolor{keywordtype}{string} treeName = treeNames[\hyperlink{_random_8h_ada0cb10681c0f3cf9d30c7766047397e}{RandomInt}(0, \textcolor{keyword}{sizeof}(treeNames) / \textcolor{keyword}{sizeof}(treeNames[0]))];
+37         pTree = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{ModelLibrary::GetInstance}().
+      \hyperlink{class_model_library_a1e9987808a135340d5b321f5b79c573f}{GetObjectInstance}(treeName);
+38         pTree->\hyperlink{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}{SetTranslation}(\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(x*x\_bs, heightAtPixel*hs, y*y\_bs));
+39         \textcolor{keywordtype}{float} yaw = \hyperlink{_random_8h_a9f58d4bd6816fa021e202738ae24020f}{RandomFloat}(0, 360);
+40         \textcolor{keywordtype}{float} scale = \hyperlink{_random_8h_a9f58d4bd6816fa021e202738ae24020f}{RandomFloat}(0.5f, 1);
+41         pTree->\hyperlink{class_affine_transformable_a47ab5b07df1ee77ae2e63dc0804c5caa}{SetYaw}(yaw);
+42         pTree->\hyperlink{class_affine_transformable_a215383be79781d61103dfdf8c201be22}{SetScale}(\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(scale, scale, scale));
+43         \hyperlink{class_forest_terrain_a4e5d3e48f4b6169c7feda855d3b104b2}{m\_trees}.push\_back(pTree);
+44       \}
+45     \}
+46   \}
+47 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_forest_terrain_a00b38761747044c6b5b786082671548e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_forest_terrain_a00b38761747044c6b5b786082671548e_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Forest\+Terrain@{Forest\+Terrain}!Get\+Indices@{Get\+Indices}}
+\index{Get\+Indices@{Get\+Indices}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Get\+Indices() const  override}{GetIndices() const  override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ const \& Forest\+Terrain\+::\+Get\+Indices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_forest_terrain_a565602d0a4ebdb6a8fe30563d5e1f1e0}{}\label{class_forest_terrain_a565602d0a4ebdb6a8fe30563d5e1f1e0}
+
+
+Gets the indices. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_mesh_ab750669f5d9be25853c0e8bed73b0d3e}{I\+Mesh}.
+
+
+
+Definition at line 67 of file Forest\+Terrain.\+cpp.
+
+
+\begin{DoxyCode}
+68 \{
+69   \textcolor{keywordflow}{return} \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_adeef11f1e39c3bf980c2a80a88f41375}{GetIndices}();
+70 \}
+\end{DoxyCode}
+\index{Forest\+Terrain@{Forest\+Terrain}!Get\+Normals@{Get\+Normals}}
+\index{Get\+Normals@{Get\+Normals}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Get\+Normals() const  override}{GetNormals() const  override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf vec3} $>$ const \& Forest\+Terrain\+::\+Get\+Normals (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_forest_terrain_a4468dfa3bf8afe31382e0aac4f0a15af}{}\label{class_forest_terrain_a4468dfa3bf8afe31382e0aac4f0a15af}
+
+
+Gets the normals. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_mesh_a2c856178275884f78deb0c5ebd497cc7}{I\+Mesh}.
+
+
+
+Definition at line 62 of file Forest\+Terrain.\+cpp.
+
+
+\begin{DoxyCode}
+63 \{
+64   \textcolor{keywordflow}{return} \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_aef83808bbeac9305c35711acfe078fd5}{GetNormals}();
+65 \}
+\end{DoxyCode}
+\index{Forest\+Terrain@{Forest\+Terrain}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Get\+Vertices() const  override}{GetVertices() const  override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf vec3} $>$ const \& Forest\+Terrain\+::\+Get\+Vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_forest_terrain_a9d00b6d342c76831c2353a278f41a3e8}{}\label{class_forest_terrain_a9d00b6d342c76831c2353a278f41a3e8}
+
+
+Gets the vertices. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_mesh_afb0bb17c66970b42cd883cf7ea2c6199}{I\+Mesh}.
+
+
+
+Definition at line 57 of file Forest\+Terrain.\+cpp.
+
+
+\begin{DoxyCode}
+58 \{
+59   \textcolor{keywordflow}{return} \hyperlink{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{m\_pLand}->\hyperlink{class_terrain_aad119025aad6316288e8bd07eb309552}{GetVertices}();
+60 \}
+\end{DoxyCode}
+\index{Forest\+Terrain@{Forest\+Terrain}!Render@{Render}}
+\index{Render@{Render}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Render(mat4 const \&world\+Matrix, mat4 const \&view\+Matrix, mat4 const \&projection\+Matrix, float time) override}{Render(mat4 const &worldMatrix, mat4 const &viewMatrix, mat4 const &projectionMatrix, float time) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Forest\+Terrain\+::\+Render (
+\begin{DoxyParamCaption}
+\item[{{\bf mat4} const \&}]{world\+Matrix, }
+\item[{{\bf mat4} const \&}]{view\+Matrix, }
+\item[{{\bf mat4} const \&}]{projection\+Matrix, }
+\item[{float}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_forest_terrain_a6bd4f25a6efd0e1b4b77755c227ad3f7}{}\label{class_forest_terrain_a6bd4f25a6efd0e1b4b77755c227ad3f7}
+
+
+Renders the specified world matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Matrix} & The world matrix.\\
+\hline
+{\em view\+Matrix} & The view matrix.\\
+\hline
+{\em projection\+Matrix} & The projection matrix.\\
+\hline
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_i_renderable_aafd1a9b5729b8794fc5b7e8452ecc3c2}{I\+Renderable}.
+
+
+
+Definition at line 49 of file Forest\+Terrain.\+cpp.
+
+
+\begin{DoxyCode}
+50 \{
+51   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{class_forest_terrain_a4e5d3e48f4b6169c7feda855d3b104b2}{m\_trees}.size(); i++)
+52   \{
+53     \hyperlink{class_forest_terrain_a4e5d3e48f4b6169c7feda855d3b104b2}{m\_trees}[i]->Render(worldMatrix, viewMatrix, projectionMatrix);
+54   \}
+55 \}
+\end{DoxyCode}
+\index{Forest\+Terrain@{Forest\+Terrain}!Save\+Terrain\+To\+O\+BJ@{Save\+Terrain\+To\+O\+BJ}}
+\index{Save\+Terrain\+To\+O\+BJ@{Save\+Terrain\+To\+O\+BJ}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{Save\+Terrain\+To\+O\+B\+J(const string \&filepath) const }{SaveTerrainToOBJ(const string &filepath) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Forest\+Terrain\+::\+Save\+Terrain\+To\+O\+BJ (
+\begin{DoxyParamCaption}
+\item[{const {\bf string} \&}]{filepath}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_forest_terrain_a04c699a9e59086ea267d01387a9fd918}{}\label{class_forest_terrain_a04c699a9e59086ea267d01387a9fd918}
+
+
+Saves the terrain to object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & The filepath.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Forest\+Terrain.\+cpp.
+
+
+\begin{DoxyCode}
+6 \{
+7   \hyperlink{class_o_b_j_writer_a99cb9b1c28fa4c59c8087a9c1c6899e3}{OBJWriter::SaveMeshToOBJ}(*\textcolor{keyword}{this}, filepath);
+8 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Forest\+Terrain@{Forest\+Terrain}!m\+\_\+p\+Land@{m\+\_\+p\+Land}}
+\index{m\+\_\+p\+Land@{m\+\_\+p\+Land}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Land}{m_pLand}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Terrain}$\ast$ Forest\+Terrain\+::m\+\_\+p\+Land\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}{}\label{class_forest_terrain_a6ef2f670fa4b4e1a9500a87c927d2a5c}
+
+
+The m p land 
+
+
+
+Definition at line 92 of file Forest\+Terrain.\+h.
+
+
+
+Referenced by Forest\+Terrain(), and Generate\+Forest().
+
+\index{Forest\+Terrain@{Forest\+Terrain}!m\+\_\+trees@{m\+\_\+trees}}
+\index{m\+\_\+trees@{m\+\_\+trees}!Forest\+Terrain@{Forest\+Terrain}}
+\subsubsection[{\texorpdfstring{m\+\_\+trees}{m_trees}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Object\+Instance}$\ast$$>$ Forest\+Terrain\+::m\+\_\+trees\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_forest_terrain_a4e5d3e48f4b6169c7feda855d3b104b2}{}\label{class_forest_terrain_a4e5d3e48f4b6169c7feda855d3b104b2}
+
+
+The m trees 
+
+
+
+Definition at line 87 of file Forest\+Terrain.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_forest_terrain_8h}{Forest\+Terrain.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_forest_terrain_8cpp}{Forest\+Terrain.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+<map id="OBJWriter::SaveMeshToOBJ" name="OBJWriter::SaveMeshToOBJ">
+<area shape="rect" id="node2" href="$class_i_mesh.html#af017d9682b2b9d9caef0a81f616be47d" title="Gets the index count. " alt="" coords="259,5,409,32"/>
+<area shape="rect" id="node3" href="$class_i_mesh.html#a85469248e71ed9401c61573d32be44f4" title="Gets the texture coords count. " alt="" coords="243,56,425,83"/>
+<area shape="rect" id="node4" href="$class_i_mesh.html#aff814631d73a51d364824632beabe147" title="Gets the vertex count. " alt="" coords="255,107,413,133"/>
+</map>

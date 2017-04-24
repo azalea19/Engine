@@ -1,0 +1,88 @@
+\hypertarget{class_lua_display2_d_a_p_i}{}\section{Lua\+Display2\+D\+A\+PI Class Reference}
+\label{class_lua_display2_d_a_p_i}\index{Lua\+Display2\+D\+A\+PI@{Lua\+Display2\+D\+A\+PI}}
+
+
+{\ttfamily \#include $<$Lua\+Display2\+D\+A\+P\+I.\+h$>$}
+
+
+
+Collaboration diagram for Lua\+Display2\+D\+A\+PI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{class_lua_display2_d_a_p_i__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_lua_display2_d_a_p_i_a766e83bd46fa7810acec8f6b079709f0}{Draw\+Full\+Screen} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} file\+Path)
+\item 
+static void \hyperlink{class_lua_display2_d_a_p_i_ae59a06b7f6ca4d45c449e9defb166efb}{Expose} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} lua\+A\+P\+I\+Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file Lua\+Display2\+D\+A\+P\+I.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Lua\+Display2\+D\+A\+PI@{Lua\+Display2\+D\+A\+PI}!Draw\+Full\+Screen@{Draw\+Full\+Screen}}
+\index{Draw\+Full\+Screen@{Draw\+Full\+Screen}!Lua\+Display2\+D\+A\+PI@{Lua\+Display2\+D\+A\+PI}}
+\subsubsection[{\texorpdfstring{Draw\+Full\+Screen(string file\+Path)}{DrawFullScreen(string filePath)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lua\+Display2\+D\+A\+P\+I\+::\+Draw\+Full\+Screen (
+\begin{DoxyParamCaption}
+\item[{{\bf string}}]{file\+Path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_display2_d_a_p_i_a766e83bd46fa7810acec8f6b079709f0}{}\label{class_lua_display2_d_a_p_i_a766e83bd46fa7810acec8f6b079709f0}
+
+
+Definition at line 4 of file Lua\+Display2\+D\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+5 \{
+6 
+7     \textcolor{comment}{/*}
+8 \textcolor{comment}{    GLuint id = TextureLibrary::GetInstance().GetTexture(filePath);}
+9 \textcolor{comment}{    if ( id == UINT32\_MAX)}
+10 \textcolor{comment}{    \{}
+11 \textcolor{comment}{        id = LoadImage(filePath.c\_str(), false);}
+12 \textcolor{comment}{        TextureLibrary::GetInstance().AddTexture(filePath, id);}
+13 \textcolor{comment}{    \}}
+14 \textcolor{comment}{    FrameBuffer::Display(id);}
+15 \textcolor{comment}{    */}
+16     GLuint \textcolor{keywordtype}{id} = \hyperlink{_texture_8h_a0c153ad9db5ff2cbd74fdae51d3f342a}{LoadImage}(filePath.c\_str(), \textcolor{keyword}{false});
+17 
+18     \hyperlink{class_frame_buffer_aa71789f57e31a8f54f8ff2e9067afdb2}{FrameBuffer::Display}(\textcolor{keywordtype}{id});
+19 \}
+\end{DoxyCode}
+\index{Lua\+Display2\+D\+A\+PI@{Lua\+Display2\+D\+A\+PI}!Expose@{Expose}}
+\index{Expose@{Expose}!Lua\+Display2\+D\+A\+PI@{Lua\+Display2\+D\+A\+PI}}
+\subsubsection[{\texorpdfstring{Expose(\+Lua\+Context\+Handle context\+Handle, string lua\+A\+P\+I\+Name)}{Expose(LuaContextHandle contextHandle, string luaAPIName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lua\+Display2\+D\+A\+P\+I\+::\+Expose (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle, }
+\item[{{\bf string}}]{lua\+A\+P\+I\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_lua_display2_d_a_p_i_ae59a06b7f6ca4d45c449e9defb166efb}{}\label{class_lua_display2_d_a_p_i_ae59a06b7f6ca4d45c449e9defb166efb}
+
+
+Definition at line 20 of file Lua\+Display2\+D\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+21 \{
+22     \hyperlink{class_lua_context}{LuaContext}* pContext = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().
+      \hyperlink{class_lua_manager_a68592b46a59219d130cf4f637c977378}{GetContext}(contextHandle);
+23     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"drawFullScreen"}, 
+      \hyperlink{class_lua_display2_d_a_p_i_a766e83bd46fa7810acec8f6b079709f0}{DrawFullScreen});
+24 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_lua_display2_d_a_p_i_8h}{Lua\+Display2\+D\+A\+P\+I.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_lua_display2_d_a_p_i_8cpp}{Lua\+Display2\+D\+A\+P\+I.\+cpp}\end{DoxyCompactItemize}

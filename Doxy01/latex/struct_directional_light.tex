@@ -1,0 +1,125 @@
+\hypertarget{struct_directional_light}{}\section{Directional\+Light Struct Reference}
+\label{struct_directional_light}\index{Directional\+Light@{Directional\+Light}}
+
+
+{\ttfamily \#include $<$Light.\+h$>$}
+
+
+
+Inheritance diagram for Directional\+Light\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{struct_directional_light__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Directional\+Light\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{struct_directional_light__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_directional_light_ac2b1a62d9ad6395b2f453b4544127bf1}{Directional\+Light} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&light\+Direction, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&light\+Color=\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(1.\+0f, 1.\+0f, 1.\+0f), bool light\+Enabled=true)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{struct_directional_light_a0fff081764e57e46c7342fc6c6849c1c}{color}
+\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{struct_directional_light_a78a56aede026b50aa2606bf20c1b0871}{direction}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 49 of file Light.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Directional\+Light@{Directional\+Light}!Directional\+Light@{Directional\+Light}}
+\index{Directional\+Light@{Directional\+Light}!Directional\+Light@{Directional\+Light}}
+\subsubsection[{\texorpdfstring{Directional\+Light(vec3 const \&light\+Direction, vec3 const \&light\+Color=vec3(1.\+0f, 1.\+0f, 1.\+0f), bool light\+Enabled=true)}{DirectionalLight(vec3 const &lightDirection, vec3 const &lightColor=vec3(1.0f, 1.0f, 1.0f), bool lightEnabled=true)}}]{\setlength{\rightskip}{0pt plus 5cm}Directional\+Light\+::\+Directional\+Light (
+\begin{DoxyParamCaption}
+\item[{{\bf vec3} const \&}]{light\+Direction, }
+\item[{{\bf vec3} const \&}]{light\+Color = {\ttfamily {\bf vec3}(1.0f,~1.0f,~1.0f)}, }
+\item[{bool}]{light\+Enabled = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_directional_light_ac2b1a62d9ad6395b2f453b4544127bf1}{}\label{struct_directional_light_ac2b1a62d9ad6395b2f453b4544127bf1}
+
+
+Definition at line 51 of file Light.\+h.
+
+
+
+References direction, Directional\+Light(), Light\+::\+Light(), and L\+T\+\_\+\+Directional.
+
+
+
+Referenced by Directional\+Light().
+
+
+\begin{DoxyCode}
+52     : \hyperlink{struct_light_a0df5e58af351bd13c996da2880be0dee}{Light}(\hyperlink{_light_8h_a3336214f41ddc8acd932fa9be957047da21fefd4273a9d89cb46b6610ade6ca01}{LT\_Directional}, lightEnabled)
+53     , \hyperlink{struct_directional_light_a0fff081764e57e46c7342fc6c6849c1c}{color}(lightColor)
+54     , \hyperlink{struct_directional_light_a78a56aede026b50aa2606bf20c1b0871}{direction}(lightDirection)
+55   \{
+56 
+57   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{struct_directional_light_ac2b1a62d9ad6395b2f453b4544127bf1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{struct_directional_light_ac2b1a62d9ad6395b2f453b4544127bf1_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Directional\+Light@{Directional\+Light}!color@{color}}
+\index{color@{color}!Directional\+Light@{Directional\+Light}}
+\subsubsection[{\texorpdfstring{color}{color}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Directional\+Light\+::color}\hypertarget{struct_directional_light_a0fff081764e57e46c7342fc6c6849c1c}{}\label{struct_directional_light_a0fff081764e57e46c7342fc6c6849c1c}
+
+
+Definition at line 58 of file Light.\+h.
+
+\index{Directional\+Light@{Directional\+Light}!direction@{direction}}
+\index{direction@{direction}!Directional\+Light@{Directional\+Light}}
+\subsubsection[{\texorpdfstring{direction}{direction}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Directional\+Light\+::direction}\hypertarget{struct_directional_light_a78a56aede026b50aa2606bf20c1b0871}{}\label{struct_directional_light_a78a56aede026b50aa2606bf20c1b0871}
+
+
+Definition at line 59 of file Light.\+h.
+
+
+
+Referenced by Directional\+Light().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_light_8h}{Light.\+h}\end{DoxyCompactItemize}

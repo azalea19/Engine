@@ -1,0 +1,121 @@
+\hypertarget{_m_math_8h}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+M\+Math.h File Reference}
+\label{_m_math_8h}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+M\+Math.\+h@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+M\+Math.\+h}}
+
+
+The math functions.  
+
+
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_m_math_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_m_math_8h_a12596bd7bfb634efa54d7493e6d546a8}{Deg\+To\+Rad}(val)~((val) $\ast$ 3.\+1416f / 180)
+\item 
+\#define \hyperlink{_m_math_8h_a598a3330b3c21701223ee0ca14316eca}{PI}~3.\+1415962654
+\item 
+\#define \hyperlink{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}{Rad\+To\+Deg}(val)~((val) $\ast$ 180 / 3.\+1416f)
+\item 
+\#define \hyperlink{_m_math_8h_af0751869f0c0e40a569be6a98233806d}{m\+Min}(a,  b)~(((a) $<$ (b)) ? (a) \+: (b))
+\item 
+\#define \hyperlink{_m_math_8h_ace2f4b2aaa65739670572d59f7561714}{m\+Max}(a,  b)~(((a) $>$ (b)) ? (a) \+: (b))
+\item 
+\#define \hyperlink{_m_math_8h_a35bcf6994210feb2d96d1d22df3385ea}{m\+Clamp}(val,  min,  max)~\hyperlink{_m_math_8h_af0751869f0c0e40a569be6a98233806d}{m\+Min}(\hyperlink{_m_math_8h_ace2f4b2aaa65739670572d59f7561714}{m\+Max}((val), (min)), (max))
+\item 
+\#define \hyperlink{_m_math_8h_a4bed40aea38e85fa14ae70b1ea77728c}{m\+Lerp}(a,  b,  t)~(a) $\ast$ (1.f-\/(t)) + (b)$\ast$(t)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The math functions. 
+
+Maddisen Topaz \begin{DoxyDate}{Date}
+S1, 2017 The various math functions / constants. 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\index{M\+Math.\+h@{M\+Math.\+h}!Deg\+To\+Rad@{Deg\+To\+Rad}}
+\index{Deg\+To\+Rad@{Deg\+To\+Rad}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{Deg\+To\+Rad}{DegToRad}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Deg\+To\+Rad(
+\begin{DoxyParamCaption}
+\item[{}]{val}
+\end{DoxyParamCaption}
+)~((val) $\ast$ 3.\+1416f / 180)}\hypertarget{_m_math_8h_a12596bd7bfb634efa54d7493e6d546a8}{}\label{_m_math_8h_a12596bd7bfb634efa54d7493e6d546a8}
+
+
+Definition at line 14 of file M\+Math.\+h.
+
+\index{M\+Math.\+h@{M\+Math.\+h}!m\+Clamp@{m\+Clamp}}
+\index{m\+Clamp@{m\+Clamp}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{m\+Clamp}{mClamp}}]{\setlength{\rightskip}{0pt plus 5cm}\#define m\+Clamp(
+\begin{DoxyParamCaption}
+\item[{}]{val, }
+\item[{}]{min, }
+\item[{}]{max}
+\end{DoxyParamCaption}
+)~{\bf m\+Min}({\bf m\+Max}((val), (min)), (max))}\hypertarget{_m_math_8h_a35bcf6994210feb2d96d1d22df3385ea}{}\label{_m_math_8h_a35bcf6994210feb2d96d1d22df3385ea}
+
+
+Definition at line 20 of file M\+Math.\+h.
+
+\index{M\+Math.\+h@{M\+Math.\+h}!m\+Lerp@{m\+Lerp}}
+\index{m\+Lerp@{m\+Lerp}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{m\+Lerp}{mLerp}}]{\setlength{\rightskip}{0pt plus 5cm}\#define m\+Lerp(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b, }
+\item[{}]{t}
+\end{DoxyParamCaption}
+)~(a) $\ast$ (1.f-\/(t)) + (b)$\ast$(t)}\hypertarget{_m_math_8h_a4bed40aea38e85fa14ae70b1ea77728c}{}\label{_m_math_8h_a4bed40aea38e85fa14ae70b1ea77728c}
+
+
+Definition at line 23 of file M\+Math.\+h.
+
+\index{M\+Math.\+h@{M\+Math.\+h}!m\+Max@{m\+Max}}
+\index{m\+Max@{m\+Max}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{m\+Max}{mMax}}]{\setlength{\rightskip}{0pt plus 5cm}\#define m\+Max(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(((a) $>$ (b)) ? (a) \+: (b))}\hypertarget{_m_math_8h_ace2f4b2aaa65739670572d59f7561714}{}\label{_m_math_8h_ace2f4b2aaa65739670572d59f7561714}
+
+
+Definition at line 19 of file M\+Math.\+h.
+
+\index{M\+Math.\+h@{M\+Math.\+h}!m\+Min@{m\+Min}}
+\index{m\+Min@{m\+Min}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{m\+Min}{mMin}}]{\setlength{\rightskip}{0pt plus 5cm}\#define m\+Min(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~(((a) $<$ (b)) ? (a) \+: (b))}\hypertarget{_m_math_8h_af0751869f0c0e40a569be6a98233806d}{}\label{_m_math_8h_af0751869f0c0e40a569be6a98233806d}
+
+
+Definition at line 18 of file M\+Math.\+h.
+
+\index{M\+Math.\+h@{M\+Math.\+h}!PI@{PI}}
+\index{PI@{PI}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{PI}{PI}}]{\setlength{\rightskip}{0pt plus 5cm}\#define PI~3.\+1415962654}\hypertarget{_m_math_8h_a598a3330b3c21701223ee0ca14316eca}{}\label{_m_math_8h_a598a3330b3c21701223ee0ca14316eca}
+
+
+Definition at line 15 of file M\+Math.\+h.
+
+\index{M\+Math.\+h@{M\+Math.\+h}!Rad\+To\+Deg@{Rad\+To\+Deg}}
+\index{Rad\+To\+Deg@{Rad\+To\+Deg}!M\+Math.\+h@{M\+Math.\+h}}
+\subsubsection[{\texorpdfstring{Rad\+To\+Deg}{RadToDeg}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Rad\+To\+Deg(
+\begin{DoxyParamCaption}
+\item[{}]{val}
+\end{DoxyParamCaption}
+)~((val) $\ast$ 180 / 3.\+1416f)}\hypertarget{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}{}\label{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}
+
+
+Definition at line 16 of file M\+Math.\+h.
+

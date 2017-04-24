@@ -1,0 +1,173 @@
+\hypertarget{_render_manager_a_p_i_8cpp}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Render\+Manager\+A\+PI.cpp File Reference}
+\label{_render_manager_a_p_i_8cpp}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Render\+Manager\+A\+P\+I.\+cpp@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Render\+Manager\+A\+P\+I.\+cpp}}
+{\ttfamily \#include \char`\"{}Render\+Manager\+A\+P\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Lua\+Object\+Instance\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G\+Buffer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Engine\+A\+P\+I.\+h\char`\"{}}\\*
+Include dependency graph for Render\+Manager\+A\+P\+I.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_render_manager_a_p_i_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scene_decompose_effect}{Scene\+Decompose\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_a7cab16375909f127703d305e85ccf50b}{p\+Decompose\+Effect}
+\item 
+\hyperlink{class_depth_threshold_effect}{Depth\+Threshold\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_a49b3cc87ecdf30a8e30699a094676dc5}{p\+Threshold\+Effect}
+\item 
+\hyperlink{class_god_rays_effect}{God\+Rays\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_a2713636656f1e235232b471ab99c303f}{p\+Ray\+Effect}
+\item 
+\hyperlink{class_bloom_effect}{Bloom\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_a01a51429aeef6159ee45b369324b6763}{p\+Bloom\+Effect}
+\item 
+\hyperlink{class_f_x_a_a_effect}{F\+X\+A\+A\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_aa0ad97e01bcaf286b57de9a9ce16eda6}{p\+F\+X\+A\+A\+Effect}
+\item 
+\hyperlink{class_multiplicative_blend_effect}{Multiplicative\+Blend\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_ad0d5d50d26273bd6cd81197bc714ef79}{p\+Blend\+Effect}
+\item 
+\hyperlink{class_directional_lighting_effect}{Directional\+Lighting\+Effect} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_a2b28d16b2f0702b9339c87c834f1374b}{p\+Lighting\+Effect}
+\item 
+G\+Luint \hyperlink{_render_manager_a_p_i_8cpp_a71f22b5acb0415565c14e01e1d1fac01}{god\+Ray\+Mask\+Texture}
+\item 
+\hyperlink{class_g_buffer}{G\+Buffer} $\ast$ \hyperlink{_render_manager_a_p_i_8cpp_a3e255706d276f815cf3fbafbbfe660f8}{buffers}
+\item 
+G\+Luint \hyperlink{_render_manager_a_p_i_8cpp_a5c04dd45bd8b00428f7afa259b83a3c1}{final\+Tex}
+\item 
+G\+Luint \hyperlink{_render_manager_a_p_i_8cpp_ad40f7f42e75a5f330d68aaa2e3127ba8}{temp\+Tex}
+\item 
+G\+Luint \hyperlink{_render_manager_a_p_i_8cpp_a426dcb3404de0fbf21d7cfa5d00e0659}{temp\+Tex2}
+\item 
+int \hyperlink{_render_manager_a_p_i_8cpp_a18016816658ac34f80df6c402ed5478c}{fillmode}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!buffers@{buffers}}
+\index{buffers@{buffers}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{buffers}{buffers}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\+Buffer}$\ast$ buffers}\hypertarget{_render_manager_a_p_i_8cpp_a3e255706d276f815cf3fbafbbfe660f8}{}\label{_render_manager_a_p_i_8cpp_a3e255706d276f815cf3fbafbbfe660f8}
+
+
+Definition at line 15 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Begin\+Render(), Render\+Manager\+A\+P\+I\+::\+Initialise(), Render\+Manager\+A\+P\+I\+::\+Render\+From\+Camera(), and Render\+Manager\+A\+P\+I\+::\+Render\+Object().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!fillmode@{fillmode}}
+\index{fillmode@{fillmode}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{fillmode}{fillmode}}]{\setlength{\rightskip}{0pt plus 5cm}int fillmode}\hypertarget{_render_manager_a_p_i_8cpp_a18016816658ac34f80df6c402ed5478c}{}\label{_render_manager_a_p_i_8cpp_a18016816658ac34f80df6c402ed5478c}
+
+
+Definition at line 19 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Present(), and Render\+Manager\+A\+P\+I\+::\+Set\+Fill\+Mode().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!final\+Tex@{final\+Tex}}
+\index{final\+Tex@{final\+Tex}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{final\+Tex}{finalTex}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint final\+Tex}\hypertarget{_render_manager_a_p_i_8cpp_a5c04dd45bd8b00428f7afa259b83a3c1}{}\label{_render_manager_a_p_i_8cpp_a5c04dd45bd8b00428f7afa259b83a3c1}
+
+
+Definition at line 16 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!god\+Ray\+Mask\+Texture@{god\+Ray\+Mask\+Texture}}
+\index{god\+Ray\+Mask\+Texture@{god\+Ray\+Mask\+Texture}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{god\+Ray\+Mask\+Texture}{godRayMaskTexture}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint god\+Ray\+Mask\+Texture}\hypertarget{_render_manager_a_p_i_8cpp_a71f22b5acb0415565c14e01e1d1fac01}{}\label{_render_manager_a_p_i_8cpp_a71f22b5acb0415565c14e01e1d1fac01}
+
+
+Definition at line 14 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+Blend\+Effect@{p\+Blend\+Effect}}
+\index{p\+Blend\+Effect@{p\+Blend\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+Blend\+Effect}{pBlendEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Multiplicative\+Blend\+Effect}$\ast$ p\+Blend\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_ad0d5d50d26273bd6cd81197bc714ef79}{}\label{_render_manager_a_p_i_8cpp_ad0d5d50d26273bd6cd81197bc714ef79}
+
+
+Definition at line 12 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Initialise().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+Bloom\+Effect@{p\+Bloom\+Effect}}
+\index{p\+Bloom\+Effect@{p\+Bloom\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+Bloom\+Effect}{pBloomEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bloom\+Effect}$\ast$ p\+Bloom\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_a01a51429aeef6159ee45b369324b6763}{}\label{_render_manager_a_p_i_8cpp_a01a51429aeef6159ee45b369324b6763}
+
+
+Definition at line 10 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Initialise().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+Decompose\+Effect@{p\+Decompose\+Effect}}
+\index{p\+Decompose\+Effect@{p\+Decompose\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+Decompose\+Effect}{pDecomposeEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\+Decompose\+Effect}$\ast$ p\+Decompose\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_a7cab16375909f127703d305e85ccf50b}{}\label{_render_manager_a_p_i_8cpp_a7cab16375909f127703d305e85ccf50b}
+
+
+Definition at line 7 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Begin\+Render(), Render\+Manager\+A\+P\+I\+::\+Initialise(), Render\+Manager\+A\+P\+I\+::\+Present(), Render\+Manager\+A\+P\+I\+::\+Render\+From\+Camera(), and Render\+Manager\+A\+P\+I\+::\+Render\+Object().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+F\+X\+A\+A\+Effect@{p\+F\+X\+A\+A\+Effect}}
+\index{p\+F\+X\+A\+A\+Effect@{p\+F\+X\+A\+A\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+F\+X\+A\+A\+Effect}{pFXAAEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\+X\+A\+A\+Effect}$\ast$ p\+F\+X\+A\+A\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_aa0ad97e01bcaf286b57de9a9ce16eda6}{}\label{_render_manager_a_p_i_8cpp_aa0ad97e01bcaf286b57de9a9ce16eda6}
+
+
+Definition at line 11 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Initialise().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+Lighting\+Effect@{p\+Lighting\+Effect}}
+\index{p\+Lighting\+Effect@{p\+Lighting\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+Lighting\+Effect}{pLightingEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Directional\+Lighting\+Effect}$\ast$ p\+Lighting\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_a2b28d16b2f0702b9339c87c834f1374b}{}\label{_render_manager_a_p_i_8cpp_a2b28d16b2f0702b9339c87c834f1374b}
+
+
+Definition at line 13 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Initialise().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+Ray\+Effect@{p\+Ray\+Effect}}
+\index{p\+Ray\+Effect@{p\+Ray\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+Ray\+Effect}{pRayEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf God\+Rays\+Effect}$\ast$ p\+Ray\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_a2713636656f1e235232b471ab99c303f}{}\label{_render_manager_a_p_i_8cpp_a2713636656f1e235232b471ab99c303f}
+
+
+Definition at line 9 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Initialise().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!p\+Threshold\+Effect@{p\+Threshold\+Effect}}
+\index{p\+Threshold\+Effect@{p\+Threshold\+Effect}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{p\+Threshold\+Effect}{pThresholdEffect}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Depth\+Threshold\+Effect}$\ast$ p\+Threshold\+Effect}\hypertarget{_render_manager_a_p_i_8cpp_a49b3cc87ecdf30a8e30699a094676dc5}{}\label{_render_manager_a_p_i_8cpp_a49b3cc87ecdf30a8e30699a094676dc5}
+
+
+Definition at line 8 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Initialise().
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!temp\+Tex@{temp\+Tex}}
+\index{temp\+Tex@{temp\+Tex}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{temp\+Tex}{tempTex}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint temp\+Tex}\hypertarget{_render_manager_a_p_i_8cpp_ad40f7f42e75a5f330d68aaa2e3127ba8}{}\label{_render_manager_a_p_i_8cpp_ad40f7f42e75a5f330d68aaa2e3127ba8}
+
+
+Definition at line 17 of file Render\+Manager\+A\+P\+I.\+cpp.
+
+\index{Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}!temp\+Tex2@{temp\+Tex2}}
+\index{temp\+Tex2@{temp\+Tex2}!Render\+Manager\+A\+P\+I.\+cpp@{Render\+Manager\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{temp\+Tex2}{tempTex2}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint temp\+Tex2}\hypertarget{_render_manager_a_p_i_8cpp_a426dcb3404de0fbf21d7cfa5d00e0659}{}\label{_render_manager_a_p_i_8cpp_a426dcb3404de0fbf21d7cfa5d00e0659}
+
+
+Definition at line 18 of file Render\+Manager\+A\+P\+I.\+cpp.
+

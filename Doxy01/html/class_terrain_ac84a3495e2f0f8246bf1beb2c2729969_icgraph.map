@@ -1,0 +1,4 @@
+<map id="Terrain::GetXBlockScale" name="Terrain::GetXBlockScale">
+<area shape="rect" id="node2" href="$class_forest_terrain.html#a00b38761747044c6b5b786082671548e" title="Generates the forest. " alt="" coords="216,5,412,32"/>
+<area shape="rect" id="node3" href="$class_forest_terrain.html#a2cfcbadbae4c5904c40f52636cd16118" title="Initializes a new instance of the ForestTerrain class. " alt="" coords="460,5,643,32"/>
+</map>
