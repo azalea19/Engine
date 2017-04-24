@@ -18,12 +18,28 @@ class RayEffect
 {
 public:
 
-	RayEffect();
+  /// <summary>
+  /// Initializes a new instance of the <see cref="RayEffect"/> class.
+  /// </summary>
+  RayEffect();
 
-	void Apply(GLuint inputTex, GLuint outputTex, vec2 ssLightPos);
+  /// <summary>
+  /// Applies the ray effect.
+  /// </summary>
+  /// <param name="inputTex">The input tex.</param>
+  /// <param name="outputTex">The output tex.</param>
+  /// <param name="ssLightPos">The screenspace light position.</param>
+  void Apply(GLuint inputTex, GLuint outputTex, vec2 ssLightPos);
 
 private:
-	FrameBuffer m_fb;
+  /// <summary>
+  /// The frame buffer
+  /// </summary>
+  FrameBuffer m_fb;
+
+  /// <summary>
+  /// The shader
+  /// </summary>
   std::unique_ptr<IShader> const& m_pShader;
 };
 

@@ -32,10 +32,23 @@ public:
   /// <param name="contextHandle">The context handle.</param>
   /// <param name="luaAPIName">Name of the lua API.</param>
 
+  /// <summary>
+  /// Creates the engine of specified API.
+  /// </summary>
+  /// <param name="api">The API.</param>
   static void Create(int api);
 
+  /// <summary>
+  /// Exposes the specified functions.
+  /// </summary>
+  /// <param name="contextHandle">The context handle.</param>
+  /// <param name="luaAPIName">Name of the lua API.</param>
   static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 
+  /// <summary>
+  /// Gets the engine.
+  /// </summary>
+  /// <returns></returns>
   static IEngine* GetEngine();
 
 private:

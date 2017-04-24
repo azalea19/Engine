@@ -44,7 +44,6 @@ function Player:update()
 
 	-- written by liz translated from maddys c++ code
 	turnSpeed = 0.3
-	
 	if(inputManagerAPI.isKeyDown(SDL_SCANCODE_LSHIFT)) then
 	moveSpeed = 0.2
 	else
@@ -125,8 +124,6 @@ function Player:update()
 
 	newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
 	newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
-	--printAPI.print(5)
-
 	desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
 
 	newPos.y = math.max(newPos.y, desiredHeight)		

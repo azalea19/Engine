@@ -36,8 +36,6 @@ bool Intersects(mTriangle const& a, mTriangle const& b);
 
 bool Intersects(mTriangle const& tri, mSphere const& sphere);
 
-bool Intersects(mTriangle const& tri, mRay const& ray);
-
 bool Intersects(mSphere const& a, mSphere const& b);
 
 bool Intersects(mSphere const& sphere, mRay const& ray);

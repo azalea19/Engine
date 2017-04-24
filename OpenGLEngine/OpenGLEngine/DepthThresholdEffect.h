@@ -17,12 +17,29 @@ class DepthThresholdEffect
 {
 public:
 
-	DepthThresholdEffect();
+  /// <summary>
+  /// Initializes a new instance of the <see cref="DepthThresholdEffect"/> class.
+  /// </summary>
+  DepthThresholdEffect();
 
-	void Apply(GLuint inputTex, GLuint outputTex, float threshold);
+  /// <summary>
+  /// Applies the depth threshold effect.
+  /// </summary>
+  /// <param name="inputTex">The input tex.</param>
+  /// <param name="outputTex">The output tex.</param>
+  /// <param name="threshold">The threshold.</param>
+  void Apply(GLuint inputTex, GLuint outputTex, float threshold);
 
 private:
-	FrameBuffer m_fb;
+
+  /// <summary>
+  /// The frame buffer
+  /// </summary>
+  FrameBuffer m_fb;
+
+  /// <summary>
+  /// The shader
+  /// </summary>
   std::unique_ptr<IShader> const& m_pShader;
 };
 

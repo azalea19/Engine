@@ -34,28 +34,36 @@ public:
   virtual std::vector<int> const& GetIndices() const = 0;
 
 
+  /// <summary>
+  /// Gets the texture coords.
+  /// </summary>
+  /// <returns>std::vector<vec2></returns>
   virtual std::vector<vec2> const& GetTexCoords() const;
 
   
+  /// <summary>
+  /// Gets the texture coords count.
+  /// </summary>
+  /// <returns>int</returns>
   int GetTexCoordsCount() const;
 
 
   /// <summary>
   /// Gets the vertex count.
   /// </summary>
-  /// <returns></returns>
+  /// <returns>int</returns>
   int GetVertexCount() const;
 
   /// <summary>
   /// Gets the normal count.
   /// </summary>
-  /// <returns></returns>
+  /// <returns>int</returns>
   int GetNormalCount() const;
 
   /// <summary>
   /// Gets the index count.
   /// </summary>
-  /// <returns></returns>
+  /// <returns>int</returns>
   int GetIndexCount() const;
 
 };

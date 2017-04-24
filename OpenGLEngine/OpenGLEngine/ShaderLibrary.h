@@ -83,6 +83,9 @@ private:
   /// </summary>
   string m_currentShaderName;
 
+  /// <summary>
+  /// The engine
+  /// </summary>
   IEngine const *m_pEngine;
 
 };

@@ -193,6 +193,7 @@
     <ClCompile Include="IMeshCollection.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputManagerAPI.cpp" />
+    <ClCompile Include="IRenderableObject.cpp" />
     <ClCompile Include="IslandCollision.cpp" />
     <ClCompile Include="IslandCollisionAPI.cpp" />
     <ClCompile Include="LuaInstanceManager.cpp" />

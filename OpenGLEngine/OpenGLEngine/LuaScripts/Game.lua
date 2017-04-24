@@ -26,6 +26,7 @@ SDL_SCANCODE_S = 22
 SDL_SCANCODE_E = 8
 SDL_SCANCODE_H = 11
 SDL_SCANCODE_D = 7
+SDL_SCANCODE_K = 14
 SDL_SCANCODE_L = 15
 SDL_SCANCODE_ESCAPE = 41
 SDL_SCANCODE_Q = 20
@@ -131,7 +132,8 @@ function Initialize()
     printAPI.print('Initialising engine...\n')
 
 	engineAPI.Create(OPEN_GL);
-		
+	wireindex =0
+
 	printAPI.print('Creating...\n')
 
 	engineAPI.Initialise(1280,720);
@@ -198,7 +200,6 @@ function Initialize()
 
 		table.insert(gameObjects, item)
 	end
-
 
         	printAPI.print('Data Loaded...\n')
 
@@ -280,9 +281,18 @@ function Update()
         end
     end
 
+
+    if(inputManagerAPI.isKeyPressed(SDL_SCANCODE_K)) then
+        if(wireindex ==0) then
+            wireindex =1
+        else
+            wireindex =0
+        end
+    end
+
     --[[
             printAPI.print("e..\n");
-
+            -- this now crashes - liz
 	e = inputManagerAPI.isKeyPressed(SDL_SCANCODE_E)
 	if e then
 		local newX = player0["pos"]["x"] 
@@ -312,7 +322,7 @@ function Update()
 
                 --printAPI.print("l..\n");
                 
-                --[[  -- this crashes - liz
+                --[[  -- this now crashes - liz
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
 		local numRows = 0
 		for k,v in next, gameObjects do 
@@ -365,6 +375,8 @@ function Render()
     
     --printAPI.print("Rendering...\n");
 
+    renderManagerAPI.setFillMode(wireindex)
+
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
@@ -372,6 +384,8 @@ function Render()
 	for i = 1, numRows do
 		renderManagerAPI.renderObject(camera0,time,gameObjects[i]["id"], 1)
 	end
+
+    
 	renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 
     --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
