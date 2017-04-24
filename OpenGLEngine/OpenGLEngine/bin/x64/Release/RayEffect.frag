@@ -10,7 +10,7 @@ uniform float decay = 0.97;
 uniform float density = 1.0;
 uniform float weight = 1.0;
 uniform vec2 lightPos;
-uniform vec3 lightColor = vec3(1.0, 1.0, 0.8);
+uniform vec3 lightColor = vec3(1.0, 1.0, 0.6);
 
 const int NUM_SAMPLES = 256;
 
