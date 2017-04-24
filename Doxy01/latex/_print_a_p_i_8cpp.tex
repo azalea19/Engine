@@ -1,0 +1,99 @@
+\hypertarget{_print_a_p_i_8cpp}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Print\+A\+PI.cpp File Reference}
+\label{_print_a_p_i_8cpp}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Print\+A\+P\+I.\+cpp@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Print\+A\+P\+I.\+cpp}}
+{\ttfamily \#include \char`\"{}Print\+A\+P\+I.\+h\char`\"{}}\\*
+Include dependency graph for Print\+A\+P\+I.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_print_a_p_i_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{_print_a_p_i_8cpp_ad1b2bf45286564c358ba6cfe40d5194b}{Print\+Int} (int val)
+\item 
+static void \hyperlink{_print_a_p_i_8cpp_a559bdb8463ae3b744bf0ce5400b54003}{Print\+String} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} val)
+\item 
+static void \hyperlink{_print_a_p_i_8cpp_ab7a3fffb8414857825276dcb1df87318}{Print\+Float} (float val)
+\item 
+static void \hyperlink{_print_a_p_i_8cpp_a0d38c3308bc7ee6fa15aff6171429632}{Print\+Ref} (\hyperlink{_lua_context_8h_a2220f03700ba40e366f0ee2d684d5c91}{Lua\+Ref} val)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}!Print\+Float@{Print\+Float}}
+\index{Print\+Float@{Print\+Float}!Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Print\+Float(float val)}{PrintFloat(float val)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Print\+Float (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_print_a_p_i_8cpp_ab7a3fffb8414857825276dcb1df87318}{}\label{_print_a_p_i_8cpp_ab7a3fffb8414857825276dcb1df87318}
+
+
+Definition at line 14 of file Print\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+15 \{
+16   printf(\textcolor{stringliteral}{"%f"}, val);
+17 \}
+\end{DoxyCode}
+\index{Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}!Print\+Int@{Print\+Int}}
+\index{Print\+Int@{Print\+Int}!Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Print\+Int(int val)}{PrintInt(int val)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Print\+Int (
+\begin{DoxyParamCaption}
+\item[{int}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_print_a_p_i_8cpp_ad1b2bf45286564c358ba6cfe40d5194b}{}\label{_print_a_p_i_8cpp_ad1b2bf45286564c358ba6cfe40d5194b}
+
+
+Definition at line 4 of file Print\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+5 \{
+6   printf(\textcolor{stringliteral}{"%d"}, val);
+7 \}
+\end{DoxyCode}
+\index{Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}!Print\+Ref@{Print\+Ref}}
+\index{Print\+Ref@{Print\+Ref}!Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Print\+Ref(\+Lua\+Ref val)}{PrintRef(LuaRef val)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Print\+Ref (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Ref}}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_print_a_p_i_8cpp_a0d38c3308bc7ee6fa15aff6171429632}{}\label{_print_a_p_i_8cpp_a0d38c3308bc7ee6fa15aff6171429632}
+
+
+Definition at line 19 of file Print\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+20 \{
+21   \textcolor{keywordflow}{if} (val.isNil())
+22     \hyperlink{_print_a_p_i_8cpp_a559bdb8463ae3b744bf0ce5400b54003}{PrintString}(\textcolor{stringliteral}{"Nil"});
+23   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (val.isNumber())
+24     \hyperlink{_print_a_p_i_8cpp_ab7a3fffb8414857825276dcb1df87318}{PrintFloat}(val);
+25   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (val.isString())
+26     \hyperlink{_print_a_p_i_8cpp_a559bdb8463ae3b744bf0ce5400b54003}{PrintString}(val);
+27   \textcolor{keywordflow}{else}
+28     \hyperlink{_print_a_p_i_8cpp_a559bdb8463ae3b744bf0ce5400b54003}{PrintString}(\textcolor{stringliteral}{"No print function defined for this type.\(\backslash\)n"});
+29 \}
+\end{DoxyCode}
+\index{Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}!Print\+String@{Print\+String}}
+\index{Print\+String@{Print\+String}!Print\+A\+P\+I.\+cpp@{Print\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Print\+String(string val)}{PrintString(string val)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Print\+String (
+\begin{DoxyParamCaption}
+\item[{{\bf string}}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_print_a_p_i_8cpp_a559bdb8463ae3b744bf0ce5400b54003}{}\label{_print_a_p_i_8cpp_a559bdb8463ae3b744bf0ce5400b54003}
+
+
+Definition at line 9 of file Print\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+10 \{
+11   printf(\textcolor{stringliteral}{"%s"}, val.c\_str());
+12 \}
+\end{DoxyCode}

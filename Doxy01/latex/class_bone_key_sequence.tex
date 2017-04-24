@@ -1,0 +1,585 @@
+\hypertarget{class_bone_key_sequence}{}\section{Bone\+Key\+Sequence Class Reference}
+\label{class_bone_key_sequence}\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+
+
+{\ttfamily \#include $<$Bone\+Key\+Sequence.\+h$>$}
+
+
+
+Collaboration diagram for Bone\+Key\+Sequence\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{class_bone_key_sequence__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_bone_key_sequence_ad186adb564fba0e3d87286c3f78f3ec2}{Bone\+Key\+Sequence} (ai\+Node\+Anim const $\ast$p\+Anim, int bone\+ID)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_bone_key_sequence}{Bone\+Key\+Sequence} class. \end{DoxyCompactList}\item 
+int \hyperlink{class_bone_key_sequence_ac43149e05d6f297d215a4166fcd6f909}{Get\+Bone\+ID} () const 
+\begin{DoxyCompactList}\small\item\em Gets the bone identifier. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{class_bone_key_sequence_a88b854b70d320cf1f08ae38ea156f3e1}{Get\+Position} (float time) const 
+\begin{DoxyCompactList}\small\item\em Gets the position. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a02abcac728eae225e929e9e0dc427f28}{quat} \hyperlink{class_bone_key_sequence_aae8845be8d37c41e0e61bc27d07354f2}{Get\+Rotation} (float time) const 
+\begin{DoxyCompactList}\small\item\em Gets the rotation. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{class_bone_key_sequence_a54a036ab5a976bb00d3c470281ab65f1}{Get\+Scale} (float time) const 
+\begin{DoxyCompactList}\small\item\em Gets the scale. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} \hyperlink{class_bone_key_sequence_acec08fe52251082ea3d224189f7cf201}{Get\+Transform} (float time) const 
+\begin{DoxyCompactList}\small\item\em Gets the transform. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_bone_key_sequence_a9165c4e680ccb15818a1f895e7445332}{Load\+Position\+Keys} (ai\+Node\+Anim const $\ast$p\+Anim)
+\begin{DoxyCompactList}\small\item\em Loads the position keys. \end{DoxyCompactList}\item 
+void \hyperlink{class_bone_key_sequence_a9eebce05ff9c1a59187f9f8d31fc6f49}{Load\+Rotation\+Keys} (ai\+Node\+Anim const $\ast$p\+Anim)
+\begin{DoxyCompactList}\small\item\em Loads the rotation keys. \end{DoxyCompactList}\item 
+void \hyperlink{class_bone_key_sequence_af6d9f85bb507d3712d9805b3a5a05421}{Load\+Scale\+Keys} (ai\+Node\+Anim const $\ast$p\+Anim)
+\begin{DoxyCompactList}\small\item\em Loads the scale keys. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_bone_key_sequence_a3479ae87f50df83ca145080406a1c3b8}{m\+\_\+bone\+ID}
+\begin{DoxyCompactList}\small\item\em The bone identifier \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{struct_position_key}{Position\+Key} $>$ \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\+\_\+position\+Keys}
+\begin{DoxyCompactList}\small\item\em The position keys \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{struct_rotation_key}{Rotation\+Key} $>$ \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\+\_\+rotation\+Keys}
+\begin{DoxyCompactList}\small\item\em The rotation keys \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{struct_scale_key}{Scale\+Key} $>$ \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\+\_\+scale\+Keys}
+\begin{DoxyCompactList}\small\item\em The scale keys \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 36 of file Bone\+Key\+Sequence.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Bone\+Key\+Sequence(ai\+Node\+Anim const $\ast$p\+Anim, int bone\+I\+D)}{BoneKeySequence(aiNodeAnim const *pAnim, int boneID)}}]{\setlength{\rightskip}{0pt plus 5cm}Bone\+Key\+Sequence\+::\+Bone\+Key\+Sequence (
+\begin{DoxyParamCaption}
+\item[{ai\+Node\+Anim const $\ast$}]{p\+Anim, }
+\item[{int}]{bone\+ID}
+\end{DoxyParamCaption}
+)}\hypertarget{class_bone_key_sequence_ad186adb564fba0e3d87286c3f78f3ec2}{}\label{class_bone_key_sequence_ad186adb564fba0e3d87286c3f78f3ec2}
+
+
+Initializes a new instance of the \hyperlink{class_bone_key_sequence}{Bone\+Key\+Sequence} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Anim} & The p anim.\\
+\hline
+{\em bone\+ID} & The bone identifier.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 6 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+References Load\+Position\+Keys(), Load\+Rotation\+Keys(), Load\+Scale\+Keys(), and m\+\_\+bone\+ID.
+
+
+\begin{DoxyCode}
+7   : \hyperlink{class_bone_key_sequence_a3479ae87f50df83ca145080406a1c3b8}{m\_boneID}(boneID)
+8 \{
+9   \hyperlink{class_bone_key_sequence_a9165c4e680ccb15818a1f895e7445332}{LoadPositionKeys}(pAnim);
+10   \hyperlink{class_bone_key_sequence_a9eebce05ff9c1a59187f9f8d31fc6f49}{LoadRotationKeys}(pAnim);
+11   \hyperlink{class_bone_key_sequence_af6d9f85bb507d3712d9805b3a5a05421}{LoadScaleKeys}(pAnim);
+12 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_ad186adb564fba0e3d87286c3f78f3ec2_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Get\+Bone\+ID@{Get\+Bone\+ID}}
+\index{Get\+Bone\+ID@{Get\+Bone\+ID}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Get\+Bone\+I\+D() const }{GetBoneID() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Bone\+Key\+Sequence\+::\+Get\+Bone\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bone_key_sequence_ac43149e05d6f297d215a4166fcd6f909}{}\label{class_bone_key_sequence_ac43149e05d6f297d215a4166fcd6f909}
+
+
+Gets the bone identifier. 
+
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+
+
+Definition at line 14 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+References m\+\_\+bone\+ID.
+
+
+\begin{DoxyCode}
+15 \{
+16   \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_a3479ae87f50df83ca145080406a1c3b8}{m\_boneID};
+17 \}
+\end{DoxyCode}
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Get\+Position(float time) const }{GetPosition(float time) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Bone\+Key\+Sequence\+::\+Get\+Position (
+\begin{DoxyParamCaption}
+\item[{float}]{time}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bone_key_sequence_a88b854b70d320cf1f08ae38ea156f3e1}{}\label{class_bone_key_sequence_a88b854b70d320cf1f08ae38ea156f3e1}
+
+
+Gets the position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vec3
+\end{DoxyReturn}
+
+
+Definition at line 19 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+References Position\+Key\+::time.
+
+
+
+Referenced by Get\+Transform().
+
+
+\begin{DoxyCode}
+20 \{
+21   \textcolor{keywordflow}{if} (time <= \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[0].time)
+22     \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[0].position;
+23 
+24   \textcolor{keywordflow}{if} (time >= \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[\hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}.size() - 1].time)
+25     \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[\hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}.size() - 1].position;
+26 
+27   \textcolor{comment}{//Find last frame before the current time}
+28   \textcolor{keywordtype}{int} lastFrameIndex = 0;
+29   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}.size(); i++)
+30     \textcolor{keywordflow}{if} (\hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[i].time < time)
+31       lastFrameIndex = i;
+32     \textcolor{keywordflow}{else}
+33       \textcolor{keywordflow}{break};
+34 
+35   \hyperlink{struct_position_key}{PositionKey} \textcolor{keyword}{const}& lastKey = \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[lastFrameIndex];
+36   \hyperlink{struct_position_key}{PositionKey} \textcolor{keyword}{const}& nextKey = \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}[lastFrameIndex + 1];
+37   
+38   \textcolor{keywordtype}{float} timeSinceLast = time - lastKey.\hyperlink{struct_position_key_ab18d1c0baf9f835e2dbd8b8663d552f4}{time};
+39   \textcolor{keywordtype}{float} timeBetweenFrames = nextKey.\hyperlink{struct_position_key_ab18d1c0baf9f835e2dbd8b8663d552f4}{time} - lastKey.\hyperlink{struct_position_key_ab18d1c0baf9f835e2dbd8b8663d552f4}{time};
+40   \textcolor{keywordtype}{float} interpolationFactor = timeSinceLast / timeBetweenFrames;
+41   interpolationFactor = \hyperlink{_m_math_8h_a35bcf6994210feb2d96d1d22df3385ea}{mClamp}(interpolationFactor, 0, 1);
+42   
+43   \textcolor{keywordflow}{return} glm::lerp(lastKey.\hyperlink{struct_position_key_a6b7f3212adb099bc1b5d86513ef2fd36}{position}, nextKey.\hyperlink{struct_position_key_a6b7f3212adb099bc1b5d86513ef2fd36}{position}, interpolationFactor);
+44 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_a88b854b70d320cf1f08ae38ea156f3e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Get\+Rotation@{Get\+Rotation}}
+\index{Get\+Rotation@{Get\+Rotation}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Get\+Rotation(float time) const }{GetRotation(float time) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf quat} Bone\+Key\+Sequence\+::\+Get\+Rotation (
+\begin{DoxyParamCaption}
+\item[{float}]{time}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bone_key_sequence_aae8845be8d37c41e0e61bc27d07354f2}{}\label{class_bone_key_sequence_aae8845be8d37c41e0e61bc27d07354f2}
+
+
+Gets the rotation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+quat
+\end{DoxyReturn}
+
+
+Definition at line 46 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+References Rotation\+Key\+::time.
+
+
+
+Referenced by Get\+Transform().
+
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{keywordflow}{if} (time <= \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[0].time)
+49     \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[0].rotation;
+50 
+51   \textcolor{keywordflow}{if} (time >= \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[\hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}.size() - 1].time)
+52     \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[\hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}.size() - 1].rotation;
+53 
+54   \textcolor{comment}{//Find last frame before the current time}
+55   \textcolor{keywordtype}{int} lastFrameIndex = 0;
+56   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}.size(); i++)
+57     \textcolor{keywordflow}{if} (\hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[i].time < time)
+58       lastFrameIndex = i;
+59     \textcolor{keywordflow}{else}
+60       \textcolor{keywordflow}{break};
+61 
+62   \hyperlink{struct_rotation_key}{RotationKey} \textcolor{keyword}{const}& lastKey = \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[lastFrameIndex];
+63   \hyperlink{struct_rotation_key}{RotationKey} \textcolor{keyword}{const}& nextKey = \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}[lastFrameIndex + 1];
+64 
+65   \textcolor{keywordtype}{float} timeSinceLast = time - lastKey.\hyperlink{struct_rotation_key_a421ab28d247b062e4c46e4879943ee7d}{time};
+66   \textcolor{keywordtype}{float} timeBetweenFrames = nextKey.\hyperlink{struct_rotation_key_a421ab28d247b062e4c46e4879943ee7d}{time} - lastKey.\hyperlink{struct_rotation_key_a421ab28d247b062e4c46e4879943ee7d}{time};
+67   \textcolor{keywordtype}{float} interpolationFactor = timeSinceLast / timeBetweenFrames;
+68   interpolationFactor = \hyperlink{_m_math_8h_a35bcf6994210feb2d96d1d22df3385ea}{mClamp}(interpolationFactor, 0, 1);
+69 
+70   \textcolor{keywordflow}{return} glm::lerp(lastKey.\hyperlink{struct_rotation_key_a9638fbf119b41fd844b3d24c9e95d52d}{rotation}, nextKey.\hyperlink{struct_rotation_key_a9638fbf119b41fd844b3d24c9e95d52d}{rotation}, interpolationFactor);
+71 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_aae8845be8d37c41e0e61bc27d07354f2_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Get\+Scale(float time) const }{GetScale(float time) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Bone\+Key\+Sequence\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+\item[{float}]{time}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bone_key_sequence_a54a036ab5a976bb00d3c470281ab65f1}{}\label{class_bone_key_sequence_a54a036ab5a976bb00d3c470281ab65f1}
+
+
+Gets the scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vec3
+\end{DoxyReturn}
+
+
+Definition at line 73 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+References Scale\+Key\+::time.
+
+
+
+Referenced by Get\+Transform().
+
+
+\begin{DoxyCode}
+74 \{
+75   \textcolor{keywordflow}{if} (time <= \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[0].time)
+76     \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[0].scale;
+77 
+78   \textcolor{keywordflow}{if} (time >= \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[\hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}.size() - 1].time)
+79     \textcolor{keywordflow}{return} \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[\hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}.size() - 1].scale;
+80 
+81   \textcolor{comment}{//Find last frame before the current time}
+82   \textcolor{keywordtype}{int} lastFrameIndex = 0;
+83   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}.size(); i++)
+84     \textcolor{keywordflow}{if} (\hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[i].time < time)
+85       lastFrameIndex = i;
+86     \textcolor{keywordflow}{else}
+87       \textcolor{keywordflow}{break};
+88 
+89   \hyperlink{struct_scale_key}{ScaleKey} \textcolor{keyword}{const}& lastKey = \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[lastFrameIndex];
+90   \hyperlink{struct_scale_key}{ScaleKey} \textcolor{keyword}{const}& nextKey = \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}[lastFrameIndex + 1];
+91 
+92   \textcolor{keywordtype}{float} timeSinceLast = time - lastKey.\hyperlink{struct_scale_key_a5fc8b5f2ab58d62addddbb51a794fee7}{time};
+93   \textcolor{keywordtype}{float} timeBetweenFrames = nextKey.\hyperlink{struct_scale_key_a5fc8b5f2ab58d62addddbb51a794fee7}{time} - lastKey.\hyperlink{struct_scale_key_a5fc8b5f2ab58d62addddbb51a794fee7}{time};
+94   \textcolor{keywordtype}{float} interpolationFactor = timeSinceLast / timeBetweenFrames;
+95   interpolationFactor = \hyperlink{_m_math_8h_a35bcf6994210feb2d96d1d22df3385ea}{mClamp}(interpolationFactor, 0, 1);
+96 
+97   \textcolor{keywordflow}{return} glm::lerp(lastKey.\hyperlink{struct_scale_key_a49c1e61733ade0134fb94a62620d2caf}{scale}, nextKey.\hyperlink{struct_scale_key_a49c1e61733ade0134fb94a62620d2caf}{scale}, interpolationFactor);
+98 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_a54a036ab5a976bb00d3c470281ab65f1_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Get\+Transform@{Get\+Transform}}
+\index{Get\+Transform@{Get\+Transform}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Get\+Transform(float time) const }{GetTransform(float time) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat4} Bone\+Key\+Sequence\+::\+Get\+Transform (
+\begin{DoxyParamCaption}
+\item[{float}]{time}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_bone_key_sequence_acec08fe52251082ea3d224189f7cf201}{}\label{class_bone_key_sequence_acec08fe52251082ea3d224189f7cf201}
+
+
+Gets the transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mat4
+\end{DoxyReturn}
+
+
+Definition at line 100 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+References Get\+Position(), Get\+Rotation(), and Get\+Scale().
+
+
+\begin{DoxyCode}
+101 \{
+102   \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} position = \hyperlink{class_bone_key_sequence_a88b854b70d320cf1f08ae38ea156f3e1}{GetPosition}(time);
+103   \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} scale = \hyperlink{class_bone_key_sequence_a54a036ab5a976bb00d3c470281ab65f1}{GetScale}(time);
+104   \hyperlink{_types_8h_a02abcac728eae225e929e9e0dc427f28}{quat} rotation = \hyperlink{class_bone_key_sequence_aae8845be8d37c41e0e61bc27d07354f2}{GetRotation}(time);
+105 
+106   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} translationMatrix = glm::translate(position);
+107   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} scalingMatrix = glm::scale(scale);
+108   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} rotationMatrix = \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4}(rotation);
+109 
+110   \textcolor{keywordflow}{return} translationMatrix * rotationMatrix * scalingMatrix;
+111 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_acec08fe52251082ea3d224189f7cf201_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Load\+Position\+Keys@{Load\+Position\+Keys}}
+\index{Load\+Position\+Keys@{Load\+Position\+Keys}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Load\+Position\+Keys(ai\+Node\+Anim const $\ast$p\+Anim)}{LoadPositionKeys(aiNodeAnim const *pAnim)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bone\+Key\+Sequence\+::\+Load\+Position\+Keys (
+\begin{DoxyParamCaption}
+\item[{ai\+Node\+Anim const $\ast$}]{p\+Anim}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_a9165c4e680ccb15818a1f895e7445332}{}\label{class_bone_key_sequence_a9165c4e680ccb15818a1f895e7445332}
+
+
+Loads the position keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Anim} & The p anim.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 113 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+Referenced by Bone\+Key\+Sequence().
+
+
+\begin{DoxyCode}
+114 \{
+115   \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} i = 0; i < pAnim->mNumPositionKeys; i++)
+116       \hyperlink{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{m\_positionKeys}.push\_back(\hyperlink{struct_position_key}{PositionKey}\{ float(pAnim->mPositionKeys[i].mTime), 
+      ASToGLM(pAnim->mPositionKeys[i].mValue) \});
+117 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_a9165c4e680ccb15818a1f895e7445332_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Load\+Rotation\+Keys@{Load\+Rotation\+Keys}}
+\index{Load\+Rotation\+Keys@{Load\+Rotation\+Keys}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Load\+Rotation\+Keys(ai\+Node\+Anim const $\ast$p\+Anim)}{LoadRotationKeys(aiNodeAnim const *pAnim)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bone\+Key\+Sequence\+::\+Load\+Rotation\+Keys (
+\begin{DoxyParamCaption}
+\item[{ai\+Node\+Anim const $\ast$}]{p\+Anim}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_a9eebce05ff9c1a59187f9f8d31fc6f49}{}\label{class_bone_key_sequence_a9eebce05ff9c1a59187f9f8d31fc6f49}
+
+
+Loads the rotation keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Anim} & The p anim.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 119 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+Referenced by Bone\+Key\+Sequence().
+
+
+\begin{DoxyCode}
+120 \{
+121   \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} i = 0; i < pAnim->mNumRotationKeys; i++)
+122       \hyperlink{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{m\_rotationKeys}.push\_back(\hyperlink{struct_rotation_key}{RotationKey}\{ float(pAnim->mRotationKeys[i].mTime), 
+      ASToGLM(pAnim->mRotationKeys[i].mValue) \});
+123 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_a9eebce05ff9c1a59187f9f8d31fc6f49_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!Load\+Scale\+Keys@{Load\+Scale\+Keys}}
+\index{Load\+Scale\+Keys@{Load\+Scale\+Keys}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{Load\+Scale\+Keys(ai\+Node\+Anim const $\ast$p\+Anim)}{LoadScaleKeys(aiNodeAnim const *pAnim)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bone\+Key\+Sequence\+::\+Load\+Scale\+Keys (
+\begin{DoxyParamCaption}
+\item[{ai\+Node\+Anim const $\ast$}]{p\+Anim}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_af6d9f85bb507d3712d9805b3a5a05421}{}\label{class_bone_key_sequence_af6d9f85bb507d3712d9805b3a5a05421}
+
+
+Loads the scale keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Anim} & The p anim.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file Bone\+Key\+Sequence.\+cpp.
+
+
+
+Referenced by Bone\+Key\+Sequence().
+
+
+\begin{DoxyCode}
+126 \{
+127   \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} i = 0; i < pAnim->mNumScalingKeys; i++)
+128       \hyperlink{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{m\_scaleKeys}.push\_back(\hyperlink{struct_scale_key}{ScaleKey}\{ float(pAnim->mScalingKeys[i].mTime), ASToGLM(pAnim
+      ->mScalingKeys[i].mValue) \});
+129 \}\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bone_key_sequence_af6d9f85bb507d3712d9805b3a5a05421_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!m\+\_\+bone\+ID@{m\+\_\+bone\+ID}}
+\index{m\+\_\+bone\+ID@{m\+\_\+bone\+ID}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{m\+\_\+bone\+ID}{m_boneID}}]{\setlength{\rightskip}{0pt plus 5cm}int Bone\+Key\+Sequence\+::m\+\_\+bone\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_a3479ae87f50df83ca145080406a1c3b8}{}\label{class_bone_key_sequence_a3479ae87f50df83ca145080406a1c3b8}
+
+
+The bone identifier 
+
+
+
+Definition at line 88 of file Bone\+Key\+Sequence.\+h.
+
+
+
+Referenced by Bone\+Key\+Sequence(), and Get\+Bone\+I\+D().
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!m\+\_\+position\+Keys@{m\+\_\+position\+Keys}}
+\index{m\+\_\+position\+Keys@{m\+\_\+position\+Keys}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{m\+\_\+position\+Keys}{m_positionKeys}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Position\+Key}$>$ Bone\+Key\+Sequence\+::m\+\_\+position\+Keys\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}{}\label{class_bone_key_sequence_acae9becd7de02c955da5d64050513ce5}
+
+
+The position keys 
+
+
+
+Definition at line 93 of file Bone\+Key\+Sequence.\+h.
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!m\+\_\+rotation\+Keys@{m\+\_\+rotation\+Keys}}
+\index{m\+\_\+rotation\+Keys@{m\+\_\+rotation\+Keys}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{m\+\_\+rotation\+Keys}{m_rotationKeys}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Rotation\+Key}$>$ Bone\+Key\+Sequence\+::m\+\_\+rotation\+Keys\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}{}\label{class_bone_key_sequence_abb6be9db9c5bdc089b6ae7ea6bdae0e3}
+
+
+The rotation keys 
+
+
+
+Definition at line 98 of file Bone\+Key\+Sequence.\+h.
+
+\index{Bone\+Key\+Sequence@{Bone\+Key\+Sequence}!m\+\_\+scale\+Keys@{m\+\_\+scale\+Keys}}
+\index{m\+\_\+scale\+Keys@{m\+\_\+scale\+Keys}!Bone\+Key\+Sequence@{Bone\+Key\+Sequence}}
+\subsubsection[{\texorpdfstring{m\+\_\+scale\+Keys}{m_scaleKeys}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Scale\+Key}$>$ Bone\+Key\+Sequence\+::m\+\_\+scale\+Keys\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}{}\label{class_bone_key_sequence_a9a1a5986127adf2f67411d8802463c36}
+
+
+The scale keys 
+
+
+
+Definition at line 103 of file Bone\+Key\+Sequence.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_bone_key_sequence_8h}{Bone\+Key\+Sequence.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_bone_key_sequence_8cpp}{Bone\+Key\+Sequence.\+cpp}\end{DoxyCompactItemize}

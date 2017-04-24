@@ -1,0 +1,11 @@
+<map id="RenderManagerAPI::Initialise" name="RenderManagerAPI::Initialise">
+<area shape="rect" id="node2" href="$class_bloom_effect.html#ae76d6ede7ad9201f6bf8f4c9927c827b" title="BloomEffect::BloomEffect" alt="" coords="259,5,430,32"/>
+<area shape="rect" id="node3" href="$class_depth_threshold_effect.html#ae4e0bf5ce9847f019acb17000868803f" title="Initializes a new instance of the DepthThresholdEffect class. " alt="" coords="268,81,421,122"/>
+<area shape="rect" id="node4" href="$class_directional_lighting_effect.html#a4ee635d9d9ed5ce5ebb5cef463e67723" title="Initializes a new instance of the DirectionalLightingEffect class. " alt="" coords="260,170,429,211"/>
+<area shape="rect" id="node5" href="$class_f_x_a_a_effect.html#a86127f37cfc0a67e3a96cb7c5a498988" title="Initializes a new instance of the FXAAEffect class. " alt="" coords="263,260,426,287"/>
+<area shape="rect" id="node6" href="$class_g_buffer.html#a633b1c21ce5aed0c280ecb53efce7a05" title="GBuffer::GBuffer" alt="" coords="287,311,403,337"/>
+<area shape="rect" id="node7" href="$class_god_rays_effect.html#aa6e3d593e4aa1f8e4c1fa6dfb81f1d02" title="Initializes a new instance of the GodRaysEffect class. " alt="" coords="243,385,447,412"/>
+<area shape="rect" id="node8" href="$class_frame_buffer.html#af1d4cb768692b76c354f24a6e98d5419" title="Initializes this instance. " alt="" coords="271,436,418,463"/>
+<area shape="rect" id="node9" href="$class_multiplicative_blend_effect.html#a52b3c9ea6ef5f4fb1bdae35c66905108" title="Initializes a new instance of the MultiplicativeBlendEffect class. " alt="" coords="259,511,430,553"/>
+<area shape="rect" id="node10" href="$class_scene_decompose_effect.html#af2c37b4960d6ccafe8a6c9fe8de6d4e4" title="Initializes a new instance of the SceneDecomposeEffect class. " alt="" coords="260,577,429,618"/>
+</map>

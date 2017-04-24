@@ -1,0 +1,6 @@
+<map id="ObjectInstance" name="ObjectInstance">
+<area shape="rect" id="node2" href="$class_i_renderable.html" title="{IRenderable\n||+ Render()\l}" alt="" coords="5,263,96,340"/>
+<area shape="rect" id="node3" href="$class_i_animatable.html" title="{IAnimatable\n||+ SetActiveAnimation()\l+ GetActiveAnimationName()\l+ SetActiveAnimation()\l+ GetActiveAnimationIndex()\l}" alt="" coords="121,241,311,362"/>
+<area shape="rect" id="node4" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="139,5,293,112"/>
+<area shape="rect" id="node5" href="$class_affine_transformable.html" title="{AffineTransformable\n|&#45; m_translation\l&#45; m_yaw\l&#45; m_pitch\l&#45; m_roll\l&#45; m_scale\l|+ AffineTransformable()\l+ AffineTransformable()\l+ GetTranslation()\l+ SetTranslation()\l+ SetTranslation()\l+ GetOrientation()\l+ SetOrientation()\l+ GetYaw()\l+ SetYaw()\l+ GetPitch()\land 8 more...\l}" alt="" coords="336,160,491,443"/>
+</map>

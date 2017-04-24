@@ -1,0 +1,101 @@
+\hypertarget{class_model_library_a_p_i}{}\section{Model\+Library\+A\+PI Class Reference}
+\label{class_model_library_a_p_i}\index{Model\+Library\+A\+PI@{Model\+Library\+A\+PI}}
+
+
+{\ttfamily \#include $<$Model\+Library\+A\+P\+I.\+h$>$}
+
+
+
+Collaboration diagram for Model\+Library\+A\+PI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_model_library_a_p_i__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_model_library_a_p_i_aff106f8a92fea71b22c4464e0ffc893f}{Add\+Model} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&name, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&path, bool normalized)
+\begin{DoxyCompactList}\small\item\em Adds the model. \end{DoxyCompactList}\item 
+static void \hyperlink{class_model_library_a_p_i_ad4be7e68d06c067d4b1ef67bc1e25956}{Expose} (\hyperlink{_lua_context_8h_a2ffcc2d3ed21165072a1d7b61259bf14}{Lua\+Context\+Handle} context\+Handle, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} lua\+A\+P\+I\+Name)
+\begin{DoxyCompactList}\small\item\em Exposes the A\+PI functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file Model\+Library\+A\+P\+I.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Model\+Library\+A\+PI@{Model\+Library\+A\+PI}!Add\+Model@{Add\+Model}}
+\index{Add\+Model@{Add\+Model}!Model\+Library\+A\+PI@{Model\+Library\+A\+PI}}
+\subsubsection[{\texorpdfstring{Add\+Model(string const \&name, string const \&path, bool normalized)}{AddModel(string const &name, string const &path, bool normalized)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+Library\+A\+P\+I\+::\+Add\+Model (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{name, }
+\item[{{\bf string} const \&}]{path, }
+\item[{bool}]{normalized}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_model_library_a_p_i_aff106f8a92fea71b22c4464e0ffc893f}{}\label{class_model_library_a_p_i_aff106f8a92fea71b22c4464e0ffc893f}
+
+
+Adds the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name.\\
+\hline
+{\em path} & The path.\\
+\hline
+{\em normalized} & if set to {\ttfamily true} \mbox{[}normalized\mbox{]}.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 4 of file Model\+Library\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+5 \{
+6     \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{ModelLibrary::GetInstance}().\hyperlink{class_model_library_a580264d3ee6f553c916f04cecf2de660}{AddModel}(name, path, normalized);
+7 \}
+\end{DoxyCode}
+\index{Model\+Library\+A\+PI@{Model\+Library\+A\+PI}!Expose@{Expose}}
+\index{Expose@{Expose}!Model\+Library\+A\+PI@{Model\+Library\+A\+PI}}
+\subsubsection[{\texorpdfstring{Expose(\+Lua\+Context\+Handle context\+Handle, string lua\+A\+P\+I\+Name)}{Expose(LuaContextHandle contextHandle, string luaAPIName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+Library\+A\+P\+I\+::\+Expose (
+\begin{DoxyParamCaption}
+\item[{{\bf Lua\+Context\+Handle}}]{context\+Handle, }
+\item[{{\bf string}}]{lua\+A\+P\+I\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_model_library_a_p_i_ad4be7e68d06c067d4b1ef67bc1e25956}{}\label{class_model_library_a_p_i_ad4be7e68d06c067d4b1ef67bc1e25956}
+
+
+Exposes the A\+PI functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context\+Handle} & The context handle.\\
+\hline
+{\em lua\+A\+P\+I\+Name} & Name of the lua A\+PI.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 9 of file Model\+Library\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+10 \{
+11     \hyperlink{class_lua_context}{LuaContext}* pContext = \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{LuaManager::GetInstance}().
+      \hyperlink{class_lua_manager_a68592b46a59219d130cf4f637c977378}{GetContext}(contextHandle);
+12     pContext->\hyperlink{class_lua_context_a2229908b6b329ed67105f1be7409cb3f}{ExposeFunction}(luaAPIName, \textcolor{stringliteral}{"addModel"}, \hyperlink{class_model_library_a_p_i_aff106f8a92fea71b22c4464e0ffc893f}{AddModel});
+13 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_model_library_a_p_i_8h}{Model\+Library\+A\+P\+I.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_model_library_a_p_i_8cpp}{Model\+Library\+A\+P\+I.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,11 @@
+<map id="HeightMap::GetWidth" name="HeightMap::GetWidth">
+<area shape="rect" id="node2" href="$class_forest_terrain.html#a00b38761747044c6b5b786082671548e" title="Generates the forest. " alt="" coords="432,11,628,38"/>
+<area shape="rect" id="node4" href="$class_terrain.html#a73df20324a97a2dd88807539b9cbc783" title="Generates the normals. " alt="" coords="207,46,377,72"/>
+<area shape="rect" id="node5" href="$class_terrain.html#a6d4038969c8f9db67de07f03b2ac6b9a" title="Generates the terrain indices. " alt="" coords="211,97,373,138"/>
+<area shape="rect" id="node7" href="$class_terrain.html#a50392203c65b6d8d0b2b243effc07053" title="Initializes a new instance of the Terrain class. " alt="" coords="676,170,784,196"/>
+<area shape="rect" id="node9" href="$class_terrain.html#a7b82fc680b5747dadda8477bdcf33cf9" title="Generates the terrain vertices. " alt="" coords="211,162,373,204"/>
+<area shape="rect" id="node10" href="$class_terrain.html#a39c46be48d267589430a97b00cd3399d" title="Generates the texture coords. " alt="" coords="200,228,384,255"/>
+<area shape="rect" id="node3" href="$class_forest_terrain.html#a2cfcbadbae4c5904c40f52636cd16118" title="Initializes a new instance of the ForestTerrain class. " alt="" coords="832,103,1015,130"/>
+<area shape="rect" id="node6" href="$class_terrain.html#ae7bafb8ba2f656805c07fbef600a35c4" title="Creates the mesh. " alt="" coords="461,170,599,196"/>
+<area shape="rect" id="node8" href="$class_terrain_a_p_i.html#a77f6f3df5ae85964a74eed00b76e1154" title="Generates the terrain. " alt="" coords="832,170,1015,196"/>
+</map>

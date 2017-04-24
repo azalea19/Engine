@@ -1,0 +1,169 @@
+\hypertarget{class_ray_effect}{}\section{Ray\+Effect Class Reference}
+\label{class_ray_effect}\index{Ray\+Effect@{Ray\+Effect}}
+
+
+{\ttfamily \#include $<$Ray\+Effect.\+h$>$}
+
+
+
+Collaboration diagram for Ray\+Effect\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{class_ray_effect__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ray_effect_a4be88c0ce86e43a8229dfa9696795ae7}{Ray\+Effect} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_ray_effect}{Ray\+Effect} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_ray_effect_a815b27679273f66bb900578fcfc85f36}{Apply} (G\+Luint input\+Tex, G\+Luint output\+Tex, \hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2} ss\+Light\+Pos)
+\begin{DoxyCompactList}\small\item\em Applies the ray effect. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_frame_buffer}{Frame\+Buffer} \hyperlink{class_ray_effect_a4e83685c236058fe810d67fe40387bd8}{m\+\_\+fb}
+\begin{DoxyCompactList}\small\item\em The frame buffer \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{class_i_shader}{I\+Shader} $>$ const \& \hyperlink{class_ray_effect_a8633b843d8f014110b994465eb8a2590}{m\+\_\+p\+Shader}
+\begin{DoxyCompactList}\small\item\em The shader \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file Ray\+Effect.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ray\+Effect@{Ray\+Effect}!Ray\+Effect@{Ray\+Effect}}
+\index{Ray\+Effect@{Ray\+Effect}!Ray\+Effect@{Ray\+Effect}}
+\subsubsection[{\texorpdfstring{Ray\+Effect()}{RayEffect()}}]{\setlength{\rightskip}{0pt plus 5cm}Ray\+Effect\+::\+Ray\+Effect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_ray_effect_a4be88c0ce86e43a8229dfa9696795ae7}{}\label{class_ray_effect_a4be88c0ce86e43a8229dfa9696795ae7}
+
+
+Initializes a new instance of the \hyperlink{class_ray_effect}{Ray\+Effect} class. 
+
+
+
+Definition at line 5 of file Ray\+Effect.\+cpp.
+
+
+
+References Ray\+Effect().
+
+
+
+Referenced by Ray\+Effect().
+
+
+\begin{DoxyCode}
+6   : \hyperlink{class_ray_effect_a8633b843d8f014110b994465eb8a2590}{m\_pShader}(\hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{ShaderLibrary::GetInstance}().GetShader(\textcolor{stringliteral}{"RayEffect"}))
+7 \{
+8 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{class_ray_effect_a4be88c0ce86e43a8229dfa9696795ae7_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{class_ray_effect_a4be88c0ce86e43a8229dfa9696795ae7_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Ray\+Effect@{Ray\+Effect}!Apply@{Apply}}
+\index{Apply@{Apply}!Ray\+Effect@{Ray\+Effect}}
+\subsubsection[{\texorpdfstring{Apply(\+G\+Luint input\+Tex, G\+Luint output\+Tex, vec2 ss\+Light\+Pos)}{Apply(GLuint inputTex, GLuint outputTex, vec2 ssLightPos)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ray\+Effect\+::\+Apply (
+\begin{DoxyParamCaption}
+\item[{G\+Luint}]{input\+Tex, }
+\item[{G\+Luint}]{output\+Tex, }
+\item[{{\bf vec2}}]{ss\+Light\+Pos}
+\end{DoxyParamCaption}
+)}\hypertarget{class_ray_effect_a815b27679273f66bb900578fcfc85f36}{}\label{class_ray_effect_a815b27679273f66bb900578fcfc85f36}
+
+
+Applies the ray effect. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Tex} & The input tex.\\
+\hline
+{\em output\+Tex} & The output tex.\\
+\hline
+{\em ss\+Light\+Pos} & The screenspace light position.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file Ray\+Effect.\+cpp.
+
+
+\begin{DoxyCode}
+11 \{
+12     \hyperlink{class_ray_effect_a4e83685c236058fe810d67fe40387bd8}{m\_fb}.\hyperlink{class_frame_buffer_ae7e61568475fba3b15e446c9061833ea}{Bind}();
+13 
+14     \hyperlink{class_ray_effect_a4e83685c236058fe810d67fe40387bd8}{m\_fb}.\hyperlink{class_frame_buffer_a1556417c0dec00d1d24bdf0e84bc4c4d}{AttachColour}(0, outputTex);
+15   glClear(GL\_COLOR\_BUFFER\_BIT | GL\_DEPTH\_BUFFER\_BIT);
+16     \hyperlink{class_ray_effect_a8633b843d8f014110b994465eb8a2590}{m\_pShader}->Bind();
+17     \hyperlink{class_ray_effect_a8633b843d8f014110b994465eb8a2590}{m\_pShader}->TransmitUniform(\textcolor{stringliteral}{"lightPos"}, ssLightPos);
+18     glBindVertexArray(\hyperlink{class_frame_buffer_a22b0c9de2bef06e0de865684556a6677}{FrameBuffer::FSQuadVAO});
+19     glActiveTexture(GL\_TEXTURE0 + 0);
+20     glBindTexture(GL\_TEXTURE\_2D, inputTex);
+21     \hyperlink{class_ray_effect_a8633b843d8f014110b994465eb8a2590}{m\_pShader}->TransmitUniform(\textcolor{stringliteral}{"inputTex0"}, 0);
+22     glDrawArrays(GL\_QUADS, 0, 4);
+23     glBindVertexArray(NULL);
+24 
+25     \hyperlink{class_ray_effect_a4e83685c236058fe810d67fe40387bd8}{m\_fb}.\hyperlink{class_frame_buffer_a1e114b325998ec4e4b9a9ea090d64ae8}{Unbind}();
+26 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Ray\+Effect@{Ray\+Effect}!m\+\_\+fb@{m\+\_\+fb}}
+\index{m\+\_\+fb@{m\+\_\+fb}!Ray\+Effect@{Ray\+Effect}}
+\subsubsection[{\texorpdfstring{m\+\_\+fb}{m_fb}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Frame\+Buffer} Ray\+Effect\+::m\+\_\+fb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_ray_effect_a4e83685c236058fe810d67fe40387bd8}{}\label{class_ray_effect_a4e83685c236058fe810d67fe40387bd8}
+
+
+The frame buffer 
+
+
+
+Definition at line 38 of file Ray\+Effect.\+h.
+
+\index{Ray\+Effect@{Ray\+Effect}!m\+\_\+p\+Shader@{m\+\_\+p\+Shader}}
+\index{m\+\_\+p\+Shader@{m\+\_\+p\+Shader}!Ray\+Effect@{Ray\+Effect}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Shader}{m_pShader}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf I\+Shader}$>$ const\& Ray\+Effect\+::m\+\_\+p\+Shader\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_ray_effect_a8633b843d8f014110b994465eb8a2590}{}\label{class_ray_effect_a8633b843d8f014110b994465eb8a2590}
+
+
+The shader 
+
+
+
+Definition at line 43 of file Ray\+Effect.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_ray_effect_8h}{Ray\+Effect.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_ray_effect_8cpp}{Ray\+Effect.\+cpp}\end{DoxyCompactItemize}

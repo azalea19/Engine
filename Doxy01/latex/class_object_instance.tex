@@ -1,0 +1,697 @@
+\hypertarget{class_object_instance}{}\section{Object\+Instance Class Reference}
+\label{class_object_instance}\index{Object\+Instance@{Object\+Instance}}
+
+
+{\ttfamily \#include $<$Object\+Instance.\+h$>$}
+
+
+
+Inheritance diagram for Object\+Instance\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Object\+Instance\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_object_instance__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_object_instance_abc93e8022756b412663cfdfdb4101ab3}{Object\+Instance} (\hyperlink{class_i_renderable_object}{I\+Renderable\+Object} $\ast$object, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&coords=\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm\+::vec3}(0, 0, 0), \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&scale\+Factor=\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(1, 1, 1), float yaw=0, float pitch=0)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_object_instance}{Object\+Instance} struct. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} $>$ \hyperlink{class_object_instance_ab9de0b3252e0df4c15129876163dad6d}{Get\+Vertices} (\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&parent\+Model\+Matrix=\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4}()) const 
+\begin{DoxyCompactList}\small\item\em Gets the vertices. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} \hyperlink{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f}{Get\+World\+Matrix} () const 
+\begin{DoxyCompactList}\small\item\em Gets the world matrix. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_object_instance_a5aab17f4111ca91e123f9485c616aa6f}{Render} (\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&world\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&view\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&projection\+Matrix, float time=0) override
+\begin{DoxyCompactList}\small\item\em The render method. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_object_instance_a9628216a9ea2cd68f3b2163718517fa4}{Set\+Active\+Animation} (int animation\+Index) override
+\begin{DoxyCompactList}\small\item\em Sets the active animation. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_object_instance_a8012a0c7dbe376714997c9a4848d1dca}{Get\+Active\+Animation\+Index} () const  override
+\begin{DoxyCompactList}\small\item\em Gets the index of the active animation. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_object_instance_ae49dc1d9e6b86bd109b9ff67451b4b1f}{Get\+Animation\+Count} () const  override
+\begin{DoxyCompactList}\small\item\em Gets the animation count. \end{DoxyCompactList}\item 
+virtual \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \& \hyperlink{class_object_instance_a249323ec3456eb98658ea0135c3bbdab}{Get\+Animation\+Name} (int animation\+Index) const  override
+\begin{DoxyCompactList}\small\item\em Gets the name of the animation. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_object_instance_a2daf48dc1c7680b0eccfc10351ea511b}{Get\+Animation\+Index} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&animation\+Name) const  override
+\begin{DoxyCompactList}\small\item\em Gets the index of the animation. \end{DoxyCompactList}\item 
+\hyperlink{class_i_renderable_object}{I\+Renderable\+Object} const $\ast$ \hyperlink{class_object_instance_a0094457f916c48654ce0551358469220}{Get\+Renderable\+Object} () const 
+\begin{DoxyCompactList}\small\item\em Gets the renderable object. \end{DoxyCompactList}\item 
+void \hyperlink{class_object_instance_abae26d0879e8db5a3e7aee6fcb080fdf}{Set\+Visible} (bool vis)
+\begin{DoxyCompactList}\small\item\em Sets whether the instance is visible. \end{DoxyCompactList}\item 
+bool \hyperlink{class_object_instance_a51bf8948761704cc38ffe66d4de291f1}{Get\+Visible} () const 
+\begin{DoxyCompactList}\small\item\em Gets whether the object is visible. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_i_renderable_object}{I\+Renderable\+Object} $\ast$ \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\+\_\+p\+Renderable\+Object}
+\begin{DoxyCompactList}\small\item\em The renderable object \end{DoxyCompactList}\item 
+int \hyperlink{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}{m\+\_\+active\+Animation}
+\begin{DoxyCompactList}\small\item\em The active animation \end{DoxyCompactList}\item 
+bool \hyperlink{class_object_instance_a42b286c70cd268899841162e35b854e1}{m\+\_\+visible} = true
+\begin{DoxyCompactList}\small\item\em Whether the instance is visible \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Object\+Instance.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Object\+Instance@{Object\+Instance}!Object\+Instance@{Object\+Instance}}
+\index{Object\+Instance@{Object\+Instance}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Object\+Instance(\+I\+Renderable\+Object $\ast$object, vec3 const \&coords=glm\+::vec3(0, 0, 0), vec3 const \&scale\+Factor=vec3(1, 1, 1), float yaw=0, float pitch=0)}{ObjectInstance(IRenderableObject *object, vec3 const &coords=glm::vec3(0, 0, 0), vec3 const &scaleFactor=vec3(1, 1, 1), float yaw=0, float pitch=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Object\+Instance\+::\+Object\+Instance (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+Renderable\+Object} $\ast$}]{object, }
+\item[{{\bf vec3} const \&}]{coords = {\ttfamily {\bf glm\+::vec3}(0,~0,~0)}, }
+\item[{{\bf vec3} const \&}]{scale\+Factor = {\ttfamily {\bf vec3}(1,~1,~1)}, }
+\item[{float}]{yaw = {\ttfamily 0}, }
+\item[{float}]{pitch = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object_instance_abc93e8022756b412663cfdfdb4101ab3}{}\label{class_object_instance_abc93e8022756b412663cfdfdb4101ab3}
+
+
+Initializes a new instance of the \hyperlink{class_object_instance}{Object\+Instance} struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & The object.\\
+\hline
+{\em coords} & The coords.\\
+\hline
+{\em scale\+Factor} & The scale factor.\\
+\hline
+{\em yaw} & The yaw.\\
+\hline
+{\em pitch} & The pitch.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Object\+Instance.\+cpp.
+
+
+
+References m\+\_\+active\+Animation, m\+\_\+p\+Renderable\+Object, and Affine\+Transformable\+::\+Set\+Transform().
+
+
+\begin{DoxyCode}
+6   : \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}(\textcolor{keywordtype}{object})
+7   , \hyperlink{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}{m\_activeAnimation}(-1)
+8 \{
+9   \hyperlink{class_affine_transformable_aacc67804c045aa75da888ca3ea409939}{SetTransform}(coords, yaw, pitch, 0, scaleFactor);
+10   \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{RenderManager::GetInstance}().\hyperlink{class_render_manager_a289e8b7de820f26e461e587299cc4603}{AddObject}(\textcolor{keyword}{this});
+11 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_abc93e8022756b412663cfdfdb4101ab3_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Object\+Instance@{Object\+Instance}!Get\+Active\+Animation\+Index@{Get\+Active\+Animation\+Index}}
+\index{Get\+Active\+Animation\+Index@{Get\+Active\+Animation\+Index}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Active\+Animation\+Index() const  override}{GetActiveAnimationIndex() const  override}}]{\setlength{\rightskip}{0pt plus 5cm}int Object\+Instance\+::\+Get\+Active\+Animation\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_object_instance_a8012a0c7dbe376714997c9a4848d1dca}{}\label{class_object_instance_a8012a0c7dbe376714997c9a4848d1dca}
+
+
+Gets the index of the active animation. 
+
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animatable_aabaf112657c85beabd1639cd99b52274}{I\+Animatable}.
+
+
+
+Definition at line 65 of file Object\+Instance.\+cpp.
+
+
+
+References m\+\_\+active\+Animation.
+
+
+\begin{DoxyCode}
+66 \{
+67   \textcolor{keywordflow}{return} \hyperlink{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}{m\_activeAnimation};
+68 \}
+\end{DoxyCode}
+\index{Object\+Instance@{Object\+Instance}!Get\+Animation\+Count@{Get\+Animation\+Count}}
+\index{Get\+Animation\+Count@{Get\+Animation\+Count}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Count() const  override}{GetAnimationCount() const  override}}]{\setlength{\rightskip}{0pt plus 5cm}int Object\+Instance\+::\+Get\+Animation\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_object_instance_ae49dc1d9e6b86bd109b9ff67451b4b1f}{}\label{class_object_instance_ae49dc1d9e6b86bd109b9ff67451b4b1f}
+
+
+Gets the animation count. 
+
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animated_a851d42fc3936a93959f8e6f1bf50e5b7}{I\+Animated}.
+
+
+
+Definition at line 70 of file Object\+Instance.\+cpp.
+
+
+
+References I\+Animated\+::\+Get\+Animation\+Count(), and m\+\_\+p\+Renderable\+Object.
+
+
+\begin{DoxyCode}
+71 \{
+72   \textcolor{keywordflow}{return} \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_animated_a851d42fc3936a93959f8e6f1bf50e5b7}{GetAnimationCount}();
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_ae49dc1d9e6b86bd109b9ff67451b4b1f_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Get\+Animation\+Index@{Get\+Animation\+Index}}
+\index{Get\+Animation\+Index@{Get\+Animation\+Index}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Index(string const \&animation\+Name) const  override}{GetAnimationIndex(string const &animationName) const  override}}]{\setlength{\rightskip}{0pt plus 5cm}int Object\+Instance\+::\+Get\+Animation\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{animation\+Name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_object_instance_a2daf48dc1c7680b0eccfc10351ea511b}{}\label{class_object_instance_a2daf48dc1c7680b0eccfc10351ea511b}
+
+
+Gets the index of the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Name} & Name of the animation.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animated_a33e7b0dd04727e5dc9311c60730ad6e5}{I\+Animated}.
+
+
+
+Definition at line 80 of file Object\+Instance.\+cpp.
+
+
+
+References I\+Animated\+::\+Get\+Animation\+Index(), and m\+\_\+p\+Renderable\+Object.
+
+
+\begin{DoxyCode}
+81 \{
+82   \textcolor{keywordflow}{return} \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_animated_a33e7b0dd04727e5dc9311c60730ad6e5}{GetAnimationIndex}(animationName);
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_a2daf48dc1c7680b0eccfc10351ea511b_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Get\+Animation\+Name@{Get\+Animation\+Name}}
+\index{Get\+Animation\+Name@{Get\+Animation\+Name}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Name(int animation\+Index) const  override}{GetAnimationName(int animationIndex) const  override}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string} const \& Object\+Instance\+::\+Get\+Animation\+Name (
+\begin{DoxyParamCaption}
+\item[{int}]{animation\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_object_instance_a249323ec3456eb98658ea0135c3bbdab}{}\label{class_object_instance_a249323ec3456eb98658ea0135c3bbdab}
+
+
+Gets the name of the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Index} & Index of the animation.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animated_a4840f3a1bbcc5e0050bdb0dde1191704}{I\+Animated}.
+
+
+
+Definition at line 75 of file Object\+Instance.\+cpp.
+
+
+
+References I\+Animated\+::\+Get\+Animation\+Name(), and m\+\_\+p\+Renderable\+Object.
+
+
+\begin{DoxyCode}
+76 \{
+77   \textcolor{keywordflow}{return} \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_animated_a4840f3a1bbcc5e0050bdb0dde1191704}{GetAnimationName}(animationIndex);
+78 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_a249323ec3456eb98658ea0135c3bbdab_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Get\+Renderable\+Object@{Get\+Renderable\+Object}}
+\index{Get\+Renderable\+Object@{Get\+Renderable\+Object}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Renderable\+Object() const }{GetRenderableObject() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Renderable\+Object} const $\ast$ Object\+Instance\+::\+Get\+Renderable\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_object_instance_a0094457f916c48654ce0551358469220}{}\label{class_object_instance_a0094457f916c48654ce0551358469220}
+
+
+Gets the renderable object. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_i_renderable_object}{I\+Renderable\+Object}
+\end{DoxyReturn}
+
+
+Definition at line 85 of file Object\+Instance.\+cpp.
+
+
+
+References m\+\_\+p\+Renderable\+Object.
+
+
+
+Referenced by Render\+Manager\+::\+Add\+Object(), and Render\+Manager\+::\+Remove\+Object().
+
+
+\begin{DoxyCode}
+86 \{
+87   \textcolor{keywordflow}{return} \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject};
+88 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_a0094457f916c48654ce0551358469220_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Vertices(mat4 const \&parent\+Model\+Matrix=mat4()) const }{GetVertices(mat4 const &parentModelMatrix=mat4()) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf vec3} $>$ Object\+Instance\+::\+Get\+Vertices (
+\begin{DoxyParamCaption}
+\item[{{\bf mat4} const \&}]{parent\+Model\+Matrix = {\ttfamily {\bf mat4}()}}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_object_instance_ab9de0b3252e0df4c15129876163dad6d}{}\label{class_object_instance_ab9de0b3252e0df4c15129876163dad6d}
+
+
+Gets the vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent\+Model\+Matrix} & The parent model matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$vec3$>$
+\end{DoxyReturn}
+
+
+Definition at line 40 of file Object\+Instance.\+cpp.
+
+
+
+References Get\+World\+Matrix().
+
+
+\begin{DoxyCode}
+41 \{
+42   std::vector<vec3> verts;
+43   verts = \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_mesh_collection_af3ad8b8f405ae37eaff19f9965ea6148}{GetVertices}();
+44 
+45   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} worldMatrix = parentWorldMatrix * \hyperlink{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f}{GetWorldMatrix}();
+46 
+47   \hyperlink{_types_8h_ac54e849f8b2339f592307eaf6cdbba77}{vec4} temp;
+48   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < verts.size(); i++)
+49   \{
+50     temp = \hyperlink{_types_8h_ac54e849f8b2339f592307eaf6cdbba77}{vec4}(verts[i], 1);
+51     temp = worldMatrix * temp;
+52     verts[i].x = temp.x;
+53     verts[i].y = temp.y;
+54     verts[i].z = temp.z;
+55   \}
+56 
+57   \textcolor{keywordflow}{return} verts;
+58 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_ab9de0b3252e0df4c15129876163dad6d_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Get\+Visible@{Get\+Visible}}
+\index{Get\+Visible@{Get\+Visible}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+Visible() const }{GetVisible() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Object\+Instance\+::\+Get\+Visible (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_object_instance_a51bf8948761704cc38ffe66d4de291f1}{}\label{class_object_instance_a51bf8948761704cc38ffe66d4de291f1}
+
+
+Gets whether the object is visible. 
+
+\begin{DoxyReturn}{Returns}
+bool
+\end{DoxyReturn}
+
+
+Definition at line 18 of file Object\+Instance.\+cpp.
+
+
+
+References m\+\_\+visible.
+
+
+\begin{DoxyCode}
+19 \{
+20   \textcolor{keywordflow}{return} \hyperlink{class_object_instance_a42b286c70cd268899841162e35b854e1}{m\_visible};
+21 \}
+\end{DoxyCode}
+\index{Object\+Instance@{Object\+Instance}!Get\+World\+Matrix@{Get\+World\+Matrix}}
+\index{Get\+World\+Matrix@{Get\+World\+Matrix}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Get\+World\+Matrix() const }{GetWorldMatrix() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat4} Object\+Instance\+::\+Get\+World\+Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f}{}\label{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f}
+
+
+Gets the world matrix. 
+
+\begin{DoxyReturn}{Returns}
+mat4
+\end{DoxyReturn}
+
+
+Definition at line 35 of file Object\+Instance.\+cpp.
+
+
+
+References Affine\+Transformable\+::\+Get\+Transform().
+
+
+
+Referenced by Get\+Vertices(), and Render().
+
+
+\begin{DoxyCode}
+36 \{
+37   \textcolor{keywordflow}{return} \hyperlink{class_affine_transformable_a3eb990ab0b75ad30d3bb667e437d8606}{GetTransform}();
+38 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Render@{Render}}
+\index{Render@{Render}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Render(mat4 const \&world\+Matrix, mat4 const \&view\+Matrix, mat4 const \&projection\+Matrix, float time=0) override}{Render(mat4 const &worldMatrix, mat4 const &viewMatrix, mat4 const &projectionMatrix, float time=0) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Instance\+::\+Render (
+\begin{DoxyParamCaption}
+\item[{{\bf mat4} const \&}]{world\+Matrix, }
+\item[{{\bf mat4} const \&}]{view\+Matrix, }
+\item[{{\bf mat4} const \&}]{projection\+Matrix, }
+\item[{float}]{time = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_object_instance_a5aab17f4111ca91e123f9485c616aa6f}{}\label{class_object_instance_a5aab17f4111ca91e123f9485c616aa6f}
+
+
+The render method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Matrix} & The world matrix.\\
+\hline
+{\em view\+Matrix} & The view matrix.\\
+\hline
+{\em projection\+Matrix} & The projection matrix.\\
+\hline
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_i_renderable_aafd1a9b5729b8794fc5b7e8452ecc3c2}{I\+Renderable}.
+
+
+
+Definition at line 23 of file Object\+Instance.\+cpp.
+
+
+
+References I\+Renderable\+Object\+::\+Bind\+Mesh(), I\+Renderable\+Object\+::\+Bind\+Object(), I\+Mesh\+Collection\+::\+Get\+Mesh\+Count(), Get\+World\+Matrix(), m\+\_\+active\+Animation, m\+\_\+p\+Renderable\+Object, and I\+Renderable\+Object\+::\+Render().
+
+
+
+Referenced by Render\+Manager\+A\+P\+I\+::\+Render\+Object().
+
+
+\begin{DoxyCode}
+24 \{
+25   \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_renderable_object_ab44c017819f2e57a9b4b4ba40961d9eb}{BindObject}();
+26   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} meshIndex = 0; meshIndex < \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->
+      \hyperlink{class_i_mesh_collection_adf67edfc7e63ed993082714cfc9de7e2}{GetMeshCount}(); meshIndex++)
+27   \{
+28     \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_renderable_object_ac0db472961e13dbbdc5cd36f14a87fae}{BindMesh}(meshIndex);
+29     \hyperlink{class_object_instance_a67070bfa6058a31558b406be673df000}{m\_pRenderableObject}->\hyperlink{class_i_renderable_object_a6f47f692684ec70b5b776c0884495059}{Render}(parentWorldMatrix * 
+      \hyperlink{class_object_instance_aa9a660435b76ef436a5dcdb24d897c4f}{GetWorldMatrix}(), viewMatrix, projectionMatrix, time, 
+      \hyperlink{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}{m\_activeAnimation});
+30   \}
+31 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_a5aab17f4111ca91e123f9485c616aa6f_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_instance_a5aab17f4111ca91e123f9485c616aa6f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Set\+Active\+Animation@{Set\+Active\+Animation}}
+\index{Set\+Active\+Animation@{Set\+Active\+Animation}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Set\+Active\+Animation(int animation\+Index) override}{SetActiveAnimation(int animationIndex) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Instance\+::\+Set\+Active\+Animation (
+\begin{DoxyParamCaption}
+\item[{int}]{animation\+Index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_object_instance_a9628216a9ea2cd68f3b2163718517fa4}{}\label{class_object_instance_a9628216a9ea2cd68f3b2163718517fa4}
+
+
+Sets the active animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Index} & Index of the animation.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_i_animatable_a7bbd254fa9982deeae933ed0be38764b}{I\+Animatable}.
+
+
+
+Definition at line 60 of file Object\+Instance.\+cpp.
+
+
+
+References m\+\_\+active\+Animation.
+
+
+
+Referenced by Object\+Instance\+A\+P\+I\+::\+Set\+Animation().
+
+
+\begin{DoxyCode}
+61 \{
+62   \hyperlink{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}{m\_activeAnimation} = animationIndex;
+63 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{class_object_instance_a9628216a9ea2cd68f3b2163718517fa4_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Object\+Instance@{Object\+Instance}!Set\+Visible@{Set\+Visible}}
+\index{Set\+Visible@{Set\+Visible}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{Set\+Visible(bool vis)}{SetVisible(bool vis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Instance\+::\+Set\+Visible (
+\begin{DoxyParamCaption}
+\item[{bool}]{vis}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object_instance_abae26d0879e8db5a3e7aee6fcb080fdf}{}\label{class_object_instance_abae26d0879e8db5a3e7aee6fcb080fdf}
+
+
+Sets whether the instance is visible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vis} & if set to {\ttfamily true} \mbox{[}vis\mbox{]}.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 13 of file Object\+Instance.\+cpp.
+
+
+
+References m\+\_\+visible.
+
+
+\begin{DoxyCode}
+14 \{
+15   \hyperlink{class_object_instance_a42b286c70cd268899841162e35b854e1}{m\_visible} = vis;
+16 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Object\+Instance@{Object\+Instance}!m\+\_\+active\+Animation@{m\+\_\+active\+Animation}}
+\index{m\+\_\+active\+Animation@{m\+\_\+active\+Animation}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{m\+\_\+active\+Animation}{m_activeAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}int Object\+Instance\+::m\+\_\+active\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}{}\label{class_object_instance_afecd5e87b02f138d36e01b129e7edf68}
+
+
+The active animation 
+
+
+
+Definition at line 117 of file Object\+Instance.\+h.
+
+
+
+Referenced by Get\+Active\+Animation\+Index(), Object\+Instance(), Render(), and Set\+Active\+Animation().
+
+\index{Object\+Instance@{Object\+Instance}!m\+\_\+p\+Renderable\+Object@{m\+\_\+p\+Renderable\+Object}}
+\index{m\+\_\+p\+Renderable\+Object@{m\+\_\+p\+Renderable\+Object}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Renderable\+Object}{m_pRenderableObject}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Renderable\+Object}$\ast$ Object\+Instance\+::m\+\_\+p\+Renderable\+Object\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_object_instance_a67070bfa6058a31558b406be673df000}{}\label{class_object_instance_a67070bfa6058a31558b406be673df000}
+
+
+The renderable object 
+
+
+
+Definition at line 112 of file Object\+Instance.\+h.
+
+
+
+Referenced by Get\+Animation\+Count(), Get\+Animation\+Index(), Get\+Animation\+Name(), Get\+Renderable\+Object(), Object\+Instance(), and Render().
+
+\index{Object\+Instance@{Object\+Instance}!m\+\_\+visible@{m\+\_\+visible}}
+\index{m\+\_\+visible@{m\+\_\+visible}!Object\+Instance@{Object\+Instance}}
+\subsubsection[{\texorpdfstring{m\+\_\+visible}{m_visible}}]{\setlength{\rightskip}{0pt plus 5cm}bool Object\+Instance\+::m\+\_\+visible = true\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_object_instance_a42b286c70cd268899841162e35b854e1}{}\label{class_object_instance_a42b286c70cd268899841162e35b854e1}
+
+
+Whether the instance is visible 
+
+
+
+Definition at line 122 of file Object\+Instance.\+h.
+
+
+
+Referenced by Get\+Visible(), and Set\+Visible().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_object_instance_8h}{Object\+Instance.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_object_instance_8cpp}{Object\+Instance.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,6 @@
+<map id="GodRaysEffect" name="GodRaysEffect">
+<area shape="rect" id="node2" href="$class_depth_threshold_effect.html" title="{DepthThresholdEffect\n|&#45; m_pShader\l|+ DepthThresholdEffect()\l+ Apply()\l}" alt="" coords="68,409,234,501"/>
+<area shape="rect" id="node3" href="$class_frame_buffer.html" title="{FrameBuffer\n|+ FSQuadVAO\l&#45; m_fb\l&#45; colourAttachments\l&#45; MAX_COLOUR_ATTACHMENTS\l|+ FrameBuffer()\l+ ~FrameBuffer()\l+ Bind()\l+ Unbind()\l+ GetBindMode()\l+ GetStatus()\l+ AttachColour()\l+ AttachDepth()\l+ DetachColour()\l+ DetachDepth()\l+ Initialize()\l+ BindToScreen()\l+ Display()\l&#45; AddColourAttachment()\l&#45; RemoveColourAttachment()\l&#45; BindFrameBuffer()\l}" alt="" coords="133,5,353,347"/>
+<area shape="rect" id="node4" href="$class_additive_blend_effect.html" title="{AdditiveBlendEffect\n|&#45; m_pShader\l|+ AdditiveBlendEffect()\l+ Apply()\l}" alt="" coords="258,409,412,501"/>
+<area shape="rect" id="node5" href="$class_ray_effect.html" title="{RayEffect\n|&#45; m_pShader\l|+ RayEffect()\l+ Apply()\l}" alt="" coords="436,409,535,501"/>
+</map>

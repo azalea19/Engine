@@ -1,0 +1,5 @@
+<map id="RenderManagerAPI::BeginRender" name="RenderManagerAPI::BeginRender">
+<area shape="rect" id="node2" href="$class_i_engine.html#ac07a33654b17337655bb1e36f28991bb" title="Begins the render. " alt="" coords="277,5,423,32"/>
+<area shape="rect" id="node3" href="$class_scene_decompose_effect.html#a2c2bbdba7d4a8cbe1988f56b02754118" title="Binds the specified buffers. " alt="" coords="269,57,431,98"/>
+<area shape="rect" id="node4" href="$class_engine_a_p_i.html#a6cecc94147f6fed1c2f886c082051bc7" title="Gets the engine. " alt="" coords="274,123,426,149"/>
+</map>

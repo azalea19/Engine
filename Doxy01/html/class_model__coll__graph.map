@@ -1,0 +1,7 @@
+<map id="Model" name="Model">
+<area shape="rect" id="node2" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="5,307,160,413"/>
+<area shape="rect" id="node4" href="$class_skeleton.html" title="{Skeleton\n|&#45; m_bones\l&#45; m_animations\l&#45; m_globalInverseTransform\l|+ Skeleton()\l+ GetBoneTransforms()\l+ GetBoneTransforms()\l+ GetBoneLookup()\l+ GetAnimationCount()\l+ GetAnimationIndex()\l+ GetAnimationName()\l&#45; CalculateBoneTransforms()\l&#45; CreateBoneLookup()\l&#45; LoadBones()\l&#45; LoadAnimations()\l}" alt="" coords="120,535,307,788"/>
+<area shape="rect" id="node3" href="$class_i_mesh_collection.html" title="{IMeshCollection\n||+ GetVertices()\l+ GetNormals()\l+ GetAABB()\l+ GetIndices()\l+ GetVertexCount()\l+ GetNormalCount()\l+ GetIndexCount()\l+ GetMesh()\l+ GetMeshCount()\l}" alt="" coords="331,564,469,759"/>
+<area shape="rect" id="node5" href="$class_bimap.html" title="{Bimap\&lt; string, int \&gt;\n|&#45; m_ValueLookup\l&#45; m_KeyLookup\l|+ GetKey()\l+ GetKey()\l+ GetValue()\l+ GetValue()\l+ HasKey()\l+ HasValue()\l+ Add()\l+ Count()\l}" alt="" coords="185,263,322,457"/>
+<area shape="rect" id="node6" href="$class_bimap.html" title="{Bimap\&lt; Key, Value \&gt;\n|&#45; m_ValueLookup\l&#45; m_KeyLookup\l|+ GetKey()\l+ GetValue()\l+ GetKey()\l+ GetValue()\l+ HasKey()\l+ HasValue()\l+ Add()\l+ Count()\l}" alt="" coords="180,5,327,200"/>
+</map>

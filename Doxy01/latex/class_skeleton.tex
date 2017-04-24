@@ -1,0 +1,620 @@
+\hypertarget{class_skeleton}{}\section{Skeleton Class Reference}
+\label{class_skeleton}\index{Skeleton@{Skeleton}}
+
+
+{\ttfamily \#include $<$Skeleton.\+h$>$}
+
+
+
+Inheritance diagram for Skeleton\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_skeleton__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Skeleton\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_skeleton__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_skeleton_a4409c43e54759c130bb1f297d1434c93}{Skeleton} (ai\+Scene const $\ast$p\+Scene)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_skeleton}{Skeleton} class. Uses the Assimp library. For more information on the Assimp ai\+Scene data structure See\+: \href{http://www.assimp.org/lib_html/structai_scene.html}{\tt http\+://www.\+assimp.\+org/lib\+\_\+html/structai\+\_\+scene.\+html} \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} $>$ \hyperlink{class_skeleton_a28782f28aa705467ffe19b0cbe60ff17}{Get\+Bone\+Transforms} (int animation\+Index, float time) const 
+\begin{DoxyCompactList}\small\item\em Gets the bone transforms. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} $>$ \hyperlink{class_skeleton_a6b9accce448e9780da3149ca04a85a42}{Get\+Bone\+Transforms} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&animation\+Name, float time) const 
+\begin{DoxyCompactList}\small\item\em Gets the bone transforms. \end{DoxyCompactList}\item 
+\hyperlink{class_bimap}{Bimap}$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string}, int $>$ const \& \hyperlink{class_skeleton_ad07266c79fbc83a1702f1a47475966de}{Get\+Bone\+Lookup} () const 
+\begin{DoxyCompactList}\small\item\em Gets the bone lookup. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_skeleton_a7eee30dae6f47d4e90bd4968608ecea8}{Get\+Animation\+Count} () const  override
+\begin{DoxyCompactList}\small\item\em Gets the animation count. \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_skeleton_a1d805e4a364116706ff9c2ba3072d527}{Get\+Animation\+Index} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&animation\+Name) const  override
+\begin{DoxyCompactList}\small\item\em Gets the index of the animation. \end{DoxyCompactList}\item 
+virtual \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \& \hyperlink{class_skeleton_a4778c245da8f20ccf7aeb53f75f6882b}{Get\+Animation\+Name} (int animation\+Index) const  override
+\begin{DoxyCompactList}\small\item\em Gets the name of the animation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_skeleton_acb1d4da86553e8df31208a67c03b92ae}{Calculate\+Bone\+Transforms} (int animation\+Index, float time, std\+::vector$<$ \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} $>$ \&final\+Transforms, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} parent\+Transform=\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4}(), int bone\+Index=0) const 
+\begin{DoxyCompactList}\small\item\em Calculates the bone transforms. \end{DoxyCompactList}\item 
+void \hyperlink{class_skeleton_a5c17fbf494ac8f40cd81d0f2da7e0c6e}{Create\+Bone\+Lookup} (ai\+Node const $\ast$p\+Node)
+\begin{DoxyCompactList}\small\item\em Creates the bone lookup. \end{DoxyCompactList}\item 
+void \hyperlink{class_skeleton_a56489c3623441f2740a4944225f5a2fa}{Load\+Bones} (ai\+Scene const $\ast$p\+Scene)
+\begin{DoxyCompactList}\small\item\em Loads the bones. \end{DoxyCompactList}\item 
+void \hyperlink{class_skeleton_af10380d2615f74c4003ee37e71dac71b}{Load\+Animations} (ai\+Scene const $\ast$p\+Scene)
+\begin{DoxyCompactList}\small\item\em Loads the animations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{struct_bone}{Bone} $>$ \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\+\_\+bones}
+\begin{DoxyCompactList}\small\item\em The bones \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \hyperlink{class_animation}{Animation} $>$ $>$ \hyperlink{class_skeleton_a8332723240466214376407613a11f4ce}{m\+\_\+animations}
+\begin{DoxyCompactList}\small\item\em The animations \end{DoxyCompactList}\item 
+\hyperlink{class_bimap}{Bimap}$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string}, int $>$ \hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\+\_\+bone\+Lookup}
+\begin{DoxyCompactList}\small\item\em The bone lookup \end{DoxyCompactList}\item 
+\hyperlink{class_bimap}{Bimap}$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string}, int $>$ \hyperlink{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}{m\+\_\+animation\+Lookup}
+\begin{DoxyCompactList}\small\item\em The animation lookup \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} \hyperlink{class_skeleton_a0811c767c720f15e9f8419828731c4bf}{m\+\_\+global\+Inverse\+Transform}
+\begin{DoxyCompactList}\small\item\em The global inverse transform \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 31 of file Skeleton.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Skeleton@{Skeleton}!Skeleton@{Skeleton}}
+\index{Skeleton@{Skeleton}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Skeleton(ai\+Scene const $\ast$p\+Scene)}{Skeleton(aiScene const *pScene)}}]{\setlength{\rightskip}{0pt plus 5cm}Skeleton\+::\+Skeleton (
+\begin{DoxyParamCaption}
+\item[{ai\+Scene const $\ast$}]{p\+Scene}
+\end{DoxyParamCaption}
+)}\hypertarget{class_skeleton_a4409c43e54759c130bb1f297d1434c93}{}\label{class_skeleton_a4409c43e54759c130bb1f297d1434c93}
+
+
+Initializes a new instance of the \hyperlink{class_skeleton}{Skeleton} class. Uses the Assimp library. For more information on the Assimp ai\+Scene data structure See\+: \href{http://www.assimp.org/lib_html/structai_scene.html}{\tt http\+://www.\+assimp.\+org/lib\+\_\+html/structai\+\_\+scene.\+html} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & The pointer to the scene.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 6 of file Skeleton.\+cpp.
+
+
+
+References Load\+Animations(), and Load\+Bones().
+
+
+\begin{DoxyCode}
+7 \{
+8   \hyperlink{class_skeleton_a0811c767c720f15e9f8419828731c4bf}{m\_globalInverseTransform} = glm::inverse(\hyperlink{_assimp_to_g_l_m_8cpp_a1b03f2444f2a24982dd5a2c84b50cf98}{ASToGLM}(pScene->mRootNode->
+      mTransformation));
+9   \hyperlink{class_skeleton_a56489c3623441f2740a4944225f5a2fa}{LoadBones}(pScene);
+10   \hyperlink{class_skeleton_af10380d2615f74c4003ee37e71dac71b}{LoadAnimations}(pScene);
+11 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_skeleton_a4409c43e54759c130bb1f297d1434c93_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Skeleton@{Skeleton}!Calculate\+Bone\+Transforms@{Calculate\+Bone\+Transforms}}
+\index{Calculate\+Bone\+Transforms@{Calculate\+Bone\+Transforms}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Calculate\+Bone\+Transforms(int animation\+Index, float time, std\+::vector$<$ mat4 $>$ \&final\+Transforms, mat4 parent\+Transform=mat4(), int bone\+Index=0) const }{CalculateBoneTransforms(int animationIndex, float time, std::vector< mat4 > &finalTransforms, mat4 parentTransform=mat4(), int boneIndex=0) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Skeleton\+::\+Calculate\+Bone\+Transforms (
+\begin{DoxyParamCaption}
+\item[{int}]{animation\+Index, }
+\item[{float}]{time, }
+\item[{std\+::vector$<$ {\bf mat4} $>$ \&}]{final\+Transforms, }
+\item[{{\bf mat4}}]{parent\+Transform = {\ttfamily {\bf mat4}()}, }
+\item[{int}]{bone\+Index = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_acb1d4da86553e8df31208a67c03b92ae}{}\label{class_skeleton_acb1d4da86553e8df31208a67c03b92ae}
+
+
+Calculates the bone transforms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Index} & Index of the animation.\\
+\hline
+{\em time} & The time.\\
+\hline
+{\em final\+Transforms} & The final transforms.\\
+\hline
+{\em parent\+Transform} & The parent transform.\\
+\hline
+{\em bone\+Index} & Index of the bone.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file Skeleton.\+cpp.
+
+
+
+References Bone\+::transform.
+
+
+\begin{DoxyCode}
+31 \{
+32   \textcolor{keyword}{const} \hyperlink{struct_bone}{Bone}& bone = \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex];
+33   \textcolor{keyword}{const} std::unique\_ptr<Animation> &pAnimation = \hyperlink{class_skeleton_a8332723240466214376407613a11f4ce}{m\_animations}[animationIndex];
+34 
+35   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} boneTransform = bone.\hyperlink{struct_bone_a24c5bc5cfeb022d82677b5f786d74ff2}{transform};
+36   \textcolor{keywordflow}{if} (pAnimation && pAnimation->HasBoneTransform(boneIndex))
+37     boneTransform = pAnimation->GetBoneTransform(boneIndex, time);
+38 
+39   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} globalTransform = parentTransform * boneTransform;
+40   finalTransforms[boneIndex] = \hyperlink{class_skeleton_a0811c767c720f15e9f8419828731c4bf}{m\_globalInverseTransform} * globalTransform * 
+      \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].offsetMatrix;
+41 
+42   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].m\_childBoneIDs.size(); i++)
+43     \hyperlink{class_skeleton_acb1d4da86553e8df31208a67c03b92ae}{CalculateBoneTransforms}(animationIndex, time, finalTransforms, globalTransform, 
+      \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].m\_childBoneIDs[i]);
+44 \}
+\end{DoxyCode}
+\index{Skeleton@{Skeleton}!Create\+Bone\+Lookup@{Create\+Bone\+Lookup}}
+\index{Create\+Bone\+Lookup@{Create\+Bone\+Lookup}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Create\+Bone\+Lookup(ai\+Node const $\ast$p\+Node)}{CreateBoneLookup(aiNode const *pNode)}}]{\setlength{\rightskip}{0pt plus 5cm}void Skeleton\+::\+Create\+Bone\+Lookup (
+\begin{DoxyParamCaption}
+\item[{ai\+Node const $\ast$}]{p\+Node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_a5c17fbf494ac8f40cd81d0f2da7e0c6e}{}\label{class_skeleton_a5c17fbf494ac8f40cd81d0f2da7e0c6e}
+
+
+Creates the bone lookup. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Node} & The p node.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 46 of file Skeleton.\+cpp.
+
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{keywordtype}{int} boneIndex = \hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup}.\hyperlink{class_bimap_aef1a42d79e8c66d5453b655dc17ccc07}{Count}();
+49   \textcolor{keywordtype}{string} boneName = pNode->mName.data;
+50   \textcolor{keywordflow}{if} (!\hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup}.\hyperlink{class_bimap_acb0e0a0d4e926680f047edd90ee15f7b}{HasKey}(boneName))
+51   \{
+52 
+53     \hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup}.\hyperlink{class_bimap_a6c80d80555ca8318ee53845d83a81628}{Add}(pNode->mName.data, boneIndex);
+54     \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}.emplace\_back();
+55     \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].m\_ID = boneIndex;
+56     \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].transform = \hyperlink{_assimp_to_g_l_m_8cpp_a1b03f2444f2a24982dd5a2c84b50cf98}{ASToGLM}(pNode->mTransformation);
+57     \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} i = 0; i < pNode->mNumChildren; i++)
+58     \{
+59       \hyperlink{class_skeleton_a5c17fbf494ac8f40cd81d0f2da7e0c6e}{CreateBoneLookup}(pNode->mChildren[i]);
+60       \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].m\_childBoneIDs.push\_back(\hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup}.
+      \hyperlink{class_bimap_a38d190f4016ae28f415014ef4e6c08da}{GetValue}(pNode->mChildren[i]->mName.data));
+61     \}
+62   \}
+63 
+64 
+65 \}
+\end{DoxyCode}
+\index{Skeleton@{Skeleton}!Get\+Animation\+Count@{Get\+Animation\+Count}}
+\index{Get\+Animation\+Count@{Get\+Animation\+Count}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Count() const  override}{GetAnimationCount() const  override}}]{\setlength{\rightskip}{0pt plus 5cm}int Skeleton\+::\+Get\+Animation\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_skeleton_a7eee30dae6f47d4e90bd4968608ecea8}{}\label{class_skeleton_a7eee30dae6f47d4e90bd4968608ecea8}
+
+
+Gets the animation count. 
+
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animated_a851d42fc3936a93959f8e6f1bf50e5b7}{I\+Animated}.
+
+
+
+Definition at line 101 of file Skeleton.\+cpp.
+
+
+
+Referenced by Model\+::\+Get\+Animation\+Count().
+
+
+\begin{DoxyCode}
+102 \{
+103   \textcolor{keywordflow}{return} \hyperlink{class_skeleton_a8332723240466214376407613a11f4ce}{m\_animations}.size();
+104 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_skeleton_a7eee30dae6f47d4e90bd4968608ecea8_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Skeleton@{Skeleton}!Get\+Animation\+Index@{Get\+Animation\+Index}}
+\index{Get\+Animation\+Index@{Get\+Animation\+Index}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Index(string const \&animation\+Name) const  override}{GetAnimationIndex(string const &animationName) const  override}}]{\setlength{\rightskip}{0pt plus 5cm}int Skeleton\+::\+Get\+Animation\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{animation\+Name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_skeleton_a1d805e4a364116706ff9c2ba3072d527}{}\label{class_skeleton_a1d805e4a364116706ff9c2ba3072d527}
+
+
+Gets the index of the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Name} & Name of the animation.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animated_a33e7b0dd04727e5dc9311c60730ad6e5}{I\+Animated}.
+
+
+
+Definition at line 106 of file Skeleton.\+cpp.
+
+
+
+Referenced by Model\+::\+Get\+Animation\+Index().
+
+
+\begin{DoxyCode}
+107 \{
+108   \textcolor{keywordflow}{return} \hyperlink{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}{m\_animationLookup}.\hyperlink{class_bimap_a38d190f4016ae28f415014ef4e6c08da}{GetValue}(animationName);
+109 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_skeleton_a1d805e4a364116706ff9c2ba3072d527_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Skeleton@{Skeleton}!Get\+Animation\+Name@{Get\+Animation\+Name}}
+\index{Get\+Animation\+Name@{Get\+Animation\+Name}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Name(int animation\+Index) const  override}{GetAnimationName(int animationIndex) const  override}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string} const \& Skeleton\+::\+Get\+Animation\+Name (
+\begin{DoxyParamCaption}
+\item[{int}]{animation\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_skeleton_a4778c245da8f20ccf7aeb53f75f6882b}{}\label{class_skeleton_a4778c245da8f20ccf7aeb53f75f6882b}
+
+
+Gets the name of the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Index} & Index of the animation.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_i_animated_a4840f3a1bbcc5e0050bdb0dde1191704}{I\+Animated}.
+
+
+
+Definition at line 111 of file Skeleton.\+cpp.
+
+
+
+Referenced by Model\+::\+Get\+Animation\+Name().
+
+
+\begin{DoxyCode}
+112 \{
+113   \textcolor{keywordflow}{return} \hyperlink{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}{m\_animationLookup}.\hyperlink{class_bimap_a287bee82ecf52e0addf01188e845b3b4}{GetKey}(animationIndex);
+114 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_skeleton_a4778c245da8f20ccf7aeb53f75f6882b_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Skeleton@{Skeleton}!Get\+Bone\+Lookup@{Get\+Bone\+Lookup}}
+\index{Get\+Bone\+Lookup@{Get\+Bone\+Lookup}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Get\+Bone\+Lookup() const }{GetBoneLookup() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bimap}$<$ {\bf string}, int $>$ const \& Skeleton\+::\+Get\+Bone\+Lookup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_skeleton_ad07266c79fbc83a1702f1a47475966de}{}\label{class_skeleton_ad07266c79fbc83a1702f1a47475966de}
+
+
+Gets the bone lookup. 
+
+\begin{DoxyReturn}{Returns}
+A reference to the bone lookup \hyperlink{class_bimap}{Bimap}. \hyperlink{class_bimap}{Bimap$<$string,int$>$} 
+\end{DoxyReturn}
+
+
+Definition at line 96 of file Skeleton.\+cpp.
+
+
+\begin{DoxyCode}
+97 \{
+98   \textcolor{keywordflow}{return} \hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup};
+99 \}
+\end{DoxyCode}
+\index{Skeleton@{Skeleton}!Get\+Bone\+Transforms@{Get\+Bone\+Transforms}}
+\index{Get\+Bone\+Transforms@{Get\+Bone\+Transforms}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Get\+Bone\+Transforms(int animation\+Index, float time) const }{GetBoneTransforms(int animationIndex, float time) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf mat4} $>$ Skeleton\+::\+Get\+Bone\+Transforms (
+\begin{DoxyParamCaption}
+\item[{int}]{animation\+Index, }
+\item[{float}]{time}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_skeleton_a28782f28aa705467ffe19b0cbe60ff17}{}\label{class_skeleton_a28782f28aa705467ffe19b0cbe60ff17}
+
+
+Gets the bone transforms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Index} & Index of the animation.\\
+\hline
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$mat4$>$
+\end{DoxyReturn}
+
+
+Definition at line 13 of file Skeleton.\+cpp.
+
+
+\begin{DoxyCode}
+14 \{
+15   std::vector<mat4> finalTransforms;
+16   finalTransforms.resize(\hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}.size());
+17   \textcolor{keywordflow}{if}(animationIndex >= 0)
+18     \hyperlink{class_skeleton_acb1d4da86553e8df31208a67c03b92ae}{CalculateBoneTransforms}(animationIndex, time, finalTransforms);
+19   \textcolor{keywordflow}{return} finalTransforms;
+20 \}
+\end{DoxyCode}
+\index{Skeleton@{Skeleton}!Get\+Bone\+Transforms@{Get\+Bone\+Transforms}}
+\index{Get\+Bone\+Transforms@{Get\+Bone\+Transforms}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Get\+Bone\+Transforms(string const \&animation\+Name, float time) const }{GetBoneTransforms(string const &animationName, float time) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf mat4} $>$ Skeleton\+::\+Get\+Bone\+Transforms (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{animation\+Name, }
+\item[{float}]{time}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_skeleton_a6b9accce448e9780da3149ca04a85a42}{}\label{class_skeleton_a6b9accce448e9780da3149ca04a85a42}
+
+
+Gets the bone transforms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em animation\+Name} & Name of the animation.\\
+\hline
+{\em time} & The time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$mat4$>$
+\end{DoxyReturn}
+
+
+Definition at line 22 of file Skeleton.\+cpp.
+
+
+\begin{DoxyCode}
+23 \{
+24   \textcolor{keywordtype}{int} animationIndex = \hyperlink{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}{m\_animationLookup}.\hyperlink{class_bimap_a38d190f4016ae28f415014ef4e6c08da}{GetValue}(animationName);
+25   std::vector<mat4> finalTransforms;
+26   \hyperlink{class_skeleton_acb1d4da86553e8df31208a67c03b92ae}{CalculateBoneTransforms}(animationIndex, time, finalTransforms);
+27   \textcolor{keywordflow}{return} finalTransforms;
+28 \}
+\end{DoxyCode}
+\index{Skeleton@{Skeleton}!Load\+Animations@{Load\+Animations}}
+\index{Load\+Animations@{Load\+Animations}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Load\+Animations(ai\+Scene const $\ast$p\+Scene)}{LoadAnimations(aiScene const *pScene)}}]{\setlength{\rightskip}{0pt plus 5cm}void Skeleton\+::\+Load\+Animations (
+\begin{DoxyParamCaption}
+\item[{ai\+Scene const $\ast$}]{p\+Scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_af10380d2615f74c4003ee37e71dac71b}{}\label{class_skeleton_af10380d2615f74c4003ee37e71dac71b}
+
+
+Loads the animations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & The pointer to the scene.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 81 of file Skeleton.\+cpp.
+
+
+
+Referenced by Skeleton().
+
+
+\begin{DoxyCode}
+82 \{
+83   \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} i = 0; i < pScene->mNumAnimations; i++)
+84   \{
+85     \textcolor{comment}{//Use emplace\_back to construct an item in place with this as arguments. }
+86     \textcolor{comment}{//Cannot create one and push\_back since it tries to copy and push in to the vector}
+87     \hyperlink{class_skeleton_a8332723240466214376407613a11f4ce}{m\_animations}.emplace\_back(\textcolor{keyword}{new} \hyperlink{class_animation}{Animation}(pScene->mAnimations[i], 
+      \hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup}));
+88   \}
+89 
+90   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{class_skeleton_a8332723240466214376407613a11f4ce}{m\_animations}.size(); i++)
+91   \{
+92     \hyperlink{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}{m\_animationLookup}.\hyperlink{class_bimap_a6c80d80555ca8318ee53845d83a81628}{Add}(\hyperlink{class_skeleton_a8332723240466214376407613a11f4ce}{m\_animations}[i]->GetName(), i);
+93   \}
+94 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_skeleton_af10380d2615f74c4003ee37e71dac71b_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Skeleton@{Skeleton}!Load\+Bones@{Load\+Bones}}
+\index{Load\+Bones@{Load\+Bones}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{Load\+Bones(ai\+Scene const $\ast$p\+Scene)}{LoadBones(aiScene const *pScene)}}]{\setlength{\rightskip}{0pt plus 5cm}void Skeleton\+::\+Load\+Bones (
+\begin{DoxyParamCaption}
+\item[{ai\+Scene const $\ast$}]{p\+Scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_a56489c3623441f2740a4944225f5a2fa}{}\label{class_skeleton_a56489c3623441f2740a4944225f5a2fa}
+
+
+Loads the bones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & The pointer to the scene.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file Skeleton.\+cpp.
+
+
+
+Referenced by Skeleton().
+
+
+\begin{DoxyCode}
+68 \{
+69   \hyperlink{class_skeleton_a5c17fbf494ac8f40cd81d0f2da7e0c6e}{CreateBoneLookup}(pScene->mRootNode);
+70   \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} meshIndex = 0; meshIndex < pScene->mNumMeshes; meshIndex++)
+71   \{
+72     \textcolor{keyword}{const} aiMesh* m = pScene->mMeshes[meshIndex];
+73     \textcolor{keywordflow}{for} (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} b = 0; b < m->mNumBones; b++)
+74     \{
+75       \textcolor{keywordtype}{int} boneIndex = \hyperlink{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{m\_boneLookup}.\hyperlink{class_bimap_a38d190f4016ae28f415014ef4e6c08da}{GetValue}(m->mBones[b]->mName.data);
+76       \hyperlink{class_skeleton_a62748e7093e45f6f7788830afe25e168}{m\_bones}[boneIndex].offsetMatrix = \hyperlink{_assimp_to_g_l_m_8cpp_a1b03f2444f2a24982dd5a2c84b50cf98}{ASToGLM}(m->mBones[b]->mOffsetMatrix);
+77     \}
+78   \}
+79 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{class_skeleton_a56489c3623441f2740a4944225f5a2fa_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Skeleton@{Skeleton}!m\+\_\+animation\+Lookup@{m\+\_\+animation\+Lookup}}
+\index{m\+\_\+animation\+Lookup@{m\+\_\+animation\+Lookup}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{m\+\_\+animation\+Lookup}{m_animationLookup}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bimap}$<${\bf string}, int$>$ Skeleton\+::m\+\_\+animation\+Lookup\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}{}\label{class_skeleton_a5dcba0b9955626744dc1a7efa35b5800}
+
+
+The animation lookup 
+
+
+
+Definition at line 106 of file Skeleton.\+h.
+
+\index{Skeleton@{Skeleton}!m\+\_\+animations@{m\+\_\+animations}}
+\index{m\+\_\+animations@{m\+\_\+animations}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{m\+\_\+animations}{m_animations}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::unique\+\_\+ptr$<${\bf Animation}$>$ $>$ Skeleton\+::m\+\_\+animations\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_a8332723240466214376407613a11f4ce}{}\label{class_skeleton_a8332723240466214376407613a11f4ce}
+
+
+The animations 
+
+
+
+Definition at line 96 of file Skeleton.\+h.
+
+\index{Skeleton@{Skeleton}!m\+\_\+bone\+Lookup@{m\+\_\+bone\+Lookup}}
+\index{m\+\_\+bone\+Lookup@{m\+\_\+bone\+Lookup}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{m\+\_\+bone\+Lookup}{m_boneLookup}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bimap}$<${\bf string}, int$>$ Skeleton\+::m\+\_\+bone\+Lookup\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}{}\label{class_skeleton_aea181d3c2cd294fbf7c9cabb92f1fa19}
+
+
+The bone lookup 
+
+
+
+Definition at line 101 of file Skeleton.\+h.
+
+\index{Skeleton@{Skeleton}!m\+\_\+bones@{m\+\_\+bones}}
+\index{m\+\_\+bones@{m\+\_\+bones}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{m\+\_\+bones}{m_bones}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Bone}$>$ Skeleton\+::m\+\_\+bones\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_a62748e7093e45f6f7788830afe25e168}{}\label{class_skeleton_a62748e7093e45f6f7788830afe25e168}
+
+
+The bones 
+
+
+
+Definition at line 91 of file Skeleton.\+h.
+
+\index{Skeleton@{Skeleton}!m\+\_\+global\+Inverse\+Transform@{m\+\_\+global\+Inverse\+Transform}}
+\index{m\+\_\+global\+Inverse\+Transform@{m\+\_\+global\+Inverse\+Transform}!Skeleton@{Skeleton}}
+\subsubsection[{\texorpdfstring{m\+\_\+global\+Inverse\+Transform}{m_globalInverseTransform}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat4} Skeleton\+::m\+\_\+global\+Inverse\+Transform\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_skeleton_a0811c767c720f15e9f8419828731c4bf}{}\label{class_skeleton_a0811c767c720f15e9f8419828731c4bf}
+
+
+The global inverse transform 
+
+
+
+Definition at line 111 of file Skeleton.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_skeleton_8h}{Skeleton.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_skeleton_8cpp}{Skeleton.\+cpp}\end{DoxyCompactItemize}

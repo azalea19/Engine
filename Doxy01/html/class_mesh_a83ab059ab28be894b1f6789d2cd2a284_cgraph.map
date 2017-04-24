@@ -1,0 +1,11 @@
+<map id="Mesh::Mesh" name="Mesh::Mesh">
+<area shape="rect" id="node2" href="$class_mesh.html#a563b0d3d387217053f1af6db1aa00cfe" title="Mesh::CalculateBounds" alt="" coords="154,5,314,32"/>
+<area shape="rect" id="node3" href="$class_mesh.html#aa78facba5ece5befd4714245a71743af" title="Mesh::LoadBones" alt="" coords="171,56,297,83"/>
+<area shape="rect" id="node5" href="$class_mesh.html#aabd8093c9c7ad3798788a7f4c8f99749" title="Mesh::LoadIndices" alt="" coords="169,107,299,133"/>
+<area shape="rect" id="node6" href="$class_mesh.html#aa46d25e3a6f35c2a2d29328deb5d94df" title="Mesh::LoadMaterial" alt="" coords="166,157,302,184"/>
+<area shape="rect" id="node7" href="$class_mesh.html#a9d31f365bf7234de49b6174da1c26d59" title="Mesh::LoadNormals" alt="" coords="165,208,303,235"/>
+<area shape="rect" id="node8" href="$class_mesh.html#a24c7c604d9c452d3f1c6c554e8d4a947" title="Mesh::LoadTexCoords" alt="" coords="158,259,310,285"/>
+<area shape="rect" id="node9" href="$class_mesh.html#a16e015cb11cdb0fe19c8c2890baf70ef" title="Mesh::LoadVertexColours" alt="" coords="148,309,320,336"/>
+<area shape="rect" id="node10" href="$class_mesh.html#aa7bc703b77e0bdfcb5e0ca9d501c76f5" title="Mesh::LoadVertices" alt="" coords="165,360,303,387"/>
+<area shape="rect" id="node4" href="$class_mesh.html#aefa23899668cfbc296a075add2d36057" title="Mesh::GetNextWeightSlot" alt="" coords="368,56,543,83"/>
+</map>

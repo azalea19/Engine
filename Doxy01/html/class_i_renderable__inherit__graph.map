@@ -1,0 +1,5 @@
+<map id="IRenderable" name="IRenderable">
+<area shape="rect" id="node2" href="$class_forest_terrain.html" title="{ForestTerrain\n|&#45; m_trees\l&#45; m_pLand\l|+ ForestTerrain()\l+ GenerateForest()\l+ SaveTerrainToOBJ()\l+ Render()\l+ GetVertices()\l+ GetNormals()\l+ GetIndices()\l}" alt="" coords="5,175,153,355"/>
+<area shape="rect" id="node3" href="$class_object_instance.html" title="{ObjectInstance\n|&#45; m_pRenderableObject\l&#45; m_activeAnimation\l&#45; m_visible\l|+ ObjectInstance()\l+ GetVertices()\l+ GetWorldMatrix()\l+ Render()\l+ SetActiveAnimation()\l+ GetActiveAnimationIndex()\l+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l+ GetRenderableObject()\l+ SetVisible()\l+ GetVisible()\l}" alt="" coords="178,131,365,399"/>
+<area shape="rect" id="node4" href="$class_render_manager.html" title="{RenderManager\n|&#45; m_objectMap\l&#45; m_renderTimes\l&#45; m_frameRate\l|+ AddObject()\l+ RemoveObject()\l+ Render()\l+ GetFrameRate()\l&#45; UpdateFrameRate()\l}" alt="" coords="389,182,532,347"/>
+</map>

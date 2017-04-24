@@ -1,0 +1,6 @@
+<map id="Light" name="Light">
+<area shape="rect" id="node2" href="$struct_ambient_light.html" title="{AmbientLight\n|+ color\l|+ AmbientLight()\l}" alt="" coords="5,189,124,267"/>
+<area shape="rect" id="node3" href="$struct_directional_light.html" title="{DirectionalLight\n|+ color\l+ direction\l|+ DirectionalLight()\l}" alt="" coords="149,182,279,274"/>
+<area shape="rect" id="node4" href="$struct_point_light.html" title="{PointLight\n|+ color\l+ position\l|+ PointLight()\l}" alt="" coords="304,182,404,274"/>
+<area shape="rect" id="node5" href="$struct_spot_light.html" title="{SpotLight\n|+ color\l+ position\l+ direction\l+ linearAttenuation\l&#45; coneAngle\l&#45; coneCosine\l|+ SpotLight()\l+ SetConeAngle()\l}" alt="" coords="429,145,559,311"/>
+</map>

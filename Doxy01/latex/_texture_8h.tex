@@ -1,0 +1,358 @@
+\hypertarget{_texture_8h}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Texture.h File Reference}
+\label{_texture_8h}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Texture.\+h@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Texture.\+h}}
+
+
+The function to load textures.  
+
+
+{\ttfamily \#include $<$G\+L/glew.\+h$>$}\\*
+Include dependency graph for Texture.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{_texture_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_texture_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+G\+Luint \hyperlink{_texture_8h_af233cf381f148ea33a3ca84016fada98}{Load\+B\+MP} (const char $\ast$imagepath)
+\item 
+G\+Luint \hyperlink{_texture_8h_a0c153ad9db5ff2cbd74fdae51d3f342a}{Load\+Image} (const char $\ast$imagepath, bool use\+Mips=true)
+\item 
+G\+Luint \hyperlink{_texture_8h_affdc10a24cb59ae7a4fb5a3d9318640e}{Create\+Colour\+Texture} (int width=0, int height=0)
+\item 
+G\+Luint \hyperlink{_texture_8h_af9ee26b6b0fd750143b981cfaa672b5f}{Create\+Colour\+F\+Texture} (int width=0, int height=0)
+\item 
+G\+Luint \hyperlink{_texture_8h_a3c36f881960920b08d298fc1622d90e2}{Create\+Depth\+Texture} (int width=0, int height=0)
+\item 
+G\+Luint \hyperlink{_texture_8h_a50d476cb6e78d47146e686e2f6da2a1e}{Create\+Vec3\+Texture} (int width=0, int height=0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The function to load textures. 
+
+Maddisen Topaz \begin{DoxyDate}{Date}
+S2, 2016 The texture file has two options for loading textures. The load\+B\+M\+P() which can only load a bmp file and the load\+Image() method which uses S\+D\+L2\textquotesingle{}s I\+M\+G\+\_\+\+Load internally. The load\+Image() method can handle P\+NG\textquotesingle{}s, T\+GA\textquotesingle{}s, J\+P\+EG\textquotesingle{}s, B\+MP\textquotesingle{}s. See S\+D\+L2\textquotesingle{}s I\+M\+G\+\_\+\+Load for a full list of supported file types.
+\end{DoxyDate}
+See S\+DL documentation for S\+D\+L\+\_\+image A\+PI information\+: \href{https://www.libsdl.org/projects/SDL_image/docs/SDL_image_5.html#SEC5}{\tt https\+://www.\+libsdl.\+org/projects/\+S\+D\+L\+\_\+image/docs/\+S\+D\+L\+\_\+image\+\_\+5.\+html\#\+S\+E\+C5} 
+
+\subsection{Function Documentation}
+\index{Texture.\+h@{Texture.\+h}!Create\+Colour\+F\+Texture@{Create\+Colour\+F\+Texture}}
+\index{Create\+Colour\+F\+Texture@{Create\+Colour\+F\+Texture}!Texture.\+h@{Texture.\+h}}
+\subsubsection[{\texorpdfstring{Create\+Colour\+F\+Texture(int width=0, int height=0)}{CreateColourFTexture(int width=0, int height=0)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Create\+Colour\+F\+Texture (
+\begin{DoxyParamCaption}
+\item[{int}]{width = {\ttfamily 0}, }
+\item[{int}]{height = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{_texture_8h_af9ee26b6b0fd750143b981cfaa672b5f}{}\label{_texture_8h_af9ee26b6b0fd750143b981cfaa672b5f}
+
+
+Definition at line 349 of file Texture.\+cpp.
+
+
+\begin{DoxyCode}
+350 \{
+351   \textcolor{keywordflow}{if} (width == 0)
+352     width = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().x;
+353 
+354   \textcolor{keywordflow}{if} (height == 0)
+355     height = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().y;
+356 
+357   GLuint result = 0;
+358   glGenTextures(1, &result);
+359 
+360   \textcolor{comment}{//Create color texture}
+361   glBindTexture(GL\_TEXTURE\_2D, result);
+362   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_S, GL\_REPEAT);
+363   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_T, GL\_REPEAT);
+364   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_NEAREST);
+365   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_NEAREST);
+366   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAX\_LEVEL, 0);
+367   glTexImage2D(GL\_TEXTURE\_2D, 0, GL\_RGBA32F, width, height, 0, GL\_RGBA, GL\_FLOAT, NULL);
+368   glBindTexture(GL\_TEXTURE\_2D, 0);
+369   \textcolor{keywordflow}{return} result;
+370 \}
+\end{DoxyCode}
+\index{Texture.\+h@{Texture.\+h}!Create\+Colour\+Texture@{Create\+Colour\+Texture}}
+\index{Create\+Colour\+Texture@{Create\+Colour\+Texture}!Texture.\+h@{Texture.\+h}}
+\subsubsection[{\texorpdfstring{Create\+Colour\+Texture(int width=0, int height=0)}{CreateColourTexture(int width=0, int height=0)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Create\+Colour\+Texture (
+\begin{DoxyParamCaption}
+\item[{int}]{width = {\ttfamily 0}, }
+\item[{int}]{height = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{_texture_8h_affdc10a24cb59ae7a4fb5a3d9318640e}{}\label{_texture_8h_affdc10a24cb59ae7a4fb5a3d9318640e}
+
+
+Definition at line 326 of file Texture.\+cpp.
+
+
+\begin{DoxyCode}
+327 \{
+328   \textcolor{keywordflow}{if} (width == 0)
+329     width = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().x;
+330 
+331   \textcolor{keywordflow}{if} (height == 0)
+332     height = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().y;
+333 
+334   GLuint result = 0;
+335   glGenTextures(1, &result);
+336 
+337   \textcolor{comment}{//Create color texture}
+338   glBindTexture(GL\_TEXTURE\_2D, result);
+339   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_S, GL\_REPEAT);
+340   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_T, GL\_REPEAT);
+341   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_NEAREST);
+342   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_NEAREST);
+343   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAX\_LEVEL, 0);
+344   glTexImage2D(GL\_TEXTURE\_2D, 0, GL\_RGBA8, width, height, 0, GL\_BGRA, GL\_UNSIGNED\_BYTE, NULL);
+345   glBindTexture(GL\_TEXTURE\_2D, 0);
+346   \textcolor{keywordflow}{return} result;
+347 \}
+\end{DoxyCode}
+\index{Texture.\+h@{Texture.\+h}!Create\+Depth\+Texture@{Create\+Depth\+Texture}}
+\index{Create\+Depth\+Texture@{Create\+Depth\+Texture}!Texture.\+h@{Texture.\+h}}
+\subsubsection[{\texorpdfstring{Create\+Depth\+Texture(int width=0, int height=0)}{CreateDepthTexture(int width=0, int height=0)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Create\+Depth\+Texture (
+\begin{DoxyParamCaption}
+\item[{int}]{width = {\ttfamily 0}, }
+\item[{int}]{height = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{_texture_8h_a3c36f881960920b08d298fc1622d90e2}{}\label{_texture_8h_a3c36f881960920b08d298fc1622d90e2}
+
+
+Definition at line 372 of file Texture.\+cpp.
+
+
+\begin{DoxyCode}
+373 \{
+374   \textcolor{keywordflow}{if} (width == 0)
+375     width = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().x;
+376 
+377   \textcolor{keywordflow}{if} (height == 0)
+378     height = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().y;
+379 
+380   GLuint result = 0;
+381   glGenTextures(1, &result);
+382   \textcolor{comment}{//Create Depth Texture}
+383   glBindTexture(GL\_TEXTURE\_2D, result);
+384   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_S, GL\_REPEAT);
+385   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_T, GL\_REPEAT);
+386   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_NEAREST);
+387   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_NEAREST);
+388   glTexParameteri(GL\_TEXTURE\_2D, GL\_DEPTH\_TEXTURE\_MODE, GL\_INTENSITY);
+389   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_COMPARE\_MODE, GL\_COMPARE\_R\_TO\_TEXTURE);
+390   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_COMPARE\_FUNC, GL\_LEQUAL);
+391   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAX\_LEVEL, 0);
+392   glTexImage2D(GL\_TEXTURE\_2D, 0, GL\_DEPTH\_COMPONENT32, width, height, 0, GL\_DEPTH\_COMPONENT, GL\_FLOAT, NULL
+      );
+393   glBindTexture(GL\_TEXTURE\_2D, 0);
+394   \textcolor{keywordflow}{return} result;
+395 \}
+\end{DoxyCode}
+\index{Texture.\+h@{Texture.\+h}!Create\+Vec3\+Texture@{Create\+Vec3\+Texture}}
+\index{Create\+Vec3\+Texture@{Create\+Vec3\+Texture}!Texture.\+h@{Texture.\+h}}
+\subsubsection[{\texorpdfstring{Create\+Vec3\+Texture(int width=0, int height=0)}{CreateVec3Texture(int width=0, int height=0)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Create\+Vec3\+Texture (
+\begin{DoxyParamCaption}
+\item[{int}]{width = {\ttfamily 0}, }
+\item[{int}]{height = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{_texture_8h_a50d476cb6e78d47146e686e2f6da2a1e}{}\label{_texture_8h_a50d476cb6e78d47146e686e2f6da2a1e}
+
+
+Definition at line 397 of file Texture.\+cpp.
+
+
+\begin{DoxyCode}
+398 \{
+399   \textcolor{keywordflow}{if} (width == 0)
+400     width = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().x;
+401 
+402   \textcolor{keywordflow}{if} (height == 0)
+403     height = \hyperlink{_screen_8h_a30da0e5a5d6ee95789dc562a4f495ba9}{GetScreenDimensions}().y;
+404 
+405   GLuint result = 0;
+406   glGenTextures(1, &result);
+407 
+408   \textcolor{comment}{//Create color texture}
+409   glBindTexture(GL\_TEXTURE\_2D, result);
+410   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_S, GL\_REPEAT);
+411   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_T, GL\_REPEAT);
+412   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_NEAREST);
+413   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_NEAREST);
+414   glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAX\_LEVEL, 0);
+415   glTexImage2D(GL\_TEXTURE\_2D, 0, GL\_RGB32F, width, height, 0, GL\_RGB, GL\_FLOAT, NULL);
+416   glBindTexture(GL\_TEXTURE\_2D, 0);
+417   \textcolor{keywordflow}{return} result;
+418 \}
+\end{DoxyCode}
+\index{Texture.\+h@{Texture.\+h}!Load\+B\+MP@{Load\+B\+MP}}
+\index{Load\+B\+MP@{Load\+B\+MP}!Texture.\+h@{Texture.\+h}}
+\subsubsection[{\texorpdfstring{Load\+B\+M\+P(const char $\ast$imagepath)}{LoadBMP(const char *imagepath)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Load\+B\+MP (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{imagepath}
+\end{DoxyParamCaption}
+)}\hypertarget{_texture_8h_af233cf381f148ea33a3ca84016fada98}{}\label{_texture_8h_af233cf381f148ea33a3ca84016fada98}
+
+
+Definition at line 24 of file Texture.\+cpp.
+
+
+\begin{DoxyCode}
+25 \{
+26 
+27     \textcolor{comment}{//printf("Reading image %s\(\backslash\)n", imagepath);}
+28 
+29     \textcolor{comment}{// Data read from the header of the BMP file}
+30     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} header[54];
+31     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dataPos;
+32     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} imageSize;
+33     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width, height;
+34     \textcolor{comment}{// Actual RGB data}
+35     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} * data;
+36 
+37     \textcolor{comment}{// Open the file}
+38     FILE *file;
+39     fopen\_s(&file, imagepath, \textcolor{stringliteral}{"rb"});
+40     \textcolor{keywordflow}{if} (!file) \{ printf(\textcolor{stringliteral}{"%s could not be opened.\(\backslash\)n"}, imagepath); getchar(); \textcolor{keywordflow}{return} 0; \}
+41 
+42     \textcolor{comment}{// Read the header, i.e. the 54 first bytes}
+43 
+44     \textcolor{comment}{// If less than 54 bytes are read, problem}
+45     \textcolor{keywordflow}{if} (fread(header, 1, 54, file) != 54) \{
+46         printf(\textcolor{stringliteral}{"Not a correct BMP file\(\backslash\)n"});
+47         \textcolor{keywordflow}{return} 0;
+48     \}
+49     \textcolor{comment}{// A BMP files always begins with "BM"}
+50     \textcolor{keywordflow}{if} (header[0] != \textcolor{charliteral}{'B'} || header[1] != \textcolor{charliteral}{'M'}) \{
+51         printf(\textcolor{stringliteral}{"Not a correct BMP file\(\backslash\)n"});
+52         \textcolor{keywordflow}{return} 0;
+53     \}
+54     \textcolor{comment}{// Make sure this is a 24bpp file}
+55     \textcolor{keywordflow}{if} (*(\textcolor{keywordtype}{int}*)&(header[0x1E]) != 0) \{ printf(\textcolor{stringliteral}{"Not a correct BMP file\(\backslash\)n"});    \textcolor{keywordflow}{return} 0; \}
+56     \textcolor{keywordflow}{if} (*(\textcolor{keywordtype}{int}*)&(header[0x1C]) != 24) \{ printf(\textcolor{stringliteral}{"Not a correct BMP file\(\backslash\)n"});    \textcolor{keywordflow}{return} 0; \}
+57 
+58     \textcolor{comment}{// Read the information about the image}
+59     dataPos = *(\textcolor{keywordtype}{int}*)&(header[0x0A]);
+60     imageSize = *(\textcolor{keywordtype}{int}*)&(header[0x22]);
+61     width = *(\textcolor{keywordtype}{int}*)&(header[0x12]);
+62     height = *(\textcolor{keywordtype}{int}*)&(header[0x16]);
+63 
+64     \textcolor{comment}{// Some BMP files are misformatted, guess missing information}
+65     \textcolor{keywordflow}{if} (imageSize == 0)    imageSize = width*height * 3; \textcolor{comment}{// 3 : one byte for each Red, Green and Blue
+       component}
+66     \textcolor{keywordflow}{if} (dataPos == 0)      dataPos = 54; \textcolor{comment}{// The BMP header is done that way}
+67 
+68                                          \textcolor{comment}{// Create a buffer}
+69     data = \textcolor{keyword}{new} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}[imageSize];
+70 
+71     \textcolor{comment}{// Read the actual data from the file into the buffer}
+72     fread(data, 1, imageSize, file);
+73 
+74     \textcolor{comment}{// Everything is in memory now, the file wan be closed}
+75     fclose(file);
+76 
+77     \textcolor{comment}{// Create one OpenGL texture}
+78     GLuint textureID;
+79     glGenTextures(1, &textureID);
+80 
+81     \textcolor{comment}{// "Bind" the newly created texture : all future texture functions will modify this texture}
+82     glBindTexture(GL\_TEXTURE\_2D, textureID);
+83 
+84     \textcolor{comment}{// Give the image to OpenGL}
+85     glTexImage2D(GL\_TEXTURE\_2D, 0, GL\_RGB, width, height, 0, GL\_BGR, GL\_UNSIGNED\_BYTE, data);
+86 
+87     \textcolor{comment}{// OpenGL has now copied the data. Free our own version}
+88     \textcolor{keyword}{delete}[] data;
+89 
+90     \textcolor{comment}{// Poor filtering, or ...}
+91     \textcolor{comment}{//glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_NEAREST);}
+92     \textcolor{comment}{//glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_NEAREST);}
+93 
+94     \textcolor{comment}{// ... nice trilinear filtering.}
+95     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_S, GL\_REPEAT);
+96     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_T, GL\_REPEAT);
+97     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_LINEAR);
+98     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_LINEAR\_MIPMAP\_LINEAR);
+99     glGenerateMipmap(GL\_TEXTURE\_2D);
+100 
+101     \textcolor{comment}{// Return the ID of the texture we just created}
+102     \textcolor{keywordflow}{return} textureID;
+103 \}
+\end{DoxyCode}
+\index{Texture.\+h@{Texture.\+h}!Load\+Image@{Load\+Image}}
+\index{Load\+Image@{Load\+Image}!Texture.\+h@{Texture.\+h}}
+\subsubsection[{\texorpdfstring{Load\+Image(const char $\ast$imagepath, bool use\+Mips=true)}{LoadImage(const char *imagepath, bool useMips=true)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Load\+Image (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{imagepath, }
+\item[{bool}]{use\+Mips = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{_texture_8h_a0c153ad9db5ff2cbd74fdae51d3f342a}{}\label{_texture_8h_a0c153ad9db5ff2cbd74fdae51d3f342a}
+
+
+Definition at line 286 of file Texture.\+cpp.
+
+
+
+References Convert\+To\+R\+G\+B\+A(), and Flip\+Surface().
+
+
+\begin{DoxyCode}
+287 \{
+288     GLuint TextureID = 0;
+289 
+290     SDL\_Surface* rawSurface = IMG\_Load(imagepath);
+291 
+292     \textcolor{keywordflow}{if} (!rawSurface)
+293         \textcolor{keywordflow}{return} 1;
+294 
+295     SDL\_Surface* convertedSurface = \hyperlink{_texture_8cpp_ac8e4f07c831ff379d3b0672cdc0839a6}{ConvertToRGBA}(rawSurface);
+296     SDL\_Surface* flippedSurface = \hyperlink{_texture_8cpp_a43094b4481e6538fc6edee52884c6107}{FlipSurface}(convertedSurface);
+297 
+298     glGenTextures(1, &TextureID);
+299     glBindTexture(GL\_TEXTURE\_2D, TextureID);
+300 
+301     \textcolor{keywordtype}{int} Mode = GL\_RGBA;
+302 
+303     glTexImage2D(GL\_TEXTURE\_2D, 0, Mode, flippedSurface->w, flippedSurface->h, 0, Mode, GL\_UNSIGNED\_BYTE, 
+      flippedSurface->pixels);
+304     
+305     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_S, GL\_REPEAT);
+306     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_WRAP\_T, GL\_REPEAT);
+307     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MAG\_FILTER, GL\_LINEAR);
+308   
+309   \textcolor{keywordflow}{if} (useMips)
+310   \{
+311     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_LINEAR\_MIPMAP\_LINEAR);
+312     glGenerateMipmap(GL\_TEXTURE\_2D);
+313   \}
+314   \textcolor{keywordflow}{else}
+315   \{
+316     glTexParameteri(GL\_TEXTURE\_2D, GL\_TEXTURE\_MIN\_FILTER, GL\_LINEAR);
+317   \}
+318 
+319     SDL\_FreeSurface(rawSurface);
+320     SDL\_FreeSurface(convertedSurface);
+321     SDL\_FreeSurface(flippedSurface);
+322 
+323     \textcolor{keywordflow}{return} TextureID;
+324 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{_texture_8h_a0c153ad9db5ff2cbd74fdae51d3f342a_cgraph}
+\end{center}
+\end{figure}
+
+

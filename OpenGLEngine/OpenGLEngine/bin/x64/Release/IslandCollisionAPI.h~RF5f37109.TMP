@@ -1,0 +1,39 @@
+
+#include "LuaContext.h"
+#include "LuaManager.h"
+
+
+#pragma once
+class IslandCollisionAPI
+{
+public:
+	/// <summary>
+	/// Expose API to lua
+	/// </summary>
+	/// <param name="contextHandle">Lua context handle</param>
+	/// <param name="contextHandle">API name</param>
+
+	/// <returns>bool</returns>
+	void IslandCollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPIName);
+
+	/// <summary>
+	/// Given the current origin of a colliding AABB, returns the new origin for it
+	/// that will resolve the collision with any static objects.
+	/// Exposes Resolve function through Lua API.
+	/// </summary>
+	/// <param name="contextHandle">Lua context handle</param>
+	/// <param name="contextHandle">API name</param>
+	/// <returns>LuaRef</returns>
+	LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBMin, LuaRef toMoveBBMax, LuaRef staticBBMin, LuaRef staticBBMax);
+	
+	/// <summary>
+	/// Check if one AABB is colliding with any in a list.
+	/// Exposes Check function through Lua API.
+	/// </summary>
+	/// <param name="contextHandle">Lua context handle</param>
+	/// <param name="contextHandle">API name</param>
+	/// <returns>LuaRef</returns>
+	void IslandCollisionAPI::Check1ToMany(LuaRef min, LuaRef max, LuaRef manyList, int listSize, LuaContextHandle handle);
+
+};
+

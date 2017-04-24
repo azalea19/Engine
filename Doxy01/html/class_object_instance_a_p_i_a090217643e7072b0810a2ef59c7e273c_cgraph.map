@@ -1,0 +1,8 @@
+<map id="ObjectInstanceAPI::SetOrientation" name="ObjectInstanceAPI::SetOrientation">
+<area shape="rect" id="node2" href="$class_object_instance_a_p_i.html#ad5097ac5c9231e23c5f7f08a6bf6de84" title="Gets the object instance. " alt="" coords="192,23,331,64"/>
+<area shape="rect" id="node4" href="$class_affine_transformable.html#a9565967f58321117e198b6925c4200d6" title="Sets the orientation. " alt="" coords="194,120,329,161"/>
+<area shape="rect" id="node3" href="$class_lua_object_instance_manager.html#a62e842ba254f119752b29e8b5d56010f" title="Gets the object instance. " alt="" coords="379,5,559,47"/>
+<area shape="rect" id="node5" href="$class_affine_transformable.html#a8413b02e25aec2a759d5fd269d13fc02" title="Sets the pitch. " alt="" coords="401,71,536,112"/>
+<area shape="rect" id="node6" href="$class_affine_transformable.html#a9db54f563d9db087b43b64a371200264" title="Sets the roll. " alt="" coords="401,136,536,177"/>
+<area shape="rect" id="node7" href="$class_affine_transformable.html#a47ab5b07df1ee77ae2e63dc0804c5caa" title="Sets the yaw. " alt="" coords="401,201,536,243"/>
+</map>

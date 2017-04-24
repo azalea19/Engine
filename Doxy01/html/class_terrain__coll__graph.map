@@ -1,0 +1,4 @@
+<map id="Terrain" name="Terrain">
+<area shape="rect" id="node2" href="$class_i_mesh.html" title="{IMesh\n||+ GetVertices()\l+ GetNormals()\l+ GetIndices()\l+ GetTexCoords()\l+ GetTexCoordsCount()\l+ GetVertexCount()\l+ GetNormalCount()\l+ GetIndexCount()\l}" alt="" coords="5,5,164,185"/>
+<area shape="rect" id="node3" href="$class_height_map.html" title="{HeightMap\n|&#45; m_pHeightMap\l&#45; m_heightMapDimensions\l&#45; m_heightMapFile\l|+ HeightMap()\l+ LoadHeightMap()\l+ GetHeightValueAtPixel()\l+ GetWidth()\l+ GetHeight()\l}" alt="" coords="189,13,365,178"/>
+</map>

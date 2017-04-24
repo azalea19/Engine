@@ -1,0 +1,343 @@
+\hypertarget{class_height_map}{}\section{Height\+Map Class Reference}
+\label{class_height_map}\index{Height\+Map@{Height\+Map}}
+
+
+{\ttfamily \#include $<$Height\+Map.\+h$>$}
+
+
+
+Collaboration diagram for Height\+Map\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{class_height_map__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_height_map_a5a81f55f25aca424c9b9afddab239596}{Height\+Map} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&file\+Path)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_height_map}{Height\+Map} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_height_map_af4faa63fa0dfe8386342e45127d708d4}{Load\+Height\+Map} ()
+\begin{DoxyCompactList}\small\item\em Loads the height map. \end{DoxyCompactList}\item 
+float \hyperlink{class_height_map_a895733b01397c21c3562e748267da822}{Get\+Height\+Value\+At\+Pixel} (\hyperlink{_types_8h_abf8f3dd1636a08cb074d661110e0f4c0}{vec2i} const \&pixel\+Pos)
+\begin{DoxyCompactList}\small\item\em Gets the height value at pixel. Assuming 4 bytes per pixel 32 bit image depth. \end{DoxyCompactList}\item 
+int \hyperlink{class_height_map_a85709e10bb08442730bfddb649a86e0b}{Get\+Width} () const 
+\begin{DoxyCompactList}\small\item\em Gets the width. \end{DoxyCompactList}\item 
+int \hyperlink{class_height_map_a4c1243d24a8c5d039ea967a57a7bf462}{Get\+Height} () const 
+\begin{DoxyCompactList}\small\item\em Gets the height. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} $\ast$ \hyperlink{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{m\+\_\+p\+Height\+Map}
+\begin{DoxyCompactList}\small\item\em The height map \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a43182e59794291f6ab00e51b160706c2}{vec2} \hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\+\_\+height\+Map\+Dimensions}
+\begin{DoxyCompactList}\small\item\em The height map dimensions \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} \hyperlink{class_height_map_ae9b9a9f4af0846321a8b03ff46dee730}{m\+\_\+height\+Map\+File}
+\begin{DoxyCompactList}\small\item\em The height map file \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 7 of file Height\+Map.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Height\+Map@{Height\+Map}!Height\+Map@{Height\+Map}}
+\index{Height\+Map@{Height\+Map}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{Height\+Map(string const \&file\+Path)}{HeightMap(string const &filePath)}}]{\setlength{\rightskip}{0pt plus 5cm}Height\+Map\+::\+Height\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{file\+Path}
+\end{DoxyParamCaption}
+)}\hypertarget{class_height_map_a5a81f55f25aca424c9b9afddab239596}{}\label{class_height_map_a5a81f55f25aca424c9b9afddab239596}
+
+
+Initializes a new instance of the \hyperlink{class_height_map}{Height\+Map} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The file path.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Height\+Map.\+cpp.
+
+
+
+References Height\+Map(), and Load\+Height\+Map().
+
+
+
+Referenced by Height\+Map(), and Terrain\+::\+Terrain().
+
+
+\begin{DoxyCode}
+6   : \hyperlink{class_height_map_ae9b9a9f4af0846321a8b03ff46dee730}{m\_heightMapFile}(filePath)
+7 \{
+8   \hyperlink{class_height_map_af4faa63fa0dfe8386342e45127d708d4}{LoadHeightMap}();
+9 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_height_map_a5a81f55f25aca424c9b9afddab239596_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_height_map_a5a81f55f25aca424c9b9afddab239596_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Height\+Map@{Height\+Map}!Get\+Height@{Get\+Height}}
+\index{Get\+Height@{Get\+Height}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{Get\+Height() const }{GetHeight() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Height\+Map\+::\+Get\+Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_height_map_a4c1243d24a8c5d039ea967a57a7bf462}{}\label{class_height_map_a4c1243d24a8c5d039ea967a57a7bf462}
+
+
+Gets the height. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 43 of file Height\+Map.\+cpp.
+
+
+
+Referenced by Forest\+Terrain\+::\+Generate\+Forest(), Terrain\+::\+Generate\+Normals(), Terrain\+::\+Generate\+Terrain\+Indices(), Terrain\+::\+Generate\+Terrain\+Vertices(), Terrain\+::\+Generate\+Tex\+Coords(), and Terrain\+::\+Terrain().
+
+
+\begin{DoxyCode}
+44 \{
+45   \textcolor{keywordflow}{return} \hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\_heightMapDimensions}.y;
+46 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_height_map_a4c1243d24a8c5d039ea967a57a7bf462_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Height\+Map@{Height\+Map}!Get\+Height\+Value\+At\+Pixel@{Get\+Height\+Value\+At\+Pixel}}
+\index{Get\+Height\+Value\+At\+Pixel@{Get\+Height\+Value\+At\+Pixel}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{Get\+Height\+Value\+At\+Pixel(vec2i const \&pixel\+Pos)}{GetHeightValueAtPixel(vec2i const &pixelPos)}}]{\setlength{\rightskip}{0pt plus 5cm}float Height\+Map\+::\+Get\+Height\+Value\+At\+Pixel (
+\begin{DoxyParamCaption}
+\item[{{\bf vec2i} const \&}]{pixel\+Pos}
+\end{DoxyParamCaption}
+)}\hypertarget{class_height_map_a895733b01397c21c3562e748267da822}{}\label{class_height_map_a895733b01397c21c3562e748267da822}
+
+
+Gets the height value at pixel. Assuming 4 bytes per pixel 32 bit image depth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pixel\+Pos} & The pixel position.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 19 of file Height\+Map.\+cpp.
+
+
+
+References m\+\_\+p\+Height\+Map.
+
+
+\begin{DoxyCode}
+20 \{
+21   \hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint} pos = (\hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\_heightMapDimensions}.x * pixelPos.y) + pixelPos.x;
+22 
+23   \textcolor{comment}{//Color = 0xRRGGBBAA}
+24   \textcolor{comment}{//Color packed in to a four-byte integer with RGBA component}
+25   \textcolor{comment}{//We need mask and shift to get back the color channels.}
+26 
+27 
+28   \textcolor{comment}{//todo this line crashes occasionally... run a bunch of tests.}
+29   \hyperlink{_types_8h_af077aeace1515c95803def7a782c7ba1}{ubyte} redChannel = \hyperlink{_types_8h_af077aeace1515c95803def7a782c7ba1}{ubyte}((\hyperlink{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{m\_pHeightMap}[pos] & 0x00FF0000) >> 16);
+30   \hyperlink{_types_8h_af077aeace1515c95803def7a782c7ba1}{ubyte} blueChannel = \hyperlink{_types_8h_af077aeace1515c95803def7a782c7ba1}{ubyte}((\hyperlink{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{m\_pHeightMap}[pos] & 0x0000FF00) >> 8);
+31   \hyperlink{_types_8h_af077aeace1515c95803def7a782c7ba1}{ubyte} greenChannel = \hyperlink{_types_8h_af077aeace1515c95803def7a782c7ba1}{ubyte}((\hyperlink{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{m\_pHeightMap}[pos] & 0x000000FF) >> 0);
+32 
+33   \textcolor{keywordtype}{float} ave = (redChannel + blueChannel + greenChannel) / 3.f;
+34 
+35   \textcolor{keywordflow}{return} ave / 255;
+36 \}
+\end{DoxyCode}
+\index{Height\+Map@{Height\+Map}!Get\+Width@{Get\+Width}}
+\index{Get\+Width@{Get\+Width}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{Get\+Width() const }{GetWidth() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Height\+Map\+::\+Get\+Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_height_map_a85709e10bb08442730bfddb649a86e0b}{}\label{class_height_map_a85709e10bb08442730bfddb649a86e0b}
+
+
+Gets the width. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 38 of file Height\+Map.\+cpp.
+
+
+
+Referenced by Forest\+Terrain\+::\+Generate\+Forest(), Terrain\+::\+Generate\+Normals(), Terrain\+::\+Generate\+Terrain\+Indices(), Terrain\+::\+Generate\+Terrain\+Vertices(), Terrain\+::\+Generate\+Tex\+Coords(), and Terrain\+::\+Terrain().
+
+
+\begin{DoxyCode}
+39 \{
+40   \textcolor{keywordflow}{return} \hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\_heightMapDimensions}.x;
+41 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_height_map_a85709e10bb08442730bfddb649a86e0b_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Height\+Map@{Height\+Map}!Load\+Height\+Map@{Load\+Height\+Map}}
+\index{Load\+Height\+Map@{Load\+Height\+Map}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{Load\+Height\+Map()}{LoadHeightMap()}}]{\setlength{\rightskip}{0pt plus 5cm}void Height\+Map\+::\+Load\+Height\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_height_map_af4faa63fa0dfe8386342e45127d708d4}{}\label{class_height_map_af4faa63fa0dfe8386342e45127d708d4}
+
+
+Loads the height map. 
+
+
+
+Definition at line 11 of file Height\+Map.\+cpp.
+
+
+
+References Get\+Image\+Dimensions(), Get\+Pixel\+Data(), m\+\_\+height\+Map\+Dimensions, and m\+\_\+p\+Height\+Map.
+
+
+
+Referenced by Height\+Map().
+
+
+\begin{DoxyCode}
+12 \{
+13   SDL\_Surface* pHeightMapSurface = \hyperlink{_interface2_d_8h_a7772d7b358cc73373b31a284a014daf6}{GetSurfaceFromImg}(
+      \hyperlink{class_height_map_ae9b9a9f4af0846321a8b03ff46dee730}{m\_heightMapFile});
+14   \hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\_heightMapDimensions} = \hyperlink{_interface2_d_8h_a671086030e30983190d7b004bdb93861}{GetImageDimensions}(pHeightMapSurface);
+15   \hyperlink{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{m\_pHeightMap} = (\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint}*)malloc(\textcolor{keyword}{sizeof}(\hyperlink{_types_8h_a4f5fce8c1ef282264f9214809524d836}{uint}) * 
+      \hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\_heightMapDimensions}.x * \hyperlink{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{m\_heightMapDimensions}.y);
+16   \hyperlink{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{m\_pHeightMap} = \hyperlink{_interface2_d_8h_ad718f5335c8ffff16a647bb8b0b4d441}{GetPixelData}(pHeightMapSurface);
+17 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_height_map_af4faa63fa0dfe8386342e45127d708d4_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_height_map_af4faa63fa0dfe8386342e45127d708d4_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Height\+Map@{Height\+Map}!m\+\_\+height\+Map\+Dimensions@{m\+\_\+height\+Map\+Dimensions}}
+\index{m\+\_\+height\+Map\+Dimensions@{m\+\_\+height\+Map\+Dimensions}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{m\+\_\+height\+Map\+Dimensions}{m_heightMapDimensions}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec2} Height\+Map\+::m\+\_\+height\+Map\+Dimensions\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}{}\label{class_height_map_abf8f6fd763c9f44a6b7602a35e96cf58}
+
+
+The height map dimensions 
+
+
+
+Definition at line 50 of file Height\+Map.\+h.
+
+
+
+Referenced by Load\+Height\+Map().
+
+\index{Height\+Map@{Height\+Map}!m\+\_\+height\+Map\+File@{m\+\_\+height\+Map\+File}}
+\index{m\+\_\+height\+Map\+File@{m\+\_\+height\+Map\+File}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{m\+\_\+height\+Map\+File}{m_heightMapFile}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf string} Height\+Map\+::m\+\_\+height\+Map\+File\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_height_map_ae9b9a9f4af0846321a8b03ff46dee730}{}\label{class_height_map_ae9b9a9f4af0846321a8b03ff46dee730}
+
+
+The height map file 
+
+
+
+Definition at line 54 of file Height\+Map.\+h.
+
+\index{Height\+Map@{Height\+Map}!m\+\_\+p\+Height\+Map@{m\+\_\+p\+Height\+Map}}
+\index{m\+\_\+p\+Height\+Map@{m\+\_\+p\+Height\+Map}!Height\+Map@{Height\+Map}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Height\+Map}{m_pHeightMap}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint}$\ast$ Height\+Map\+::m\+\_\+p\+Height\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}{}\label{class_height_map_a3b60ac0f926ebf20cbdf8f62ae6d8203}
+
+
+The height map 
+
+
+
+Definition at line 46 of file Height\+Map.\+h.
+
+
+
+Referenced by Get\+Height\+Value\+At\+Pixel(), and Load\+Height\+Map().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_height_map_8h}{Height\+Map.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_height_map_8cpp}{Height\+Map.\+cpp}\end{DoxyCompactItemize}

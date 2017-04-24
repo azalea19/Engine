@@ -1,0 +1,157 @@
+\hypertarget{_engine_a_p_i_8cpp}{}\section{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Engine\+A\+PI.cpp File Reference}
+\label{_engine_a_p_i_8cpp}\index{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Engine\+A\+P\+I.\+cpp@{C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\+Engine\+A\+P\+I.\+cpp}}
+{\ttfamily \#include \char`\"{}Engine\+A\+P\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\+X\+Engine.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G\+L\+Engine.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Shader\+Library.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Model\+Library.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Input\+Manager.\+h\char`\"{}}\\*
+Include dependency graph for Engine\+A\+P\+I.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_engine_a_p_i_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{_engine_a_p_i_8cpp_a9d081f4d71a4fea9cf89a16e8f25447b}{Create\+Shader} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&name, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&vert\+File\+Path, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&frag\+File\+Path, std\+::vector$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} $>$ const \&attributes, std\+::vector$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} $>$ const \&uniforms)
+\item 
+static void \hyperlink{_engine_a_p_i_8cpp_a38944e0dbf9efcdb2b174afd93aacb46}{Initialise} (int screen\+Width, int screen\+Height)
+\item 
+static bool \hyperlink{_engine_a_p_i_8cpp_adb032bce7d8debc11b6b5074c5b3b8ab}{Begin\+Update} ()
+\item 
+static void \hyperlink{_engine_a_p_i_8cpp_a14a73fee6a5920b912fb85bea1d5e0d7}{End\+Update} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}!Begin\+Update@{Begin\+Update}}
+\index{Begin\+Update@{Begin\+Update}!Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Begin\+Update()}{BeginUpdate()}}]{\setlength{\rightskip}{0pt plus 5cm}static bool Begin\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_engine_a_p_i_8cpp_adb032bce7d8debc11b6b5074c5b3b8ab}{}\label{_engine_a_p_i_8cpp_adb032bce7d8debc11b6b5074c5b3b8ab}
+
+
+Definition at line 39 of file Engine\+A\+P\+I.\+cpp.
+
+
+
+References I\+Engine\+::\+Begin\+Update(), and Engine\+A\+P\+I\+::\+Get\+Engine().
+
+
+\begin{DoxyCode}
+40 \{
+41   \textcolor{keywordflow}{return} \hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}()->\hyperlink{class_i_engine_a5da41643af01472fe1b4aa0ac84fb447}{BeginUpdate}();
+42 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{_engine_a_p_i_8cpp_adb032bce7d8debc11b6b5074c5b3b8ab_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}!Create\+Shader@{Create\+Shader}}
+\index{Create\+Shader@{Create\+Shader}!Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Create\+Shader(string const \&name, string const \&vert\+File\+Path, string const \&frag\+File\+Path, std\+::vector$<$ string $>$ const \&attributes, std\+::vector$<$ string $>$ const \&uniforms)}{CreateShader(string const &name, string const &vertFilePath, string const &fragFilePath, std::vector< string > const &attributes, std::vector< string > const &uniforms)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Create\+Shader (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{name, }
+\item[{{\bf string} const \&}]{vert\+File\+Path, }
+\item[{{\bf string} const \&}]{frag\+File\+Path, }
+\item[{std\+::vector$<$ {\bf string} $>$ const \&}]{attributes, }
+\item[{std\+::vector$<$ {\bf string} $>$ const \&}]{uniforms}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_engine_a_p_i_8cpp_a9d081f4d71a4fea9cf89a16e8f25447b}{}\label{_engine_a_p_i_8cpp_a9d081f4d71a4fea9cf89a16e8f25447b}
+
+
+Definition at line 25 of file Engine\+A\+P\+I.\+cpp.
+
+
+\begin{DoxyCode}
+26 \{
+27   \hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}()->\hyperlink{class_i_engine_aa42fdef0b3b3741e4a4de1821aaa8cd6}{CreateShader}(name, vertFilePath, fragFilePath, 
+      attributes, uniforms);
+28 \}
+\end{DoxyCode}
+\index{Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}!End\+Update@{End\+Update}}
+\index{End\+Update@{End\+Update}!Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{End\+Update()}{EndUpdate()}}]{\setlength{\rightskip}{0pt plus 5cm}static void End\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_engine_a_p_i_8cpp_a14a73fee6a5920b912fb85bea1d5e0d7}{}\label{_engine_a_p_i_8cpp_a14a73fee6a5920b912fb85bea1d5e0d7}
+
+
+Definition at line 44 of file Engine\+A\+P\+I.\+cpp.
+
+
+
+References I\+Engine\+::\+End\+Update(), and Engine\+A\+P\+I\+::\+Get\+Engine().
+
+
+\begin{DoxyCode}
+45 \{
+46   \hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}()->\hyperlink{class_i_engine_afbacb27cbd19a8d63dbd6c40e4f089f9}{EndUpdate}();
+47 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{_engine_a_p_i_8cpp_a14a73fee6a5920b912fb85bea1d5e0d7_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!Engine\+A\+P\+I.\+cpp@{Engine\+A\+P\+I.\+cpp}}
+\subsubsection[{\texorpdfstring{Initialise(int screen\+Width, int screen\+Height)}{Initialise(int screenWidth, int screenHeight)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Initialise (
+\begin{DoxyParamCaption}
+\item[{int}]{screen\+Width, }
+\item[{int}]{screen\+Height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{_engine_a_p_i_8cpp_a38944e0dbf9efcdb2b174afd93aacb46}{}\label{_engine_a_p_i_8cpp_a38944e0dbf9efcdb2b174afd93aacb46}
+
+
+Definition at line 30 of file Engine\+A\+P\+I.\+cpp.
+
+
+
+References Engine\+A\+P\+I\+::\+Get\+Engine(), Model\+Library\+::\+Initialise(), I\+Engine\+::\+Initialise(), and Shader\+Library\+::\+Init\+Shader\+Library().
+
+
+\begin{DoxyCode}
+31 \{
+32   \hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}()->\hyperlink{class_i_engine_a2033b147f3b325d0194b746048a6200e}{Initialise}(screenWidth, screenHeight);
+33   \hyperlink{struct_shader_library_ac5a116b42faf885357d2118f91d5bb39}{ShaderLibrary::InitShaderLibrary}(
+      \hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}());
+34   \hyperlink{class_model_library_a85d5aeaa54615a41c0f38f638606fe41}{ModelLibrary::Initialise}(\hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}());
+35   
+36   \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{InputManager::GetInstance}().\hyperlink{class_input_manager_af93398faf21d795debc76b79ad2d5201}{Initialise}(
+      \hyperlink{class_engine_a_p_i_a6cecc94147f6fed1c2f886c082051bc7}{EngineAPI::GetEngine}()->CreateInputHandler());
+37 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{_engine_a_p_i_8cpp_a38944e0dbf9efcdb2b174afd93aacb46_cgraph}
+\end{center}
+\end{figure}
+
+

@@ -1,0 +1,6 @@
+<map id="AffineTransformable::GetTransform" name="AffineTransformable::GetTransform">
+<area shape="rect" id="node2" href="$class_object_instance.html#aa9a660435b76ef436a5dcdb24d897c4f" title="Gets the world matrix. " alt="" coords="188,31,360,72"/>
+<area shape="rect" id="node3" href="$class_object_instance.html#a5aab17f4111ca91e123f9485c616aa6f" title="The render method. " alt="" coords="422,13,581,39"/>
+<area shape="rect" id="node5" href="$class_object_instance.html#ab9de0b3252e0df4c15129876163dad6d" title="Gets the vertices. " alt="" coords="408,63,595,90"/>
+<area shape="rect" id="node4" href="$class_render_manager_a_p_i.html#a3d10854e7ddcbb9b77ef23cad6267b67" title="Renders the object. " alt="" coords="643,5,825,47"/>
+</map>

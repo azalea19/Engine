@@ -1,0 +1,5 @@
+<map id="ObjectInstanceAPI::GetTranslation" name="ObjectInstanceAPI::GetTranslation">
+<area shape="rect" id="node2" href="$class_lua_object_instance_manager.html#a62e842ba254f119752b29e8b5d56010f" title="Gets the object instance. " alt="" coords="192,5,372,47"/>
+<area shape="rect" id="node3" href="$class_affine_transformable.html#a6c6a849bb0dc120cdb96494aa40c6898" title="Gets the translation. " alt="" coords="215,71,349,112"/>
+<area shape="rect" id="node4" href="$_math_a_p_i_8cpp.html#afdae8c4f79ebf2bd38dd49c0c10fba5c" title="Converts mat4 to lua table " alt="" coords="238,137,326,163"/>
+</map>

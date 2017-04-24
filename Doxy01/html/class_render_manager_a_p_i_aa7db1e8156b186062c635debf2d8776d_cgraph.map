@@ -1,0 +1,8 @@
+<map id="RenderManagerAPI::RenderFromCamera" name="RenderManagerAPI::RenderFromCamera">
+<area shape="rect" id="node2" href="$class_scene_decompose_effect.html#a2c2bbdba7d4a8cbe1988f56b02754118" title="Binds the specified buffers. " alt="" coords="255,5,416,47"/>
+<area shape="rect" id="node3" href="$class_m_camera.html#a29193c7d70b0922abceb288c1aefcb81" title="Get the projection matrix of the camera. " alt="" coords="236,71,435,98"/>
+<area shape="rect" id="node4" href="$class_m_camera.html#ade7b040e08bdddc5fdc92d55c55b5413" title="Get the view matrix. " alt="" coords="251,122,419,149"/>
+<area shape="rect" id="node5" href="$class_render_manager.html#aa51d440b124cf2a1744655b1b24369f5" title="The render method. " alt="" coords="254,173,417,199"/>
+<area shape="rect" id="node7" href="$class_scene_decompose_effect.html#a92108d282bf0f2d7f3b3889ee64cf77c" title="Unbinds this instance. " alt="" coords="255,224,416,265"/>
+<area shape="rect" id="node6" href="$class_render_manager.html#a85483a27c84d7e11ea6bf12bfd984f28" title="Updates the frame rate. " alt="" coords="483,173,709,199"/>
+</map>

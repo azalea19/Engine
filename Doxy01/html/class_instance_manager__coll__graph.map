@@ -1,0 +1,4 @@
+<map id="InstanceManager&lt; Type &gt;" name="InstanceManager&lt; Type &gt;">
+<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; InstanceManager\l\&lt; Type \&gt; \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="5,315,192,421"/>
+<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="11,145,186,237"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Model::Model" name="Model::Model">
+<area shape="rect" id="node2" href="$class_model.html#a473f1ba420d4c80c7691924a00f41550" title="Loads the assimp meshes. " alt="" coords="156,5,339,32"/>
+<area shape="rect" id="node3" href="$class_model.html#a694937ff39bfa5fc570a17911ebad663" title="Loads the assimp skeleton. " alt="" coords="153,56,341,83"/>
+<area shape="rect" id="node4" href="$class_model.html#a16116c10d24e886acf1dcb44718695ea" title="Loads the vertex attributes. " alt="" coords="154,107,341,133"/>
+</map>

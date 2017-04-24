@@ -1,0 +1,4 @@
+<map id="ShaderLibrary" name="ShaderLibrary">
+<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; ShaderLibrary \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="5,160,185,252"/>
+<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="8,5,183,97"/>
+</map>

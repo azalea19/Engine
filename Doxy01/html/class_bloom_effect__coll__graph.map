@@ -1,0 +1,6 @@
+<map id="BloomEffect" name="BloomEffect">
+<area shape="rect" id="node2" href="$class_blur_effect.html" title="{BlurEffect\n|&#45; m_pShader\l|+ BlurEffect()\l+ Apply()\l}" alt="" coords="67,409,166,501"/>
+<area shape="rect" id="node3" href="$class_frame_buffer.html" title="{FrameBuffer\n|+ FSQuadVAO\l&#45; m_fb\l&#45; colourAttachments\l&#45; MAX_COLOUR_ATTACHMENTS\l|+ FrameBuffer()\l+ ~FrameBuffer()\l+ Bind()\l+ Unbind()\l+ GetBindMode()\l+ GetStatus()\l+ AttachColour()\l+ AttachDepth()\l+ DetachColour()\l+ DetachDepth()\l+ Initialize()\l+ BindToScreen()\l+ Display()\l&#45; AddColourAttachment()\l&#45; RemoveColourAttachment()\l&#45; BindFrameBuffer()\l}" alt="" coords="81,5,301,347"/>
+<area shape="rect" id="node4" href="$class_additive_blend_effect.html" title="{AdditiveBlendEffect\n|&#45; m_pShader\l|+ AdditiveBlendEffect()\l+ Apply()\l}" alt="" coords="191,409,344,501"/>
+<area shape="rect" id="node5" href="$class_h_d_r_split_effect.html" title="{HDRSplitEffect\n|&#45; m_pShader\l|+ HDRSplitEffect()\l+ Apply()\l}" alt="" coords="369,409,497,501"/>
+</map>

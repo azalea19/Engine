@@ -1,0 +1,724 @@
+\hypertarget{struct_agent}{}\section{Agent Struct Reference}
+\label{struct_agent}\index{Agent@{Agent}}
+
+
+{\ttfamily \#include $<$Agent.\+h$>$}
+
+
+
+Collaboration diagram for Agent\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{struct_agent__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{struct_agent_a511d2a3f9962d7b8b8ed8e55bb2fd9b2}{Update} ()=0
+\begin{DoxyCompactList}\small\item\em Calls the supplied update function if it has been implemented. \end{DoxyCompactList}\item 
+virtual int \hyperlink{struct_agent_a1088932d3e1dcce8ff7ee49a5ab64f57}{Sub\+Object\+Count} ()=0
+\begin{DoxyCompactList}\small\item\em Returns the number of sub-\/objects in the model rendered with a different material. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm\+::vec3} $>$ \hyperlink{struct_agent_a98530102fcae3e3ed6e97102efbfdf38}{Get\+Vertices} (int sub\+Index, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4} parent\+Model\+Matrix=\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4}())=0
+\begin{DoxyCompactList}\small\item\em Returns a vector of vertices for the specified sub object. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{struct_agent_a6eef7edaf0c490be38ac5b9fa4a88754}{Is\+Climbable} (int sub\+Index)=0
+\begin{DoxyCompactList}\small\item\em Returns the climbability of the sub-\/object. \end{DoxyCompactList}\item 
+virtual void \hyperlink{struct_agent_a7f9cd5a90b4766b24f49e5100cfe5026}{Render} (\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4} view\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4} projection\+Matrix, \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4} parent\+Model\+Matrix=\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4}())=0
+\begin{DoxyCompactList}\small\item\em Render an object. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_a0502dba36dde5b51033e38c744f2db11}{Set\+Position} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm\+::vec3} coords)
+\begin{DoxyCompactList}\small\item\em Sets the position that the model will be rendered at in the world. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{struct_agent_a7f42342662f587ec076b7f283000331a}{Get\+Position} ()
+\begin{DoxyCompactList}\small\item\em Get the posistion of the agent. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_afaba4f5661ada2bec70aee15e71852bd}{Set\+Scale} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm\+::vec3} a\+\_\+scale)
+\begin{DoxyCompactList}\small\item\em Sets the scale that the model will be rendered at in the world. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_a4ac318bdc2653ecbbbe95ab74602e207}{Set\+Pitch} (float degrees)
+\begin{DoxyCompactList}\small\item\em Rotates the model by a specified number of degrees around the x-\/axis. \end{DoxyCompactList}\item 
+float \hyperlink{struct_agent_a0ba5a593c61ffb2c199766478fe24af7}{Get\+Pitch} ()
+\begin{DoxyCompactList}\small\item\em Gets the pitch. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_aa3295f1b269d653a36cb63aae7587576}{Set\+Yaw} (float degrees)
+\begin{DoxyCompactList}\small\item\em Rotates the model by a specified number of degrees around the y-\/axis. \end{DoxyCompactList}\item 
+float \hyperlink{struct_agent_ab8fd6738035a240f0a5cf77d9904b5f7}{Get\+Yaw} ()
+\begin{DoxyCompactList}\small\item\em Gets the yaw. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_a82766fa6b32f2f347c79eb669dd080d6}{Set\+Visible} (bool b)
+\begin{DoxyCompactList}\small\item\em Determines whether or not the object is visible. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_agent_a5be15897c8663390f65c18d59c8dd883}{Get\+Visible} ()
+\begin{DoxyCompactList}\small\item\em Returns true if the object is visible, false if the object is invisible. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm\+::mat4} \hyperlink{struct_agent_a3b0f5c28eddeda3fcf002633ab43fae0}{Get\+Model\+Matrix} ()
+\begin{DoxyCompactList}\small\item\em Gets the model matrix. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_agent_a51d3f034af5810302abb3eda96d66d39}{Check\+Property} (\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{Agent\+Property} target)
+\begin{DoxyCompactList}\small\item\em Get the value (true/false) of a specified Agent\+Property. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_ae9dba04d6c1ca72bb6451f1f2f81be95}{Set\+Property} (\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{Agent\+Property} prop, bool value)
+\begin{DoxyCompactList}\small\item\em Set the value (true/false) of a specified Agent\+Property. \end{DoxyCompactList}\item 
+void \hyperlink{struct_agent_a01fb711b44cb03494a9751f66a7b4d7e}{Set\+Disabled} (bool new\+Dis)
+\begin{DoxyCompactList}\small\item\em set the value for disabled \end{DoxyCompactList}\item 
+bool \hyperlink{struct_agent_a29b7642fb4e6e623700ab479561fcdfb}{Get\+Disabled} ()
+\begin{DoxyCompactList}\small\item\em Get the value for disabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{struct_agent_aa0d2f2202888755e79f3d8022e79d816}{m\+\_\+disabled} = false
+\begin{DoxyCompactList}\small\item\em disabled -\/ whether the agent is disabled \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm\+::vec3} \hyperlink{struct_agent_aba44b4b1781713d1ec074b079c5dc4e1}{m\+\_\+position}
+\begin{DoxyCompactList}\small\item\em posistion -\/ the coordinates of the agent \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm\+::vec3} \hyperlink{struct_agent_abc8afe26ba8fbe75eba18ee7ccf45c7e}{m\+\_\+scale}
+\begin{DoxyCompactList}\small\item\em scale -\/ the scale of the agent \end{DoxyCompactList}\item 
+float \hyperlink{struct_agent_ab247e82de72e83d05afea649311a9314}{m\+\_\+yaw} = 0
+\begin{DoxyCompactList}\small\item\em yaw -\/ the yaw of the agent \end{DoxyCompactList}\item 
+float \hyperlink{struct_agent_aec2384613e952e3f4e280985743f41ce}{m\+\_\+pitch} = 0
+\begin{DoxyCompactList}\small\item\em pitch -\/ the pitch of the agent \end{DoxyCompactList}\item 
+bool \hyperlink{struct_agent_a0155e68895c28427071104719d710fc1}{m\+\_\+visible} = true
+\begin{DoxyCompactList}\small\item\em visible -\/ whether the agent is visible \end{DoxyCompactList}\item 
+\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{Agent\+Property} \hyperlink{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{m\+\_\+properties}
+\begin{DoxyCompactList}\small\item\em properties -\/ properties of the agent \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 38 of file Agent.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Agent@{Agent}!Check\+Property@{Check\+Property}}
+\index{Check\+Property@{Check\+Property}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Check\+Property(\+Agent\+Property target)}{CheckProperty(AgentProperty target)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\+::\+Check\+Property (
+\begin{DoxyParamCaption}
+\item[{{\bf Agent\+Property}}]{target}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a51d3f034af5810302abb3eda96d66d39}{}\label{struct_agent_a51d3f034af5810302abb3eda96d66d39}
+
+
+Get the value (true/false) of a specified Agent\+Property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & -\/ Name of the agent property to check.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file Agent.\+cpp.
+
+
+
+References m\+\_\+properties.
+
+
+\begin{DoxyCode}
+58 \{
+59     \textcolor{keywordflow}{return} (\hyperlink{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{m\_properties} & target) != 0;
+60 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Get\+Disabled@{Get\+Disabled}}
+\index{Get\+Disabled@{Get\+Disabled}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Disabled()}{GetDisabled()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\+::\+Get\+Disabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a29b7642fb4e6e623700ab479561fcdfb}{}\label{struct_agent_a29b7642fb4e6e623700ab479561fcdfb}
+
+
+Get the value for disabled. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file Agent.\+cpp.
+
+
+
+References m\+\_\+disabled.
+
+
+\begin{DoxyCode}
+79                         \{
+80     \textcolor{keywordflow}{return} \hyperlink{struct_agent_aa0d2f2202888755e79f3d8022e79d816}{m\_disabled};
+81 \}\end{DoxyCode}
+\index{Agent@{Agent}!Get\+Model\+Matrix@{Get\+Model\+Matrix}}
+\index{Get\+Model\+Matrix@{Get\+Model\+Matrix}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Model\+Matrix()}{GetModelMatrix()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf glm\+::mat4} Agent\+::\+Get\+Model\+Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a3b0f5c28eddeda3fcf002633ab43fae0}{}\label{struct_agent_a3b0f5c28eddeda3fcf002633ab43fae0}
+
+
+Gets the model matrix. 
+
+\begin{DoxyReturn}{Returns}
+glm\+::mat4 
+\end{DoxyReturn}
+
+
+Definition at line 4 of file Agent.\+cpp.
+
+
+\begin{DoxyCode}
+5 \{
+6   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm::mat4} scaleMatrix = glm::scale(\hyperlink{struct_agent_abc8afe26ba8fbe75eba18ee7ccf45c7e}{m\_scale});
+7   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm::mat4} YrotationMatrix = glm::rotate(((\hyperlink{struct_agent_ab247e82de72e83d05afea649311a9314}{m\_yaw})* 3.1416f / 180), 
+      \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm::vec3}(0, 1, 0));
+8   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm::mat4} XrotationMatrix = glm::rotate(((\hyperlink{struct_agent_aec2384613e952e3f4e280985743f41ce}{m\_pitch})* 3.1416f / 180), 
+      \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{glm::vec3}(1, 0, 0));
+9   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{glm::mat4} translationMatrix = glm::translate(\hyperlink{struct_agent_aba44b4b1781713d1ec074b079c5dc4e1}{m\_position});
+10 
+11   \textcolor{comment}{//rotates and THEN translates}
+12   \textcolor{keywordflow}{return} translationMatrix * XrotationMatrix * YrotationMatrix * scaleMatrix;
+13 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Get\+Pitch@{Get\+Pitch}}
+\index{Get\+Pitch@{Get\+Pitch}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Pitch()}{GetPitch()}}]{\setlength{\rightskip}{0pt plus 5cm}float Agent\+::\+Get\+Pitch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a0ba5a593c61ffb2c199766478fe24af7}{}\label{struct_agent_a0ba5a593c61ffb2c199766478fe24af7}
+
+
+Gets the pitch. 
+
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file Agent.\+cpp.
+
+
+
+References m\+\_\+pitch.
+
+
+\begin{DoxyCode}
+31 \{
+32   \textcolor{keywordflow}{return} \hyperlink{struct_agent_aec2384613e952e3f4e280985743f41ce}{m\_pitch};
+33 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Position()}{GetPosition()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Agent\+::\+Get\+Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a7f42342662f587ec076b7f283000331a}{}\label{struct_agent_a7f42342662f587ec076b7f283000331a}
+
+
+Get the posistion of the agent. 
+
+\begin{DoxyReturn}{Returns}
+vec3 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file Agent.\+cpp.
+
+
+\begin{DoxyCode}
+46 \{
+47     \textcolor{keywordflow}{return} \hyperlink{struct_agent_aba44b4b1781713d1ec074b079c5dc4e1}{m\_position};
+48 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Vertices(int sub\+Index, glm\+::mat4 parent\+Model\+Matrix=glm\+::mat4())=0}{GetVertices(int subIndex, glm::mat4 parentModelMatrix=glm::mat4())=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::vector$<${\bf glm\+::vec3}$>$ Agent\+::\+Get\+Vertices (
+\begin{DoxyParamCaption}
+\item[{int}]{sub\+Index, }
+\item[{{\bf glm\+::mat4}}]{parent\+Model\+Matrix = {\ttfamily {\bf glm\+::mat4}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{struct_agent_a98530102fcae3e3ed6e97102efbfdf38}{}\label{struct_agent_a98530102fcae3e3ed6e97102efbfdf38}
+
+
+Returns a vector of vertices for the specified sub object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sub\+Index} & -\/ the index of the sub object needed \\
+\hline
+{\em parent\+Model\+Matrix} & -\/ the parent model matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$glm\+::vec3$>$ 
+\end{DoxyReturn}
+\index{Agent@{Agent}!Get\+Visible@{Get\+Visible}}
+\index{Get\+Visible@{Get\+Visible}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Visible()}{GetVisible()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\+::\+Get\+Visible (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_agent_a5be15897c8663390f65c18d59c8dd883}{}\label{struct_agent_a5be15897c8663390f65c18d59c8dd883}
+
+
+Returns true if the object is visible, false if the object is invisible. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Definition at line 167 of file Agent.\+h.
+
+
+
+References m\+\_\+visible.
+
+
+\begin{DoxyCode}
+167 \{ \textcolor{keywordflow}{return} \hyperlink{struct_agent_a0155e68895c28427071104719d710fc1}{m\_visible}; \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Get\+Yaw@{Get\+Yaw}}
+\index{Get\+Yaw@{Get\+Yaw}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Get\+Yaw()}{GetYaw()}}]{\setlength{\rightskip}{0pt plus 5cm}float Agent\+::\+Get\+Yaw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_ab8fd6738035a240f0a5cf77d9904b5f7}{}\label{struct_agent_ab8fd6738035a240f0a5cf77d9904b5f7}
+
+
+Gets the yaw. 
+
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file Agent.\+cpp.
+
+
+
+References m\+\_\+yaw.
+
+
+\begin{DoxyCode}
+21 \{
+22   \textcolor{keywordflow}{return} \hyperlink{struct_agent_ab247e82de72e83d05afea649311a9314}{m\_yaw};
+23 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Is\+Climbable@{Is\+Climbable}}
+\index{Is\+Climbable@{Is\+Climbable}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Is\+Climbable(int sub\+Index)=0}{IsClimbable(int subIndex)=0}}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\+::\+Is\+Climbable (
+\begin{DoxyParamCaption}
+\item[{int}]{sub\+Index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{struct_agent_a6eef7edaf0c490be38ac5b9fa4a88754}{}\label{struct_agent_a6eef7edaf0c490be38ac5b9fa4a88754}
+
+
+Returns the climbability of the sub-\/object. 
+
+Returns climbability of sub\+Object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sub\+Index} & -\/ the index of the sub-\/object needed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Definition at line 51 of file Agent.\+cpp.
+
+
+\begin{DoxyCode}
+52 \{
+53     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+54 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Render@{Render}}
+\index{Render@{Render}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Render(glm\+::mat4 view\+Matrix, glm\+::mat4 projection\+Matrix, glm\+::mat4 parent\+Model\+Matrix=glm\+::mat4())=0}{Render(glm::mat4 viewMatrix, glm::mat4 projectionMatrix, glm::mat4 parentModelMatrix=glm::mat4())=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Agent\+::\+Render (
+\begin{DoxyParamCaption}
+\item[{{\bf glm\+::mat4}}]{view\+Matrix, }
+\item[{{\bf glm\+::mat4}}]{projection\+Matrix, }
+\item[{{\bf glm\+::mat4}}]{parent\+Model\+Matrix = {\ttfamily {\bf glm\+::mat4}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{struct_agent_a7f9cd5a90b4766b24f49e5100cfe5026}{}\label{struct_agent_a7f9cd5a90b4766b24f49e5100cfe5026}
+
+
+Render an object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Matrix} & -\/ the view\+Matrix \\
+\hline
+{\em projection\+Matrix} & -\/ the projection matrix \\
+\hline
+{\em parent\+Model\+Matrix} & -\/ the parent model matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\index{Agent@{Agent}!Set\+Disabled@{Set\+Disabled}}
+\index{Set\+Disabled@{Set\+Disabled}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Disabled(bool new\+Dis)}{SetDisabled(bool newDis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Disabled (
+\begin{DoxyParamCaption}
+\item[{bool}]{new\+Dis}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a01fb711b44cb03494a9751f66a7b4d7e}{}\label{struct_agent_a01fb711b44cb03494a9751f66a7b4d7e}
+
+
+set the value for disabled 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Dis} & -\/ the new value for disabled\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file Agent.\+cpp.
+
+
+
+References m\+\_\+disabled.
+
+
+\begin{DoxyCode}
+75                                    \{
+76     \hyperlink{struct_agent_aa0d2f2202888755e79f3d8022e79d816}{m\_disabled} = newDis;
+77 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Set\+Pitch@{Set\+Pitch}}
+\index{Set\+Pitch@{Set\+Pitch}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Pitch(float degrees)}{SetPitch(float degrees)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Pitch (
+\begin{DoxyParamCaption}
+\item[{float}]{degrees}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a4ac318bdc2653ecbbbe95ab74602e207}{}\label{struct_agent_a4ac318bdc2653ecbbbe95ab74602e207}
+
+
+Rotates the model by a specified number of degrees around the x-\/axis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degrees} & -\/ the new value for pitch in degrees\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 25 of file Agent.\+cpp.
+
+
+
+References m\+\_\+pitch.
+
+
+\begin{DoxyCode}
+26 \{
+27   \hyperlink{struct_agent_aec2384613e952e3f4e280985743f41ce}{m\_pitch} = degrees;
+28 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Set\+Position@{Set\+Position}}
+\index{Set\+Position@{Set\+Position}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Position(glm\+::vec3 coords)}{SetPosition(glm::vec3 coords)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf glm\+::vec3}}]{coords}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_a0502dba36dde5b51033e38c744f2db11}{}\label{struct_agent_a0502dba36dde5b51033e38c744f2db11}
+
+
+Sets the position that the model will be rendered at in the world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coords} & -\/ the new coordinates\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file Agent.\+cpp.
+
+
+\begin{DoxyCode}
+41 \{
+42   \hyperlink{struct_agent_aba44b4b1781713d1ec074b079c5dc4e1}{m\_position} = coords;
+43 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Set\+Property@{Set\+Property}}
+\index{Set\+Property@{Set\+Property}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Property(\+Agent\+Property prop, bool value)}{SetProperty(AgentProperty prop, bool value)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Property (
+\begin{DoxyParamCaption}
+\item[{{\bf Agent\+Property}}]{prop, }
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_ae9dba04d6c1ca72bb6451f1f2f81be95}{}\label{struct_agent_ae9dba04d6c1ca72bb6451f1f2f81be95}
+
+
+Set the value (true/false) of a specified Agent\+Property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop} & -\/ Name of the Agent\+Property to set. \\
+\hline
+{\em value} & -\/ Bool to set the Agent\+Property to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file Agent.\+cpp.
+
+
+
+References m\+\_\+properties.
+
+
+\begin{DoxyCode}
+64 \{
+65     \textcolor{keywordflow}{if} (value)
+66     \{
+67         \hyperlink{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{m\_properties} = (\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{AgentProperty})(\hyperlink{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{m\_properties} | prop);
+68     \}
+69     \textcolor{keywordflow}{else}
+70     \{
+71         \hyperlink{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{m\_properties} = (\hyperlink{_agent_8h_ab486bd3cbb07abc600b5b7586f95f7f5}{AgentProperty})(\hyperlink{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{m\_properties} & ~prop);
+72     \}
+73 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Set\+Scale@{Set\+Scale}}
+\index{Set\+Scale@{Set\+Scale}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Scale(glm\+::vec3 a\+\_\+scale)}{SetScale(glm::vec3 a_scale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Scale (
+\begin{DoxyParamCaption}
+\item[{{\bf glm\+::vec3}}]{a\+\_\+scale}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_afaba4f5661ada2bec70aee15e71852bd}{}\label{struct_agent_afaba4f5661ada2bec70aee15e71852bd}
+
+
+Sets the scale that the model will be rendered at in the world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+scale} & -\/ the new scale\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 35 of file Agent.\+cpp.
+
+
+\begin{DoxyCode}
+36 \{
+37   \hyperlink{struct_agent_abc8afe26ba8fbe75eba18ee7ccf45c7e}{m\_scale} = a\_scale;
+38 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Set\+Visible@{Set\+Visible}}
+\index{Set\+Visible@{Set\+Visible}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Visible(bool b)}{SetVisible(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Visible (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_agent_a82766fa6b32f2f347c79eb669dd080d6}{}\label{struct_agent_a82766fa6b32f2f347c79eb669dd080d6}
+
+
+Determines whether or not the object is visible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & -\/ bool to set whether or not visible. True for visible, false for invisible.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 160 of file Agent.\+h.
+
+
+
+References m\+\_\+visible.
+
+
+\begin{DoxyCode}
+160 \{ \hyperlink{struct_agent_a0155e68895c28427071104719d710fc1}{m\_visible} = b; \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Set\+Yaw@{Set\+Yaw}}
+\index{Set\+Yaw@{Set\+Yaw}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Set\+Yaw(float degrees)}{SetYaw(float degrees)}}]{\setlength{\rightskip}{0pt plus 5cm}void Agent\+::\+Set\+Yaw (
+\begin{DoxyParamCaption}
+\item[{float}]{degrees}
+\end{DoxyParamCaption}
+)}\hypertarget{struct_agent_aa3295f1b269d653a36cb63aae7587576}{}\label{struct_agent_aa3295f1b269d653a36cb63aae7587576}
+
+
+Rotates the model by a specified number of degrees around the y-\/axis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degrees} & -\/ the new value for yaw in degrees\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file Agent.\+cpp.
+
+
+
+References m\+\_\+yaw.
+
+
+\begin{DoxyCode}
+16 \{
+17   \hyperlink{struct_agent_ab247e82de72e83d05afea649311a9314}{m\_yaw} = degrees;
+18 \}
+\end{DoxyCode}
+\index{Agent@{Agent}!Sub\+Object\+Count@{Sub\+Object\+Count}}
+\index{Sub\+Object\+Count@{Sub\+Object\+Count}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Sub\+Object\+Count()=0}{SubObjectCount()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual int Agent\+::\+Sub\+Object\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{struct_agent_a1088932d3e1dcce8ff7ee49a5ab64f57}{}\label{struct_agent_a1088932d3e1dcce8ff7ee49a5ab64f57}
+
+
+Returns the number of sub-\/objects in the model rendered with a different material. 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\index{Agent@{Agent}!Update@{Update}}
+\index{Update@{Update}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{Update()=0}{Update()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Agent\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{struct_agent_a511d2a3f9962d7b8b8ed8e55bb2fd9b2}{}\label{struct_agent_a511d2a3f9962d7b8b8ed8e55bb2fd9b2}
+
+
+Calls the supplied update function if it has been implemented. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Agent@{Agent}!m\+\_\+disabled@{m\+\_\+disabled}}
+\index{m\+\_\+disabled@{m\+\_\+disabled}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+disabled}{m_disabled}}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\+::m\+\_\+disabled = false\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_aa0d2f2202888755e79f3d8022e79d816}{}\label{struct_agent_aa0d2f2202888755e79f3d8022e79d816}
+
+
+disabled -\/ whether the agent is disabled 
+
+
+
+Definition at line 217 of file Agent.\+h.
+
+
+
+Referenced by Get\+Disabled(), and Set\+Disabled().
+
+\index{Agent@{Agent}!m\+\_\+pitch@{m\+\_\+pitch}}
+\index{m\+\_\+pitch@{m\+\_\+pitch}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+pitch}{m_pitch}}]{\setlength{\rightskip}{0pt plus 5cm}float Agent\+::m\+\_\+pitch = 0\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_aec2384613e952e3f4e280985743f41ce}{}\label{struct_agent_aec2384613e952e3f4e280985743f41ce}
+
+
+pitch -\/ the pitch of the agent 
+
+
+
+Definition at line 221 of file Agent.\+h.
+
+
+
+Referenced by Get\+Pitch(), and Set\+Pitch().
+
+\index{Agent@{Agent}!m\+\_\+position@{m\+\_\+position}}
+\index{m\+\_\+position@{m\+\_\+position}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+position}{m_position}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf glm\+::vec3} Agent\+::m\+\_\+position\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_aba44b4b1781713d1ec074b079c5dc4e1}{}\label{struct_agent_aba44b4b1781713d1ec074b079c5dc4e1}
+
+
+posistion -\/ the coordinates of the agent 
+
+
+
+Definition at line 218 of file Agent.\+h.
+
+\index{Agent@{Agent}!m\+\_\+properties@{m\+\_\+properties}}
+\index{m\+\_\+properties@{m\+\_\+properties}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+properties}{m_properties}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Agent\+Property} Agent\+::m\+\_\+properties\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}{}\label{struct_agent_a323d48d9a1fe0b993aad8700e051d4c4}
+
+
+properties -\/ properties of the agent 
+
+
+
+Definition at line 223 of file Agent.\+h.
+
+
+
+Referenced by Check\+Property(), and Set\+Property().
+
+\index{Agent@{Agent}!m\+\_\+scale@{m\+\_\+scale}}
+\index{m\+\_\+scale@{m\+\_\+scale}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+scale}{m_scale}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf glm\+::vec3} Agent\+::m\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_abc8afe26ba8fbe75eba18ee7ccf45c7e}{}\label{struct_agent_abc8afe26ba8fbe75eba18ee7ccf45c7e}
+
+
+scale -\/ the scale of the agent 
+
+
+
+Definition at line 219 of file Agent.\+h.
+
+\index{Agent@{Agent}!m\+\_\+visible@{m\+\_\+visible}}
+\index{m\+\_\+visible@{m\+\_\+visible}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+visible}{m_visible}}]{\setlength{\rightskip}{0pt plus 5cm}bool Agent\+::m\+\_\+visible = true\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_a0155e68895c28427071104719d710fc1}{}\label{struct_agent_a0155e68895c28427071104719d710fc1}
+
+
+visible -\/ whether the agent is visible 
+
+
+
+Definition at line 222 of file Agent.\+h.
+
+
+
+Referenced by Get\+Visible(), and Set\+Visible().
+
+\index{Agent@{Agent}!m\+\_\+yaw@{m\+\_\+yaw}}
+\index{m\+\_\+yaw@{m\+\_\+yaw}!Agent@{Agent}}
+\subsubsection[{\texorpdfstring{m\+\_\+yaw}{m_yaw}}]{\setlength{\rightskip}{0pt plus 5cm}float Agent\+::m\+\_\+yaw = 0\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{struct_agent_ab247e82de72e83d05afea649311a9314}{}\label{struct_agent_ab247e82de72e83d05afea649311a9314}
+
+
+yaw -\/ the yaw of the agent 
+
+
+
+Definition at line 220 of file Agent.\+h.
+
+
+
+Referenced by Get\+Yaw(), and Set\+Yaw().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_agent_8h}{Agent.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_agent_8cpp}{Agent.\+cpp}\end{DoxyCompactItemize}

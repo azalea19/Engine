@@ -1,0 +1,5 @@
+<map id="ObjectInstanceAPI::GetInstance" name="ObjectInstanceAPI::GetInstance">
+<area shape="rect" id="node2" href="$class_object_instance_a_p_i.html#a8004b94256b3aea6c56588c8288be4e2" title="Sets the active animation. " alt="" coords="192,5,331,47"/>
+<area shape="rect" id="node3" href="$class_object_instance_a_p_i.html#a090217643e7072b0810a2ef59c7e273c" title="Sets affine transformable orientation of object instance. " alt="" coords="192,71,331,112"/>
+<area shape="rect" id="node4" href="$class_object_instance_a_p_i.html#abb6be8e818a4f8ce8d243d615834b8bb" title="ObjectInstanceAPI::\lSetRotation" alt="" coords="192,136,331,177"/>
+</map>

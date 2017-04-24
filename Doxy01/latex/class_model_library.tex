@@ -1,0 +1,204 @@
+\hypertarget{class_model_library}{}\section{Model\+Library Class Reference}
+\label{class_model_library}\index{Model\+Library@{Model\+Library}}
+
+
+{\ttfamily \#include $<$Model\+Library.\+h$>$}
+
+
+
+Inheritance diagram for Model\+Library\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{class_model_library__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Model\+Library\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_model_library__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_model_library_a580264d3ee6f553c916f04cecf2de660}{Add\+Model} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&model\+Name, \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&path, bool normalized=false)
+\begin{DoxyCompactList}\small\item\em Adds the model. \end{DoxyCompactList}\item 
+\hyperlink{class_object_instance}{Object\+Instance} $\ast$ \hyperlink{class_model_library_a1e9987808a135340d5b321f5b79c573f}{Get\+Object\+Instance} (\hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string} const \&model\+Name) const 
+\begin{DoxyCompactList}\small\item\em Gets the object instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_model_library_a85d5aeaa54615a41c0f38f638606fe41}{Initialise} (\hyperlink{class_i_engine}{I\+Engine} const $\ast$p\+Engine)
+\begin{DoxyCompactList}\small\item\em Initialises this instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ \hyperlink{_types_8h_ad453f9f71ce1f9153fb748d6bb25e454}{string}, \hyperlink{class_i_renderable_object}{I\+Renderable\+Object} $\ast$ $>$ \hyperlink{class_model_library_a96a5beac0ac16cd79317772448e78487}{models}
+\begin{DoxyCompactList}\small\item\em The models \end{DoxyCompactList}\item 
+\hyperlink{class_i_engine}{I\+Engine} const $\ast$ \hyperlink{class_model_library_aa49436037315f3a3732bb3a0a855b243}{m\+\_\+p\+Engine}
+\begin{DoxyCompactList}\small\item\em The engine \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 24 of file Model\+Library.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Model\+Library@{Model\+Library}!Add\+Model@{Add\+Model}}
+\index{Add\+Model@{Add\+Model}!Model\+Library@{Model\+Library}}
+\subsubsection[{\texorpdfstring{Add\+Model(string const \&model\+Name, string const \&path, bool normalized=false)}{AddModel(string const &modelName, string const &path, bool normalized=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+Library\+::\+Add\+Model (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{model\+Name, }
+\item[{{\bf string} const \&}]{path, }
+\item[{bool}]{normalized = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_model_library_a580264d3ee6f553c916f04cecf2de660}{}\label{class_model_library_a580264d3ee6f553c916f04cecf2de660}
+
+
+Adds the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Name} & Name of the model.\\
+\hline
+{\em path} & The path.\\
+\hline
+{\em normalized} & if set to {\ttfamily true} \mbox{[}normalized\mbox{]}.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Model\+Library.\+cpp.
+
+
+
+References I\+Engine\+::\+Create\+Renderable\+Object(), and m\+\_\+p\+Engine.
+
+
+\begin{DoxyCode}
+12 \{
+13   \hyperlink{class_i_renderable_object}{IRenderableObject}* newObject = \hyperlink{class_model_library_aa49436037315f3a3732bb3a0a855b243}{m\_pEngine}->
+      \hyperlink{class_i_engine_a263c5f4b936dbb4f2ec08df3c0b5b49e}{CreateRenderableObject}(name, path);
+14     \hyperlink{class_model_library_a96a5beac0ac16cd79317772448e78487}{models}.emplace(name, newObject);
+15 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_model_library_a580264d3ee6f553c916f04cecf2de660_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Model\+Library@{Model\+Library}!Get\+Object\+Instance@{Get\+Object\+Instance}}
+\index{Get\+Object\+Instance@{Get\+Object\+Instance}!Model\+Library@{Model\+Library}}
+\subsubsection[{\texorpdfstring{Get\+Object\+Instance(string const \&model\+Name) const }{GetObjectInstance(string const &modelName) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Instance} $\ast$ Model\+Library\+::\+Get\+Object\+Instance (
+\begin{DoxyParamCaption}
+\item[{{\bf string} const \&}]{model\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_model_library_a1e9987808a135340d5b321f5b79c573f}{}\label{class_model_library_a1e9987808a135340d5b321f5b79c573f}
+
+
+Gets the object instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Name} & Name of the model.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 17 of file Model\+Library.\+cpp.
+
+
+\begin{DoxyCode}
+18 \{
+19     \textcolor{keywordflow}{return} \textcolor{keyword}{new} \hyperlink{class_object_instance}{ObjectInstance}(\hyperlink{class_model_library_a96a5beac0ac16cd79317772448e78487}{models}.at(name));
+20 \}
+\end{DoxyCode}
+\index{Model\+Library@{Model\+Library}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!Model\+Library@{Model\+Library}}
+\subsubsection[{\texorpdfstring{Initialise(\+I\+Engine const $\ast$p\+Engine)}{Initialise(IEngine const *pEngine)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+Library\+::\+Initialise (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+Engine} const $\ast$}]{p\+Engine}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_model_library_a85d5aeaa54615a41c0f38f638606fe41}{}\label{class_model_library_a85d5aeaa54615a41c0f38f638606fe41}
+
+
+Initialises this instance. 
+
+
+
+Definition at line 6 of file Model\+Library.\+cpp.
+
+
+
+Referenced by Initialise().
+
+
+\begin{DoxyCode}
+7 \{
+8   \hyperlink{class_singleton_a74f32751d99bf3cc95fe17aba11f4b07}{ModelLibrary::GetInstance}().\hyperlink{class_model_library_aa49436037315f3a3732bb3a0a855b243}{m\_pEngine} = pEngine;
+9 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{class_model_library_a85d5aeaa54615a41c0f38f638606fe41_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Model\+Library@{Model\+Library}!m\+\_\+p\+Engine@{m\+\_\+p\+Engine}}
+\index{m\+\_\+p\+Engine@{m\+\_\+p\+Engine}!Model\+Library@{Model\+Library}}
+\subsubsection[{\texorpdfstring{m\+\_\+p\+Engine}{m_pEngine}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Engine} const$\ast$ Model\+Library\+::m\+\_\+p\+Engine\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_model_library_aa49436037315f3a3732bb3a0a855b243}{}\label{class_model_library_aa49436037315f3a3732bb3a0a855b243}
+
+
+The engine 
+
+
+
+Definition at line 62 of file Model\+Library.\+h.
+
+
+
+Referenced by Add\+Model().
+
+\index{Model\+Library@{Model\+Library}!models@{models}}
+\index{models@{models}!Model\+Library@{Model\+Library}}
+\subsubsection[{\texorpdfstring{models}{models}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<${\bf string}, {\bf I\+Renderable\+Object}$\ast$$>$ Model\+Library\+::models\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_model_library_a96a5beac0ac16cd79317772448e78487}{}\label{class_model_library_a96a5beac0ac16cd79317772448e78487}
+
+
+The models 
+
+
+
+Definition at line 57 of file Model\+Library.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_model_library_8h}{Model\+Library.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_model_library_8cpp}{Model\+Library.\+cpp}\end{DoxyCompactItemize}

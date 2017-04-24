@@ -1,0 +1,6 @@
+<map id="GLInputHandler::GLInputHandler" name="GLInputHandler::GLInputHandler">
+<area shape="rect" id="node2" href="$class_g_l_input_handler.html#ab0d7e33520356b9de4298e941c3155f6" title="Updates this instance. " alt="" coords="261,35,421,61"/>
+<area shape="rect" id="node3" href="$class_g_l_input_handler.html#a8024ecc15bf5f8a4fa048011eb9e77b1" title="Handles the events. " alt="" coords="469,5,668,32"/>
+<area shape="rect" id="node4" href="$class_g_l_input_handler.html#a9f03ccbccd3bd3649874f8dfdeeb2271" title="Processes the event queue. " alt="" coords="469,57,668,98"/>
+<area shape="rect" id="node5" href="$struct_mouse_event.html#afefc615a5438d68b47ee155197f58842" title="MouseEvent::MouseEvent" alt="" coords="716,64,888,91"/>
+</map>

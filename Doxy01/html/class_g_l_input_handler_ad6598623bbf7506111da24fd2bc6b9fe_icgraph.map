@@ -1,0 +1,5 @@
+<map id="GLInputHandler::IsKeyDown" name="GLInputHandler::IsKeyDown">
+<area shape="rect" id="node2" href="$class_g_l_input_handler.html#a650016eee7bab73d55898617e7cd9bfd" title="Determines whether [is key pressed] [the specified key code]. " alt="" coords="237,5,437,32"/>
+<area shape="rect" id="node3" href="$class_g_l_input_handler.html#a3a1dbf9463118c74302228e02dfb0cbf" title="Determines whether [is key up] [the specified key code]. " alt="" coords="253,56,421,83"/>
+<area shape="rect" id="node4" href="$class_g_l_input_handler.html#adddafba34c7070325782cbf55673730a" title="Determines whether [is key released] [the specified key code]. " alt="" coords="485,56,692,83"/>
+</map>

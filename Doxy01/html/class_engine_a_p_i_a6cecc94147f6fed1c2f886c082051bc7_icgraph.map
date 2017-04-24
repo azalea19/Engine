@@ -1,0 +1,7 @@
+<map id="EngineAPI::GetEngine" name="EngineAPI::GetEngine">
+<area shape="rect" id="node2" href="$class_render_manager_a_p_i.html#a3989cd3076c42b1fc5f63239887dd5ca" title="Begins the render. " alt="" coords="205,5,421,32"/>
+<area shape="rect" id="node3" href="$_engine_a_p_i_8cpp.html#adb032bce7d8debc11b6b5074c5b3b8ab" title="BeginUpdate" alt="" coords="265,56,361,83"/>
+<area shape="rect" id="node4" href="$class_render_manager_a_p_i.html#ab948dfb4627bbb9952937f24f658a975" title="Ends the render. " alt="" coords="210,107,417,133"/>
+<area shape="rect" id="node5" href="$_engine_a_p_i_8cpp.html#a14a73fee6a5920b912fb85bea1d5e0d7" title="EndUpdate" alt="" coords="270,157,357,184"/>
+<area shape="rect" id="node6" href="$_engine_a_p_i_8cpp.html#a38944e0dbf9efcdb2b174afd93aacb46" title="Initialise" alt="" coords="279,208,348,235"/>
+</map>

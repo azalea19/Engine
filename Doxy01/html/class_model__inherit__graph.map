@@ -1,0 +1,4 @@
+<map id="Model" name="Model">
+<area shape="rect" id="node2" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="5,49,160,156"/>
+<area shape="rect" id="node3" href="$class_i_mesh_collection.html" title="{IMeshCollection\n||+ GetVertices()\l+ GetNormals()\l+ GetAABB()\l+ GetIndices()\l+ GetVertexCount()\l+ GetNormalCount()\l+ GetIndexCount()\l+ GetMesh()\l+ GetMeshCount()\l}" alt="" coords="184,5,323,200"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="MPlayer::GetPickingRay" name="MPlayer::GetPickingRay">
+<area shape="rect" id="node2" href="$class_m_camera.html#aa1da16fdb2e87fa0d4b06651b832fb8b" title="Calculates the forward vector of the camera. " alt="" coords="230,5,362,32"/>
+<area shape="rect" id="node3" href="$class_m_camera.html#ac553d9ca4e16e421fe2ce9366c1f237e" title="Get the position of the camera. " alt="" coords="219,56,373,83"/>
+<area shape="rect" id="node4" href="$class_affine_transformable.html#a6c6a849bb0dc120cdb96494aa40c6898" title="Gets the translation. " alt="" coords="421,49,556,90"/>
+</map>

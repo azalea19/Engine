@@ -1,0 +1,973 @@
+\hypertarget{class_affine_transformable}{}\section{Affine\+Transformable Class Reference}
+\label{class_affine_transformable}\index{Affine\+Transformable@{Affine\+Transformable}}
+
+
+{\ttfamily \#include $<$Affine\+Transformable.\+h$>$}
+
+
+
+Inheritance diagram for Affine\+Transformable\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Affine\+Transformable\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_affine_transformable__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_affine_transformable_a54fbbe0cdde13ea581dce04ec0de8545}{Affine\+Transformable} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_affine_transformable}{Affine\+Transformable} class. \end{DoxyCompactList}\item 
+\hyperlink{class_affine_transformable_ab70fc4cbb5d5d3436d4e6fc50ccb1cc7}{Affine\+Transformable} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&translation, float yaw, float pitch, float roll, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&scale)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \hyperlink{class_affine_transformable}{Affine\+Transformable} class. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \& \hyperlink{class_affine_transformable_a6c6a849bb0dc120cdb96494aa40c6898}{Get\+Translation} () const 
+\begin{DoxyCompactList}\small\item\em Gets the translation. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}{Set\+Translation} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&translation)
+\begin{DoxyCompactList}\small\item\em Sets the translation. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_a47eccc886862946587d6e9de46f55dff}{Set\+Translation} (float x, float y, float z)
+\begin{DoxyCompactList}\small\item\em Sets the translation. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \& \hyperlink{class_affine_transformable_a891419484ac01da747f832e5a84e8e37}{Get\+Orientation} () const 
+\begin{DoxyCompactList}\small\item\em Gets the orientation. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_a9565967f58321117e198b6925c4200d6}{Set\+Orientation} (float deg\+Yaw, float deg\+Pitch, float deg\+Roll)
+\begin{DoxyCompactList}\small\item\em Sets the orientation. \end{DoxyCompactList}\item 
+float \hyperlink{class_affine_transformable_afcc35bdd6301a92f87d339f386743d93}{Get\+Yaw} () const 
+\begin{DoxyCompactList}\small\item\em Gets the yaw. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_a47ab5b07df1ee77ae2e63dc0804c5caa}{Set\+Yaw} (float deg\+Yaw)
+\begin{DoxyCompactList}\small\item\em Sets the yaw. \end{DoxyCompactList}\item 
+float \hyperlink{class_affine_transformable_ae2905ed9fc069a5b237a7103538723d3}{Get\+Pitch} () const 
+\begin{DoxyCompactList}\small\item\em Gets the pitch. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_a8413b02e25aec2a759d5fd269d13fc02}{Set\+Pitch} (float deg\+Pitch)
+\begin{DoxyCompactList}\small\item\em Sets the pitch. \end{DoxyCompactList}\item 
+float \hyperlink{class_affine_transformable_a36e3c2f2b62a4a66ab960118440d186c}{Get\+Roll} () const 
+\begin{DoxyCompactList}\small\item\em Gets the roll. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_a9db54f563d9db087b43b64a371200264}{Set\+Roll} (float deg\+Roll)
+\begin{DoxyCompactList}\small\item\em Sets the roll. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \& \hyperlink{class_affine_transformable_a8a9e32647f5e4bfb893d63ff8fb9b9f8}{Get\+Scale} () const 
+\begin{DoxyCompactList}\small\item\em Gets the scale. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_a215383be79781d61103dfdf8c201be22}{Set\+Scale} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&scale)
+\begin{DoxyCompactList}\small\item\em Sets the scale. \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} \hyperlink{class_affine_transformable_a3eb990ab0b75ad30d3bb667e437d8606}{Get\+Transform} () const 
+\begin{DoxyCompactList}\small\item\em Gets the transform. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_aacc67804c045aa75da888ca3ea409939}{Set\+Transform} (\hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} const \&transform)
+\begin{DoxyCompactList}\small\item\em Sets the transform. \end{DoxyCompactList}\item 
+void \hyperlink{class_affine_transformable_ac4faa6d4c8127e61622ae265ba708276}{Set\+Transform} (\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&translation, float yaw, float pitch, float roll, \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} const \&scale)
+\begin{DoxyCompactList}\small\item\em Sets the transform. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{m\+\_\+translation}
+\begin{DoxyCompactList}\small\item\em The translation \end{DoxyCompactList}\item 
+float \hyperlink{class_affine_transformable_abf9b231dc1bd3e61bbbed8714f127f93}{m\+\_\+yaw}
+\begin{DoxyCompactList}\small\item\em The yaw \end{DoxyCompactList}\item 
+float \hyperlink{class_affine_transformable_ade24cef424ce102502357cde8214d54b}{m\+\_\+pitch}
+\begin{DoxyCompactList}\small\item\em The pitch \end{DoxyCompactList}\item 
+float \hyperlink{class_affine_transformable_a33e3fc9a32cafaa0a04c6058f283d437}{m\+\_\+roll}
+\begin{DoxyCompactList}\small\item\em The roll \end{DoxyCompactList}\item 
+\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} \hyperlink{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{m\+\_\+scale}
+\begin{DoxyCompactList}\small\item\em The scale \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 16 of file Affine\+Transformable.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Affine\+Transformable@{Affine\+Transformable}!Affine\+Transformable@{Affine\+Transformable}}
+\index{Affine\+Transformable@{Affine\+Transformable}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Affine\+Transformable()}{AffineTransformable()}}]{\setlength{\rightskip}{0pt plus 5cm}Affine\+Transformable\+::\+Affine\+Transformable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a54fbbe0cdde13ea581dce04ec0de8545}{}\label{class_affine_transformable_a54fbbe0cdde13ea581dce04ec0de8545}
+
+
+Initializes a new instance of the \hyperlink{class_affine_transformable}{Affine\+Transformable} class. 
+
+
+
+Definition at line 12 of file Affine\+Transformable.\+cpp.
+
+
+
+References Affine\+Transformable(), m\+\_\+translation, and Set\+Orientation().
+
+
+
+Referenced by Affine\+Transformable(), and M\+Camera\+::\+M\+Camera().
+
+
+\begin{DoxyCode}
+13   : \hyperlink{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{m\_translation}(0)
+14   , \hyperlink{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{m\_scale}(1, 1, 1)
+15 \{
+16   \hyperlink{class_affine_transformable_a9565967f58321117e198b6925c4200d6}{SetOrientation}(0, 0, 0);
+17 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a54fbbe0cdde13ea581dce04ec0de8545_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a54fbbe0cdde13ea581dce04ec0de8545_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Affine\+Transformable@{Affine\+Transformable}}
+\index{Affine\+Transformable@{Affine\+Transformable}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Affine\+Transformable(vec3 const \&translation, float yaw, float pitch, float roll, vec3 const \&scale)}{AffineTransformable(vec3 const &translation, float yaw, float pitch, float roll, vec3 const &scale)}}]{\setlength{\rightskip}{0pt plus 5cm}Affine\+Transformable\+::\+Affine\+Transformable (
+\begin{DoxyParamCaption}
+\item[{{\bf vec3} const \&}]{translation, }
+\item[{float}]{yaw, }
+\item[{float}]{pitch, }
+\item[{float}]{roll, }
+\item[{{\bf vec3} const \&}]{scale}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_ab70fc4cbb5d5d3436d4e6fc50ccb1cc7}{}\label{class_affine_transformable_ab70fc4cbb5d5d3436d4e6fc50ccb1cc7}
+
+
+Initializes a new instance of the \hyperlink{class_affine_transformable}{Affine\+Transformable} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em translation} & The translation.\\
+\hline
+{\em yaw} & The yaw.\\
+\hline
+{\em pitch} & The pitch.\\
+\hline
+{\em roll} & The roll.\\
+\hline
+{\em scale} & The scale.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Affine\+Transformable.\+cpp.
+
+
+
+References Set\+Orientation(), Set\+Scale(), and Set\+Translation().
+
+
+\begin{DoxyCode}
+6 \{
+7   \hyperlink{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}{SetTranslation}(translation);
+8   \hyperlink{class_affine_transformable_a9565967f58321117e198b6925c4200d6}{SetOrientation}(yaw, pitch, roll);
+9   \hyperlink{class_affine_transformable_a215383be79781d61103dfdf8c201be22}{SetScale}(scale);
+10 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_ab70fc4cbb5d5d3436d4e6fc50ccb1cc7_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Orientation@{Get\+Orientation}}
+\index{Get\+Orientation@{Get\+Orientation}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Orientation() const }{GetOrientation() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat4} const \& Affine\+Transformable\+::\+Get\+Orientation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_a891419484ac01da747f832e5a84e8e37}{}\label{class_affine_transformable_a891419484ac01da747f832e5a84e8e37}
+
+
+Gets the orientation. 
+
+\begin{DoxyReturn}{Returns}
+mat4
+\end{DoxyReturn}
+
+
+Definition at line 34 of file Affine\+Transformable.\+cpp.
+
+
+
+Referenced by Get\+Transform().
+
+
+\begin{DoxyCode}
+35 \{
+36   \textcolor{keywordflow}{return} \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4}(\hyperlink{_types_8h_a02abcac728eae225e929e9e0dc427f28}{quat}(\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}(\hyperlink{class_affine_transformable_ade24cef424ce102502357cde8214d54b}{m\_pitch}, \hyperlink{class_affine_transformable_abf9b231dc1bd3e61bbbed8714f127f93}{m\_yaw}, \hyperlink{class_affine_transformable_a33e3fc9a32cafaa0a04c6058f283d437}{m\_roll})));
+37 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a891419484ac01da747f832e5a84e8e37_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Pitch@{Get\+Pitch}}
+\index{Get\+Pitch@{Get\+Pitch}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Pitch() const }{GetPitch() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Affine\+Transformable\+::\+Get\+Pitch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_ae2905ed9fc069a5b237a7103538723d3}{}\label{class_affine_transformable_ae2905ed9fc069a5b237a7103538723d3}
+
+
+Gets the pitch. 
+
+\begin{DoxyReturn}{Returns}
+float
+\end{DoxyReturn}
+
+
+Definition at line 56 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+pitch.
+
+
+\begin{DoxyCode}
+57 \{
+58   \textcolor{keywordflow}{return} \hyperlink{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}{RadToDeg}(\hyperlink{class_affine_transformable_ade24cef424ce102502357cde8214d54b}{m\_pitch});
+59 \}
+\end{DoxyCode}
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Roll@{Get\+Roll}}
+\index{Get\+Roll@{Get\+Roll}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Roll() const }{GetRoll() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Affine\+Transformable\+::\+Get\+Roll (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_a36e3c2f2b62a4a66ab960118440d186c}{}\label{class_affine_transformable_a36e3c2f2b62a4a66ab960118440d186c}
+
+
+Gets the roll. 
+
+\begin{DoxyReturn}{Returns}
+float
+\end{DoxyReturn}
+
+
+Definition at line 66 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+roll.
+
+
+\begin{DoxyCode}
+67 \{
+68   \textcolor{keywordflow}{return} \hyperlink{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}{RadToDeg}(\hyperlink{class_affine_transformable_a33e3fc9a32cafaa0a04c6058f283d437}{m\_roll});
+69 \}
+\end{DoxyCode}
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Scale() const }{GetScale() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} const \& Affine\+Transformable\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_a8a9e32647f5e4bfb893d63ff8fb9b9f8}{}\label{class_affine_transformable_a8a9e32647f5e4bfb893d63ff8fb9b9f8}
+
+
+Gets the scale. 
+
+\begin{DoxyReturn}{Returns}
+vec3
+\end{DoxyReturn}
+
+
+Definition at line 76 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+scale.
+
+
+
+Referenced by Object\+Instance\+A\+P\+I\+::\+Get\+Scale().
+
+
+\begin{DoxyCode}
+77 \{
+78   \textcolor{keywordflow}{return} \hyperlink{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{m\_scale};
+79 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_affine_transformable_a8a9e32647f5e4bfb893d63ff8fb9b9f8_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Transform@{Get\+Transform}}
+\index{Get\+Transform@{Get\+Transform}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Transform() const }{GetTransform() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mat4} Affine\+Transformable\+::\+Get\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_a3eb990ab0b75ad30d3bb667e437d8606}{}\label{class_affine_transformable_a3eb990ab0b75ad30d3bb667e437d8606}
+
+
+Gets the transform. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 86 of file Affine\+Transformable.\+cpp.
+
+
+
+References Get\+Orientation().
+
+
+
+Referenced by Object\+Instance\+::\+Get\+World\+Matrix().
+
+
+\begin{DoxyCode}
+87 \{
+88   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} translationMatrix = translate(\hyperlink{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{m\_translation});
+89   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} rotationMatrix = \hyperlink{class_affine_transformable_a891419484ac01da747f832e5a84e8e37}{GetOrientation}();
+90   \hyperlink{_types_8h_a2db59f395fe82a7394c6324956c265d8}{mat4} scaleMatrix = scale(\hyperlink{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{m\_scale});
+91   \textcolor{keywordflow}{return} translationMatrix * scaleMatrix * rotationMatrix;
+92 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_affine_transformable_a3eb990ab0b75ad30d3bb667e437d8606_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a3eb990ab0b75ad30d3bb667e437d8606_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Translation@{Get\+Translation}}
+\index{Get\+Translation@{Get\+Translation}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Translation() const }{GetTranslation() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} const \& Affine\+Transformable\+::\+Get\+Translation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_a6c6a849bb0dc120cdb96494aa40c6898}{}\label{class_affine_transformable_a6c6a849bb0dc120cdb96494aa40c6898}
+
+
+Gets the translation. 
+
+\begin{DoxyReturn}{Returns}
+vec3
+\end{DoxyReturn}
+
+
+Definition at line 19 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+translation.
+
+
+
+Referenced by M\+Camera\+::\+Get\+Position(), and Object\+Instance\+A\+P\+I\+::\+Get\+Translation().
+
+
+\begin{DoxyCode}
+20 \{
+21   \textcolor{keywordflow}{return} \hyperlink{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{m\_translation};
+22 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a6c6a849bb0dc120cdb96494aa40c6898_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Get\+Yaw@{Get\+Yaw}}
+\index{Get\+Yaw@{Get\+Yaw}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Get\+Yaw() const }{GetYaw() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Affine\+Transformable\+::\+Get\+Yaw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_affine_transformable_afcc35bdd6301a92f87d339f386743d93}{}\label{class_affine_transformable_afcc35bdd6301a92f87d339f386743d93}
+
+
+Gets the yaw. 
+
+\begin{DoxyReturn}{Returns}
+float
+\end{DoxyReturn}
+
+
+Definition at line 46 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+yaw.
+
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{keywordflow}{return} \hyperlink{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}{RadToDeg}(\hyperlink{class_affine_transformable_abf9b231dc1bd3e61bbbed8714f127f93}{m\_yaw});
+49 \}
+\end{DoxyCode}
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Orientation@{Set\+Orientation}}
+\index{Set\+Orientation@{Set\+Orientation}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Orientation(float deg\+Yaw, float deg\+Pitch, float deg\+Roll)}{SetOrientation(float degYaw, float degPitch, float degRoll)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Orientation (
+\begin{DoxyParamCaption}
+\item[{float}]{deg\+Yaw, }
+\item[{float}]{deg\+Pitch, }
+\item[{float}]{deg\+Roll}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a9565967f58321117e198b6925c4200d6}{}\label{class_affine_transformable_a9565967f58321117e198b6925c4200d6}
+
+
+Sets the orientation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg\+Yaw} & The yaw in degrees.\\
+\hline
+{\em deg\+Pitch} & The pitch in degrees.\\
+\hline
+{\em deg\+Roll} & The roll in degrees.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 39 of file Affine\+Transformable.\+cpp.
+
+
+
+References Set\+Pitch(), Set\+Roll(), and Set\+Yaw().
+
+
+
+Referenced by Affine\+Transformable(), Object\+Instance\+A\+P\+I\+::\+Set\+Orientation(), and Set\+Transform().
+
+
+\begin{DoxyCode}
+40 \{
+41   \hyperlink{class_affine_transformable_a47ab5b07df1ee77ae2e63dc0804c5caa}{SetYaw}(yaw);
+42   \hyperlink{class_affine_transformable_a8413b02e25aec2a759d5fd269d13fc02}{SetPitch}(pitch);
+43   \hyperlink{class_affine_transformable_a9db54f563d9db087b43b64a371200264}{SetRoll}(roll);
+44 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_affine_transformable_a9565967f58321117e198b6925c4200d6_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a9565967f58321117e198b6925c4200d6_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Pitch@{Set\+Pitch}}
+\index{Set\+Pitch@{Set\+Pitch}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Pitch(float deg\+Pitch)}{SetPitch(float degPitch)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Pitch (
+\begin{DoxyParamCaption}
+\item[{float}]{deg\+Pitch}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a8413b02e25aec2a759d5fd269d13fc02}{}\label{class_affine_transformable_a8413b02e25aec2a759d5fd269d13fc02}
+
+
+Sets the pitch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg\+Pitch} & The pitch in degrees.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 61 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+pitch.
+
+
+
+Referenced by Set\+Orientation(), and Object\+Instance\+A\+P\+I\+::\+Set\+Rotation().
+
+
+\begin{DoxyCode}
+62 \{
+63   \hyperlink{class_affine_transformable_ade24cef424ce102502357cde8214d54b}{m\_pitch} = \hyperlink{_m_math_8h_a12596bd7bfb634efa54d7493e6d546a8}{DegToRad}(pitch);
+64 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a8413b02e25aec2a759d5fd269d13fc02_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Roll@{Set\+Roll}}
+\index{Set\+Roll@{Set\+Roll}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Roll(float deg\+Roll)}{SetRoll(float degRoll)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Roll (
+\begin{DoxyParamCaption}
+\item[{float}]{deg\+Roll}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a9db54f563d9db087b43b64a371200264}{}\label{class_affine_transformable_a9db54f563d9db087b43b64a371200264}
+
+
+Sets the roll. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg\+Roll} & The deg roll.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 71 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+roll.
+
+
+
+Referenced by Set\+Orientation(), and Object\+Instance\+A\+P\+I\+::\+Set\+Rotation().
+
+
+\begin{DoxyCode}
+72 \{
+73   \hyperlink{class_affine_transformable_a33e3fc9a32cafaa0a04c6058f283d437}{m\_roll} = \hyperlink{_m_math_8h_a12596bd7bfb634efa54d7493e6d546a8}{DegToRad}(roll);
+74 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a9db54f563d9db087b43b64a371200264_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Scale@{Set\+Scale}}
+\index{Set\+Scale@{Set\+Scale}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Scale(vec3 const \&scale)}{SetScale(vec3 const &scale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Scale (
+\begin{DoxyParamCaption}
+\item[{{\bf vec3} const \&}]{scale}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a215383be79781d61103dfdf8c201be22}{}\label{class_affine_transformable_a215383be79781d61103dfdf8c201be22}
+
+
+Sets the scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & The scale.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 81 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+scale.
+
+
+
+Referenced by Affine\+Transformable(), and Set\+Transform().
+
+
+\begin{DoxyCode}
+82 \{
+83   \hyperlink{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{m\_scale} = scale;
+84 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a215383be79781d61103dfdf8c201be22_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Transform@{Set\+Transform}}
+\index{Set\+Transform@{Set\+Transform}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Transform(mat4 const \&transform)}{SetTransform(mat4 const &transform)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Transform (
+\begin{DoxyParamCaption}
+\item[{{\bf mat4} const \&}]{transform}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_aacc67804c045aa75da888ca3ea409939}{}\label{class_affine_transformable_aacc67804c045aa75da888ca3ea409939}
+
+
+Sets the transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & The transform.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 94 of file Affine\+Transformable.\+cpp.
+
+
+\begin{DoxyCode}
+95 \{
+96   \hyperlink{_types_8h_a02abcac728eae225e929e9e0dc427f28}{quat} temp;
+97   \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} skew;
+98   \hyperlink{_types_8h_ac54e849f8b2339f592307eaf6cdbba77}{vec4} perspective;
+99   glm::decompose(transform, \hyperlink{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{m\_scale}, temp, \hyperlink{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{m\_translation}, skew, perspective);
+100 
+101   \hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3} eulers = \hyperlink{_m_math_8h_a8a41524e2041d1382fe880bedddd20a1}{RadToDeg}(eulerAngles(temp));
+102   \hyperlink{class_affine_transformable_a9565967f58321117e198b6925c4200d6}{SetOrientation}(eulers.y, eulers.x, eulers.z);
+103 \}
+\end{DoxyCode}
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Transform@{Set\+Transform}}
+\index{Set\+Transform@{Set\+Transform}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Transform(vec3 const \&translation, float yaw, float pitch, float roll, vec3 const \&scale)}{SetTransform(vec3 const &translation, float yaw, float pitch, float roll, vec3 const &scale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Transform (
+\begin{DoxyParamCaption}
+\item[{{\bf vec3} const \&}]{translation, }
+\item[{float}]{yaw, }
+\item[{float}]{pitch, }
+\item[{float}]{roll, }
+\item[{{\bf vec3} const \&}]{scale}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_ac4faa6d4c8127e61622ae265ba708276}{}\label{class_affine_transformable_ac4faa6d4c8127e61622ae265ba708276}
+
+
+Sets the transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em translation} & The translation.\\
+\hline
+{\em yaw} & The yaw.\\
+\hline
+{\em pitch} & The pitch.\\
+\hline
+{\em roll} & The roll.\\
+\hline
+{\em scale} & The scale.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 105 of file Affine\+Transformable.\+cpp.
+
+
+
+References Set\+Orientation(), Set\+Scale(), and Set\+Translation().
+
+
+
+Referenced by Object\+Instance\+::\+Object\+Instance().
+
+
+\begin{DoxyCode}
+106 \{
+107   \hyperlink{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}{SetTranslation}(translation);
+108   \hyperlink{class_affine_transformable_a9565967f58321117e198b6925c4200d6}{SetOrientation}(yaw, pitch, roll);
+109   \hyperlink{class_affine_transformable_a215383be79781d61103dfdf8c201be22}{SetScale}(scale);
+110 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_ac4faa6d4c8127e61622ae265ba708276_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_ac4faa6d4c8127e61622ae265ba708276_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Translation@{Set\+Translation}}
+\index{Set\+Translation@{Set\+Translation}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Translation(vec3 const \&translation)}{SetTranslation(vec3 const &translation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Translation (
+\begin{DoxyParamCaption}
+\item[{{\bf vec3} const \&}]{translation}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}{}\label{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}
+
+
+Sets the translation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em translation} & The translation.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 24 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+translation.
+
+
+
+Referenced by Affine\+Transformable(), M\+Camera\+::\+Set\+Position(), and Set\+Transform().
+
+
+\begin{DoxyCode}
+25 \{
+26   \hyperlink{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{m\_translation} = translation;
+27 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Translation@{Set\+Translation}}
+\index{Set\+Translation@{Set\+Translation}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Translation(float x, float y, float z)}{SetTranslation(float x, float y, float z)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Translation (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{float}]{z}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a47eccc886862946587d6e9de46f55dff}{}\label{class_affine_transformable_a47eccc886862946587d6e9de46f55dff}
+
+
+Sets the translation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x.\\
+\hline
+{\em y} & The y.\\
+\hline
+{\em z} & The z.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 29 of file Affine\+Transformable.\+cpp.
+
+
+\begin{DoxyCode}
+30 \{
+31   \hyperlink{class_affine_transformable_abd554f0c81205675ed2a6520e09e5b98}{SetTranslation}(\hyperlink{_types_8h_a3d0ce73e3199de81565fb01632415288}{vec3}\{ x, y, z \});
+32 \}
+\end{DoxyCode}
+\index{Affine\+Transformable@{Affine\+Transformable}!Set\+Yaw@{Set\+Yaw}}
+\index{Set\+Yaw@{Set\+Yaw}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{Set\+Yaw(float deg\+Yaw)}{SetYaw(float degYaw)}}]{\setlength{\rightskip}{0pt plus 5cm}void Affine\+Transformable\+::\+Set\+Yaw (
+\begin{DoxyParamCaption}
+\item[{float}]{deg\+Yaw}
+\end{DoxyParamCaption}
+)}\hypertarget{class_affine_transformable_a47ab5b07df1ee77ae2e63dc0804c5caa}{}\label{class_affine_transformable_a47ab5b07df1ee77ae2e63dc0804c5caa}
+
+
+Sets the yaw. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg\+Yaw} & The yaw in degrees.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 51 of file Affine\+Transformable.\+cpp.
+
+
+
+References m\+\_\+yaw.
+
+
+
+Referenced by Forest\+Terrain\+::\+Generate\+Forest(), Set\+Orientation(), and Object\+Instance\+A\+P\+I\+::\+Set\+Rotation().
+
+
+\begin{DoxyCode}
+52 \{
+53   \hyperlink{class_affine_transformable_abf9b231dc1bd3e61bbbed8714f127f93}{m\_yaw} = \hyperlink{_m_math_8h_a12596bd7bfb634efa54d7493e6d546a8}{DegToRad}(yaw);
+54 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_affine_transformable_a47ab5b07df1ee77ae2e63dc0804c5caa_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Affine\+Transformable@{Affine\+Transformable}!m\+\_\+pitch@{m\+\_\+pitch}}
+\index{m\+\_\+pitch@{m\+\_\+pitch}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{m\+\_\+pitch}{m_pitch}}]{\setlength{\rightskip}{0pt plus 5cm}float Affine\+Transformable\+::m\+\_\+pitch\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_affine_transformable_ade24cef424ce102502357cde8214d54b}{}\label{class_affine_transformable_ade24cef424ce102502357cde8214d54b}
+
+
+The pitch 
+
+
+
+Definition at line 33 of file Affine\+Transformable.\+h.
+
+
+
+Referenced by Get\+Pitch(), and Set\+Pitch().
+
+\index{Affine\+Transformable@{Affine\+Transformable}!m\+\_\+roll@{m\+\_\+roll}}
+\index{m\+\_\+roll@{m\+\_\+roll}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{m\+\_\+roll}{m_roll}}]{\setlength{\rightskip}{0pt plus 5cm}float Affine\+Transformable\+::m\+\_\+roll\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_affine_transformable_a33e3fc9a32cafaa0a04c6058f283d437}{}\label{class_affine_transformable_a33e3fc9a32cafaa0a04c6058f283d437}
+
+
+The roll 
+
+
+
+Definition at line 38 of file Affine\+Transformable.\+h.
+
+
+
+Referenced by Get\+Roll(), and Set\+Roll().
+
+\index{Affine\+Transformable@{Affine\+Transformable}!m\+\_\+scale@{m\+\_\+scale}}
+\index{m\+\_\+scale@{m\+\_\+scale}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{m\+\_\+scale}{m_scale}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Affine\+Transformable\+::m\+\_\+scale\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}{}\label{class_affine_transformable_ac332af15336f089337fd31d7b3996bad}
+
+
+The scale 
+
+
+
+Definition at line 43 of file Affine\+Transformable.\+h.
+
+
+
+Referenced by Get\+Scale(), and Set\+Scale().
+
+\index{Affine\+Transformable@{Affine\+Transformable}!m\+\_\+translation@{m\+\_\+translation}}
+\index{m\+\_\+translation@{m\+\_\+translation}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{m\+\_\+translation}{m_translation}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vec3} Affine\+Transformable\+::m\+\_\+translation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}{}\label{class_affine_transformable_a3573983127e380c3d9151c32b43d199d}
+
+
+The translation 
+
+
+
+Definition at line 23 of file Affine\+Transformable.\+h.
+
+
+
+Referenced by Affine\+Transformable(), Get\+Translation(), and Set\+Translation().
+
+\index{Affine\+Transformable@{Affine\+Transformable}!m\+\_\+yaw@{m\+\_\+yaw}}
+\index{m\+\_\+yaw@{m\+\_\+yaw}!Affine\+Transformable@{Affine\+Transformable}}
+\subsubsection[{\texorpdfstring{m\+\_\+yaw}{m_yaw}}]{\setlength{\rightskip}{0pt plus 5cm}float Affine\+Transformable\+::m\+\_\+yaw\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_affine_transformable_abf9b231dc1bd3e61bbbed8714f127f93}{}\label{class_affine_transformable_abf9b231dc1bd3e61bbbed8714f127f93}
+
+
+The yaw 
+
+
+
+Definition at line 28 of file Affine\+Transformable.\+h.
+
+
+
+Referenced by Get\+Yaw(), and Set\+Yaw().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_affine_transformable_8h}{Affine\+Transformable.\+h}\item 
+C\+:/\+Users/elizabeth/\+Documents/\+Git\+Hub/\+Engine/\+Open\+G\+L\+Engine/\+Open\+G\+L\+Engine/\hyperlink{_affine_transformable_8cpp}{Affine\+Transformable.\+cpp}\end{DoxyCompactItemize}
