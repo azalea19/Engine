@@ -7,6 +7,7 @@ local Player =
 	bbox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
 	pos = {x=0,y=0,z=0},
 	lastpos = {x=0,y=0,z=0}
+	dir = {x=0,y=0,z=0}
 }
 
 Player.__index = Player

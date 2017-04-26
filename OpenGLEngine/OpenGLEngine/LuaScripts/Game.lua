@@ -150,7 +150,6 @@ function Initialize()
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
         end
-    printAPI.print('Data Loaded...\n')
 
 	for i = 1, numRows do
 		if(gameObjects[i]["position"]["Y"] == 0) then
@@ -290,9 +289,6 @@ function Update()
         end
     end
 
-    --[[
-            printAPI.print("e..\n");
-            -- this now crashes - liz
 	e = inputManagerAPI.isKeyPressed(SDL_SCANCODE_E)
 	if e then
 		local newX = player0["pos"]["x"] 
@@ -305,24 +301,37 @@ function Update()
 		local scaTemp = Vector3.new(0.1, 0.1, 0.1)
 
 		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
+
+
+
+		local nscale = objectInstanceAPI.getScale(tempID, context.handle)
+        local nloc = objectInstanceAPI.getTranslation(tempID, context.handle)
+        local abox = AABBAPI.getAABB(tempID, context.handle)
+		item["boundingbox"] = BBToLocal(abox,nscale,nloc)
+
 		table.insert(gameObjects, item)
 		objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
 		objectInstanceAPI.setOrientation(tempID,dirTemp.X,dirTemp.Y,dirTemp.Z)
 		objectInstanceAPI.setScale(tempID,scaTemp.X,scaTemp.Y,scaTemp.Z)
 		objectInstanceAPI.setAnimation(tempID,0)
 		renderManagerAPI.addObject(tempID)
+
+
 	end
-    ]]
+    
                 --printAPI.print("p..\n");
 
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
+		local t = timeAPI.elapsedTimeMs()
 		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
+		local t2 = timeAPI.elapsedTimeMs()
+		--printAPI.print(t2 - t .. " seconds")
 	end
 
                 --printAPI.print("l..\n");
                 
-                --[[  -- this now crashes - liz
+
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
 		local numRows = 0
 		for k,v in next, gameObjects do 
@@ -336,12 +345,33 @@ function Update()
 		player0["pos"]["x"] = 500
 		player0["pos"]["z"] = 500
 		player0["pos"]["y"] = GetHeightAtPoint(500 , 500)
+		cameraAPI.setPosition(camera0,player0["pos"]["x"],player0["pos"]["y"],player0["pos"]["z"]); 
 
 		printAPI.print('Initialising objects...\n')
 		LoadInstances("SaveData/GO_Save.csv", "gameObject")
 		LoadInstances("SaveData/NPC_Save.csv", "npc")
+
+		numRows = 0
+
+		for k,v in next, gameObjects do 
+			numRows = numRows + 1
+		end
+
+		for i = 1, numRows do
+			if(gameObjects[i]["position"]["Y"] == 0) then
+				gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"])
+			end
+			local gid = gameObjects[i]["id"]
+
+			objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
+	
+			local nscale = objectInstanceAPI.getScale(gid, context.handle)
+			local nloc = objectInstanceAPI.getTranslation(gid, context.handle)
+			local abox = AABBAPI.getAABB(gid, context.handle)
+			gameObjects[i]["boundingbox"] = BBToLocal(abox,nscale,nloc)
+		end
 	end
-    ]]
+
 
     --printAPI.print("checkdeath..\n");
 
