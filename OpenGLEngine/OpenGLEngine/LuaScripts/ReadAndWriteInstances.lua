@@ -25,23 +25,23 @@ function SaveInstances(filePath, data, fileType)
 				saveTable[#saveTable + 1] =  "," 
 				saveTable[#saveTable + 1] =  gameObjects[i]["model"]
 				saveTable[#saveTable + 1] =  "," 
-				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["X"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["x"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["Y"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["y"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["Z"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["z"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["X"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["x"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["Y"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["y"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["Z"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["z"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["X"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["x"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["Y"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["y"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["Z"]
+				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["z"]
 				saveTable[#saveTable + 1] =  ","
 				saveTable[#saveTable + 1] =  gameObjects[i]["animation"]
 				saveTable[#saveTable + 1] =  "\n"
@@ -54,29 +54,29 @@ function SaveInstances(filePath, data, fileType)
 					saveTable[#saveTable + 1] =  "," 
 					saveTable[#saveTable + 1] =  gameObjects[i]["model"]
 					saveTable[#saveTable + 1] =  "," 
-					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["X"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["x"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["Y"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["y"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["Z"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["z"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["X"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["x"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["Y"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["y"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["Z"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["z"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["X"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["x"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["Y"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["y"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["Z"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["z"]
 					saveTable[#saveTable + 1] =  ","
 					saveTable[#saveTable + 1] =  gameObjects[i]["animation"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["currentHealth"]["Y"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["currentHealth"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["maxHealth"]["Z"]
+					saveTable[#saveTable + 1] =  gameObjects[i]["maxHealth"]
 					saveTable[#saveTable + 1] =  ","
 					saveTable[#saveTable + 1] =  gameObjects[i]["characterName"]
 					saveTable[#saveTable + 1] =  "\n"
@@ -100,6 +100,7 @@ end
 function LoadInstances(filePath, fileType)
 	printAPI.print("Loading instances")
 
+	local n, instanceID, objPos, dir, sca
 	local fileData= read(filePath, ',')
 	local numRows = 0
 
@@ -112,11 +113,7 @@ function LoadInstances(filePath, fileType)
 		objpos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
 		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
 		sca = Vector3.new(fileData[i][9], fileData[i][10], fileData[i][11])
-		if(fileData[i][12] == 1) then
-			anim = 1
-		else
-			anim = 0
-		end
+		anim = fileData[i][12]
 
 		if(fileType == "gameObject") then
 			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim, instanceID)
@@ -127,9 +124,9 @@ function LoadInstances(filePath, fileType)
 		end
 		
 		table.insert(gameObjects, n)
-		objectInstanceAPI.setTranslation(instanceID,objpos.X,objpos.Y,objpos.Z)
-		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
-		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
+		objectInstanceAPI.setTranslation(instanceID,objpos.x,objpos.y,objpos.z)
+		objectInstanceAPI.setOrientation(instanceID,dir.x,dir.y,dir.z)
+		objectInstanceAPI.setScale(instanceID,sca.x,sca.y,sca.z)
 		objectInstanceAPI.setAnimation(instanceID,0)
 		renderManagerAPI.addObject(instanceID)
 	end

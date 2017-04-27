@@ -12,6 +12,7 @@ require 'LuaScripts/Terrain'
 OPEN_GL = 0
 
 gameObjects = {}
+world = {}
 debug = true
 terrainSizeX = 1024
 terrainSizeY = 1024
@@ -152,12 +153,12 @@ function Initialize()
         end
 
 	for i = 1, numRows do
-		if(gameObjects[i]["position"]["Y"] == 0) then
-			gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"])
+		if(gameObjects[i]["position"]["y"] == 0) then
+			gameObjects[i]["position"]["y"] = GetHeightAtPoint(gameObjects[i]["position"]["x"] , gameObjects[i]["position"]["z"])
 		end
         local gid = gameObjects[i]["id"]
 
-		objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
+		objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["x"],gameObjects[i]["position"]["y"],gameObjects[i]["position"]["z"])
 	
         local nscale = objectInstanceAPI.getScale(gid, context.handle)
         local nloc = objectInstanceAPI.getTranslation(gid, context.handle)
@@ -251,7 +252,7 @@ function Update()
     --Lua update here
     --printAPI.print("Updating...\n");
     time = timeAPI.elapsedTimeMs()
-	
+
     local quitIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_X)
 	if quitIn then
 		printAPI.print("Quitting - pressed input to quit.\n")
@@ -311,26 +312,18 @@ function Update()
 
 		table.insert(gameObjects, item)
 		objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
-		objectInstanceAPI.setOrientation(tempID,dirTemp.X,dirTemp.Y,dirTemp.Z)
-		objectInstanceAPI.setScale(tempID,scaTemp.X,scaTemp.Y,scaTemp.Z)
+		objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
+		objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
 		objectInstanceAPI.setAnimation(tempID,0)
 		renderManagerAPI.addObject(tempID)
 
 
 	end
-    
-                --printAPI.print("p..\n");
 
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
-		local t = timeAPI.elapsedTimeMs()
 		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
-		local t2 = timeAPI.elapsedTimeMs()
-		--printAPI.print(t2 - t .. " seconds")
-	end
-
-                --printAPI.print("l..\n");
-                
+	end      
 
 	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
 		local numRows = 0
@@ -358,12 +351,12 @@ function Update()
 		end
 
 		for i = 1, numRows do
-			if(gameObjects[i]["position"]["Y"] == 0) then
-				gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"])
+			if(gameObjects[i]["position"]["y"] == 0) then
+				gameObjects[i]["position"]["y"] = GetHeightAtPoint(gameObjects[i]["position"]["x"] , gameObjects[i]["position"]["z"])
 			end
 			local gid = gameObjects[i]["id"]
 
-			objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
+			objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["x"],gameObjects[i]["position"]["y"],gameObjects[i]["position"]["z"])
 	
 			local nscale = objectInstanceAPI.getScale(gid, context.handle)
 			local nloc = objectInstanceAPI.getTranslation(gid, context.handle)
@@ -372,10 +365,6 @@ function Update()
 		end
 	end
 
-
-    --printAPI.print("checkdeath..\n");
-
-	
 	local numRows = 0
 	for k,v in next, gameObjects do 
 		numRows = numRows + 1
@@ -390,20 +379,13 @@ function Update()
 		end
 	end
 
-        --printAPI.print("playerupdate..\n");
-
     player0:update();
 	engineAPI.EndUpdate();
-        --printAPI.print("update complete..\n");
-
-
 end
 
 
 function Render()
     renderManagerAPI.beginRender()
-    
-    --printAPI.print("Rendering...\n");
 
     renderManagerAPI.setFillMode(wireindex)
 

@@ -8,6 +8,8 @@ require 'LuaScripts/FileIO'
 function SaveInstances(filePath, data, fileType)
 	local numRows = 0
 	local total = 0
+	local saveTable = {}
+	local saveString = ""
 	
 	for k,v in next, data do 
 		numRows = numRows + 1
@@ -19,91 +21,73 @@ function SaveInstances(filePath, data, fileType)
 		if(fileType == "gameObject") then
 			if gameObjects[i]["currentHealth"] == nil then
 				total = total + 1
-				write(filePath, gameObjects[i]["name"])
-				write(filePath, ",")
-				
-				write(filePath, gameObjects[i]["model"])
-				write(filePath, ",")
-				
-				write(filePath, gameObjects[i]["position"]["X"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["position"]["Y"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["position"]["Z"])
-				write(filePath, ",")
-				
-				write(filePath, gameObjects[i]["direction"]["X"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["direction"]["Y"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["direction"]["Z"])
-				write(filePath, ",")
-				
-				write(filePath, gameObjects[i]["scale"]["X"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["scale"]["Y"])
-				write(filePath, ",")
-				write(filePath, gameObjects[i]["scale"]["Z"])
-				write(filePath, ",")
-				
-				if(gameObjects[i]["animation"] == true) then
-					ani = 1
-				else
-					ani = 0
-				end
-				write(filePath, ani)
-				write(filePath, "\n")
+				saveTable[#saveTable + 1] =  gameObjects[i]["name"] 
+				saveTable[#saveTable + 1] =  "," 
+				saveTable[#saveTable + 1] =  gameObjects[i]["model"]
+				saveTable[#saveTable + 1] =  "," 
+				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["x"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["y"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["z"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["x"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["y"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["z"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["x"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["y"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["z"]
+				saveTable[#saveTable + 1] =  ","
+				saveTable[#saveTable + 1] =  gameObjects[i]["animation"]
+				saveTable[#saveTable + 1] =  "\n"
 			end
 		else
 			if(fileType == "npc") then
 				if gameObjects[i]["currentHealth"] ~= nil then
 					total = total + 1
-					write(filePath, gameObjects[i]["name"])
-					write(filePath, ",")
-					
-					write(filePath, gameObjects[i]["model"])
-					write(filePath, ",")
-					
-					write(filePath, gameObjects[i]["position"]["X"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["position"]["Y"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["position"]["Z"])
-					write(filePath, ",")
-					
-					write(filePath, gameObjects[i]["direction"]["X"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["direction"]["Y"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["direction"]["Z"])
-					write(filePath, ",")
-					
-					write(filePath, gameObjects[i]["scale"]["X"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["scale"]["Y"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["scale"]["Z"])
-					write(filePath, ",")
-					
-					if(gameObjects[i]["animation"] == true) then
-						ani = 1
-					else
-						ani = 0
-					end
-					write(filePath, ani)
-					write(filePath, ",")
-					
-					write(filePath, gameObjects[i]["currentHealth"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["maxHealth"])
-					write(filePath, ",")
-					write(filePath, gameObjects[i]["characterName"])
-					write(filePath, "\n")
+					saveTable[#saveTable + 1] =  gameObjects[i]["name"] 
+					saveTable[#saveTable + 1] =  "," 
+					saveTable[#saveTable + 1] =  gameObjects[i]["model"]
+					saveTable[#saveTable + 1] =  "," 
+					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["x"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["y"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["z"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["x"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["y"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["z"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["x"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["y"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["z"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["animation"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["currentHealth"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["maxHealth"]
+					saveTable[#saveTable + 1] =  ","
+					saveTable[#saveTable + 1] =  gameObjects[i]["characterName"]
+					saveTable[#saveTable + 1] =  "\n"
 				end
 			end
 		end
 	end
 	
+	saveString = table.concat(saveTable)
+	write(filePath, saveString)
+
 	if(fileType == "gameObject") then
 		printAPI.print(total .. ' game objects saved.\n')
 	else
@@ -143,9 +127,9 @@ function LoadInstances(filePath, fileType)
 		end
 		
 		table.insert(gameObjects, n)
-		objectInstanceAPI.setTranslation(instanceID,objpos.X,objpos.Y,objpos.Z)
-		objectInstanceAPI.setOrientation(instanceID,dir.X,dir.Y,dir.Z)
-		objectInstanceAPI.setScale(instanceID,sca.X,sca.Y,sca.Z)
+		objectInstanceAPI.setTranslation(instanceID,objpos.x,objpos.y,objpos.z)
+		objectInstanceAPI.setOrientation(instanceID,dir.x,dir.y,dir.z)
+		objectInstanceAPI.setScale(instanceID,sca.x,sca.y,sca.z)
 		objectInstanceAPI.setAnimation(instanceID,0)
 		renderManagerAPI.addObject(instanceID)
 	end

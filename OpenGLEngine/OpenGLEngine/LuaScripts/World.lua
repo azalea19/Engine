@@ -4,11 +4,12 @@ World.__index = World
 
 function World.new(newPlayer, newScenes)
 	local instance = {
-	Player = newPlayer,
-	scenes = newScenes,
-	currentScene = 1}      
+		Player = newPlayer,
+		scenes = newScenes,
+		currentScene = 1
+	}    
+	  
 	setmetatable(instance,World)
-	
 	return instance
 end
 	

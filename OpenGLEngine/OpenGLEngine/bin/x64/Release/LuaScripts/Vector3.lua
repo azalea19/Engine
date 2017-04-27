@@ -1,10 +1,10 @@
 local Vector3 = {}
 
-function Vector3.new(x, y, z)
+function Vector3.new(newX, newY, newZ)
 	local instance = {
-		X = x,
-		Y = y,
-		Z = z
+		x = newX,
+		y = newY,
+		z = newZ
 	}
 	setmetatable(instance, Vector3)
 	return instance

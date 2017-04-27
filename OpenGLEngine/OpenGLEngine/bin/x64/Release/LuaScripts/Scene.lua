@@ -6,7 +6,8 @@ function Scene.new(newSceneName, newSceneObjects, newSceneTerrain, newPlayerStar
 	name = newSceneName,
 	objects = newSceneObjects,
 	terrain = newSceneTerrain,
-	playerStartPos = newPlayerStartPos}
+	playerStartPos = newPlayerStartPos,
+	playerStartDir = 0}
 	
 	setmetatable(instance,Scene)
 	
