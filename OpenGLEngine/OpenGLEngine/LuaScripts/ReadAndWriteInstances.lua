@@ -1,3 +1,10 @@
+--[[local Vector3 = require 'Vector3'
+local gameObject = require 'gameObject'
+local AABoundingBox = require 'AABoundingBox'
+local npc = require 'npc'
+local Player = require 'Player'
+require 'FileIO'
+]]
 local Vector3 = require 'LuaScripts/Vector3'
 local gameObject = require 'LuaScripts/gameObject'
 local AABoundingBox = require 'LuaScripts/AABoundingBox'
@@ -100,6 +107,7 @@ end
 function LoadInstances(filePath, fileType)
 	printAPI.print("Loading instances")
 
+	local outputData = {}
 	local n, instanceID, objPos, dir, sca
 	local fileData= read(filePath, ',')
 	local numRows = 0
@@ -123,7 +131,7 @@ function LoadInstances(filePath, fileType)
 			end
 		end
 		
-		table.insert(gameObjects, n)
+		table.insert(outputData, n)
 		objectInstanceAPI.setTranslation(instanceID,objpos.x,objpos.y,objpos.z)
 		objectInstanceAPI.setOrientation(instanceID,dir.x,dir.y,dir.z)
 		objectInstanceAPI.setScale(instanceID,sca.x,sca.y,sca.z)
@@ -138,6 +146,6 @@ function LoadInstances(filePath, fileType)
 			printAPI.print(numRows .. ' NPCs loaded.\n')
 		end
 	end	
-	printAPI.print("Loaded instances")
-
+	
+	return outputData
 end

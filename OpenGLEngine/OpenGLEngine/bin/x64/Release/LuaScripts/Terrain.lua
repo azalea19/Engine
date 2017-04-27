@@ -11,7 +11,6 @@ function biLerp(p00, p10, p01, p11, tx,ty)
 end
 
 function mapRange(u1,u2,v1,v2, value)
-
 	local lerpFactor = (value-u1)/(u2-u1)
 	return lerp(v1,v2,lerpFactor)
 end
@@ -24,7 +23,6 @@ function WSToHeightMapSpace(wsX,wsZ)
 end
 
 function GetHeightAtPoint(x,y)
-
 	--returned as floating value
 	local hmX, hmY = WSToHeightMapSpace(x,y)
 	hmX = hmX - 0.5	+ 1
@@ -46,7 +44,8 @@ end
 
 
 function GetHeightAtPointNathan(x, y)
-	
+	local z1, z2, z3, x1, x2, x3, y1, y2, y3, first, second, third, resultHeight
+
 	if(x < 0) then
 		x = 0
 	end
@@ -59,16 +58,17 @@ function GetHeightAtPointNathan(x, y)
 	if(y > terrainSizeY) then
 		y = terrainSizeY - 2
 	end
-	xScale = terrainSizeX / heightMapSize
-	yScale = terrainSizeY / heightMapSize
 
-	xPixel = (x / terrainSizeX) * heightMapSize - 1
-	yPixel = (y / terrainSizeY) * heightMapSize - 1
+	local xScale = terrainSizeX / heightMapSize
+	local yScale = terrainSizeY / heightMapSize
 
-	BottomLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 1]
-	BottomRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 1]
-	TopLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 2]
-	TopRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 2]
+	local xPixel = (x / terrainSizeX) * heightMapSize - 1
+	local yPixel = (y / terrainSizeY) * heightMapSize - 1
+
+	local BottomLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 1]
+	local BottomRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 1]
+	local TopLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 2]
+	local TopRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 2]
 	if(x + y <= xPixel * xScale + yScale * yScale ) then
 		z1 = TopLeft
 		z2 = BottomRight

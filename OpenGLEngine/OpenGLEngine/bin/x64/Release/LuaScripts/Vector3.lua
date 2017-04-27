@@ -6,6 +6,7 @@ function Vector3.new(newX, newY, newZ)
 		y = newY,
 		z = newZ
 	}
+
 	setmetatable(instance, Vector3)
 	return instance
 end

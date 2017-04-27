@@ -1,4 +1,5 @@
 local gameObject = require 'LuaScripts/gameObject'
+--local gameObject = require 'gameObject'
 
 local npc = {}
 npc.__index = npc
