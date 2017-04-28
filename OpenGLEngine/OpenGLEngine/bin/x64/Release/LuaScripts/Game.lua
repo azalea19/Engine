@@ -81,7 +81,7 @@ function PrintVec3s(vecc,vecb)
 end
 	
 function LoadAssets()
-
+	printAPI.print('Loading Models...\n')
 	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	--modelLibraryAPI.addModel("Horse","Assets/Models/Horse/horse.3ds",false)
 	--modelLibraryAPI.addModel("Drone","Assets/Models/Drone/PA_drone.fbx",false)
@@ -100,27 +100,16 @@ function LoadAssets()
 	--modelLibraryAPI.addModel("Cart","Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
 	--modelLibraryAPI.addModel("Saloon","Assets/Models/Saloon/saloon exterior-interior.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Alfred.obj",false)
+	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
-
-	--terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/hmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
-
-		
-	printAPI.print('terrain loaded\n')
-
+	printAPI.print('Loading Terrain...\n')
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)	
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 
-
-	
-	printAPI.print('skybox loaded\n')
-
+	printAPI.print('Loading Skybox...\n')
 	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
-	
-	printAPI.print('cactus loaded\n')
-
-	modelLibraryAPI.addModel("Cactus1","Assets/Models/Cactus1/cactus.obj",false)
-
 end
+
 
 
 function BBToLocal(bb,scalea,loca)
@@ -145,18 +134,15 @@ function Initialize()
 	wireindex =0
 
 	printAPI.print('Creating...\n')
-
 	engineAPI.Initialise(1280,720);
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
 
+	printAPI.print('Initialising terrain...\n')
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 	objectInstanceAPI.setTranslation(skybox, 0,0,0);
 	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
-
-	printAPI.print('Initialising terrain...\n')
-
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 
@@ -190,7 +176,6 @@ function Initialize()
     printAPI.print('Initialization finished.\n')
 end
 
-
 function GameLoop()
 	run = true
 	while run do
@@ -217,25 +202,19 @@ function Update()
     if(quitting) then
         if inputManagerAPI.isMousePressedLeft() then
             run = false
-
         end
-
     end
-        --printAPI.print("helpmenu1...\n");
 
     local helpIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_M)
 	if helpIn then
         helpMenu = true
     end
-            --printAPI.print("helpmenu2...\n");
 
     if helpMenu then
         if inputManagerAPI.isMousePressedLeft() then
             helpMenu = false
-
         end
     end
-
 
     if(inputManagerAPI.isKeyPressed(SDL_SCANCODE_K)) then
         if(wireindex ==0) then
@@ -247,8 +226,8 @@ function Update()
 
 	e = inputManagerAPI.isKeyPressed(SDL_SCANCODE_E)
 	if e then
-		local newX = player0["pos"]["x"] 
-		local newZ = player0["pos"]["z"]
+		local newX = player0["position"]["x"] 
+		local newZ = player0["position"]["z"]
 		local newY = GetHeightAtPoint(newX , newZ)
 		local xRotRand = math.random(360)
 		local tempID = luaObjInstManager.addNewInstance("Bob")
@@ -264,9 +243,11 @@ function Update()
 		objectInstanceAPI.setAnimation(tempID,0)
 
 		local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-        local nloc = objectInstanceAPI.getTranslation(tempID, context.handle)
+
         local abox = AABBAPI.getAABB(tempID, context.handle)
-		item["boundingbox"] = BBToLocal(abox,nscale,nloc)
+		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
+		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
+		item["boundingBox"] = abox
 
 		world:AddInstance(item)
 		renderManagerAPI.addObject(tempID)
@@ -283,10 +264,10 @@ function Update()
 
 		currentScene:RemoveInstances()
 
-		player0["pos"]["x"] = 500
-		player0["pos"]["z"] = 500
-		player0["pos"]["y"] = GetHeightAtPoint(500 , 500)
-		cameraAPI.setPosition(camera0,player0["pos"]["x"],player0["pos"]["y"],player0["pos"]["z"]); 
+		player0["position"]["x"] = 500
+		player0["position"]["z"] = 500
+		player0["position"]["y"] = GetHeightAtPoint(500 , 500)
+		cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
 
 		printAPI.print('Initialising objects...\n')
 		local GOData = LoadInstances("SaveData/GO_Save.csv", "gameObject")
@@ -299,47 +280,40 @@ function Update()
 
 	local currentGOs = world:GetGameObjects()
 	for i = 1, world:GetGameObjectCount() do
-		if currentGOs[i]["currentHealth"] == nil then
-			local a = currentGOs[i]:Update()
-		end
-		--if currentGOs[i]["alive"] == false then
-		--	currentGOs[i] = nil
-		--end
+		local a = currentGOs[i]:Update()
 	end
 
     player0:update();
 	engineAPI.EndUpdate();
 end
 
-
 function Render()
     renderManagerAPI.beginRender()
 
     renderManagerAPI.setFillMode(wireindex)
 
-	local currentGOs = world:GetGameObjects()
-	for i = 1, world:GetGameObjectCount() do
-		renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
-	end
-
-    local currentTerrainID = world:GetTerrainID()
-	renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
-
-    --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-    --renderManagerAPI.renderFromCamera(camera0,time)
-	--renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
-	renderManagerAPI.renderObject(camera0,time,skybox, 0)
-	--renderManagerAPI.renderObject(camera0,time,cactus, 1)
-	renderManagerAPI.present(camera0)
-
     if(quitting) then
         display2DAPI.drawFullScreen("faces.png")
-    end
+    else
+		if(helpMenu) then
+			display2DAPI.drawFullScreen("rules.png")
+		else
+			local currentGOs = world:GetGameObjects()
+			for i = 1, world:GetGameObjectCount() do
+				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+			end
 
-    if(helpMenu) then
-        display2DAPI.drawFullScreen("rules.png")
-    end
-    --printAPI.print("Render Successful\n");
+			local currentTerrainID = world:GetTerrainID()
+			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+
+			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
+			--renderManagerAPI.renderFromCamera(camera0,time)
+			--renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
+			renderManagerAPI.renderObject(camera0,time,skybox, 0)
+			--renderManagerAPI.renderObject(camera0,time,cactus, 1)
+			renderManagerAPI.present(camera0)
+		end
+	end
 
     renderManagerAPI.endRender()
 end

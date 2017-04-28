@@ -12,11 +12,20 @@ function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.id = newID
 	instance.scale = newScale
 	instance.animation = newAnim
+	instance.boundingBox = {}
 
 
 	setmetatable(instance, gameObject)
 
 	return instance
+end
+
+function gameObject:BBToWorld()
+	local newBB = {}
+    newBB.min = luaVectorUtility.vec3_Sum(self.boundingBox.min,self.position,context.handle)
+    newBB.max = luaVectorUtility.vec3_Sum(self.boundingBox.max,self.position,context.handle)
+
+    return newBB
 end
 
 function gameObject:Update()

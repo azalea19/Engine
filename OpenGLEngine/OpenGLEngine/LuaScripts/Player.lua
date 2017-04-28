@@ -4,10 +4,11 @@
 local Player = 
 {
 	instanceid =0,
-	bbox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
-	pos = {x=0,y=0,z=0},
-	lastpos = {x=0,y=0,z=0},
-	dir = {x=0,y=0,z=0}
+	boundingBox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
+	position = {x=0,y=0,z=0},
+	direction = {x=0,y=0,z=0},
+	camera = {},
+	acceleration = {x=0,y=0,z=0}
 }
 
 Player.__index = Player
@@ -19,38 +20,33 @@ function Player:new(o)
 	return o
 end
 
-
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
 	printAPI.print("Setting player AABB...\n");
-
 	
-	self.bbox.min = {x=self.pos.x+minx,y=self.pos.y+miny,z=self.pos.z+minz}
-	self.bbox.max = {x=self.pos.x+maxx,y=self.pos.y+maxy,z=self.pos.z+maxz}
+	self.boundingBox.min = {x=minx,y=miny,z=minz}
+	self.boundingBox.max = {x=maxx,y=maxy,z=maxz}
+end
 
-	--[[
-	{
-	min = {pos.x+minx, pos.y+miny, pos.z+minz}, 
-	max = {pos.x+maxx, pos.y+maxy, pos.z+maxz}
-	}
-	]]
-	printAPI.print("Player AABB set.\n");
+function Player:BBToWorld()
+	local newBB = {}
+    newBB.min = luaVectorUtility.vec3_Sum(self.boundingBox.min,self.position,context.handle)
+    newBB.max = luaVectorUtility.vec3_Sum(self.boundingBox.max,self.position,context.handle)
 
+    return newBB
 end
 
 function Player:update()
 	-- Start movement update
-	--printAPI.print(1)
-	--printAPI.print("Updating player.\n")
-	self.pos = cameraAPI.getPosition(camera0,context.handle)
+	self.position = cameraAPI.getPosition(camera0,context.handle)
 
 	-- written by liz translated from maddys c++ code
 	turnSpeed = 0.3
 	if(inputManagerAPI.isKeyDown(SDL_SCANCODE_LSHIFT)) then
-	moveSpeed = 0.2
+		moveSpeed = 0.2
 	else
-	moveSpeed = 0.1
+		moveSpeed = 0.1
 	end
-	gravitySpeed = 1 
+	gravitySpeed = 0.01
 	--rotation
 	origYaw = cameraAPI.getYaw(camera0,context.handle)
 	origPitch = cameraAPI.getPitch(camera0,context.handle)
@@ -63,10 +59,8 @@ function Player:update()
 
 	cameraAPI.setYaw(camera0,origYaw + deltaYaw)
 	cameraAPI.setPitch(camera0,origPitch+deltaPitch)
-	--printAPI.print(2)
 
 	--translation   
-
 	oldPos = cameraAPI.getPosition(camera0,context.handle);
 	forward = cameraAPI.forward(camera0,context.handle);
 	right = cameraAPI.right(camera0,context.handle);
@@ -74,12 +68,8 @@ function Player:update()
 
 	translation = luaVectorUtility.vec3_CreateEmpty(context.handle)
 
-	--printAPI.print(translation[1] .. translation[2] .. translation[3] .. "\n")
-	--printAPI.print(3)
-
 	if inputManagerAPI.isKeyDown(SDL_SCANCODE_W) then
 		translation = luaVectorUtility.vec3_Sum(translation,forward,context.handle)
-		--printAPI.print(translation[1] .. translation[2] .. translation[3] .. "\n")
 	end
 
 	if inputManagerAPI.isKeyDown(SDL_SCANCODE_A) then
@@ -104,16 +94,10 @@ function Player:update()
 	end
 	
 	emptyvec = luaVectorUtility.vec3_CreateEmpty(context.handle)
-
-	--printAPI.print("Updating player location...\n")
 	
-	newPos = self.pos
+	newPos = self.position
 	
 	--printAPI.print("Updating player location...\n")
-
-		--printAPI.print(4)
-
-	--if moving
 	if not luaVectorUtility.vec3_Equals(translation,emptyvec) then
 		translation = luaVectorUtility.vec3_Normalize(translation,context.handle)
 	end
@@ -129,50 +113,33 @@ function Player:update()
 
 	newPos.y = math.max(newPos.y, desiredHeight)		
 				
-	--printAPI.print(newPos.x .. "    " .. newPos.z .. "\n")	
 	cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 
-	-- Movement update finished
-
-  -- printAPI.print("Moving player bounding box...\n")
-	--printAPI.print(6)
-
-	self.pos = newPos
+	-- printAPI.print("Moving player bounding box...\n")
+	self.position = newPos
 	
-	--PrintVec3s(self.bbox.min, self.bbox.max)
+	--PrintVec3s(self.boundingBox.min, self.boundingBox.max)
 
 	--value = AABBBAPI.move(emptyv,emptyb,emptyc,context.handle)
-	--printAPI.print(7)
-
-	self.bbox = AABBAPI.move(self.bbox,self.lastpos,self.pos,context.handle)
-	--printAPI.print(8)
-
-	self.lastpos = self.pos
 		 
 	--printAPI.print("Completed player update.\n")
 
 	manyList = {}
 	local currentGOs = world:GetGameObjects()
 
-	--printAPI.print("rows " .. anumRows)
-
     for i = 1, world:GetGameObjectCount() do
-		local bbo = currentGOs[i]["boundingbox"]
+		local bbo = currentGOs[i]:BBToWorld()
 		if bbo ~= nil then
 			manyList[i] = bbo
 		else
 			printAPI.print("nil aabb\n")
-
 		end
     end
-	--printAPI.print(9)
 
-	self.pos = islandCollisionAPI.resolve(self.pos,self.bbox,manyList,world:GetGameObjectCount(),0.01,context.handle)
-	--printAPI.print(9.1)
+
+	self.position = islandCollisionAPI.resolve(self.position,self.boundingBox,manyList,world:GetGameObjectCount(),0.01,context.handle)
 	
-	cameraAPI.setPosition(camera0,self.pos.x,self.pos.y,self.pos.z)
-	--printAPI.print(10)
-
+	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
 end
 
 return Player

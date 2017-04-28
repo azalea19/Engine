@@ -55,9 +55,10 @@ function Scene:SetupInstances()
 
 		objectInstanceAPI.setTranslation(self.objects[i]["id"],self.objects[i]["position"]["x"],self.objects[i]["position"]["y"],self.objects[i]["position"]["z"])
         local nscale = objectInstanceAPI.getScale(gid, context.handle)
-        local nloc = objectInstanceAPI.getTranslation(gid, context.handle)
         local abox = AABBAPI.getAABB(gid, context.handle)
-        self.objects[i]["boundingbox"] = BBToLocal(abox,nscale,nloc)
+		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
+		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
+        self.objects[i]["boundingBox"] = abox
     end
 end
 
@@ -80,9 +81,10 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		objectInstanceAPI.setOrientation(tempID, xRotRand, rotationMod["y"], rotationMod["z"])
 
         local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-        local nloc = objectInstanceAPI.getTranslation(tempID, context.handle)
         local abox = AABBAPI.getAABB(tempID, context.handle)
-        item["boundingbox"] = BBToLocal(abox,nscale,nloc)
+		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
+		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
+		item["boundingBox"] = abox
 		table.insert(self.objects, item)
 	end
 end
