@@ -1,3 +1,6 @@
+local Vector3 = require 'LuaScripts/Vector3'
+local gameObject = require 'LuaScripts/gameObject'
+
 local Scene = {}
 Scene.__index = Scene
 
@@ -5,10 +8,9 @@ function Scene.new(newSceneName, newSceneTerrain, newPlayerStartPos, newPlayerSt
 	local instance = {
 		name = newSceneName,
 		objects = {},
-		terrain = newSceneTerrain,
+		terrainID = newSceneTerrain,
 		playerStartPos = newPlayerStartPos,
 		playerStartDir = newPlayerStartDir,
-		gameObjectCount = 0
 	}
 	
 	setmetatable(instance,Scene)
@@ -21,30 +23,31 @@ function Scene:Update()
 end
 
 function Scene:GetTerrainID()
-	return self.terrain["id"]
+	return self.terrainID
 end
 
 function Scene:AddInstances(data)
-	local numRows = 0
-	for k,v in next, gameObjects do 
-		numRows = numRows + 1
-	end
-
-	for i = 1,numRows do
-		table.insert(self.objects, data[i])
-		self.gameObjectCount = self.gameObjectCount + 1
+	if(self:GetGameObjectCount() <= 0) then
+		self.objects = data
+	else
+		for i = 1,#data do
+			table.insert(self.objects, data[i])
+		end
 	end
 end
 
-function Scene:RemoveInstances(data)
-	for i = 1,self.gameObjectCount do
+function Scene:AddInstance(data)
+	table.insert(self.objects, data)
+end
+
+function Scene:RemoveInstances()
+	for i = 1,self:GetGameObjectCount() do
 		self.objects[i] = nil
-		self.gameObjectCount = self.gameObjectCount - 1
 	end
 end
 
 function Scene:SetupInstances()
-	for i = 1, self.gameObjectCount do
+	for i = 1, self:GetGameObjectCount() do
 		if(self.objects[i]["position"]["y"] == 0) then
 			self.objects[i]["position"]["y"] = GetHeightAtPoint(self.objects[i]["position"]["x"] , self.objects[i]["position"]["z"])
 		end
@@ -56,6 +59,10 @@ function Scene:SetupInstances()
         local abox = AABBAPI.getAABB(gid, context.handle)
         self.objects[i]["boundingbox"] = BBToLocal(abox,nscale,nloc)
     end
+end
+
+function Scene:GetGameObjectCount()
+	return #self.objects
 end
 
 function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
@@ -77,7 +84,6 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
         local abox = AABBAPI.getAABB(tempID, context.handle)
         item["boundingbox"] = BBToLocal(abox,nscale,nloc)
 		table.insert(self.objects, item)
-		self.gameObjectCount = self.gameObjectCount + 1
 	end
 end
 

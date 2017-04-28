@@ -1,6 +1,6 @@
 
 local gameObject = {}
-gameObject.__index = character
+gameObject.__index = gameObject
 
 function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim, newID)
 	local instance = {}	
@@ -12,9 +12,15 @@ function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.id = newID
 	instance.scale = newScale
 	instance.animation = newAnim
+
+
 	setmetatable(instance, gameObject)
 
 	return instance
+end
+
+function gameObject:Update()
+	return self.id
 end
 
 function gameObject:getPos()

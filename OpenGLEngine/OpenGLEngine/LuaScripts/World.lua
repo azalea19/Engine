@@ -2,10 +2,10 @@
 local World = {}
 World.__index = World
 
-function World.new(newPlayer, newScene)
+function World.new(newPlayer)
 	local instance = {
 		Player = newPlayer,
-		scenes = newScene,
+		scenes = {},
 		currentScene = 1
 	}    
 	  
@@ -16,7 +16,7 @@ end
 function World:enterScene(sceneToEnter)
 	for i = 1, #self.scenes do
 		if(self.scenes[i]["name"] == sceneToEnter) then
-			currentScene = i
+			self.currentScene = i
 		end
 	end
 end
@@ -25,28 +25,40 @@ function World:Update()
 
 end
 	
+function World:GetScene()
+	return self.scenes[self.currentScene]
+end
+
 function World:AddScene(newScene)
-	table.insert(self.scenes, newScene)
+	self.scenes[#self.scenes + 1] = newScene
 end
 
 function World:GetGameObjects()
-	return self.scenes[currentScene]["objects"]
+	return self.scenes[self.currentScene]["objects"]
 end
 
 function World:AddInstances(data)
-	self.scenes[currentScene]:AddInstances(data)
+	self.scenes[self.currentScene]:AddInstances(data)
+end
+
+function World:AddInstance(newInstance)
+	self.scenes[self.currentScene]:AddInstance(newInstance)
 end
 
 function World:RemoveInstances()
-	self.scenes[currentScene]:RemoveInstances()
+	self.scenes[self.currentScene]:RemoveInstances()
 end
 
 function World:GetTerrainID()
-	return self.scenes[currentScene]:GetTerrainID()
+	return self.scenes[self.currentScene]:GetTerrainID()
 end
 
 function World:GetGameObjectCount()
-	return self.scenes[currentScene]["gameObjectCount"]
+	return self.scenes[self.currentScene]:GetGameObjectCount()
+end
+
+function World:SetupInstances()
+	self.scenes[self.currentScene]:SetupInstances()
 end
 
 return World

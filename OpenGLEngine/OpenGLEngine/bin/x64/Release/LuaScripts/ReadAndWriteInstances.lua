@@ -26,66 +26,66 @@ function SaveInstances(filePath, data, fileType)
 
 	for i = 1, numRows do
 		if(fileType == "gameObject") then
-			if gameObjects[i]["currentHealth"] == nil then
+			if data[i]["currentHealth"] == nil then
 				total = total + 1
-				saveTable[#saveTable + 1] =  gameObjects[i]["name"] 
+				saveTable[#saveTable + 1] =  data[i]["name"] 
 				saveTable[#saveTable + 1] =  "," 
-				saveTable[#saveTable + 1] =  gameObjects[i]["model"]
+				saveTable[#saveTable + 1] =  data[i]["model"]
 				saveTable[#saveTable + 1] =  "," 
-				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["x"]
+				saveTable[#saveTable + 1] =  data[i]["position"]["x"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["y"]
+				saveTable[#saveTable + 1] =  data[i]["position"]["y"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["position"]["z"]
+				saveTable[#saveTable + 1] =  data[i]["position"]["z"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["x"]
+				saveTable[#saveTable + 1] =  data[i]["direction"]["x"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["y"]
+				saveTable[#saveTable + 1] =  data[i]["direction"]["y"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["z"]
+				saveTable[#saveTable + 1] =  data[i]["direction"]["z"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["x"]
+				saveTable[#saveTable + 1] =  data[i]["scale"]["x"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["y"]
+				saveTable[#saveTable + 1] =  data[i]["scale"]["y"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["z"]
+				saveTable[#saveTable + 1] =  data[i]["scale"]["z"]
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  gameObjects[i]["animation"]
+				saveTable[#saveTable + 1] =  data[i]["animation"]
 				saveTable[#saveTable + 1] =  "\n"
 			end
 		else
 			if(fileType == "npc") then
-				if gameObjects[i]["currentHealth"] ~= nil then
+				if data[i]["currentHealth"] ~= nil then
 					total = total + 1
-					saveTable[#saveTable + 1] =  gameObjects[i]["name"] 
+					saveTable[#saveTable + 1] =  data[i]["name"] 
 					saveTable[#saveTable + 1] =  "," 
-					saveTable[#saveTable + 1] =  gameObjects[i]["model"]
+					saveTable[#saveTable + 1] =  data[i]["model"]
 					saveTable[#saveTable + 1] =  "," 
-					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["x"]
+					saveTable[#saveTable + 1] =  data[i]["position"]["x"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["y"]
+					saveTable[#saveTable + 1] =  data[i]["position"]["y"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["position"]["z"]
+					saveTable[#saveTable + 1] =  data[i]["position"]["z"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["x"]
+					saveTable[#saveTable + 1] =  data[i]["direction"]["x"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["y"]
+					saveTable[#saveTable + 1] =  data[i]["direction"]["y"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["direction"]["z"]
+					saveTable[#saveTable + 1] =  data[i]["direction"]["z"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["x"]
+					saveTable[#saveTable + 1] =  data[i]["scale"]["x"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["y"]
+					saveTable[#saveTable + 1] =  data[i]["scale"]["y"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["scale"]["z"]
+					saveTable[#saveTable + 1] =  data[i]["scale"]["z"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["animation"]
+					saveTable[#saveTable + 1] =  data[i]["animation"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["currentHealth"]
+					saveTable[#saveTable + 1] =  data[i]["currentHealth"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["maxHealth"]
+					saveTable[#saveTable + 1] =  data[i]["maxHealth"]
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  gameObjects[i]["characterName"]
+					saveTable[#saveTable + 1] =  data[i]["characterName"]
 					saveTable[#saveTable + 1] =  "\n"
 				end
 			end
@@ -105,8 +105,6 @@ function SaveInstances(filePath, data, fileType)
 end
 
 function LoadInstances(filePath, fileType)
-	printAPI.print("Loading instances")
-
 	local outputData = {}
 	local n, instanceID, objPos, dir, sca
 	local fileData= read(filePath, ',')
