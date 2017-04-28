@@ -46,7 +46,7 @@ function Player:update()
 	else
 		moveSpeed = 0.1
 	end
-	gravitySpeed = 0.01
+	gravitySpeed = 0
 	--rotation
 	origYaw = cameraAPI.getYaw(camera0,context.handle)
 	origPitch = cameraAPI.getPitch(camera0,context.handle)
@@ -136,8 +136,7 @@ function Player:update()
 		end
     end
 
-
-	self.position = islandCollisionAPI.resolve(self.position,self.boundingBox,manyList,world:GetGameObjectCount(),0.01,context.handle)
+	self.position = islandCollisionAPI.resolve(self.position,self:BBToWorld(),manyList,world:GetGameObjectCount(),0.01,context.handle)
 	
 	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
 end
