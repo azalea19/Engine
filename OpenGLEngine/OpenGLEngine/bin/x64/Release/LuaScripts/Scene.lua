@@ -56,7 +56,7 @@ function Scene:SetupInstances()
 		objectInstanceAPI.setTranslation(self.objects[i]["id"],self.objects[i]["position"]["x"],self.objects[i]["position"]["y"],self.objects[i]["position"]["z"])
         local nscale = objectInstanceAPI.getScale(gid, context.handle)
         local abox = AABBAPI.getAABB(gid, context.handle)
-		--printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
+		
 		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
 		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
 
@@ -73,7 +73,7 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		local xRand = math.random(5, terrainSizeX - 5)
 		local zRand = math.random(5, terrainSizeY - 5)
 		local xRotRand = math.random(360)
-		local yRand = 0 --GetHeightAtPoint(xRand , zRand)
+		local yRand = GetHeightAtPoint(xRand , zRand)
 		local tempID = luaObjInstManager.addNewInstance(type)
 		local objPosTemp = Vector3.new(xRand, yRand, zRand )
 		local dirTemp = Vector3.new(xRotRand, 0, 0)
@@ -85,8 +85,10 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		objectInstanceAPI.setAnimation(tempID,0)
 		renderManagerAPI.addObject(tempID)
 
+
         local nscale = objectInstanceAPI.getScale(tempID, context.handle)
         local abox = AABBAPI.getAABB(tempID, context.handle)
+		printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
 		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
 		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
 		item["boundingBox"] = abox

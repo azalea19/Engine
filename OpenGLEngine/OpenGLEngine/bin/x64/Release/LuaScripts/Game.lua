@@ -82,7 +82,7 @@ end
 	
 function LoadAssets()
 	printAPI.print('Loading Models...\n')
-	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	--modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	--modelLibraryAPI.addModel("Horse","Assets/Models/Horse/horse.3ds",false)
 	--modelLibraryAPI.addModel("Drone","Assets/Models/Drone/PA_drone.fbx",false)
 	--modelLibraryAPI.addModel("Bomber","Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
@@ -99,6 +99,7 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Airship","Assets/Models/Airship/airship.lwo",false)
 	--modelLibraryAPI.addModel("Cart","Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
 	--modelLibraryAPI.addModel("Saloon","Assets/Models/Saloon/saloon exterior-interior.obj",false)
+	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Alfred.obj",false)
 	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
@@ -107,7 +108,7 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 
 	printAPI.print('Loading Skybox...\n')
-	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
+
 end
 
 
@@ -139,24 +140,15 @@ function Initialize()
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
 
-	printAPI.print('Initialising terrain...\n')
-	skybox = luaObjInstManager.addNewInstance("Skybox")
-	objectInstanceAPI.setTranslation(skybox, 0,0,0);
-	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
+	--test = luaObjInstManager.addNewInstance("Bob")
+	--objectInstanceAPI.setTranslation(test, 0,0,0);
+    --local abox = AABBAPI.getAABB(test, context.handle)
+	--printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
+
+	--Works
+
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-
-    printAPI.print('Initialising camera...\n')
-    camera0 = cameraAPI.addNewInstance()
-    cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
-
-    printAPI.print('Initialising rendermanager...\n')
-    renderManagerAPI.initialise()
-
-    printAPI.print('Initialising player...\n')
-	player0 = Player:new()
-	cameraAPI.setPosition(camera0,0,0,0)
-    player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
 	printAPI.print('Initialising Scenes...\n')
 	local GOData = LoadInstances("SaveData/GO_Data.csv", "gameObject")
@@ -172,6 +164,66 @@ function Initialize()
 	scene:SpawnRandomObjects("Bob", a, b,100)
 	world = World.new(player0)
 	world:AddScene(scene)
+
+	printAPI.print('Initialising terrain...\n')
+
+
+
+	skybox = luaObjInstManager.addNewInstance("Skybox")
+
+	--[[test = {}
+	for k = 0, 50 do
+		local xRand = math.random(5, terrainSizeX - 5)
+		local zRand = math.random(5, terrainSizeY - 5)
+		local xRotRand = math.random(360)
+		local yRand = GetHeightAtPoint(xRand , zRand)
+			--test = luaObjInstManager.addNewInstance("Bob")
+		tempID = luaObjInstManager.addNewInstance("Bob")
+		local objPosTemp = Vector3.new(xRand, yRand, zRand )
+		local dirTemp = Vector3.new(xRotRand, 0, 0)
+
+		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, b, 0, tempID)
+		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
+
+        local nscale = objectInstanceAPI.getScale(tempID, context.handle)
+        local abox = AABBAPI.getAABB(tempID, context.handle)
+		printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
+		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
+		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
+		item["boundingBox"] = abox
+		table.insert(test, item)
+	end]]
+
+	--wont work
+
+	objectInstanceAPI.setTranslation(skybox, 0,0,0);
+
+	--wont work
+
+	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
+
+	--wont work
+
+	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
+	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
+
+	--Wont work
+
+    printAPI.print('Initialising camera...\n')
+    camera0 = cameraAPI.addNewInstance()
+    cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
+
+
+
+    printAPI.print('Initialising rendermanager...\n')
+    renderManagerAPI.initialise()
+
+    printAPI.print('Initialising player...\n')
+	player0 = Player:new()
+	cameraAPI.setPosition(camera0,0,0,0)
+    player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
+
+	--test = luaObjInstManager.addNewInstance("Bob")
 
     printAPI.print('Initialization finished.\n')
 end
@@ -302,9 +354,11 @@ function Render()
 			for i = 1, world:GetGameObjectCount() do
 				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
 			end
-
+			--for i = 1, #test do
+			--	renderManagerAPI.renderObject(camera0,time,test[i]["id"], 1)
+			--end
 			local currentTerrainID = world:GetTerrainID()
-			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+			--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
 			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
 			--renderManagerAPI.renderFromCamera(camera0,time)
