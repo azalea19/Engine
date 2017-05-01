@@ -19,6 +19,7 @@ local World = require 'LuaScripts/World'
 require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
+require 'LuaScripts/Controls'
 
 OPEN_GL = 0
 
@@ -29,23 +30,9 @@ terrainSizeX = 1024
 terrainSizeY = 1024
 heightMapSize = 1024
 heightMapHeight = 100
-
---SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
-SDL_SCANCODE_W = 26
-SDL_SCANCODE_A = 4
-SDL_SCANCODE_P = 19
-SDL_SCANCODE_S = 22
-SDL_SCANCODE_E = 8
-SDL_SCANCODE_H = 11
-SDL_SCANCODE_D = 7
-SDL_SCANCODE_K = 14
-SDL_SCANCODE_L = 15
-SDL_SCANCODE_ESCAPE = 41
-SDL_SCANCODE_Q = 20
-SDL_SCANCODE_Z = 29
-SDL_SCANCODE_X = 27
-SDL_SCANCODE_M = 16
-SDL_SCANCODE_LSHIFT = 225
+time = 0
+lastTime = 0
+deltaTime = 0
 
 function Run()
 	Initialize()
@@ -147,9 +134,6 @@ function Initialize()
 
 	--Works
 
-	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
-	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-
 	printAPI.print('Initialising Scenes...\n')
 	local GOData = LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	local NPCData = LoadInstances("SaveData/NPC_Data.csv", "npc")
@@ -163,36 +147,19 @@ function Initialize()
 	scene:SetupInstances()
 	scene:SpawnRandomObjects("Bob", a, b,100)
 	world = World.new(player0)
-	world:AddScene(scene)
 
 	printAPI.print('Initialising terrain...\n')
 
+	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 
+	--wont work
 
+	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
+	scene:SetTerrain(Terrain01)
+	world:AddScene(scene)
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 
-	--[[test = {}
-	for k = 0, 50 do
-		local xRand = math.random(5, terrainSizeX - 5)
-		local zRand = math.random(5, terrainSizeY - 5)
-		local xRotRand = math.random(360)
-		local yRand = GetHeightAtPoint(xRand , zRand)
-			--test = luaObjInstManager.addNewInstance("Bob")
-		tempID = luaObjInstManager.addNewInstance("Bob")
-		local objPosTemp = Vector3.new(xRand, yRand, zRand )
-		local dirTemp = Vector3.new(xRotRand, 0, 0)
 
-		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, b, 0, tempID)
-		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
-
-        local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-        local abox = AABBAPI.getAABB(tempID, context.handle)
-		printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
-		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
-		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
-		item["boundingBox"] = abox
-		table.insert(test, item)
-	end]]
 
 	--wont work
 
@@ -203,9 +170,6 @@ function Initialize()
 	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
 
 	--wont work
-
-	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
-	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 
 	--Wont work
 
@@ -219,7 +183,7 @@ function Initialize()
     renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
-	player0 = Player:new()
+	player0 = Player:new(camera0)
 	cameraAPI.setPosition(camera0,0,0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
@@ -242,10 +206,11 @@ end
 
 function Update()
     engineAPI.BeginUpdate()
-
+	lastTime = time
     time = timeAPI.elapsedTimeMs()
+	deltaTime = time - lastTime
 
-    local quitIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_X)
+    local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
 	if quitIn then
 		printAPI.print("Quitting - pressed input to quit.\n")
         quitting = true
@@ -257,7 +222,7 @@ function Update()
         end
     end
 
-    local helpIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_M)
+    local helpIn = inputManagerAPI.isKeyDown(Help_Input)
 	if helpIn then
         helpMenu = true
     end
@@ -268,7 +233,7 @@ function Update()
         end
     end
 
-    if(inputManagerAPI.isKeyPressed(SDL_SCANCODE_K)) then
+    if(inputManagerAPI.isKeyPressed(Wireframe_Input)) then
         if(wireindex ==0) then
             wireindex =1
         else
@@ -276,7 +241,7 @@ function Update()
         end
     end
 
-	e = inputManagerAPI.isKeyPressed(SDL_SCANCODE_E)
+	e = inputManagerAPI.isKeyPressed(Use_Input)
 	if e then
 		local newX = player0["position"]["x"] 
 		local newZ = player0["position"]["z"]
@@ -305,13 +270,13 @@ function Update()
 		renderManagerAPI.addObject(tempID)
 	end
 
-	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
+	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
 		local currentGOs = world:GetGameObjects()
 		SaveInstances("SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
 	end
 
-	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
+	if inputManagerAPI.isKeyPressed(Quickload_Input) then
 		local currentScene = world:GetScene()
 
 		currentScene:RemoveInstances()
@@ -354,11 +319,8 @@ function Render()
 			for i = 1, world:GetGameObjectCount() do
 				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
 			end
-			--for i = 1, #test do
-			--	renderManagerAPI.renderObject(camera0,time,test[i]["id"], 1)
-			--end
 			local currentTerrainID = world:GetTerrainID()
-			--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
 			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
 			--renderManagerAPI.renderFromCamera(camera0,time)

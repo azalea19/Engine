@@ -651,5 +651,8 @@
     <None Include="LuaScripts\Scene.lua">
       <Filter>Source\Lua\Scripts</Filter>
     </None>
+    <None Include="LuaScripts\Controls.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

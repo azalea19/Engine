@@ -354,6 +354,7 @@
     <None Include="HDRSplitEffect.frag" />
     <None Include="HDRSplitEffect.vert" />
     <None Include="LuaScripts\AABoundingBox.lua" />
+    <None Include="LuaScripts\Controls.lua" />
     <None Include="LuaScripts\FileIO.lua" />
     <None Include="LuaScripts\Game.lua" />
     <None Include="LuaScripts\gameObject.lua" />

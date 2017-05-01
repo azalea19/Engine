@@ -3,18 +3,17 @@ local gameObject = {}
 gameObject.__index = gameObject
 
 function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim, newID)
-	local instance = {}	
+	local instance = {
+		model = newModel,
+		position = newPos,
+		direction = newDir,
+		name = newName,
+		id = newID,
+		scale = newScale,
+		animation = newAnim,
+		boundingBox = {}
+	}	
 	
-	instance.model = newModel
-	instance.position = newPos
-	instance.direction = newDir
-	instance.name = newName
-	instance.id = newID
-	instance.scale = newScale
-	instance.animation = newAnim
-	instance.boundingBox = {}
-
-
 	setmetatable(instance, gameObject)
 
 	return instance

@@ -4,11 +4,11 @@ local gameObject = require 'LuaScripts/gameObject'
 local Scene = {}
 Scene.__index = Scene
 
-function Scene.new(newSceneName, newSceneTerrain, newPlayerStartPos, newPlayerStartDir)
+function Scene.new(newSceneName, newPlayerStartPos, newPlayerStartDir)
 	local instance = {
 		name = newSceneName,
 		objects = {},
-		terrainID = newSceneTerrain,
+		terrainID = 0,
 		playerStartPos = newPlayerStartPos,
 		playerStartDir = newPlayerStartDir,
 	}
@@ -16,6 +16,10 @@ function Scene.new(newSceneName, newSceneTerrain, newPlayerStartPos, newPlayerSt
 	setmetatable(instance,Scene)
 	
 	return instance
+end
+
+function Scene:SetTerrain(newTerrainID)
+	self.terrainID = newTerrainID
 end
 
 function Scene:Update()

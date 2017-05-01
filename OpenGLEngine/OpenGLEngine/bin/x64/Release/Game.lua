@@ -30,9 +30,6 @@ terrainSizeX = 1024
 terrainSizeY = 1024
 heightMapSize = 1024
 heightMapHeight = 100
-time = 0
-lastTime = 0
-deltaTime = 0
 
 function Run()
 	Initialize()
@@ -206,11 +203,10 @@ end
 
 function Update()
     engineAPI.BeginUpdate()
-	lastTime = time
-    time = timeAPI.elapsedTimeMs()
-	deltaTime = time - lastTime
 
-    local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
+    time = timeAPI.elapsedTimeMs()
+
+    local quitIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_X)
 	if quitIn then
 		printAPI.print("Quitting - pressed input to quit.\n")
         quitting = true
@@ -222,7 +218,7 @@ function Update()
         end
     end
 
-    local helpIn = inputManagerAPI.isKeyDown(Help_Input)
+    local helpIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_M)
 	if helpIn then
         helpMenu = true
     end
@@ -233,7 +229,7 @@ function Update()
         end
     end
 
-    if(inputManagerAPI.isKeyPressed(Wireframe_Input)) then
+    if(inputManagerAPI.isKeyPressed(SDL_SCANCODE_K)) then
         if(wireindex ==0) then
             wireindex =1
         else
@@ -241,7 +237,7 @@ function Update()
         end
     end
 
-	e = inputManagerAPI.isKeyPressed(Use_Input)
+	e = inputManagerAPI.isKeyPressed(SDL_SCANCODE_E)
 	if e then
 		local newX = player0["position"]["x"] 
 		local newZ = player0["position"]["z"]
@@ -270,13 +266,13 @@ function Update()
 		renderManagerAPI.addObject(tempID)
 	end
 
-	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
+	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
 		local currentGOs = world:GetGameObjects()
 		SaveInstances("SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
 		SaveInstances("SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
 	end
 
-	if inputManagerAPI.isKeyPressed(Quickload_Input) then
+	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
 		local currentScene = world:GetScene()
 
 		currentScene:RemoveInstances()
