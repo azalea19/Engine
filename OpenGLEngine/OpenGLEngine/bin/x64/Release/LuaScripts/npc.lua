@@ -1,4 +1,5 @@
 local gameObject = require 'LuaScripts/gameObject'
+--local gameObject = require 'gameObject'
 
 local npc = {}
 npc.__index = npc
@@ -18,10 +19,19 @@ function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newID, ne
 	instance.scale = newScale
 	instance.animation = newAnim
 	instance.alive = true
+	instance.boundingBox = {}
 	
 	setmetatable(instance, npc)
 
 	return instance
+end
+
+function npc:BBToWorld()
+	local newBB = {}
+    newBB.min = luaVectorUtility.vec3_Sum(self.boundingBox.min,self.position,context.handle)
+    newBB.max = luaVectorUtility.vec3_Sum(self.boundingBox.max,self.position,context.handle)
+
+    return newBB
 end
 
 function npc:Update()

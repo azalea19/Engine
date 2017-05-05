@@ -1,3 +1,14 @@
+--[[local Vector3 = require 'Vector3'
+local gameObject = require 'gameObject'
+local AABoundingBox = require 'AABoundingBox'
+local npc = require 'npc'
+local Player = require 'Player'
+local Scene = require 'Scene'
+local World = require 'World'
+require 'FileIO'
+require 'ReadAndWriteInstances'
+require 'Terrain'
+]]
 local Vector3 = require 'LuaScripts/Vector3'
 local gameObject = require 'LuaScripts/gameObject'
 local AABoundingBox = require 'LuaScripts/AABoundingBox'
@@ -8,34 +19,20 @@ local World = require 'LuaScripts/World'
 require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
+require 'LuaScripts/Controls'
 
 OPEN_GL = 0
 
 gameObjects = {}
+world = {}
 debug = true
 terrainSizeX = 1024
 terrainSizeY = 1024
 heightMapSize = 1024
 heightMapHeight = 100
-
---SDL ScanCode list: https://wiki.libsdl.org/SDLScancodeLookup
-SDL_SCANCODE_W = 26
-SDL_SCANCODE_A = 4
-SDL_SCANCODE_P = 19
-SDL_SCANCODE_S = 22
-SDL_SCANCODE_E = 8
-SDL_SCANCODE_H = 11
-SDL_SCANCODE_D = 7
-SDL_SCANCODE_K = 14
-SDL_SCANCODE_L = 15
-SDL_SCANCODE_ESCAPE = 41
-SDL_SCANCODE_Q = 20
-SDL_SCANCODE_Z = 29
-SDL_SCANCODE_X = 27
-SDL_SCANCODE_M = 16
-
-
-SDL_SCANCODE_LSHIFT = 225
+time = 0
+lastTime = 0
+deltaTime = 0
 
 function Run()
 	Initialize()
@@ -71,8 +68,8 @@ function PrintVec3s(vecc,vecb)
 end
 	
 function LoadAssets()
-
-	modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
+	printAPI.print('Loading Models...\n')
+	--modelLibraryAPI.addModel("Plant","Assets/Models/SmallPlant/SmallPlant.obj",false)
 	--modelLibraryAPI.addModel("Horse","Assets/Models/Horse/horse.3ds",false)
 	--modelLibraryAPI.addModel("Drone","Assets/Models/Drone/PA_drone.fbx",false)
 	--modelLibraryAPI.addModel("Bomber","Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
@@ -89,28 +86,18 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Airship","Assets/Models/Airship/airship.lwo",false)
 	--modelLibraryAPI.addModel("Cart","Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
 	--modelLibraryAPI.addModel("Saloon","Assets/Models/Saloon/saloon exterior-interior.obj",false)
+	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
 	modelLibraryAPI.addModel("Bob","Assets/Models/Alfred.obj",false)
+	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
-
-	--terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/hmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)
-
-		
-	printAPI.print('terrain loaded\n')
-
+	printAPI.print('Loading Terrain...\n')
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)	
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 
-
-	
-	printAPI.print('skybox loaded\n')
-
-	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
-	
-	printAPI.print('cactus loaded\n')
-
-	modelLibraryAPI.addModel("Cactus1","Assets/Models/Cactus1/cactus.obj",false)
+	printAPI.print('Loading Skybox...\n')
 
 end
+
 
 
 function BBToLocal(bb,scalea,loca)
@@ -135,103 +122,75 @@ function Initialize()
 	wireindex =0
 
 	printAPI.print('Creating...\n')
-
 	engineAPI.Initialise(1280,720);
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
-	
-    printAPI.print('Initialising objects...\n')
-	LoadInstances("SaveData/GO_Data.csv", "gameObject")
-	LoadInstances("SaveData/NPC_Data.csv", "npc")
 
-	printAPI.print('Data Loaded...\n')
-	local numRows = 0
-	for k,v in next, gameObjects do 
-		numRows = numRows + 1
-        end
-    printAPI.print('Data Loaded...\n')
+	--test = luaObjInstManager.addNewInstance("Bob")
+	--objectInstanceAPI.setTranslation(test, 0,0,0);
+    --local abox = AABBAPI.getAABB(test, context.handle)
+	--printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
 
-	for i = 1, numRows do
-		if(gameObjects[i]["position"]["Y"] == 0) then
-			gameObjects[i]["position"]["Y"] = GetHeightAtPoint(gameObjects[i]["position"]["X"] , gameObjects[i]["position"]["Z"])
-		end
-        local gid = gameObjects[i]["id"]
+	--Works
 
-		objectInstanceAPI.setTranslation(gameObjects[i]["id"],gameObjects[i]["position"]["X"],gameObjects[i]["position"]["Y"],gameObjects[i]["position"]["Z"])
-	
-        local nscale = objectInstanceAPI.getScale(gid, context.handle)
-        local nloc = objectInstanceAPI.getTranslation(gid, context.handle)
-        local abox = AABBAPI.getAABB(gid, context.handle)
-        gameObjects[i]["boundingbox"] = BBToLocal(abox,nscale,nloc)
+	printAPI.print('Initialising Scenes...\n')
+	local GOData = LoadInstances("SaveData/GO_Data.csv", "gameObject")
+	local NPCData = LoadInstances("SaveData/NPC_Data.csv", "npc")
+	local startPos = Vector3.new(0,0,0)
+	local startDir = Vector3.new(0,0,0)
+	scene = Scene.new("Level1", Terrain01, startPos, startDir)
+	scene:AddInstances(GOData)
+	scene:AddInstances(NPCData)
+	local a = Vector3.new(0,0,0)
+	local b = Vector3.new(1,1,1)
+	scene:SetupInstances()
+	scene:SpawnRandomObjects("Bob", a, b,100)
+	world = World.new(player0)
 
-        -- Set uniform scale for the NPCs
-        --[[
-        if(gameObjects[i]["model"]=="Bob") then
-            --objectInstanceAPI.setRotation(gameObjects[i]["id"],0,-90,0)
-            --objectInstanceAPI.setScale(gameObjects[i]["id"],1,1,1)
-            objectInstanceAPI.setTranslation(gameObjects[i]["id"],nloc.x,nloc.y+2,nloc.z)
-        end
-        ]]
-    end
-    printAPI.print('Data Loaded...\n')
-
-
-	for k = 0, 50 do
-		local xRand = math.random(5, terrainSizeX - 5)
-		local zRand = math.random(5, terrainSizeY - 5)
-		local xRotRand = math.random(360)
-		local yRand = GetHeightAtPoint(xRand , zRand)
-		local tempID = luaObjInstManager.addNewInstance("Plant")
-		local objPosTemp = Vector3.new(xRand, yRand, zRand )
-		local dirTemp = Vector3.new(xRotRand, 0, 0)
-		local scaTemp = Vector3.new(1, 1, 1)
-
-		item = gameObject.new("Plant", "Plant", objPosTemp, dirTemp, scaTemp, 0, tempID)
-        
-		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
-
-        
-        local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-        local nloc = objectInstanceAPI.getTranslation(tempID, context.handle)
-        local abox = AABBAPI.getAABB(tempID, context.handle)
-
-        item["boundingbox"] = BBToLocal(abox,nscale,nloc)
-
-		table.insert(gameObjects, item)
-	end
-
-        	printAPI.print('Data Loaded...\n')
-
-	skybox = luaObjInstManager.addNewInstance("Skybox")
-	objectInstanceAPI.setTranslation(skybox, 0,0,0);
-	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
-        	printAPI.print('Data Loaded...\n')
-
-	cactus = luaObjInstManager.addNewInstance("Cactus1")
-	objectInstanceAPI.setTranslation(cactus, 15,45,15)
 	printAPI.print('Initialising terrain...\n')
 
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
+
+	--wont work
+
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-    
-    printAPI.print('Initialising AABBs...\n')
+	scene:SetTerrain(Terrain01)
+	world:AddScene(scene)
+	skybox = luaObjInstManager.addNewInstance("Skybox")
+
+
+
+	--wont work
+
+	objectInstanceAPI.setTranslation(skybox, 0,0,0);
+
+	--wont work
+
+	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
+
+	--wont work
+
+	--Wont work
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
     cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
 
+
+
     printAPI.print('Initialising rendermanager...\n')
     renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
-	player0 = Player:new()
+	player0 = Player:new(camera0)
 	cameraAPI.setPosition(camera0,0,0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
+	--test = luaObjInstManager.addNewInstance("Bob")
+
     printAPI.print('Initialization finished.\n')
 end
-
 
 function GameLoop()
 	run = true
@@ -246,14 +205,12 @@ function Finalize()
 end
 
 function Update()
-
     engineAPI.BeginUpdate()
-    	
-    --Lua update here
-    --printAPI.print("Updating...\n");
+	lastTime = time
     time = timeAPI.elapsedTimeMs()
-	
-    local quitIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_X)
+	deltaTime = time - lastTime
+
+    local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
 	if quitIn then
 		printAPI.print("Quitting - pressed input to quit.\n")
         quitting = true
@@ -262,27 +219,21 @@ function Update()
     if(quitting) then
         if inputManagerAPI.isMousePressedLeft() then
             run = false
-
         end
-
     end
-        --printAPI.print("helpmenu1...\n");
 
-    local helpIn = inputManagerAPI.isKeyDown(SDL_SCANCODE_M)
+    local helpIn = inputManagerAPI.isKeyDown(Help_Input)
 	if helpIn then
         helpMenu = true
     end
-            --printAPI.print("helpmenu2...\n");
 
     if helpMenu then
         if inputManagerAPI.isMousePressedLeft() then
             helpMenu = false
-
         end
     end
 
-
-    if(inputManagerAPI.isKeyPressed(SDL_SCANCODE_K)) then
+    if(inputManagerAPI.isKeyPressed(Wireframe_Input)) then
         if(wireindex ==0) then
             wireindex =1
         else
@@ -290,119 +241,95 @@ function Update()
         end
     end
 
-    --[[
-            printAPI.print("e..\n");
-            -- this now crashes - liz
-	e = inputManagerAPI.isKeyPressed(SDL_SCANCODE_E)
+	e = inputManagerAPI.isKeyPressed(Use_Input)
 	if e then
-		local newX = player0["pos"]["x"] 
-		local newZ = player0["pos"]["z"]
+		local newX = player0["position"]["x"] 
+		local newZ = player0["position"]["z"]
 		local newY = GetHeightAtPoint(newX , newZ)
 		local xRotRand = math.random(360)
 		local tempID = luaObjInstManager.addNewInstance("Bob")
 		local objPosTemp = Vector3.new(newX, newY, newZ )
-		local dirTemp = Vector3.new(xRotRand, 270, 0)
-		local scaTemp = Vector3.new(0.1, 0.1, 0.1)
+		local dirTemp = Vector3.new(xRotRand, 0, 0)
+		local scaTemp = Vector3.new(1, 1, 1)
 
 		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
-		table.insert(gameObjects, item)
+
 		objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
-		objectInstanceAPI.setOrientation(tempID,dirTemp.X,dirTemp.Y,dirTemp.Z)
-		objectInstanceAPI.setScale(tempID,scaTemp.X,scaTemp.Y,scaTemp.Z)
+		objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
+		objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
 		objectInstanceAPI.setAnimation(tempID,0)
+
+		local nscale = objectInstanceAPI.getScale(tempID, context.handle)
+
+        local abox = AABBAPI.getAABB(tempID, context.handle)
+		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
+		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
+		item["boundingBox"] = abox
+
+		world:AddInstance(item)
 		renderManagerAPI.addObject(tempID)
 	end
-    ]]
-                --printAPI.print("p..\n");
 
-	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_P) then
-		SaveInstances("SaveData/GO_Save.csv", gameObjects, "gameObject")
-		SaveInstances("SaveData/NPC_Save.csv", gameObjects, "npc")
+	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
+		local currentGOs = world:GetGameObjects()
+		SaveInstances("SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
+		SaveInstances("SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
 	end
 
-                --printAPI.print("l..\n");
-                
-                --[[  -- this now crashes - liz
-	if inputManagerAPI.isKeyPressed(SDL_SCANCODE_L) then
-		local numRows = 0
-		for k,v in next, gameObjects do 
-			numRows = numRows + 1
-		end
+	if inputManagerAPI.isKeyPressed(Quickload_Input) then
+		local currentScene = world:GetScene()
 
-		for i = 1, numRows do
-			 gameObjects[i] = nil
-		end
+		currentScene:RemoveInstances()
 
-		player0["pos"]["x"] = 500
-		player0["pos"]["z"] = 500
-		player0["pos"]["y"] = GetHeightAtPoint(500 , 500)
+		player0["position"]["x"] = 500
+		player0["position"]["z"] = 500
+		player0["position"]["y"] = GetHeightAtPoint(500 , 500)
+		cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
 
 		printAPI.print('Initialising objects...\n')
-		LoadInstances("SaveData/GO_Save.csv", "gameObject")
-		LoadInstances("SaveData/NPC_Save.csv", "npc")
-	end
-    ]]
+		local GOData = LoadInstances("SaveData/GO_Save.csv", "gameObject")
+		local NPCData = LoadInstances("SaveData/NPC_Save.csv", "npc")
 
-    --printAPI.print("checkdeath..\n");
-
-	
-	local numRows = 0
-	for k,v in next, gameObjects do 
-		numRows = numRows + 1
+		world:AddInstances(GOData)
+		world:AddInstances(NPCData)
+		world:SetupInstances()
 	end
 
-	for i = 1, numRows do
-		if gameObjects[i]["currentHealth"] ~= nil then
-			gameObjects[i]:Update()
-			if gameObjects[i]["alive"] == false then
-				gameObjects[i] = nil
-			end
-		end
+	local currentGOs = world:GetGameObjects()
+	for i = 1, world:GetGameObjectCount() do
+		local a = currentGOs[i]:Update()
 	end
-
-        --printAPI.print("playerupdate..\n");
 
     player0:update();
 	engineAPI.EndUpdate();
-        --printAPI.print("update complete..\n");
-
-
 end
-
 
 function Render()
     renderManagerAPI.beginRender()
-    
-    --printAPI.print("Rendering...\n");
 
     renderManagerAPI.setFillMode(wireindex)
 
-	local numRows = 0
-	for k,v in next, gameObjects do 
-		numRows = numRows + 1
-	end
-	for i = 1, numRows do
-		renderManagerAPI.renderObject(camera0,time,gameObjects[i]["id"], 1)
-	end
-
-    
-	renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
-
-    --renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-    --renderManagerAPI.renderFromCamera(camera0,time)
-	renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
-	renderManagerAPI.renderObject(camera0,time,skybox, 0)
-	--renderManagerAPI.renderObject(camera0,time,cactus, 1)
-	renderManagerAPI.present(camera0)
-
     if(quitting) then
         display2DAPI.drawFullScreen("faces.png")
-    end
+    else
+		if(helpMenu) then
+			display2DAPI.drawFullScreen("rules.png")
+		else
+			local currentGOs = world:GetGameObjects()
+			for i = 1, world:GetGameObjectCount() do
+				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+			end
+			local currentTerrainID = world:GetTerrainID()
+			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
-    if(helpMenu) then
-        display2DAPI.drawFullScreen("rules.png")
-    end
-    --printAPI.print("Render Successful\n");
+			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
+			--renderManagerAPI.renderFromCamera(camera0,time)
+			--renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
+			renderManagerAPI.renderObject(camera0,time,skybox, 0)
+			--renderManagerAPI.renderObject(camera0,time,cactus, 1)
+			renderManagerAPI.present(camera0)
+		end
+	end
 
     renderManagerAPI.endRender()
 end
