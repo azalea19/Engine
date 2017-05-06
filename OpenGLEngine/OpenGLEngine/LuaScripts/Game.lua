@@ -26,10 +26,8 @@ OPEN_GL = 0
 gameObjects = {}
 world = {}
 debug = true
-terrainSizeX = 1024
-terrainSizeY = 1024
-heightMapSize = 1024
-heightMapHeight = 100
+loadSmallTestTerrain = true
+
 time = 0
 lastTime = 0
 deltaTime = 0
@@ -91,7 +89,24 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)	
+
+    if loadSmallTestTerrain then
+        hMapPath = "Assets/HeightMaps/heightmap.png"
+        terrainSizeX = 1024
+        terrainSizeY = 1024
+        heightMapSize = 257
+        heightMapHeight = 100
+    else
+        hMapPath = "Assets/HeightMaps/testmap.png"
+        terrainSizeX = 1024
+        terrainSizeY = 1024
+        heightMapSize = 1024
+        heightMapHeight = 100
+    end
+
+
+
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "Assets/Models/Terrain/Terrain.obj", context.handle)	
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 
 	printAPI.print('Loading Skybox...\n')
@@ -319,7 +334,7 @@ function Render()
 			display2DAPI.drawFullScreen("rules.png")
 		else
             -- Draw UI text
-            display2DAPI.DrawTextLua(10,font1path,"Drawn text",10,10,white)
+            display2DAPI.drawText(10,font1path,"Drawn text",10,10,white)
 
             -- Draw object
 			local currentGOs = world:GetGameObjects()

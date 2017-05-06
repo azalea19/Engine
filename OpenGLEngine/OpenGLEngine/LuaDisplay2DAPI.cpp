@@ -30,4 +30,6 @@ void LuaDisplay2DAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "drawFullScreen", DrawFullScreen);
+	pContext->ExposeFunction(luaAPIName, "drawText", DrawTextLua);
+
 }

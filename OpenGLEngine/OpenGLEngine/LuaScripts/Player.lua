@@ -130,7 +130,7 @@ function Player:update()
 		self.velocity.y = terminalVelocity
 	end
 
-	printAPI.print(deltaTime .. "\n")
+	--printAPI.print("Delta Time:"..deltaTime .. "\n")
 	newPos = luaVectorUtility.vec3_Sum(oldPos,self.velocity, context.handle)
 	newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
 	newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
