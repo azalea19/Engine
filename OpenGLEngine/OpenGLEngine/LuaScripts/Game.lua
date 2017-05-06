@@ -304,6 +304,9 @@ function Update()
 	engineAPI.EndUpdate();
 end
 
+font1path = "Assets/Fonts/verdanab.ttf"
+white = {x=1,y=1,z=1}
+
 function Render()
     renderManagerAPI.beginRender()
 
@@ -315,6 +318,10 @@ function Render()
 		if(helpMenu) then
 			display2DAPI.drawFullScreen("rules.png")
 		else
+            -- Draw UI text
+            display2DAPI.DrawTextLua(10,font1path,"Drawn text",10,10,white)
+
+            -- Draw object
 			local currentGOs = world:GetGameObjects()
 			for i = 1, world:GetGameObjectCount() do
 				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
@@ -322,14 +329,14 @@ function Render()
 			local currentTerrainID = world:GetTerrainID()
 			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
-			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-			--renderManagerAPI.renderFromCamera(camera0,time)
-			--renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
-			--renderManagerAPI.renderObject(camera0,time,cactus, 1)
 			renderManagerAPI.present(camera0)
 		end
 	end
+
+
+
+
 
     renderManagerAPI.endRender()
 end

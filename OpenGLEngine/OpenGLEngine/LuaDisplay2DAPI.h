@@ -12,7 +12,6 @@
 #include "Texture.h"
 #include "Interface2D.h"
 
-#include "LuaBridge.h"
 
 
 
