@@ -50,24 +50,6 @@ function Scene:RemoveInstances()
 	end
 end
 
-function Scene:SetupInstances()
-	for i = 1, self:GetGameObjectCount() do
-		if(self.objects[i]["position"]["y"] == 0) then
-			self.objects[i]["position"]["y"] = GetHeightAtPoint(self.objects[i]["position"]["x"] , self.objects[i]["position"]["z"]) + 10
-		end
-        local gid = self.objects[i]["id"]
-
-		objectInstanceAPI.setTranslation(self.objects[i]["id"],self.objects[i]["position"]["x"],self.objects[i]["position"]["y"],self.objects[i]["position"]["z"])
-        local nscale = objectInstanceAPI.getScale(gid, context.handle)
-        local abox = AABBAPI.getAABB(gid, context.handle)
-		
-		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
-		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
-
-        self.objects[i]["boundingBox"] = abox
-    end
-end
-
 function Scene:GetGameObjectCount()
 	return #self.objects
 end
@@ -92,9 +74,9 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 
         local nscale = objectInstanceAPI.getScale(tempID, context.handle)
         local abox = AABBAPI.getAABB(tempID, context.handle)
-		printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
-		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
-		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
+		--printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
+		abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
+		abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
 		item["boundingBox"] = abox
 		table.insert(self.objects, item)
 	end

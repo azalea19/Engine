@@ -2,37 +2,70 @@ local gameObject = require 'LuaScripts/gameObject'
 --local gameObject = require 'gameObject'
 
 local npc = {}
-npc.__index = npc
+npc.__index = gameObject
+
+	-- todo What are the expected values/types for these parameters?
+function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth, newCharacterName)
 	
-function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newID, newCurrentHealth, newMaxHealth, newCharacterName)
-	local instance = {}
 	
-	instance.model = newModel
-	instance.position = newPos
-	instance.direction = newDir
+	local instance = gameObject.new(newName,newModel,newPos,newDir,newScale,newAnim)
+	
+
+	instance.dialogue = nil
 	instance.maxHealth = newMaxHealth
 	instance.currentHealth = newCurrentHealth
 	instance.type = newType
-	instance.name = newName
-	instance.id = newID
 	instance.characterName = newCharacterName
-	instance.scale = newScale
-	instance.animation = newAnim
 	instance.alive = true
-	instance.boundingBox = {}
-	
-	setmetatable(instance, npc)
+    instance.hostileToPlayer = false
+    instance.seenPlayer = false
+    instance.alertedToPlayer = false
+    instance.state = idle -- Function to call for to the players state
+    instance.moveSpeed = 0.1
 
+	setmetatable(instance, { __index = gameObject } )
+
+	setmetatable(instance, npc)
+	
 	return instance
 end
 
-function npc:BBToWorld()
-	local newBB = {}
-    newBB.min = luaVectorUtility.vec3_Sum(self.boundingBox.min,self.position,context.handle)
-    newBB.max = luaVectorUtility.vec3_Sum(self.boundingBox.max,self.position,context.handle)
-
-    return newBB
+function npc:makeIdle()
+	self.state = idle
 end
+
+function npc:idle()
+	printAPI.print("Idling...")
+    if (self.hostileToPlayer and self.seenPlayer) then
+        self.state = npc:chasing()
+    end
+end
+
+function npc:chasing()
+
+    self:setPosition(MoveTowards(self.position,player0.position,self.moveSpeed * deltaTime))
+
+end
+
+function npc:setDialogue(dial)
+	self.dialogue = dial
+end
+
+
+function npc:test()
+
+end
+
+function npc:setDialogue(dial)
+	self.dialogue = dial
+end
+--[[
+function npc:Talk(topic)
+    if(topic.questEvent) then
+        questManager.check()
+    end
+end
+]]
 
 function npc:Update()
 	if self.alive == true then
@@ -41,6 +74,8 @@ function npc:Update()
 			--self:Die()
 		end
 	end
+	
+	self.state()
 end
 
 function npc:Die()
@@ -52,6 +87,10 @@ function npc:Die()
 	self.alive = false
 end
 
-setmetatable(npc,{__index = gameObject})
+function npc:SetDialogue(dial)
+	self.dialogue = dial
+end
+
+--setmetatable(npc,{__index = gameObject})
 
 return npc

@@ -114,7 +114,7 @@ function LoadInstances(filePath, fileType)
 		numRows = numRows + 1
 	end
 	for i = 1, numRows do
-		instanceID = luaObjInstManager.addNewInstance(fileData[i][2])
+		--instanceID = luaObjInstManager.addNewInstance(fileData[i][2])
 
 		objpos = Vector3.new(fileData[i][3], fileData[i][4], fileData[i][5])
 		dir = Vector3.new(fileData[i][6], fileData[i][7], fileData[i][8])
@@ -122,19 +122,15 @@ function LoadInstances(filePath, fileType)
 		anim = fileData[i][12]
 
 		if(fileType == "gameObject") then
-			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim, instanceID)
+			n = gameObject.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim)
 		else
 			if(fileType == "npc") then
-				n = npc.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim, instanceID, fileData[i][13], fileData[i][14], fileData[i][15])
+				n = npc.new(fileData[i][1], fileData[i][2], objpos, dir, sca, anim, fileData[i][13], fileData[i][14], fileData[i][15])
 			end
 		end
 		
 		table.insert(outputData, n)
-		objectInstanceAPI.setTranslation(instanceID,objpos.x,objpos.y,objpos.z)
-		objectInstanceAPI.setOrientation(instanceID,dir.x,dir.y,dir.z)
-		objectInstanceAPI.setScale(instanceID,sca.x,sca.y,sca.z)
-		objectInstanceAPI.setAnimation(instanceID,0)
-		renderManagerAPI.addObject(instanceID)
+		
 	end
 	
 	if(fileType == "gameObject") then

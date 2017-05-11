@@ -16,10 +16,15 @@ local npc = require 'LuaScripts/npc'
 local Player = require 'LuaScripts/Player'
 local Scene = require 'LuaScripts/Scene'
 local World = require 'LuaScripts/World'
+
+--local QuestManager = require 'LuaScripts/QuestManager'
+require 'LuaScripts/Dialogue'
+
 require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
 require 'LuaScripts/Controls'
+
 
 OPEN_GL = 0
 
@@ -31,6 +36,7 @@ loadSmallTestTerrain = true
 time = 0
 lastTime = 0
 deltaTime = 0
+
 
 function Run()
 	Initialize()
@@ -46,7 +52,7 @@ function LoadAPIs()
 	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
 	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
 	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
-    GetAPI(context.handle, 'luaVectorUtility', 'luaVectorUtility')
+    GetAPI(context.handle, 'mmath', 'luaVectorUtility')
     GetAPI(context.handle, 'engineAPI', 'engineAPI')
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
@@ -85,7 +91,7 @@ function LoadAssets()
 	--modelLibraryAPI.addModel("Cart","Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
 	--modelLibraryAPI.addModel("Saloon","Assets/Models/Saloon/saloon exterior-interior.obj",false)
 	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
-	modelLibraryAPI.addModel("Bob","Assets/Models/Alfred.obj",false)
+	modelLibraryAPI.addModel("Bob","Assets/Models/_Imported3D/Characters/PA_Warrior.fbx",false)
 	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
@@ -116,10 +122,10 @@ end
 
 
 function BBToLocal(bb,scalea,loca)
-    bb.min = luaVectorUtility.vec3_Multiply(bb.min,scalea,context.handle)
-    bb.min = luaVectorUtility.vec3_Sum(bb.min,loca,context.handle)
-    bb.max = luaVectorUtility.vec3_Multiply(bb.max,scalea,context.handle)
-    bb.max = luaVectorUtility.vec3_Sum(bb.max,loca,context.handle)
+    bb.min = mmath.vec3_Multiply(bb.min,scalea,context.handle)
+    bb.min = mmath.vec3_Sum(bb.min,loca,context.handle)
+    bb.max = mmath.vec3_Multiply(bb.max,scalea,context.handle)
+    bb.max = mmath.vec3_Sum(bb.max,loca,context.handle)
 
     if bb == null then
         printAPI.print('ERROR Tried to get null local AABB\n')
@@ -157,11 +163,45 @@ function Initialize()
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
+
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
-	scene:SetupInstances()
+
+
+    emptyVec = mmath.vec3_CreateEmpty(context.handle)
+    scale = {x=100,y=100,z=100}
+
+    NPC01 = npc.new("Bob1","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human")
+    local diag = Dialogue.new()
+    local topic01 = Topic.new("Greeting")
+
+    local mylines = {}
+    mylines[1] = "line 1\n"
+    mylines[2] = "line 2\n"
+    mylines[3] = "line 3\n"
+    --printAPI.print(mylines[1])
+    topic01:setLines(mylines)
+
+    diag:addTopic(topic01)
+    NPC01.dialogue = diag
+
+    NPC01:test()
+    --NPC01.state = 
+
+
+    scene:AddInstance(NPC01) 
+
+
 	scene:SpawnRandomObjects("Bob", a, b,100)
+
+
+    emptyVec = {x=0,y=0,z=0}
+    scale = {x=10,y=10,z=10}
+    
+
 	world = World.new(player0)
+
+
 
 	printAPI.print('Initialising terrain...\n')
 
@@ -173,8 +213,6 @@ function Initialize()
 	scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
 	skybox = luaObjInstManager.addNewInstance("Skybox")
-
-
 
 	--wont work
 
@@ -220,6 +258,8 @@ function Finalize()
 end
 
 function Update()
+	--printAPI.print("Update begun\n")
+
     engineAPI.BeginUpdate()
 	lastTime = time
     time = timeAPI.elapsedTimeMs()
@@ -255,34 +295,16 @@ function Update()
             wireindex =0
         end
     end
+    --printAPI.print("Processing inputs\n")
 
 	e = inputManagerAPI.isKeyPressed(Use_Input)
 	if e then
-		local newX = player0["position"]["x"] 
-		local newZ = player0["position"]["z"]
-		local newY = GetHeightAtPoint(newX , newZ)
-		local xRotRand = math.random(360)
-		local tempID = luaObjInstManager.addNewInstance("Bob")
-		local objPosTemp = Vector3.new(newX, newY, newZ )
-		local dirTemp = Vector3.new(xRotRand, 0, 0)
-		local scaTemp = Vector3.new(1, 1, 1)
+        printAPI.print("Talking to Bob.")
 
-		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
-
-		objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
-		objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
-		objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
-		objectInstanceAPI.setAnimation(tempID,0)
-
-		local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-
-        local abox = AABBAPI.getAABB(tempID, context.handle)
-		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
-		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
-		item["boundingBox"] = abox
-
-		world:AddInstance(item)
-		renderManagerAPI.addObject(tempID)
+        for i=0,NPC01.dialogue.topics["Greeting"].size do
+            printAPI.print(NPC01.dialogue.topics["Greeting"].textLines[i])
+        end
+        
 	end
 
 	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
@@ -310,18 +332,86 @@ function Update()
 		world:SetupInstances()
 	end
 
+    if debug then
+        if inputManagerAPI.isKeyPressed(TestInput1) then
+        
+            TestDialogueTextGet()
+
+	    end
+    
+        if inputManagerAPI.isKeyPressed(TestInput2) then
+        
+            TestChangeNPCState()
+
+	    end
+
+    
+        if inputManagerAPI.isKeyPressed(TestInput3) then
+            -- spawn bob
+            local newX = player0["position"]["x"] 
+		    local newZ = player0["position"]["z"]
+		    local newY = GetHeightAtPoint(newX , newZ)
+		    local xRotRand = math.random(360)
+		    local tempID = luaObjInstManager.addNewInstance("Bob")
+		    local objPosTemp = Vector3.new(newX, newY, newZ )
+		    local dirTemp = Vector3.new(xRotRand, 0, 0)
+		    local scaTemp = Vector3.new(1, 1, 1)
+
+		    local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
+
+		    objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
+		    objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
+		    objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
+		    objectInstanceAPI.setAnimation(tempID,0)
+
+		    local nscale = objectInstanceAPI.getScale(tempID, context.handle)
+
+            local abox = AABBAPI.getAABB(tempID, context.handle)
+		    abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
+		    abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
+		    item["boundingBox"] = abox
+
+		    world:AddInstance(item)
+		    renderManagerAPI.addObject(tempID)
+
+	    end
+    
+        if inputManagerAPI.isKeyPressed(TestInput4) then
+        
+            TestDialogueTextGet()
+
+	    end
+
+    end
+    --printAPI.print("Updating gameobjects\n")
+
+
 	local currentGOs = world:GetGameObjects()
 	for i = 1, world:GetGameObjectCount() do
+        --printAPI.print(currentGOs[i].name .. "\n")
 		local a = currentGOs[i]:Update()
 	end
+    --printAPI.print("Updating player\n")
 
     player0:update();
 	engineAPI.EndUpdate();
+    --printAPI.print("Update complete\n")
+
 end
 
 font1path = "Assets/Fonts/verdanab.ttf"
 white = {x=1,y=1,z=1}
 
+
+function TestChangeNPCState()
+    NPC01.state = chasing
+end
+
+function TestDialogueTextGet()
+    printAPI.print(NPC01.dialogue.topics["Greeting"].textLines[1])
+    printAPI.print(NPC01.dialogue.topics["Greeting"]:getLine(2))
+    printAPI.print(NPC01.dialogue.topics["Greeting"]:getLine(3))
+end
 function Render()
     renderManagerAPI.beginRender()
 
@@ -333,8 +423,6 @@ function Render()
 		if(helpMenu) then
 			display2DAPI.drawFullScreen("rules.png")
 		else
-            -- Draw UI text
-            display2DAPI.drawText(10,font1path,"Drawn text",10,10,white)
 
             -- Draw object
 			local currentGOs = world:GetGameObjects()
@@ -346,11 +434,12 @@ function Render()
 
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
 			renderManagerAPI.present(camera0)
+
+            
+            -- Draw UI text
+            display2DAPI.drawText(100,font1path,"Drawn text",300,300,white)
 		end
 	end
-
-
-
 
 
     renderManagerAPI.endRender()

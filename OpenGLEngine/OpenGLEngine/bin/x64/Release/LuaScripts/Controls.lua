@@ -271,4 +271,8 @@ Menu_Input = SDL_SCANCODE_ESCAPE
 Wireframe_Input = SDL_SCANCODE_K
 Ascend_Input = SDL_SCANCODE_Q
 Descend_Input = SDL_SCANCODE_Z
+TestInput1 = SDL_SCANCODE_Y
+TestInput2 = SDL_SCANCODE_U
+TestInput3 = SDL_SCANCODE_J
+TestInput4 = SDL_SCANCODE_H
 

@@ -26,10 +26,8 @@ OPEN_GL = 0
 gameObjects = {}
 world = {}
 debug = true
-terrainSizeX = 1024
-terrainSizeY = 1024
-heightMapSize = 1024
-heightMapHeight = 100
+loadSmallTestTerrain = true
+
 time = 0
 lastTime = 0
 deltaTime = 0
@@ -91,7 +89,24 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)	
+
+    if loadSmallTestTerrain then
+        hMapPath = "Assets/HeightMaps/heightmap.png"
+        terrainSizeX = 1024
+        terrainSizeY = 1024
+        heightMapSize = 257
+        heightMapHeight = 100
+    else
+        hMapPath = "Assets/HeightMaps/testmap.png"
+        terrainSizeX = 1024
+        terrainSizeY = 1024
+        heightMapSize = 1024
+        heightMapHeight = 100
+    end
+
+
+
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "Assets/Models/Terrain/Terrain.obj", context.handle)	
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 
 	printAPI.print('Loading Skybox...\n')
@@ -146,7 +161,21 @@ function Initialize()
 	local b = Vector3.new(1,1,1)
 	scene:SetupInstances()
 	scene:SpawnRandomObjects("Bob", a, b,100)
+
+
+    emptyVec = {x=0,y=0,z=0}
+    scale = {x=100,y=100,z=100}
+
+    NPC01 = npc.new("Bob1","Bob",emptyVec,emptyVec,scale,0,0,100,100,"Bob the Human")
+
+
+
+    --NPC01inst = 
+
+
 	world = World.new(player0)
+
+
 
 	printAPI.print('Initialising terrain...\n')
 
@@ -158,8 +187,6 @@ function Initialize()
 	scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
 	skybox = luaObjInstManager.addNewInstance("Skybox")
-
-
 
 	--wont work
 
@@ -243,6 +270,13 @@ function Update()
 
 	e = inputManagerAPI.isKeyPressed(Use_Input)
 	if e then
+        printAPI.print("Talking to Bob.")
+
+        for i=0,NPC01.dialogue.topics["Greeting"].size do
+            printAPI.print(NPC01.dialogue.topics["Greeting"].textLines[i])
+        end
+
+    --[[
 		local newX = player0["position"]["x"] 
 		local newZ = player0["position"]["z"]
 		local newY = GetHeightAtPoint(newX , newZ)
@@ -268,6 +302,7 @@ function Update()
 
 		world:AddInstance(item)
 		renderManagerAPI.addObject(tempID)
+        ]]
 	end
 
 	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
@@ -304,6 +339,10 @@ function Update()
 	engineAPI.EndUpdate();
 end
 
+font1path = "Assets/Fonts/verdanab.ttf"
+white = {x=1,y=1,z=1}
+
+
 function Render()
     renderManagerAPI.beginRender()
 
@@ -315,6 +354,10 @@ function Render()
 		if(helpMenu) then
 			display2DAPI.drawFullScreen("rules.png")
 		else
+            -- Draw UI text
+            display2DAPI.drawText(100,font1path,"Drawn text",300,300,white)
+
+            -- Draw object
 			local currentGOs = world:GetGameObjects()
 			for i = 1, world:GetGameObjectCount() do
 				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
@@ -322,14 +365,11 @@ function Render()
 			local currentTerrainID = world:GetTerrainID()
 			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
-			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-			--renderManagerAPI.renderFromCamera(camera0,time)
-			--renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
-			--renderManagerAPI.renderObject(camera0,time,cactus, 1)
 			renderManagerAPI.present(camera0)
 		end
 	end
+
 
     renderManagerAPI.endRender()
 end
