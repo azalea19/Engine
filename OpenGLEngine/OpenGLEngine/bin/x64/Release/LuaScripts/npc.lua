@@ -1,8 +1,9 @@
 local gameObject = require 'LuaScripts/gameObject'
+require 'LuaScripts/3DUtility'
 --local gameObject = require 'gameObject'
 
 local npc = {}
-npc.__index = gameObject
+npc.__index = npc
 
 	-- todo What are the expected values/types for these parameters?
 function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth, newCharacterName)
@@ -20,30 +21,43 @@ function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newCurren
     instance.hostileToPlayer = false
     instance.seenPlayer = false
     instance.alertedToPlayer = false
-    instance.state = idle -- Function to call for to the players state
+    instance.state = nil -- Function to call for to the players state
     instance.moveSpeed = 0.1
 
-	setmetatable(instance, { __index = gameObject } )
+	--printAPI.print("Testing NPC instantiate bounding box: " .. instance.boundingBox.min.x .. "\n")
+	--setmetatable(instance, { __index = gameObject } )
 
 	setmetatable(instance, npc)
 	
 	return instance
 end
 
-function npc:makeIdle()
-	self.state = idle
-end
+	setmetatable(npc,{__index = gameObject})
 
-function npc:idle()
-	printAPI.print("Idling...")
-    if (self.hostileToPlayer and self.seenPlayer) then
-        self.state = npc:chasing()
+
+function idle(anpc)
+	debugPrint("NPC is Idling... ")
+    if (anpc.hostileToPlayer and anpc.seenPlayer) then
+        anpc.state = chasing
     end
 end
 
-function npc:chasing()
-
-    self:setPosition(MoveTowards(self.position,player0.position,self.moveSpeed * deltaTime))
+function chasing(anpc)
+	debugPrint("NPC is Chasing... ")
+	if player0 ~= nil then
+		anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
+	else
+		printAPI.print("Warning: Player is nil\n")
+	end
+end
+function npc:makeIdle()
+	printAPI.print("Made NPC idle.")
+	self.state = idle
+end
+function npc:makeChasing()
+	debugPrint("Made NPC chase... ")
+	self.state = chasing
+	debugPrint("Success\n")
 
 end
 
@@ -51,14 +65,6 @@ function npc:setDialogue(dial)
 	self.dialogue = dial
 end
 
-
-function npc:test()
-
-end
-
-function npc:setDialogue(dial)
-	self.dialogue = dial
-end
 --[[
 function npc:Talk(topic)
     if(topic.questEvent) then
@@ -74,8 +80,10 @@ function npc:Update()
 			--self:Die()
 		end
 	end
-	
-	self.state()
+	if self.state ~= nil then
+		debugPrint("Running NPC state...")
+		self.state(self)
+	end
 end
 
 function npc:Die()

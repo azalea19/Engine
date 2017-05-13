@@ -18,14 +18,25 @@ end
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
 	printAPI.print("Setting player AABB...\n");
 	
-	self.boundingBox.min = {x=minx,y=miny,z=minz}
-	self.boundingBox.max = {x=maxx,y=maxy,z=maxz}
+	if(boundingBox ~= nil) then
+		self.boundingBox.min = {x=minx,y=miny,z=minz}
+		self.boundingBox.max = {x=maxx,y=maxy,z=maxz}
+	else
+		printAPI.print("Warning: Player bounding box is nil.")
+	end
 end
 
 function Player:BBToWorld()
+	if debugdetail then
+		printAPI.print("Getting player BBToWorld... ")
+	end
 	local newBB = {}
     newBB.min = mmath.vec3_Sum(self.boundingBox.min,self.position,context.handle)
     newBB.max = mmath.vec3_Sum(self.boundingBox.max,self.position,context.handle)
+	
+	if debugdetail then
+		printAPI.print("Got player BBToWorld\n")
+	end
 
     return newBB
 end
@@ -158,11 +169,12 @@ function Player:update()
 	local currentGOs = world:GetGameObjects()
 	--printAPI.print("Resolving player collisions...\n")
 
+	local listCount =0
     for i = 1, world:GetGameObjectCount() do
 		--printAPI.print(i .. "\n")
 		
 		if(currentGOs == nil) then
-		printAPI.print("Warning: Tried to check collisions, but World's GameObjects is nil\n")
+		debugPrint("Warning: Tried to check collisions, but World's GameObjects is nil\n")
 		else
 		
 			--printAPI.print(world:GetGameObjectCount() .. " game objects in scene\n")
@@ -173,17 +185,21 @@ function Player:update()
 			
 			if bbo ~= nil then
 				manyList[i] = bbo
+				listCount = listCount + 1
 			else
 				printAPI.print("nil aabb\n")
 			end
 		end
     end
-	--printAPI.print("Resolving player collisions...\n")
-
-	self.position = islandCollisionAPI.resolve(self.position,self:BBToWorld(),manyList,world:GetGameObjectCount(),0.01,context.handle)
-	
+	debugPrint("Resolving player collisions...\n")
+	if self.boundingBox ~= nil then
+		debugPrint("Resolving player collisions (2)...\n")
+		--manyList[1]["max"] =0
+		self.position = islandCollisionAPI.resolve(self.position,self:BBToWorld(),manyList,listCount,0.01,context.handle)
+	end
+	debugPrint("Resolving player collisions (3)...\n")
 	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
-	--printAPI.print("Finished updating player...\n")
+	debugPrint("Finished updating player...\n")
 
 end
 

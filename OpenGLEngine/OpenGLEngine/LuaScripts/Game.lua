@@ -31,6 +31,7 @@ OPEN_GL = 0
 gameObjects = {}
 world = {}
 debug = true
+debugdetail = true
 loadSmallTestTerrain = true
 
 time = 0
@@ -42,6 +43,12 @@ function Run()
 	Initialize()
 	GameLoop()
 	Finalize()
+end
+
+function debugPrint(string)
+    if debugdetail then
+        printAPI.print(string)
+    end
 end
 
 function LoadAPIs()
@@ -63,11 +70,17 @@ function LoadAPIs()
 
 end
 
-function PrintVec3(veca)
+function printVec3(veca)
     printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
 end
 
-function PrintVec3s(vecc,vecb)
+function printVec3After(string,veca)
+    printAPI.print(string)
+    printVec3(veca)
+
+end
+
+function printVec3s(vecc,vecb)
     printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
 end
 	
@@ -91,7 +104,7 @@ function LoadAssets()
 	--modelLibraryAPI.addModel("Cart","Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
 	--modelLibraryAPI.addModel("Saloon","Assets/Models/Saloon/saloon exterior-interior.obj",false)
 	modelLibraryAPI.addModel("Skybox","Assets/Models/SkyBox/skybox.obj",false)
-	modelLibraryAPI.addModel("Bob","Assets/Models/_Imported3D/Characters/PA_Warrior.fbx",false)
+	modelLibraryAPI.addModel("Bob","Assets/Models/Alfred.obj",false)
 	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
@@ -169,7 +182,7 @@ function Initialize()
 
 
     emptyVec = mmath.vec3_CreateEmpty(context.handle)
-    scale = {x=100,y=100,z=100}
+    scale = {x=1,y=1,z=1}
 
     NPC01 = npc.new("Bob1","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human")
     local diag = Dialogue.new()
@@ -184,15 +197,15 @@ function Initialize()
 
     diag:addTopic(topic01)
     NPC01.dialogue = diag
+    NPC01:setDialogue(diag)
 
-    NPC01:test()
-    --NPC01.state = 
+    NPC01:makeIdle()
 
 
     scene:AddInstance(NPC01) 
 
 
-	scene:SpawnRandomObjects("Bob", a, b,100)
+	--scene:SpawnRandomObjects("Bob", a, b,100)
 
 
     emptyVec = {x=0,y=0,z=0}
@@ -376,10 +389,13 @@ function Update()
 
 	    end
     
+        -- switch whether debug detail printing is on or off
         if inputManagerAPI.isKeyPressed(TestInput4) then
-        
-            TestDialogueTextGet()
-
+            if debugdetail == true then
+                debugdetail = false
+            else
+                debugdetail = true
+            end
 	    end
 
     end
@@ -404,7 +420,8 @@ white = {x=1,y=1,z=1}
 
 
 function TestChangeNPCState()
-    NPC01.state = chasing
+    printAPI.print("Test change NPC State.\n")
+    NPC01:makeChasing()
 end
 
 function TestDialogueTextGet()

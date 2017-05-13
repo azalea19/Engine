@@ -33,10 +33,14 @@ function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim)
 	renderManagerAPI.addObject(instanceID)
 	
 	local abox = AABBAPI.getAABB(instanceID, context.handle)
-		
-	abox.min = mmath.vec3_Multiply(abox.min,newScale,context.handle)
-	abox.max = mmath.vec3_Multiply(abox.max,newScale,context.handle)
 	
+	if abox ~= nil then
+	
+		abox.min = mmath.vec3_Multiply(abox.min,newScale,context.handle)
+		abox.max = mmath.vec3_Multiply(abox.max,newScale,context.handle)
+	else
+		printAPI.print("Warning: Created object with nil aabb")
+	end
 	boundingBox = abox
 	
 	
@@ -55,14 +59,17 @@ end
 
 
 function gameObject:BBToWorld()
-	local newBB = {}
 
-	--printAPI.print("Getting BB to world... ")
+	if (self.boundingBox ~= nil) then
+		local newBB = {}
+		--printAPI.print("Getting BB to world... ")
+		
+		newBB.min = mmath.vec3_Sum(self.boundingBox.min,self:getPosition(),context.handle)
+		newBB.max = mmath.vec3_Sum(self.boundingBox.max,self:getPosition(),context.handle)
+		--printAPI.print("Got BB to world.")
+		return newBB
+	end
 	
-    newBB.min = mmath.vec3_Sum(self.boundingBox.min,self:getPosition(),context.handle)
-    newBB.max = mmath.vec3_Sum(self.boundingBox.max,self:getPosition(),context.handle)
-	--printAPI.print("Got BB to world.")
-    return newBB
 end
 
 function gameObject:Update()
