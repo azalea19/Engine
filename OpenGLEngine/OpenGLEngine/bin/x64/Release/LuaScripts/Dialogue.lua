@@ -57,12 +57,4 @@ function Topic:getLine(ind)
 end
 
 function DialogueTest()
-local questStages = {}
-
---questStages[1] = new QuestStage(KILL,Enemy01,nil)
-questStages[1] = QuestStage.new(TALK,NPC01,"BobQuest1")
---questStages[3] = new QuestStage(GET,Item01,nil)
-
-quest = Quest:new(questStages,1)
-
 end
