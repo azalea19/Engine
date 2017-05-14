@@ -6,17 +6,17 @@ local npc = {}
 npc.__index = npc
 
 	-- todo What are the expected values/types for these parameters?
-function npc.new(newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth, newCharacterName)
+function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth, newCharacterName)
 	
 	
-	local instance = gameObject.new(newName,newModel,newPos,newDir,newScale,newAnim)
+	local instance = gameObject.new(strID, newName,newModel,newPos,newDir,newScale,newAnim)
 	
 
 	instance.dialogue = nil
 	instance.maxHealth = newMaxHealth
 	instance.currentHealth = newCurrentHealth
 	instance.type = newType
-	instance.characterName = newCharacterName
+	instance.characterName = newCharacterName -- todo delete
 	instance.alive = true
     instance.hostileToPlayer = false
     instance.seenPlayer = false
@@ -34,7 +34,6 @@ end
 
 	setmetatable(npc,{__index = gameObject})
 
-
 function idle(anpc)
 	debugPrint("NPC is Idling... ")
     if (anpc.hostileToPlayer and anpc.seenPlayer) then
@@ -46,6 +45,7 @@ function chasing(anpc)
 	debugPrint("NPC is Chasing... ")
 	if player0 ~= nil then
 		anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
+
 	else
 		printAPI.print("Warning: Player is nil\n")
 	end
@@ -59,6 +59,28 @@ function npc:makeChasing()
 	self.state = chasing
 	debugPrint("Success\n")
 
+end
+
+
+function npc:readTopics()
+	local str = {}
+	local length = 0
+	if self.dialogue ~= nil then
+		for i=1,self.dialogue.topicCount do
+			local topic = self.dialogue.topics[i]
+			local topicName
+			if topic.name~= nil then
+				topicName = topic.name
+			else
+				topicName = topic.id
+			end
+			length = length + 1
+			str[length] = topicName
+
+		end
+		return str,length
+	end
+	return nil,0
 end
 
 function npc:setDialogue(dial)
@@ -83,6 +105,9 @@ function npc:Update()
 	if self.state ~= nil then
 		debugPrint("Running NPC state...")
 		self.state(self)
+		local an ={ x=self:getPosition().x, y = GetHeightAtPoint(self:getPosition().x , self:getPosition().z) +10, z = self:getPosition().z}
+		self:setPosition(an)
+
 	end
 end
 

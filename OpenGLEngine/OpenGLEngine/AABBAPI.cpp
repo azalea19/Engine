@@ -24,13 +24,11 @@ LuaRef AABBAPI::Move(LuaRef bbox, LuaRef oldPos, LuaRef newPos, LuaContextHandle
 	vec3 newMin = bboxmin + diff;
 	vec3 newMax = bboxmax + diff;
 
+	mAABB newAABB;
+	newAABB.min = newMin;
+	newAABB.max = newMax;
+	return ToLuaTable(newAABB, cHandle);
 
-	LuaRef newAABB = luabridge::newTable(LuaManager::GetInstance().GetContext(cHandle)->GetLuaState());
-
-	newAABB["min"] = ToLuaTable(newMin,cHandle);
-	newAABB["max"] = ToLuaTable(newMax,cHandle);
-
-	return newAABB;
 }
 
 

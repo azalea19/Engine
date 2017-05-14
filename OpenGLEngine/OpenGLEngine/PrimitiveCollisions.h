@@ -2,6 +2,7 @@
 #define PRIMITIVE_COLLISIONS_H__
 
 #include "GeometricPrimitives.h"
+#include <limits>
 
 /**
 * @file   PrimitiveCollisions.h

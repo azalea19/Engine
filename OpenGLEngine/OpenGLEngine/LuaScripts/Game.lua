@@ -24,14 +24,14 @@ require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
 require 'LuaScripts/Controls'
-
+require 'LuaScripts/QuestManager'
 
 OPEN_GL = 0
 
 gameObjects = {}
 world = {}
 debug = true
-debugdetail = true
+debugdetail = false
 loadSmallTestTerrain = true
 
 time = 0
@@ -45,8 +45,16 @@ function Run()
 	Finalize()
 end
 
+-- Detailed debug print. For when you want to display value constantly in update and will pause to find it.
 function debugPrint(string)
     if debugdetail then
+        printAPI.print(string)
+    end
+end
+
+-- Limited debug print. For prints that will not occur constantly in update, such as when a button is pressed.
+function debugLPrint(string)
+    if debug then
         printAPI.print(string)
     end
 end
@@ -67,6 +75,8 @@ function LoadAPIs()
     GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
     GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
     GetAPI(context.handle, 'display2DAPI', 'display2DAPI')
+    GetAPI(context.handle, 'collisionAPI', 'collisionAPI')
+
 
 end
 
@@ -81,7 +91,7 @@ function printVec3After(string,veca)
 end
 
 function printVec3s(vecc,vecb)
-    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
+    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. "\n")
 end
 	
 function LoadAssets()
@@ -148,6 +158,7 @@ function BBToLocal(bb,scalea,loca)
 end
 
 function Initialize()
+
 	LoadAPIs()
 	printAPI.print('Initializing...\n')
     printAPI.print('Initialising engine...\n')
@@ -168,6 +179,17 @@ function Initialize()
 
 	--Works
 
+
+    printAPI.print("Initialising text...\n")
+    lookAtText = " "
+    dialogueText = " "
+    dInMenu = false
+    dCurrentTopic = nil
+    dCurrentLine = 0
+
+
+
+    -- Initialise scene objects
 	printAPI.print('Initialising Scenes...\n')
 	local GOData = LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	local NPCData = LoadInstances("SaveData/NPC_Data.csv", "npc")
@@ -186,16 +208,26 @@ function Initialize()
 
     NPC01 = npc.new("Bob1","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human")
     local diag = Dialogue.new()
-    local topic01 = Topic.new("Greeting")
+    local topic01 = Topic.new("Greeting","Greeting")
+    local topic02 = Topic.new("Quest1","Help find organs")
 
     local mylines = {}
     mylines[1] = "line 1\n"
     mylines[2] = "line 2\n"
     mylines[3] = "line 3\n"
-    --printAPI.print(mylines[1])
+
     topic01:setLines(mylines)
 
+    local mylines2 = {}
+    mylines2[1] = "t2line 1\n"
+    mylines2[2] = "t2line 2\n"
+    mylines2[3] = "t2line 3\n"
+
+    topic02:setLines(mylines2)
+
     diag:addTopic(topic01)
+    diag:addTopic(topic02)
+
     NPC01.dialogue = diag
     NPC01:setDialogue(diag)
 
@@ -255,6 +287,16 @@ function Initialize()
 
 	--test = luaObjInstManager.addNewInstance("Bob")
 
+    
+    --Initialise quests
+    questManager = QuestManager.new()
+    local stage1 = QuestStage.new(TALK,NPC01,"Greeting")
+    local stage2 = QuestStage.new(TALK,NPC01,"Stage1")
+
+    local stages = {stage1,stage2}
+    local talkToBob = Quest.new(stages,2)
+    questManager.addQuest(talkToBob)
+
     printAPI.print('Initialization finished.\n')
 end
 
@@ -268,6 +310,26 @@ end
 
 function Finalize()
 	printAPI.print('Finalizing...\n')
+end
+
+function StartDialogueTopic(playr,topicn)
+
+    if(playr.inDialogue) then
+        local topic = playr.lookTarget.dialogue.topics[topicn]
+        if(topic ~= nil and topic.textLines ~= nil and topic.textLines[topicn] ~= nil) then
+            dialogueText = topic.textLines[topicn]
+            dCurrentTopic = topic
+            dCurrentLine = 1
+            dInMenu = false
+
+            if topic.questEvent then
+                questManager:check(TALK,playr.lookTarget,topic.id)
+            end
+
+        else
+            debugLPrint("Could not start that topic.\n")
+        end
+    end
 end
 
 function Update()
@@ -312,13 +374,35 @@ function Update()
 
 	e = inputManagerAPI.isKeyPressed(Use_Input)
 	if e then
-        printAPI.print("Talking to Bob.")
+        printAPI.print("Interacting.\n")
 
-        for i=0,NPC01.dialogue.topics["Greeting"].size do
-            printAPI.print(NPC01.dialogue.topics["Greeting"].textLines[i])
-        end
+        StartDialogue(player0.lookTarget)
         
 	end
+
+    if inputManagerAPI.isKeyPressed(QuickSlot1_Input) then
+
+        StartDialogueTopic(player0,1)
+        
+    end
+
+    if inputManagerAPI.isMousePressedLeft() then
+        if(player0.inDialogue == true and dInMenu == false) then
+            if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
+                dCurrentLine = dCurrentLine + 1
+                dialogueText = dCurrentTopic.textLines[dCurrentLine]
+                dInMenu = false
+
+            else
+                debugLPrint("Next line in topic is nil.\n")
+                StartDialogue(player0.lookTarget)
+            end
+        else
+            if(dInMenu) then
+                    player0.inDialogue = false
+            end
+        end
+    end
 
 	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
 		local currentGOs = world:GetGameObjects()
@@ -346,9 +430,15 @@ function Update()
 	end
 
     if debug then
+
+        if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
+            printAPI.print("Force quitting.\n")
+            os.exit()
+
+	    end
         if inputManagerAPI.isKeyPressed(TestInput1) then
-        
-            TestDialogueTextGet()
+            
+            
 
 	    end
     
@@ -399,6 +489,8 @@ function Update()
 	    end
 
     end
+
+    
     --printAPI.print("Updating gameobjects\n")
 
 
@@ -424,11 +516,36 @@ function TestChangeNPCState()
     NPC01:makeChasing()
 end
 
-function TestDialogueTextGet()
-    printAPI.print(NPC01.dialogue.topics["Greeting"].textLines[1])
-    printAPI.print(NPC01.dialogue.topics["Greeting"]:getLine(2))
-    printAPI.print(NPC01.dialogue.topics["Greeting"]:getLine(3))
+function StartDialogue(npc)
+    debugPrint("Starting Dialogue... ")
+    if(npc ~= nil) then
+        if(npc.dialogue ~= nil) then
+    
+            dInMenu= true
+            local str = npc.name.."\n\nTopics: \n"
+            local topics
+            local count
+            topics, count = npc:readTopics()
+            for i=1,count do
+                str = str .. topics[i]
+            end
+
+            dialogueText = str
+
+            player0.inDialogue = true
+
+            dCurrentTopic = nil
+            debugPrint("Complete\n")
+        else
+            debugPrint("NPC has no dialogue.\n")
+        end
+    end
+    
+
+
+
 end
+
 function Render()
     renderManagerAPI.beginRender()
 
@@ -454,7 +571,12 @@ function Render()
 
             
             -- Draw UI text
-            display2DAPI.drawText(100,font1path,"Drawn text",300,300,white)
+            display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
+
+            if(player0.inDialogue) then 
+                display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
+            end
+
 		end
 	end
 

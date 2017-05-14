@@ -173,6 +173,7 @@
     <ClCompile Include="BlurEffect.cpp" />
     <ClCompile Include="BoneKeySequence.cpp" />
     <ClCompile Include="CameraAPI.cpp" />
+    <ClCompile Include="CollisionAPI.cpp" />
     <ClCompile Include="DepthThresholdEffect.cpp" />
     <ClCompile Include="DirectionalLightingEffect.cpp" />
     <ClCompile Include="LuaDisplay2DAPI.cpp" />
@@ -254,6 +255,7 @@
     <ClInclude Include="AffineTransformable.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="CameraAPI.h" />
+    <ClInclude Include="CollisionAPI.h" />
     <ClInclude Include="DirectionalLightingEffect.h" />
     <ClInclude Include="LuaDisplay2DAPI.h" />
     <ClInclude Include="DXEngine.h" />

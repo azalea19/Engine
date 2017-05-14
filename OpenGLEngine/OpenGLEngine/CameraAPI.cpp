@@ -91,6 +91,7 @@ void CameraAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "getYaw", GetYaw);
 	pContext->ExposeFunction(luaAPIName, "getPitch", GetPitch);
 	pContext->ExposeFunction(luaAPIName, "setPitch", SetPitch);
+
 	pContext->ExposeFunction(luaAPIName, "forward", Forward);
 	pContext->ExposeFunction(luaAPIName, "right", Right);
 	pContext->ExposeFunction(luaAPIName, "up", Up);

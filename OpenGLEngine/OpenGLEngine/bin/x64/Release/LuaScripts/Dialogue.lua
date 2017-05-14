@@ -8,7 +8,7 @@ function Dialogue.new()
 	instance = 
 	{
 		topics = {},
-		topicCount = 1
+		topicCount = 0,
 	}
 
 	setmetatable(instance, Dialogue)
@@ -17,23 +17,23 @@ end
 
 function Dialogue:addTopic(newTopic)
 	printAPI.print("Setting Dialogue...\n");
-	self.topics[newTopic.id] = newTopic
 	self.topicCount = self.topicCount+1
-	
+	self.topics[self.topicCount] = newTopic	
 end
 
 Topic = {}
 Topic.__index = Topic
 
-function Topic.new(topicID)
+function Topic.new(topicID, topicName)
 	instance = 
 	
 	{
-		id = topicID,
-		textLines = {},
-		size=0,
-		questEvent = false, -- Is the topic a quest event? If so, when it is read it should trigger a QuestManager status check.
-		unlockReq = nil, -- Unlock Requirements, set this to a bool check method to see if topic is available.
+		id = topicID, -- ID for finding this topic in the list
+		name = topicName, -- Name of topic visible to player
+		textLines = {}, -- The lines of text in this topic
+		size=0, -- Number of lines of text
+		questEvent = false, -- Is the topic a quest event? If so, when it is read it should trigger a QuestManager status check. 
+		unlockReq = nil, -- Unlock Requirements, set this to a QuestManager check (stages complete) to see if topic is available. 
 		hasRead = false, -- Whether the player has read this topic in the dialogue
 		deleteOnRead = false -- Whether the topic becomes unavailable once the player reads it
 	}

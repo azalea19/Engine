@@ -4,26 +4,30 @@
 local gameObject = {}
 gameObject.__index = gameObject
 
-function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim)
+function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
 
 	instanceID = luaObjInstManager.addNewInstance(newModel)
 
 	local instance = 
 	{
-		model = newModel,
-		direction = newDir,
-		name = newName,
-		id = instanceID,
-		scale = newScale,
-		animation = newAnim,
-		boundingBox = { min ={x=0,y=0,z=0}, max={x=0,y=0,z=0} }
+		model = newModel, -- Name of model (must be accurate to load correctly)
+		direction = newDir, -- Direction
+		name = newName, -- Name of this object, assume visible to player
+		stringID = strID
+		id = instanceID, -- Unique Object Instance ID
+		scale = newScale, -- Scale
+		animation = newAnim, -- Current animation index
+		boundingBox = { min ={x=0,y=0,z=0}, max={x=0,y=0,z=0} }, -- AABB for collisions
+		playerLookAt = false, -- Is the player looking at the object
+		displayNameOnLook = true
+		
 	}	
 	
 	setmetatable(instance, gameObject)
 	
 	if(newPos.y == 0) then
-		newPos.y = GetHeightAtPoint(newPos.x , newPos.z) +10
+		newPos.y = GetHeightAtPoint(newPos.x , newPos.z)
 	end
 
 	objectInstanceAPI.setTranslation(instanceID,newPos.x,newPos.y,newPos.z)
@@ -41,10 +45,9 @@ function gameObject.new(newName, newModel, newPos, newDir, newScale, newAnim)
 	else
 		printAPI.print("Warning: Created object with nil aabb")
 	end
-	boundingBox = abox
+	instance.boundingBox = abox
 	
-	
-	
+	--printVec3s(boundingBox.min,boundingBox.max)
 	return instance
 end
 
@@ -60,15 +63,20 @@ end
 
 function gameObject:BBToWorld()
 
-	if (self.boundingBox ~= nil) then
+	--if (self.boundingBox ~= nil) then
 		local newBB = {}
 		--printAPI.print("Getting BB to world... ")
 		
 		newBB.min = mmath.vec3_Sum(self.boundingBox.min,self:getPosition(),context.handle)
 		newBB.max = mmath.vec3_Sum(self.boundingBox.max,self:getPosition(),context.handle)
 		--printAPI.print("Got BB to world.")
+		
+		--printVec3s(self.boundingBox.min,self.boundingBox.max)
+
 		return newBB
-	end
+	--else
+		--return nil
+	--end
 	
 end
 
