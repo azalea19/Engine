@@ -199,6 +199,8 @@ function Initialize()
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
 
+    currentScene = scene
+
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
@@ -287,6 +289,11 @@ function Initialize()
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
 	--test = luaObjInstManager.addNewInstance("Bob")
+
+    -- Initialise weapon
+
+    basicGun = Weapon.new("basicGun","Gun",100,1)
+    player0:setWeapon(basicGun)
 
     
     --Initialise quests
@@ -386,8 +393,43 @@ function Update()
         StartDialogueTopic(player0,1)
         
     end
+    if inputManagerAPI.isKeyPressed(QuickSlot2_Input) then
 
+        StartDialogueTopic(player0,2)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot3_Input) then
+
+        StartDialogueTopic(player0,3)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot4_Input) then
+
+        StartDialogueTopic(player0,4)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot5_Input) then
+
+        StartDialogueTopic(player0,5)
+        
+    end
     if inputManagerAPI.isMousePressedLeft() then
+
+    debugLPrint("Clicked LMB.\n")
+
+    if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
+        if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
+            if(player0.lastTimeShot ==nil or player0.lastTimeShot>= player0.weapon.shootInterval) then
+                player0.lastTimeShot = timeAPI.elapsedTimeMs()
+                player0.weapon:attack(player0.lookTarget)
+            end
+            
+        end
+    end
+
+
+
+
         if(player0.inDialogue == true and dInMenu == false) then
             if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
                 dCurrentLine = dCurrentLine + 1
@@ -562,7 +604,9 @@ function Render()
             -- Draw object
 			local currentGOs = world:GetGameObjects()
 			for i = 1, world:GetGameObjectCount() do
-				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+                if(currentGOs[i].visible) then
+                    renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+                end
 			end
 			local currentTerrainID = world:GetTerrainID()
 			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)

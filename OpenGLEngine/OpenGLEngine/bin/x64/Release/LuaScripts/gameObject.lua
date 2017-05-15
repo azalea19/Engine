@@ -21,12 +21,16 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 		animation = newAnim, -- Current animation index
 		boundingBox = { min ={x=0,y=0,z=0}, max={x=0,y=0,z=0} }, -- AABB for collisions
 		playerLookAt = false, -- Is the player looking at the object
-		displayNameOnLook = true
+		displayNameOnLook = true,
+		visible = true,
+		objType = "GameObject"
 		
 	}	
 	
-	if(instance.stringID == "0") then
-		instance.stringID = instance.model .. instance.id .."-".. time
+	if(instance.stringID == 0) then
+		debugLPrint("Generating stringID for object: ")
+		instance.stringID = instance.model .. instance.id .."-".. os.date("%x-%X")
+		debugLPrint(instance.stringID .."\n")
 	end
 	
 	setmetatable(instance, gameObject)

@@ -1,3 +1,26 @@
+Weapon = {}
+Weapon.__index = Weapon
+
+
+function Weapon.new(iid,iname,idmg,ishootInterval)
+	instance = 
+	{
+		id=iid,
+		name=iname,
+		damage = idmg,
+		shootInterval = ishootInterval
+		
+	}
+
+	setmetatable(instance, Weapon)
+	return instance
+end
+
+function Weapon:attack(mynpc)
+	mynpc:takeDamage(self.damage)
+end
+
+
 local Player = {}
 Player.__index = Player
 
@@ -13,12 +36,18 @@ function Player.new(newCam)
 		lookRay = nil,
 		lookTarget = nil,
 		inDialogue = false,
+		rangedWeaponEquipped = true, -- Whether the player is wielding a readied ranged weapon
+		weapon = nil,
+		lastTimeShot = nil, -- Last time player shot ranged weapon
 	}
 
 	setmetatable(instance, Player)
 	return instance
 end
 
+function Player:setWeapon(weap)
+	self.weapon = weap
+end
 function Player:getPosition()
 	return self.position
 end

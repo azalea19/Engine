@@ -17,11 +17,12 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.currentHealth = newCurrentHealth
 	instance.type = newType
 	instance.alive = true
-    instance.hostileToPlayer = false
+    instance.hostileToPlayer = true
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
     instance.moveSpeed = 0.1
+	instance.objType = "NPC"
 
 	--printAPI.print("Testing NPC instantiate bounding box: " .. instance.boundingBox.min.x .. "\n")
 	--setmetatable(instance, { __index = gameObject } )
@@ -48,6 +49,23 @@ function chasing(anpc)
 	else
 		printAPI.print("Warning: Player is nil\n")
 	end
+end
+function npc:takeDamage(dmg)
+	debugLPrint("NPC Taking damage " .. dmg .. "\n")
+	self.currentHealth = self.currentHealth - dmg
+	if(self.currentHealth <= 0) then
+		self:die()
+	end
+end
+function npc:die()
+	debugLPrint("NPC death.\n")
+	self.alive = false
+	
+	currentScene:RemoveInstance(self)
+	--self.updating = false
+	--self.visible = false
+	-- You will not be able to check if this specific instance is dead/properties of later on, but you could check if it exists in the scene or not.
+	-- Todo possibly store past gameobjects in the scene as well as current gameobjects, so this data can be accessed if needed.
 end
 function npc:makeIdle()
 	printAPI.print("Made NPC idle.")
@@ -98,7 +116,7 @@ function npc:Update()
 	if self.alive == true then
 		self.currentHealth = self.currentHealth - 1
 		if(self.currentHealth <= 0) then
-			--self:Die()
+			self:Die()
 		end
 	end
 	if self.state ~= nil then

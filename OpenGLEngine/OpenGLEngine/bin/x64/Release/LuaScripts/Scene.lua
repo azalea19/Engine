@@ -4,6 +4,8 @@ local gameObject = require 'LuaScripts/gameObject'
 local Scene = {}
 Scene.__index = Scene
 
+-- todo change capitalisation
+
 function Scene.new(newSceneName, newPlayerStartPos, newPlayerStartDir)
 	local instance = {
 		name = newSceneName,
@@ -38,6 +40,18 @@ function Scene:AddInstances(data)
 			table.insert(self.objects, data[i])
 		end
 	end
+end
+
+function Scene:RemoveInstance(data)
+	for i=1,#self.objects do
+		if(self.objects[i].stringID == data.stringID) then
+			debugLPrint("Removed object " .. data.stringID .." from scene.\n")
+			table.remove(self.objects,i)
+			return true
+		end
+	end
+	debugLPrint("Could not remove ".. data.stringID .." from scene - it does not exist.")
+	return false
 end
 
 function Scene:AddInstance(data)
