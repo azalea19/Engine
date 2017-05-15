@@ -206,9 +206,10 @@ function Initialize()
     emptyVec = mmath.vec3_CreateEmpty(context.handle)
     scale = {x=1,y=1,z=1}
 
-    NPC01 = npc.new("Bob1","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human")
+    NPC01 = npc.new("NPC01","Bob the Human","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human NPC")
     local diag = Dialogue.new()
     local topic01 = Topic.new("Greeting","Greeting")
+    topic01.questEvent = true
     local topic02 = Topic.new("Quest1","Help find organs")
 
     local mylines = {}
@@ -290,12 +291,12 @@ function Initialize()
     
     --Initialise quests
     questManager = QuestManager.new()
-    local stage1 = QuestStage.new(TALK,NPC01,"Greeting")
-    local stage2 = QuestStage.new(TALK,NPC01,"Stage1")
+    local stage1 = QuestStage.new("MeetBob",TALK,"NPC01","Greeting")
+    local stage2 = QuestStage.new("GetQuest",TALK,"NPC01","Quest1")
 
     local stages = {stage1,stage2}
-    local talkToBob = Quest.new(stages,2)
-    questManager.addQuest(talkToBob)
+    local talkToBob = Quest.new("TalkToBob",stages,2)
+    questManager:addQuest(talkToBob)
 
     printAPI.print('Initialization finished.\n')
 end

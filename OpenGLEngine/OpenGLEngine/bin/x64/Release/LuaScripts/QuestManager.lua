@@ -9,8 +9,7 @@ QuestManager.__index = QuestManager
 	
 function QuestManager.new()
 	local instance = {}
-	instance.quests = nil
-	instance.questNum = 1
+	instance.quests = {}
 	
 	setmetatable(instance, QuestManager)
 
@@ -19,25 +18,38 @@ end
 
 -- Checks whether the action that was performed updated any quests.
 function QuestManager:check(action,target,extraInfo)
-	for i=0,questNum do
-		for a=0,quests[i].stageCount do
-			thisStage = quests[i].stages[a]
-			if(action==thisStage.action and target == thisStage.target and extraInfo == thisStage.extraInfo) then
-				thisStage.isComplete = true
-				printAPI.print("You completed quest stage: " .. thisStage.name)
+	for i=1,#self.quests do
+		if(self.quests[i]~= nil) then
+		printAPI.print("Checking quest "..i .. "\n")
+
+			for a=1,#self.quests[i].stages do
+				thisStage = self.quests[i].stages[a]
+				debugLPrint(action .. " " .. target.stringID .. " " .. extraInfo .. "\n")
 				
-				if(quests[i]:isComplete()) then
-				printAPI.print("You completed quest: " .. quests[i].name)
+				if(action==thisStage.action and target.stringID == thisStage.targetName and extraInfo == thisStage.extraInfo) then
+					if(thisStage.isComplete == false) then
+						self.quests[i].stages[a].isComplete = true
+						printAPI.print("You completed quest stage: " .. thisStage.name .. "\n")
+						
+						if(self.quests[i]:isComplete()) then
+							printAPI.print("You completed quest: " .. self.quests[i].name .. "\n")
+						end
+					end
 				end
 			end
+		else
+		printAPI.print(i-1 .. " " .. self.quests[i-1].name)
+		printAPI.print(" Was last quest. Next, ".. i.. "was Nil quest tried to access\n")
 		end
 	end
 end
 
 -- Expects Quest as param
 function QuestManager:addQuest(newQuest)
-	self.quests[questNum] = newQuest
-	self.questNum = self.questNum + 1
+	self.quests[#self.quests +1] = newQuest
+	
+	
+	
 end
 
 -- QUEST
@@ -50,7 +62,6 @@ function Quest.new(name,questStages, iEndStage)
 	instance.name = name -- Name of quest, assume visible to player.
 	instance.endStage = iEndStage
 	instance.stages = questStages
-	instance.stageCount = 0
 
 	setmetatable(instance, Quest)
 
@@ -58,8 +69,11 @@ function Quest.new(name,questStages, iEndStage)
 end
 
 function Quest:isComplete()
-	for i=0,stageCount do
-		if(stages[i].isComplete == false) then
+	for i=1,#self.stages-1 do
+		debugLPrint("Checking Quests ... ")
+
+		if(self.stages[i].isComplete == false) then
+				debugLPrint("a stage is incomplete\n")
 			return false
 		end
 	end
@@ -72,7 +86,7 @@ end
 QuestStage = {}
 QuestStage.__index = QuestStage
 	
-function QuestStage.new(name, myAction, myTargetName myExtraInfo)
+function QuestStage.new(name, myAction, myTargetName, myExtraInfo)
 	local instance = {}
 	instance.name = name -- Name of quest stage, assume visible to player.
 	instance.action = myAction

@@ -6,7 +6,7 @@ local npc = {}
 npc.__index = npc
 
 	-- todo What are the expected values/types for these parameters?
-function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth, newCharacterName)
+function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth)
 	
 	
 	local instance = gameObject.new(strID, newName,newModel,newPos,newDir,newScale,newAnim)
@@ -16,7 +16,6 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.maxHealth = newMaxHealth
 	instance.currentHealth = newCurrentHealth
 	instance.type = newType
-	instance.characterName = newCharacterName -- todo delete
 	instance.alive = true
     instance.hostileToPlayer = false
     instance.seenPlayer = false

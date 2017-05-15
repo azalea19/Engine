@@ -6,7 +6,8 @@ gameObject.__index = gameObject
 
 function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-
+	
+	
 	instanceID = luaObjInstManager.addNewInstance(newModel)
 
 	local instance = 
@@ -14,7 +15,7 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 		model = newModel, -- Name of model (must be accurate to load correctly)
 		direction = newDir, -- Direction
 		name = newName, -- Name of this object, assume visible to player
-		stringID = strID
+		stringID = strID, -- String ID for constant reference to this object despite saving and loading granting new object instance IDs. Pass in 0 to generate new unique ID (based on generated instance ID and time+date).
 		id = instanceID, -- Unique Object Instance ID
 		scale = newScale, -- Scale
 		animation = newAnim, -- Current animation index
@@ -23,6 +24,10 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 		displayNameOnLook = true
 		
 	}	
+	
+	if(instance.stringID == "0") then
+		instance.stringID = instance.model .. instance.id .."-".. time
+	end
 	
 	setmetatable(instance, gameObject)
 	

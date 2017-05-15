@@ -65,6 +65,7 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		local dirTemp = Vector3.new(xRotRand, 0, 0)
 
 		local item = gameObject.new(type, type, objPosTemp, dirTemp, scale, 0, tempID)
+		--[[
 		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
 		objectInstanceAPI.setOrientation(tempID, xRotRand, rotationMod["y"], rotationMod["z"])
 		objectInstanceAPI.setScale(tempID,scale.x,scale.y,scale.z)
@@ -78,6 +79,7 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
 		abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
 		item["boundingBox"] = abox
+		]]
 		table.insert(self.objects, item)
 	end
 end
