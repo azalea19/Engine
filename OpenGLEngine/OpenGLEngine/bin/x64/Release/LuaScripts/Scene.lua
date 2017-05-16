@@ -4,6 +4,8 @@ local gameObject = require 'LuaScripts/gameObject'
 local Scene = {}
 Scene.__index = Scene
 
+-- todo change capitalisation
+
 function Scene.new(newSceneName, newPlayerStartPos, newPlayerStartDir)
 	local instance = {
 		name = newSceneName,
@@ -40,6 +42,18 @@ function Scene:AddInstances(data)
 	end
 end
 
+function Scene:RemoveInstance(data)
+	for i=1,#self.objects do
+		if(self.objects[i].stringID == data.stringID) then
+			debugLPrint("Removed object " .. data.stringID .." from scene.\n")
+			table.remove(self.objects,i)
+			return true
+		end
+	end
+	debugLPrint("Could not remove ".. data.stringID .." from scene - it does not exist.")
+	return false
+end
+
 function Scene:AddInstance(data)
 	table.insert(self.objects, data)
 end
@@ -65,6 +79,7 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		local dirTemp = Vector3.new(xRotRand, 0, 0)
 
 		local item = gameObject.new(type, type, objPosTemp, dirTemp, scale, 0, tempID)
+		--[[
 		objectInstanceAPI.setTranslation(tempID, xRand, yRand, zRand)
 		objectInstanceAPI.setOrientation(tempID, xRotRand, rotationMod["y"], rotationMod["z"])
 		objectInstanceAPI.setScale(tempID,scale.x,scale.y,scale.z)
@@ -78,6 +93,7 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
 		abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
 		item["boundingBox"] = abox
+		]]
 		table.insert(self.objects, item)
 	end
 end

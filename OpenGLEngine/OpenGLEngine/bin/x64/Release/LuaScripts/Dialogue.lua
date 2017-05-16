@@ -34,6 +34,7 @@ function Topic.new(topicID, topicName)
 		size=0, -- Number of lines of text
 		questEvent = false, -- Is the topic a quest event? If so, when it is read it should trigger a QuestManager status check. 
 		unlockReq = nil, -- Unlock Requirements, set this to a QuestManager check (stages complete) to see if topic is available. 
+		isAvailable = true,
 		hasRead = false, -- Whether the player has read this topic in the dialogue
 		deleteOnRead = false -- Whether the topic becomes unavailable once the player reads it
 	}

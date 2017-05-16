@@ -199,6 +199,8 @@ function Initialize()
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
 
+    currentScene = scene
+
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
@@ -206,9 +208,10 @@ function Initialize()
     emptyVec = mmath.vec3_CreateEmpty(context.handle)
     scale = {x=1,y=1,z=1}
 
-    NPC01 = npc.new("Bob1","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human")
+    NPC01 = npc.new("NPC01","Bob the Human","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human NPC")
     local diag = Dialogue.new()
     local topic01 = Topic.new("Greeting","Greeting")
+    topic01.questEvent = true
     local topic02 = Topic.new("Quest1","Help find organs")
 
     local mylines = {}
@@ -287,15 +290,20 @@ function Initialize()
 
 	--test = luaObjInstManager.addNewInstance("Bob")
 
+    -- Initialise weapon
+
+    basicGun = Weapon.new("basicGun","Gun",100,1)
+    player0:setWeapon(basicGun)
+
     
     --Initialise quests
     questManager = QuestManager.new()
-    local stage1 = QuestStage.new(TALK,NPC01,"Greeting")
-    local stage2 = QuestStage.new(TALK,NPC01,"Stage1")
+    local stage1 = QuestStage.new("MeetBob",TALK,"NPC01","Greeting")
+    local stage2 = QuestStage.new("GetQuest",TALK,"NPC01","Quest1")
 
     local stages = {stage1,stage2}
-    local talkToBob = Quest.new(stages,2)
-    questManager.addQuest(talkToBob)
+    local talkToBob = Quest.new("TalkToBob",stages,2)
+    questManager:addQuest(talkToBob)
 
     printAPI.print('Initialization finished.\n')
 end
@@ -385,8 +393,43 @@ function Update()
         StartDialogueTopic(player0,1)
         
     end
+    if inputManagerAPI.isKeyPressed(QuickSlot2_Input) then
 
+        StartDialogueTopic(player0,2)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot3_Input) then
+
+        StartDialogueTopic(player0,3)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot4_Input) then
+
+        StartDialogueTopic(player0,4)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot5_Input) then
+
+        StartDialogueTopic(player0,5)
+        
+    end
     if inputManagerAPI.isMousePressedLeft() then
+
+    debugLPrint("Clicked LMB.\n")
+
+    if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
+        if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
+            if(player0.lastTimeShot ==nil or player0.lastTimeShot>= player0.weapon.shootInterval) then
+                player0.lastTimeShot = timeAPI.elapsedTimeMs()
+                player0.weapon:attack(player0.lookTarget)
+            end
+            
+        end
+    end
+
+
+
+
         if(player0.inDialogue == true and dInMenu == false) then
             if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
                 dCurrentLine = dCurrentLine + 1
@@ -561,7 +604,9 @@ function Render()
             -- Draw object
 			local currentGOs = world:GetGameObjects()
 			for i = 1, world:GetGameObjectCount() do
-				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+                if(currentGOs[i].visible) then
+                    renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+                end
 			end
 			local currentTerrainID = world:GetTerrainID()
 			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
