@@ -84,7 +84,7 @@ function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 		objectInstanceAPI.setOrientation(tempID, xRotRand, rotationMod["y"], rotationMod["z"])
 		objectInstanceAPI.setScale(tempID,scale.x,scale.y,scale.z)
 		objectInstanceAPI.setAnimation(tempID,0)
-		renderManagerAPI.addObject(tempID)
+		--renderManagerAPI.addObject(tempID)
 
 
         local nscale = objectInstanceAPI.getScale(tempID, context.handle)

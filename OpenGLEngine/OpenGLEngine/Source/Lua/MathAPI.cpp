@@ -81,6 +81,17 @@ vec3 FromLuaTable<vec3>(LuaRef value)
 	return result;
 }
 
+template<>
+vec2 FromLuaTable<vec2>(LuaRef value)
+{
+  vec2 result;
+
+  result.x = value["x"];
+  result.y = value["y"];
+
+  return result;
+}
+
 template<> mat4 FromLuaTable<mat4>(LuaRef value)
 {
   float result[16];
