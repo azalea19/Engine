@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OpenGLEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(ProjectDir)Int/$(Platform)/$(Configuration)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(ProjectDir)Int/$(Platform)/$(Configuration)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(ProjectDir)Int/$(Platform)/$(Configuration)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(ProjectDir)Int/$(Platform)/$(Configuration)/</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib32\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/;$(SolutionDir)3rdParty/Lua;$(SolutionDir)3rdParty/Lua/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib;Lua52.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/;$(SolutionDir)3rdParty/Lua;$(SolutionDir)3rdParty/Lua/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib;Lua52.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib32\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/;$(SolutionDir)3rdParty/Lua;$(SolutionDir)3rdParty/Lua/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib;Lua52.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL\lib\;$(SolutionDir)3rdParty\Assimp\lib64\;%(AdditionalLibraryDirectories);$(SolutionDir)3rdParty/glew/lib/Release/$(Platform)/;$(SolutionDir)3rdParty/Lua;$(SolutionDir)3rdParty/Lua/$(Platform)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;dxguid.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32s.lib;SDL2_image.lib;opengl32.lib;assimp.lib;Lua52.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AABBAPI.cpp" />
+    <ClCompile Include="AdditiveBlendEffect.cpp" />
+    <ClCompile Include="AffineTransformable.cpp" />
+    <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="Animatable.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AssimpToGLM.cpp" />
+    <ClCompile Include="BloomEffect.cpp" />
+    <ClCompile Include="BlurEffect.cpp" />
+    <ClCompile Include="BoneKeySequence.cpp" />
+    <ClCompile Include="CameraAPI.cpp" />
+    <ClCompile Include="DepthThresholdEffect.cpp" />
+    <ClCompile Include="DirectionalLightingEffect.cpp" />
+    <ClCompile Include="LuaDisplay2DAPI.cpp" />
+    <ClCompile Include="DXEngine.cpp" />
+    <ClCompile Include="EngineAPI.cpp" />
+    <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="GBuffer.cpp" />
+    <ClCompile Include="GLEngine.cpp" />
+    <ClCompile Include="ForestTerrain.cpp" />
+    <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="FXAAEffect.cpp" />
+    <ClCompile Include="GLInputHandler.cpp" />
+    <ClCompile Include="GodRaysEffect.cpp" />
+    <ClCompile Include="HDRSplitEffect.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
+    <ClCompile Include="IAnimatedRenderable.cpp" />
+    <ClCompile Include="IMesh.cpp" />
+    <ClCompile Include="IMeshCollection.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InputManagerAPI.cpp" />
+    <ClCompile Include="IRenderableObject.cpp" />
+    <ClCompile Include="IslandCollision.cpp" />
+    <ClCompile Include="IslandCollisionAPI.cpp" />
+    <ClCompile Include="LuaInstanceManager.cpp" />
+    <ClCompile Include="Interface2D.cpp" />
+    <ClCompile Include="LuaContext.cpp" />
+    <ClCompile Include="LuaObjectInstanceManager.cpp" />
+    <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="LuaVectorUtility.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainRename.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MathAPI.cpp" />
+    <ClCompile Include="MCamera.cpp" />
+    <ClCompile Include="ModelLibrary.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelLibraryAPI.cpp" />
+    <ClCompile Include="MPlayer.cpp" />
+    <ClCompile Include="MultiplicativeBlendEffect.cpp" />
+    <ClCompile Include="ObjectInstanceAPI.cpp" />
+    <ClCompile Include="OBJWriter.cpp" />
+    <ClCompile Include="PrintAPI.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="RayEffect.cpp" />
+    <ClCompile Include="RenderableObject.cpp" />
+    <ClCompile Include="ObjectInstance.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="PrimitiveCollisions.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RenderManagerAPI.cpp" />
+    <ClCompile Include="SceneDecomposeEffect.cpp" />
+    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderLibrary.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TerrainAPI.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureLibrary.cpp" />
+    <ClCompile Include="TimeAPI.cpp" />
+    <ClCompile Include="Utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AABBAPI.h" />
+    <ClInclude Include="AdditiveBlendEffect.h" />
+    <ClInclude Include="AffineTransformable.h" />
+    <ClInclude Include="Agent.h" />
+    <ClInclude Include="CameraAPI.h" />
+    <ClInclude Include="DirectionalLightingEffect.h" />
+    <ClInclude Include="LuaDisplay2DAPI.h" />
+    <ClInclude Include="DXEngine.h" />
+    <ClInclude Include="EngineAPI.h" />
+    <ClInclude Include="GBuffer.h" />
+    <ClInclude Include="GLEngine.h" />
+    <ClInclude Include="GLInputHandler.h" />
+    <ClInclude Include="IEngine.h" />
+    <ClInclude Include="ForestTerrain.h" />
+    <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="IAnimatable.h" />
+    <ClInclude Include="IAnimated.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AssimpToGLM.h" />
+    <ClInclude Include="Bimap.h" />
+    <ClInclude Include="BloomEffect.h" />
+    <ClInclude Include="BlurEffect.h" />
+    <ClInclude Include="BoneKeySequence.h" />
+    <ClInclude Include="DepthThresholdEffect.h" />
+    <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="FXAAEffect.h" />
+    <ClInclude Include="GodRaysEffect.h" />
+    <ClInclude Include="HDRSplitEffect.h" />
+    <ClInclude Include="IAnimatedRenderable.h" />
+    <ClInclude Include="IInputHandler.h" />
+    <ClInclude Include="IMesh.h" />
+    <ClInclude Include="IMeshCollection.h" />
+    <ClInclude Include="InputManagerAPI.h" />
+    <ClInclude Include="IslandCollision.h" />
+    <ClInclude Include="IslandCollisionAPI.h" />
+    <ClInclude Include="LuaInstanceManager.h" />
+    <ClInclude Include="IRenderableObject.h" />
+    <ClInclude Include="IShader.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="LuaAPI.h" />
+    <ClInclude Include="LuaContext.h" />
+    <ClInclude Include="LuaObjectInstanceManager.h" />
+    <ClInclude Include="LuaManager.h" />
+    <ClInclude Include="LuaVectorUtility.h" />
+    <ClInclude Include="MainRename.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="MathAPI.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelLibraryAPI.h" />
+    <ClInclude Include="MultiplicativeBlendEffect.h" />
+    <ClInclude Include="ObjectInstanceAPI.h" />
+    <ClInclude Include="OBJWriter.h" />
+    <ClInclude Include="PrintAPI.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="RayEffect.h" />
+    <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="RenderManagerAPI.h" />
+    <ClInclude Include="SceneDecomposeEffect.h" />
+    <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="ExampleScene.h" />
+    <ClInclude Include="GeometricPrimitives.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Interface2D.h" />
+    <ClInclude Include="MCamera.h" />
+    <ClInclude Include="MMath.h" />
+    <ClInclude Include="ModelLibrary.h" />
+    <ClInclude Include="ObjectInstance.h" />
+    <ClInclude Include="PrimitiveCollisions.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Screen.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderLibrary.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TerrainAPI.h" />
+    <ClInclude Include="TerrainEffect.h" />
+    <ClInclude Include="TextureLibrary.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TimeAPI.h" />
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AdditiveBlendEffect.frag" />
+    <None Include="AdditiveBlendEffect.vert" />
+    <None Include="BlurEffect.frag" />
+    <None Include="BlurEffect.vert" />
+    <None Include="colored.frag" />
+    <None Include="colored.vert" />
+    <None Include="defaultShader.frag" />
+    <None Include="defaultShader.vert" />
+    <None Include="DepthThresholdEffect.frag" />
+    <None Include="DepthThresholdEffect.vert" />
+    <None Include="DirectionalLightingEffect.frag" />
+    <None Include="DirectionalLightingEffect.vert" />
+    <None Include="FXAAEffect.frag" />
+    <None Include="FXAAEffect.vert" />
+    <None Include="HDRSplitEffect.frag" />
+    <None Include="HDRSplitEffect.vert" />
+    <None Include="LuaScripts\AABoundingBox.lua" />
+    <None Include="LuaScripts\Engine.lua" />
+    <None Include="LuaScripts\FileIO.lua" />
+    <None Include="LuaScripts\Game.lua" />
+    <None Include="LuaScripts\gameObject.lua" />
+    <None Include="LuaScripts\npc.lua" />
+    <None Include="LuaScripts\Player.lua" />
+    <None Include="LuaScripts\ReadAndWriteInstances.lua" />
+    <None Include="LuaScripts\Terrain.lua" />
+    <None Include="LuaScripts\Vector3.lua" />
+    <None Include="MultiplicativeBlendEffect.frag" />
+    <None Include="MultiplicativeBlendEffect.vert" />
+    <None Include="orthoShader.frag" />
+    <None Include="orthoShader.vert" />
+    <None Include="RayEffect.frag" />
+    <None Include="RayEffect.vert" />
+    <None Include="SceneDecomposeEffect.frag" />
+    <None Include="SceneDecomposeEffect.vert" />
+    <None Include="textured.frag" />
+    <None Include="textured.vert" />
+    <None Include="TextureDisplay.frag" />
+    <None Include="TextureDisplay.vert" />
+    <None Include="uberShader.frag" />
+    <None Include="uberShader.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

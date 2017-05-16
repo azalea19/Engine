@@ -1,0 +1,9 @@
+newmtl PalmTree
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd PalmTree_1k.jpg
+map_d PalmTree_1k_alpha.jpg
