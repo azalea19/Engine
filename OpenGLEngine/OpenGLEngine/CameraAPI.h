@@ -30,6 +30,7 @@ public:
 	static LuaRef Up(InstanceHandle handle, LuaContextHandle contextHandle);
 	static void SetPosition(InstanceHandle handle, float x, float y, float z);
 	static LuaRef CameraAPI::GetPosition(InstanceHandle handle, LuaContextHandle contextHandle);
+	static LuaRef CameraAPI::GetDirection(InstanceHandle handle, LuaContextHandle contextHandle);
 
 
 

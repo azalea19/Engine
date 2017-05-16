@@ -55,6 +55,20 @@ LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
  
 }
 
+
+LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle)
+{
+	LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+
+	LuaRef newAABB = luabridge::newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+
+	newAABB["min"] = ToLuaTable(value.min, contextHandle);
+	newAABB["max"] = ToLuaTable(value.max, contextHandle);
+
+	return newAABB;
+
+}
+
 template<>
 vec3 FromLuaTable<vec3>(LuaRef value)
 {
@@ -78,6 +92,27 @@ template<> mat4 FromLuaTable<mat4>(LuaRef value)
   return glm::make_mat4(result);
 }
 
+template<> mAABB FromLuaTable<mAABB>(LuaRef value)
+{
+	mAABB result;
+
+	result.min = FromLuaTable<vec3>(value["min"]);
+	result.max = FromLuaTable<vec3>(value["max"]);
+
+
+	return result;
+}
+
+
+template<> mRay FromLuaTable<mRay>(LuaRef value)
+{
+	mRay result;
+
+	result.direction = FromLuaTable<vec3>(value["dir"]);
+	result.position = FromLuaTable<vec3>(value["pos"]);
+
+	return result;
+}
 
 void MathAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {

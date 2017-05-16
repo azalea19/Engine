@@ -2,6 +2,7 @@
 #define Interface2D_h__
 
 #include "Types.h"
+#include "FrameBuffer.h"
 
 /**
 * @file   2DInterface.h

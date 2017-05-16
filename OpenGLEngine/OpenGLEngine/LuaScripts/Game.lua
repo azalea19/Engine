@@ -16,28 +16,47 @@ local npc = require 'LuaScripts/npc'
 local Player = require 'LuaScripts/Player'
 local Scene = require 'LuaScripts/Scene'
 local World = require 'LuaScripts/World'
+
+--local QuestManager = require 'LuaScripts/QuestManager'
+require 'LuaScripts/Dialogue'
+
 require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
 require 'LuaScripts/Terrain'
 require 'LuaScripts/Controls'
+require 'LuaScripts/QuestManager'
 
 OPEN_GL = 0
 
 gameObjects = {}
 world = {}
 debug = true
-terrainSizeX = 1024
-terrainSizeY = 1024
-heightMapSize = 1024
-heightMapHeight = 100
+debugdetail = false
+loadSmallTestTerrain = true
+
 time = 0
 lastTime = 0
 deltaTime = 0
+
 
 function Run()
 	Initialize()
 	GameLoop()
 	Finalize()
+end
+
+-- Detailed debug print. For when you want to display value constantly in update and will pause to find it.
+function debugPrint(string)
+    if debugdetail then
+        printAPI.print(string)
+    end
+end
+
+-- Limited debug print. For prints that will not occur constantly in update, such as when a button is pressed.
+function debugLPrint(string)
+    if debug then
+        printAPI.print(string)
+    end
 end
 
 function LoadAPIs()
@@ -48,7 +67,7 @@ function LoadAPIs()
 	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
 	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
 	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
-    GetAPI(context.handle, 'luaVectorUtility', 'luaVectorUtility')
+    GetAPI(context.handle, 'mmath', 'luaVectorUtility')
     GetAPI(context.handle, 'engineAPI', 'engineAPI')
     GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
     GetAPI(context.handle, 'timeAPI', 'timeAPI')
@@ -56,15 +75,23 @@ function LoadAPIs()
     GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
     GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
     GetAPI(context.handle, 'display2DAPI', 'display2DAPI')
+    GetAPI(context.handle, 'collisionAPI', 'collisionAPI')
+
 
 end
 
-function PrintVec3(veca)
+function printVec3(veca)
     printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
 end
 
-function PrintVec3s(vecc,vecb)
-    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. " ")
+function printVec3After(string,veca)
+    printAPI.print(string)
+    printVec3(veca)
+
+end
+
+function printVec3s(vecc,vecb)
+    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. "\n")
 end
 	
 function LoadAssets()
@@ -91,7 +118,24 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Cactus","Assets/Models/Cactus1/cactus.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, "Assets/HeightMaps/testmap.png", "Assets/Models/Terrain/Terrain.obj", context.handle)	
+
+    if loadSmallTestTerrain then
+        hMapPath = "Assets/HeightMaps/heightmap.png"
+        terrainSizeX = 1024
+        terrainSizeY = 1024
+        heightMapSize = 257
+        heightMapHeight = 100
+    else
+        hMapPath = "Assets/HeightMaps/testmap.png"
+        terrainSizeX = 1024
+        terrainSizeY = 1024
+        heightMapSize = 1024
+        heightMapHeight = 100
+    end
+
+
+
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "Assets/Models/Terrain/Terrain.obj", context.handle)	
 	modelLibraryAPI.addModel("Terrain","Assets/Models/Terrain/Terrain.obj",false)
 
 	printAPI.print('Loading Skybox...\n')
@@ -101,10 +145,10 @@ end
 
 
 function BBToLocal(bb,scalea,loca)
-    bb.min = luaVectorUtility.vec3_Multiply(bb.min,scalea,context.handle)
-    bb.min = luaVectorUtility.vec3_Sum(bb.min,loca,context.handle)
-    bb.max = luaVectorUtility.vec3_Multiply(bb.max,scalea,context.handle)
-    bb.max = luaVectorUtility.vec3_Sum(bb.max,loca,context.handle)
+    bb.min = mmath.vec3_Multiply(bb.min,scalea,context.handle)
+    bb.min = mmath.vec3_Sum(bb.min,loca,context.handle)
+    bb.max = mmath.vec3_Multiply(bb.max,scalea,context.handle)
+    bb.max = mmath.vec3_Sum(bb.max,loca,context.handle)
 
     if bb == null then
         printAPI.print('ERROR Tried to get null local AABB\n')
@@ -114,6 +158,7 @@ function BBToLocal(bb,scalea,loca)
 end
 
 function Initialize()
+
 	LoadAPIs()
 	printAPI.print('Initializing...\n')
     printAPI.print('Initialising engine...\n')
@@ -134,6 +179,17 @@ function Initialize()
 
 	--Works
 
+
+    printAPI.print("Initialising text...\n")
+    lookAtText = " "
+    dialogueText = " "
+    dInMenu = false
+    dCurrentTopic = nil
+    dCurrentLine = 0
+
+
+
+    -- Initialise scene objects
 	printAPI.print('Initialising Scenes...\n')
 	local GOData = LoadInstances("SaveData/GO_Data.csv", "gameObject")
 	local NPCData = LoadInstances("SaveData/NPC_Data.csv", "npc")
@@ -142,11 +198,58 @@ function Initialize()
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
+
+    currentScene = scene
+
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
-	scene:SetupInstances()
-	scene:SpawnRandomObjects("Bob", a, b,100)
+
+
+    emptyVec = mmath.vec3_CreateEmpty(context.handle)
+    scale = {x=1,y=1,z=1}
+
+    NPC01 = npc.new("NPC01","Bob the Human","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human NPC")
+    local diag = Dialogue.new()
+    local topic01 = Topic.new("Greeting","Greeting")
+    topic01.questEvent = true
+    local topic02 = Topic.new("Quest1","Help find organs")
+
+    local mylines = {}
+    mylines[1] = "line 1\n"
+    mylines[2] = "line 2\n"
+    mylines[3] = "line 3\n"
+
+    topic01:setLines(mylines)
+
+    local mylines2 = {}
+    mylines2[1] = "t2line 1\n"
+    mylines2[2] = "t2line 2\n"
+    mylines2[3] = "t2line 3\n"
+
+    topic02:setLines(mylines2)
+
+    diag:addTopic(topic01)
+    diag:addTopic(topic02)
+
+    NPC01.dialogue = diag
+    NPC01:setDialogue(diag)
+
+    NPC01:makeIdle()
+
+
+    scene:AddInstance(NPC01) 
+
+
+	--scene:SpawnRandomObjects("Bob", a, b,100)
+
+
+    emptyVec = {x=0,y=0,z=0}
+    scale = {x=10,y=10,z=10}
+    
+
 	world = World.new(player0)
+
+
 
 	printAPI.print('Initialising terrain...\n')
 
@@ -158,8 +261,6 @@ function Initialize()
 	scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
 	skybox = luaObjInstManager.addNewInstance("Skybox")
-
-
 
 	--wont work
 
@@ -189,6 +290,21 @@ function Initialize()
 
 	--test = luaObjInstManager.addNewInstance("Bob")
 
+    -- Initialise weapon
+
+    basicGun = Weapon.new("basicGun","Gun",100,1)
+    player0:setWeapon(basicGun)
+
+    
+    --Initialise quests
+    questManager = QuestManager.new()
+    local stage1 = QuestStage.new("MeetBob",TALK,"NPC01","Greeting")
+    local stage2 = QuestStage.new("GetQuest",TALK,"NPC01","Quest1")
+
+    local stages = {stage1,stage2}
+    local talkToBob = Quest.new("TalkToBob",stages,2)
+    questManager:addQuest(talkToBob)
+
     printAPI.print('Initialization finished.\n')
 end
 
@@ -204,7 +320,29 @@ function Finalize()
 	printAPI.print('Finalizing...\n')
 end
 
+function StartDialogueTopic(playr,topicn)
+
+    if(playr.inDialogue) then
+        local topic = playr.lookTarget.dialogue.topics[topicn]
+        if(topic ~= nil and topic.textLines ~= nil and topic.textLines[topicn] ~= nil) then
+            dialogueText = topic.textLines[topicn]
+            dCurrentTopic = topic
+            dCurrentLine = 1
+            dInMenu = false
+
+            if topic.questEvent then
+                questManager:check(TALK,playr.lookTarget,topic.id)
+            end
+
+        else
+            debugLPrint("Could not start that topic.\n")
+        end
+    end
+end
+
 function Update()
+	--printAPI.print("Update begun\n")
+
     engineAPI.BeginUpdate()
 	lastTime = time
     time = timeAPI.elapsedTimeMs()
@@ -240,35 +378,74 @@ function Update()
             wireindex =0
         end
     end
+    --printAPI.print("Processing inputs\n")
 
 	e = inputManagerAPI.isKeyPressed(Use_Input)
 	if e then
-		local newX = player0["position"]["x"] 
-		local newZ = player0["position"]["z"]
-		local newY = GetHeightAtPoint(newX , newZ)
-		local xRotRand = math.random(360)
-		local tempID = luaObjInstManager.addNewInstance("Bob")
-		local objPosTemp = Vector3.new(newX, newY, newZ )
-		local dirTemp = Vector3.new(xRotRand, 0, 0)
-		local scaTemp = Vector3.new(1, 1, 1)
+        printAPI.print("Interacting.\n")
 
-		local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
-
-		objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
-		objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
-		objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
-		objectInstanceAPI.setAnimation(tempID,0)
-
-		local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-
-        local abox = AABBAPI.getAABB(tempID, context.handle)
-		abox.min = luaVectorUtility.vec3_Multiply(abox.min,nscale,context.handle)
-		abox.max = luaVectorUtility.vec3_Multiply(abox.max,nscale,context.handle)
-		item["boundingBox"] = abox
-
-		world:AddInstance(item)
-		renderManagerAPI.addObject(tempID)
+        StartDialogue(player0.lookTarget)
+        
 	end
+
+    if inputManagerAPI.isKeyPressed(QuickSlot1_Input) then
+
+        StartDialogueTopic(player0,1)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot2_Input) then
+
+        StartDialogueTopic(player0,2)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot3_Input) then
+
+        StartDialogueTopic(player0,3)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot4_Input) then
+
+        StartDialogueTopic(player0,4)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot5_Input) then
+
+        StartDialogueTopic(player0,5)
+        
+    end
+    if inputManagerAPI.isMousePressedLeft() then
+
+    debugLPrint("Clicked LMB.\n")
+
+    if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
+        if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
+            if(player0.lastTimeShot ==nil or player0.lastTimeShot>= player0.weapon.shootInterval) then
+                player0.lastTimeShot = timeAPI.elapsedTimeMs()
+                player0.weapon:attack(player0.lookTarget)
+            end
+            
+        end
+    end
+
+
+
+
+        if(player0.inDialogue == true and dInMenu == false) then
+            if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
+                dCurrentLine = dCurrentLine + 1
+                dialogueText = dCurrentTopic.textLines[dCurrentLine]
+                dInMenu = false
+
+            else
+                debugLPrint("Next line in topic is nil.\n")
+                StartDialogue(player0.lookTarget)
+            end
+        else
+            if(dInMenu) then
+                    player0.inDialogue = false
+            end
+        end
+    end
 
 	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
 		local currentGOs = world:GetGameObjects()
@@ -295,13 +472,121 @@ function Update()
 		world:SetupInstances()
 	end
 
+    if debug then
+
+        if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
+            printAPI.print("Force quitting.\n")
+            os.exit()
+
+	    end
+        if inputManagerAPI.isKeyPressed(TestInput1) then
+            
+            
+
+	    end
+    
+        if inputManagerAPI.isKeyPressed(TestInput2) then
+        
+            TestChangeNPCState()
+
+	    end
+
+    
+        if inputManagerAPI.isKeyPressed(TestInput3) then
+            -- spawn bob
+            local newX = player0["position"]["x"] 
+		    local newZ = player0["position"]["z"]
+		    local newY = GetHeightAtPoint(newX , newZ)
+		    local xRotRand = math.random(360)
+		    local tempID = luaObjInstManager.addNewInstance("Bob")
+		    local objPosTemp = Vector3.new(newX, newY, newZ )
+		    local dirTemp = Vector3.new(xRotRand, 0, 0)
+		    local scaTemp = Vector3.new(1, 1, 1)
+
+		    local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
+
+		    objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
+		    objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
+		    objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
+		    objectInstanceAPI.setAnimation(tempID,0)
+
+		    local nscale = objectInstanceAPI.getScale(tempID, context.handle)
+
+            local abox = AABBAPI.getAABB(tempID, context.handle)
+		    abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
+		    abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
+		    item["boundingBox"] = abox
+
+		    world:AddInstance(item)
+		    renderManagerAPI.addObject(tempID)
+
+	    end
+    
+        -- switch whether debug detail printing is on or off
+        if inputManagerAPI.isKeyPressed(TestInput4) then
+            if debugdetail == true then
+                debugdetail = false
+            else
+                debugdetail = true
+            end
+	    end
+
+    end
+
+    
+    --printAPI.print("Updating gameobjects\n")
+
+
 	local currentGOs = world:GetGameObjects()
 	for i = 1, world:GetGameObjectCount() do
+        --printAPI.print(currentGOs[i].name .. "\n")
 		local a = currentGOs[i]:Update()
 	end
+    --printAPI.print("Updating player\n")
 
     player0:update();
 	engineAPI.EndUpdate();
+    --printAPI.print("Update complete\n")
+
+end
+
+font1path = "Assets/Fonts/verdanab.ttf"
+white = {x=1,y=1,z=1}
+
+
+function TestChangeNPCState()
+    printAPI.print("Test change NPC State.\n")
+    NPC01:makeChasing()
+end
+
+function StartDialogue(npc)
+    debugPrint("Starting Dialogue... ")
+    if(npc ~= nil) then
+        if(npc.dialogue ~= nil) then
+    
+            dInMenu= true
+            local str = npc.name.."\n\nTopics: \n"
+            local topics
+            local count
+            topics, count = npc:readTopics()
+            for i=1,count do
+                str = str .. topics[i]
+            end
+
+            dialogueText = str
+
+            player0.inDialogue = true
+
+            dCurrentTopic = nil
+            debugPrint("Complete\n")
+        else
+            debugPrint("NPC has no dialogue.\n")
+        end
+    end
+    
+
+
+
 end
 
 function Render()
@@ -315,21 +600,31 @@ function Render()
 		if(helpMenu) then
 			display2DAPI.drawFullScreen("rules.png")
 		else
+
+            -- Draw object
 			local currentGOs = world:GetGameObjects()
 			for i = 1, world:GetGameObjectCount() do
-				renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+                if(currentGOs[i].visible) then
+                    renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+                end
 			end
 			local currentTerrainID = world:GetTerrainID()
 			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
-			--renderManagerAPI.render(worldMatrix,viewMatrix,projectionMatrix,time)
-			--renderManagerAPI.renderFromCamera(camera0,time)
-			--renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
-			--renderManagerAPI.renderObject(camera0,time,cactus, 1)
 			renderManagerAPI.present(camera0)
+
+            
+            -- Draw UI text
+            display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
+
+            if(player0.inDialogue) then 
+                display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
+            end
+
 		end
 	end
+
 
     renderManagerAPI.endRender()
 end

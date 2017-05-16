@@ -54,7 +54,10 @@ function World:GetTerrainID()
 end
 
 function World:GetGameObjectCount()
-	return self.scenes[self.currentScene]:GetGameObjectCount()
+	debugPrint("Getting game object count... ")
+	a = self.scenes[self.currentScene]:GetGameObjectCount()
+	debugPrint("Success\n")
+	return a
 end
 
 function World:SetupInstances()

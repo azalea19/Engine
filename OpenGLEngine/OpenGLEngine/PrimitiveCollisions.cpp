@@ -237,10 +237,246 @@ bool Intersects(mAABB const & aabb, mSphere const & sphere)
 	return true;
 }
 
+bool RayAABBPlane(const float boxMin, const float boxMax, const float vertOrigin, const float vertEnd, float& globalMin, float& globalMax, float norm)
+{
+
+	// planeMin is the fraction at which the line collides with the AABB first, planeMax is the second collision, temp is used to move values around
+	float planeMin, planeMax, temp;
+	bool isColliding = true;	//If true, then the line is colliding on this plane
+								// Gets the location of the first collision with the cube along the line as a fraction, the fraction is the percent that the line moved before colliding.
+
+	if ((vertEnd <= boxMax && vertEnd >= boxMin) ||
+		(vertOrigin <= boxMax && vertOrigin >= boxMin) ||
+		(boxMin <= vertOrigin && boxMin >= vertEnd) ||
+		(boxMin >= vertOrigin && boxMin <= vertEnd) ||
+		(boxMax <= vertOrigin && boxMax >= vertEnd) ||
+		(boxMax >= vertOrigin && boxMax <= vertEnd))
+	{
+
+		planeMin = (boxMin - vertOrigin) / (norm);
+		//Same as above, but for the second collision (line leaves Object)
+		planeMax = (boxMax - vertOrigin) / (norm);
+
+		// check if the max value is larger than the min value
+		if (planeMax < planeMin) {
+			//If it is, then swap the values
+			temp = planeMin;
+			planeMin = planeMax;
+			planeMax = temp;
+		}
+
+		// set the new values for the global min and max values, get the largest min value, and the smallest max value, this shrinks the scope of the line
+		if (planeMin > globalMin)
+			globalMin = planeMin;
+
+		if (planeMax < globalMax)
+			globalMax = planeMax;
+
+		//If the minimum value is greater than the max value, there is no collision
+		if (globalMin > globalMax) {
+			isColliding = false;
+		}
+		if (globalMax < 0)
+		{
+			isColliding = false;
+		}
+	}
+	else {
+		isColliding = false;
+	}
+
+	return isColliding;
+}
+
+
+/// <summary>
+/// Intersectses the specified aabb. 
+/// Author Nathan
+/// </summary>
+/// <param name="aabb">The aabb.</param>
+/// <param name="ray">The ray.</param>
+/// <param name="rayEnterDist">The ray enter dist.</param>
+/// <param name="rayExitDist">The ray exit dist.</param>
+/// <returns></returns>
 bool Intersects(mAABB const & aabb, mRay const & ray, float * rayEnterDist, float * rayExitDist)
 {
+/*float tmin = (aabb.min.x - ray.position.x) / ray.direction.x;
+float tmax = (aabb.max.x - ray.position.x) / ray.direction.x;
+float tmp;
+
+if (tmin > tmax) {
+	tmp = tmin;
+	tmin = tmax;
+	tmax = tmp;
+}
+
+float tymin = (aabb.min.y - ray.position.y) / ray.direction.y;
+float tymax = (aabb.max.y - ray.position.y) / ray.direction.y;
+
+if (tymin > tymax)
+{
+	tmp = tymin;
+	tymin = tymax;
+	tymax = tmp;
+}
+
+if ((tmin > tymax) || (tymin > tmax))
+return false;
+
+if (tymin > tmin)
+tmin = tymin;
+
+if (tymax < tmax)
+	tmax = tymax;
+
+float tzmin = (aabb.min.z - ray.position.z) / ray.direction.z;
+float tzmax = (aabb.max.z - ray.position.z) / ray.direction.z;
+
+if (tzmin > tzmax) {
+	tmp = tzmin;
+	tzmin = tzmax;
+	tzmax = tmp;
+}
+
+if ((tmin > tzmax) || (tzmin > tmax))
+return false;
+
+if (tzmin > tmin)
+tmin = tzmin;
+
+if (tzmax < tmax)
+	tmax = tzmax;
+
+return true;*/
+
+
+
+
+
+		float globalMin = -1000000000;	//minimum value is 0%
+		float globalMax = 1000000000;	//max value is 100%
+		bool isColliding = false;	//whether the line is colliding with the AABB2
+
+									//Check every plane, if all checks return true then the line is colliding with the Box
+		if (RayAABBPlane(aabb.min.x, aabb.max.x, ray.position.x, ray.position.x + ray.direction.x * 50, globalMin, globalMax, ray.direction.x)) {
+			if (RayAABBPlane(aabb.min.y, aabb.max.y, ray.position.y, ray.position.y + ray.direction.y * 50, globalMin, globalMax, ray.direction.y)) {
+				if (RayAABBPlane(aabb.min.z, aabb.max.z, ray.position.z, ray.position.z + ray.direction.z * 50, globalMin, globalMax, ray.direction.z)) {
+					isColliding = true;
+				}
+			}
+		}
+
+		//collisionFraction = globalMin;	//set the value for the collision fraction, so we can use it later for collision resolution
+
+		return isColliding;
+	
+	/*float Tnear = -std::numeric_limits<float>::infinity();
+	float Tfar = std::numeric_limits<float>::infinity();
+
+	if (ray.direction.x == 0) {
+		if (ray.position.x < aabb.min.x || ray.position.x > aabb.max.x) {
+			return false;
+		}
+	}
+	float Tone = (aabb.min.x - ray.position.x) / ray.direction.x;
+	float Ttwo = (aabb.max.x - ray.position.x) / ray.direction.x;
+	float tmp = 0;
+
+	if (Tone > Ttwo) {
+		tmp = Tone;
+		Tone = Ttwo;
+		Ttwo = tmp;
+	}
+
+	if (Tone > Tnear)
+	{
+		Tnear = Tone;
+	}
+	if (Ttwo < Tfar) 
+	{
+		Tfar = Ttwo;
+	}
+	if (Tnear > Tfar)
+	{
+		return false;
+	}
+	if(Tfar < 0)
+	{
+		return false;
+	}
+
+	if (ray.direction.y == 0) {
+		if (ray.position.y < aabb.min.y || ray.position.y > aabb.max.y) {
+			return false;
+		}
+	}
+	Tone = (aabb.min.y - ray.position.y) / ray.direction.y;
+	Ttwo = (aabb.max.y - ray.position.y) / ray.direction.y;
+	tmp = 0;
+
+	if (Tone > Ttwo) {
+		tmp = Tone;
+		Tone = Ttwo;
+		Ttwo = tmp;
+	}
+
+	if (Tone > Tnear)
+	{
+		Tnear = Tone;
+	}
+	if (Ttwo < Tfar)
+	{
+		Tfar = Ttwo;
+	}
+	if (Tnear > Tfar)
+	{
+		return false;
+	}
+	if (Tfar < 0)
+	{
+		return false;
+	}
+
+	if (ray.direction.z == 0) {
+		if (ray.position.z < aabb.min.z || ray.position.z > aabb.max.z) {
+			return false;
+		}
+	}
+	Tone = (aabb.min.z - ray.position.z) / ray.direction.z;
+	Ttwo = (aabb.max.z - ray.position.z) / ray.direction.z;
+	tmp = 0;
+
+	if (Tone > Ttwo) {
+		tmp = Tone;
+		Tone = Ttwo;
+		Ttwo = tmp;
+	}
+
+	if (Tone > Tnear)
+	{
+		Tnear = Tone;
+	}
+	if (Ttwo < Tfar)
+	{
+		Tfar = Ttwo;
+	}
+	if (Tnear > Tfar)
+	{
+		return false;
+	}
+	if (Tfar < 0)
+	{
+		return false;
+	}
+	
+	if (rayEnterDist != nullptr && rayExitDist != nullptr)
+	{
+
+	}
+
+
 	//TODO
-	return false;
+	return true;*/
 }
 
 bool Intersects(mOBB const & a, mOBB const & b)

@@ -17,8 +17,19 @@ void LuaDisplay2DAPI::DrawFullScreen(string filePath)
 
 	FrameBuffer::Display(id);
 }
+
+void LuaDisplay2DAPI::DrawTextLua(int size, string const& filePath, string const& text, int xpos, int ypos, LuaRef color)
+{
+	glm::vec3 nVec;
+	nVec.x = FromLuaTable<glm::vec3>(color).x;
+	DrawText(size, filePath, text, xpos, ypos, nVec);
+}
+
+
 void LuaDisplay2DAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "drawFullScreen", DrawFullScreen);
+	pContext->ExposeFunction(luaAPIName, "drawText", DrawTextLua);
+
 }
