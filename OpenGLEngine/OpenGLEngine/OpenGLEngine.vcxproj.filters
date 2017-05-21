@@ -232,6 +232,9 @@
     <ClCompile Include="Source\Engine Components\Independant\Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="KDTree.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Interface2D.h">
