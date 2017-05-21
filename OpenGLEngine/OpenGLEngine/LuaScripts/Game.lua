@@ -91,13 +91,13 @@ function LoadAssets()
 	printAPI.print('Loading Terrain...\n')
 
     if loadSmallTestTerrain then
-        hMapPath = "Assets/HeightMaps/heightmap.png"
+        hMapPath = "Assets/HeightMaps/flatmap.png"
         terrainSizeX = 1024
         terrainSizeY = 1024
         heightMapSize = 257
         heightMapHeight = 100
     else
-        hMapPath = "Assets/HeightMaps/testmap.png"
+        hMapPath = "Assets/HeightMaps/flatmap.png"
         terrainSizeX = 1024
         terrainSizeY = 1024
         heightMapSize = 1024
@@ -155,10 +155,10 @@ function Initialize()
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
-	scene:AddInstances(GOData)
-	scene:AddInstances(NPCData)
+	--scene:AddInstances(GOData)
+	--scene:AddInstances(NPCData)
 	local a = Vector3.new(0,0,0)
-	local b = Vector3.new(1,1,1)
+	local b = Vector3.new(.2,.2,.2)
 	scene:SetupInstances()
 	scene:SpawnRandomObjects("Bob", a, b,100)
 	world = World.new(player0)
