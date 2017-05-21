@@ -1,0 +1,9 @@
+int/
+*.sdf
+*.db
+*.opendb
+*.exe
+*.ilk
+*.pdb
+*.iobj
+*.ipdb
