@@ -620,10 +620,52 @@
     <None Include="DirectionalLightingEffect.vert">
       <Filter>Source\Shaders</Filter>
     </None>
-    <None Include="LuaScripts\Game.lua">
-      <Filter>Source\Lua\Scripts</Filter>
-    </None>
     <None Include="colored.frag" />
     <None Include="colored.vert" />
+    <None Include="bin\x64\Game.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="Controls.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="Dialogue.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="FileIO.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="GameObject.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="NPC.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="Player.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="QuestManager.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="ReadAndWriteInstances.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="Scene.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="Terrain.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="Vector3.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="World.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="3DUtility.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
+    <None Include="AABoundingBox.lua">
+      <Filter>Source\Lua\Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>
