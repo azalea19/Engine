@@ -91,6 +91,10 @@ vec3 AffineTransformable::Backward() const
 	return -Forward();
 }
 
+/// <summary>
+/// Looks at. NOT WORKING TODO
+/// </summary>
+/// <param name="targetTranslation">The target translation.</param>
 void AffineTransformable::LookAt(vec3 targetTranslation)
 {
 	SetTransform(glm::lookAt(GetTranslation(), targetTranslation, vec3(0, 1, 0)));

@@ -2,10 +2,9 @@
 #include "IEngine.h"
 #include "GLEngine.h"
 #include "DXEngine.h"
-
-
 int main(int argc, char **argv)
 {
 	LuaManager::Initialize();
-	LuaManager::GetInstance().CreateContext("LuaScripts/Game.lua");
+
+	LuaManager::GetInstance().CreateContext("Game.lua");
 }
