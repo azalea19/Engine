@@ -60,7 +60,12 @@ LuaRef ObjectInstanceAPI::GetTranslation(InstanceHandle instHandle, LuaContextHa
 
 void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef targetVec3)
 {
-	LuaObjectInstanceManager::GetInstance(instHandle)->LookAt(FromLuaTable<vec3>(targetVec3));
+	vec3 target = FromLuaTable<vec3>(targetVec3);
+	auto inst = LuaObjectInstanceManager::GetInstance(instHandle);
+
+
+	inst->SetTransform(glm::lookAt(inst->GetTranslation(), target, vec3(0, 1, 0)));
+
 
 }
 

@@ -1,5 +1,4 @@
 function lerp(a, b, t)
-
 	return a * (1-t) + b * t
 end
 
@@ -21,7 +20,7 @@ function WSToHeightMapSpace(wsX,wsZ)
 	local hmX = mapRange(0,terrainSizeX, 0.5, heightMapSize-0.5, wsX)
 	local hmY = mapRange(0, terrainSizeY, 0.5, heightMapSize-0.5, wsZ)
 	
-	printAPI.print(hmX .." " .. hmY .. "\n")
+	debugPrint("World to height map space: " .. hmX .." " .. hmY .. " ...")
 	debugPrint("Complete gwths\n")
 
 	return hmX,hmY

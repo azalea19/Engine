@@ -40,6 +40,8 @@ end
 
 function idle(anpc)
 	debugPrint("NPC is Idling... ")
+	printVec3After("NPC pos: ",anpc:getPosition())
+
 	
 	
     if (anpc.hostileToPlayer and anpc.seenPlayer) then
@@ -52,8 +54,10 @@ function chasing(anpc)
 	debugPrint("NPC is Chasing... ")
 	if player0 ~= nil then
 		anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
-		debugLPrint("Looking at player position.\n")
-		anpc:lookAt(player0.position)
+		debugPrint("Looking at player position.\n")
+		local newVec = {x=0,y=0,z=0}
+		anpc:lookAt(newVec)--player0.position)
+		printVec3After("NPC pos: ",anpc:getPosition())
 	else
 		printAPI.print("Warning: Player is nil\n")
 	end
