@@ -13,6 +13,24 @@ function Distance(vec1,vec2)
     --(x2 x1)2 + (y2 y1)2 + (z2 z1)2.
 end
 
+function Direction(vec1,vec2)
+	return mmath.vec3_Normalize(mmath.vec3_Subtract(vec1,vec2,context.handle), context.handle)
+end
+
+
+function AngleDiffDeg(vec1,vec2)
+
+
+	if(debugdetail) then
+	printVec3s(vec1,vec2)
+	end
+	local dot = mmath.vec3_DotProduct(vec1,vec2)
+	debugPrint("Dot product: " .. dot .. " // ")
+	local angle = math.acos(dot)* 180 / 3.14
+	debugPrint("Angle difference: " .. angle .. "\n")
+	return angle 
+end
+
 -- Move from source (vec3) to dest (vec3) with the given increment (float) - author Liz
 function MoveTowards(source,dest,increment)
 	
@@ -24,7 +42,7 @@ function MoveTowards(source,dest,increment)
 		
 	end
 	
-    direction = mmath.vec3_Normalize(mmath.vec3_Subtract(dest,source,context.handle), context.handle)
+    direction = Direction(dest,source)
 
     if Distance(source,dest) <= increment then
 		debugPrint("Complete.\n")

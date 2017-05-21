@@ -7,6 +7,8 @@
 #include "MCamera.h"
 #include "ObjectInstance.h"
 #include "MathAPI.h"
+#include "Types.h"
+
 
 typedef int InstanceHandle;
 
@@ -33,6 +35,15 @@ public:
 
 
 	static void SetOrientation(InstanceHandle instHandle, float in1, float in2, float in3);
+	
+	/*
+	/// <summary>
+	/// Gets the orientation.
+	/// </summary>
+	/// <param name="instHandle">The instance handle.</param>
+	/// <param name="contextHandle">The context handle.</param>
+	//static LuaRef GetOrientation(InstanceHandle instHandle, LuaContextHandle contextHandle);
+	*/
 	/// <summary>
 	/// Sets the scale.
 	/// </summary>
@@ -81,10 +92,11 @@ public:
   /// <param name="z">The z.</param>
   static void SetTranslation(InstanceHandle instHandle, float x, float y, float z);
 
-  static void SetRotation(InstanceHandle instHandle, float x, float y, float z);
 
-	
+  static LuaRef ObjectInstanceAPI::Forward(InstanceHandle instHandle, LuaContextHandle cHandle);
 
+
+  static void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef targetVec3);
 
   /// <summary>
   /// Exposes the API functions.

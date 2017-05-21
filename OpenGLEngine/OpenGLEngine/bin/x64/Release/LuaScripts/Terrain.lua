@@ -16,15 +16,21 @@ function mapRange(u1,u2,v1,v2, value)
 end
 
 function WSToHeightMapSpace(wsX,wsZ)
+	debugPrint("Getting world to heightmap space... ")
+
 	local hmX = mapRange(0,terrainSizeX, 0.5, heightMapSize-0.5, wsX)
 	local hmY = mapRange(0, terrainSizeY, 0.5, heightMapSize-0.5, wsZ)
+	
+	printAPI.print(hmX .." " .. hmY .. "\n")
+	debugPrint("Complete gwths\n")
 
 	return hmX,hmY
 end
 
-function GetHeightAtPoint(x,y)
+function GetHeightAtPoint(nx,ny)
+	debugPrint("Getting height at point... ")
 	--returned as floating value
-	local hmX, hmY = WSToHeightMapSpace(x,y)
+	local hmX, hmY = WSToHeightMapSpace(nx,ny)
 	hmX = hmX - 0.5	+ 1
 	hmY = hmY - 0.5 + 1
 
@@ -39,7 +45,10 @@ function GetHeightAtPoint(x,y)
     local h01 = terrainHeightData[sampleX][sampleY + 1]
 	local h11 = terrainHeightData[sampleX + 1][sampleY + 1]	
 	
-	return biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
+	local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
+	debugPrint("Complete\n")
+
+	return val
 end
 
 

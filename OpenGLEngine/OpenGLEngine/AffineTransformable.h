@@ -2,7 +2,7 @@
 #define AffineTransformable_h__
 
 #include "Types.h"
-
+#include "glm/glm.hpp"
 /**
 * @file AffineTransformable.h
 * @Author Maddisen Topaz
@@ -16,6 +16,10 @@
 class AffineTransformable
 {
 private:
+
+
+
+
 
   /// <summary>
   /// The translation
@@ -78,6 +82,12 @@ public:
   /// <param name="y">The y.</param>
   /// <param name="z">The z.</param>
   void SetTranslation(float x, float y, float z);
+  
+  /// <summary>
+  /// Looks at position.
+  /// </summary>
+  /// <param name="position">The position.</param>
+  void LookAt(vec3 position);
 
   /// <summary>
   /// Gets the orientation.
@@ -163,5 +173,48 @@ public:
   /// <param name="scale">The scale.</param>
   void SetTransform(vec3 const& translation, float yaw, float pitch, float roll, vec3 const& scale);
 
+
+
+  /**
+  * @brief Calculates the forward vector of the object
+  *
+  * @return vec3
+  */
+  vec3 Forward() const;
+
+  /**
+  * @brief Calculates the backward vector of the object
+  *
+  * @return vec3
+  */
+  vec3 Backward() const;
+
+  /**
+  * @brief Calculates the up vector of the object
+  *
+  * @return vec3
+  */
+  vec3 Up() const;
+
+  /**
+  * @brief Calculates the down vector of the object
+  *
+  * @return vec3
+  */
+  vec3 Down() const;
+
+  /**
+  * @brief Calculates the left vector of the object
+  *
+  * @return vec3
+  */
+  vec3 Left() const;
+
+  /**
+  * @brief Calculates the right vector of the object
+  *
+  * @return vec3
+  */
+  vec3 Right() const;
 };
 #endif // AffineTransformable_h__

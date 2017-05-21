@@ -5,9 +5,29 @@
 //vec3 * 1/magnitude
 LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHandle)
 {
-  vec3 vec = FromLuaTable<vec3>(value);
-	vec = normalize(vec);
+	vec3 vec = FromLuaTable<vec3>(value);
+	//vec = normalize(vec);
+
+	float mag = sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
+
+	vec.x = vec.x / mag;
+	vec.y = vec.y / mag;
+	vec.z = vec.z / mag;
+	
+
 	return ToLuaTable(vec, contextHandle);
+}
+
+float LuaVectorUtility::vec3_DotProduct(LuaRef a, LuaRef b)
+{
+	vec3 vec1 = FromLuaTable<vec3>(a);
+	vec3 vec2 = FromLuaTable<vec3>(b);
+
+	float c[] = { vec1.x,vec1.y,vec1.z };
+	float d[] = { vec2.x,vec2.y,vec2.z };
+
+	return std::inner_product(std::begin(c), std::end(c), std::begin(d), 0.0);
+	//return std::inner_product(c, c + sizeof(c) / sizeof(c[0]), d, 0);
 }
 
 //vec3 + vec3
@@ -76,6 +96,7 @@ void LuaVectorUtility::Expose(LuaContextHandle contextHandle, string luaAPIName)
 	pContext->ExposeFunction(luaAPIName, "vec3_Equals", vec3_Equals);
 
 	pContext->ExposeFunction(luaAPIName, "vec3_CreateEmpty", vec3_CreateEmpty);
+	pContext->ExposeFunction(luaAPIName, "vec3_DotProduct", vec3_DotProduct);
 
 	pContext->ExposeFunction(luaAPIName, "vec3_Normalize", vec3_Normalize);
 	pContext->ExposeFunction(luaAPIName, "vec3_Sum", vec3_Sum);

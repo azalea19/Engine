@@ -5,6 +5,8 @@ require 'LuaScripts/3DUtility'
 local npc = {}
 npc.__index = npc
 
+player = player0
+
 	-- todo What are the expected values/types for these parameters?
 function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, newCurrentHealth, newMaxHealth)
 	
@@ -23,6 +25,8 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.state = nil -- Function to call for to the players state
     instance.moveSpeed = 0.1
 	instance.objType = "NPC"
+	instance.hearDist = 10
+	instance.lookAngleDeg = 45
 
 	--printAPI.print("Testing NPC instantiate bounding box: " .. instance.boundingBox.min.x .. "\n")
 	--setmetatable(instance, { __index = gameObject } )
@@ -36,16 +40,20 @@ end
 
 function idle(anpc)
 	debugPrint("NPC is Idling... ")
+	
+	
     if (anpc.hostileToPlayer and anpc.seenPlayer) then
         anpc.state = chasing
     end
 end
 
+
 function chasing(anpc)
 	debugPrint("NPC is Chasing... ")
 	if player0 ~= nil then
 		anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
-
+		debugLPrint("Looking at player position.\n")
+		anpc:lookAt(player0.position)
 	else
 		printAPI.print("Warning: Player is nil\n")
 	end
@@ -119,6 +127,17 @@ function npc:Update()
 			self:Die()
 		end
 	end
+	
+	if
+	(
+	AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg
+	--or 
+	--Distance(npc:getPosition(), player:getPosition()) <= self.hearDist
+	) 
+	then
+		self.seenPlayer = true
+	end
+	
 	if self.state ~= nil then
 		debugPrint("Running NPC state...")
 		self.state(self)
@@ -126,6 +145,8 @@ function npc:Update()
 		self:setPosition(an)
 
 	end
+	
+	
 end
 
 function npc:Die()

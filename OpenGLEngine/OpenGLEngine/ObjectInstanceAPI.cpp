@@ -14,6 +14,21 @@ void ObjectInstanceAPI::SetOrientation(InstanceHandle instHandle, float in1, flo
 	GetInstance(instHandle)->SetOrientation(in1, in2, in3);
 }
 
+/*
+LuaRef ObjectInstanceAPI::GetOrientation(InstanceHandle instHandle, LuaContextHandle contextHandle)
+{
+	//Gets mat4
+	return ToLuaTable(GetInstance(instHandle)->GetOrientation(),contextHandle);
+}
+*/
+
+LuaRef ObjectInstanceAPI::Forward(InstanceHandle instHandle, LuaContextHandle cHandle)
+{
+	auto inst = GetInstance(instHandle);
+
+	return ToLuaTable(inst->Forward(), cHandle);
+}
+
 void ObjectInstanceAPI::SetScale(InstanceHandle instHandle, float in1, float in2, float in3)
 {
 	vec3 vec(in1, in2, in3);
@@ -42,6 +57,13 @@ LuaRef ObjectInstanceAPI::GetTranslation(InstanceHandle instHandle, LuaContextHa
 
 }
 
+
+void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef targetVec3)
+{
+	LuaObjectInstanceManager::GetInstance(instHandle)->LookAt(FromLuaTable<vec3>(targetVec3));
+
+}
+
 void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
@@ -50,14 +72,9 @@ void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName
 	pContext->ExposeFunction(luaAPIName, "setScale", SetScale);
 	pContext->ExposeFunction(luaAPIName, "getScale", GetScale);
 	pContext->ExposeFunction(luaAPIName, "getTranslation", GetTranslation);
-	pContext->ExposeFunction(luaAPIName, "setRotation", SetRotation);
+	pContext->ExposeFunction(luaAPIName, "forward", Forward);
+	pContext->ExposeFunction(luaAPIName, "lookAt", LookAt);
 
 	pContext->ExposeFunction(luaAPIName, "setAnimation", SetAnimation);
 }
 
-void ObjectInstanceAPI::SetRotation(InstanceHandle instHandle, float roll, float pit, float yaw)
-{
-	GetInstance(instHandle)->SetRoll(roll);
-	GetInstance(instHandle)->SetPitch(pit);
-	GetInstance(instHandle)->SetYaw(yaw);
-}

@@ -59,6 +59,9 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 	--printVec3s(boundingBox.min,boundingBox.max)
 	return instance
 end
+function gameObject:lookAt(npos)
+	objectInstanceAPI.lookAt(self.id,npos)
+end
 
 
 function gameObject:setPosition(pos)
@@ -67,6 +70,10 @@ end
 
 function gameObject:getPosition()
     return objectInstanceAPI.getTranslation(self.id,context.handle)
+end
+
+function gameObject:getForward()
+	return objectInstanceAPI.forward(self.id,context.handle)
 end
 
 
@@ -99,6 +106,10 @@ end
 
 function gameObject:getDir()
 	return gameObject.direction
+end
+
+function gameObject:setDir(newDir)
+	objectInstanceAPI.setOrientation(newDir.x,newDir.y,newDir.z,context.handle)
 end
 
 function gameObject:getScale()

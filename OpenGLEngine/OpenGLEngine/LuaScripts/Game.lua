@@ -31,7 +31,7 @@ OPEN_GL = 0
 gameObjects = {}
 world = {}
 debug = true
-debugdetail = false
+debugdetail = falsew
 loadSmallTestTerrain = true
 
 time = 0
@@ -205,10 +205,12 @@ function Initialize()
 	local b = Vector3.new(1,1,1)
 
 
-    emptyVec = mmath.vec3_CreateEmpty(context.handle)
-    scale = {x=1,y=1,z=1}
+    local emptyVec = mmath.vec3_CreateEmpty(context.handle)
+    local loc = {x=100,y=0,z=100}
+    local scale = {x=3,y=3,z=3}
+    local dir = {x=0,y=1,z=0}
 
-    NPC01 = npc.new("NPC01","Bob the Human","Bob",emptyVec,emptyVec,scale,0,100,100,"Bob the Human NPC")
+    NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100,"Bob the Human NPC")
     local diag = Dialogue.new()
     local topic01 = Topic.new("Greeting","Greeting")
     topic01.questEvent = true

@@ -78,6 +78,52 @@ vec3 const& AffineTransformable::GetScale() const
   return m_scale;
 }
 
+
+vec3 AffineTransformable::Forward() const
+{
+	vec4 vsForward(0, 0, -1, 0);
+	vec4 wsForward = GetTransform() * vsForward;
+	return normalize(vec3(wsForward.x, wsForward.y, wsForward.z));
+}
+
+vec3 AffineTransformable::Backward() const
+{
+	return -Forward();
+}
+
+void AffineTransformable::LookAt(vec3 targetTranslation)
+{
+	SetTransform(glm::lookAt(GetTranslation(), targetTranslation, vec3(0, 1, 0)));
+}
+
+
+vec3 AffineTransformable::Down() const
+{
+	vec4 vsDown(0, -1, 0, 0);
+	vec4 wsDown = GetTransform() * vsDown;
+
+	return normalize(vec3(wsDown.x, wsDown.y, wsDown.z));
+}
+
+vec3 AffineTransformable::Up() const
+{
+	return -Down();
+}
+
+vec3 AffineTransformable::Left() const
+{
+	vec4 vsLeft(-1, 0, 0, 0);
+	vec4 wsLeft = GetTransform() * vsLeft;
+	return normalize(vec3(wsLeft.x, wsLeft.y, wsLeft.z));
+}
+
+vec3 AffineTransformable::Right() const
+{
+	return -Left();
+}
+
+
+
 void AffineTransformable::SetScale(vec3 const& scale)
 {
   m_scale = scale;

@@ -6,6 +6,7 @@
 #include "LuaManager.h"
 #include <GL/glew.h>
 #include "MathAPI.h"
+#include <numeric>
 
 
 
@@ -30,6 +31,10 @@ public:
 	/// <returns>LuaRef</returns>
 	static LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHandle);
 	
+
+	static float LuaVectorUtility::vec3_DotProduct(LuaRef vec1, LuaRef vec2);
+
+
 	/// <summary>
 	/// Vec3 sum.
 	/// </summary>
