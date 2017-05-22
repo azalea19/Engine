@@ -1,6 +1,0 @@
-<map id="RenderableObject" name="RenderableObject">
-<area shape="rect" id="node2" href="$class_i_renderable_object.html" title="{IRenderableObject\n||+ Initialise()\l+ Destroy()\l+ BindObject()\l+ BindMesh()\l+ Render()\l}" alt="" coords="101,403,229,539"/>
-<area shape="rect" id="node3" href="$class_i_animated_renderable.html" title="{IAnimatedRenderable\n||+ Render()\l}" alt="" coords="10,219,155,296"/>
-<area shape="rect" id="node4" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="5,5,160,112"/>
-<area shape="rect" id="node5" href="$class_i_mesh_collection.html" title="{IMeshCollection\n||+ GetVertices()\l+ GetNormals()\l+ GetAABB()\l+ GetIndices()\l+ GetVertexCount()\l+ GetNormalCount()\l+ GetIndexCount()\l+ GetMesh()\l+ GetMeshCount()\l}" alt="" coords="180,160,319,355"/>
-</map>

@@ -1,3 +1,0 @@
-<map id="AdditiveBlendEffect" name="AdditiveBlendEffect">
-<area shape="rect" id="node2" href="$class_frame_buffer.html" title="{FrameBuffer\n|+ FSQuadVAO\l&#45; m_fb\l&#45; colourAttachments\l&#45; MAX_COLOUR_ATTACHMENTS\l|+ FrameBuffer()\l+ ~FrameBuffer()\l+ Bind()\l+ Unbind()\l+ GetBindMode()\l+ GetStatus()\l+ AttachColour()\l+ AttachDepth()\l+ DetachColour()\l+ DetachDepth()\l+ Initialize()\l+ BindToScreen()\l+ Display()\l&#45; AddColourAttachment()\l&#45; RemoveColourAttachment()\l&#45; BindFrameBuffer()\l}" alt="" coords="5,5,225,347"/>
-</map>

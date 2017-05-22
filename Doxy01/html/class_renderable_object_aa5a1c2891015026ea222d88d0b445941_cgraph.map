@@ -1,7 +1,0 @@
-<map id="RenderableObject::RenderableObject" name="RenderableObject::RenderableObject">
-<area shape="rect" id="node2" href="$class_renderable_object.html#a82c94dda816b7b43ff74714c7e91b92d" title="Initialises this instance. " alt="" coords="252,5,432,32"/>
-<area shape="rect" id="node3" href="$class_model.html#ae74bb9abcef7456bb360317cd1dda70c" title="Initializes a new instance of the Model class. " alt="" coords="292,80,392,107"/>
-<area shape="rect" id="node4" href="$class_model.html#a473f1ba420d4c80c7691924a00f41550" title="Loads the assimp meshes. " alt="" coords="483,29,665,56"/>
-<area shape="rect" id="node5" href="$class_model.html#a694937ff39bfa5fc570a17911ebad663" title="Loads the assimp skeleton. " alt="" coords="480,80,668,107"/>
-<area shape="rect" id="node6" href="$class_model.html#a16116c10d24e886acf1dcb44718695ea" title="Loads the vertex attributes. " alt="" coords="481,131,667,157"/>
-</map>

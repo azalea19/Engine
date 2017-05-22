@@ -1,5 +1,0 @@
-<map id="IMeshCollection::GetVertexCount" name="IMeshCollection::GetVertexCount">
-<area shape="rect" id="node2" href="$class_i_mesh_collection.html#a69a697dbe55af35db69dc056aef900a5" title="Gets the mesh at the specified index. " alt="" coords="235,5,409,32"/>
-<area shape="rect" id="node3" href="$class_i_mesh_collection.html#adf67edfc7e63ed993082714cfc9de7e2" title="Gets the mesh count. " alt="" coords="235,57,409,98"/>
-<area shape="rect" id="node4" href="$class_i_mesh.html#aff814631d73a51d364824632beabe147" title="Gets the vertex count. " alt="" coords="243,123,401,149"/>
-</map>

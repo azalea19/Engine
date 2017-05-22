@@ -1,6 +1,0 @@
-<map id="MCamera::Forward" name="MCamera::Forward">
-<area shape="rect" id="node2" href="$class_m_camera.html#a0f5e90744e9d50492c2751c68f307eae" title="Calculates the backward vector of the camera. " alt="" coords="203,5,346,32"/>
-<area shape="rect" id="node3" href="$class_m_camera.html#a7c3c46db993bd13e119362483d93abc4" title="Gets the forward direction of the camera, but disregard changes in the pitch of the camera This allow..." alt="" coords="185,56,364,83"/>
-<area shape="rect" id="node5" href="$class_m_player.html#af357bfec947db56384c5b1dcc989faab" title="Get&#39;s the player&#39;s Ray. " alt="" coords="192,107,357,133"/>
-<area shape="rect" id="node4" href="$class_m_camera.html#a5a65b30d471acdfa172adf0fb5ac163b" title="Gets the backwards direction of the camera, but disregard changes in the pitch of the camera..." alt="" coords="412,56,601,83"/>
-</map>

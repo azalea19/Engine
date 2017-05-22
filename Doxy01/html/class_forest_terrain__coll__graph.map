@@ -1,6 +1,0 @@
-<map id="ForestTerrain" name="ForestTerrain">
-<area shape="rect" id="node2" href="$class_i_renderable.html" title="{IRenderable\n||+ Render()\l}" alt="" coords="5,417,96,494"/>
-<area shape="rect" id="node3" href="$class_i_mesh.html" title="{IMesh\n||+ GetVertices()\l+ GetNormals()\l+ GetIndices()\l+ GetTexCoords()\l+ GetTexCoordsCount()\l+ GetVertexCount()\l+ GetNormalCount()\l+ GetIndexCount()\l}" alt="" coords="54,5,213,185"/>
-<area shape="rect" id="node4" href="$class_terrain.html" title="{Terrain\n|&#45; gVBO\l&#45; gNBO\l&#45; gIBO\l&#45; gUVBO\l&#45; m_texture\l&#45; m_vertices\l&#45; m_normals\l&#45; m_indices\l&#45; m_texCoords\l&#45; m_heightScale\land 6 more...\l|+ Terrain()\l+ CreateMesh()\l+ GetHeightMap()\l+ GetXBlockScale()\l+ GetYBlockScale()\l+ GetHeightScale()\l+ GetVertices()\l+ GetNormals()\l+ GetIndices()\l+ GetTexCoords()\l&#45; GenerateTexCoords()\l&#45; GenerateTerrainIndices()\l&#45; GenerateTerrainVertices()\l&#45; GenerateNormals()\l}" alt="" coords="171,248,349,663"/>
-<area shape="rect" id="node5" href="$class_height_map.html" title="{HeightMap\n|&#45; m_pHeightMap\l&#45; m_heightMapDimensions\l&#45; m_heightMapFile\l|+ HeightMap()\l+ LoadHeightMap()\l+ GetHeightValueAtPixel()\l+ GetWidth()\l+ GetHeight()\l}" alt="" coords="237,13,413,178"/>
-</map>

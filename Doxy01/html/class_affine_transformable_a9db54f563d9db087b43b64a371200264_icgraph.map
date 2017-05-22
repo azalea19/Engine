@@ -1,8 +1,0 @@
-<map id="AffineTransformable::SetRoll" name="AffineTransformable::SetRoll">
-<area shape="rect" id="node2" href="$class_affine_transformable.html#a9565967f58321117e198b6925c4200d6" title="Sets the orientation. " alt="" coords="190,71,325,112"/>
-<area shape="rect" id="node7" href="$class_object_instance_a_p_i.html#abb6be8e818a4f8ce8d243d615834b8bb" title="ObjectInstanceAPI::\lSetRotation" alt="" coords="188,136,327,177"/>
-<area shape="rect" id="node3" href="$class_affine_transformable.html#ab70fc4cbb5d5d3436d4e6fc50ccb1cc7" title="Initializes a new instance of the AffineTransformable class. " alt="" coords="375,5,517,47"/>
-<area shape="rect" id="node4" href="$class_object_instance_a_p_i.html#a090217643e7072b0810a2ef59c7e273c" title="Sets affine transformable orientation of object instance. " alt="" coords="377,71,515,112"/>
-<area shape="rect" id="node5" href="$class_affine_transformable.html#ac4faa6d4c8127e61622ae265ba708276" title="Sets the transform. " alt="" coords="379,136,513,177"/>
-<area shape="rect" id="node6" href="$class_object_instance.html#abc93e8022756b412663cfdfdb4101ab3" title="Initializes a new instance of the ObjectInstance struct. " alt="" coords="565,143,769,170"/>
-</map>

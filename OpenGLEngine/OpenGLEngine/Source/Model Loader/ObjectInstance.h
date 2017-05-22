@@ -102,6 +102,8 @@ public:
   /// </summary>
   /// <returns>bool</returns>
   bool GetVisible() const;
+
+  mOBB GetBoundingBox() const;
   
 
 private:

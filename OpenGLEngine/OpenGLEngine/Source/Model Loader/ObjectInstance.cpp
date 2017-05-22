@@ -20,6 +20,26 @@ bool ObjectInstance::GetVisible() const
   return m_visible;
 }
 
+mOBB ObjectInstance::GetBoundingBox() const
+{
+  mat4 modelMatrix = GetTransform();
+  mat4 normalMatrix = transpose(inverse(modelMatrix));
+  mAABB aabb = m_pRenderableObject->GetBoundingBox();
+  mOBB result;
+  result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
+  result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
+  result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
+  result.corners[0] = vec3(modelMatrix * vec4(aabb.min.x, aabb.min.y, aabb.min.z, 1));
+  result.corners[1] = vec3(modelMatrix * vec4(aabb.min.x, aabb.min.y, aabb.max.z, 1));
+  result.corners[2] = vec3(modelMatrix * vec4(aabb.min.x, aabb.max.y, aabb.min.z, 1));
+  result.corners[3] = vec3(modelMatrix * vec4(aabb.min.x, aabb.max.y, aabb.max.z, 1));
+  result.corners[4] = vec3(modelMatrix * vec4(aabb.max.x, aabb.min.y, aabb.min.z, 1));
+  result.corners[5] = vec3(modelMatrix * vec4(aabb.max.x, aabb.min.y, aabb.max.z, 1));
+  result.corners[6] = vec3(modelMatrix * vec4(aabb.max.x, aabb.max.y, aabb.min.z, 1));
+  result.corners[7] = vec3(modelMatrix * vec4(aabb.max.x, aabb.max.y, aabb.max.z, 1));
+  return result;
+}
+
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
   m_pRenderableObject->BindObject();

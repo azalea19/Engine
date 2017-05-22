@@ -1,4 +1,0 @@
-<map id="ModelLibrary" name="ModelLibrary">
-<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; ModelLibrary \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="5,160,180,252"/>
-<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="5,5,180,97"/>
-</map>

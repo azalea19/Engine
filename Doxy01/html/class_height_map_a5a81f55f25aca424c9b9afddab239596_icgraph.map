@@ -1,5 +1,0 @@
-<map id="HeightMap::HeightMap" name="HeightMap::HeightMap">
-<area shape="rect" id="node2" href="$class_terrain.html#a50392203c65b6d8d0b2b243effc07053" title="Initializes a new instance of the Terrain class. " alt="" coords="208,31,316,57"/>
-<area shape="rect" id="node3" href="$class_forest_terrain.html#a2cfcbadbae4c5904c40f52636cd16118" title="Initializes a new instance of the ForestTerrain class. " alt="" coords="364,5,547,32"/>
-<area shape="rect" id="node4" href="$class_terrain_a_p_i.html#a77f6f3df5ae85964a74eed00b76e1154" title="Generates the terrain. " alt="" coords="364,56,547,83"/>
-</map>

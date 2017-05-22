@@ -85,6 +85,9 @@ public:
   /// <returns></returns>
   virtual IInputHandler* CreateInputHandler() override;
 
+
+  virtual IRenderManager* CreateRenderManager() override;
+
 private:
 
   /// <summary>

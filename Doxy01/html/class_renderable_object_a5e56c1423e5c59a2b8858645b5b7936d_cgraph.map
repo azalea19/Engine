@@ -1,6 +1,0 @@
-<map id="RenderableObject::Render" name="RenderableObject::Render">
-<area shape="rect" id="node2" href="$class_model.html#a24eb1631a6274af5e2df089f3cb18ac8" title="Gets the mesh index range. " alt="" coords="228,5,415,32"/>
-<area shape="rect" id="node3" href="$class_renderable_object.html#a843661db2d38d1a74ff974539dc3d257" title="Updates the animation. " alt="" coords="234,57,409,98"/>
-<area shape="rect" id="node5" href="$class_renderable_object.html#ac504cf0d249e194eda261b45f629a7b8" title="Uploads the matrices. " alt="" coords="235,122,408,163"/>
-<area shape="rect" id="node4" href="$class_model.html#a1b13528a1be8e78385821d4a4c659ef6" title="Determines whether this instance has animation. " alt="" coords="463,64,609,91"/>
-</map>

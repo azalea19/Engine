@@ -1,9 +1,0 @@
-<map id="C:/Users/elizabeth/Documents/GitHub/Engine/OpenGLEngine/OpenGLEngine/HDRSplitEffect.h" name="C:/Users/elizabeth/Documents/GitHub/Engine/OpenGLEngine/OpenGLEngine/HDRSplitEffect.h">
-<area shape="rect" id="node2" href="$_bloom_effect_8h.html" title="Accepts an input texture and creates a bloom effect on the texture using additive blend and blur..." alt="" coords="236,124,443,195"/>
-<area shape="rect" id="node8" href="$_h_d_r_split_effect_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/HDRSplitEffect.cpp" alt="" coords="467,124,673,195"/>
-<area shape="rect" id="node3" href="$_bloom_effect_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/BloomEffect.cpp" alt="" coords="5,243,212,313"/>
-<area shape="rect" id="node4" href="$_render_manager_a_p_i_8h.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/RenderManagerAPI.h" alt="" coords="236,243,443,313"/>
-<area shape="rect" id="node7" href="$_renderable_object_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/RenderableObject.cpp" alt="" coords="467,243,673,313"/>
-<area shape="rect" id="node5" href="$_lua_manager_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/LuaManager.cpp" alt="" coords="120,361,327,432"/>
-<area shape="rect" id="node6" href="$_render_manager_a_p_i_8cpp.html" title="C:/Users/elizabeth\l/Documents/GitHub/Engine\l/OpenGLEngine/OpenGLEngine\l/RenderManagerAPI.cpp" alt="" coords="351,361,557,432"/>
-</map>

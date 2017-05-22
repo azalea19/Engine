@@ -1,4 +1,0 @@
-<map id="TextureLibrary" name="TextureLibrary">
-<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; TextureLibrary \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="5,160,188,252"/>
-<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n|# p\l|+ GetInstance()\l# Singleton()\l}" alt="" coords="9,5,184,97"/>
-</map>

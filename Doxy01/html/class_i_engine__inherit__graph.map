@@ -1,4 +1,0 @@
-<map id="IEngine" name="IEngine">
-<area shape="rect" id="node2" href="$class_d_x_engine.html" title="{DXEngine\n||+ Initialise()\l+ BeginRender()\l+ EndRender()\l+ BeginUpdate()\l+ EndUpdate()\l+ CreateShader()\l+ CreateRenderableObject()\l+ CreateInputHandler()\l+ Create()\l&#45; DXEngine()\l&#45; ~DXEngine()\l}" alt="" coords="5,299,188,523"/>
-<area shape="rect" id="node3" href="$class_g_l_engine.html" title="{GLEngine\n|&#45; m_screen\l&#45; m_screenWidth\l&#45; m_screenHeight\l&#45; m_instanceManager\l|+ Initialise()\l+ BeginRender()\l+ EndRender()\l+ BeginUpdate()\l+ EndUpdate()\l+ Create()\l&#45; GLEngine()\l&#45; ~GLEngine()\l&#45; CreateWindow()\l&#45; InitSDL()\l&#45; HandleEvents()\l&#45; InitGlew()\l&#45; CreateShader()\l&#45; CreateRenderableObject()\l&#45; CreateInputHandler()\l}" alt="" coords="213,248,391,575"/>
-</map>

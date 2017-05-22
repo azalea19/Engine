@@ -1,5 +1,0 @@
-<map id="GLInputHandler::Update" name="GLInputHandler::Update">
-<area shape="rect" id="node2" href="$class_g_l_input_handler.html#a8024ecc15bf5f8a4fa048011eb9e77b1" title="Handles the events. " alt="" coords="213,5,412,32"/>
-<area shape="rect" id="node3" href="$class_g_l_input_handler.html#a9f03ccbccd3bd3649874f8dfdeeb2271" title="Processes the event queue. " alt="" coords="213,57,412,98"/>
-<area shape="rect" id="node4" href="$struct_mouse_event.html#afefc615a5438d68b47ee155197f58842" title="MouseEvent::MouseEvent" alt="" coords="460,64,632,91"/>
-</map>

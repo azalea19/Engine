@@ -1,6 +1,0 @@
-<map id="Initialise" name="Initialise">
-<area shape="rect" id="node2" href="$class_engine_a_p_i.html#a6cecc94147f6fed1c2f886c082051bc7" title="Gets the engine. " alt="" coords="131,5,283,32"/>
-<area shape="rect" id="node3" href="$class_model_library.html#a85d5aeaa54615a41c0f38f638606fe41" title="Initialises this instance. " alt="" coords="131,56,282,83"/>
-<area shape="rect" id="node4" href="$class_i_engine.html#a2033b147f3b325d0194b746048a6200e" title="Initialises the engine. " alt="" coords="147,107,267,133"/>
-<area shape="rect" id="node5" href="$struct_shader_library.html#ac5a116b42faf885357d2118f91d5bb39" title="Initializes the shader library. " alt="" coords="123,158,291,199"/>
-</map>

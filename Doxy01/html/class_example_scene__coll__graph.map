@@ -1,6 +1,0 @@
-<map id="ExampleScene" name="ExampleScene">
-<area shape="rect" id="node2" href="$class_scene.html" title="{Scene\n|&#45; m_name\l|+ Initialise()\l+ Finished()\l+ Update()\l+ Render()\l+ GetName()\l+ SetName()\l}" alt="" coords="5,690,103,841"/>
-<area shape="rect" id="node3" href="$class_m_player.html" title="{MPlayer\n|# height\l|+ MPlayer()\l+ GetCamera()\l+ GetPosition()\l+ SetPosition()\l+ GetPickingRay()\l+ GetHeight()\l+ SetHeight()\l}" alt="" coords="127,683,256,848"/>
-<area shape="rect" id="node4" href="$class_m_camera.html" title="{MCamera\n|&#45; projectionMatrix\l|+ MCamera()\l+ MCamera()\l+ Forward()\l+ Backward()\l+ Up()\l+ Down()\l+ Left()\l+ Right()\l+ SetPosition()\l+ GetPosition()\l+ ForwardNoPitch()\l+ getProjectionMatrix()\l+ BackwardNoPitch()\l+ getViewMatrix()\l+ SetClipPlanes()\l}" alt="" coords="114,337,269,620"/>
-<area shape="rect" id="node5" href="$class_affine_transformable.html" title="{AffineTransformable\n|&#45; m_translation\l&#45; m_yaw\l&#45; m_pitch\l&#45; m_roll\l&#45; m_scale\l|+ AffineTransformable()\l+ AffineTransformable()\l+ GetTranslation()\l+ SetTranslation()\l+ SetTranslation()\l+ GetOrientation()\l+ SetOrientation()\l+ GetYaw()\l+ SetYaw()\l+ GetPitch()\land 8 more...\l}" alt="" coords="114,5,269,288"/>
-</map>

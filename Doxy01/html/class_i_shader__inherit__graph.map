@@ -1,3 +1,0 @@
-<map id="IShader" name="IShader">
-<area shape="rect" id="node2" href="$class_shader.html" title="{Shader\n|&#45; m_name\l&#45; m_uid\l&#45; m_pVertex\l&#45; m_pFragment\l&#45; m_attributes\l&#45; m_uniforms\l|+ Shader()\l+ Shader()\l+ ~Shader()\l+ Load()\l+ Bind()\l+ Setup()\l+ SetupLocations()\l+ GetName()\l+ Attribute()\l+ Uniform()\land 8 more...\l}" alt="" coords="23,292,155,589"/>
-</map>
