@@ -1,6 +1,0 @@
-<map id="Light::Light" name="Light::Light">
-<area shape="rect" id="node2" href="$struct_ambient_light.html#af6960d19d0e491643fef45009ba73437" title="AmbientLight::AmbientLight" alt="" coords="140,29,323,56"/>
-<area shape="rect" id="node3" href="$struct_directional_light.html#ac2b1a62d9ad6395b2f453b4544127bf1" title="DirectionalLight::Directional\lLight" alt="" coords="141,105,321,146"/>
-<area shape="rect" id="node4" href="$struct_point_light.html#a0f855fe2861bb2372accfc6b93889067" title="PointLight::PointLight" alt="" coords="158,195,305,221"/>
-<area shape="rect" id="node5" href="$struct_spot_light.html#ade2739079d666cb447290e6f85404a28" title="SpotLight::SpotLight" alt="" coords="161,269,301,296"/>
-</map>

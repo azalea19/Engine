@@ -1,7 +1,0 @@
-<map id="FrameBuffer::GetBindMode" name="FrameBuffer::GetBindMode">
-<area shape="rect" id="node2" href="$class_frame_buffer.html#a1556417c0dec00d1d24bdf0e84bc4c4d" title="Attaches the color buffer. " alt="" coords="234,5,409,32"/>
-<area shape="rect" id="node3" href="$class_frame_buffer.html#a103aa8f388e325d1837c6d9e465a6d33" title="Attaches the depth buffer. " alt="" coords="235,56,407,83"/>
-<area shape="rect" id="node4" href="$class_frame_buffer.html#ae23b4fae4b529b4b368535f0095b9c98" title="Detaches the color buffer. " alt="" coords="232,107,411,133"/>
-<area shape="rect" id="node5" href="$class_frame_buffer.html#ae078c63d55a6454a98a4affe20503d86" title="Detaches the depth buffer. " alt="" coords="234,157,409,184"/>
-<area shape="rect" id="node6" href="$class_frame_buffer.html#af10f98a915b7829d49ddbd803eb68172" title="Gets the status of the frame buffer. " alt="" coords="242,208,401,235"/>
-</map>

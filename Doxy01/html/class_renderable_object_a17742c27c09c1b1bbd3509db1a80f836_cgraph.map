@@ -1,5 +1,0 @@
-<map id="RenderableObject::BindMesh" name="RenderableObject::BindMesh">
-<area shape="rect" id="node2" href="$class_renderable_object.html#ac13b7599ac581dcb0ad6f7bf90b0aa2c" title="Binds the material. " alt="" coords="244,42,449,69"/>
-<area shape="rect" id="node3" href="$class_material.html#a11e5c7f30a1b4aaf465eb611c4d2baa2" title="Material::GetDiffuseTexture\lCount" alt="" coords="497,5,676,47"/>
-<area shape="rect" id="node4" href="$class_model.html#a6266aadeb0b38caa954034c4c914817a" title="Gets the mesh material. " alt="" coords="505,71,669,98"/>
-</map>

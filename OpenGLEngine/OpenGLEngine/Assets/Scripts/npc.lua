@@ -151,8 +151,8 @@ end
 
 function npc:Die()
 	
-	renderManagerAPI.removeObject(self.id)
-	renderManagerAPI.removeObject(self.id)
+	--renderManagerAPI.removeObject(self.id)
+	--renderManagerAPI.removeObject(self.id)
 	--luaObjInstManager.deleteInstance(self.id)
 	--self = nil
 	self.alive = false

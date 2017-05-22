@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Data Structures\KDTree.cpp" />
+    <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
+    <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
     <ClCompile Include="Source\Lua\AABBAPI.cpp" />
     <ClCompile Include="Source\Effects\AdditiveBlendEffect.cpp" />
     <ClCompile Include="Source\Plug-Ins\AffineTransformable.cpp" />
@@ -59,8 +62,6 @@
     <ClCompile Include="Source\Lua\LuaObjectInstanceManager.cpp" />
     <ClCompile Include="Source\Lua\LuaVectorUtility.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\MainAPI.cpp" />
-    <ClCompile Include="Source\MainRename.cpp" />
     <ClCompile Include="Source\Model Loader\Material.cpp" />
     <ClCompile Include="Source\Lua\MathAPI.cpp" />
     <ClCompile Include="Source\MCamera.cpp" />
@@ -95,6 +96,10 @@
     <ClCompile Include="Source\Utility\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Base Classes\IRenderManager.h" />
+    <ClInclude Include="Source\Data Structures\KDTree.h" />
+    <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
+    <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
     <ClInclude Include="Source\Lua\AABBAPI.h" />
     <ClInclude Include="Source\Effects\AdditiveBlendEffect.h" />
     <ClInclude Include="Source\Plug-Ins\AffineTransformable.h" />
@@ -143,8 +148,6 @@
     <ClInclude Include="Source\Lua\LuaManager.h" />
     <ClInclude Include="Source\Lua\LuaObjectInstanceManager.h" />
     <ClInclude Include="Source\Lua\LuaVectorUtility.h" />
-    <ClInclude Include="Source\MainAPI.h" />
-    <ClInclude Include="Source\MainRename.h" />
     <ClInclude Include="Source\Model Loader\Material.h" />
     <ClInclude Include="Source\Lua\MathAPI.h" />
     <ClInclude Include="Source\MCamera.h" />

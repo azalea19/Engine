@@ -1,5 +1,0 @@
-<map id="RenderManager" name="RenderManager">
-<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; RenderManager \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="148,373,339,465"/>
-<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="5,182,180,274"/>
-<area shape="rect" id="node5" href="$class_i_renderable.html" title="{IRenderable\n||+ Render()\l}" alt="" coords="233,5,323,83"/>
-</map>

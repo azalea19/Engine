@@ -1,6 +1,0 @@
-<map id="Terrain::GenerateTexCoords" name="Terrain::GenerateTexCoords">
-<area shape="rect" id="node2" href="$class_terrain.html#ae7bafb8ba2f656805c07fbef600a35c4" title="Creates the mesh. " alt="" coords="237,31,376,57"/>
-<area shape="rect" id="node3" href="$class_terrain.html#a50392203c65b6d8d0b2b243effc07053" title="Initializes a new instance of the Terrain class. " alt="" coords="424,31,532,57"/>
-<area shape="rect" id="node4" href="$class_forest_terrain.html#a2cfcbadbae4c5904c40f52636cd16118" title="Initializes a new instance of the ForestTerrain class. " alt="" coords="580,5,763,32"/>
-<area shape="rect" id="node5" href="$class_terrain_a_p_i.html#a77f6f3df5ae85964a74eed00b76e1154" title="Generates the terrain. " alt="" coords="580,56,763,83"/>
-</map>

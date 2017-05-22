@@ -1,5 +1,0 @@
-<map id="IAnimatedRenderable" name="IAnimatedRenderable">
-<area shape="rect" id="node3" href="$class_i_renderable_object.html" title="{IRenderableObject\n||+ Initialise()\l+ Destroy()\l+ BindObject()\l+ BindMesh()\l+ Render()\l}" alt="" coords="19,285,147,421"/>
-<area shape="rect" id="node2" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="5,5,160,112"/>
-<area shape="rect" id="node4" href="$class_renderable_object.html" title="{RenderableObject\n|&#45; m_pModel\l&#45; m_VAO\l&#45; m_buffers\l&#45; boundMeshIndex\l|+ RenderableObject()\l+ ~RenderableObject()\l+ Initialise()\l+ Render()\l+ Destroy()\l+ GetAnimationCount()\l+ GetAnimationIndex()\l+ GetAnimationName()\l+ GetMesh()\l+ GetMeshCount()\l+ BindObject()\l+ BindMesh()\l&#45; BindMaterial()\l&#45; SetFillMode()\l&#45; UpdateAnimation()\l&#45; UploadMatrices()\l}" alt="" coords="5,469,160,811"/>
-</map>

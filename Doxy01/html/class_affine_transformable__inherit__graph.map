@@ -1,4 +1,0 @@
-<map id="AffineTransformable" name="AffineTransformable">
-<area shape="rect" id="node2" href="$class_m_camera.html" title="{MCamera\n|&#45; projectionMatrix\l|+ MCamera()\l+ MCamera()\l+ Forward()\l+ Backward()\l+ Up()\l+ Down()\l+ Left()\l+ Right()\l+ SetPosition()\l+ GetPosition()\l+ ForwardNoPitch()\l+ getProjectionMatrix()\l+ BackwardNoPitch()\l+ getViewMatrix()\l+ SetClipPlanes()\l}" alt="" coords="5,336,160,619"/>
-<area shape="rect" id="node3" href="$class_object_instance.html" title="{ObjectInstance\n|&#45; m_pRenderableObject\l&#45; m_activeAnimation\l&#45; m_visible\l|+ ObjectInstance()\l+ GetVertices()\l+ GetWorldMatrix()\l+ Render()\l+ SetActiveAnimation()\l+ GetActiveAnimationIndex()\l+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l+ GetRenderableObject()\l+ SetVisible()\l+ GetVisible()\l}" alt="" coords="184,343,371,611"/>
-</map>

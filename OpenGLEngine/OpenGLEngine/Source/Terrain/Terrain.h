@@ -85,25 +85,6 @@ public:
 
 private:
 
-  /// <summary>
-  /// The vertex buffer object
-  /// </summary>
-  GLuint gVBO;
-
-  /// <summary>
-  /// The normals buffer object
-  /// </summary>
-  GLuint gNBO;
-
-  /// <summary>
-  /// The index buffer object
-  /// </summary>
-  GLuint gIBO;
-
-  /// <summary>
-  /// The uvs buffer object
-  /// </summary>
-  GLuint gUVBO;
 
   GLuint m_texture;
 

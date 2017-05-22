@@ -1,3 +1,0 @@
-<map id="MCamera" name="MCamera">
-<area shape="rect" id="node2" href="$class_affine_transformable.html" title="{AffineTransformable\n|&#45; m_translation\l&#45; m_yaw\l&#45; m_pitch\l&#45; m_roll\l&#45; m_scale\l|+ AffineTransformable()\l+ AffineTransformable()\l+ GetTranslation()\l+ SetTranslation()\l+ SetTranslation()\l+ GetOrientation()\l+ SetOrientation()\l+ GetYaw()\l+ SetYaw()\l+ GetPitch()\land 8 more...\l}" alt="" coords="5,5,160,288"/>
-</map>

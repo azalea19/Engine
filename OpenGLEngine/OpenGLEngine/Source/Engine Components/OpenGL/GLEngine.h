@@ -2,7 +2,7 @@
 #define GLEngine_h__
 
 #include "IEngine.h"
-
+#include "IRenderManager.h"
 
 /**
 * @file GLEngine.h
@@ -96,11 +96,6 @@ private:
   /// <returns></returns>
   bool InitSDL();
   
-  /// <summary>
-  /// Handles the input events.
-  /// </summary>
-  /// <returns></returns>
-  bool HandleEvents();
   
   /// <summary>
   /// Initializes GLEW
@@ -151,6 +146,9 @@ private:
   /// </summary>
   /// <returns></returns>
   virtual IInputHandler* CreateInputHandler();
+
+
+  virtual IRenderManager* CreateRenderManager() override;
 
 };
 

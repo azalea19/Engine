@@ -9,34 +9,12 @@
 #include "RenderableObject.h"
 #include "Screen.h"
 #include "GLInputHandler.h"
+#include "GLRenderManager.h"
 
 IEngine* GLEngine::Create()
 {
   return new GLEngine();
 }
-
-//bool GLEngine::HandleEvents()
-//{
-//  SDL_Event event;
-//  while (SDL_PollEvent(&event))
-//  {
-//    switch (event.type)
-//    {
-//      case SDL_QUIT:
-//        return false;
-//      case SDL_MOUSEMOTION:
-//        InputManager::GetInstance().PushEvent(MouseEvent(event.motion));
-//        break;
-//      case SDL_MOUSEBUTTONDOWN:
-//        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
-//        break;
-//      case SDL_MOUSEBUTTONUP:
-//        InputManager::GetInstance().PushEvent(MouseEvent(event.button));
-//        break;
-//    }
-//  }
-//  return true;
-//}
 
 void GLEngine::InitGlew()
 {
@@ -64,6 +42,11 @@ IRenderableObject* GLEngine::CreateRenderableObject(string const& name, string c
 IInputHandler* GLEngine::CreateInputHandler()
 {
   return new GLInputHandler();
+}
+
+IRenderManager* GLEngine::CreateRenderManager()
+{
+  return new GLRenderManager();
 }
 
 GLEngine::GLEngine()
@@ -149,9 +132,6 @@ void GLEngine::EndRender()
 
 bool GLEngine::BeginUpdate()
 {
-  //if (!HandleEvents())
-  //  return false;
-
   InputManager::GetInstance().Update();
 
   return true;

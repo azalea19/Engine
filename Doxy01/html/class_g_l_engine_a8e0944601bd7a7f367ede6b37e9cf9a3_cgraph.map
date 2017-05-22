@@ -1,7 +1,0 @@
-<map id="GLEngine::Initialise" name="GLEngine::Initialise">
-<area shape="rect" id="node2" href="$class_g_l_engine.html#a6a3de34ef35e375a701387a0b9c5d551" title="Creates the window. " alt="" coords="188,5,359,32"/>
-<area shape="rect" id="node3" href="$class_g_l_engine.html#a3a91756215e75cf82c5af4e242b5416c" title="Initializes GLEW " alt="" coords="207,56,340,83"/>
-<area shape="rect" id="node4" href="$class_lua_manager.html#ac0bf2dac2f4de45307df2bbcc75e61f3" title="Initializes this instance. " alt="" coords="199,107,347,133"/>
-<area shape="rect" id="node5" href="$class_g_l_engine.html#aa1b26985e390b1befdc1d83248d4252f" title="Initializes the SDL API. " alt="" coords="209,157,338,184"/>
-<area shape="rect" id="node6" href="$_screen_8cpp.html#a1f93317859b7a1195b7be36f8f2c216e" title="Set screen dimension. " alt="" coords="198,208,349,235"/>
-</map>

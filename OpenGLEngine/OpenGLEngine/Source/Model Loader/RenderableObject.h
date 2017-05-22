@@ -7,6 +7,7 @@
 #include "IAnimatable.h"
 #include "IMeshCollection.h"
 #include "IRenderableObject.h"
+#include "GeometricPrimitives.h"
 
 
 /**
@@ -126,7 +127,8 @@ public:
   /// </summary>
   /// <param name="meshIndex">Index of the mesh.</param>
   void BindMesh(int meshIndex) const override;
-
+  
+  mAABB GetBoundingBox() const override;
 
 private:
 
@@ -134,6 +136,8 @@ private:
   /// The model
   /// </summary>
   Model* m_pModel;
+
+  mAABB m_boundingBox;
 
   /// <summary>
   /// The vertex array object
@@ -176,6 +180,8 @@ private:
   /// <param name="viewMatrix">The view matrix.</param>
   /// <param name="projectionMatrix">The projection matrix.</param>
   void UploadMatrices(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const;
+
+  void CreateBoundingBox();
 };
 
 

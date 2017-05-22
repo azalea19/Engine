@@ -283,7 +283,7 @@ function Initialize()
 
 
     printAPI.print('Initialising rendermanager...\n')
-    renderManagerAPI.initialise()
+    --renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
 	player0 = Player:new(camera0)
@@ -520,7 +520,7 @@ function Update()
 		    item["boundingBox"] = abox
 
 		    world:AddInstance(item)
-		    renderManagerAPI.addObject(tempID)
+		    --renderManagerAPI.addObject(tempID)
 
 	    end
     
@@ -618,10 +618,10 @@ function Render()
 
             
             -- Draw UI text
-            display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
+            --display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
 
             if(player0.inDialogue) then 
-                display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
+                --display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
             end
 
 		end

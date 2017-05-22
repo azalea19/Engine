@@ -1,6 +1,0 @@
-<map id="AffineTransformable::SetTranslation" name="AffineTransformable::SetTranslation">
-<area shape="rect" id="node2" href="$class_affine_transformable.html#ab70fc4cbb5d5d3436d4e6fc50ccb1cc7" title="Initializes a new instance of the AffineTransformable class. " alt="" coords="193,5,336,47"/>
-<area shape="rect" id="node3" href="$class_m_camera.html#a17c2c4147555b6aaba51dec8d57e024b" title="Set the position of the camera. " alt="" coords="188,71,341,98"/>
-<area shape="rect" id="node4" href="$class_affine_transformable.html#ac4faa6d4c8127e61622ae265ba708276" title="Sets the transform. " alt="" coords="197,123,332,164"/>
-<area shape="rect" id="node5" href="$class_object_instance.html#abc93e8022756b412663cfdfdb4101ab3" title="Initializes a new instance of the ObjectInstance struct. " alt="" coords="389,130,593,157"/>
-</map>

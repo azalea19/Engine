@@ -1,4 +1,0 @@
-<map id="LuaObjectInstanceManager" name="LuaObjectInstanceManager">
-<area shape="rect" id="node2" href="$class_singleton.html" title="{Singleton\&lt; LuaObjectInstance\lManager \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="36,329,232,436"/>
-<area shape="rect" id="node3" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="209,160,384,252"/>
-</map>

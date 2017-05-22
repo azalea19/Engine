@@ -1,5 +1,0 @@
-<map id="Terrain::GetHeightMap" name="Terrain::GetHeightMap">
-<area shape="rect" id="node2" href="$class_forest_terrain.html#a00b38761747044c6b5b786082671548e" title="Generates the forest. " alt="" coords="205,5,401,32"/>
-<area shape="rect" id="node4" href="$class_terrain.html#a73df20324a97a2dd88807539b9cbc783" title="Generates the normals. " alt="" coords="218,56,389,83"/>
-<area shape="rect" id="node3" href="$class_forest_terrain.html#a2cfcbadbae4c5904c40f52636cd16118" title="Initializes a new instance of the ForestTerrain class. " alt="" coords="449,5,632,32"/>
-</map>

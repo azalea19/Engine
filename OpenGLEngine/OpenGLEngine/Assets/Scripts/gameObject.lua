@@ -42,7 +42,7 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 	objectInstanceAPI.setOrientation(instanceID,newDir.x,newDir.y,newDir.z)
 	objectInstanceAPI.setScale(instanceID,newScale.x,newScale.y,newScale.z)
 	objectInstanceAPI.setAnimation(instanceID,0)
-	renderManagerAPI.addObject(instanceID)
+	--renderManagerAPI.addObject(instanceID)
 	
 	local abox = AABBAPI.getAABB(instanceID, context.handle)
 	

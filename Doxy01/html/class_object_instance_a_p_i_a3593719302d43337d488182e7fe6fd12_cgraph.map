@@ -1,5 +1,0 @@
-<map id="ObjectInstanceAPI::GetScale" name="ObjectInstanceAPI::GetScale">
-<area shape="rect" id="node2" href="$class_lua_object_instance_manager.html#a62e842ba254f119752b29e8b5d56010f" title="Gets the object instance. " alt="" coords="192,5,372,47"/>
-<area shape="rect" id="node3" href="$class_affine_transformable.html#a8a9e32647f5e4bfb893d63ff8fb9b9f8" title="Gets the scale. " alt="" coords="215,71,349,112"/>
-<area shape="rect" id="node4" href="$_math_a_p_i_8cpp.html#afdae8c4f79ebf2bd38dd49c0c10fba5c" title="Converts mat4 to lua table " alt="" coords="238,137,326,163"/>
-</map>

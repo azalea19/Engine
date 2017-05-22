@@ -1,9 +1,0 @@
-<map id="ObjectInstance" name="ObjectInstance">
-<area shape="rect" id="node2" href="$class_i_renderable.html" title="{IRenderable\n||+ Render()\l}" alt="" coords="5,628,96,705"/>
-<area shape="rect" id="node3" href="$class_i_animatable.html" title="{IAnimatable\n||+ SetActiveAnimation()\l+ GetActiveAnimationName()\l+ SetActiveAnimation()\l+ GetActiveAnimationIndex()\l}" alt="" coords="23,380,214,501"/>
-<area shape="rect" id="node4" href="$class_i_animated.html" title="{IAnimated\n||+ GetAnimationCount()\l+ GetAnimationName()\l+ GetAnimationIndex()\l}" alt="" coords="77,5,232,112"/>
-<area shape="rect" id="node7" href="$class_i_animated_renderable.html" title="{IAnimatedRenderable\n||+ Render()\l}" alt="" coords="157,220,302,297"/>
-<area shape="rect" id="node5" href="$class_affine_transformable.html" title="{AffineTransformable\n|&#45; m_translation\l&#45; m_yaw\l&#45; m_pitch\l&#45; m_roll\l&#45; m_scale\l|+ AffineTransformable()\l+ AffineTransformable()\l+ GetTranslation()\l+ SetTranslation()\l+ SetTranslation()\l+ GetOrientation()\l+ SetOrientation()\l+ GetYaw()\l+ SetYaw()\l+ GetPitch()\land 8 more...\l}" alt="" coords="323,525,477,808"/>
-<area shape="rect" id="node6" href="$class_i_renderable_object.html" title="{IRenderableObject\n||+ Initialise()\l+ Destroy()\l+ BindObject()\l+ BindMesh()\l+ Render()\l}" alt="" coords="171,599,299,735"/>
-<area shape="rect" id="node8" href="$class_i_mesh_collection.html" title="{IMeshCollection\n||+ GetVertices()\l+ GetNormals()\l+ GetAABB()\l+ GetIndices()\l+ GetVertexCount()\l+ GetNormalCount()\l+ GetIndexCount()\l+ GetMesh()\l+ GetMeshCount()\l}" alt="" coords="327,161,465,356"/>
-</map>

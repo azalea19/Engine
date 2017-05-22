@@ -16,6 +16,7 @@ RenderableObject::RenderableObject(string const& name, string const& filename)
   memset(m_buffers, 0, sizeof(GLuint)* BT_NUM_BUFFERS);
   m_pModel = new Model(name, filename);
   Initialise();
+  CreateBoundingBox();
 }
 
 RenderableObject::~RenderableObject()
@@ -86,6 +87,20 @@ void RenderableObject::UploadMatrices(mat4 const& worldMatrix, mat4 const& viewM
 	  shader->TransmitUniform("CAMERA_POSITION", vec3(cam.x, cam.y, cam.z));
   }
 
+}
+
+void RenderableObject::CreateBoundingBox()
+{
+  std::vector<vec3> const& vertices = m_pModel->GetVertices();
+
+  m_boundingBox.min = vertices[0];
+  m_boundingBox.max = vertices[0];
+
+  for (int i = 1; i < vertices.size(); i++)
+  {
+    m_boundingBox.min = min(m_boundingBox.min, vertices[i]);
+    m_boundingBox.max = max(m_boundingBox.max, vertices[i]);
+  }
 }
 
 void RenderableObject::Initialise()
@@ -203,6 +218,11 @@ void RenderableObject::BindMesh(int meshIndex) const
 {
   boundMeshIndex = meshIndex;
   BindMaterial(meshIndex);
+}
+
+mAABB RenderableObject::GetBoundingBox() const 
+{
+  return m_boundingBox;
 }
 
 

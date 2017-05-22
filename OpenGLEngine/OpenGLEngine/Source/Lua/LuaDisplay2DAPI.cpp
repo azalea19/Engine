@@ -12,17 +12,19 @@ void LuaDisplay2DAPI::DrawFullScreen(string filePath)
 		TextureLibrary::GetInstance().AddTexture(filePath, id);
 	}
 	FrameBuffer::Display(id);
-	*/
+	*/    
 	GLuint id = LoadImage(filePath.c_str(), false);
 
 	FrameBuffer::Display(id);
 }
 
-void LuaDisplay2DAPI::DrawTextLua(int size, string const& filePath, string const& text, int xpos, int ypos, LuaRef color)
+void LuaDisplay2DAPI::DrawTextLua(int size, string const& filePath, string const& text, LuaRef pos, LuaRef color, int centered, int screenWidth, int screenHeight)
 {
 	glm::vec3 nVec;
+  vec2 position;
 	nVec.x = FromLuaTable<glm::vec3>(color).x;
-	DrawText(size, filePath, text, xpos, ypos, nVec);
+  position = FromLuaTable<vec2>(pos);
+	DrawText(size, filePath, text, position, nVec, centered, screenWidth, screenHeight);
 }
 
 

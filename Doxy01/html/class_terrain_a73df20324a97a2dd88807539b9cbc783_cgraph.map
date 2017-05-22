@@ -1,5 +1,0 @@
-<map id="Terrain::GenerateNormals" name="Terrain::GenerateNormals">
-<area shape="rect" id="node2" href="$class_height_map.html#a4c1243d24a8c5d039ea967a57a7bf462" title="Gets the height. " alt="" coords="225,5,375,32"/>
-<area shape="rect" id="node3" href="$class_terrain.html#a7572ad49b7cb4afa13985ee6a03b8f3b" title="Gets the height map. " alt="" coords="224,56,376,83"/>
-<area shape="rect" id="node4" href="$class_height_map.html#a85709e10bb08442730bfddb649a86e0b" title="Gets the width. " alt="" coords="227,107,373,133"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="GLEngine" name="GLEngine">
-<area shape="rect" id="node2" href="$class_i_engine.html" title="{IEngine\n||+ Initialise()\l+ ~IEngine()\l+ BeginRender()\l+ EndRender()\l+ BeginUpdate()\l+ EndUpdate()\l+ CreateShader()\l+ CreateRenderableObject()\l+ CreateInputHandler()\l}" alt="" coords="5,145,188,340"/>
-<area shape="rect" id="node3" href="$class_lua_object_instance_manager.html" title="{LuaObjectInstanceManager\n||+ AddNewInstance()\l+ GetInstance()\l+ Expose()\l+ DeleteInstance()\l}" alt="" coords="212,182,392,303"/>
-<area shape="rect" id="node4" href="$class_singleton.html" title="{Singleton\&lt; LuaObjectInstance\lManager \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="243,505,439,612"/>
-<area shape="rect" id="node5" href="$class_singleton.html" title="{Singleton\&lt; DerivedClass \&gt;\n||+ GetInstance()\l# Singleton()\l}" alt="" coords="416,197,591,289"/>
-</map>

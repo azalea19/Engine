@@ -41,8 +41,11 @@ T FromLuaTable(LuaRef value)
 /// <returns>vec3</returns>
 template<> vec3 FromLuaTable<vec3>(LuaRef value);
 
+template<> vec2 FromLuaTable<vec2>(LuaRef value);
+
 
 LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle);
+
 
 LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle);
 

@@ -151,24 +151,7 @@ void Terrain::CreateMesh()
 {
   GenerateTerrainVertices();
   GenerateTerrainIndices();
-  //GenerateNormals();
   GenerateTexCoords();
-
-  glGenBuffers(1, &gVBO);
-  glGenBuffers(1, &gNBO);
-  glGenBuffers(1, &gIBO);
-
-  glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-  glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * 3 * sizeof(GLfloat), m_vertices.data(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-  glBindBuffer(GL_ARRAY_BUFFER, gNBO);
-  glBufferData(GL_ARRAY_BUFFER, m_normals.size() * 3 * sizeof(GLfloat), m_normals.data(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-  glBindBuffer(GL_ARRAY_BUFFER, gIBO);
-  glBufferData(GL_ARRAY_BUFFER, m_indices.size() * sizeof(GLint), m_indices.data(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 

@@ -45,6 +45,11 @@ IInputHandler* DXEngine::CreateInputHandler()
   throw std::logic_error("The method or operation is not implemented.");
 }
 
+IRenderManager* DXEngine::CreateRenderManager()
+{
+  throw std::logic_error("The method or operation is not implemented.");
+}
+
 DXEngine::DXEngine()
 {
 
