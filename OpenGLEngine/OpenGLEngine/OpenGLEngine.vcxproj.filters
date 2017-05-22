@@ -16,12 +16,6 @@
     <ClCompile Include="Source\main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MainAPI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MainRename.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MCamera.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -241,12 +235,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\Light.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MainAPI.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MainRename.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\MCamera.h">

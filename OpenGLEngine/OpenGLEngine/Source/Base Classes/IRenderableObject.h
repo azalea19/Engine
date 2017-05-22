@@ -6,6 +6,7 @@
 #include "IAnimatedRenderable.h"
 #include "IAnimatable.h"
 #include "IMeshCollection.h"
+#include "GeometricPrimitives.h"
 
 /**
 * @file RenderableObject.h

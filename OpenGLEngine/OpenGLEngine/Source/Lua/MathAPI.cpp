@@ -1,6 +1,7 @@
 #include "MathAPI.h"
+#include "GeometricPrimitives.h"
 
-//#include <glm/gtc/type_ptr.hpp>
+
 
 static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
 {
