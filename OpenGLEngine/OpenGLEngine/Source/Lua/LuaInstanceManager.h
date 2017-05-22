@@ -1,4 +1,7 @@
-#pragma once
+#ifndef LuaInstanceManager_h__
+#define LuaInstanceManager_h__
+
+
 
 #include <unordered_map>
 #include <map>
@@ -80,3 +83,6 @@ template<class T>  std::unordered_map<int, T * >  InstanceManager<T>::m_instance
 
 
 template<class T>  int InstanceManager <T> ::m_lastIndx;
+
+
+#endif // LuaInstanceManager_h__

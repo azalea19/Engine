@@ -4,7 +4,6 @@
 #include "LuaInstanceManager.h"
 #include "ModelLibraryAPI.h"
 #include "RenderManagerAPI.h"
-#include "MainAPI.h"
 #include "InputManagerAPI.h"
 #include "LuaVectorUtility.h"
 #include "CameraAPI.h"

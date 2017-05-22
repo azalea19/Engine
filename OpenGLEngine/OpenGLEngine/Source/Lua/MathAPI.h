@@ -6,7 +6,6 @@
 #include "LuaContext.h"
 #include "LuaManager.h"
 #include "Types.h"
-#include "GeometricPrimitives.h"
 
 
 /**
@@ -41,11 +40,10 @@ T FromLuaTable(LuaRef value)
 /// <returns>vec3</returns>
 template<> vec3 FromLuaTable<vec3>(LuaRef value);
 
+template<> vec2 FromLuaTable(LuaRef value);
+
 
 LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle);
-
-LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle);
-
 
 /// <summary>
 /// Gets mat4 return from the lua table.
@@ -53,21 +51,6 @@ LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle);
 /// <param name="value">The value.</param>
 /// <returns>mat4</returns>
 template<> mat4 FromLuaTable<mat4>(LuaRef value);
-
-/// <summary>
-/// Gets mAABB return from the lua table.
-/// </summary>
-/// <param name="value">The value.</param>
-/// <returns>mAABB</returns>
-template<> mAABB FromLuaTable<mAABB>(LuaRef value);
-
-/// <summary>
-/// Gets mRay return from the lua table.
-/// </summary>
-/// <param name="value">The value.</param>
-/// <returns>mRay</returns>
-template<> mRay FromLuaTable<mRay>(LuaRef value);
-
 
 /// <summary>
 /// Converts mat4 to lua table

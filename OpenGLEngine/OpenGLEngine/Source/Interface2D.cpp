@@ -60,7 +60,7 @@ vec2 GetImageDimensions(SDL_Surface* surface)
   return dim;
 }
 
-void DrawText(int size, string const& filePath, string const& text, int xpos, int ypos, vec3 const& color)
+void DrawText(int size, string const& filePath, string const& text, vec2 pos, vec3 const& color, int center, int screenWidth,int screenHeight)
 {
   //Load the font
   TTF_Font *font = TTF_OpenFont(filePath.c_str(), size);
@@ -111,15 +111,24 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
   GLuint gVBO;
   GLuint gUVBO;
 
-  const GLfloat g_vertex_buffer_data[] =
+
+  if (center)
   {
-    (float)(xpos),				(float)(ypos + surface->h),				0,
-    (float)(xpos + surface->w),	(float)(ypos + surface->h),				0,
-    (float)(xpos),				(float)(ypos),							0,
-    (float)(xpos + surface->w),	(float)(ypos + surface->h),				0,
-    (float)(xpos + surface->w),	(float)(ypos),							0,
-    (float)(xpos),				(float)(ypos),							0
-  };
+    int halfscreen = screenWidth / 2;
+    int halfheight = screenHeight / 2;
+    pos.x = halfscreen - (surface->w / 2);
+    pos.y = halfheight - (surface->h / 2);
+  }
+
+    const GLfloat g_vertex_buffer_data[] =
+    {
+      (float)(pos.x),				(float)(pos.y + surface->h),				0,
+      (float)(pos.x + surface->w),	(float)(pos.y + surface->h),				0,
+      (float)(pos.x),				(float)(pos.y),							0,
+      (float)(pos.x + surface->w),	(float)(pos.y + surface->h),				0,
+      (float)(pos.x + surface->w),	(float)(pos.y),							0,
+      (float)(pos.x),				(float)(pos.y),							0
+    };
 
   const GLfloat g_uv_buffer_data[] =
   {
@@ -181,6 +190,7 @@ void DrawText(int size, string const& filePath, string const& text, int xpos, in
   glDeleteTextures(1, &texId);
   glDeleteBuffers(1, &gVBO);
   glDeleteBuffers(1, &gUVBO);
+
 }
 
 void DrawImage(string const& filePath)
@@ -206,7 +216,6 @@ void DrawImage(string const& filePath)
   //Avoid mipmap filtering
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
 
 
   //Create a surface to the correct size in RGB format, and copy the old image

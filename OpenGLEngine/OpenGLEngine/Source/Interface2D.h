@@ -2,7 +2,6 @@
 #define Interface2D_h__
 
 #include "Types.h"
-#include "FrameBuffer.h"
 
 /**
 * @file   2DInterface.h
@@ -31,7 +30,7 @@ uint32_t* GetPixelData(SDL_Surface* source);
 
 SDL_Surface* GetSurfaceFromImg(const string& filePath);
 
-void DrawText(int size, string const& filePath, string const& text, int xpos, int ypos, vec3 const& color = vec3(0, 0, 0));
+void DrawText(int size, string const& filePath, string const& text, vec2 pos, vec3 const& color, int centered, int screenWidth, int screenHeight);
 
 uint32_t* GetImgData(const string& filePath);
 

@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Data Structures\KDTree.cpp" />
+    <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
+    <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
     <ClCompile Include="Source\Lua\AABBAPI.cpp" />
     <ClCompile Include="Source\Effects\AdditiveBlendEffect.cpp" />
     <ClCompile Include="Source\Plug-Ins\AffineTransformable.cpp" />
@@ -95,6 +98,10 @@
     <ClCompile Include="Source\Utility\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Base Classes\IRenderManager.h" />
+    <ClInclude Include="Source\Data Structures\KDTree.h" />
+    <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
+    <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
     <ClInclude Include="Source\Lua\AABBAPI.h" />
     <ClInclude Include="Source\Effects\AdditiveBlendEffect.h" />
     <ClInclude Include="Source\Plug-Ins\AffineTransformable.h" />

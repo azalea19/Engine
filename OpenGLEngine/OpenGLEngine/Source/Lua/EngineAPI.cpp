@@ -4,6 +4,7 @@
 #include "ShaderLibrary.h"
 #include "ModelLibrary.h"
 #include "InputManager.h"
+#include "Renderer.h"
 
 /// <summary>
 /// The s engine{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}
@@ -34,6 +35,7 @@ static void Initialise(int screenWidth, int screenHeight)
   ModelLibrary::Initialise(EngineAPI::GetEngine());
   
   InputManager::GetInstance().Initialise(EngineAPI::GetEngine()->CreateInputHandler());
+  Renderer::GetInstance().Initialise(EngineAPI::GetEngine()->CreateRenderManager());
 }
 
 static bool BeginUpdate()

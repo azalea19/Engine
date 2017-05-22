@@ -5,6 +5,7 @@
 #include "IShader.h"
 #include "IRenderableObject.h"
 #include "IInputHandler.h"
+#include "IRenderManager.h"
 
 /**
 * @file IEngine.h
@@ -88,6 +89,8 @@ public:
   /// <returns></returns>
   virtual IInputHandler* CreateInputHandler() = 0;
 
+
+  virtual IRenderManager* CreateRenderManager() = 0;
 
 };
 #endif // IEngine_h__

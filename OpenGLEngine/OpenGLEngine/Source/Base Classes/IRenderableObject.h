@@ -63,6 +63,8 @@ public:
   /// <param name="animationIndex">Index of the animation.</param>
   virtual void Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time, int animationIndex) const = 0;
 
+  virtual mAABB GetBoundingBox() const = 0;
+
 };
 
 

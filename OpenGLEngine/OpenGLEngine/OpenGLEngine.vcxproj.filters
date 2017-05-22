@@ -232,9 +232,9 @@
     <ClCompile Include="Source\Engine Components\Independant\Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="KDTree.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
+    <ClCompile Include="Source\Data Structures\KDTree.cpp" />
+    <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
+    <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Interface2D.h">
@@ -492,5 +492,9 @@
     <ClInclude Include="Source\Data Structures\Singleton.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Base Classes\IRenderManager.h" />
+    <ClInclude Include="Source\Data Structures\KDTree.h" />
+    <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
+    <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
   </ItemGroup>
 </Project>
