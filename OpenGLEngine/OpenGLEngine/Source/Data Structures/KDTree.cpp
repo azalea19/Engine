@@ -51,6 +51,7 @@ KDTree::KDTree(std::vector<ObjectInstance*> const& objects, int depthLevel)
 {
   if (objects.size() > 0)
   {
+    root = new Node();
     std::vector<ObjectBoxPair> pairs = CreateObjectBoxPairs(objects);
     root->box = MergeBoundingBoxes(pairs);
     Split(root, pairs, X, depthLevel);
@@ -172,7 +173,7 @@ static void SplitY(Node* node)
   mAABB right = node->box;
 
   left.min.y = node->box.min.y;
-  left.max.y = node->box.max.y / 2;
+  left.max.y = (node->box.max.y + node->box.min.y) / 2;
 
   right.min.y = left.max.y;
   right.max.y = node->box.max.y;
@@ -187,7 +188,7 @@ static void SplitZ(Node* node)
   mAABB right = node->box;
 
   left.min.z = node->box.min.z;
-  left.max.z = node->box.max.z / 2;
+  left.max.z = (node->box.max.z + node->box.min.z) / 2;
 
   right.min.z = left.max.z;
   right.max.z = node->box.max.z;
@@ -225,7 +226,7 @@ static void Split(Node* node, std::vector<ObjectBoxPair> &pairs, Axis axis, int 
       delete node->right;
       node->left = nullptr;
       node->right = nullptr;
-      Split(node, rightPairs, Axis((axis + 1) % 3), depth + 1);
+      Split(node, rightPairs, Axis((axis + 1) % 3), depth);
     }
     else if (rightPairs.empty())
     {
@@ -234,12 +235,12 @@ static void Split(Node* node, std::vector<ObjectBoxPair> &pairs, Axis axis, int 
       delete node->right;
       node->left = nullptr;
       node->right = nullptr;
-      Split(node, leftPairs, Axis((axis + 1) % 3), depth + 1);
+      Split(node, leftPairs, Axis((axis + 1) % 3), depth);
     }
     else
     {
-      Split(node->left, leftPairs, Axis((axis + 1) % 3), depth + 1);
-      Split(node->right, rightPairs, Axis((axis + 1) % 3), depth + 1);
+      Split(node->left, leftPairs, Axis((axis + 1) % 3), depth - 1);
+      Split(node->right, rightPairs, Axis((axis + 1) % 3), depth - 1);
     }
 
   }

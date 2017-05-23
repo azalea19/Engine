@@ -27,11 +27,13 @@ public:
 	/// <returns></returns>
 	static bool RayToAABB(LuaRef ray, LuaRef aabb);
 
-  void CreateCollisionTree(LuaRef objectInstanceHandles);
+  static void CreateCollisionTree(LuaRef objectInstanceHandles);
 
-  bool CollidingInTree(LuaRef box);
+  static bool Box_CollidingInTree(LuaRef box);
 
-  bool CollidingInTree(InstanceHandle objectInstance);
+  static bool AABB_CollidingInTree(const mAABB box);
+
+  static bool ObjectInstance_CollidingInTree(InstanceHandle objectInstance);
 
 
 	/// <summary>
@@ -43,8 +45,6 @@ public:
 
 
 private:
-
-  KDTree* collisionTree;
 
 
 };

@@ -479,4 +479,7 @@
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scripts\NewGame.lua" />
+  </ItemGroup>
 </Project>
