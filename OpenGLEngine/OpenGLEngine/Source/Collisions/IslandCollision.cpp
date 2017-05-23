@@ -1,4 +1,5 @@
 #include "IslandCollision.h"
+#include "CollisionAPI.h"
 #include <iostream>
 
 
@@ -16,14 +17,15 @@ bool IslandCollision::Check(mAABB a, std::vector<mAABB> list, int listSize)
 
 	//std::cout << "Checking collision with... MIN: " << a.min.x << "," << a.min.z << "," << a.min.z << ", MAX: " << a.max.x << "," << a.max.y << "," << a.max.z << "//  ";
 
-	for (int i = 0; i < listSize; i++)
-	{
-		if (Intersects(a, list[i]))
-		{
-			return true;
-		}
-	}
-	return false;
+ // for (int i = 0; i < listSize; i++)
+ // {
+ //   if (Intersects(a, list[i]))
+ //   {
+ //     return true;
+ //   }
+ // }
+	//return false;
+  return CollisionAPI::AABB_CollidingInTree(a);
 }
 
 
@@ -42,35 +44,38 @@ vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAA
 	// These are all the directions in which to check for an "escape route" from the collision.
 	if (dirs.empty())
 	{
-		// y = 0 layer
-		dirs.push_back(normalize(vec3(1, 0, 0))); // x 
-		dirs.push_back(normalize(vec3(-1, 0, 0))); // -x
-		dirs.push_back(normalize(vec3(0, 0, 1))); // z
-		dirs.push_back(normalize(vec3(0, 0, -1))); //-z
-		dirs.push_back(normalize(vec3(1, 0, 1))); // x z
-		dirs.push_back(normalize(vec3(-1, 0, 1))); // -x z
-		dirs.push_back(normalize(vec3(1, 0, -1))); // x -z
-		dirs.push_back(normalize(vec3(-1, 0, -1))); // -x -z
 
-		// y = 1 layer
-		dirs.push_back(normalize(vec3(1, 1, 0))); // x 
-		dirs.push_back(normalize(vec3(-1, 1, 0))); // -x
-		dirs.push_back(normalize(vec3(0, 1, 1))); // z
-		dirs.push_back(normalize(vec3(0, 1, -1))); //-z
-		dirs.push_back(normalize(vec3(1, 1, 1))); // x z
-		dirs.push_back(normalize(vec3(-1, 1, 1))); // -x z
-		dirs.push_back(normalize(vec3(1, 1, -1))); // x -z
-		dirs.push_back(normalize(vec3(-1, 1, -1))); // -x -z
+    // y = 1 layer
+    dirs.push_back(normalize(vec3(0, 1, 0))); // x z
+    dirs.push_back(normalize(vec3(-1, 1, -1))); // x 
+    dirs.push_back(normalize(vec3(-1, 1, 0))); // -x
+    dirs.push_back(normalize(vec3(-1, 1, 1))); // z
+    dirs.push_back(normalize(vec3(0, 1, -1))); //-z
+    dirs.push_back(normalize(vec3(0, 1, 1))); // -x z
+    dirs.push_back(normalize(vec3(1, 1, -1))); // x -z
+    dirs.push_back(normalize(vec3(1, 1, 0))); // -x -z
+    dirs.push_back(normalize(vec3(1, 1, 1))); // -x -z
 
-		// y = -1 layer
-		dirs.push_back(normalize(vec3(1, -1, 0))); // x 
-		dirs.push_back(normalize(vec3(-1, -1, 0))); // -x
-		dirs.push_back(normalize(vec3(0, -1, 1))); // z
-		dirs.push_back(normalize(vec3(0, -1, -1))); //-z
-		dirs.push_back(normalize(vec3(1, -1, 1))); // x z
-		dirs.push_back(normalize(vec3(-1, -1, 1))); // -x z
-		dirs.push_back(normalize(vec3(1, -1, -1))); // x -z
-		dirs.push_back(normalize(vec3(-1, -1, -1))); // -x -z
+    // y = 0 layer
+    dirs.push_back(normalize(vec3(-1, 0, -1))); // x 
+    dirs.push_back(normalize(vec3(-1, 0, 0))); // -x
+    dirs.push_back(normalize(vec3(-1, 0, 1))); // z
+    dirs.push_back(normalize(vec3(0, 0, -1))); //-z
+    dirs.push_back(normalize(vec3(0, 0, 1))); // -x z
+    dirs.push_back(normalize(vec3(1, 0, -1))); // x -z
+    dirs.push_back(normalize(vec3(1, 0, 0))); // -x -z
+    dirs.push_back(normalize(vec3(1, 0, 1))); // -x -z
+
+    // y = 1 layer
+    dirs.push_back(normalize(vec3(-1, -1, 0))); // -x
+    dirs.push_back(normalize(vec3(-1, -1, 1))); // z
+    dirs.push_back(normalize(vec3(0, -1, -1))); //-z
+    dirs.push_back(normalize(vec3(0, -1, 0))); // x z
+    dirs.push_back(normalize(vec3(0, -1, 1))); // -x z
+    dirs.push_back(normalize(vec3(1, -1, -1))); // x -z
+    dirs.push_back(normalize(vec3(1, -1, 0))); // -x -z
+    dirs.push_back(normalize(vec3(1, -1, 1))); // -x -z
+    dirs.push_back(normalize(vec3(-1, -1, -1))); // x 
 	}
 
 	// If there is no collision to begin with

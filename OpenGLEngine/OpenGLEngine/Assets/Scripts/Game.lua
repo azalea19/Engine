@@ -10,7 +10,6 @@ require 'ReadAndWriteInstances'
 require 'Terrain'
 ]]--
 
-GetAPI(context.handle, 'printAPI', 'printAPI')
 local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 local AABoundingBox = dofile '../Assets/Scripts/AABoundingBox.lua'
@@ -80,39 +79,12 @@ function LoadAPIs()
 
 end
 
-function printVec3(veca)
-    printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
-end
-
-function printVec3After(string,veca)
-    printAPI.print(string)
-    printVec3(veca)
-
-end
-
-function printVec3s(vecc,vecb)
-    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. "\n")
-end
 	
 function LoadAssets()
 	printAPI.print('Loading Models...\n')
-	--modelLibraryAPI.addModel("Plant","../Assets/Models/SmallPlant/SmallPlant.obj",false)
-	--modelLibraryAPI.addModel("Horse","../Assets/Models/Horse/horse.3ds",false)
-	--modelLibraryAPI.addModel("Drone","../Assets/Models/Drone/PA_drone.fbx",false)
-	--modelLibraryAPI.addModel("Bomber","../Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
-	--modelLibraryAPI.addModel("DropPod","../Assets/Models/DropPod/PA_DropPod.fbx",false)
-	--modelLibraryAPI.addModel("Tank","../Assets/Models/Tank/PA_ArchfireTank.fbx",false)
-	--modelLibraryAPI.addModel("Warrior","../Assets/Models/Warrior/PA_Warrior.fbx",false)
-	--modelLibraryAPI.addModel("Rabbit","../Assets/Models/Rabbit/rabbit.fbx",false)
-	--modelLibraryAPI.addModel("Spider","../Assets/Models/Spider/spider.fbx",false)
-	--modelLibraryAPI.addModel("Cactus1","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
-	--modelLibraryAPI.addModel("Cactus2","../Assets/Models/DesertPlants/Cactus/cactus_02.FBX",false)BROKEN
-	--modelLibraryAPI.addModel("Cactus3","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
-	modelLibraryAPI.addModel("Rock","../Assets/Models/Rocks/Boulder/Rock.obj",false)
-	--modelLibraryAPI.addModel("Stone","../Assets/Models/Rocks/SmallRock/stone.fbx",false)BROKEN
+
+
 	modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
-	--modelLibraryAPI.addModel("Cart","../Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
-	--modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon exterior-interior.obj",false)
 	modelLibraryAPI.addModel("Skybox","../Assets/Models/SkyBox/skybox.obj",false)
 	modelLibraryAPI.addModel("Bob","../Assets/Models/Alfred.obj",false)
 	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
@@ -171,13 +143,6 @@ function Initialize()
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
-
-	--test = luaObjInstManager.addNewInstance("Bob")
-	--objectInstanceAPI.setTranslation(test, 0,0,0);
-    --local abox = AABBAPI.getAABB(test, context.handle)
-	--printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
-
-	--Works
 
 
     printAPI.print("Initialising text...\n")

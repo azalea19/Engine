@@ -3,6 +3,7 @@
 #include "LuaObjectInstanceManager.h"
 #include "KDTree.h"
 
+static KDTree* collisionTree;
 
 bool CollisionAPI::RayToAABB(LuaRef ray, LuaRef aabb)
 {
@@ -22,29 +23,34 @@ void CollisionAPI::CreateCollisionTree(LuaRef objectInstanceHandles)
 
   for (int i = 0; i < length; i++)
   {
-    handles.push_back(objectInstanceHandles[i]);
+    handles.push_back(objectInstanceHandles[i + 1]);
   }
 
   ObjectInstance* newObject;
   
   for (int i = 0; i < handles.size(); i++)
   {
-    newObject = LuaObjectInstanceManager::GetInstance(i);
+    newObject = LuaObjectInstanceManager::GetInstance(handles[i]);
     objects.push_back(newObject);
   }
 
-  collisionTree = new KDTree(objects, 10);
+  collisionTree = new KDTree(objects, 32);
 
   //KD Tree created now have a bounding volume hierarchy of all objects that were passed in to the tree
 }
 
 
-bool CollisionAPI::CollidingInTree(LuaRef luaBox)
+bool CollisionAPI::Box_CollidingInTree(LuaRef luaBox)
 {
   return collisionTree->Intersects(FromLuaTable<mAABB>(luaBox));
 }
 
-bool CollisionAPI::CollidingInTree(InstanceHandle instanceHandle)
+bool CollisionAPI::AABB_CollidingInTree(const mAABB box)
+{
+  return collisionTree->Intersects(box);
+}
+
+bool CollisionAPI::ObjectInstance_CollidingInTree(InstanceHandle instanceHandle)
 {
   mOBB box = LuaObjectInstanceManager::GetInstance(instanceHandle)->GetBoundingBox();
 
@@ -56,4 +62,7 @@ void CollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "rayToAABB", RayToAABB);
+  pContext->ExposeFunction(luaAPIName, "createCollisionTree", CreateCollisionTree);
+  pContext->ExposeFunction(luaAPIName, "box_collidingInTree", Box_CollidingInTree);
+  pContext->ExposeFunction(luaAPIName, "objectInstance_collidingInTree", ObjectInstance_CollidingInTree);
 }

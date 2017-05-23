@@ -58,17 +58,20 @@ bool ObjectInstance::Intersects(mAABB const & box)
   result.corners[5] = vec3(modelMatrix * vec4(box.max.x, box.min.y, box.max.z, 1));
   result.corners[6] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.min.z, 1));
   result.corners[7] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.max.z, 1));
-  
-  //Result now contains the box with coords in the model space of object instance
-  //Check if the box intersects with the renderable objects bounding box
-  //If we are intersecting then go over the triangles of the renderable object and check if we are intersecting with one of those
-  if (::Intersects(m_pRenderableObject->GetBoundingBox(), result))
+
+  return Intersects(result);
+}
+
+
+bool ObjectInstance::Intersects(mOBB const & box)
+{
+  if (::Intersects(m_pRenderableObject->GetBoundingBox(), box))
   {
     std::vector<mTriangle> const& faces = m_pRenderableObject->GetTriangleFaces();
     for (int i = 0; i < faces.size(); i++)
     {
       //If box is intersecting a triangle face 
-      if (::Intersects(result, faces[i]))
+      if (::Intersects(box, faces[i]))
       {
         //Return true
         return true;

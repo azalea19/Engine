@@ -196,9 +196,9 @@ bool Intersects(mAABB const & aabb, mOBB const & obb)
 	normals[0] = vec3(1, 0, 0);
 	normals[1] = vec3(0, 1, 0);
 	normals[2] = vec3(0, 0, 1);
-	normals[4] = obb.axes[0];
-	normals[5] = obb.axes[1];
-	normals[6] = obb.axes[2];
+	normals[3] = obb.axes[0];
+	normals[4] = obb.axes[1];
+	normals[5] = obb.axes[2];
 
 	return SeperatingAxisTest(aabbCorners, 8, obb.corners, 8, normals, 6);
 }
