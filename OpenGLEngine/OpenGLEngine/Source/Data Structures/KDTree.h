@@ -23,6 +23,8 @@ public:
 
   bool Intersects(mAABB const& box) const;
 
+  bool Intersects(mOBB const& box) const;
+
 private:
   Node* root;
 };

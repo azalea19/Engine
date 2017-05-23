@@ -112,10 +112,44 @@ static bool Intersects(mAABB const& box, Node const* node)
   return false;
 }
 
+static bool Intersects(mOBB const& box, Node const* node)
+{
+  //If box is colliding with the bounding volume in our node
+  if (Intersects(node->box, box))
+  {
+    //If children aren't null
+    if (node->left)
+    {
+      //Pass box down to my children
+      if (!Intersects(box, node->left) && !Intersects(box, node->right))
+        return false;
+      else
+        return true;
+    }
+    else
+    {
+      //End of tree reached 
+      //If either node is null node is a leaf
+      for (int i = 0; i < node->objects.size(); i++)
+      {
+        if (node->objects[i]->Intersects(box))
+          return true;
+      }
+    }
+  }
+  return false;
+}
+
 bool KDTree::Intersects(mAABB const& box) const
 {
   return ::Intersects(box, root);
 }
+
+bool KDTree::Intersects(mOBB const & box) const
+{
+  return ::Intersects(box, root);
+}
+
 
 static void SplitX(Node* node)
 {

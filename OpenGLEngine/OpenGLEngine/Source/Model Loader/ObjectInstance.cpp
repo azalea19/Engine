@@ -8,7 +8,6 @@ ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, ve
   , m_activeAnimation(-1)
 {
   SetTransform(coords, yaw, pitch, 0, scaleFactor);
-  //RenderBatch::GetInstance().AddObject(this);
 }
 
 void ObjectInstance::SetVisible(bool vis)
@@ -80,7 +79,6 @@ bool ObjectInstance::Intersects(mAABB const & box)
 }
 
 
-
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
   m_pRenderableObject->BindObject();
@@ -90,7 +88,6 @@ void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatri
     m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
   }
 }
-
 
 
 mat4 ObjectInstance::GetWorldMatrix() const

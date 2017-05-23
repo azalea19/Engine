@@ -111,7 +111,6 @@ template<> mAABB FromLuaTable<mAABB>(LuaRef value)
   result.min = FromLuaTable<vec3>(value["min"]);
   result.max = FromLuaTable<vec3>(value["max"]);
 
-
   return result;
 }
 
