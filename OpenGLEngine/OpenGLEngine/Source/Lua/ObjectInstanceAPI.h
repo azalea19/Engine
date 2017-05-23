@@ -3,7 +3,6 @@
 #include "LuaObjectInstanceManager.h"
 #include "LuaManager.h"
 #include "ShaderLibrary.h"
-#include "MPlayer.h"
 #include "MCamera.h"
 #include "ObjectInstance.h"
 #include "MathAPI.h"

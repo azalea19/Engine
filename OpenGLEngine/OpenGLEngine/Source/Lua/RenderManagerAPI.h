@@ -4,7 +4,6 @@
 
 #include "LuaContext.h"
 #include "LuaManager.h"
-#include "RenderManager.h"
 #include "MathAPI.h"
 #include "Types.h"
 

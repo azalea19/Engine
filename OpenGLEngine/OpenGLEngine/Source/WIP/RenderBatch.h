@@ -1,5 +1,5 @@
-#ifndef RenderManager_h__
-#define RenderManager_h__
+#ifndef RenderBatch_h__
+#define RenderBatch_h__
 
 #include "Singleton.h"
 #include <unordered_map>
@@ -18,7 +18,7 @@
 class RenderableObject;
 class ObjectInstance;
 
-class RenderManager : public Singleton<RenderManager>, public IRenderable
+class RenderBatch : public Singleton<RenderBatch>, public IRenderable
 {
 public:
 
@@ -73,4 +73,4 @@ private:
   void UpdateFrameRate(float time);
 
 };
-#endif // RenderManager_h__
+#endif // RenderBatch_h__

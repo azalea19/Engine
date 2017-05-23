@@ -17,6 +17,7 @@ RenderableObject::RenderableObject(string const& name, string const& filename)
   m_pModel = new Model(name, filename);
   Initialise();
   CreateBoundingBox();
+  CreateTriangleFaces();
 }
 
 RenderableObject::~RenderableObject()
@@ -100,6 +101,22 @@ void RenderableObject::CreateBoundingBox()
   {
     m_boundingBox.min = min(m_boundingBox.min, vertices[i]);
     m_boundingBox.max = max(m_boundingBox.max, vertices[i]);
+  }
+}
+
+void RenderableObject::CreateTriangleFaces()
+{
+  std::vector<vec3> const& vertices = m_pModel->GetVertices();
+  std::vector<int> const& indices = m_pModel->GetIndices();
+
+  mTriangle newFace;
+
+  for (int i = 0; i < indices.size(); i+=3)
+  {
+    newFace.corners[0] = vertices[indices[i]];
+    newFace.corners[1] = vertices[indices[i+1]];
+    newFace.corners[2] = vertices[indices[i+2]];
+    m_faces.push_back(newFace);
   }
 }
 
@@ -223,6 +240,11 @@ void RenderableObject::BindMesh(int meshIndex) const
 mAABB RenderableObject::GetBoundingBox() const 
 {
   return m_boundingBox;
+}
+
+std::vector<mTriangle> RenderableObject::GetTriangleFaces() const
+{
+  return m_faces;
 }
 
 

@@ -10,22 +10,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Interface2D.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MCamera.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MPlayer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\OBJWriter.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RenderManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Animation\Animation.cpp">
@@ -229,26 +214,20 @@
     <ClCompile Include="Source\Data Structures\KDTree.cpp" />
     <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
     <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
+    <ClCompile Include="Source\WIP\RenderBatch.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\File IO\OBJWriter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WIP\Interface2D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Model Loader\MCamera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Interface2D.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Light.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MCamera.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MPlayer.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\OBJWriter.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RenderManager.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Animation\Animation.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -484,5 +463,20 @@
     <ClInclude Include="Source\Data Structures\KDTree.h" />
     <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
     <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
+    <ClInclude Include="Source\WIP\RenderBatch.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\File IO\OBJWriter.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WIP\Interface2D.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WIP\Light.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Model Loader\MCamera.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -83,6 +83,7 @@ KDTree::~KDTree()
 
 }
 
+//Expecting box in world space coords
 static bool Intersects(mAABB const& box, Node const* node) 
 {
   //If box is colliding with the bounding volume in our node
@@ -103,7 +104,7 @@ static bool Intersects(mAABB const& box, Node const* node)
       //If either node is null node is a leaf
         for (int i = 0; i < node->objects.size(); i++)
         {
-          if (Intersects(box, node->objects[i]->GetRenderableObject()->GetBoundingBox()))         
+          if (node->objects[i]->Intersects(box))              
             return true;
         }
     }   

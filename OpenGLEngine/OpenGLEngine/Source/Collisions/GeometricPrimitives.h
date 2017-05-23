@@ -41,4 +41,6 @@ struct mTriangle
 	vec3 corners[3];	
 };
 
+
+
 #endif // GeometricPrimitives_h__

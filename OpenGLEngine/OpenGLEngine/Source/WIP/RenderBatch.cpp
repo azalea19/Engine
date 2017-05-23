@@ -1,9 +1,9 @@
-#include "RenderManager.h"
+#include "RenderBatch.h"
 #include "ObjectInstance.h"
 #include "Utility.h"
 #include "IMesh.h"
 
-void RenderManager::AddObject(ObjectInstance const* pObject)
+void RenderBatch::AddObject(ObjectInstance const* pObject)
 {
  IRenderableObject const* rObject = pObject->GetRenderableObject();
   auto i = m_objectMap.find(rObject);
@@ -13,7 +13,7 @@ void RenderManager::AddObject(ObjectInstance const* pObject)
     i->second.push_back(pObject);
 }
 
-void RenderManager::RemoveObject(ObjectInstance const* pObject)
+void RenderBatch::RemoveObject(ObjectInstance const* pObject)
 {
   IRenderableObject const* rObject = pObject->GetRenderableObject();
   auto i = m_objectMap.find(rObject);
@@ -31,7 +31,7 @@ void RenderManager::RemoveObject(ObjectInstance const* pObject)
   }
 }
 
-void RenderManager::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
+void RenderBatch::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
   int verticesDrawn = 0;
   for (auto i : m_objectMap)
@@ -57,12 +57,12 @@ void RenderManager::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4
   UpdateFrameRate(time);
 }
 
-float RenderManager::GetFrameRate() const
+float RenderBatch::GetFrameRate() const
 {
   return m_frameRate;
 }
 
-void RenderManager::UpdateFrameRate(float time)
+void RenderBatch::UpdateFrameRate(float time)
 {
   if (m_renderTimes.size() == 60)
     m_renderTimes.erase(m_renderTimes.begin());

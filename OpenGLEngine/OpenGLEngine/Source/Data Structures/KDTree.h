@@ -1,6 +1,15 @@
 #ifndef KDTree_h__
 #define KDTree_h__
 
+/**
+* @file KDTree.h
+* @Author Maddisen Topaz
+* @date   S1, 2017
+* @brief A class for creating a "KDTree" style bounding volume hierarchy for the world.
+* Which allows for fast collision testing.
+*/
+
+
 #include "GeometricPrimitives.h"
 #include "ObjectInstance.h"
 

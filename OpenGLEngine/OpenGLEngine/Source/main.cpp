@@ -6,7 +6,6 @@
 
 int main(int argc, char **argv)
 {
-	LuaManager::Initialize();
-	LuaManager::GetInstance().CreateContext("../Assets/Scripts/Game.lua");
-  getchar();
+  LuaManager::Initialize();
+  LuaManager::GetInstance().CreateContext("../Assets/Scripts/Game.lua");
 }

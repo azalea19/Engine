@@ -51,7 +51,7 @@
     <ClCompile Include="Source\Plug-Ins\IMeshCollection.cpp" />
     <ClCompile Include="Source\Engine Components\Independant\InputManager.cpp" />
     <ClCompile Include="Source\Lua\InputManagerAPI.cpp" />
-    <ClCompile Include="Source\Interface2D.cpp" />
+    <ClCompile Include="Source\WIP\Interface2D.cpp" />
     <ClCompile Include="Source\Base Classes\IRenderableObject.cpp" />
     <ClCompile Include="Source\Collisions\IslandCollision.cpp" />
     <ClCompile Include="Source\Lua\IslandCollisionAPI.cpp" />
@@ -64,22 +64,21 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Model Loader\Material.cpp" />
     <ClCompile Include="Source\Lua\MathAPI.cpp" />
-    <ClCompile Include="Source\MCamera.cpp" />
+    <ClCompile Include="Source\Model Loader\MCamera.cpp" />
     <ClCompile Include="Source\Model Loader\Mesh.cpp" />
     <ClCompile Include="Source\Model Loader\Model.cpp" />
     <ClCompile Include="Source\Engine Components\Independant\ModelLibrary.cpp" />
     <ClCompile Include="Source\Lua\ModelLibraryAPI.cpp" />
-    <ClCompile Include="Source\MPlayer.cpp" />
     <ClCompile Include="Source\Effects\MultiplicativeBlendEffect.cpp" />
     <ClCompile Include="Source\Model Loader\ObjectInstance.cpp" />
     <ClCompile Include="Source\Lua\ObjectInstanceAPI.cpp" />
-    <ClCompile Include="Source\OBJWriter.cpp" />
+    <ClCompile Include="Source\File IO\OBJWriter.cpp" />
     <ClCompile Include="Source\Collisions\PrimitiveCollisions.cpp" />
     <ClCompile Include="Source\Lua\PrintAPI.cpp" />
     <ClCompile Include="Source\Utility\Random.cpp" />
     <ClCompile Include="Source\Effects\RayEffect.cpp" />
     <ClCompile Include="Source\Model Loader\RenderableObject.cpp" />
-    <ClCompile Include="Source\RenderManager.cpp" />
+    <ClCompile Include="Source\WIP\RenderBatch.cpp" />
     <ClCompile Include="Source\Lua\RenderManagerAPI.cpp" />
     <ClCompile Include="Source\Effects\SceneDecomposeEffect.cpp" />
     <ClCompile Include="Source\Utility\Screen.cpp" />
@@ -134,13 +133,13 @@
     <ClInclude Include="Source\Plug-Ins\IMeshCollection.h" />
     <ClInclude Include="Source\Engine Components\Independant\InputManager.h" />
     <ClInclude Include="Source\Lua\InputManagerAPI.h" />
-    <ClInclude Include="Source\Interface2D.h" />
+    <ClInclude Include="Source\WIP\Interface2D.h" />
     <ClInclude Include="Source\Plug-Ins\IRenderable.h" />
     <ClInclude Include="Source\Base Classes\IRenderableObject.h" />
     <ClInclude Include="Source\Base Classes\IShader.h" />
     <ClInclude Include="Source\Collisions\IslandCollision.h" />
     <ClInclude Include="Source\Lua\IslandCollisionAPI.h" />
-    <ClInclude Include="Source\Light.h" />
+    <ClInclude Include="Source\WIP\Light.h" />
     <ClInclude Include="Source\Lua\LuaAPI.h" />
     <ClInclude Include="Source\Lua\LuaContext.h" />
     <ClInclude Include="Source\Lua\LuaDisplay2DAPI.h" />
@@ -150,23 +149,22 @@
     <ClInclude Include="Source\Lua\LuaVectorUtility.h" />
     <ClInclude Include="Source\Model Loader\Material.h" />
     <ClInclude Include="Source\Lua\MathAPI.h" />
-    <ClInclude Include="Source\MCamera.h" />
+    <ClInclude Include="Source\Model Loader\MCamera.h" />
     <ClInclude Include="Source\Model Loader\Mesh.h" />
     <ClInclude Include="Source\Utility\MMath.h" />
     <ClInclude Include="Source\Model Loader\Model.h" />
     <ClInclude Include="Source\Engine Components\Independant\ModelLibrary.h" />
     <ClInclude Include="Source\Lua\ModelLibraryAPI.h" />
-    <ClInclude Include="Source\MPlayer.h" />
     <ClInclude Include="Source\Effects\MultiplicativeBlendEffect.h" />
     <ClInclude Include="Source\Model Loader\ObjectInstance.h" />
     <ClInclude Include="Source\Lua\ObjectInstanceAPI.h" />
-    <ClInclude Include="Source\OBJWriter.h" />
+    <ClInclude Include="Source\File IO\OBJWriter.h" />
     <ClInclude Include="Source\Collisions\PrimitiveCollisions.h" />
     <ClInclude Include="Source\Lua\PrintAPI.h" />
     <ClInclude Include="Source\Utility\Random.h" />
     <ClInclude Include="Source\Effects\RayEffect.h" />
     <ClInclude Include="Source\Model Loader\RenderableObject.h" />
-    <ClInclude Include="Source\RenderManager.h" />
+    <ClInclude Include="Source\WIP\RenderBatch.h" />
     <ClInclude Include="Source\Lua\RenderManagerAPI.h" />
     <ClInclude Include="Source\Utility\Scene.h" />
     <ClInclude Include="Source\Effects\SceneDecomposeEffect.h" />
@@ -278,7 +276,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;$(ProjectDir)Source/;$(ProjectDir)Source/Animation/;$(ProjectDir)Source/Base Classes/;$(ProjectDir)Source/Collisions/;$(ProjectDir)Source/Data Structures/;$(ProjectDir)Source/Effects/;$(ProjectDir)Source/Engine Components/;$(ProjectDir)Source/Framebuffer/;$(ProjectDir)Source/Lua/;$(ProjectDir)Source/Model Loader/;$(ProjectDir)Source/Plug-Ins/;$(ProjectDir)Source/Terrain/;$(ProjectDir)Source/Utility/;$(ProjectDir)Source/Engine Components/DirectX/;$(ProjectDir)Source/Engine Components/OpenGL/;$(ProjectDir)Source/Engine Components/Independant/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;$(ProjectDir)Source/;$(ProjectDir)Source/Animation/;$(ProjectDir)Source/Base Classes/;$(ProjectDir)Source/Collisions/;$(ProjectDir)Source/Data Structures/;$(ProjectDir)Source/Effects/;$(ProjectDir)Source/Engine Components/;$(ProjectDir)Source/Framebuffer/;$(ProjectDir)Source/Lua/;$(ProjectDir)Source/Model Loader/;$(ProjectDir)Source/Plug-Ins/;$(ProjectDir)Source/Terrain/;$(ProjectDir)Source/Utility/;$(ProjectDir)Source/Engine Components/DirectX/;$(ProjectDir)Source/Engine Components/OpenGL/;$(ProjectDir)Source/WIP/;$(ProjectDir)Source/FIle IO;$(ProjectDir)Source/Engine Components/Independant/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -316,7 +314,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;$(ProjectDir)Source/;$(ProjectDir)Source/Animation/;$(ProjectDir)Source/Base Classes/;$(ProjectDir)Source/Collisions/;$(ProjectDir)Source/Data Structures/;$(ProjectDir)Source/Effects/;$(ProjectDir)Source/Engine Components/;$(ProjectDir)Source/Framebuffer/;$(ProjectDir)Source/Lua/;$(ProjectDir)Source/Model Loader/;$(ProjectDir)Source/Plug-Ins/;$(ProjectDir)Source/Terrain/;$(ProjectDir)Source/Utility/;$(ProjectDir)Source/Engine Components/DirectX/;$(ProjectDir)Source/Engine Components/OpenGL/;$(ProjectDir)Source/Engine Components/Independant/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\glm-0.9.7.6\;$(SolutionDir)3rdParty\SDL\include\;$(SolutionDir)3rdParty\Assimp\include\;$(SolutionDir)3rdParty\glew\include\;$(SolutionDir)3rdParty\LuaBridge\;$(SolutionDir)3rdParty\Lua\$(Platform)/include/;$(ProjectDir)Source/;$(ProjectDir)Source/Animation/;$(ProjectDir)Source/Base Classes/;$(ProjectDir)Source/Collisions/;$(ProjectDir)Source/Data Structures/;$(ProjectDir)Source/Effects/;$(ProjectDir)Source/Engine Components/;$(ProjectDir)Source/Framebuffer/;$(ProjectDir)Source/Lua/;$(ProjectDir)Source/Model Loader/;$(ProjectDir)Source/Plug-Ins/;$(ProjectDir)Source/Terrain/;$(ProjectDir)Source/Utility/;$(ProjectDir)Source/Engine Components/DirectX/;$(ProjectDir)Source/Engine Components/OpenGL/;$(ProjectDir)Source/WIP/;$(ProjectDir)Source/FIle IO;$(ProjectDir)Source/Engine Components/Independant/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
