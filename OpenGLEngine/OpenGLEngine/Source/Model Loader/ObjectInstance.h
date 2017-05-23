@@ -102,9 +102,20 @@ public:
   /// </summary>
   /// <returns>bool</returns>
   bool GetVisible() const;
-
+  
+  /// <summary>
+  /// Gets the oriented bounding box of the object instance.
+  /// </summary>
+  /// <returns></returns>
   mOBB GetBoundingBox() const;
   
+ 
+  /// <summary>
+  /// Determines whether box intersects any triangles in the object instance.
+  /// </summary>
+  /// <param name="box">The box.</param>
+  /// <returns></returns>
+  bool Intersects(mAABB const& box);
 
 private:
 

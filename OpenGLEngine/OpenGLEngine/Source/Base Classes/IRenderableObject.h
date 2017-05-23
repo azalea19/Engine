@@ -66,6 +66,8 @@ public:
 
   virtual mAABB GetBoundingBox() const = 0;
 
+  virtual std::vector<mTriangle> GetTriangleFaces() const = 0;
+
 };
 
 
