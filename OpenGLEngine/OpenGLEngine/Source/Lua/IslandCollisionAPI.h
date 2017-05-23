@@ -1,9 +1,13 @@
+#ifndef IslandCollisionAPI_h__
+#define IslandCollisionAPI_h__
+
 /**
 * @file   IslandCollisionAPI.h
 * @Author Elizabeth Haynes
 * @date   S1, 2017
 * @brief  Lua API for checking collisions and resolving them with the island method
 */
+
 #include "LuaContext.h"
 #include "LuaManager.h"
 
@@ -11,7 +15,7 @@
 #include "IslandCollision.h"
 
 
-#pragma once
+
 class IslandCollisionAPI
 {
 public:
@@ -50,3 +54,4 @@ public:
 
 };
 
+#endif // IslandCollisionAPI_h__

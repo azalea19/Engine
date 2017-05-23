@@ -117,6 +117,13 @@ public:
   /// <returns></returns>
   bool Intersects(mAABB const& box);
 
+  /// <summary>
+  /// Determines whether box intersects any triangles in the object instance.
+  /// </summary>
+  /// <param name="box">The box.</param>
+  /// <returns></returns>
+  bool Intersects(mOBB const& box);
+
 private:
 
   /// <summary>
