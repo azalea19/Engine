@@ -12,10 +12,44 @@ local npc = require 'LuaScripts/npc'
 local Player = require 'LuaScripts/Player'
 require 'LuaScripts/FileIO'
 
+function SaveQuests(filePath, data)
+	local numRows = 0
+	local total = 0
+	local saveTable = {}
+	local saveTableTwo = {}
+	local saveString = ""
+
+	clearFile(filePath)
+
+	for i = 1, #data.quests do
+		total = total + 1
+		saveTable[#saveTable + 1] =  data.quests[i]["name"] 
+		saveTable[#saveTable + 1] =  "," 
+		saveTable[#saveTable + 1] =  data.quests[i]["iEndStage"] 
+		saveTable[#saveTable + 1] =  "," 
+		saveTable[#saveTable + 1] =  #data.quests[i]["questStages"] 
+		saveTable[#saveTable + 1] =  "\n" 
+		
+		local Stages = {}
+
+		for k = 1, #data.quests[i]["questStages"]  do
+			saveTable[#saveTable + 1] =  data.quests[i]["questStages"][k]
+			t = QuestStage.new(fileData[i + k][1], fileData[i + k][2], fileData[i + k][3], fileData[i + k][4])
+		end
+		
+		
+	end
+	
+	saveString = table.concat(saveTable)
+	write(filePath, saveString)
+
+end
+
 function SaveInstances(filePath, data, fileType)
 	local numRows = 0
 	local total = 0
 	local saveTable = {}
+	local saveTableTwo = {}
 	local saveString = ""
 	
 	for k,v in next, data do 

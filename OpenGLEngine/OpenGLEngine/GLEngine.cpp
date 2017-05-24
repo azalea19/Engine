@@ -78,6 +78,8 @@ void GLEngine::CreateWindow()
 
 bool GLEngine::InitSDL()
 {
+
+
   if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
   {
     printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());

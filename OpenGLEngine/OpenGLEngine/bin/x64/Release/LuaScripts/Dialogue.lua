@@ -17,7 +17,7 @@ end
 
 function Dialogue:addTopic(newTopic)
 	printAPI.print("Setting Dialogue...\n");
-	self.topicCount = self.topicCount+1
+	self.topicCount = self.topicCount + 1
 	self.topics[self.topicCount] = newTopic	
 end
 

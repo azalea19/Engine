@@ -42,6 +42,17 @@ function Scene:AddInstances(data)
 	end
 end
 
+function Scene:FindInstance(name)
+	for i=1,#self.objects do
+		if(self.objects[i].stringID == name) then
+			debugLPrint("Found object " .. name .." in " .. self.name .. "\n")
+			return self.objects[i]
+		end
+	end
+	debugLPrint("Could not find ".. name .. " in " .. self.name .. "\n")
+	return false
+end
+
 function Scene:RemoveInstance(data)
 	for i=1,#self.objects do
 		if(self.objects[i].stringID == data.stringID) then

@@ -22,6 +22,7 @@ require 'LuaScripts/Dialogue'
 
 require 'LuaScripts/FileIO'
 require 'LuaScripts/ReadAndWriteInstances'
+require 'LuaScripts/SaveLoadDialogue'
 require 'LuaScripts/Terrain'
 require 'LuaScripts/Controls'
 require 'LuaScripts/QuestManager'
@@ -260,6 +261,8 @@ function Initialize()
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
+	LoadTopics("SaveData/DIA_Data.csv")
+
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 
 	--wont work
@@ -324,8 +327,8 @@ function StartDialogueTopic(playr,topicn)
 
     if(playr.inDialogue) then
         local topic = playr.lookTarget.dialogue.topics[topicn]
-        if(topic ~= nil and topic.textLines ~= nil and topic.textLines[topicn] ~= nil) then
-            dialogueText = topic.textLines[topicn]
+        if(topic ~= nil and topic.textLines ~= nil and topic.textLines[1] ~= nil) then
+            dialogueText = topic.textLines[1]
             dCurrentTopic = topic
             dCurrentLine = 1
             dInMenu = false
