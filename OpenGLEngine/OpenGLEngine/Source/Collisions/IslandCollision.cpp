@@ -26,6 +26,18 @@ bool IslandCollision::Check(mAABB a, std::vector<mAABB> list, int listSize)
 	return false;
 }
 
+int IslandCollision::CheckAndGetIndex(mAABB a, std::vector<mAABB> list, int listSize)
+{
+	for (int i = 0; i < listSize; i++)
+	{
+		if (Intersects(a, list[i]))
+		{
+			return i;
+		}
+	}
+	return 0;
+}
+
 
 static std::vector<vec3> dirs; // directions
 

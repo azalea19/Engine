@@ -10,7 +10,7 @@ require 'ReadAndWriteInstances'
 require 'Terrain'
 ]]--
 
-GetAPI(context.handle, 'printAPI', 'printAPI')
+--GetAPI(context.handle, 'printAPI', 'printAPI')
 local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 local AABoundingBox = dofile '../Assets/Scripts/AABoundingBox.lua'
@@ -22,10 +22,11 @@ local World = dofile '../Assets/Scripts/World.lua'
 --local QuestManager = require '../Assets/Scripts/QuestManager'
 dofile '../Assets/Scripts/Dialogue.lua'
 dofile '../Assets/Scripts/FileIO.lua'
-dofile '../Assets/Scripts/ReadAndWriteInstances.lua'
+dofile '../Assets/Scripts/ReadAndWriteData.lua'
 dofile '../Assets/Scripts/Terrain.lua'
 dofile '../Assets/Scripts/Controls.lua'
 dofile '../Assets/Scripts/QuestManager.lua'
+dofile '../Assets/Scripts/Menu.lua'
 
 OPEN_GL = 0
 
@@ -164,7 +165,7 @@ function Initialize()
     printAPI.print('Initialising engine...\n')
 
 	engineAPI.Create(OPEN_GL);
-	wireindex =0
+	wireindex = 1
 
 	printAPI.print('Creating...\n')
 	engineAPI.Initialise(1280,720);
@@ -280,14 +281,14 @@ function Initialize()
     camera0 = cameraAPI.addNewInstance()
     cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
 
-
-
     printAPI.print('Initialising rendermanager...\n')
     --renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
 	player0 = Player:new(camera0)
 	cameraAPI.setPosition(camera0,0,0,0)
+	cameraAPI.setYaw(camera0,225)
+	cameraAPI.setPitch(camera0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
 	--test = luaObjInstManager.addNewInstance("Bob")
@@ -307,6 +308,8 @@ function Initialize()
     local talkToBob = Quest.new("TalkToBob",stages,2)
     questManager:addQuest(talkToBob)
 
+	initMenu()
+	
     printAPI.print('Initialization finished.\n')
 end
 
@@ -349,17 +352,28 @@ function Update()
 	lastTime = time
     time = timeAPI.elapsedTimeMs()
 	deltaTime = time - lastTime
-
-    local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
-	if quitIn then
-		printAPI.print("Quitting - pressed input to quit.\n")
-        quitting = true
-    end
-    
+	
     if(quitting) then
         if inputManagerAPI.isMousePressedLeft() then
             run = false
         end
+    end
+	
+	if(inputManagerAPI.isKeyPressed(Menu_Input)) then
+        if(inMenu == false) then
+            inMenu = true
+        else
+            inMenu = false
+        end
+    end
+	
+	if(inMenu) then
+	
+	else
+    local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
+	if quitIn then
+		printAPI.print("Quitting - pressed input to quit.\n")
+        quitting = true
     end
 
     local helpIn = inputManagerAPI.isKeyDown(Help_Input)
@@ -380,6 +394,7 @@ function Update()
             wireindex =0
         end
     end
+
     --printAPI.print("Processing inputs\n")
 
 	e = inputManagerAPI.isKeyPressed(Use_Input)
@@ -492,7 +507,10 @@ function Update()
             TestChangeNPCState()
 
 	    end
-
+		
+		if inputManagerAPI.isKeyPressed(TestInput3) then
+		
+		end
     
         if inputManagerAPI.isKeyPressed(TestInput3) then
             -- spawn bob
@@ -547,6 +565,7 @@ function Update()
     --printAPI.print("Updating player\n")
 
     player0:update();
+	end
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
 
@@ -599,32 +618,65 @@ function Render()
     if(quitting) then
         display2DAPI.drawFullScreen("faces.png")
     else
-		if(helpMenu) then
-			display2DAPI.drawFullScreen("rules.png")
-		else
-
-            -- Draw object
-			local currentGOs = world:GetGameObjects()
-			for i = 1, world:GetGameObjectCount() do
-                if(currentGOs[i].visible) then
-                    renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
-                end
+		if(inMenu) then
+			updateMenu()
+			renderManagerAPI.renderObject(camera0,time,Background.id, 1)
+			renderManagerAPI.renderObject(camera0,time,MouseObject.id, 1)
+			if ButtonOne.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonOne.id, 1)
 			end
-			local currentTerrainID = world:GetTerrainID()
-			renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
-
-			renderManagerAPI.renderObject(camera0,time,skybox, 0)
-			renderManagerAPI.present(camera0)
-
-            
-            -- Draw UI text
-            --display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
-
-            if(player0.inDialogue) then 
-                --display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
-            end
-
+			if ButtonTwo.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonTwo.id, 1)
+			end
+			if ButtonThree.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonThree.id, 1)
+			end
+			if BackButton.active then
+				renderManagerAPI.renderObject(camera0,time,BackButton.id, 1)
+			end
+			if StartNewButton.active then
+				renderManagerAPI.renderObject(camera0,time,StartNewButton.id, 1)
+			end
+			if ContinueButton.active then
+				renderManagerAPI.renderObject(camera0,time,ContinueButton.id, 1)
+			end
+			if SaveButton.active then
+				renderManagerAPI.renderObject(camera0,time,SaveButton.id, 1)
+			end	
+			if LoadButton.active then
+				renderManagerAPI.renderObject(camera0,time,LoadButton.id, 1)
+			end
+			if ExitButton.active then
+				renderManagerAPI.renderObject(camera0,time,ExitButton.id, 1)
+			end
 		end
+			if(helpMenu) then
+				display2DAPI.drawFullScreen("rules.png")
+			else
+
+				-- Draw object
+				local currentGOs = world:GetGameObjects()
+				for i = 1, world:GetGameObjectCount() do
+					if(currentGOs[i].visible) then
+						renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
+					end
+				end
+				local currentTerrainID = world:GetTerrainID()
+				renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+
+				renderManagerAPI.renderObject(camera0,time,skybox, 0)
+				renderManagerAPI.present(camera0)
+
+				
+				-- Draw UI text
+				--display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
+
+				if(player0.inDialogue) then 
+					--display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
+				end
+
+			end
+		
 	end
 
 
