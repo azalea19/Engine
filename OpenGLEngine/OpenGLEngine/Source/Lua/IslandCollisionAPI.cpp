@@ -7,6 +7,18 @@ bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox)
   toMoveBB.max = FromLuaTable<vec3>(thisbox["max"]);
   toMoveBB.min = FromLuaTable<vec3>(thisbox["min"]);
   return IslandCollision::Check(toMoveBB);
+	std::vector<mAABB> manyBB;
+	mAABB bbox;
+	for (int i = 0; i < listSize; i++)
+	{
+		bbox.max = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["max"]);
+		bbox.min = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["min"]);
+		manyBB.push_back(bbox);
+	}
+
+	return IslandCollision::CheckAndGetIndex(toMoveBB, manyBB, listSize);
+
+	//todo write
 }
 
 LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBi, LuaContextHandle handle)
@@ -29,8 +41,9 @@ void IslandCollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPINam
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "checkAnyCollision", CheckAnyCollision);
+	pContext->ExposeFunction(luaAPIName, "checkAnyCollisionGetIndex", CheckAnyCollisionGetIndex);
 	pContext->ExposeFunction(luaAPIName, "resolve", Resolve);
-
+	
 	//pContext->ExposeFunction(luaAPIName, "testRender", TestRender);
 	//pContext->ExposeFunction(luaAPIName, "updatePlayer", UpdatePlayer);
 }

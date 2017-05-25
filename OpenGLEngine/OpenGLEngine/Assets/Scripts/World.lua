@@ -22,6 +22,17 @@ function World:enterScene(sceneToEnter)
 	end
 end
 
+function World:FindObject(name)
+	for i=1,#self.scenes do
+	local tmp = self.scenes[i]:FindInstance(name)
+		if(tmp ~= false) then
+			debugLPrint("Found object " .. name .." in scene.\n")
+			return tmp
+		end
+	end
+	return false
+end
+
 function World:Update()
 
 end
