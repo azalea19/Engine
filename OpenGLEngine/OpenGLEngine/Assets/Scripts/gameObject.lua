@@ -66,7 +66,7 @@ end
 function gameObject:setPosition(pos)
 	objectInstanceAPI.setTranslation(self.id,pos.x,pos.y,pos.z)
 end
-
+  
 function gameObject:getPosition()
     return objectInstanceAPI.getTranslation(self.id,context.handle)
 end

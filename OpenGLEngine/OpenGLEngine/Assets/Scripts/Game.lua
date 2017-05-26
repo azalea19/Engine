@@ -307,7 +307,7 @@ function Initialize()
     local stages = {stage1,stage2}
     local talkToBob = Quest.new("TalkToBob",stages,2)
     questManager:addQuest(talkToBob)
-
+	LoadQuests("../SaveData/QUE_Data.csv")
 	initMenu()
 	
     printAPI.print('Initialization finished.\n')
@@ -362,8 +362,20 @@ function Update()
 	if(inputManagerAPI.isKeyPressed(Menu_Input)) then
         if(inMenu == false) then
             inMenu = true
+			preCameraPos = player0:getPosition()
+			printVec3(preCameraPos)
+			preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
+			preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
+			
+			cameraAPI.setPosition(camera0,0,10,0)
+			cameraAPI.setYaw(camera0,180)
+			cameraAPI.setPitch(camera0,0)
+			changeMenu(0)
         else
             inMenu = false
+			cameraAPI.setPosition(camera0,preCameraPos.x,preCameraPos.y,preCameraPos.z)
+			cameraAPI.setYaw(camera0,preCameraYaw)
+			cameraAPI.setPitch(camera0,preCameraPitch)
         end
     end
 	
@@ -649,7 +661,8 @@ function Render()
 			if ExitButton.active then
 				renderManagerAPI.renderObject(camera0,time,ExitButton.id, 1)
 			end
-		end
+			renderManagerAPI.present(camera0)
+		else
 			if(helpMenu) then
 				display2DAPI.drawFullScreen("rules.png")
 			else
@@ -676,7 +689,7 @@ function Render()
 				end
 
 			end
-		
+		end
 	end
 
 

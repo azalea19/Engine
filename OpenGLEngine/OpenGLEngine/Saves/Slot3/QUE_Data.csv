@@ -1,0 +1,5 @@
+TalkToBob,2,2
+MeetBob,1,NPC01,Greeting,0
+GetQuest,1,NPC01,Quest1,0
+TalkToBob,1,1
+MeetBob,1,Fargrim01,Greeting,1

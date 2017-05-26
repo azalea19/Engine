@@ -29,15 +29,17 @@ function SaveInstances(filePath, data, fileType)
 		if(fileType == "gameObject") then
 			if data[i]["currentHealth"] == nil then
 				total = total + 1
+				saveTable[#saveTable + 1] =  data[i]["stringID"] 
+				saveTable[#saveTable + 1] =  "," 
 				saveTable[#saveTable + 1] =  data[i]["name"] 
 				saveTable[#saveTable + 1] =  "," 
 				saveTable[#saveTable + 1] =  data[i]["model"]
 				saveTable[#saveTable + 1] =  "," 
-				saveTable[#saveTable + 1] =  data[i]["position"]["x"]
+				saveTable[#saveTable + 1] =  data[i]:getPosition().x
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  data[i]["position"]["y"]
+				saveTable[#saveTable + 1] =  data[i]:getPosition().y
 				saveTable[#saveTable + 1] =  ","
-				saveTable[#saveTable + 1] =  data[i]["position"]["z"]
+				saveTable[#saveTable + 1] =  data[i]:getPosition().z
 				saveTable[#saveTable + 1] =  ","
 				saveTable[#saveTable + 1] =  data[i]["direction"]["x"]
 				saveTable[#saveTable + 1] =  ","
@@ -58,15 +60,17 @@ function SaveInstances(filePath, data, fileType)
 			if(fileType == "npc") then
 				if data[i]["currentHealth"] ~= nil then
 					total = total + 1
+					saveTable[#saveTable + 1] =  data[i]["stringID"] 
+					saveTable[#saveTable + 1] =  "," 
 					saveTable[#saveTable + 1] =  data[i]["name"] 
 					saveTable[#saveTable + 1] =  "," 
 					saveTable[#saveTable + 1] =  data[i]["model"]
 					saveTable[#saveTable + 1] =  "," 
-					saveTable[#saveTable + 1] =  data[i]["position"]["x"]
+					saveTable[#saveTable + 1] =  data[i]:getPosition().x
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  data[i]["position"]["y"]
+					saveTable[#saveTable + 1] =  data[i]:getPosition().y
 					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  data[i]["position"]["z"]
+					saveTable[#saveTable + 1] =  data[i]:getPosition().z
 					saveTable[#saveTable + 1] =  ","
 					saveTable[#saveTable + 1] =  data[i]["direction"]["x"]
 					saveTable[#saveTable + 1] =  ","
@@ -85,8 +89,8 @@ function SaveInstances(filePath, data, fileType)
 					saveTable[#saveTable + 1] =  data[i]["currentHealth"]
 					saveTable[#saveTable + 1] =  ","
 					saveTable[#saveTable + 1] =  data[i]["maxHealth"]
-					saveTable[#saveTable + 1] =  ","
-					saveTable[#saveTable + 1] =  data[i]["characterName"]
+					--saveTable[#saveTable + 1] =  ","
+					--saveTable[#saveTable + 1] =  data[i]["characterName"]
 					saveTable[#saveTable + 1] =  "\n"
 				end
 			end
@@ -158,29 +162,40 @@ function SaveQuests(filePath, data)
 	local saveString = ""
 
 	clearFile(filePath)
-
+--questManager.quests[1].name
 	for i = 1, #data.quests do
 		total = total + 1
 		saveTable[#saveTable + 1] =  data.quests[i]["name"] 
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.quests[i]["iEndStage"] 
+		saveTable[#saveTable + 1] =  data.quests[i]["endStage"] 
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  #data.quests[i]["questStages"] 
+		saveTable[#saveTable + 1] =  data.quests[i]:getSize()
 		saveTable[#saveTable + 1] =  "\n" 
 		
 		local Stages = {}
 
-		for k = 1, #data.quests[i]["questStages"]  do
-			saveTable[#saveTable + 1] =  data.quests[i]["questStages"][k]
-			t = QuestStage.new(fileData[i + k][1], fileData[i + k][2], fileData[i + k][3], fileData[i + k][4])
+		for k = 1, data.quests[i]:getSize()  do
+			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].name
+			saveTable[#saveTable + 1] =  "," 
+			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].action
+			saveTable[#saveTable + 1] =  "," 
+			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].targetName
+			saveTable[#saveTable + 1] =  "," 
+			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].extraInfo
+			saveTable[#saveTable + 1] =  "," 
+			if(data.quests[i]["stages"][k].isComplete)then
+				saveTable[#saveTable + 1] =  1
+			else
+				saveTable[#saveTable + 1] =  0
+			end
+			saveTable[#saveTable + 1] =  "\n" 
 		end
-		
-		
 	end
 	
 	saveString = table.concat(saveTable)
 	write(filePath, saveString)
-
+	
+	printAPI.print(#data.quests .. ' quests saved.\n')
 end
 
 function LoadTopics(filePath)
@@ -264,6 +279,7 @@ function LoadQuests(filePath)
 		for k = 1, nStageCount do
 			local t = {}
 			t = QuestStage.new(fileData[i + k][1], fileData[i + k][2], fileData[i + k][3], fileData[i + k][4])
+			t.isComplete = fileData[i + k][5]
 			table.insert(Stages, t)
 		end
 		
