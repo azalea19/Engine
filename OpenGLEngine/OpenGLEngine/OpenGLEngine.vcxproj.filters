@@ -485,4 +485,7 @@
     <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
     <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scripts\Weapon.lua" />
+  </ItemGroup>
 </Project>

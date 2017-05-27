@@ -17,6 +17,7 @@ function World:enterScene(sceneToEnter)
 	for i = 1, #self.scenes do
 		if(self.scenes[i]["name"] == sceneToEnter) then
 			self.currentScene = i
+            printAPI.print("Successfuly changed scenes\n")
 		end
 	end
 end

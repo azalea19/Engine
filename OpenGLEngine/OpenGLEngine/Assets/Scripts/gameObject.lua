@@ -5,8 +5,6 @@ gameObject.__index = gameObject
 
 function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-	
-	
 	instanceID = luaObjInstManager.addNewInstance(newModel)
 
 	local instance = 
@@ -22,10 +20,12 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 		playerLookAt = false, -- Is the player looking at the object
 		displayNameOnLook = true,
 		visible = true,
-		objType = "GameObject"
+		objType = "GameObject",
+        defaultAnim = newAnim
 		
 	}	
-	
+	instance.upVector = {x=0,y=1,z=0}
+
 	if(instance.stringID == 0) then
 		debugLPrint("Generating stringID for object: ")
 		instance.stringID = instance.model .. instance.id .."-".. os.date("%x-%X")
@@ -58,8 +58,15 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 	--printVec3s(boundingBox.min,boundingBox.max)
 	return instance
 end
+
+function gameObject:setAnimation(n)
+    objectInstanceAPI.setAnimation(self.id,n)
+    self.animation = n
+end
 function gameObject:lookAt(npos)
-	objectInstanceAPI.lookAt(self.id,npos)
+    debugPrint("Looking at...")
+	objectInstanceAPI.lookAt(self.id,self.upVector,npos)
+    debugPrint("Look at complete.\n")
 end
 
 

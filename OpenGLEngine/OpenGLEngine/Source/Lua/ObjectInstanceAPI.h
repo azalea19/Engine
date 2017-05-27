@@ -96,7 +96,7 @@ public:
   static LuaRef ObjectInstanceAPI::Forward(InstanceHandle instHandle, LuaContextHandle cHandle);
 
 
-  static void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef targetVec3);
+  static void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef upVector, LuaRef targetVec3);
 
   /// <summary>
   /// Exposes the API functions.

@@ -184,6 +184,9 @@
     <ClInclude Include="Source\Utility\Types.h" />
     <ClInclude Include="Source\Utility\Utility.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scripts\Weapon.lua" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

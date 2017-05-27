@@ -31,7 +31,7 @@ OPEN_GL = 0
 
 gameObjects = {}
 world = {}
-debug = false
+debug = true
 debugdetail = false
 loadSmallTestTerrain = true
 
@@ -108,6 +108,16 @@ function LoadAssets()
 	--modelLibraryAPI.addModel("Cactus1","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
 	--modelLibraryAPI.addModel("Cactus2","../Assets/Models/DesertPlants/Cactus/cactus_02.FBX",false)BROKEN
 	--modelLibraryAPI.addModel("Cactus3","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
+
+    modelLibraryAPI.addModel("Warrior","../Assets/Models/Characters/PA_SciFiCombatants/PA_SciFiCombatants/_Imported3D/Characters/lizabc.FBX",false)
+    modelLibraryAPI.addModel("CaveDoor","../Assets/Models/Liz_Dungeons/CAVEDOOR.obj",false)
+
+    modelLibraryAPI.addModel("Dungeon1Interior","../Assets/Models/Liz_Dungeons/Dungeon1Interior.obj",false)
+    modelLibraryAPI.addModel("Dungeon1InteriorEntrance","../Assets/Models/Liz_Dungeons/Dungeon1InteriorEntrance.obj",false)
+
+
+
+
 	modelLibraryAPI.addModel("Rock","../Assets/Models/Rocks/Boulder/Rock.obj",false)
 	--modelLibraryAPI.addModel("Stone","../Assets/Models/Rocks/SmallRock/stone.fbx",false)BROKEN
 	modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
@@ -196,21 +206,47 @@ function Initialize()
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
+
+    scene2 = Scene.new("Level2", Terrain01, startPos, startDir)
+
+
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
+
+    
+    local loc = {x=20,y=0,z=20}
+    local scale = {x=1,y=1,z=1}
+    local dir = {x=0,y=1,z=0}
+
+
+    Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
+    scene:AddInstance(Dungeon1Door)
+
+    loc = {x=0,y=0,z=0}
+    Dungeon1Intr = gameObject.new("Dungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
+    scene2:AddInstance(Dungeon1Intr);
+
+    Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
+    scene2:AddInstance(Dungeon1IntrDoor);
+
+
+    
 
     currentScene = scene
 
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
+    loc = {x=40,y=0,z=40}
+    scale = {x=10,y=10,z=10}
+    dir = {x=0,y=1,z=0}
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
-    local loc = {x=100,y=0,z=100}
-    local scale = {x=3,y=3,z=3}
-    local dir = {x=0,y=1,z=0}
 
-    NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100,"Bob the Human NPC")
+    NPC01 = npc.new("NPC01","Bob the Human","Warrior",loc,dir,scale,0,100,100)
+    NPC01.hurtAnim = 4
+    local upVector = {x=1,y=0,z=0}
+    NPC01.upVector = upVector
     local diag = Dialogue.new()
     local topic01 = Topic.new("Greeting","Greeting")
     topic01.questEvent = true
@@ -262,6 +298,8 @@ function Initialize()
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
+    world:AddScene(scene2)
+
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 
 	--wont work
@@ -286,7 +324,7 @@ function Initialize()
     --renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
-	player0 = Player:new(camera0)
+	player0 = Player:new(camera0,100,100)
 	cameraAPI.setPosition(camera0,0,0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
@@ -294,7 +332,7 @@ function Initialize()
 
     -- Initialise weapon
 
-    basicGun = Weapon.new("basicGun","Gun",100,1)
+    basicGun = Weapon.new("basicGun","Gun",1,1)
     player0:setWeapon(basicGun)
 
     
@@ -386,7 +424,18 @@ function Update()
 	if e then
         printAPI.print("Interacting.\n")
 
-        StartDialogue(player0.lookTarget)
+        
+        if(player0.lookTarget ~= nil) then
+
+            StartDialogue(player0.lookTarget)
+
+            if(player0.lookTarget.stringID == "Dungeon1Door") then
+                printAPI.print("Entering dungeon 1.\n")
+                world:enterScene(scene2.name)
+
+            end
+        end
+        
         
 	end
 
@@ -417,17 +466,14 @@ function Update()
     end
     if inputManagerAPI.isMousePressedLeft() then
 
-    debugLPrint("Clicked LMB.\n")
+        debugLPrint("Clicked LMB.\n")
 
-    if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
-        if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-            if(player0.lastTimeShot ==nil or player0.lastTimeShot>= player0.weapon.shootInterval) then
-                player0.lastTimeShot = timeAPI.elapsedTimeMs()
-                player0.weapon:attack(player0.lookTarget)
-            end
+        if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
+            if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
+                    player0.weapon:attack(player0.lookTarget)
             
+            end
         end
-    end
 
 
 
