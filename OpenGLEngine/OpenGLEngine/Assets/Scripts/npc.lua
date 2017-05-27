@@ -1,5 +1,7 @@
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 dofile '../Assets/Scripts/3DUtility.lua'
+dofile '../Assets/Scripts/Weapon.lua'
+
 --local gameObject = require 'gameObject'
 
 local npc = {}
@@ -12,7 +14,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	
 	
 	local instance = gameObject.new(strID, newName,newModel,newPos,newDir,newScale,newAnim)
-	
+	printAPI.print(strID.." hp "..newCurrentHealth .."/"..newMaxHealth.."\n")
 
 	instance.dialogue = nil
 	instance.maxHealth = newMaxHealth
@@ -27,6 +29,10 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
+    instance.weapon = Weapon.new("melee","melee",1000,100,1)
+    instance.hurtAnim = nil
+    instance.timeHurtAnimTriggered = 0
+    printAPI.print(instance.currentHealth.."\n")
 
 	--printAPI.print("Testing NPC instantiate bounding box: " .. instance.boundingBox.min.x .. "\n")
 	--setmetatable(instance, { __index = gameObject } )
@@ -43,28 +49,57 @@ function idle(anpc)
 	
 	
     if (anpc.hostileToPlayer and anpc.seenPlayer) then
+    	debugPrint("NPC state changed to chasing during idle. ")
+
         anpc.state = chasing
     end
+    debugPrint("NPC idling complete.\n")
 end
 
 
 function chasing(anpc)
 	debugPrint("NPC is Chasing... ")
+
+    --printAPI.print(anpc.currentHealth.."\n")
+
 	if player0 ~= nil then
 		anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
-		debugLPrint("Looking at player position.\n")
+		debugPrint("Looking at player position.\n")
 		anpc:lookAt(player0.position)
+
+        if(anpc.weapon ~= nil) then
+            if(Distance(anpc:getPosition(),player0:getPosition()) < anpc.weapon.range) then
+            	debugPrint("Ready to attack.\n")
+
+                anpc.weapon:attack(player0)
+            end
+        end
+        
+        --printAPI.print("Got distance~!")
+        
+
+
 	else
 		printAPI.print("Warning: Player is nil\n")
 	end
 end
-function npc:takeDamage(dmg)
-	debugLPrint("NPC Taking damage " .. dmg .. "\n")
-	self.currentHealth = self.currentHealth - dmg
+function npc:takeDamage(mydmg)
+    --debugLPrint(self.currentHealth .. " hp remains\n")
+
+    if (self.hurtAnim~= nil) then
+    	debugLPrint("NPC playing hurt anim ".."\n")
+        self.timeHurtAnimTriggered = time
+        self:setAnimation(self.hurtAnim)
+    end
+
+	debugLPrint("NPC Taking damage " .. mydmg .. "\n")
+	self.currentHealth = self.currentHealth - mydmg
+    debugLPrint(self.currentHealth .. " hp remains\n")
 	if(self.currentHealth <= 0) then
 		self:die()
 	end
 end
+
 function npc:die()
 	debugLPrint("NPC death.\n")
 	self.alive = false
@@ -75,14 +110,16 @@ function npc:die()
 	-- You will not be able to check if this specific instance is dead/properties of later on, but you could check if it exists in the scene or not.
 	-- Todo possibly store past gameobjects in the scene as well as current gameobjects, so this data can be accessed if needed.
 end
+
 function npc:makeIdle()
 	printAPI.print("Made NPC idle.")
 	self.state = idle
 end
+
 function npc:makeChasing()
-	debugPrint("Made NPC chase... ")
+	debugLPrint("Making NPC chase... ")
 	self.state = chasing
-	debugPrint("Success\n")
+	debugLPrint("Chase success\n")
 
 end
 
@@ -121,8 +158,17 @@ end
 ]]
 
 function npc:Update()
+
+
+    if self.animation == self.hurtAnim then
+        if self.timeHurtAnimTriggered < (timeAPI.elapsedTimeMs() + 100) then
+            self:setAnimation(self.defaultAnim)
+            printAPI.print("Swapping back")
+        end
+    end
+
 	if self.alive == true then
-		self.currentHealth = self.currentHealth - 1
+		--self.currentHealth = self.currentHealth - 1
 		if(self.currentHealth <= 0) then
 			self:Die()
 		end

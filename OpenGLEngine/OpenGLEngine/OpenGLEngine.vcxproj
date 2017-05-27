@@ -188,8 +188,8 @@
     <None Include="Assets\Scripts\GameWorld.lua" />
     <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
-  </ItemGroup>
-  <PropertyGroup Label="Globals">
+	<None Include="Assets\Scripts\Weapon.lua" />
+  </ItemGroup>  <PropertyGroup Label="Globals">
     <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OpenGLEngine</RootNamespace>

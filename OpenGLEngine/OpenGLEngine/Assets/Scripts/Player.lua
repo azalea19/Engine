@@ -1,13 +1,13 @@
-Weapon = {}
-Weapon.__index = Weapon
-
+dofile '../Assets/Scripts/Weapon.lua'
 
 local Player = {}
 Player.__index = Player
 
-function Player.new(newCam)
+function Player.new(newCam,newCurrentHealth,newMaxHealth)
 	instance = 
 	{
+        maxHealth = newMaxHealth,
+	    currentHealth = newCurrentHealth,
 		instanceid =0,
 		boundingBox = { min = {x=0,y=0,z=0}, max = {x=0,y=0,z=0} },
 		position = {x=0,y=0,z=0},
@@ -30,6 +30,23 @@ end
 function Player:getPosition()
 	return self.position
 end
+
+function Player:takeDamage(dmg)
+    debugLPrint("Player Taking damage " .. dmg .. "\n")
+	self.currentHealth = self.currentHealth - dmg
+	if(self.currentHealth <= 0) then
+		self:die()
+	end
+end
+
+
+function Player:die()
+    printAPI.print("Player has died.")
+
+    inMenu = true
+    inGame = false
+end
+
 
 function Player:setPosition(newPos)
 	self.position = newPos

@@ -87,7 +87,14 @@ public:
   /// Looks at position.
   /// </summary>
   /// <param name="position">The position.</param>
-  void LookAt(vec3 position);
+  void LookAt(vec3 position);  
+
+  /// <summary>
+  /// Looks at position.
+  /// </summary>
+  /// <param name="position">The position.</param>
+  /// <param name="upVector">The up vector.</param>
+  void LookAt(vec3 position, vec3 upVector);
 
   /// <summary>
   /// Gets the orientation.

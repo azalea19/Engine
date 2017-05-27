@@ -2,14 +2,20 @@
 
 -- Distance between 2 given 3d points (vec3) - author Liz
 function Distance(vec1,vec2)
-
+    --printAPI.print("Getting Distance.")
 	x2 = vec2.x
 	x1 = vec1.x
 	y1 = vec1.y
 	y2 = vec2.y
 	z1 = vec1.z
 	z2 = vec2.z
-	return (math.sqrt(math.pow(x2 - x1,2) +math.pow(y2 - y1,2)+math.pow(z2 - z1,2)))
+    --printVec3s(vec1,vec2)
+
+    local val = (math.sqrt(math.pow(x2 - x1,2) +math.pow(y2 - y1,2)+math.pow(z2 - z1,2)))
+
+    --printAPI.print("Got distance.\n")
+
+	return val
     --(x2 x1)2 + (y2 y1)2 + (z2 z1)2.
 end
 
