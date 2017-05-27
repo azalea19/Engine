@@ -55,19 +55,22 @@ function Player:BBToWorld()
 end
 
 function Player:update()
+
+	
 	-- written by liz translated from maddys c++ code
 	--printAPI.print("Updating player\n")
 	local turnSpeed = 0.3
-	local moveSpeed = 6 * deltaTime
+	local moveSpeed = 2.8 * deltaTime
+	printAPI.print("DeltaTime: " .. deltaTime .. "\n")
 	if(inputManagerAPI.isKeyDown(Sprint_Input)) then
-		moveSpeed = 12 * deltaTime
+		moveSpeed = moveSpeed * 2
 	else
 		if(inputManagerAPI.isKeyDown(Walk_Input)) then
-			moveSpeed = 3 * deltaTime
+			moveSpeed = moveSpeed * 0.5
 		end
 	end
 	local jumpHeight = 0.1
-	local gravitySpeed = 0.001
+	local gravitySpeed = 0.003
 	local terminalVelocity = -10
 	local friction = 0.5
 	local minimumSpeed = 0.001
@@ -152,7 +155,7 @@ function Player:update()
 			self.velocity.y = terminalVelocity
 		end
 
-		
+		printAPI.print(math.sqrt(self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y + self.velocity.z * self.velocity.z) .. "\n")
 		newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
 		--newPos = oldPos
 		newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
@@ -170,7 +173,7 @@ function Player:update()
 		end
 
 		if self.boundingBox ~= nil then
-			self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),bbList,0,0.01,context.handle))
+			self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
 		end
 		printAPI.print(self.position.y .. "\n")
 		cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)

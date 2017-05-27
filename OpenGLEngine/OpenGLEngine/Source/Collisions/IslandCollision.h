@@ -27,7 +27,7 @@ public:
 	/// <param name="listSize">Size of AABB list</param>
 
 	/// <returns>bool</returns>
-	static bool Check(mAABB box, std::vector<mAABB> list, int listSize);
+	static bool Check(mAABB box);
 
 	/// <summary>
 	/// Given the current origin of an AABB, returns the new origin for it
@@ -40,7 +40,7 @@ public:
 	/// <param name="listSize">Size of AABB list</param>
 	/// <param name="inc">Size of movement increments</param>
 	/// <returns>vec3</returns>
-	static vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAABB> list, int listSize, float incSize);
+	static vec3 IslandCollision::Resolve(vec3 position, mAABB box);
 
 
 };

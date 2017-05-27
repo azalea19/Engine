@@ -87,6 +87,8 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Skybox","../Assets/Models/SkyBox/skybox.obj",false)
 	modelLibraryAPI.addModel("Bob","../Assets/Models/Alfred.obj",false)
 	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
+	modelLibraryAPI.addModel("Crate","../Assets/Models/Crate/crate.obj",false)
+	modelLibraryAPI.addModel("GunShop","../Assets/Models/GunsShop/GunsShop.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
 
@@ -130,18 +132,24 @@ function Initialize()
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 	objectInstanceAPI.setTranslation(skybox, 0,0,0)
 	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
+
+	gunShop = luaObjInstManager.addNewInstance("GunShop")
+	objectInstanceAPI.setTranslation(gunShop, 80,0,80)
+	objectInstanceAPI.setScale(gunShop, .01,.01,.01)
 	
 	local x
 	local y
 	for y = 1, 8, 1 do		
 		for x = 1, 8, 1 do
-			cactus = luaObjInstManager.addNewInstance("Cactus")
-			objectInstanceAPI.setTranslation(cactus,100 + x*5,0,100 + y*5)
-			objectInstanceAPI.setScale(cactus, 0.1, 0.1, 0.1)
-			collidableObjects[#collidableObjects + 1] = cactus
+			--cactus = luaObjInstManager.addNewInstance("Cactus")
+			--objectInstanceAPI.setTranslation(cactus,100 + x*5,0,100 + y*5)
+			--objectInstanceAPI.setOrientation(cactus, 45,0,0)
+			--objectInstanceAPI.setScale(cactus, 0.1, 0.1, 0.1)
+			--collidableObjects[#collidableObjects + 1] = cactus
 		end
 	end
 	
+	collidableObjects[#collidableObjects + 1] = gunShop
 	collidableObjects["length"] = #collidableObjects
 	
     printAPI.print('Initialising camera...\n')
@@ -156,7 +164,9 @@ function Initialize()
 
 	collisionAPI.createCollisionTree(collidableObjects);
 
-    printAPI.print('Initialization finished.\n')
+   
+	
+	printAPI.print('Initialization finished.\n')
 
 end
 
@@ -224,7 +234,7 @@ end
 
 font1path = "../Assets/Fonts/verdanab.ttf"
 white = {x=1,y=1,z=1}
-
+textPos =  {x=0,y=0,z=0}
 
 function Render()
     renderManagerAPI.beginRender()
@@ -243,9 +253,13 @@ function Render()
 				renderManagerAPI.renderObject(camera0,time,collidableObjects[i], 1);
 			end
 			
+			renderManagerAPI.renderObject(camera0,time,gunShop, 1)
 			renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
 			renderManagerAPI.present(camera0)
+
+			 display2DAPI.drawText(10,font1path,"Damn it feels good to be a gangsta.",textPos, white, 1,1280,720 )
+
 
 		end
 	end

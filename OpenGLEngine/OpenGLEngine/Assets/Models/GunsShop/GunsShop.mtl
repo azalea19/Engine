@@ -1,0 +1,142 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 21.05.2017 12:48:33
+
+newmtl Decals
+	Ns 0.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka decal.tif
+	map_Kd decal.tif
+
+newmtl Wood_Siding
+	Ns 0.019608
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.329729 0.250840 0.230998
+	Kd 0.329729 0.250840 0.230998
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka wood_old_weathered_02_diffuse.jpg
+	map_Kd wood_old_weathered_02_diffuse.jpg
+
+newmtl White_Wall
+	Ns 0.039216
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.267358 0.267358 0.267358
+	Kd 0.267358 0.267358 0.267358
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka wall_plaster_dirty.jpg
+	map_Kd wall_plaster_dirty.jpg
+
+newmtl Drop_Ceiling
+	Ns 0.105882
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.500000 0.500000 0.500000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka dropped_tile_ceiling_diffuse.jpg
+	map_Kd dropped_tile_ceiling_diffuse.jpg
+
+newmtl Sidewalk_ncl1_1
+	Ns 0.054902
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.250840 0.250840 0.250840
+	Kd 0.250840 0.250840 0.250840
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka concrete_block_diffuse.jpg
+	map_Kd concrete_block_diffuse.jpg
+
+newmtl Decking
+	Ns 0.015686
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.476177 0.358654 0.459080
+	Kd 0.476177 0.358654 0.459080
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka wood_old_weathered_02_diffuse.jpg
+	map_Kd wood_old_weathered_02_diffuse.jpg
+
+newmtl Metal_Siding
+	Ns 0.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.215764 0.215764 0.215764
+	Kd 0.215764 0.215764 0.215764
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka metal_siding.jpg
+	map_Kd metal_siding.jpg
+
+newmtl Gunshop_Trim
+	Ns 0.078431
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.267358 0.267358 0.267358
+	Kd 0.267358 0.267358 0.267358
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka gunshop_trims.jpg
+	map_Kd gunshop_trims.jpg
+
+newmtl Tile
+	Ns 0.094118
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.144972 0.320382 0.368591
+	Kd 0.144972 0.320382 0.368591
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka green_speckle.jpg
+	map_Kd green_speckle.jpg
+
+newmtl Roof_ncl1_1
+	Ns 0.262745
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.101145 0.101145 0.101145
+	Kd 0.101145 0.101145 0.101145
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka metal_corrugated_clean_diffuse.jpg
+	map_Kd metal_corrugated_clean_diffuse.jpg
