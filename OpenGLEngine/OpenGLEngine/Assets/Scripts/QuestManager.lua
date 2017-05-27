@@ -80,7 +80,9 @@ function Quest:isComplete()
 	return true
 end
 
-
+function Quest:getSize()
+	return #self.stages
+end
 
 -- QUEST STAGE
 QuestStage = {}

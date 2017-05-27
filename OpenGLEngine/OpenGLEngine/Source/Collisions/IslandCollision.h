@@ -42,6 +42,7 @@ public:
 	/// <returns>vec3</returns>
 	static vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAABB> list, int listSize, float incSize);
 
+	static int IslandCollision::CheckAndGetIndex(mAABB a, std::vector<mAABB> list, int listSize);
 
 };
 
