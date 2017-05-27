@@ -237,12 +237,12 @@ void RenderableObject::BindMesh(int meshIndex) const
   BindMaterial(meshIndex);
 }
 
-mAABB RenderableObject::GetBoundingBox() const 
+const mAABB& RenderableObject::GetBoundingBox() const 
 {
   return m_boundingBox;
 }
 
-std::vector<mTriangle> RenderableObject::GetTriangleFaces() const
+const std::vector<mTriangle>& RenderableObject::GetTriangleFaces() const
 {
   return m_faces;
 }

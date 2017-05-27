@@ -12,115 +12,133 @@ bool IslandCollision::Check(mAABB a, mAABB b)
 	return false;
 }
 
-bool IslandCollision::Check(mAABB a, std::vector<mAABB> list, int listSize)
+bool IslandCollision::Check(mAABB box)
 {
-
-	//std::cout << "Checking collision with... MIN: " << a.min.x << "," << a.min.z << "," << a.min.z << ", MAX: " << a.max.x << "," << a.max.y << "," << a.max.z << "//  ";
-
- // for (int i = 0; i < listSize; i++)
- // {
- //   if (Intersects(a, list[i]))
- //   {
- //     return true;
- //   }
- // }
-	//return false;
-  return CollisionAPI::AABB_CollidingInTree(a);
+  return CollisionAPI::AABB_CollidingInTree(box);
 }
 
+static std::vector<vec3> directions;
 
-static std::vector<vec3> dirs; // directions
-
-vec3 IslandCollision::Resolve(vec3 toMoveOrigin, mAABB toMoveBB, std::vector<mAABB> list, int listSize, float incSize)
+static bool CheckDirections(vec3 position, mAABB box, float distance, vec3 *result)
 {
-	// Increment between checks - initial distance and distance increase that occurs 
-	// when repeating the check in all directions when no escape is found.
-	float increment = incSize;
+  // doubling the size increment once you've checked the previous one in every direction
+  for (int i = 0; i < directions.size(); i++)
+  {
+    // get total difference to move the object and bounding box
+    vec3 tryMove = directions[i] * distance;
 
-	// The increment 
-	float dist = increment;
+    //Get the original position
+    vec3 newPos = position;
+    //Get the original box
+    mAABB newBox = box;
 
-	// Set static var dirs if they have not been set up.
-	// These are all the directions in which to check for an "escape route" from the collision.
-	if (dirs.empty())
-	{
+    //Try to move and check if this move solves the collision
+    newPos += tryMove;
+    newBox.min += tryMove;
+    newBox.max += tryMove;
 
-    // y = 1 layer
-    dirs.push_back(normalize(vec3(0, 1, 0))); // x z
-    dirs.push_back(normalize(vec3(-1, 1, -1))); // x 
-    dirs.push_back(normalize(vec3(-1, 1, 0))); // -x
-    dirs.push_back(normalize(vec3(-1, 1, 1))); // z
-    dirs.push_back(normalize(vec3(0, 1, -1))); //-z
-    dirs.push_back(normalize(vec3(0, 1, 1))); // -x z
-    dirs.push_back(normalize(vec3(1, 1, -1))); // x -z
-    dirs.push_back(normalize(vec3(1, 1, 0))); // -x -z
-    dirs.push_back(normalize(vec3(1, 1, 1))); // -x -z
+    // If the object now isn't colliding with anything we have found a step size that moves us out of collision
+    if (!IslandCollision::Check(newBox))
+    {
+      *result = newPos;
+      return false;
+    }
+  }
+  return true;
+}
 
-    // y = 0 layer
-    dirs.push_back(normalize(vec3(-1, 0, -1))); // x 
-    dirs.push_back(normalize(vec3(-1, 0, 0))); // -x
-    dirs.push_back(normalize(vec3(-1, 0, 1))); // z
-    dirs.push_back(normalize(vec3(0, 0, -1))); //-z
-    dirs.push_back(normalize(vec3(0, 0, 1))); // -x z
-    dirs.push_back(normalize(vec3(1, 0, -1))); // x -z
-    dirs.push_back(normalize(vec3(1, 0, 0))); // -x -z
-    dirs.push_back(normalize(vec3(1, 0, 1))); // -x -z
+int SortVec3ByHeight(const void *a, const void *b)
+{
+  vec3& A = *(vec3*)a;
+  vec3& B = *(vec3*)b;
+  if (A.y < B.y)
+    return -1;
+  else if (B.y < A.y)
+    return 1;
+  else
+    return 0;
+}
 
-    // y = 1 layer
-    dirs.push_back(normalize(vec3(-1, -1, 0))); // -x
-    dirs.push_back(normalize(vec3(-1, -1, 1))); // z
-    dirs.push_back(normalize(vec3(0, -1, -1))); //-z
-    dirs.push_back(normalize(vec3(0, -1, 0))); // x z
-    dirs.push_back(normalize(vec3(0, -1, 1))); // -x z
-    dirs.push_back(normalize(vec3(1, -1, -1))); // x -z
-    dirs.push_back(normalize(vec3(1, -1, 0))); // -x -z
-    dirs.push_back(normalize(vec3(1, -1, 1))); // -x -z
-    dirs.push_back(normalize(vec3(-1, -1, -1))); // x 
-	}
+vec3 IslandCollision::Resolve(vec3 position, mAABB box)
+{
+  float accuracy = 0.001f;
+  vec3 result;
 
-	// If there is no collision to begin with
-	if (!Check(toMoveBB, list, listSize))
-	{
-		// Return the same position that was passed in
-		return toMoveOrigin;
-	}
+  // If there is no collision to begin with
+  if (!Check(box))
+    return position;
 
-	while (true)
-	{
-		// Go through each direction and check if you can find a way out of the collision in size increments, 
-		// increasing the size increment once you've checked the previous one in every direction.
-		for (int i = 0; i < dirs.size(); i++)
-		{
-			mAABB box = toMoveBB;
-			// set final position to initial position
-			vec3 position = toMoveOrigin;
-			// get total difference to move the object and bounding box
-			vec3 diff = (dirs[i] * dist); 
+  // Set static var directions if they have not been set up.
+  // These are all the directions in which to check for an "escape route" from the collision.
+  if (directions.empty())
+  {
+    int directionRes = 1;
 
-			// move object by difference									  
-			position += diff;
-			// move bounding box by difference
-			box.min += diff; 
-			box.max += diff;
+    //Top and Bottom
+    for (int x = -directionRes; x <= directionRes; x++)
+    {
+      for (int z = -directionRes; z <= directionRes; z++)
+      {
+        directions.push_back(normalize(vec3(x, directionRes, z)));
+        directions.push_back(normalize(vec3(x, directionRes, z)));
+      }
+    }
 
-			// If the object now isnt colliding with anything
-			if (!Check(box, list, listSize))
-			{
-				//std::cout << "Item moved by " << diff.x << "," << diff.y << "," << diff.z << "\n";
+    //Left and Right
+    for (int y = -directionRes + 1; y <= directionRes - 1; y++)
+    {
+      for (int z = -directionRes; z <= directionRes; z++)
+      {
+        directions.push_back(normalize(vec3(-directionRes, y, z)));
+        directions.push_back(normalize(vec3(directionRes, y, z)));
+      }
+    }
 
-				// Return the final position
-				return (position);
-			}
-		}
-		dist += increment;
+    //Back and Front
+    for (int x = -directionRes + 1; x <= directionRes - 1; x++)
+    {
+      for (int y = -directionRes + 1; y <= directionRes - 1; y++)
+      {
+        directions.push_back(normalize(vec3(x, y, -directionRes)));
+        directions.push_back(normalize(vec3(x, y, directionRes)));
+      }
+    }
 
+    qsort(directions.data(), directions.size(), sizeof(vec3), SortVec3ByHeight);
+  }
 
-		if (dist > increment * 1000)
-		{
-			printf("Collision handling failed.\n");
-			return toMoveOrigin;
-		}
+  //Find initial Range
+  float minRange = 0;
+  float maxRange = accuracy * 1;
+  while (true)
+  {
+    if (!CheckDirections(position, box, maxRange, &result))
+      break;
+    minRange = maxRange;
+    maxRange *= 2;
+  }
 
-	}
-	
+  while (true)
+  {
+    //Try half way between max and min
+    float mid = (maxRange + minRange) / 2;
+
+    //If colliding
+    if (CheckDirections(position, box, mid, &result))
+    {
+      //We must still be colliding move the min range to mid value
+      minRange = mid;
+    }
+    else
+    {
+      if ((maxRange - minRange) / 2 < accuracy)
+        //Found the optimum position for the object
+        break;
+
+      //Otherwise our max range is too far out move it in
+      maxRange = mid;
+    }
+  }
+
+  return result;
 }

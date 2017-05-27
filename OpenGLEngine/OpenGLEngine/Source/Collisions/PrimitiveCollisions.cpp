@@ -16,7 +16,7 @@ struct LineSegment1D
 
 bool Intersects(LineSegment1D const & a, LineSegment1D const & b);
 
-LineSegment1D getProjection1D(const mSphere sphere, vec3 normal)
+LineSegment1D getProjection1D(const mSphere &sphere, const vec3 &normal)
 {
 	LineSegment1D myLine;
 	float centreProjection;
@@ -28,21 +28,21 @@ LineSegment1D getProjection1D(const mSphere sphere, vec3 normal)
 	return myLine;
 }
 
-LineSegment1D getProjection1D(const vec3* corners, vec3 normal, int numCorners)
+LineSegment1D getProjection1D(const vec3* corners, const vec3 &normal, int numCorners)
 {
 	LineSegment1D myLine;
 
-myLine.start = FLT_MAX;
-myLine.end = -FLT_MAX;
+  myLine.start = FLT_MAX;
+  myLine.end = -FLT_MAX;
 
-for (int i = 0; i < numCorners; i++)
-{
-	float scalarProduct = glm::dot(corners[i], normal);
-	myLine.start = mMin(myLine.start, scalarProduct);
-	myLine.end = mMax(myLine.end, scalarProduct);
-}
+  for (int i = 0; i < numCorners; i++)
+  {
+    float scalarProduct = glm::dot(corners[i], normal);
+    myLine.start = mMin(myLine.start, scalarProduct);
+    myLine.end = mMax(myLine.end, scalarProduct);
+  }
 
-return myLine;
+  return myLine;
 }
 
 bool SeperatingAxisTest(const vec3* object1Corners, int num1Corners, const vec3* object2Corners, int num2Corners, const vec3* normals, int numNormals)
@@ -60,22 +60,16 @@ bool SeperatingAxisTest(const vec3* object1Corners, int num1Corners, const vec3*
 	return true;
 }
 
-void getmTriangleNormals(vec3* normals, mTriangle tri)
+void getmTriangleNormals(vec3* normals, const mTriangle &tri)
 {
-	vec3 direction1;
-	vec3 direction2;
-	vec3 direction3;
-	vec3 faceNormal;
+	const vec3 &a = tri.corners[0];
+	const vec3 &b = tri.corners[1];
+	const vec3 &c = tri.corners[2];
 
-	vec3 a = tri.corners[0];
-	vec3 b = tri.corners[1];
-	vec3 c = tri.corners[2];
-
-	direction1 = a - b;
-	direction2 = b - c;
-	direction3 = c - a;
-
-	faceNormal = glm::cross(direction1, direction2);
+	vec3 direction1 = a - b;
+	vec3 direction2 = b - c;
+	vec3 direction3 = c - a;
+	vec3 faceNormal = glm::cross(direction1, direction2);
 
 	normals[0] = glm::cross(faceNormal, direction1);
 	normals[1] = glm::cross(faceNormal, direction2);
@@ -122,61 +116,16 @@ bool Intersects(LineSegment1D const & a, LineSegment1D const & b)
 
 bool Intersects(mAABB const & a, mAABB const & b)
 {
-	//vec3 cornersA[8];
-	//vec3 cornersB[8];
-
-
 	if (a.max.x > b.min.x &&
 		a.min.x < b.max.x &&
 		a.max.y > b.min.y &&
 		a.min.y < b.max.y &&
 		a.max.z > b.min.z &&
 		a.min.z < b.max.z)
-		{
-		return true;
-}
-	return false;
-	/*
-
-	if (a.min.x <= b.max.x &&
-		a.max.x >= b.min.x &&
-		a.min.y <= b.max.y &&
-		a.max.y >= b.min.y &&
-		a.min.z <= b.max.z &&
-		a.max.z >= b.min.z)
 	{
 		return true;
-	}
-	else {
-		return false;
-	}
-	*/
-	/*
-	cornersA[0] = vec3(a.min.x, a.min.y, a.min.z);
-	cornersA[1] = vec3(a.min.x, a.min.y, a.max.z);
-	cornersA[2] = vec3(a.min.x, a.max.y, a.min.z);
-	cornersA[3] = vec3(a.min.x, a.max.y, a.max.z);
-	cornersA[4] = vec3(a.max.x, a.min.y, a.min.z);
-	cornersA[5] = vec3(a.max.x, a.min.y, a.max.z);
-	cornersA[6] = vec3(a.max.x, a.max.y, a.min.z);
-	cornersA[7] = vec3(a.max.x, a.max.y, a.max.z);
-
-	cornersB[0] = vec3(a.min.x, a.min.y, a.min.z);
-	cornersB[1] = vec3(a.min.x, a.min.y, a.max.z);
-	cornersB[2] = vec3(a.min.x, a.max.y, a.min.z);
-	cornersB[3] = vec3(a.min.x, a.max.y, a.max.z);
-	cornersB[4] = vec3(a.max.x, a.min.y, a.min.z);
-	cornersB[5] = vec3(a.max.x, a.min.y, a.max.z);
-	cornersB[6] = vec3(a.max.x, a.max.y, a.min.z);
-	cornersB[7] = vec3(a.max.x, a.max.y, a.max.z);
-
-	vec3 normals[3];
-
-	normals[0] = vec3(1, 0, 0);
-	normals[1] = vec3(0, 1, 0);
-	normals[2] = vec3(0, 0, 1);
-
-	return SeperatingAxisTest(cornersA, 8, cornersB, 8, normals, 3);*/
+  }
+	return false;
 }
 
 bool Intersects(mAABB const & aabb, mOBB const & obb)

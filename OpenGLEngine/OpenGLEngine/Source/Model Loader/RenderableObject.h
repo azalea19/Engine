@@ -132,9 +132,9 @@ public:
   /// Gets the bounding box of the renderable object.
   /// </summary>
   /// <returns></returns>
-  mAABB GetBoundingBox() const override;
+  const mAABB& GetBoundingBox() const override;
 
-  std::vector<mTriangle> GetTriangleFaces() const override;
+  const std::vector<mTriangle>& GetTriangleFaces() const override;
 
 private:
 
