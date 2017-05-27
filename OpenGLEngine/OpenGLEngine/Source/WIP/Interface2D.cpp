@@ -157,6 +157,12 @@ void DrawText(int size, string const& filePath, string const& text, vec2 pos, ve
 
   glEnable(GL_TEXTURE_2D);
 
+  // Enable blending
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+
 
   glEnableVertexAttribArray(shader->Attribute("position"));
   glBindBuffer(GL_ARRAY_BUFFER, gVBO);
@@ -191,6 +197,7 @@ void DrawText(int size, string const& filePath, string const& text, vec2 pos, ve
   glDeleteBuffers(1, &gVBO);
   glDeleteBuffers(1, &gUVBO);
 
+  glDisable(GL_BLEND);
 }
 
 void DrawImage(string const& filePath)
