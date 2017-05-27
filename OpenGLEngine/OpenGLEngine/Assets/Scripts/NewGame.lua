@@ -242,10 +242,10 @@ function Render()
     renderManagerAPI.setFillMode(wireindex)
 
     if(quitting) then
-        display2DAPI.drawFullScreen("../Assets/HeightMaps/faces.png")
+        display2DAPI.drawFullScreen("../Assets/Images/faces.png")
     else
 		if(helpMenu) then
-			display2DAPI.drawFullScreen("rules.png")
+			display2DAPI.drawFullScreen("../Assets/Images/rules.png")
 		else
 
 			local i
