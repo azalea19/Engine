@@ -232,8 +232,8 @@ function Update()
 	
 end
 
-font1path = "../Assets/Fonts/verdanab.ttf"
-white = {x=1,y=1,z=1}
+font1path = "../Assets/Fonts/WesternBangBang.otf"
+white = {x=0,y=0,z=0}
 textPos =  {x=0,y=0,z=0}
 
 function Render()
@@ -258,7 +258,7 @@ function Render()
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
 			renderManagerAPI.present(camera0)
 
-			 display2DAPI.drawText(10,font1path,"Damn it feels good to be a gangsta.",textPos, white, 1,1280,720 )
+			 display2DAPI.drawText(64,font1path,"Damn it feels good to be a gangsta.",textPos, white, 1,1280,720)
 
 
 		end
