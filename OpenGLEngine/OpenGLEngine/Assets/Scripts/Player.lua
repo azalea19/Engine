@@ -176,8 +176,8 @@ function Player:update()
         
 		    debugPrint("Delta Time:"..deltaTime .. "\n")
 		    newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
-		    newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
-		    newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
+		    newPos.x = math.min(math.max(newPos.x, 0), wsTerrainSize)
+		    newPos.z = math.min(math.max(newPos.z, 0), wsTerrainSize)
 		    desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
 		    newPos.y = math.max(newPos.y, desiredHeight)		
 		    if(newPos.y == desiredHeight) then

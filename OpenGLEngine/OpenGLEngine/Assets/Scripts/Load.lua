@@ -29,7 +29,7 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Bob","../Assets/Models/Bob/Bob.md5mesh",false)
 	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
 	modelLibraryAPI.addModel("Crate","../Assets/Models/Crate/crate.obj",false)
-	--modelLibraryAPI.addModel("Titan","../Assets/Models/Titan/Titan class II cargo ship landed.obj",false)
+	modelLibraryAPI.addModel("Titan","../Assets/Models/Titan/Titan class II cargo ship landed.obj",false)
 	modelLibraryAPI.addModel("GunShop","../Assets/Models/GunsShop/GunsShop.obj",false)
 	--modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
 
