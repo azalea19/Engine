@@ -37,6 +37,9 @@ function CreateTown()
 	gunShop = luaObjInstManager.addNewInstance("GunShop")
 	DealWith(gunShop, 0,0, .015,.015,.015, 0,0,0)
 
+  BobTest = luaObjInstManager.addNewInstance("Bob");
+  DealWith(BobTest, 100,150, 1,1,1, 0,0,0)
+
 	collidableObjects[#collidableObjects + 1] = gunShop
 	
 	--ANIMATION

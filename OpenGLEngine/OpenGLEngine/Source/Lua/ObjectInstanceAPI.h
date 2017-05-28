@@ -91,6 +91,8 @@ public:
   /// <param name="z">The z.</param>
   static void SetTranslation(InstanceHandle instHandle, float x, float y, float z);
 
+  static void SetBaseTransform(InstanceHandle instHandle, LuaRef translation, float yaw, float pitch, float roll, LuaRef scale);
+
 
   static LuaRef ObjectInstanceAPI::Forward(InstanceHandle instHandle, LuaContextHandle cHandle);
 

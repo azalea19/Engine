@@ -65,6 +65,8 @@ function Initialize()
 	LoadAssets()
 
 	CreateTown()
+
+  objectInstanceAPI.setBaseTransform(BobTest, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
    
 
 end
@@ -132,6 +134,7 @@ function Update()
 	end
 	
 
+    objectInstanceAPI.lookAt(BobTest, player0:getPosition())
 	
 end
 
@@ -160,7 +163,7 @@ function Render()
 			renderManagerAPI.renderObject(camera0,time,gunShop, 1)
 			renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
-
+      renderManagerAPI.renderObject(camera0,time,BobTest,1)
 
 			renderManagerAPI.present(camera0)
 

@@ -128,6 +128,10 @@ public:
   /// <returns></returns>
   bool Intersects(mOBB const& box);
 
+  mat4 GetTransform() const;
+
+  void SetBaseTransform(vec3 translation, float yaw, float pitch, float roll, vec3 scale);
+
 private:
 
   /// <summary>
@@ -146,6 +150,7 @@ private:
   bool m_visible = true;
 
   TriangleTree* m_collisionTree;
+  AffineTransformable m_baseTransform;
 
 };
 

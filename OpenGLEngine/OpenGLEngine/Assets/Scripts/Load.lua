@@ -39,7 +39,7 @@ function LoadAssets()
     terrainSizeX = 1024
     terrainSizeY = 1024
     heightMapSize = 256
-    heightMapHeight = 10
+    heightMapHeight = 50
 
 
 	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath, alphaMapPath, "../Assets/Models/Terrain/Terrain.obj", context.handle)	

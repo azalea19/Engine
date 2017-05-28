@@ -9,7 +9,7 @@ ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, ve
   , m_activeAnimation(-1)
 {
   SetTransform(coords, yaw, pitch, 0, scaleFactor);
-  m_collisionTree = new TriangleTree(this, 16);
+  //m_collisionTree = new TriangleTree(this, 16);
 }
 
 void ObjectInstance::SetVisible(bool vis)
@@ -98,7 +98,8 @@ bool ObjectInstance::Intersects(mAABB const & box)
 //Expects box in model space
 bool ObjectInstance::Intersects(mOBB const & box)
 {
-  return m_collisionTree->Intersects(box);
+  return false;
+  //return m_collisionTree->Intersects(box);
   //if (::Intersects(m_pRenderableObject->GetBoundingBox(), box))
   //{
   //  std::vector<mTriangle> const& faces = m_pRenderableObject->GetTriangleFaces();
@@ -115,6 +116,18 @@ bool ObjectInstance::Intersects(mOBB const & box)
   //return false;
 }
 
+
+mat4 ObjectInstance::GetTransform() const
+{
+  return AffineTransformable::GetTransform() * m_baseTransform.GetTransform();
+}
+
+void ObjectInstance::SetBaseTransform(vec3 translation, float yaw, float pitch, float roll, vec3 scale)
+{
+  m_baseTransform.SetTranslation(translation);
+  m_baseTransform.SetOrientation(yaw, pitch, roll);
+  m_baseTransform.SetScale(scale);
+}
 
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {

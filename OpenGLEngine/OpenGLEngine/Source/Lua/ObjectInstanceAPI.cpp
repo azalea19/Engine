@@ -6,6 +6,13 @@ void ObjectInstanceAPI::SetTranslation(InstanceHandle instHandle, float in1,floa
 	GetInstance(instHandle)->SetTranslation(vec);
 }
 
+void ObjectInstanceAPI::SetBaseTransform(InstanceHandle instHandle, LuaRef translation, float yaw, float pitch, float roll, LuaRef scale)
+{
+  vec3 _translation = FromLuaTable<vec3>(translation);
+  vec3 _scale = FromLuaTable<vec3>(scale);
+  GetInstance(instHandle)->SetBaseTransform(_translation, yaw, pitch, roll, _scale);
+}
+
 //static MPlayer* player;
 static MCamera* camera;// = player->GetCamera();
 
@@ -85,5 +92,6 @@ void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName
 	pContext->ExposeFunction(luaAPIName, "lookAt", LookAt);
   pContext->ExposeFunction(luaAPIName, "getBoundingBox", GetBoundingBox);
 	pContext->ExposeFunction(luaAPIName, "setAnimation", SetAnimation);
+  pContext->ExposeFunction(luaAPIName, "setBaseTransform", SetBaseTransform);
 }
 
