@@ -21,12 +21,14 @@ OPEN_GL = 0
 debug = false
 debugdetail = false
 
-createCollisionTree = false
+createCollisionTree = true
 
 
 time = 0
 lastTime = 0
 deltaTime = 0
+
+BoxYaw = 0;
 
 
 -- Detailed debug print. For when you want to display value constantly in update and will pause to find it.
@@ -89,7 +91,7 @@ end
 
 function Update()
 
-	for updateIndex = 1, 2, 1 do
+	for updateIndex = 1, 1, 1 do
 
 	    engineAPI.BeginUpdate()
 		lastTime = time
@@ -135,6 +137,10 @@ function Update()
 
     objectInstanceAPI.lookAt(BobTest, Vector3.new(0, 1, 0), player0:getPosition())
 
+    objectInstanceAPI.setOrientation(BoxTest, BoxYaw, 0, 0)
+    collisionAPI.createCollisionTree(collidableObjects);
+    BoxYaw = BoxYaw + 0.2
+
 	
 end
 
@@ -164,6 +170,7 @@ function Render()
 			renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
       renderManagerAPI.renderObject(camera0,time,BobTest,1)
+      renderManagerAPI.renderObject(camera0, time, BoxTest, 1)
 
 			renderManagerAPI.present(camera0)
 

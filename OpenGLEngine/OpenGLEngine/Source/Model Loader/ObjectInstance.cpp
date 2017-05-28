@@ -3,6 +3,7 @@
 #include "RenderBatch.h"
 #include "PrimitiveCollisions.h"
 #include "TriangleTree.h"
+#include "MMath.h"
 
 ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
   : m_pRenderableObject(object)
@@ -26,50 +27,24 @@ bool ObjectInstance::GetVisible() const
 
 mOBB ObjectInstance::GetBoundingBox() const
 {
-  mat4 worldMatrix = GetTransform();
-  mat4 normalMatrix = transpose(inverse(worldMatrix));
-  mAABB aabb = m_pRenderableObject->GetBoundingBox();
-  mOBB result;
-  result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
-  result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
-  result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
-  result.corners[0] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.min.z, 1));
-  result.corners[1] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.max.z, 1));
-  result.corners[2] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.min.z, 1));
-  result.corners[3] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.max.z, 1));
-  result.corners[4] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.min.z, 1));
-  result.corners[5] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.max.z, 1));
-  result.corners[6] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.min.z, 1));
-  result.corners[7] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.max.z, 1));
-  return result;
+  return GetTransform() * m_pRenderableObject->GetBoundingBox();
 }
 
 //Gets a ws axis aligned bounding box from the OBB
 mAABB ObjectInstance::GetAlignedBoundingBox()
 {
-  mat4 worldMatrix = GetTransform();
-  mat4 normalMatrix = transpose(inverse(worldMatrix));
-  mAABB aabb = m_pRenderableObject->GetBoundingBox();
-  mOBB result;
-  result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
-  result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
-  result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
-  result.corners[0] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.min.z, 1));
-  result.corners[1] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.max.z, 1));
-  result.corners[2] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.min.z, 1));
-  result.corners[3] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.max.z, 1));
-  result.corners[4] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.min.z, 1));
-  result.corners[5] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.max.z, 1));
-  result.corners[6] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.min.z, 1));
-  result.corners[7] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.max.z, 1));
+  mOBB result = GetBoundingBox();
 
   mAABB finalBox;
   finalBox.min = result.corners[0];
   finalBox.max = result.corners[0];
-  for (int i = 0; i < result.corners->length(); i++)
+  for (int i = 1; i < 8; i++)
   {
-    finalBox.min = glm::min(finalBox.min, result.corners[i]);
-    finalBox.max = glm::max(finalBox.max, result.corners[i]);
+    for (int j = 0; j < 3; j++)
+    {
+      finalBox.min[j] = mMin(finalBox.min[j], result.corners[i][j]);
+      finalBox.max[j] = mMax(finalBox.max[j], result.corners[i][j]);
+    }
   }
 
   return finalBox;
@@ -79,21 +54,7 @@ mAABB ObjectInstance::GetAlignedBoundingBox()
 bool ObjectInstance::Intersects(mAABB const & box)
 {
   //Transform the box in to the model space of the object instance
-  mat4 modelMatrix = inverse(GetTransform());
-  mat4 normalMatrix = transpose(inverse(modelMatrix));
-  mOBB result;
-  result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
-  result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
-  result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
-  result.corners[0] = vec3(modelMatrix * vec4(box.min.x, box.min.y, box.min.z, 1));
-  result.corners[1] = vec3(modelMatrix * vec4(box.min.x, box.min.y, box.max.z, 1));
-  result.corners[2] = vec3(modelMatrix * vec4(box.min.x, box.max.y, box.min.z, 1));
-  result.corners[3] = vec3(modelMatrix * vec4(box.min.x, box.max.y, box.max.z, 1));
-  result.corners[4] = vec3(modelMatrix * vec4(box.max.x, box.min.y, box.min.z, 1));
-  result.corners[5] = vec3(modelMatrix * vec4(box.max.x, box.min.y, box.max.z, 1));
-  result.corners[6] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.min.z, 1));
-  result.corners[7] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.max.z, 1));
-  return Intersects(result);
+  return Intersects(inverse(GetTransform()) * box);
 }
 
 //Expects box in model space
@@ -197,4 +158,3 @@ IRenderableObject const* ObjectInstance::GetRenderableObject() const
 {
   return m_pRenderableObject;
 }
-

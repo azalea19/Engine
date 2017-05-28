@@ -13,13 +13,15 @@
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
+  , m_collisionTree(nullptr)
 {
   memset(m_buffers, 0, sizeof(GLuint)* BT_NUM_BUFFERS);
   m_pModel = new Model(name, filename);
   Initialise();
   CreateBoundingBox();
   CreateTriangleFaces();
-  m_collisionTree = new TriangleTree(this, 16);
+  if(strncmp(name.c_str(), "TestObject", 10) == 0)
+    m_collisionTree = new TriangleTree(this, 32);
 }
 
 RenderableObject::~RenderableObject()
@@ -113,17 +115,23 @@ void RenderableObject::CreateTriangleFaces()
 
   mTriangle newFace;
 
-  for (int i = 0; i < indices.size(); i+=3)
+  for (int i = 0; i < GetMeshCount(); i++)
   {
-    newFace.corners[0] = vertices[indices[i]];
-    newFace.corners[1] = vertices[indices[i+1]];
-    newFace.corners[2] = vertices[indices[i+2]];
-    m_faces.push_back(newFace);
+    IndexRange const& range = m_pModel->GetMeshIndexRange(i);
+    for (int j = 0; j < range.indexCount; j+=3)
+    {
+      newFace.corners[0] = vertices[range.firstVertex + indices[range.firstIndexOffset + j + 0]];
+      newFace.corners[1] = vertices[range.firstVertex + indices[range.firstIndexOffset + j + 1]];
+      newFace.corners[2] = vertices[range.firstVertex + indices[range.firstIndexOffset + j + 2]];
+      m_faces.push_back(newFace);
+    }
   }
 }
 
 bool RenderableObject::Intersects(mOBB const& box) const
 {
+  if (m_collisionTree)
+    return m_collisionTree->Intersects(box);
   return false;
 }
 

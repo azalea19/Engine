@@ -1,5 +1,6 @@
 #include "KDTree.h"
 #include "PrimitiveCollisions.h"
+#include "MMath.h"
 
 struct ObjectBoxPair;
 enum Axis;
@@ -29,6 +30,8 @@ struct ObjectBoxPair
   mOBB box;
 
   ObjectBoxPair(ObjectInstance* objectInstance, const mOBB &objectBox)
+    : object(objectInstance)
+    , box(objectBox)
   {
     object = objectInstance;
     box = objectBox;
@@ -94,10 +97,7 @@ static bool Intersects(mAABB const& box, Node const* node)
     if (node->left)
     {
       //Pass box down to my children
-      if (!Intersects(box, node->left) && !Intersects(box, node->right))
-        return false;
-      else
-        return true;
+      return Intersects(box, node->left) || Intersects(box, node->right);
     }
     else
     {
@@ -122,10 +122,7 @@ static bool Intersects(mOBB const& box, Node const* node)
     if (node->left)
     {
       //Pass box down to my children
-      if (!Intersects(box, node->left) && !Intersects(box, node->right))
-        return false;
-      else
-        return true;
+      return Intersects(box, node->left) || Intersects(box, node->right);
     }
     else
     {
@@ -200,7 +197,7 @@ static void SplitZ(Node* node)
 static void Split(Node* node, std::vector<ObjectBoxPair> &pairs, Axis axis, int depth)
 {
   //Check if we have reached the depth limit for the tree
-  if (depth > 0 && pairs.size() > 1)
+  if (depth > 0 && pairs.size() > 4)
   {
     node->left = new Node();
     node->right = new Node();
@@ -260,8 +257,12 @@ static mAABB MergeBoundingBoxes(std::vector<ObjectBoxPair> const& pairs)
   {
     for (int j = 0; j < 8; j++)
     {
-      finalBox.min = glm::min(finalBox.min, pairs[i].box.corners[j]);
-      finalBox.max = glm::max(finalBox.max, pairs[i].box.corners[j]);
+      for (int k = 0; k < 3; k++)
+      {
+        finalBox.min[k] = mMin(finalBox.min[k], pairs[i].box.corners[j][k]);
+        finalBox.max[k] = mMax(finalBox.max[k], pairs[i].box.corners[j][k]);
+      }
+
     }
   }
   return finalBox;

@@ -30,19 +30,25 @@ function CreateTown()
 	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	
-
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 	DealWith(skybox, 0,0, 1000,1000,1000, 0,0,0)
 
-	gunShop = luaObjInstManager.addNewInstance("GunShop")
-	DealWith(gunShop, 0,0, .015,.015,.015, 0,0,0)
+	gunShop = luaObjInstManager.addNewInstance("TestObject_Titan")
+  objectInstanceAPI.setScale(gunShop, 1, 1, 1)
+	objectInstanceAPI.setTranslation(gunShop, 200, GetHeightAtPoint(50, 50) - 10, 200)
+  collidableObjects[#collidableObjects + 1] = gunShop
 
   BobTest = luaObjInstManager.addNewInstance("Bob");
   DealWith(BobTest, 100,150, 1,1,1, 0,0,0)
 
-	collidableObjects[#collidableObjects + 1] = gunShop
+  BoxTest = luaObjInstManager.addNewInstance("TestObject");
+  objectInstanceAPI.setTranslation(BoxTest, 50, GetHeightAtPoint(50, 50) + 10, 50)
+  objectInstanceAPI.setScale(BoxTest, 20, 20, 20)
+  collidableObjects[#collidableObjects + 1] = BoxTest
 
-	CreateCactusField()
+	--collidableObjects[#collidableObjects + 1] = gunShop
+
+	--CreateCactusField()
 	
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
@@ -52,7 +58,7 @@ function CreateTown()
     printAPI.print('Initialising player...\n')
 	player0 = Player:new(camera0)
 	cameraAPI.setPosition(camera0,100,0,100)
-    player0:setAABB(-0.1,0.1,-1.8,0,-0.1,0.1) 
+    player0:setAABB(-0.4,0.4,0,1.8,-0.4,0.4) 
 
 	collidableObjects["length"] = #collidableObjects;
 

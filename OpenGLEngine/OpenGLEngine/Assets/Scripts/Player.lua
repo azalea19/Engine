@@ -51,7 +51,7 @@ end
 
 function Player:setPosition(newPos)
 	self.position = newPos
-	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
+	cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
 
 end
 
@@ -81,7 +81,7 @@ function Player:update()
 	local moveSpeed = 2.8 * deltaTime
 	--printAPI.print("DeltaTime: " .. deltaTime .. "\n")
 	if(inputManagerAPI.isKeyDown(Sprint_Input)) then
-		moveSpeed = moveSpeed * 2
+		moveSpeed = moveSpeed * 8
 	else
 		if(inputManagerAPI.isKeyDown(Walk_Input)) then
 			moveSpeed = moveSpeed * 0.5
@@ -113,7 +113,7 @@ function Player:update()
 			self.velocity.z = 0
 		end
 		 
-		oldPos = cameraAPI.getPosition(camera0,context.handle);
+		oldPos = self.position
 		forward = cameraAPI.forward(camera0,context.handle);
 		right = cameraAPI.right(camera0,context.handle);
 		up = cameraAPI.up(camera0,context.handle);
@@ -179,12 +179,11 @@ function Player:update()
 		    newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
 		    newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
 		    newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
-		    desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
+		    desiredHeight = GetHeightAtPoint(newPos.x, newPos.z)
 		    newPos.y = math.max(newPos.y, desiredHeight)		
 		    if(newPos.y == desiredHeight) then
 			    self.velocity.y = 0
 		    end
-		    cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 
 		    self.position = newPos
         end
@@ -202,7 +201,7 @@ function Player:update()
 		  end
     end
 		--printAPI.print(self.position.y .. "\n")
-		cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
+		cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
 	end
 end
 

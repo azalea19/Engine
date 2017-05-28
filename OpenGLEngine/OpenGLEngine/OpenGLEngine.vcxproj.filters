@@ -227,6 +227,7 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Data Structures\TriangleTree.cpp" />
+    <ClCompile Include="Source\Collisions\GeometricPrimitives.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h">
@@ -485,6 +486,22 @@
     <None Include="Assets\Scripts\NewGame.lua" />
     <None Include="Assets\Scripts\GameWorld.lua" />
     <None Include="Assets\Scripts\Load.lua" />
+    <None Include="Assets\Scripts\3DUtility.lua" />
+    <None Include="Assets\Scripts\AABoundingBox.lua" />
+    <None Include="Assets\Scripts\Controls.lua" />
+    <None Include="Assets\Scripts\Dialogue.lua" />
+    <None Include="Assets\Scripts\FileIO.lua" />
+    <None Include="Assets\Scripts\Game.lua" />
+    <None Include="Assets\Scripts\gameObject.lua" />
+    <None Include="Assets\Scripts\Menu.lua" />
+    <None Include="Assets\Scripts\npc.lua" />
+    <None Include="Assets\Scripts\Player.lua" />
+    <None Include="Assets\Scripts\QuestManager.lua" />
+    <None Include="Assets\Scripts\ReadAndWriteInstances.lua" />
+    <None Include="Assets\Scripts\Scene.lua" />
+    <None Include="Assets\Scripts\Terrain.lua" />
+    <None Include="Assets\Scripts\Vector3.lua" />
+    <None Include="Assets\Scripts\World.lua" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Weapon.lua" />
