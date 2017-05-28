@@ -7,10 +7,10 @@ void ForestTerrain::SaveTerrainToOBJ(const string& filepath) const
   OBJWriter::SaveMeshToOBJ(*this, filepath);
 }
 
-ForestTerrain::ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filePath, int density)
+ForestTerrain::ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filePath, string const& alphapath, int density)
 {
-  m_pLand = new Terrain(terrainWidth, terrainHeight, heightScale, filePath);
-  GenerateForest();
+  //m_pLand = new Terrain(terrainWidth, terrainHeight, heightScale, filePath, alphapath, 0);
+  //GenerateForest();
 }
 
 void ForestTerrain::GenerateForest()

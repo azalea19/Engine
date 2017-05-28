@@ -128,7 +128,13 @@ public:
   /// <param name="meshIndex">Index of the mesh.</param>
   void BindMesh(int meshIndex) const override;
   
-  mAABB GetBoundingBox() const override;
+  /// <summary>
+  /// Gets the bounding box of the renderable object.
+  /// </summary>
+  /// <returns></returns>
+  const mAABB& GetBoundingBox() const override;
+
+  const std::vector<mTriangle>& GetTriangleFaces() const override;
 
 private:
 
@@ -137,7 +143,15 @@ private:
   /// </summary>
   Model* m_pModel;
 
+  /// <summary>
+  /// The axis aligned bounding box
+  /// </summary>
   mAABB m_boundingBox;
+
+  /// <summary>
+  /// The triangle faces of the renderable object
+  /// </summary>
+  std::vector<mTriangle> m_faces;
 
   /// <summary>
   /// The vertex array object
@@ -181,7 +195,16 @@ private:
   /// <param name="projectionMatrix">The projection matrix.</param>
   void UploadMatrices(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix) const;
 
+  /// <summary>
+  /// Creates the bounding box.
+  /// </summary>
   void CreateBoundingBox();
+
+  /// <summary>
+  /// Gets the triangle faces.
+  /// </summary>
+  void CreateTriangleFaces();
+
 };
 
 

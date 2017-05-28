@@ -51,6 +51,7 @@ KDTree::KDTree(std::vector<ObjectInstance*> const& objects, int depthLevel)
 {
   if (objects.size() > 0)
   {
+    root = new Node();
     std::vector<ObjectBoxPair> pairs = CreateObjectBoxPairs(objects);
     root->box = MergeBoundingBoxes(pairs);
     Split(root, pairs, X, depthLevel);
@@ -83,6 +84,7 @@ KDTree::~KDTree()
 
 }
 
+//Expecting box in world space coords
 static bool Intersects(mAABB const& box, Node const* node) 
 {
   //If box is colliding with the bounding volume in our node
@@ -103,10 +105,38 @@ static bool Intersects(mAABB const& box, Node const* node)
       //If either node is null node is a leaf
         for (int i = 0; i < node->objects.size(); i++)
         {
-          if (Intersects(box, node->objects[i]->GetRenderableObject()->GetBoundingBox()))         
+          if (node->objects[i]->Intersects(box))              
             return true;
         }
     }   
+  }
+  return false;
+}
+
+static bool Intersects(mOBB const& box, Node const* node)
+{
+  //If box is colliding with the bounding volume in our node
+  if (Intersects(node->box, box))
+  {
+    //If children aren't null
+    if (node->left)
+    {
+      //Pass box down to my children
+      if (!Intersects(box, node->left) && !Intersects(box, node->right))
+        return false;
+      else
+        return true;
+    }
+    else
+    {
+      //End of tree reached 
+      //If either node is null node is a leaf
+      for (int i = 0; i < node->objects.size(); i++)
+      {
+        if (node->objects[i]->Intersects(box))
+          return true;
+      }
+    }
   }
   return false;
 }
@@ -115,6 +145,12 @@ bool KDTree::Intersects(mAABB const& box) const
 {
   return ::Intersects(box, root);
 }
+
+bool KDTree::Intersects(mOBB const & box) const
+{
+  return ::Intersects(box, root);
+}
+
 
 static void SplitX(Node* node)
 {
@@ -137,7 +173,7 @@ static void SplitY(Node* node)
   mAABB right = node->box;
 
   left.min.y = node->box.min.y;
-  left.max.y = node->box.max.y / 2;
+  left.max.y = (node->box.max.y + node->box.min.y) / 2;
 
   right.min.y = left.max.y;
   right.max.y = node->box.max.y;
@@ -152,7 +188,7 @@ static void SplitZ(Node* node)
   mAABB right = node->box;
 
   left.min.z = node->box.min.z;
-  left.max.z = node->box.max.z / 2;
+  left.max.z = (node->box.max.z + node->box.min.z) / 2;
 
   right.min.z = left.max.z;
   right.max.z = node->box.max.z;
@@ -190,7 +226,7 @@ static void Split(Node* node, std::vector<ObjectBoxPair> &pairs, Axis axis, int 
       delete node->right;
       node->left = nullptr;
       node->right = nullptr;
-      Split(node, rightPairs, Axis((axis + 1) % 3), depth + 1);
+      Split(node, rightPairs, Axis((axis + 1) % 3), depth);
     }
     else if (rightPairs.empty())
     {
@@ -199,12 +235,12 @@ static void Split(Node* node, std::vector<ObjectBoxPair> &pairs, Axis axis, int 
       delete node->right;
       node->left = nullptr;
       node->right = nullptr;
-      Split(node, leftPairs, Axis((axis + 1) % 3), depth + 1);
+      Split(node, leftPairs, Axis((axis + 1) % 3), depth);
     }
     else
     {
-      Split(node->left, leftPairs, Axis((axis + 1) % 3), depth + 1);
-      Split(node->right, rightPairs, Axis((axis + 1) % 3), depth + 1);
+      Split(node->left, leftPairs, Axis((axis + 1) % 3), depth - 1);
+      Split(node->right, rightPairs, Axis((axis + 1) % 3), depth - 1);
     }
 
   }
@@ -219,7 +255,7 @@ static mAABB MergeBoundingBoxes(std::vector<ObjectBoxPair> const& pairs)
 {
   mAABB finalBox;
   finalBox.min = vec3(FLT_MAX);
-  finalBox.max = vec3(FLT_MIN);
+  finalBox.max = vec3(-FLT_MIN);
   for (int i = 0; i < pairs.size(); i++)
   {
     for (int j = 0; j < 8; j++)

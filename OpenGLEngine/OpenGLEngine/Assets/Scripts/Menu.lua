@@ -18,82 +18,82 @@ function initMenu()
     local newPos = {x=0,y=1,z=40}
     local newScale = {x=5,y=5,z=0.01}
     local newDir = {x=0,y=1,z=0}
-	Background = gameObject.new("Background", "Background", "Bob", newPos, newDir, newScale, newAnim)
+	Background = gameObject.new("Background", "Background", "WhiteCube", newPos, newDir, newScale, newAnim)
 	-- Start New, 0
     local newPos = {x=0,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    StartNewButton = gameObject.new("StartNewButton", "StartNewButton", "Bob", newPos, newDir, newScale, newAnim)
+    StartNewButton = gameObject.new("StartNewButton", "StartNewButton", "btnNewGame", newPos, newDir, newScale, newAnim)
 	StartNewButton.option = newGameButton -- initialise a new game
 	StartNewButton.active = true
 	-- Continue, 0
     local newPos = {x=5,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    ContinueButton = gameObject.new("ContinueButton", "ContinueButton", "Bob", newPos, newDir, newScale, newAnim)
+    ContinueButton = gameObject.new("ContinueButton", "ContinueButton", "btnContinue", newPos, newDir, newScale, newAnim)
 	ContinueButton.option = continueGame -- loads the most recent save
 	ContinueButton.active = true
 	-- Load Game, 0
     local newPos = {x=10,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    LoadButton = gameObject.new("LoadButton", "LoadButton", "Bob", newPos, newDir, newScale, newAnim)
+    LoadButton = gameObject.new("LoadButton", "LoadButton", "btnLoad", newPos, newDir, newScale, newAnim)
 	LoadButton.option = loadGame -- go to load menu, show 3 slots and back button
 	LoadButton.active = true
 	-- Save Game, 0
     local newPos = {x=15,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    SaveButton = gameObject.new("SaveButton", "SaveButton", "Bob", newPos, newDir, newScale, newAnim)
+    SaveButton = gameObject.new("SaveButton", "SaveButton", "btnSave", newPos, newDir, newScale, newAnim)
 	SaveButton.option = saveGame -- Go to save menu, show 3 slots and back button
 	SaveButton.active = true
 	-- Exit button, 0
     local newPos = {x=20,y=0,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    ExitButton = gameObject.new("ExitButton", "ExitButton", "Bob", newPos, newDir, newScale, newAnim)
+    ExitButton = gameObject.new("ExitButton", "ExitButton", "btnExit", newPos, newDir, newScale, newAnim)
 	ExitButton.option = quitGame -- Exit game
 	ExitButton.active = true
 	-- Back Button, 1/2
     local newPos = {x=20,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    BackButton = gameObject.new("BackButton", "BackButton", "Bob", newPos, newDir, newScale, newAnim)
+    BackButton = gameObject.new("BackButton", "BackButton", "btnBack", newPos, newDir, newScale, newAnim)
 	BackButton.option = back -- go back to menu
 	BackButton.active = false
 	-- Button One, 1/2
     local newPos = {x=10,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    ButtonOne = gameObject.new("ButtonOne", "ButtonOne", "Bob", newPos, newDir, newScale, newAnim)
+    ButtonOne = gameObject.new("ButtonOne", "ButtonOne", "btnGame1", newPos, newDir, newScale, newAnim)
 	ButtonOne.option = buttonOne -- set selected to 1
 	ButtonOne.active = false
 	-- Button Two, 1/2
     local newPos = {x=5,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    ButtonTwo = gameObject.new("ButtonTwo", "ButtonTwo", "Bob", newPos, newDir, newScale, newAnim)
+    ButtonTwo = gameObject.new("ButtonTwo", "ButtonTwo", "btnGame2", newPos, newDir, newScale, newAnim)
 	ButtonTwo.option = buttonTwo -- set selected to 2
 	ButtonTwo.active = false
 	-- Button Three, 1/2
     local newPos = {x=0,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    ButtonThree = gameObject.new("ButtonThree", "ButtonThree", "Bob", newPos, newDir, newScale, newAnim)
+    ButtonThree = gameObject.new("ButtonThree", "ButtonThree", "btnGame3", newPos, newDir, newScale, newAnim)
 	ButtonThree.option = buttonThree -- set selected to 3
 	ButtonThree.active = false
 	-- Return button, 0 during game
     local newPos = {x=25,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    ReturnButton = gameObject.new("ReturnButton", "ReturnButton", "Bob", newPos, newDir, newScale, newAnim)
+    ReturnButton = gameObject.new("ReturnButton", "ReturnButton", "btnReturn", newPos, newDir, newScale, newAnim)
 	ReturnButton.option = ReturnButton -- return to game
 	ReturnButton.active = false
 	-- Mouse cursor
     local newPos = {x=0,y=1,z=20}
     local newScale = {x=0.2,y=0.2,z=0.2}
     local newDir = {x=0,y=1,z=0}
-	MouseObject = gameObject.new("MouseObject", "MouseObject", "Bob", newPos, newDir, newScale, newAnim)
+	MouseObject = gameObject.new("MouseObject", "MouseObject", "WhiteCube", newPos, newDir, newScale, newAnim)
 	
 	
 	table.insert(MenuButtons, StartNewButton)

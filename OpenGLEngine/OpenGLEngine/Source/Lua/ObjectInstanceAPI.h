@@ -3,7 +3,6 @@
 #include "LuaObjectInstanceManager.h"
 #include "LuaManager.h"
 #include "ShaderLibrary.h"
-#include "MPlayer.h"
 #include "MCamera.h"
 #include "ObjectInstance.h"
 #include "MathAPI.h"
@@ -97,6 +96,9 @@ public:
 
 
   static void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef upVector, LuaRef targetVec3);
+
+
+  static LuaRef GetBoundingBox(InstanceHandle instHandle, LuaContextHandle contextHandle);
 
   /// <summary>
   /// Exposes the API functions.

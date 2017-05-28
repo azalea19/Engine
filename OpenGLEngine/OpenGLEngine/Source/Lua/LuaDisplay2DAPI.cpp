@@ -22,7 +22,7 @@ void LuaDisplay2DAPI::DrawTextLua(int size, string const& filePath, string const
 {
 	glm::vec3 nVec;
   vec2 position;
-	nVec.x = FromLuaTable<glm::vec3>(color).x;
+	nVec = FromLuaTable<glm::vec3>(color);
   position = FromLuaTable<vec2>(pos);
 	DrawText(size, filePath, text, position, nVec, centered, screenWidth, screenHeight);
 }

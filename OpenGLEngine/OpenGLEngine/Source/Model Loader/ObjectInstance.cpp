@@ -1,13 +1,15 @@
 #include "ObjectInstance.h"
 #include "ShaderLibrary.h"
-#include "RenderManager.h"
+#include "RenderBatch.h"
+#include "PrimitiveCollisions.h"
+#include "TriangleTree.h"
 
 ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
   : m_pRenderableObject(object)
   , m_activeAnimation(-1)
 {
   SetTransform(coords, yaw, pitch, 0, scaleFactor);
-  RenderManager::GetInstance().AddObject(this);
+  m_collisionTree = new TriangleTree(this, 16);
 }
 
 void ObjectInstance::SetVisible(bool vis)
@@ -22,23 +24,97 @@ bool ObjectInstance::GetVisible() const
 
 mOBB ObjectInstance::GetBoundingBox() const
 {
-  mat4 modelMatrix = GetTransform();
-  mat4 normalMatrix = transpose(inverse(modelMatrix));
+  mat4 worldMatrix = GetTransform();
+  mat4 normalMatrix = transpose(inverse(worldMatrix));
   mAABB aabb = m_pRenderableObject->GetBoundingBox();
   mOBB result;
   result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
   result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
   result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
-  result.corners[0] = vec3(modelMatrix * vec4(aabb.min.x, aabb.min.y, aabb.min.z, 1));
-  result.corners[1] = vec3(modelMatrix * vec4(aabb.min.x, aabb.min.y, aabb.max.z, 1));
-  result.corners[2] = vec3(modelMatrix * vec4(aabb.min.x, aabb.max.y, aabb.min.z, 1));
-  result.corners[3] = vec3(modelMatrix * vec4(aabb.min.x, aabb.max.y, aabb.max.z, 1));
-  result.corners[4] = vec3(modelMatrix * vec4(aabb.max.x, aabb.min.y, aabb.min.z, 1));
-  result.corners[5] = vec3(modelMatrix * vec4(aabb.max.x, aabb.min.y, aabb.max.z, 1));
-  result.corners[6] = vec3(modelMatrix * vec4(aabb.max.x, aabb.max.y, aabb.min.z, 1));
-  result.corners[7] = vec3(modelMatrix * vec4(aabb.max.x, aabb.max.y, aabb.max.z, 1));
+  result.corners[0] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.min.z, 1));
+  result.corners[1] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.max.z, 1));
+  result.corners[2] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.min.z, 1));
+  result.corners[3] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.max.z, 1));
+  result.corners[4] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.min.z, 1));
+  result.corners[5] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.max.z, 1));
+  result.corners[6] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.min.z, 1));
+  result.corners[7] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.max.z, 1));
   return result;
 }
+
+//Gets a ws axis aligned bounding box from the OBB
+mAABB ObjectInstance::GetAlignedBoundingBox()
+{
+  mat4 worldMatrix = GetTransform();
+  mat4 normalMatrix = transpose(inverse(worldMatrix));
+  mAABB aabb = m_pRenderableObject->GetBoundingBox();
+  mOBB result;
+  result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
+  result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
+  result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
+  result.corners[0] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.min.z, 1));
+  result.corners[1] = vec3(worldMatrix * vec4(aabb.min.x, aabb.min.y, aabb.max.z, 1));
+  result.corners[2] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.min.z, 1));
+  result.corners[3] = vec3(worldMatrix * vec4(aabb.min.x, aabb.max.y, aabb.max.z, 1));
+  result.corners[4] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.min.z, 1));
+  result.corners[5] = vec3(worldMatrix * vec4(aabb.max.x, aabb.min.y, aabb.max.z, 1));
+  result.corners[6] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.min.z, 1));
+  result.corners[7] = vec3(worldMatrix * vec4(aabb.max.x, aabb.max.y, aabb.max.z, 1));
+
+  mAABB finalBox;
+  finalBox.min = result.corners[0];
+  finalBox.max = result.corners[0];
+  for (int i = 0; i < result.corners->length(); i++)
+  {
+    finalBox.min = glm::min(finalBox.min, result.corners[i]);
+    finalBox.max = glm::max(finalBox.max, result.corners[i]);
+  }
+
+  return finalBox;
+}
+
+//Expects a box in world space coords
+bool ObjectInstance::Intersects(mAABB const & box)
+{
+  //Transform the box in to the model space of the object instance
+  mat4 modelMatrix = inverse(GetTransform());
+  mat4 normalMatrix = transpose(inverse(modelMatrix));
+  mOBB result;
+  result.axes[0] = vec3(normalMatrix * vec4(0, 0, 1, 0));
+  result.axes[1] = vec3(normalMatrix * vec4(0, 1, 0, 0));
+  result.axes[2] = vec3(normalMatrix * vec4(1, 0, 0, 0));
+  result.corners[0] = vec3(modelMatrix * vec4(box.min.x, box.min.y, box.min.z, 1));
+  result.corners[1] = vec3(modelMatrix * vec4(box.min.x, box.min.y, box.max.z, 1));
+  result.corners[2] = vec3(modelMatrix * vec4(box.min.x, box.max.y, box.min.z, 1));
+  result.corners[3] = vec3(modelMatrix * vec4(box.min.x, box.max.y, box.max.z, 1));
+  result.corners[4] = vec3(modelMatrix * vec4(box.max.x, box.min.y, box.min.z, 1));
+  result.corners[5] = vec3(modelMatrix * vec4(box.max.x, box.min.y, box.max.z, 1));
+  result.corners[6] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.min.z, 1));
+  result.corners[7] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.max.z, 1));
+
+  return Intersects(result);
+}
+
+//Expects box in model space
+bool ObjectInstance::Intersects(mOBB const & box)
+{
+  return m_collisionTree->Intersects(box);
+  //if (::Intersects(m_pRenderableObject->GetBoundingBox(), box))
+  //{
+  //  std::vector<mTriangle> const& faces = m_pRenderableObject->GetTriangleFaces();
+  //  for (int i = 0; i < faces.size(); i++)
+  //  {
+  //    //If box is intersecting a triangle face 
+  //    if (::Intersects(box, faces[i]))
+  //    {
+  //      //Return true
+  //      return true;
+  //    }
+  //  }
+  //}
+  //return false;
+}
+
 
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
@@ -49,7 +125,6 @@ void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatri
     m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
   }
 }
-
 
 
 mat4 ObjectInstance::GetWorldMatrix() const

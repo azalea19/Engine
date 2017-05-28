@@ -3,12 +3,13 @@
 #include "Texture.h"
 #include "OBJWriter.h"
 
-Terrain::Terrain(uint terrainWidth, uint terrainHeight, float heightScale, string const& filepath)
+Terrain::Terrain(uint terrainWidth, uint terrainHeight, float heightScale, string const& filepath, string const& alphapath)
   : m_terrainWidth(terrainWidth)
   , m_terrainHeight(terrainHeight)
   , m_heightScale(heightScale)
 {
   m_pHeightMap = new HeightMap(filepath);
+  m_alphaMap = new HeightMap(alphapath);
   m_xBlockScale = terrainWidth / (float)(m_pHeightMap->GetWidth() - 1);
   m_yBlockScale = terrainHeight / (float)(m_pHeightMap->GetHeight() - 1);
   CreateMesh();
@@ -111,6 +112,12 @@ HeightMap* Terrain::GetHeightMap()
 {
   return m_pHeightMap;
 }
+
+HeightMap * Terrain::GetAlphaMap()
+{
+  return m_alphaMap;
+}
+
 
 float Terrain::GetXBlockScale() const
 {

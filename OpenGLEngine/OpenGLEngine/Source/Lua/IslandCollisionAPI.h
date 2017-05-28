@@ -1,9 +1,13 @@
+#ifndef IslandCollisionAPI_h__
+#define IslandCollisionAPI_h__
+
 /**
 * @file   IslandCollisionAPI.h
 * @Author Elizabeth Haynes
 * @date   S1, 2017
 * @brief  Lua API for checking collisions and resolving them with the island method
 */
+
 #include "LuaContext.h"
 #include "LuaManager.h"
 
@@ -11,7 +15,7 @@
 #include "IslandCollision.h"
 
 
-#pragma once
+
 class IslandCollisionAPI
 {
 public:
@@ -35,7 +39,7 @@ public:
 	/// <param name="incSize">Size of movement increments</param>
 	/// <param name="handle">Lua context handle</param>
 	/// <returns>LuaRef</returns>
-	static LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBi, LuaRef manyList, int listSize, float incSize, LuaContextHandle handle);
+	static LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBi, LuaContextHandle handle);
 
 	/// <summary>
 	/// Check if one AABB is colliding with any in a list. todo Probably should be in AABB class instead.
@@ -46,9 +50,10 @@ public:
 	/// <param name="manyList">Table of many Vec3, in pairs of min and then max of AABBs.</param>
 	/// <param name="listSize">Number of AABBs in the manyList table (half the number of values)</param>
 	/// <param name="handle">Lua context handle</param>
-	static bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox, LuaRef manyList, int listSize);
+	static bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox);
 
 
 	static int IslandCollisionAPI::CheckAnyCollisionGetIndex(LuaRef thisbox, LuaRef manyList, int listSize);
 };
 
+#endif // IslandCollisionAPI_h__

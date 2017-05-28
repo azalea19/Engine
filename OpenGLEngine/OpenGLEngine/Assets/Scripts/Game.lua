@@ -10,7 +10,10 @@ require 'ReadAndWriteInstances'
 require 'Terrain'
 ]]--
 
+<<<<<<< HEAD
 --GetAPI(context.handle, 'printAPI', 'printAPI')
+=======
+>>>>>>> 36947cce270eff9264ef4a438bd106f1a7a57b9e
 local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 local AABoundingBox = dofile '../Assets/Scripts/AABoundingBox.lua'
@@ -81,22 +84,10 @@ function LoadAPIs()
 
 end
 
-function printVec3(veca)
-    printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
-end
-
-function printVec3After(string,veca)
-    printAPI.print(string)
-    printVec3(veca)
-
-end
-
-function printVec3s(vecc,vecb)
-    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. "\n")
-end
 	
 function LoadAssets()
 	printAPI.print('Loading Models...\n')
+
 	--modelLibraryAPI.addModel("Plant","../Assets/Models/SmallPlant/SmallPlant.obj",false)
 	--modelLibraryAPI.addModel("Horse","../Assets/Models/Horse/horse.3ds",false)
 	--modelLibraryAPI.addModel("Drone","../Assets/Models/Drone/PA_drone.fbx",false)
@@ -116,14 +107,21 @@ function LoadAssets()
     modelLibraryAPI.addModel("Dungeon1Interior","../Assets/Models/Liz_Dungeons/Dungeon1Interior.obj",false)
     modelLibraryAPI.addModel("Dungeon1InteriorEntrance","../Assets/Models/Liz_Dungeons/Dungeon1InteriorEntrance.obj",false)
 
+    modelLibraryAPI.addModel("btnContinue",.."/Assets/Models/UI/continue.obj",false)
+    modelLibraryAPI.addModel("btnNewGame",.."/Assets/Models/UI/newgame.obj",false)
+    modelLibraryAPI.addModel("btnLoad",.."/Assets/Models/UI/load.obj",false)
+    modelLibraryAPI.addModel("btnSave",.."/Assets/Models/UI/save.obj",false)
+    modelLibraryAPI.addModel("btnGame1",.."/Assets/Models/UI/game1.obj",false)
+    modelLibraryAPI.addModel("btnGame2",.."/Assets/Models/UI/game2.obj",false)
+    modelLibraryAPI.addModel("btnGame3",.."/Assets/Models/UI/game3.obj",false)
+    modelLibraryAPI.addModel("WhiteCube",.."/Assets/Models/UI/whiteCube.obj",false)
 
 
 
 	modelLibraryAPI.addModel("Rock","../Assets/Models/Rocks/Boulder/Rock.obj",false)
 	--modelLibraryAPI.addModel("Stone","../Assets/Models/Rocks/SmallRock/stone.fbx",false)BROKEN
+
 	modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
-	--modelLibraryAPI.addModel("Cart","../Assets/Models/Cart/Ox_Cart_FBX.fbx",false)
-	--modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon exterior-interior.obj",false)
 	modelLibraryAPI.addModel("Skybox","../Assets/Models/SkyBox/skybox.obj",false)
 	modelLibraryAPI.addModel("Bob","../Assets/Models/Alfred.obj",false)
 	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
@@ -182,13 +180,6 @@ function Initialize()
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
-
-	--test = luaObjInstManager.addNewInstance("Bob")
-	--objectInstanceAPI.setTranslation(test, 0,0,0);
-    --local abox = AABBAPI.getAABB(test, context.handle)
-	--printAPI.print(abox.min.x .. " " .. abox.min.y .. " " .. abox.min.z .. " " .. abox.max.x .. " " .. abox.max.y .. " " .. abox.max.z .. "\n")
-
-	--Works
 
 
     printAPI.print("Initialising text...\n")

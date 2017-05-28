@@ -44,10 +44,10 @@ template<> vec3 FromLuaTable<vec3>(LuaRef value);
 template<> vec2 FromLuaTable<vec2>(LuaRef value);
 
 
-LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle);
+LuaRef ToLuaTable(vec3 const& value, LuaContextHandle contextHandle);
 
 
-LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle);
+LuaRef ToLuaTable(mAABB const& value, LuaContextHandle contextHandle);
 
 
 /// <summary>
@@ -78,7 +78,9 @@ template<> mRay FromLuaTable<mRay>(LuaRef value);
 /// <param name="value">The value.</param>
 /// <param name="contextHandle">The context handle.</param>
 /// <returns>LuaRef</returns>
-LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle);
+LuaRef ToLuaTable(mat4 const& value, LuaContextHandle contextHandle);
+
+
 /// <summary>
 /// Converts vector of floats to 2D lua table
 /// </summary>
@@ -87,6 +89,6 @@ LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle);
 /// <param name="height">Desired height.</param>
 /// <param name="contextHandle">The context handle.</param>
 /// <returns>LuaRef</returns>
-LuaRef ToLuaTable(std::vector<float> data, int width, int height, LuaContextHandle contextHandle);
+LuaRef ToLuaTable(std::vector<float> const& data, std::vector<float> const& alphaData, int width, int height, LuaContextHandle contextHandle);
 
 #endif // MathAPI_h__

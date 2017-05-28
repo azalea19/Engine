@@ -67,8 +67,12 @@ void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef upVector, LuaRe
 	inst->LookAt(target, upVec);
  // vec3 translation = inst->GetTranslation();
 	//inst->SetTransform(glm::inverse(glm::lookAt(translation, target, vec3(0, 1, 0))));
+}
 
-
+LuaRef ObjectInstanceAPI::GetBoundingBox(InstanceHandle instHandle, LuaContextHandle contextHandle)
+{
+  auto inst = LuaObjectInstanceManager::GetInstance(instHandle);
+  return ToLuaTable(inst->GetAlignedBoundingBox(), contextHandle);
 }
 
 void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
@@ -81,7 +85,7 @@ void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName
 	pContext->ExposeFunction(luaAPIName, "getTranslation", GetTranslation);
 	pContext->ExposeFunction(luaAPIName, "forward", Forward);
 	pContext->ExposeFunction(luaAPIName, "lookAt", LookAt);
-
+  pContext->ExposeFunction(luaAPIName, "getBoundingBox", GetBoundingBox);
 	pContext->ExposeFunction(luaAPIName, "setAnimation", SetAnimation);
 }
 

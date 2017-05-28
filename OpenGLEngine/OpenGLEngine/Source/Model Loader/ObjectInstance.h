@@ -15,6 +15,8 @@
 * The object instance class stores the data relating to a particular instance of a model.
 */
 
+class TriangleTree;
+
 
 class ObjectInstance : public IRenderable, public IAnimatable, public AffineTransformable
 {
@@ -102,9 +104,29 @@ public:
   /// </summary>
   /// <returns>bool</returns>
   bool GetVisible() const;
-
-  mOBB GetBoundingBox() const;
   
+  /// <summary>
+  /// Gets the oriented bounding box of the object instance.
+  /// </summary>
+  /// <returns></returns>
+  mOBB GetBoundingBox() const;
+
+  //Returns the axis aligned bounding box of the oriented bounding box.
+  mAABB GetAlignedBoundingBox();
+
+  /// <summary>
+  /// Determines whether box intersects any triangles in the object instance.
+  /// </summary>
+  /// <param name="box">The box.</param>
+  /// <returns></returns>
+  bool Intersects(mAABB const& box);
+
+  /// <summary>
+  /// Determines whether box intersects any triangles in the object instance.
+  /// </summary>
+  /// <param name="box">The box.</param>
+  /// <returns></returns>
+  bool Intersects(mOBB const& box);
 
 private:
 
@@ -122,6 +144,8 @@ private:
   /// Whether the instance is visible
   /// </summary>
   bool m_visible = true;
+
+  TriangleTree* m_collisionTree;
 
 };
 

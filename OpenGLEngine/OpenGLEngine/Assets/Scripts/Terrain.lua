@@ -39,10 +39,10 @@ function GetHeightAtPoint(nx,ny)
 	local lerpFactorX = hmX - sampleX
 	local lerpFactorY = hmY - sampleY
 
-	local h00 = terrainHeightData[sampleX][sampleY]
-	local h10 = terrainHeightData[sampleX+1][sampleY]
-    local h01 = terrainHeightData[sampleX][sampleY + 1]
-	local h11 = terrainHeightData[sampleX + 1][sampleY + 1]	
+	local h00 = terrainHeightData["heightMap"][sampleX][sampleY]
+	local h10 = terrainHeightData["heightMap"][sampleX+1][sampleY]
+    local h01 = terrainHeightData["heightMap"][sampleX][sampleY + 1]
+	local h11 = terrainHeightData["heightMap"][sampleX + 1][sampleY + 1]	
 	
 	local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
 	debugPrint("Complete\n")
@@ -73,10 +73,10 @@ function GetHeightAtPointNathan(x, y)
 	local xPixel = (x / terrainSizeX) * heightMapSize - 1
 	local yPixel = (y / terrainSizeY) * heightMapSize - 1
 
-	local BottomLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 1]
-	local BottomRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 1]
-	local TopLeft = terrainHeightData[math.floor(xPixel) + 1][math.floor(yPixel) + 2]
-	local TopRight = terrainHeightData[math.floor(xPixel) + 2][math.floor(yPixel) + 2]
+	local BottomLeft = terrainHeightData["heightMap"][math.floor(xPixel) + 1][math.floor(yPixel) + 1]
+	local BottomRight = terrainHeightData["heightMap"][math.floor(xPixel) + 2][math.floor(yPixel) + 1]
+	local TopLeft = terrainHeightData["heightMap"][math.floor(xPixel) + 1][math.floor(yPixel) + 2]
+	local TopRight = terrainHeightData["heightMap"][math.floor(xPixel) + 2][math.floor(yPixel) + 2]
 	if(x + y <= xPixel * xScale + yScale * yScale ) then
 		z1 = TopLeft
 		z2 = BottomRight

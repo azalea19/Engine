@@ -1,6 +1,5 @@
 #include "MathAPI.h"
 
-//#include <glm/gtc/type_ptr.hpp>
 
 static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
 {
@@ -11,7 +10,7 @@ static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
   pContext->AddClassConstructor<vec3, void(*) (void)>(luaAPIName, "vec3");
 }
 
-LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(vec3 const& value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
   table["x"] = value.x;
@@ -21,25 +20,30 @@ LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
   return table;
 }
 
-LuaRef ToLuaTable(std::vector<float> data, int width, int height, LuaContextHandle contextHandle)
+
+LuaRef ToLuaTable(std::vector<float> const& hmData, std::vector<float> const& alphaData, int width, int height, LuaContextHandle contextHandle)
 {
-  LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-  LuaRef tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-
-  for (int i = 1; i <= width; i++)
+  LuaRef heightMap = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  LuaRef alphaMap = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  for (int y = 0; y < height; y++)
   {
-    tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-    for (int k = 1; k <= height; k++)
+    LuaRef heightRow = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+    LuaRef alphaRow = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+    for (int x = 0; x < width; x++)
     {
-      tempTable[k] = data.at(((i - 1) * width) + k - 1);
+      heightRow[x + 1] = hmData[y*width + x];
+      alphaRow[x + 1] = alphaData[y*width + x];
     }
-    table[i] = tempTable;
+    heightMap[y + 1] = heightRow;
+    alphaMap[y + 1] = alphaRow;
   }
-
-  return table;
+  LuaRef result = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  result["heightMap"] = heightMap;
+  result["alphaMap"] = alphaMap;
+  return result;
 }
 
-LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(mat4 const& value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
 
@@ -56,7 +60,7 @@ LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 }
 
 
-LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(mAABB const& value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
 
@@ -80,7 +84,6 @@ vec3 FromLuaTable<vec3>(LuaRef value)
 
   return result;
 }
-
 
 template<>
 vec2 FromLuaTable(LuaRef value)
@@ -110,7 +113,6 @@ template<> mAABB FromLuaTable<mAABB>(LuaRef value)
 
   result.min = FromLuaTable<vec3>(value["min"]);
   result.max = FromLuaTable<vec3>(value["max"]);
-
 
   return result;
 }

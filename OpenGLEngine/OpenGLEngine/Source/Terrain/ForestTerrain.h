@@ -31,7 +31,7 @@ public:
 	/// <param name="textureTileCount">The texture tile count.</param>
 	/// <param name="filepath">The filepath.</param>
 	/// <param name="density">The density.</param>
-	ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filepath, int density);
+	ForestTerrain(uint terrainWidth, uint terrainHeight, float heightScale, float textureTileCount, string const& filepath, string const& alphapath, int density);
 
 
 	/// <summary>
