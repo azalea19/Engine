@@ -20,6 +20,7 @@ function Player.new(newCam,newCurrentHealth,newMaxHealth)
 		rangedWeaponEquipped = true, -- Whether the player is wielding a readied ranged weapon
 		weapon = nil,
 		lastTimeShot = nil, -- Last time player shot ranged weapon
+        trackTerrain = true
 	}
 
 	setmetatable(instance, Player)
@@ -172,18 +173,23 @@ function Player:update()
 			self.velocity.y = terminalVelocity
 		end
 
-		--printAPI.print(math.sqrt(self.velocity.x * self.velocity.x + self.velocity.y * self.velocity.y + self.velocity.z * self.velocity.z) .. "\n")
-		newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
-		--newPos = oldPos
-		newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
-		newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
-		desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
-		newPos.y = math.max(newPos.y, desiredHeight)		
-		if(newPos.y == desiredHeight) then
-			self.velocity.y = 0
-		end
+        if(self.trackTerrain) then
+        
+		    debugPrint("Delta Time:"..deltaTime .. "\n")
+		    newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
+		    newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
+		    newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
+		    desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
+		    newPos.y = math.max(newPos.y, desiredHeight)		
+		    if(newPos.y == desiredHeight) then
+			    self.velocity.y = 0
+		    end
+		    cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 
-		self.position = newPos
+		    self.position = newPos
+        end
+
+
 
     if createCollisionTree then
 		  if collisionAPI.box_collidingInTree(self:BBToWorld()) then
