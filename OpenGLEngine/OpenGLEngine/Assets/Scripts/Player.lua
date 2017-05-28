@@ -20,7 +20,8 @@ function Player.new(newCam,newCurrentHealth,newMaxHealth)
 		rangedWeaponEquipped = true, -- Whether the player is wielding a readied ranged weapon
 		weapon = nil,
 		lastTimeShot = nil, -- Last time player shot ranged weapon
-        trackTerrain = true
+        trackTerrain = true,
+		weapon = nil
 	}
 
 	setmetatable(instance, Player)
@@ -84,7 +85,7 @@ function Player:setYaw(newYaw)
 end
 
 function Player:setPitch(newPitch);
-	cameraAPI.setPitch(camera0,newYaw)
+	cameraAPI.setPitch(camera0,newPitch)
 end
 
 function Player:update()

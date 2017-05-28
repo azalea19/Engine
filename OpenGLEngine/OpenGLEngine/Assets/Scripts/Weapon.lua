@@ -1,4 +1,4 @@
-Weapon = {}
+local Weapon = {}
 Weapon.__index = Weapon
 
 
@@ -30,3 +30,4 @@ function Weapon:attack(myObj)
 
 end
 
+return Weapon
