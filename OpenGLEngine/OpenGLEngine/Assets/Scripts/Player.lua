@@ -28,6 +28,10 @@ function Player.new(newCam,newCurrentHealth,newMaxHealth)
 end
 
 
+
+function Player:setWeapon(newWeapon)
+	self.weapon = newWeapon
+end
 function Player:getPosition()
 	return self.position
 end
@@ -172,22 +176,19 @@ function Player:update()
 			self.velocity.y = terminalVelocity
 		end
 
-        if(self.trackTerrain) then
-        
-		    debugPrint("Delta Time:"..deltaTime .. "\n")
-		    newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
-		    newPos.x = math.min(math.max(newPos.x, 0), wsTerrainSize)
-		    newPos.z = math.min(math.max(newPos.z, 0), wsTerrainSize)
-		    desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
-		    newPos.y = math.max(newPos.y, desiredHeight)		
-		    if(newPos.y == desiredHeight) then
-			    self.velocity.y = 0
-		    end
-		    cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
+		debugPrint("Delta Time:"..deltaTime .. "\n")
+		newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
+		newPos.x = math.min(math.max(newPos.x, 0), wsTerrainSize)
+		newPos.z = math.min(math.max(newPos.z, 0), wsTerrainSize)
+		desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
+		newPos.y = math.max(newPos.y, desiredHeight)		
+		if(newPos.y == desiredHeight) then
+			self.velocity.y = 0
+		end
+		cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
 
-		    self.position = newPos
-        end
-
+		self.position = newPos
+      
 
 
     if createCollisionTree then

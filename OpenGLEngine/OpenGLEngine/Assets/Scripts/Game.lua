@@ -21,11 +21,15 @@ local World = dofile '../Assets/Scripts/World.lua'
 --local QuestManager = require '../Assets/Scripts/QuestManager'
 dofile '../Assets/Scripts/Dialogue.lua'
 dofile '../Assets/Scripts/FileIO.lua'
-dofile '../Assets/Scripts/ReadAndWriteData.lua'
+dofile '../Assets/Scripts/ReadAndWriteInstances.lua'
 dofile '../Assets/Scripts/Terrain.lua'
 dofile '../Assets/Scripts/Controls.lua'
 dofile '../Assets/Scripts/QuestManager.lua'
 dofile '../Assets/Scripts/Menu.lua'
+dofile '../Assets/Scripts/Load.lua'
+dofile '../Assets/Scripts/GameWorld.lua'
+
+
 
 OPEN_GL = 0
 
@@ -33,7 +37,6 @@ gameObjects = {}
 world = {}
 debug = true
 debugdetail = false
-loadSmallTestTerrain = true
 
 time = 0
 lastTime = 0
@@ -59,84 +62,6 @@ function debugLPrint(string)
         printAPI.print(string)
     end
 end
-
-function LoadAPIs()
-	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
-	GetAPI(context.handle, 'luaObjInstManager', 'luaObjectInstanceManager')
-	GetAPI(context.handle, 'printAPI', 'printAPI')
-	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
-	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
-	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
-    GetAPI(context.handle, 'mmath', 'luaVectorUtility')
-    GetAPI(context.handle, 'engineAPI', 'engineAPI')
-    GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
-    GetAPI(context.handle, 'timeAPI', 'timeAPI')
-    GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
-    GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
-    GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
-    GetAPI(context.handle, 'display2DAPI', 'display2DAPI')
-    GetAPI(context.handle, 'collisionAPI', 'collisionAPI')
-
-
-end
-
-	
-function LoadAssets()
-	printAPI.print('Loading Models...\n')
-	--modelLibraryAPI.addModel("Plant","../Assets/Models/SmallPlant/SmallPlant.obj",false)
-	--modelLibraryAPI.addModel("Horse","../Assets/Models/Horse/horse.3ds",false)
-	--modelLibraryAPI.addModel("Drone","../Assets/Models/Drone/PA_drone.fbx",false)
-	--modelLibraryAPI.addModel("Bomber","../Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
-	--modelLibraryAPI.addModel("DropPod","../Assets/Models/DropPod/PA_DropPod.fbx",false)
-	--modelLibraryAPI.addModel("Tank","../Assets/Models/Tank/PA_ArchfireTank.fbx",false)
-	--modelLibraryAPI.addModel("Warrior","../Assets/Models/Warrior/PA_Warrior.fbx",false)
-	--modelLibraryAPI.addModel("Rabbit","../Assets/Models/Rabbit/rabbit.fbx",false)
-	--modelLibraryAPI.addModel("Spider","../Assets/Models/Spider/spider.fbx",false)
-	--modelLibraryAPI.addModel("Cactus1","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
-	--modelLibraryAPI.addModel("Cactus2","../Assets/Models/DesertPlants/Cactus/cactus_02.FBX",false)BROKEN
-	--modelLibraryAPI.addModel("Cactus3","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
-
-    modelLibraryAPI.addModel("Warrior","../Assets/Models/Characters/PA_SciFiCombatants/PA_SciFiCombatants/_Imported3D/Characters/lizabc.FBX",false)
-    modelLibraryAPI.addModel("CaveDoor","../Assets/Models/Liz_Dungeons/CAVEDOOR.obj",false)
-
-    modelLibraryAPI.addModel("Dungeon1Interior","../Assets/Models/Liz_Dungeons/Dungeon1Interior.obj",false)
-    modelLibraryAPI.addModel("Dungeon1InteriorEntrance","../Assets/Models/Liz_Dungeons/Dungeon1InteriorEntrance.obj",false)
-
-
-
-
-	modelLibraryAPI.addModel("Rock","../Assets/Models/Rocks/Boulder/Rock.obj",false)
-	--modelLibraryAPI.addModel("Stone","../Assets/Models/Rocks/SmallRock/stone.fbx",false)BROKEN
-	modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
-	modelLibraryAPI.addModel("Skybox","../Assets/Models/SkyBox/skybox.obj",false)
-	modelLibraryAPI.addModel("Bob","../Assets/Models/Alfred.obj",false)
-	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
-
-	printAPI.print('Loading Terrain...\n')
-
-    if loadSmallTestTerrain then
-        hMapPath = "../Assets/HeightMaps/heightmap.png"
-        terrainSizeX = 1024
-        terrainSizeY = 1024
-        heightMapSize = 257
-        heightMapHeight = 100
-    else
-        hMapPath = "../Assets/HeightMaps/testmap.png"
-        terrainSizeX = 1024
-        terrainSizeY = 1024
-        heightMapSize = 1024
-        heightMapHeight = 100
-    end
-
-
-
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "../Assets/Models/Terrain/Terrain.obj", context.handle)	
-	modelLibraryAPI.addModel("Terrain","../Assets/Models/Terrain/Terrain.obj",false)
-
-	printAPI.print('Loading Skybox...\n')
-
-end
-
 
 
 function BBToLocal(bb,scalea,loca)
@@ -183,11 +108,8 @@ function Initialize()
 	local NPCData = LoadInstances("../SaveData/NPC_Data.csv", "npc")
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
-	scene = Scene.new("Level1", Terrain01, startPos, startDir)
-
-    scene2 = Scene.new("Level2", Terrain01, startPos, startDir)
-
-
+	scene = Scene.new("Level1", startPos, startDir)
+    scene2 = Scene.new("Level2", startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
 
@@ -255,10 +177,6 @@ function Initialize()
 
     scene:AddInstance(NPC01) 
 
-
-	--scene:SpawnRandomObjects("Bob", a, b,100)
-
-
     emptyVec = {x=0,y=0,z=0}
     scale = {x=10,y=10,z=10}
     
@@ -269,41 +187,37 @@ function Initialize()
 
 	printAPI.print('Initialising terrain...\n')
 
-	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
+	CreateTerrain(scene)
+	CreateCactusField(scene)
 
-	--wont work
-
-	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-	scene:SetTerrain(Terrain01)
+	--objectInstanceAPI.setTranslation(Terrain01,0,0,0)
+	--scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
     world:AddScene(scene2)
 
 	skybox = luaObjInstManager.addNewInstance("Skybox")
-
-	--wont work
-
 	objectInstanceAPI.setTranslation(skybox, 0,0,0);
+	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
+	--function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-	--wont work
-
-	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
-
-	--wont work
-
-	--Wont work
+	titan = gameObject.new("titan","Titan","Titan",Vector3.new(1000,0,1000),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	scene:AddInstance(titan)
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
-    cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
+    --cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
 
     printAPI.print('Initialising rendermanager...\n')
     --renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
 	player0 = Player:new(camera0,100,100)
-	cameraAPI.setPosition(camera0,0,0,0)
-	cameraAPI.setYaw(camera0,225)
-	cameraAPI.setPitch(camera0,0)
+
+	--cameraAPI.setPosition(camera0,0,0,0)
+	player0:setPosition(Vector3.new(1000,0,1000))
+
+	--cameraAPI.setYaw(camera0,225)
+	--cameraAPI.setPitch(camera0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
 	--test = luaObjInstManager.addNewInstance("Bob")
@@ -534,6 +448,8 @@ function Update()
 		world:SetupInstances()
 	end
 
+
+
     if debug then
 
         if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
@@ -604,7 +520,7 @@ function Update()
 
 	local currentGOs = world:GetGameObjects()
 	for i = 1, world:GetGameObjectCount() do
-        --printAPI.print(currentGOs[i].name .. "\n")
+        printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
 		local a = currentGOs[i]:Update()
 	end
     --printAPI.print("Updating player\n")
@@ -613,6 +529,9 @@ function Update()
 	end
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
+
+
+
 
 end
 
@@ -707,8 +626,17 @@ function Render()
 						renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
 					end
 				end
-				local currentTerrainID = world:GetTerrainID()
-				renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+				--local currentTerrainID = world:GetTerrainID()
+
+
+				local i
+			for i = 1, #scene.terrainChunks, 1 do
+				renderManagerAPI.renderObject(camera0,time,scene.terrainChunks[i], 1);
+			end
+
+
+
+				--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
 				renderManagerAPI.renderObject(camera0,time,skybox, 0)
 				renderManagerAPI.present(camera0)
