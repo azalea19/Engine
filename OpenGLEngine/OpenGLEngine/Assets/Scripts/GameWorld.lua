@@ -13,7 +13,7 @@ end
 
 function CreateCactusField()
 	local x	
-	for x = 1, 2000, 1 do
+	for x = 1, 256, 1 do
 		cactus = luaObjInstManager.addNewInstance("Cactus")
 		local xRand = math.random(5, terrainSizeX - 5)
 		local zRand = math.random(5, terrainSizeY - 5)
@@ -41,11 +41,6 @@ function CreateTown()
   DealWith(BobTest, 100,150, 1,1,1, 0,0,0)
 
 	collidableObjects[#collidableObjects + 1] = gunShop
-	
-	--ANIMATION
-	--bob = luaObjInstManager.addNewInstance("Bob")
-	--DealWith(bob, 0,0, 1,1,1, 0,-90,0)
-	--objectInstanceAPI.setAnimation(bob,0)
 
 	CreateCactusField()
 	

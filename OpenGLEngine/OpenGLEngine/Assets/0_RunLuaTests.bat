@@ -13,4 +13,7 @@ lua Scripts\Scene.lua
 lua Scripts\Terrain.lua
 lua Scripts\Vector3.lua
 lua Scripts\World.lua
+lua Scripts\NewGame.lua
+lua Scripts\Load.lua
+lua Scripts\GameWorld.lua
 pause
