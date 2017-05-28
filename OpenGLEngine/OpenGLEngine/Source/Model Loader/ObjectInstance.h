@@ -159,9 +159,7 @@ private:
   /// </summary>
   bool m_visible = true;
 
-  TriangleTree* m_collisionTree;
   AffineTransformable m_baseTransform;
-
 };
 
 #endif //ObjectInstance_h__

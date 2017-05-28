@@ -68,6 +68,8 @@ public:
 
   virtual const std::vector<mTriangle>& GetTriangleFaces() const = 0;
 
+  virtual bool Intersects(mOBB const& box) const = 0;
+
 };
 
 

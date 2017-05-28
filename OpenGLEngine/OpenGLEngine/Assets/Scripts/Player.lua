@@ -168,13 +168,16 @@ function Player:update()
 
 		self.position = newPos
 
-		if collisionAPI.box_collidingInTree(self:BBToWorld()) then
-			self.velocity.y = 0
-		end
+    if createCollisionTree then
+		  if collisionAPI.box_collidingInTree(self:BBToWorld()) then
+			  self.velocity.y = 0
+		  end
 
-		if self.boundingBox ~= nil then
-			self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
-		end
+
+		  if self.boundingBox ~= nil then
+			  self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
+		  end
+    end
 		--printAPI.print(self.position.y .. "\n")
 		cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
 	end

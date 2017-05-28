@@ -39,10 +39,10 @@ function GetHeightAtPoint(nx,ny)
 	local lerpFactorX = hmX - sampleX
 	local lerpFactorY = hmY - sampleY
 
-	local h00 = terrainHeightData["heightMap"][sampleX][sampleY]
-	local h10 = terrainHeightData["heightMap"][sampleX+1][sampleY]
-    local h01 = terrainHeightData["heightMap"][sampleX][sampleY + 1]
-	local h11 = terrainHeightData["heightMap"][sampleX + 1][sampleY + 1]	
+	local h00 = terrainHeightData["heightMap"][sampleY][sampleX]
+	local h10 = terrainHeightData["heightMap"][sampleY][sampleX+1]
+    local h01 = terrainHeightData["heightMap"][sampleY + 1][sampleX]
+	local h11 = terrainHeightData["heightMap"][sampleY + 1]	[sampleX + 1]
 	
 	local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
 	debugPrint("Complete\n")

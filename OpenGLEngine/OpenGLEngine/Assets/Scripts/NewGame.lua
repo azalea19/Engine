@@ -21,6 +21,8 @@ OPEN_GL = 0
 debug = false
 debugdetail = false
 
+createCollisionTree = false
+
 
 time = 0
 lastTime = 0
@@ -70,7 +72,6 @@ function Initialize()
   objectInstanceAPI.setAnimationSection(BobTest, 0, 5)
   objectInstanceAPI.setAnimationSpeed(BobTest, 2)
   objectInstanceAPI.setBaseTransform(BobTest, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-   
 
 end
 
@@ -127,11 +128,6 @@ function Update()
 		end
 
 		player0:update();
-	
-		--if collisionAPI.box_collidingInTree(player0:BBToWorld()) then
-			--printAPI.print(' Collision \n')
-		--else
-			--printAPI.print(' Not collision \n')
 		
 		engineAPI.EndUpdate()
 	end

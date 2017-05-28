@@ -20,7 +20,7 @@ class TriangleTree
 
 public:
 
-  TriangleTree(ObjectInstance* const object, int depthLevel);
+  TriangleTree(RenderableObject* const object, int depthLevel);
 
   ~TriangleTree();
 

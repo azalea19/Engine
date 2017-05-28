@@ -9,6 +9,7 @@
 #include "Screen.h"
 #include "InputManager.h"
 #include <memory>
+#include "TriangleTree.h"
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
@@ -18,6 +19,7 @@ RenderableObject::RenderableObject(string const& name, string const& filename)
   Initialise();
   CreateBoundingBox();
   CreateTriangleFaces();
+  m_collisionTree = new TriangleTree(this, 16);
 }
 
 RenderableObject::~RenderableObject()
@@ -118,6 +120,11 @@ void RenderableObject::CreateTriangleFaces()
     newFace.corners[2] = vertices[indices[i+2]];
     m_faces.push_back(newFace);
   }
+}
+
+bool RenderableObject::Intersects(mOBB const& box) const
+{
+  return false;
 }
 
 void RenderableObject::Initialise()

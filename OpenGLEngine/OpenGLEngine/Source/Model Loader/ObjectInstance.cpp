@@ -12,7 +12,6 @@ ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, ve
   , m_animationSpeed(1)
 {
   SetTransform(coords, yaw, pitch, 0, scaleFactor);
-  //m_collisionTree = new TriangleTree(this, 16);
 }
 
 void ObjectInstance::SetVisible(bool vis)
@@ -94,29 +93,13 @@ bool ObjectInstance::Intersects(mAABB const & box)
   result.corners[5] = vec3(modelMatrix * vec4(box.max.x, box.min.y, box.max.z, 1));
   result.corners[6] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.min.z, 1));
   result.corners[7] = vec3(modelMatrix * vec4(box.max.x, box.max.y, box.max.z, 1));
-
   return Intersects(result);
 }
 
 //Expects box in model space
 bool ObjectInstance::Intersects(mOBB const & box)
 {
-  return false;
-  //return m_collisionTree->Intersects(box);
-  //if (::Intersects(m_pRenderableObject->GetBoundingBox(), box))
-  //{
-  //  std::vector<mTriangle> const& faces = m_pRenderableObject->GetTriangleFaces();
-  //  for (int i = 0; i < faces.size(); i++)
-  //  {
-  //    //If box is intersecting a triangle face 
-  //    if (::Intersects(box, faces[i]))
-  //    {
-  //      //Return true
-  //      return true;
-  //    }
-  //  }
-  //}
-  //return false;
+  return m_pRenderableObject->Intersects(box);
 }
 
 

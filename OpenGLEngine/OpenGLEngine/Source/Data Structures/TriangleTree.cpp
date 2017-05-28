@@ -305,9 +305,9 @@ static std::vector<int> GetObjectsInNode(Node* node, std::vector<int> const& tri
 }
 
 
-TriangleTree::TriangleTree(ObjectInstance* const object, int depthLevel)
+TriangleTree::TriangleTree(RenderableObject* const object, int depthLevel)
 {
-  std::vector<mTriangle> const& triangles = object->GetRenderableObject()->GetTriangleFaces();
+  std::vector<mTriangle> const& triangles = object->GetTriangleFaces();
   root = nullptr;
 
   if (triangles.size() > 0)
@@ -326,7 +326,7 @@ TriangleTree::TriangleTree(ObjectInstance* const object, int depthLevel)
       triangleIndexes[i] = i;
     }
     root = new Node();
-    root->box = object->GetRenderableObject()->GetBoundingBox();
+    root->box = object->GetBoundingBox();
     Split(root, triangleIndexes, collideables, X, depthLevel);
   }
  

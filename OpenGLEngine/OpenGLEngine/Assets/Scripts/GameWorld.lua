@@ -47,7 +47,7 @@ function CreateTown()
 	--DealWith(bob, 0,0, 1,1,1, 0,-90,0)
 	--objectInstanceAPI.setAnimation(bob,0)
 
-	--CreateCactusField()
+	CreateCactusField()
 	
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
@@ -60,7 +60,10 @@ function CreateTown()
     player0:setAABB(-0.1,0.1,-1.8,0,-0.1,0.1) 
 
 	collidableObjects["length"] = #collidableObjects;
-	collisionAPI.createCollisionTree(collidableObjects);
+
+  if createCollisionTree then
+	  collisionAPI.createCollisionTree(collidableObjects);
+  end
 	
 	printAPI.print('Initialization finished.\n')
 

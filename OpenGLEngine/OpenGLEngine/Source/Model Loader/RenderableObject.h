@@ -19,6 +19,7 @@
 */
 
 class Model;
+class TriangleTree;
 
 enum TextureLocation
 {
@@ -163,6 +164,8 @@ private:
   /// </summary>
   GLuint m_buffers[BT_NUM_BUFFERS];
 
+  TriangleTree* m_collisionTree;
+
   /// <summary>
   /// The bound mesh index
   /// </summary>
@@ -204,6 +207,8 @@ private:
   /// Gets the triangle faces.
   /// </summary>
   void CreateTriangleFaces();
+
+  virtual bool Intersects(mOBB const& box) const override;
 
 };
 
