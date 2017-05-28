@@ -41,6 +41,9 @@ public:
   /// <returns>Heightmap</returns>
   HeightMap* GetHeightMap();
 
+
+  HeightMap* GetAlphaMap();
+
   /// <summary>
   /// Gets the x block scale.
   /// </summary>

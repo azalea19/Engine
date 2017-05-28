@@ -34,6 +34,5 @@ public:
 	/// <returns></returns>
 	static LuaRef GenerateTerrain(uint terrainWidth, uint terrainHeight, uint heightMapSize, float heightScale, string const& heightMapPath, string const& alphaPath, string const& objPath, LuaContextHandle contextHandle);
 
-  static LuaRef GenerateAlphaTable();
 };
 

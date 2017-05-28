@@ -21,22 +21,26 @@ LuaRef ToLuaTable(vec3 const& value, LuaContextHandle contextHandle)
 }
 
 
-LuaRef ToLuaTable(std::vector<float> const& data, int width, int height, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(std::vector<float> const& hmData, std::vector<float> const& alphaData, int width, int height, LuaContextHandle contextHandle)
 {
-  LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-  LuaRef tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-
-  for (int i = 1; i <= width; i++)
+  LuaRef heightMap = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  LuaRef alphaMap = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  for (int y = 0; y < height; y++)
   {
-    tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
-    for (int k = 1; k <= height; k++)
+    LuaRef heightRow = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+    LuaRef alphaRow = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+    for (int x = 0; x < width; x++)
     {
-      tempTable[k] = data.at(((i - 1) * width) + k - 1);
+      heightRow[x + 1] = hmData[y*width + x];
+      alphaRow[x + 1] = alphaData[y*width + x];
     }
-    table[i] = tempTable;
+    heightMap[y + 1] = heightRow;
+    alphaMap[y + 1] = alphaRow;
   }
-
-  return table;
+  LuaRef result = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
+  result["heightMap"] = heightMap;
+  result["alphaMap"] = alphaMap;
+  return result;
 }
 
 LuaRef ToLuaTable(mat4 const& value, LuaContextHandle contextHandle)

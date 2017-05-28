@@ -44,7 +44,7 @@ function CreateTown()
 	--DealWith(bob, 0,0, 1,1,1, 0,-90,0)
 	--objectInstanceAPI.setAnimation(bob,0)
 
-	CreateCactusField()
+	--CreateCactusField()
 	
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
