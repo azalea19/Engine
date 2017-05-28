@@ -227,6 +227,7 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Data Structures\TriangleTree.cpp" />
+    <ClCompile Include="Source\Lua\SoundAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h">
@@ -480,6 +481,7 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\Data Structures\TriangleTree.h" />
+    <ClInclude Include="Source\Lua\SoundAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\NewGame.lua" />

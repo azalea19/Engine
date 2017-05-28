@@ -154,6 +154,52 @@ function LoadInstances(filePath, fileType)
 	return outputData
 end
 
+function savePlayer(filePath, data)
+	local numRows = 0
+
+	local saveTable = {}
+	local saveString = ""
+
+	clearFile(filePath)
+
+	saveTable[#saveTable + 1] =  data.position.x 
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.position.y
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.position.z
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data:getYaw()
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data:getPitch()
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.currentHealth
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.weapon
+	
+	saveString = table.concat(saveTable)
+	write(filePath, saveString)
+	
+	printAPI.print('Player saved.\n')
+end
+
+function loadPlayer(filePath, player)
+	local numRows = 0
+
+	local fileData= read(filePath, ',')
+
+	pos = {x=fileData[1],y=fileData[2],z=fileData[3]}
+
+	player:setPosition(pos)
+	player:setYaw(fileData[4])
+	player:setPitch(fileData[5])
+	player.currentHealth = fileData[6]
+
+	saveString = table.concat(saveTable)
+	write(filePath, saveString)
+	
+	printAPI.print('Player saved.\n')
+end
+
 function SaveQuests(filePath, data)
 	local numRows = 0
 	local total = 0

@@ -25,6 +25,7 @@
     <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
     <ClCompile Include="Source\Lua\AABBAPI.cpp" />
     <ClCompile Include="Source\Effects\AdditiveBlendEffect.cpp" />
+    <ClCompile Include="Source\Lua\SoundAPI.cpp" />
     <ClCompile Include="Source\Plug-Ins\AffineTransformable.cpp" />
     <ClCompile Include="Source\Plug-Ins\Animatable.cpp" />
     <ClCompile Include="Source\Animation\Animation.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
     <ClInclude Include="Source\Lua\AABBAPI.h" />
     <ClInclude Include="Source\Effects\AdditiveBlendEffect.h" />
+    <ClInclude Include="Source\Lua\SoundAPI.h" />
     <ClInclude Include="Source\Plug-Ins\AffineTransformable.h" />
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Animation\AssimpToGLM.h" />
@@ -188,8 +190,9 @@
     <None Include="Assets\Scripts\GameWorld.lua" />
     <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
-	<None Include="Assets\Scripts\Weapon.lua" />
-  </ItemGroup>  <PropertyGroup Label="Globals">
+    <None Include="Assets\Scripts\Weapon.lua" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
     <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OpenGLEngine</RootNamespace>

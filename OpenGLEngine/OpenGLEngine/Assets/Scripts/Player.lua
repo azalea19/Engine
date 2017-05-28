@@ -40,7 +40,6 @@ function Player:takeDamage(dmg)
 	end
 end
 
-
 function Player:die()
     printAPI.print("Player has died.")
 
@@ -70,6 +69,22 @@ function Player:BBToWorld()
     newBB.max = mmath.vec3_Sum(self.boundingBox.max,self.position,context.handle)
 
     return newBB
+end
+
+function Player:getYaw()
+	return cameraAPI.getYaw(camera0,context.handle)
+end
+
+function Player:getPitch();
+	return cameraAPI.getPitch(camera0,context.handle)
+end
+
+function Player:setYaw(newYaw)
+	cameraAPI.setYaw(camera0,newYaw)
+end
+
+function Player:setPitch(newPitch);
+	cameraAPI.setPitch(camera0,newYaw)
 end
 
 function Player:update()
