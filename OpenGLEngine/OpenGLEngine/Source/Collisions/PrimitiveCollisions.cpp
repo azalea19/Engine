@@ -45,6 +45,7 @@ LineSegment1D getProjection1D(const vec3* corners, const vec3 &normal, int numCo
   return myLine;
 }
 
+//https://gamedev.stackexchange.com/questions/44500/how-many-and-which-axes-to-use-for-3d-obb-collision-with-sat/
 bool SeperatingAxisTest(const vec3* object1Corners, int num1Corners, const vec3* object2Corners, int num2Corners, const vec3* normals, int numNormals)
 {
 	for (int i = 0; i < numNormals; i++)
@@ -58,6 +59,13 @@ bool SeperatingAxisTest(const vec3* object1Corners, int num1Corners, const vec3*
 		}
 	}
 	return true;
+}
+
+
+bool SeperatingAxisTest(ConvexHull const& a, ConvexHull const& b)
+{
+  bool result = SeperatingAxisTest(a.vertices.data(), a.vertices.size(), b.vertices.data(), b.vertices.size(), a.axes.data(), a.axes.size());
+  return result && SeperatingAxisTest(a.vertices.data(), a.vertices.size(), b.vertices.data(), b.vertices.size(), b.axes.data(), b.axes.size());
 }
 
 void getmTriangleNormals(vec3* normals, const mTriangle &tri)
@@ -74,7 +82,7 @@ void getmTriangleNormals(vec3* normals, const mTriangle &tri)
 	normals[0] = glm::cross(faceNormal, direction1);
 	normals[1] = glm::cross(faceNormal, direction2);
 	normals[2] = glm::cross(faceNormal, direction3);
-	normals[3] - faceNormal;
+	normals[3] = faceNormal;
 }
 
 void mAABBtomOBB(vec3* corners, vec3* normals, const mAABB &aabb)
@@ -102,16 +110,25 @@ float mTriangleArea(float a2, float b2, float c2)
 
 bool Intersects(LineSegment1D const & a, LineSegment1D const & b)
 {
-	if (a.end < b.start)
-	{
-		return false;
-	}
-	if (b.end < a.start)
-	{
-		return false;
-	}
+  if (b.start - a.end > FLT_EPSILON)
+    return false;
+  if (a.start - b.end > FLT_EPSILON)
+    return false;
 
 	return true;
+}
+
+bool Intersects(ConvexHull const & a, ConvexHull const & b)
+{
+  ConvexHull temp(a);
+  int originalAxisCount = temp.axes.size();
+  temp.axes.resize(temp.axes.size() + a.edgeDirs.size() * b.edgeDirs.size());
+
+  for (int i = 0; i < a.edgeDirs.size(); i++)
+    for (int j = 0; j < b.edgeDirs.size(); j++)
+      temp.axes[originalAxisCount + i * b.edgeDirs.size() + j] = glm::cross(a.edgeDirs[i], b.edgeDirs[j]);
+
+  return SeperatingAxisTest(temp, b);
 }
 
 bool Intersects(mAABB const & a, mAABB const & b)
@@ -128,40 +145,40 @@ bool Intersects(mAABB const & a, mAABB const & b)
 	return false;
 }
 
-bool Intersects(mAABB const & aabb, mOBB const & obb)
-{
-	vec3 aabbCorners[8];
-	vec3 normals[6];
+// bool Intersects(mAABB const & aabb, mOBB const & obb)
+// {
+// 	vec3 aabbCorners[8];
+// 	vec3 normals[6];
+// 
+// 	aabbCorners[0] = vec3(aabb.min.x, aabb.min.y, aabb.min.z);
+// 	aabbCorners[1] = vec3(aabb.min.x, aabb.min.y, aabb.max.z);
+// 	aabbCorners[2] = vec3(aabb.min.x, aabb.max.y, aabb.min.z);
+// 	aabbCorners[3] = vec3(aabb.min.x, aabb.max.y, aabb.max.z);
+// 	aabbCorners[4] = vec3(aabb.max.x, aabb.min.y, aabb.min.z);
+// 	aabbCorners[5] = vec3(aabb.max.x, aabb.min.y, aabb.max.z);
+// 	aabbCorners[6] = vec3(aabb.max.x, aabb.max.y, aabb.min.z);
+// 	aabbCorners[7] = vec3(aabb.max.x, aabb.max.y, aabb.max.z);
+// 
+// 	normals[0] = vec3(1, 0, 0);
+// 	normals[1] = vec3(0, 1, 0);
+// 	normals[2] = vec3(0, 0, 1);
+// 	normals[3] = obb.axes[0];
+// 	normals[4] = obb.axes[1];
+// 	normals[5] = obb.axes[2];
+// 
+// 	return SeperatingAxisTest(aabbCorners, 8, obb.corners, 8, normals, 6);
+// }
 
-	aabbCorners[0] = vec3(aabb.min.x, aabb.min.y, aabb.min.z);
-	aabbCorners[1] = vec3(aabb.min.x, aabb.min.y, aabb.max.z);
-	aabbCorners[2] = vec3(aabb.min.x, aabb.max.y, aabb.min.z);
-	aabbCorners[3] = vec3(aabb.min.x, aabb.max.y, aabb.max.z);
-	aabbCorners[4] = vec3(aabb.max.x, aabb.min.y, aabb.min.z);
-	aabbCorners[5] = vec3(aabb.max.x, aabb.min.y, aabb.max.z);
-	aabbCorners[6] = vec3(aabb.max.x, aabb.max.y, aabb.min.z);
-	aabbCorners[7] = vec3(aabb.max.x, aabb.max.y, aabb.max.z);
-
-	normals[0] = vec3(1, 0, 0);
-	normals[1] = vec3(0, 1, 0);
-	normals[2] = vec3(0, 0, 1);
-	normals[3] = obb.axes[0];
-	normals[4] = obb.axes[1];
-	normals[5] = obb.axes[2];
-
-	return SeperatingAxisTest(aabbCorners, 8, obb.corners, 8, normals, 6);
-}
-
-bool Intersects(mAABB const & aabb, mTriangle const & tri)
-{
-	vec3 aabbCorners[8];
-	vec3 normals[7];
-
-	mAABBtomOBB(aabbCorners, normals, aabb);
-	getmTriangleNormals(normals + 3,tri);
-
-	return SeperatingAxisTest(aabbCorners, 8, tri.corners, 3, normals, 7);
-}
+//bool Intersects(mAABB const & aabb, mTriangle const & tri)
+//{
+//	vec3 aabbCorners[8];
+//	vec3 normals[7];
+//
+//	mAABBtomOBB(aabbCorners, normals, aabb);
+//	getmTriangleNormals(normals + 3,tri);
+//
+//	return SeperatingAxisTest(aabbCorners, 8, tri.corners, 3, normals, 7);
+//}
 
 bool Intersects(mAABB const & aabb, mSphere const & sphere)
 {
@@ -428,33 +445,33 @@ return true;*/
 	return true;*/
 }
 
-bool Intersects(mOBB const & a, mOBB const & b)
-{
-	vec3 normals[6];
+//bool Intersects(mOBB const & a, mOBB const & b)
+//{
+//	vec3 normals[6];
+//
+//	normals[0] = a.axes[0];
+//	normals[1] = a.axes[1];
+//	normals[2] = a.axes[2];
+//
+//	normals[3] = b.axes[0];
+//	normals[4] = b.axes[1];
+//	normals[5] = b.axes[2];
+//
+//	return SeperatingAxisTest(a.corners,8,b.corners,8,normals,6);
+//}
 
-	normals[0] = a.axes[0];
-	normals[1] = a.axes[1];
-	normals[2] = a.axes[2];
-
-	normals[3] = b.axes[0];
-	normals[4] = b.axes[1];
-	normals[5] = b.axes[2];
-
-	return SeperatingAxisTest(a.corners,8,b.corners,8,normals,6);
-}
-
-bool Intersects(mOBB const & obb, mTriangle const & tri)
-{
-	vec3 normals[7];
-
-	normals[0] = obb.axes[0];
-	normals[1] = obb.axes[1];
-	normals[2] = obb.axes[2];
-
-	getmTriangleNormals(normals + 3, tri);
-
-	return SeperatingAxisTest(obb.corners, 8, tri.corners, 3, normals, 7);
-}
+//bool Intersects(mOBB const & obb, mTriangle const & tri)
+//{
+//	vec3 normals[7];
+//
+//	normals[0] = obb.axes[0];
+//	normals[1] = obb.axes[1];
+//	normals[2] = obb.axes[2];
+//
+//	getmTriangleNormals(normals + 3, tri);
+//
+//	return SeperatingAxisTest(obb.corners, 8, tri.corners, 3, normals, 7);
+//}
 
 bool Intersects(mOBB const & obb, mSphere const & sphere)
 {
@@ -486,17 +503,17 @@ bool Intersects(mOBB const & obb, mRay const & ray)
 	return false;
 }
 
-bool Intersects(mTriangle const & a, mTriangle const & b)
-{
-	vec3 normals[8];
-
-	getmTriangleNormals(normals, a);
-	getmTriangleNormals(normals + 4, b);
-
-	SeperatingAxisTest(a.corners, 3, b.corners, 3, normals, 8);
-
-	return false;
-}
+//bool Intersects(mTriangle const & a, mTriangle const & b)
+//{
+//	vec3 normals[8];
+//
+//	getmTriangleNormals(normals, a);
+//	getmTriangleNormals(normals + 4, b);
+//
+//	SeperatingAxisTest(a.corners, 3, b.corners, 3, normals, 8);
+//
+//	return false;
+//}
 
 bool Intersects(mTriangle const & tri, mSphere const & sphere)
 {

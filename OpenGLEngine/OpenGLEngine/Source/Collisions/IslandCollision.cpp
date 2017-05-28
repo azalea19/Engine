@@ -80,7 +80,7 @@ vec3 IslandCollision::Resolve(vec3 position, mAABB box)
       for (int z = -directionRes; z <= directionRes; z++)
       {
         directions.push_back(normalize(vec3(x, directionRes, z)));
-        directions.push_back(normalize(vec3(x, directionRes, z)));
+        directions.push_back(normalize(vec3(x, -directionRes, z)));
       }
     }
 

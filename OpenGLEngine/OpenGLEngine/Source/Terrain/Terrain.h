@@ -28,7 +28,7 @@ public:
   /// <param name="terrainHeight">Height of the terrain.</param>
   /// <param name="heightScale">The height scale.</param>
   /// <param name="filepath">The filepath.</param>
-  Terrain(uint terrainWidth, uint terrainHeight, float heightScale, string const& filepath);
+  Terrain(uint terrainWidth, uint terrainHeight, float heightScale, string const& filepath, string const& alphapath);
 
   /// <summary>
   /// Creates the mesh.
@@ -112,6 +112,9 @@ private:
   /// The height map
   /// </summary>
   HeightMap* m_pHeightMap;
+
+
+  HeightMap* m_alphaMap;
 
   /// <summary>
   /// The height scale

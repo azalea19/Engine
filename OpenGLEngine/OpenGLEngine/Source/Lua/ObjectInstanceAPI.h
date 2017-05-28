@@ -97,6 +97,9 @@ public:
 
   static void ObjectInstanceAPI::LookAt(InstanceHandle instHandle, LuaRef targetVec3);
 
+
+  static LuaRef GetBoundingBox(InstanceHandle instHandle, LuaContextHandle contextHandle);
+
   /// <summary>
   /// Exposes the API functions.
   /// </summary>

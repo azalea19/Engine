@@ -24,8 +24,6 @@ float HeightMap::GetHeightValueAtPixel(vec2i const& pixelPos)
   //Color packed in to a four-byte integer with RGBA component
   //We need mask and shift to get back the color channels.
 
-
-  //todo this line crashes occasionally... run a bunch of tests.
   ubyte redChannel = ubyte((m_pHeightMap[pos] & 0x00FF0000) >> 16);
   ubyte blueChannel = ubyte((m_pHeightMap[pos] & 0x0000FF00) >> 8);
   ubyte greenChannel = ubyte((m_pHeightMap[pos] & 0x000000FF) >> 0);

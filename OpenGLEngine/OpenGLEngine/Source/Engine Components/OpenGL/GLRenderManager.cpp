@@ -60,15 +60,25 @@ void GLRenderManager::Present(int camID) const
     projectedSun.x /= projectedSun.z;
     projectedSun.y /= projectedSun.z;
     pDecomposeEffect->Unbind();
-    pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.3), normalize(-sunPosition));
-    pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);
-    pRayEffect->Apply(tempTex2, buffers->GetLinearDepthBuffer(), tempTex, vec3(projectedSun.x, projectedSun.y, projectedSun.z));
-    pBloomEffect->Apply(tempTex, finalTex, 2);
-    pFXAAEffect->Apply(finalTex, tempTex, 8);
-    FrameBuffer::Display(tempTex);
-  }
+    vec3 dir = sunPosition - cam->GetPosition();
 
-  //8glEnable(GL_BLEND); glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if (glm::dot(dir, cam->Forward()) > 0)
+    {
+      pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.3), normalize(-sunPosition));
+      pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);
+      pRayEffect->Apply(tempTex2, buffers->GetLinearDepthBuffer(), tempTex, vec3(projectedSun.x, projectedSun.y, projectedSun.z));
+      pBloomEffect->Apply(tempTex, finalTex, 2);
+      pFXAAEffect->Apply(finalTex, tempTex, 8);
+      FrameBuffer::Display(tempTex);
+    }
+    else
+    {
+      pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.3), normalize(-sunPosition));
+      pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);   
+      pFXAAEffect->Apply(tempTex2, finalTex, 8);
+      FrameBuffer::Display(finalTex);
+    }
+  }
 }
 
 void GLRenderManager::SetFillMode(int fillMode) const
