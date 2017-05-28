@@ -226,6 +226,7 @@
     <ClCompile Include="Source\Model Loader\MCamera.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Data Structures\TriangleTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h">
@@ -478,8 +479,11 @@
     <ClInclude Include="Source\Model Loader\MCamera.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Data Structures\TriangleTree.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\NewGame.lua" />
+    <None Include="Assets\Scripts\GameWorld.lua" />
+    <None Include="Assets\Scripts\Load.lua" />
   </ItemGroup>
 </Project>

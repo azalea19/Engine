@@ -1,6 +1,5 @@
 #include "MathAPI.h"
 
-//#include <glm/gtc/type_ptr.hpp>
 
 static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
 {
@@ -11,7 +10,7 @@ static void ExposeVec3(LuaContext* pContext, string const& luaAPIName)
   pContext->AddClassConstructor<vec3, void(*) (void)>(luaAPIName, "vec3");
 }
 
-LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(vec3 const& value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
   table["x"] = value.x;
@@ -21,7 +20,8 @@ LuaRef ToLuaTable(vec3 value, LuaContextHandle contextHandle)
   return table;
 }
 
-LuaRef ToLuaTable(std::vector<float> data, int width, int height, LuaContextHandle contextHandle)
+
+LuaRef ToLuaTable(std::vector<float> const& data, int width, int height, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
   LuaRef tempTable = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
@@ -39,7 +39,7 @@ LuaRef ToLuaTable(std::vector<float> data, int width, int height, LuaContextHand
   return table;
 }
 
-LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(mat4 const& value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
 
@@ -56,7 +56,7 @@ LuaRef ToLuaTable(mat4 value, LuaContextHandle contextHandle)
 }
 
 
-LuaRef ToLuaTable(mAABB value, LuaContextHandle contextHandle)
+LuaRef ToLuaTable(mAABB const& value, LuaContextHandle contextHandle)
 {
   LuaRef table = newTable(LuaManager::GetInstance().GetContext(contextHandle)->GetLuaState());
 
@@ -80,7 +80,6 @@ vec3 FromLuaTable<vec3>(LuaRef value)
 
   return result;
 }
-
 
 template<>
 vec2 FromLuaTable(LuaRef value)

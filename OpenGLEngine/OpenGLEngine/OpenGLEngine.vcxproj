@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Data Structures\KDTree.cpp" />
+    <ClCompile Include="Source\Data Structures\TriangleTree.cpp" />
     <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
     <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
     <ClCompile Include="Source\Lua\AABBAPI.cpp" />
@@ -97,6 +98,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Base Classes\IRenderManager.h" />
     <ClInclude Include="Source\Data Structures\KDTree.h" />
+    <ClInclude Include="Source\Data Structures\TriangleTree.h" />
     <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
     <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
     <ClInclude Include="Source\Lua\AABBAPI.h" />
@@ -183,6 +185,8 @@
     <ClInclude Include="Source\Utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Scripts\GameWorld.lua" />
+    <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

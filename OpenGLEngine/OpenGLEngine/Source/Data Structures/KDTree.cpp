@@ -255,7 +255,7 @@ static mAABB MergeBoundingBoxes(std::vector<ObjectBoxPair> const& pairs)
 {
   mAABB finalBox;
   finalBox.min = vec3(FLT_MAX);
-  finalBox.max = vec3(FLT_MIN);
+  finalBox.max = vec3(-FLT_MIN);
   for (int i = 0; i < pairs.size(); i++)
   {
     for (int j = 0; j < 8; j++)

@@ -8,4 +8,5 @@ int main(int argc, char **argv)
 {
   LuaManager::Initialize();
   LuaManager::GetInstance().CreateContext("../Assets/Scripts/NewGame.lua");
+  getchar();
 }

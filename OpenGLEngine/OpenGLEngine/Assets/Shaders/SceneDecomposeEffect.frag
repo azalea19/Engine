@@ -126,13 +126,12 @@ float CalculateAlpha()
 }
                                                               
 void main()
-{
+{	
 	if(CalculateAlpha() <= 0.8)
-	{
+	{	
 		discard;
 		return;
 	}
-	
 	NORMAL = CalculateNormal();
 	WORLD_POS = CalculateWorldPos();
 	LINEAR_DEPTH = CalculateLinearDepth();
