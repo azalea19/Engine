@@ -89,6 +89,6 @@ LuaRef ToLuaTable(mat4 const& value, LuaContextHandle contextHandle);
 /// <param name="height">Desired height.</param>
 /// <param name="contextHandle">The context handle.</param>
 /// <returns>LuaRef</returns>
-LuaRef ToLuaTable(std::vector<float> const& data, int width, int height, LuaContextHandle contextHandle);
+LuaRef ToLuaTable(std::vector<float> const& data, std::vector<float> const& alphaData, int width, int height, LuaContextHandle contextHandle);
 
 #endif // MathAPI_h__

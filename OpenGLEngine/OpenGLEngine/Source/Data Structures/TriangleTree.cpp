@@ -198,26 +198,26 @@ static void Split(Node* node, std::vector<int> &triangleIndexes, std::vector<Con
 
     //if (leftPairs.size() + rightPairs.size() < triangleIndexes.size())
     //{
-      std::vector<int> missingIndices;
-      for (int i = 0; i < triangleIndexes.size(); i++)
-      {
-        bool found = false;
-        for (int j = 0; j < leftPairs.size() && !found; j++)
-          if (leftPairs[j] == triangleIndexes[i])
-            found = true;
+      //std::vector<int> missingIndices;
+      //for (int i = 0; i < triangleIndexes.size(); i++)
+      //{
+      //  bool found = false;
+      //  for (int j = 0; j < leftPairs.size() && !found; j++)
+      //    if (leftPairs[j] == triangleIndexes[i])
+      //      found = true;
 
-        for (int j = 0; j < rightPairs.size() && !found; j++)
-          if (rightPairs[j] == triangleIndexes[i])
-            found = true;
+      //  for (int j = 0; j < rightPairs.size() && !found; j++)
+      //    if (rightPairs[j] == triangleIndexes[i])
+      //      found = true;
 
-        if (!found)
-          missingIndices.push_back(triangleIndexes[i]);
-      }
+      //  if (!found)
+      //    missingIndices.push_back(triangleIndexes[i]);
+      //}
 
-      if (missingIndices.size() > 0)
-      {
-        missingIndices = missingIndices;
-      }
+      //if (missingIndices.size() > 0)
+      //{
+      //  missingIndices = missingIndices;
+      //}
 
     //}
 

@@ -19,6 +19,7 @@ public:
 	/// </summary>
 	void LoadHeightMap();
 
+
 /// <summary>
 /// Gets the height value at pixel.  Assuming 4 bytes per pixel 32 bit image depth.
 /// </summary>

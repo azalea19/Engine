@@ -35,13 +35,14 @@ function LoadAssets()
 	printAPI.print('Loading Terrain...\n')
 
     hMapPath = "../Assets/HeightMaps/perlin_noise.png"
+	alphaMapPath = "../Assets/HeightMaps/alphaMap.png"
     terrainSizeX = 1024
     terrainSizeY = 1024
     heightMapSize = 256
     heightMapHeight = 10
 
 
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "../Assets/Models/Terrain/Terrain.obj", context.handle)	
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath, alphaMapPath, "../Assets/Models/Terrain/Terrain.obj", context.handle)	
 	modelLibraryAPI.addModel("Terrain","../Assets/Models/Terrain/Terrain.obj",false)
 end
 
