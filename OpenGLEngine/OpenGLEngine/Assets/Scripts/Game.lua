@@ -246,7 +246,7 @@ function Initialize()
 
     NPC01 = npc.new("NPC01","Bob the Human","Warrior",loc,dir,scale,0,100,100)
     NPC01.hurtAnim = 4
-    local upVector = {x=1,y=0,z=0}
+    local upVector = {x=0,y=1,z=0}
     NPC01.upVector = upVector
     local diag = Dialogue.new()
     local topic01 = Topic.new("Greeting","Greeting")
@@ -459,6 +459,16 @@ function Update()
             if(player0.lookTarget.stringID == "Dungeon1Door") then
                 printAPI.print("Entering dungeon 1.\n")
                 world:enterScene(scene2.name)
+                player0.trackTerrain = true
+                player0.position = {x=0,y=50,z=0}
+
+                hMapPath = "../Assets/HeightMaps/flatmaphigh.png"
+                terrainSizeX = 1024
+                terrainSizeY = 1024
+                heightMapSize = 256
+                heightMapHeight = 35
+	            terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "../Assets/Models/Terrain/Terrain.obj", context.handle)	
+	
 
             end
         end
