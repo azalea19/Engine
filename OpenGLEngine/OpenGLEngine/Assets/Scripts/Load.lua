@@ -44,8 +44,11 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Crate","../Assets/Models/Crate/crate.obj",false)
 	modelLibraryAPI.addModel("Titan","../Assets/Models/Titan/Titan class II cargo ship landed.obj",false)
 	modelLibraryAPI.addModel("GunShop","../Assets/Models/GunsShop/GunsShop.obj",false)
-	--modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
-
+	modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
+	modelLibraryAPI.addModel("GeneralStore","../Assets/Models/GeneralStore/gs.obj",false)
+	modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon.obj",false)
+	modelLibraryAPI.addModel("Blacksmith","../Assets/Models/Blacksmith/bs.obj",false)
+	modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
     

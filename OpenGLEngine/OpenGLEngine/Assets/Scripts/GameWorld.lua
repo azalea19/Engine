@@ -39,61 +39,38 @@ function CreateTerrain(myscene)
 		for x = 1, worldWidthChunks, 1 do
 			 local var= luaObjInstManager.addNewInstance("Terrain_" .. x .. "_" .. y)
 			 terrainChunks[(y-1)*worldWidthChunks+x] = var
-			objectInstanceAPI.setTranslation(terrainChunks[(y-1)*worldWidthChunks+x],(x-1)*wsChunkSize,0,(y-1)*wsChunkSize)
-			
-
+			objectInstanceAPI.setTranslation(terrainChunks[(y-1)*worldWidthChunks+x],(x-1)*wsChunkSize,0,(y-1)*wsChunkSize)		
 		end
 	end
-
 	myscene.terrainChunks = terrainChunks
 end
 
-function CreateTown()
+function CreateTown(myscene)
 
-	printAPI.print("Initialising text...\n")
-	printAPI.print('Initialising terrain...\n')
-	
-	--Terrain01 = luaObjInstManager.addNewInstance("Terrain")
-	--objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-	
-	--[[
-	skybox = luaObjInstManager.addNewInstance("Skybox")
-	DealWith(skybox, 0,0, 10000,10000,10000, 0,0,0)
+	printAPI.print("Creating Town...\n")
 
-	gunShop = luaObjInstManager.addNewInstance("GunShop")
-	DealWith(gunShop, 0,0, .015,.015,.015, 0,0,0)
+	 --function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
+	gunShop = gameObject.new("0","GunShop","GunShop",Vector3.new(1024,0,1029),Vector3.new(0,0,0), Vector3.new(.008,.008,.008),0)
+	myscene:AddInstance(gunShop)
 
-	BobTest = luaObjInstManager.addNewInstance("Bob");
-	DealWith(BobTest, 100,150, 1,1,1, 0,0,0)
+	farmHouse = gameObject.new("0","FarmHouse","FarmHouse",Vector3.new(1034,0,1024),Vector3.new(0,0,0), Vector3.new(.25,.25,.25),0)
+	myscene:AddInstance(farmHouse)
 
-	titan = luaObjInstManager.addNewInstance("Titan")
-	DealWith(titan, 1000,1000, 1,1,1, 0,0,0)
-	]]
+	generalStore = gameObject.new("0","GeneralStore","GeneralStore",Vector3.new(1044,0,1020),Vector3.new(0,0,0), Vector3.new(.15,.15,.15),0)
+	myscene:AddInstance(generalStore)
 
-	collidableObjects[#collidableObjects + 1] = gunShop
+	saloon = gameObject.new("0","Saloon","Saloon",Vector3.new(1034,0,990),Vector3.new(0,0,0), Vector3.new(.1,.1,.1),0)
+	myscene:AddInstance(saloon)
 
-	--CreateTerrain()
-	--CreateCactusField()
-	
-    printAPI.print('Initialising camera...\n')
-    camera0 = cameraAPI.addNewInstance()
-    --cameraAPI.setPosition(camera0,wsChunkSize / 2, 30, wsChunkSize / 2)
+	blacksmith = gameObject.new("0","Blacksmith","Blacksmith",Vector3.new(1024,0,990),Vector3.new(0,0,0), Vector3.new(.06,.06,.06),0)
+	myscene:AddInstance(blacksmith)
 
-    printAPI.print('Initialising player...\n')
-	player0 = Player:new(camera0)
-	player0:setPosition(Vector3.new(1000,0,1000))
+	waterwell = gameObject.new("0","WaterWell","WaterWell",Vector3.new(1124,0,1024),Vector3.new(0,0,0), Vector3.new(.001,.001,.001),0)
+	myscene:AddInstance(waterwell)
 
-	--cameraAPI.setPosition(camera0,100,0,100)
-	--cameraAPI.setPosition(camera0,1,0,1)
-
-    player0:setAABB(-0.1,0.1,-1.8,0,-0.1,0.1) 
-
-	collidableObjects["length"] = #collidableObjects;
-
-  if createCollisionTree then
-	  collisionAPI.createCollisionTree(collidableObjects);
-  end
+  --if createCollisionTree then
+	--  collisionAPI.createCollisionTree(collidableObjects);
+  --end
 	
 	printAPI.print('Initialization finished.\n')
-
 end

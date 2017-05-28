@@ -189,6 +189,7 @@ function Initialize()
 
 	CreateTerrain(scene)
 	CreateCactusField(scene)
+	CreateTown(scene)
 
 	--objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 	--scene:SetTerrain(Terrain01)
@@ -200,7 +201,7 @@ function Initialize()
 	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
 	--function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-	titan = gameObject.new("titan","Titan","Titan",Vector3.new(1000,0,1000),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	titan = gameObject.new("titan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
 	scene:AddInstance(titan)
 
     printAPI.print('Initialising camera...\n')
