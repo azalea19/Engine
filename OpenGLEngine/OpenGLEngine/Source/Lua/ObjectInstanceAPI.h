@@ -102,6 +102,12 @@ public:
 
   static LuaRef GetBoundingBox(InstanceHandle instHandle, LuaContextHandle contextHandle);
 
+  static void SetAnimationSection(InstanceHandle instHandle, float startTime, float sectionLength);
+
+  static void SetAnimationStartTime(InstanceHandle instHandle, float time);
+
+  static void SetAnimationSpeed(InstanceHandle instHandle, float speed);
+
   /// <summary>
   /// Exposes the API functions.
   /// </summary>

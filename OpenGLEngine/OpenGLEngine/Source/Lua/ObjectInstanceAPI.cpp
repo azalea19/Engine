@@ -80,6 +80,24 @@ LuaRef ObjectInstanceAPI::GetBoundingBox(InstanceHandle instHandle, LuaContextHa
   return ToLuaTable(inst->GetAlignedBoundingBox(), contextHandle);
 }
 
+void ObjectInstanceAPI::SetAnimationSection(InstanceHandle instHandle, float startTime, float sectionLength)
+{
+  auto inst = LuaObjectInstanceManager::GetInstance(instHandle);
+  inst->SetAnimationSection(startTime, sectionLength);
+}
+
+void ObjectInstanceAPI::SetAnimationStartTime(InstanceHandle instHandle, float time)
+{
+  auto inst = LuaObjectInstanceManager::GetInstance(instHandle);
+  inst->SetAnimationStartTime(time);
+}
+
+void ObjectInstanceAPI::SetAnimationSpeed(InstanceHandle instHandle, float speed)
+{
+  auto inst = LuaObjectInstanceManager::GetInstance(instHandle);
+  inst->SetAnimationSpeed(speed);
+}
+
 void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
@@ -93,5 +111,8 @@ void ObjectInstanceAPI::Expose(LuaContextHandle contextHandle, string luaAPIName
   pContext->ExposeFunction(luaAPIName, "getBoundingBox", GetBoundingBox);
 	pContext->ExposeFunction(luaAPIName, "setAnimation", SetAnimation);
   pContext->ExposeFunction(luaAPIName, "setBaseTransform", SetBaseTransform);
+  pContext->ExposeFunction(luaAPIName, "setAnimationSection", SetAnimationSection);
+  pContext->ExposeFunction(luaAPIName, "setAnimationStartTime", SetAnimationStartTime);
+  pContext->ExposeFunction(luaAPIName, "setAnimationSpeed", SetAnimationSpeed);
 }
 

@@ -7,6 +7,9 @@
 ObjectInstance::ObjectInstance(IRenderableObject* object, vec3 const& coords, vec3 const& scaleFactor, float yaw, float pitch)
   : m_pRenderableObject(object)
   , m_activeAnimation(-1)
+  , m_animationSectionStart(0)
+  , m_animationSectionLength(FLT_MAX)
+  , m_animationSpeed(1)
 {
   SetTransform(coords, yaw, pitch, 0, scaleFactor);
   //m_collisionTree = new TriangleTree(this, 16);
@@ -129,13 +132,30 @@ void ObjectInstance::SetBaseTransform(vec3 translation, float yaw, float pitch, 
   m_baseTransform.SetScale(scale);
 }
 
+void ObjectInstance::SetAnimationSection(float startTime, float sectionLength)
+{
+  m_animationSectionStart = startTime;
+  m_animationSectionLength = sectionLength;
+}
+
+void ObjectInstance::SetAnimationStartTime(float time)
+{
+  m_animationStartTime = time;
+}
+
+void ObjectInstance::SetAnimationSpeed(float speed)
+{
+  m_animationSpeed = speed;
+}
+
 void ObjectInstance::Render(mat4 const& parentWorldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time)
 {
+  float animationTime = fmod(((time - m_animationStartTime) * m_animationSpeed), m_animationSectionLength);
   m_pRenderableObject->BindObject();
   for (int meshIndex = 0; meshIndex < m_pRenderableObject->GetMeshCount(); meshIndex++)
   {
     m_pRenderableObject->BindMesh(meshIndex);
-    m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, time, m_activeAnimation);
+    m_pRenderableObject->Render(parentWorldMatrix * GetWorldMatrix(), viewMatrix, projectionMatrix, animationTime, m_activeAnimation);
   }
 }
 

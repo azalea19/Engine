@@ -40,5 +40,11 @@ public:
   /// <returns></returns>
   virtual int GetActiveAnimationIndex() const = 0;
 
+  virtual void SetAnimationSection(float startTime, float sectionLength) = 0;
+
+  virtual void SetAnimationStartTime(float time) = 0;
+
+  virtual void SetAnimationSpeed(float speed) = 0;
+
 };
 #endif // IAnimatable_h__

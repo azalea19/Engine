@@ -132,6 +132,12 @@ public:
 
   void SetBaseTransform(vec3 translation, float yaw, float pitch, float roll, vec3 scale);
 
+  virtual void SetAnimationSection(float startTime, float sectionLength) override;
+
+  virtual void SetAnimationStartTime(float time) override;
+
+  virtual void SetAnimationSpeed(float speed) override;
+
 private:
 
   /// <summary>
@@ -143,6 +149,10 @@ private:
   /// The active animation
   /// </summary>
   int m_activeAnimation;
+  float m_animationSectionStart;
+  float m_animationSectionLength;
+  float m_animationStartTime;
+  float m_animationSpeed;
 
   /// <summary>
   /// Whether the instance is visible
