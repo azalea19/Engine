@@ -52,7 +52,6 @@ end
 function Player:setPosition(newPos)
 	self.position = newPos
 	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
-
 end
 
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
@@ -81,7 +80,7 @@ function Player:update()
 	local moveSpeed = 2.8 * deltaTime
 	--printAPI.print("DeltaTime: " .. deltaTime .. "\n")
 	if(inputManagerAPI.isKeyDown(Sprint_Input)) then
-		moveSpeed = moveSpeed * 2
+		moveSpeed = moveSpeed * 8
 	else
 		if(inputManagerAPI.isKeyDown(Walk_Input)) then
 			moveSpeed = moveSpeed * 0.5

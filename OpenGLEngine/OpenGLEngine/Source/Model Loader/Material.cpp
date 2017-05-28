@@ -8,7 +8,7 @@ Material::Material(string name, const aiMaterial* pMaterial, string const& model
 {
   this->name = name;
 
-  if (name == "Terrain_Material1")
+  if (strncmp(name.c_str(),"Terrain",7) == 0)
   {
     diffuseTextureCount = pMaterial->GetTextureCount(aiTextureType_DIFFUSE);
 

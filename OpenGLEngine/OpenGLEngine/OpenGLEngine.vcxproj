@@ -185,12 +185,25 @@
     <ClInclude Include="Source\Utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Scripts\3DUtility.lua" />
+    <None Include="Assets\Scripts\AABoundingBox.lua" />
+    <None Include="Assets\Scripts\Controls.lua" />
+    <None Include="Assets\Scripts\Dialogue.lua" />
+    <None Include="Assets\Scripts\FileIO.lua" />
+    <None Include="Assets\Scripts\Game.lua" />
+    <None Include="Assets\Scripts\gameObject.lua" />
     <None Include="Assets\Scripts\GameWorld.lua" />
     <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
-	<None Include="Assets\Scripts\Weapon.lua" />
-  </ItemGroup>  <PropertyGroup Label="Globals">
-    <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
+	<None Include="Assets\Scripts\Weapon.lua" />    <None Include="Assets\Scripts\Player.lua" />
+    <None Include="Assets\Scripts\QuestManager.lua" />
+    <None Include="Assets\Scripts\ReadAndWriteInstances.lua" />
+    <None Include="Assets\Scripts\Scene.lua" />
+    <None Include="Assets\Scripts\Terrain.lua" />
+    <None Include="Assets\Scripts\Vector3.lua" />
+    <None Include="Assets\Scripts\World.lua" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">    <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OpenGLEngine</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
