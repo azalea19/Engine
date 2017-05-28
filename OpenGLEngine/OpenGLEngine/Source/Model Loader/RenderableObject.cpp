@@ -19,7 +19,7 @@ RenderableObject::RenderableObject(string const& name, string const& filename)
   Initialise();
   CreateBoundingBox();
   CreateTriangleFaces();
-  m_collisionTree = new TriangleTree(this, 16);
+  //m_collisionTree = new TriangleTree(this, 16);
 }
 
 RenderableObject::~RenderableObject()

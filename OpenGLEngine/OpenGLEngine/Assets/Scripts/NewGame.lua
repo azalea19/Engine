@@ -65,7 +65,6 @@ function Initialize()
 	printAPI.print('Loading Assets...\n')
 	
 	LoadAssets()
-
 	CreateTown()
 
   objectInstanceAPI.setAnimation(BobTest, 0);
@@ -160,8 +159,13 @@ function Render()
 				renderManagerAPI.renderObject(camera0,time,collidableObjects[i], 1);
 			end
 
-			renderManagerAPI.renderObject(camera0,time,gunShop, 1)
-			renderManagerAPI.renderObject(camera0,time,Terrain01, 1)
+			
+			local i
+			for i = 1, #terrainChunks, 1 do
+				renderManagerAPI.renderObject(camera0,time,terrainChunks[i], 1);
+			end
+
+			renderManagerAPI.renderObject(camera0,time,gunShop, 1)			
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
       renderManagerAPI.renderObject(camera0,time,BobTest,1)
 

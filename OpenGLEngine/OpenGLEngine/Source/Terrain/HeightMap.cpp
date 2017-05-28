@@ -14,6 +14,7 @@ void HeightMap::LoadHeightMap()
   m_heightMapDimensions = GetImageDimensions(pHeightMapSurface);
   m_pHeightMap = (uint*)malloc(sizeof(uint) * m_heightMapDimensions.x * m_heightMapDimensions.y);
   m_pHeightMap = GetPixelData(pHeightMapSurface);
+  SDL_FreeSurface(pHeightMapSurface);
 }
 
 

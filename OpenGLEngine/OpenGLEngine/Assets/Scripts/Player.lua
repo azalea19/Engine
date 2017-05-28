@@ -52,7 +52,6 @@ end
 function Player:setPosition(newPos)
 	self.position = newPos
 	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
-
 end
 
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
@@ -81,7 +80,7 @@ function Player:update()
 	local moveSpeed = 2.8 * deltaTime
 	--printAPI.print("DeltaTime: " .. deltaTime .. "\n")
 	if(inputManagerAPI.isKeyDown(Sprint_Input)) then
-		moveSpeed = moveSpeed * 2
+		moveSpeed = moveSpeed * 8
 	else
 		if(inputManagerAPI.isKeyDown(Walk_Input)) then
 			moveSpeed = moveSpeed * 0.5
@@ -177,8 +176,8 @@ function Player:update()
         
 		    debugPrint("Delta Time:"..deltaTime .. "\n")
 		    newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
-		    newPos.x = math.min(math.max(newPos.x, 0), terrainSizeX - 1)
-		    newPos.z = math.min(math.max(newPos.z, 0), terrainSizeY - 1)
+		    newPos.x = math.min(math.max(newPos.x, 0), wsTerrainSize)
+		    newPos.z = math.min(math.max(newPos.z, 0), wsTerrainSize)
 		    desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
 		    newPos.y = math.max(newPos.y, desiredHeight)		
 		    if(newPos.y == desiredHeight) then
