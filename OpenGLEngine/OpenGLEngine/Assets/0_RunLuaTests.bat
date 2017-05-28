@@ -5,6 +5,7 @@ lua Scripts\3DUtility.lua
 lua Scripts\AABoundingBox.lua
 lua Scripts\Controls.lua
 lua Scripts\Dialogue.lua
+lua Scripts\Game.lua
 lua Scripts\FileIO.lua
 lua Scripts\NPC.lua
 lua Scripts\QuestManager.lua

@@ -165,9 +165,10 @@ function Render()
 				renderManagerAPI.renderObject(camera0,time,terrainChunks[i], 1);
 			end
 
-			renderManagerAPI.renderObject(camera0,time,gunShop, 1)			
+			renderManagerAPI.renderObject(camera0,time,gunShop, 1)	
+			renderManagerAPI.renderObject(camera0,time,titan, 1)		
 			renderManagerAPI.renderObject(camera0,time,skybox, 0)
-      renderManagerAPI.renderObject(camera0,time,BobTest,1)
+			renderManagerAPI.renderObject(camera0,time,BobTest,1)
 
 			renderManagerAPI.present(camera0)
 

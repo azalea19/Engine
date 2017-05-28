@@ -13,6 +13,7 @@ function Scene.new(newSceneName, newPlayerStartPos, newPlayerStartDir)
 		terrainID = 0,
 		playerStartPos = newPlayerStartPos,
 		playerStartDir = newPlayerStartDir,
+		terrainChunks = nil
 	}
 	
 	setmetatable(instance,Scene)
