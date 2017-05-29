@@ -506,4 +506,7 @@
   <ItemGroup>
     <None Include="Assets\Scripts\Weapon.lua" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Scripts\ParticleEmitter.lua" />
+  </ItemGroup>
 </Project>
