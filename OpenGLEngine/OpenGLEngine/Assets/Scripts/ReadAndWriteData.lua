@@ -137,59 +137,6 @@ function saveAllToCurrentSave()
 	end
 end
 
-function loadFromCurrentSave(difficulty)
-	if currentSaveFile == 1 then
-		local tmp = world:GetGameObjects()
-	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject")
-	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc", difficulty)
-	local startPos = Vector3.new(0,0,0)
-	local startDir = Vector3.new(0,0,0)
-	scene = Scene.new("Level1", Terrain01, startPos, startDir)
-	scene:AddInstances(GOData)
-	scene:AddInstances(NPCData)
-    currentScene = scene
-	world = World.new(player0)
-	world:AddScene(scene)
-	LoadTopics("../SaveData/DIA_Data.csv")
-	--Initialise camera
-    camera0 = cameraAPI.addNewInstance()
-	-- Initialise player
-	player0 = Player.new(camera0,100,100)
-    player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
-    -- Initialise weapo
-	weaponList = {}
-	loadWeapons(folder .. "WEAPON_Data.csv")
-	loadPlayer(folder .. "PLAYER_Data.csv", player0)
-    basicGun = Weapon.new("basicGun","Gun",100,1)
-    player0:setWeapon("basicGun")
-    --Initialise quests
-    questManager = QuestManager.new()
-	LoadQuests("../Saves/Slot1/QUE_Data.csv")
-
-		SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
-		SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
-		SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
-		savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
-		saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
-	end
-	if currentSaveFile == 2 then
-		local tmp = world:GetGameObjects()
-		SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
-		SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
-		SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
-		savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
-		saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
-	end
-	if currentSaveFile == 3 then
-		local tmp = world:GetGameObjects()
-		SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
-		SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
-		SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
-		savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
-		saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
-	end
-end
-
 function LoadInstances(filePath, fileType, difficulty)
 	local outputData = {}
 	local n, instanceID, objPos, dir, sca

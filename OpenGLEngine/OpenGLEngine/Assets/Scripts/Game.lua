@@ -391,8 +391,8 @@ function Update()
 			preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
 			preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
 			
-			cameraAPI.setPosition(camera0,0,10,0)
-			cameraAPI.setYaw(camera0,180)
+			cameraAPI.setPosition(camera0,10,-1,30)
+			cameraAPI.setYaw(camera0,0)
 			cameraAPI.setPitch(camera0,0)
 			changeMenu(0)
         else
@@ -732,6 +732,15 @@ function Render()
 			end
 			if ExitButton.active then
 				renderManagerAPI.renderObject(camera0,time,ExitButton.id, 1)
+			end
+			if ButtonEasy.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonEasy.id, 1)
+			end
+			if ButtonMedium.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonMedium.id, 1)
+			end
+			if ButtonHard.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonHard.id, 1)
 			end
 			renderManagerAPI.present(camera0)
 		else
