@@ -9,9 +9,11 @@ local World = dofile '../Assets/Scripts/World.lua'
 MenuButtons = {}
 MenuButtonBoxes = {}
 currentMenu = 1 -- 0MainMenu, 1SaveGame, 2LoadGame
+currentSelectedSaveFile = 0
 currentSaveFile = 0
 inMenu = false
 menuCount = 0
+currentDifficulty = 1
 
 function initMenu()
 	-- Background
@@ -82,6 +84,27 @@ function initMenu()
     ButtonThree = gameObject.new("ButtonThree", "ButtonThree", "Bob", newPos, newDir, newScale, newAnim)
 	ButtonThree.option = buttonThree -- set selected to 3
 	ButtonThree.active = false
+	-- Button Easy, 4
+    local newPos = {x=10,y=1,z=20}
+    local newScale = {x=0.75,y=0.75,z=0.75}
+    local newDir = {x=0,y=1,z=0}
+    ButtonEasy = gameObject.new("ButtonEasy", "ButtonEasy", "Bob", newPos, newDir, newScale, newAnim)
+	ButtonEasy.option = buttonEasy -- set selected to 1
+	ButtonEasy.active = false
+	-- Button Medium, 4
+    local newPos = {x=5,y=1,z=20}
+    local newScale = {x=0.75,y=0.75,z=0.75}
+    local newDir = {x=0,y=1,z=0}
+    ButtonMedium = gameObject.new("ButtonMedium", "ButtonMedium", "Bob", newPos, newDir, newScale, newAnim)
+	ButtonMedium.option = buttonMedium -- set selected to 2
+	ButtonMedium.active = false
+	-- Button Hard, 4
+    local newPos = {x=0,y=1,z=20}
+    local newScale = {x=0.75,y=0.75,z=0.75}
+    local newDir = {x=0,y=1,z=0}
+    ButtonHard = gameObject.new("ButtonHard", "ButtonHard", "Bob", newPos, newDir, newScale, newAnim)
+	ButtonHard.option = buttonHard -- set selected to 3
+	ButtonHard.active = false
 	-- Return button, 0 during game
     local newPos = {x=25,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
@@ -146,31 +169,34 @@ function updateMenu()
 					--end
 				--end
 				
-				if currentSaveFile == 1 then
+				if currentSelectedSaveFile == 1 then
 					local tmp = world:GetGameObjects()
 					SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
 					savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
 					saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
+					currentSaveFile = 1
 					changeMenu(0)
 				end
-				if currentSaveFile == 2 then
+				if currentSelectedSaveFile == 2 then
 					local tmp = world:GetGameObjects()
 					SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
 					savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
 					saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
+					currentSaveFile = 2
 					changeMenu(0)
 				end
-				if currentSaveFile == 3 then
+				if currentSelectedSaveFile == 3 then
 					local tmp = world:GetGameObjects()
 					SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
 					savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
 					saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
+					currentSaveFile = 3
 					changeMenu(0)
 				end
 				
@@ -190,16 +216,19 @@ function updateMenu()
 							MenuButtons[colIndex].option()
 						--end
 					--end
-					if currentSaveFile == 1 then
-						newGame("../Saves/Slot1/")
+					if currentSelectedSaveFile == 1 then
+						newGame("../Saves/Slot1/", 1)
+						currentSaveFile = 1
 						inMenu = false
 					end
-					if currentSaveFile == 2 then
-						newGame("../Saves/Slot2/")
+					if currentSelectedSaveFile == 2 then
+						newGame("../Saves/Slot2/", 1)
+						currentSaveFile = 2
 						inMenu = false
 					end
-					if currentSaveFile == 3 then
-						newGame("../Saves/Slot3/")
+					if currentSelectedSaveFile == 3 then
+						newGame("../Saves/Slot3/", 1)
+						currentSaveFile = 3
 						inMenu = false
 					end
 
@@ -209,42 +238,53 @@ function updateMenu()
 				if currentMenu == 3 then
 					if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 					
-									local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-							printAPI.print(MenuButtons[colIndex].name .. "\n")
+						local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+						printAPI.print(MenuButtons[colIndex].name .. "\n")
 					
 						if(inputManagerAPI.isMousePressedLeft()) then
 							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-							--if  MenuButtons[colIndex].active == true then
-							printAPI.print("SUCC")
-								MenuButtons[colIndex].option()
-							--end
-						--end
+							MenuButtons[colIndex].option()
 						
-						if currentSaveFile == 1 then
-							newGame("../SaveData/")
-							inMenu = false
-						end
-						if currentSaveFile == 2 then
-							newGame("../SaveData/")
-							inMenu = false
-						end
-						if currentSaveFile == 3 then
-							newGame("../SaveData/")
-							inMenu = false
-						end
+							if currentSelectedSaveFile == 1 then
+								newGame("../SaveData/", currentDifficulty)
+								currentSaveFile = 1
+								inMenu = false
+							end
+							if currentSelectedSaveFile == 2 then
+								newGame("../SaveData/", currentDifficulty)
+								currentSaveFile = 2
+								inMenu = false
+							end
+							if currentSelectedSaveFile == 3 then
+								newGame("../SaveData/", currentDifficulty)
+								currentSaveFile = 3
+								inMenu = false
+							end
 						end
 					end
+				else
+					if currentMenu == 4 then
+						if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+						
+							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+							printAPI.print(MenuButtons[colIndex].name .. "\n")
+						
+							if(inputManagerAPI.isMousePressedLeft()) then
+								local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+								MenuButtons[colIndex].option()
+							end
+						end
+					end	
 				end
 			end
 		end
 	end
-	
 end
 
-function newGame(folder)
+function newGame(folder, difficulty)
 	printAPI.print('Initialising Scenes...\n')
 	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject")
-	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc")
+	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc", difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
@@ -284,7 +324,7 @@ end
 
 function newGameButton()
 	printAPI.print("NewGame")
-	changeMenu(3)
+	changeMenu(4)
 end
 
 function changeMenu(num)
@@ -293,6 +333,9 @@ function changeMenu(num)
 		ButtonOne.active = false
 		ButtonTwo.active = false
 		ButtonThree.active = false
+		ButtonEasy.active = false
+		ButtonMedium.active = false
+		ButtonHard.active = false
 		BackButton.active = false
 		StartNewButton.active = true
 		ContinueButton.active = true
@@ -325,6 +368,9 @@ function changeMenu(num)
 		SaveButton.active = false
 		LoadButton.active = false
 		ExitButton.active = false
+		ButtonEasy.active = false
+		ButtonMedium.active = false
+		ButtonHard.active = false
 		currentMenu = 1
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -349,6 +395,9 @@ function changeMenu(num)
 		SaveButton.active = false
 		LoadButton.active = false
 		ExitButton.active = false
+		ButtonEasy.active = false
+		ButtonMedium.active = false
+		ButtonHard.active = false
 		currentMenu = 2
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -373,6 +422,9 @@ function changeMenu(num)
 		SaveButton.active = false
 		LoadButton.active = false
 		ExitButton.active = false
+		ButtonEasy.active = false
+		ButtonMedium.active = false
+		ButtonHard.active = false
 		currentMenu = 3
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -387,8 +439,52 @@ function changeMenu(num)
 		table.insert(MenuButtonBoxes, BackButton:BBToWorld())
 		totalButtons = 4
 	end
+	if num == 4 then
+		ButtonOne.active = false
+		ButtonTwo.active = false
+		ButtonThree.active = false
+		BackButton.active = true
+		StartNewButton.active = false
+		ContinueButton.active = false
+		SaveButton.active = false
+		LoadButton.active = false
+		ExitButton.active = false
+		ButtonEasy.active = true
+		ButtonMedium.active = true
+		ButtonHard.active = true
+		currentMenu = 3
+		MenuButtons = {}
+		MenuButtonsBox = {}
+		table.insert(MenuButtons, ButtonEasy)
+		table.insert(MenuButtons, ButtonMedium)
+		table.insert(MenuButtons, ButtonThree)
+		table.insert(MenuButtons, ButtonHard)
+		
+		table.insert(MenuButtonBoxes, ButtonEasy:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonMedium:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonHard:BBToWorld())
+		table.insert(MenuButtonBoxes, BackButton:BBToWorld())
+		totalButtons = 4
+	end
 
+end
 
+function buttonEasy()
+	printAPI.print("Easy")
+	currentDifficulty = 1
+	changeMenu(3)
+end
+
+function buttonMedium()
+	printAPI.print("Medium")
+	currentDifficulty = 1.25
+	changeMenu(3)
+end
+
+function buttonHard()
+	printAPI.print("Hard")
+	currentDifficulty = 1.5
+	changeMenu(3)
 end
 
 function loadGame()
@@ -413,17 +509,17 @@ end
 
 function buttonOne()
 	printAPI.print("One")
-	currentSaveFile = 1
+	currentSelectedSaveFile = 1
 end
 
 function buttonTwo()
 	printAPI.print("Two")
-	currentSaveFile = 2
+	currentSelectedSaveFile = 2
 end
 
 function buttonThree()
 	printAPI.print("Three")
-	currentSaveFile = 3
+	currentSelectedSaveFile = 3
 end
 
 function continueGame()
