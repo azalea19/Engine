@@ -173,6 +173,10 @@ function Initialize()
 
     greeting:setLines(mylines2)
 
+    -- USE THE SCIFI BOX MODEL PLACE IT IN THE OBSERVATORY INTERIOR
+
+
+
     local quest1 = Topic.new("Quest1Return","I have something from the observatory.")
     local mylines = {}
     mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
@@ -221,50 +225,6 @@ function Initialize()
     NPC01.dialogue = diag
     NPC01:setDialogue(diag)
 
-
-
-    --[[
-    
-    Oh, it's you. I heard you came a long way to get here.
-
-    I need my organs back
-
-    Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal...
-    Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself. If you can bring back anything high-tech you find there, I'll happily repair your eyes.
-
-    Take me to the observatory / to the airship / back to town
-
-    If you insist, I can show you the way there. Come on.
-
-    Hello again. Any luck?
-
-    I have something from the observatory.
-
-    Oh, excellent! Come right this way, I'll fix your eyes up for you.
-
-    Your cybernetic eyes have been restored. With your improved accuracy, you deal +10 damage with your gun.
-
-    What about my lungs? My heart?
-
-    You don't quit, do you... While you were gone, the nearby raiders tried to launch another attack. I am too busy helping these people to fix your faulty cybernetics.
-
-    Please.
-
-    Look, the raiders came from an airship north of here. Tell you what, if you can kill their leader and force them to retreat, I'll happily repair the rest of your organs.
-
-    Okay.
-
-    What, really? Good on you! I'll see you later, then.
-
-    Hello again. Any news?
-
-    I killed their leader.
-
-    Excellent! Thank you so much! For a while at least, the people of this town will no longer have to suffer and fear when the next raid will come. Please, come with me, I'll fix the rest of your organs for you.
-
-
-
-    ]]
 
     NPC01:makeIdle()
 
