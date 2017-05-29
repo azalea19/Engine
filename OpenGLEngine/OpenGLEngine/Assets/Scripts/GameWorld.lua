@@ -49,6 +49,8 @@ function CreateTown(myscene)
 
 	printAPI.print("Creating Town...\n")
 
+	soundAPI.playSound("HappyHour",0)
+
 	 --function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 	gunShop = gameObject.new("0","GunShop","GunShop",Vector3.new(1024,0,1029),Vector3.new(0,0,0), Vector3.new(.008,.008,.008),0)
 	myscene:AddInstance(gunShop)

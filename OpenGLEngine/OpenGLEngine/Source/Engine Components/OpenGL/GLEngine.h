@@ -145,10 +145,13 @@ private:
   /// Creates the input handler.
   /// </summary>
   /// <returns></returns>
-  virtual IInputHandler* CreateInputHandler();
+  virtual IInputHandler* CreateInputHandler() override;
 
 
   virtual IRenderManager* CreateRenderManager() override;
+
+
+  virtual ISoundManager* CreateSoundManager() override;
 
 };
 

@@ -10,6 +10,7 @@
 #include "Screen.h"
 #include "GLInputHandler.h"
 #include "GLRenderManager.h"
+#include "GLSoundManager.h"
 
 IEngine* GLEngine::Create()
 {
@@ -139,6 +140,11 @@ bool GLEngine::BeginUpdate()
 
 void GLEngine::EndUpdate()
 {
+}
+
+ISoundManager* GLEngine::CreateSoundManager()
+{
+  return new GLSoundManager();
 }
 
 GLEngine::~GLEngine()

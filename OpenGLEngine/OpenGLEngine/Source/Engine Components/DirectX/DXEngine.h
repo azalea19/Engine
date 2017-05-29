@@ -88,6 +88,9 @@ public:
 
   virtual IRenderManager* CreateRenderManager() override;
 
+
+  virtual ISoundManager* CreateSoundManager() override;
+
 private:
 
   /// <summary>

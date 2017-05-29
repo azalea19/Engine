@@ -14,6 +14,7 @@
 #include "IslandCollisionAPI.h"
 #include "LuaDisplay2DAPI.h"
 #include "CollisionAPI.h"
+#include "SoundAPI.h"
 
 LuaContext* LuaManager::GetContext(LuaContextHandle contextHandle)
 {
@@ -53,10 +54,7 @@ void LuaManager::Initialize()
   luaManager.AddAPI("islandCollisionAPI", IslandCollisionAPI::Expose);
   luaManager.AddAPI("display2DAPI", LuaDisplay2DAPI::Expose);
   luaManager.AddAPI("collisionAPI", CollisionAPI::Expose);
-
-
-
-
+  luaManager.AddAPI("soundAPI", SoundAPI::Expose);
 }
 
 void LuaManager::AddAPI(string apiName, LuaAPIExposeFunc exposeFunc)

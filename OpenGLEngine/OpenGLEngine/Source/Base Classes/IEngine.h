@@ -6,6 +6,7 @@
 #include "IRenderableObject.h"
 #include "IInputHandler.h"
 #include "IRenderManager.h"
+#include "ISoundManager.h"
 
 /**
 * @file IEngine.h
@@ -91,6 +92,9 @@ public:
 
 
   virtual IRenderManager* CreateRenderManager() = 0;
+
+
+  virtual ISoundManager* CreateSoundManager() = 0;
 
 };
 #endif // IEngine_h__
