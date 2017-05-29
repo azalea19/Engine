@@ -49,7 +49,15 @@ function LoadAssets()
     modelLibraryAPI.addModel("Bullet","../Assets/Models/Bullet.obj",false)
     modelLibraryAPI.addModel("btnNewGame","../Assets/Models/UI/newgame.obj",false)
     modelLibraryAPI.addModel("btnLoad","../Assets/Models/UI/load.obj",false)
+    modelLibraryAPI.addModel("btnGame1","../Assets/Models/UI/game1.obj",false)
+    modelLibraryAPI.addModel("btnGame2","../Assets/Models/UI/game2.obj",false)
+    modelLibraryAPI.addModel("btnGame3","../Assets/Models/UI/game3.obj",false)
     modelLibraryAPI.addModel("btnBack","../Assets/Models/UI/back.obj",false)
+    modelLibraryAPI.addModel("btnSave","../Assets/Models/UI/save.obj",false)
+    modelLibraryAPI.addModel("btnReturn","../Assets/Models/UI/backToGame.obj",false)
+    modelLibraryAPI.addModel("btnContinue","../Assets/Models/UI/continue.obj",false)
+    modelLibraryAPI.addModel("whiteCube","../Assets/Models/UI/whitecube.obj",false)
+
 
 
 

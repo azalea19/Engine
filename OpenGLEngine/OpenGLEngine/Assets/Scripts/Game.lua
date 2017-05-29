@@ -551,9 +551,11 @@ function Update()
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
 
-    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 500,context.handle) ,player0:getPosition()),1*deltaTime))
+    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 500,context.handle) ,player0:getPosition(),context.handle),10*deltaTime))
 
     gun:setPosition(player0.position)
+    local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
+    local sum = mmath.vec3_Sum(player0.position, pos,context.handle)
     gun:lookAt(cameraAPI.forward(camera0,context.handle))
 
 
@@ -561,7 +563,9 @@ end
 
 function FireBullet()
 
-    bullet:setPosition(player0.position)
+    local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
+    local sum = mmath.vec3_Sum(player0.position, pos,context.handle)
+    bullet:setPosition(sum)
     bullet:lookAt(cameraAPI.forward(camera0,context.handle))
 
 end
