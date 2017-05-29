@@ -110,7 +110,34 @@ function SaveInstances(filePath, data, fileType)
 	end	
 end
 
-function LoadInstances(filePath, fileType)
+function saveAllToCurrentSave()
+	if currentSaveFile == 1 then
+		local tmp = world:GetGameObjects()
+		SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
+		SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
+		SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
+		savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
+		saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
+	end
+	if currentSaveFile == 2 then
+		local tmp = world:GetGameObjects()
+		SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
+		SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
+		SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
+		savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
+		saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
+	end
+	if currentSaveFile == 3 then
+		local tmp = world:GetGameObjects()
+		SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
+		SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
+		SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
+		savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
+		saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
+	end
+end
+
+function LoadInstances(filePath, fileType, difficulty)
 	local outputData = {}
 	local n, instanceID, objPos, dir, sca
 	local fileData= read(filePath, ',')
@@ -136,7 +163,7 @@ function LoadInstances(filePath, fileType)
 		else
 			if(fileType == "npc") then
 			
-				n = npc.new(stringID, fileData[i][2],fileData[i][3], objpos, dir, sca, anim, fileData[i][13], fileData[i][14])
+				n = npc.new(stringID, fileData[i][2],fileData[i][3], objpos, dir, sca, anim, fileData[i][13] * difficulty, fileData[i][14] * difficulty)
 			end
 		end
 		

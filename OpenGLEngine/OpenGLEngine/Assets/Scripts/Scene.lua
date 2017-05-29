@@ -11,6 +11,7 @@ function Scene.new(newSceneName, newPlayerStartPos, newPlayerStartDir)
 		name = newSceneName,
 		objects = {},
 		terrainID = 0,
+		checkpoints = {},	--A gameObject with a boolean used
 		playerStartPos = newPlayerStartPos,
 		playerStartDir = newPlayerStartDir,
 		terrainChunks = nil
@@ -31,6 +32,16 @@ end
 
 function Scene:GetTerrainID()
 	return self.terrainID
+end
+
+function Scene:AddCheckpoints(data)
+	for i = 1,#data do
+		table.insert(self.checkpoints, data[i])
+	end
+end
+
+function Scene:AddCheckpoint(data)
+	table.insert(self.checkpoints, data)
 end
 
 function Scene:AddInstances(data)

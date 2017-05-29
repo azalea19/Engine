@@ -49,6 +49,18 @@ function World:GetGameObjects()
 	return self.scenes[self.currentScene]["objects"]
 end
 
+function World:GetCheckpoints()
+	return self.scenes[self.currentScene]["checkpoints"]
+end
+
+function World:AddCheckpoints(data)
+	self.scenes[self.currentScene]:AddCheckpoints(data)
+end
+
+function World:AddCheckpoint(newCheckpoint)
+	self.scenes[self.currentScene]:AddCheckpoint(newCheckpoint)
+end
+
 function World:AddInstances(data)
 	self.scenes[self.currentScene]:AddInstances(data)
 end
