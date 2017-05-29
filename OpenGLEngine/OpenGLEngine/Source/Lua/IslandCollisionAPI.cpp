@@ -3,10 +3,12 @@
 
 bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox)
 {
+	/*
   mAABB toMoveBB;
   toMoveBB.max = FromLuaTable<vec3>(thisbox["max"]);
   toMoveBB.min = FromLuaTable<vec3>(thisbox["min"]);
-  return IslandCollision::Check(toMoveBB);
+  return IslandCollision::Check(toMoveBB);*/
+	return false;
 }
 
 LuaRef IslandCollisionAPI::Resolve(LuaRef toMoveOrigin, LuaRef toMoveBBi, LuaContextHandle handle)

@@ -21,7 +21,7 @@ local World = dofile '../Assets/Scripts/World.lua'
 --local QuestManager = require '../Assets/Scripts/QuestManager'
 dofile '../Assets/Scripts/Dialogue.lua'
 dofile '../Assets/Scripts/FileIO.lua'
-dofile '../Assets/Scripts/ReadAndWriteInstances.lua'
+dofile '../Assets/Scripts/ReadAndWriteData.lua'
 dofile '../Assets/Scripts/Terrain.lua'
 dofile '../Assets/Scripts/Controls.lua'
 dofile '../Assets/Scripts/QuestManager.lua'
@@ -87,7 +87,9 @@ function Initialize()
 	wireindex = 1
 
 	printAPI.print('Creating...\n')
-	engineAPI.Initialise(1280,720);
+    screenWidth = 1280
+    screenHeight = 720
+	engineAPI.Initialise(screenWidth,screenHeight);
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
@@ -137,14 +139,21 @@ function Initialize()
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
-    loc = {x=40,y=0,z=40}
+    loc = {x=1100,y=0,z=1100}
     scale = {x=10,y=10,z=10}
     dir = {x=0,y=1,z=0}
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
 
     NPC01 = npc.new("NPC01","Bob the Human","Warrior",loc,dir,scale,0,100,100)
-    NPC01.hurtAnim = 4
+    local anim = {"Section",0,5}
+    local anim2 = {"Section",0,10}
+    NPC01.defaultAnim = anim2
+    NPC01.hurtAnim = {"Section",0,5}
+    NPC01:setAnimation(anim2)
+    objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+
+    --NPC01.hurtAnim = 4
     local upVector = {x=0,y=1,z=0}
     NPC01.upVector = upVector
     local diag = Dialogue.new()
@@ -213,8 +222,15 @@ function Initialize()
     printAPI.print('Initialising player...\n')
 	player0 = Player:new(camera0,100,100)
 
-	--cameraAPI.setPosition(camera0,0,0,0)
 	player0:setPosition(Vector3.new(1000,0,1000))
+
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.001,0.001,0.001),0)
+    bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
+
+    scene:AddInstance(gun)
+    scene:AddInstance(bullet)
+
+
 
 	--cameraAPI.setYaw(camera0,225)
 	--cameraAPI.setPitch(camera0,0)
@@ -292,7 +308,7 @@ function Update()
         if(inMenu == false) then
             inMenu = true
 			preCameraPos = player0:getPosition()
-			printVec3(preCameraPos)
+			--printVec3(preCameraPos)
 			preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
 			preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
 			
@@ -398,7 +414,9 @@ function Update()
 
         if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
             if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-                    player0.weapon:attack(player0.lookTarget)
+                    if(player0.weapon:attack(player0.lookTarget)) then
+                        FireBullet()
+                    end
             
             end
         end
@@ -475,6 +493,8 @@ function Update()
     
         if inputManagerAPI.isKeyPressed(TestInput3) then
             -- spawn bob
+
+            --[[
             local newX = player0["position"]["x"] 
 		    local newZ = player0["position"]["z"]
 		    local newY = GetHeightAtPoint(newX , newZ)
@@ -500,6 +520,7 @@ function Update()
 
 		    world:AddInstance(item)
 		    --renderManagerAPI.addObject(tempID)
+            ]]
 
 	    end
     
@@ -520,7 +541,7 @@ function Update()
 
 	local currentGOs = world:GetGameObjects()
 	for i = 1, world:GetGameObjectCount() do
-        printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
+        --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
 		local a = currentGOs[i]:Update()
 	end
     --printAPI.print("Updating player\n")
@@ -530,8 +551,18 @@ function Update()
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
 
+    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 500,context.handle) ,player0:getPosition()),1*deltaTime))
+
+    gun:setPosition(player0.position)
+    gun:lookAt(cameraAPI.forward(camera0,context.handle))
 
 
+end
+
+function FireBullet()
+
+    bullet:setPosition(player0.position)
+    bullet:lookAt(cameraAPI.forward(camera0,context.handle))
 
 end
 
@@ -642,12 +673,16 @@ function Render()
 				renderManagerAPI.present(camera0)
 
 				
-				-- Draw UI text
-				--display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
+				-- Draw UI text --DrawTextLua(int size, string const& filePath, string const& text, LuaRef pos, LuaRef color, int centered, int screenWidth, int screenHeight)
+				display2DAPI.drawText(10,font1path,lookAtText,{x=100,y=300},white,0,screenWidth,screenHeight)
 
 				if(player0.inDialogue) then 
-					--display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
+					display2DAPI.drawText(10,font1path,dialogueText,{x=200,y=300},white,0,screenWidth,screenHeight)
 				end
+
+                hpDisplay = "Health: ".. player0.currentHealth .. " / " .. player0.maxHealth
+                display2DAPI.drawText(10,font1path,hpDisplay,{x=400,y=100},white,0,screenWidth,screenHeight)
+
 
 			end
 		end

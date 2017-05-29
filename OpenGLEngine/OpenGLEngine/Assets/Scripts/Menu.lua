@@ -23,7 +23,7 @@ function initMenu()
     local newPos = {x=0,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    StartNewButton = gameObject.new("StartNewButton", "StartNewButton", "Bob", newPos, newDir, newScale, newAnim)
+    StartNewButton = gameObject.new("StartNewButton", "StartNewButton", "btnNewGame", newPos, newDir, newScale, newAnim)
 	StartNewButton.option = newGameButton -- initialise a new game
 	StartNewButton.active = true
 	-- Continue, 0
@@ -37,7 +37,7 @@ function initMenu()
     local newPos = {x=10,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    LoadButton = gameObject.new("LoadButton", "LoadButton", "Bob", newPos, newDir, newScale, newAnim)
+    LoadButton = gameObject.new("LoadButton", "LoadButton", "btnLoad", newPos, newDir, newScale, newAnim)
 	LoadButton.option = loadGame -- go to load menu, show 3 slots and back button
 	LoadButton.active = true
 	-- Save Game, 0
@@ -58,7 +58,7 @@ function initMenu()
     local newPos = {x=20,y=1,z=20}
     local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
-    BackButton = gameObject.new("BackButton", "BackButton", "Bob", newPos, newDir, newScale, newAnim)
+    BackButton = gameObject.new("BackButton", "BackButton", "btnBack", newPos, newDir, newScale, newAnim)
 	BackButton.option = back -- go back to menu
 	BackButton.active = false
 	-- Button One, 1/2

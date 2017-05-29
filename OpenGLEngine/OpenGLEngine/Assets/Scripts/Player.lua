@@ -189,21 +189,100 @@ function Player:update()
 
 		self.position = newPos
       
+        debugPrint("Resolving player collisions...\n")
 
 
-    if createCollisionTree then
-		  if collisionAPI.box_collidingInTree(self:BBToWorld()) then
-			  self.velocity.y = 0
-		  end
+        if createCollisionTree then
+		      if collisionAPI.box_collidingInTree(self:BBToWorld()) then
+			      self.velocity.y = 0
+		      end
 
 
-		  if self.boundingBox ~= nil then
-			  self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
-		  end
-    end
+		      if self.boundingBox ~= nil then
+			      self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
+		      end
+        end
+
+
 		--printAPI.print(self.position.y .. "\n")
 		cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
+
+
 	end
+
+
+    -- Fill bounding box/collision data for use
+	local goList = {} -- list of gameobjects with bounding boxes
+	local bbList = {} -- list of all bounding boxes (corresponds to gameobjects)
+	local listCount =0 -- number in these list
+			
+		local currentGOs = world:GetGameObjects()
+
+		for i = 1, world:GetGameObjectCount() do
+			if(currentGOs == nil) then
+			debugPrint("Warning: Tried to check collisions, but World's GameObjects is nil\n")
+			else
+			
+				--debugPrint(world:GetGameObjectCount() .. " game objects in scene to check AABBs\n")
+				--debugPrint(currentGOs[i].name .. "is name of current object\n")
+
+				local bbo = currentGOs[i]:BBToWorld()
+				
+				if bbo ~= nil then
+					goList[i] = currentGOs[i]
+					bbList[i] = bbo
+					listCount = listCount + 1
+				else
+					debugPrint(manyList[i].name .. " has nil aabb\n")
+				end
+			end
+		end
+
+    debugPrint("Setting player ray\n")
+	
+	self.lookRay = {pos = self:getPosition(),dir = cameraAPI.forward(camera0,context.handle)}
+	
+	debugPrint("Checking ray collisions\n")
+	
+	if(debugdetail) then
+		printAPI.print("Ray data: ")
+		printVec3s(self:getPosition(), cameraAPI.forward(camera0,context.handle))
+	end
+	
+	local firstLook = nil
+	for i=1,listCount do
+		--debugPrint("Checking ray vs object " ..i.."\n")
+		--printVec3After("GameObject BB Min: ",goList[i].boundingBox.min)
+		--printVec3After("GameObject BB Max: ",goList[i].boundingBox.max)
+
+		if collisionAPI.rayToAABB(self.lookRay,bbList[i]) then
+			debugPrint("Player is looking at something! ")
+			goList[i].playerLookAt = true
+			if firstLook == nil then
+				firstLook = goList[i]
+				debugPrint("It is  " .. firstLook.name .. " ... ")
+				self.lookTarget = firstLook
+				if(firstLook.displayNameOnLook) then
+				
+					lookAtText = firstLook.name
+					debugPrint("Displayed to screen.")
+				end
+				
+				debugPrint("\n")
+
+			end
+		else
+			goList[i].playerLookAt = false
+
+        end
+        if firstLook == nil then
+		debugPrint("Removed look at text. \n")
+		lookAtText = " "
+		self.lookTarget = nil
+		self.inDialogue = false
+        end
+        end 
+
 end
 
 return Player

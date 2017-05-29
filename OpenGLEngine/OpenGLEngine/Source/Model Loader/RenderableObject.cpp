@@ -188,10 +188,10 @@ void RenderableObject::Initialise()
 
 void RenderableObject::Render(mat4 const& worldMatrix, mat4 const& viewMatrix, mat4 const& projectionMatrix, float time, int animationIndex) const
 {
-  UploadMatrices(worldMatrix, viewMatrix, projectionMatrix);
-  UpdateAnimation(time, animationIndex);
-  IndexRange const& range = m_pModel->GetMeshIndexRange(boundMeshIndex);
-  glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
+	UpdateAnimation(time, animationIndex);
+    UploadMatrices(worldMatrix, viewMatrix, projectionMatrix);
+    IndexRange const& range = m_pModel->GetMeshIndexRange(boundMeshIndex);
+    glDrawElementsBaseVertex(GL_TRIANGLES, range.indexCount, GL_UNSIGNED_INT, (void*)(sizeof(int)*range.firstIndexOffset), range.firstVertex);
 }
 
 void RenderableObject::Destroy()

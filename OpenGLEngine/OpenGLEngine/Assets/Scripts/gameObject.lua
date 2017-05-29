@@ -60,8 +60,22 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 end
 
 function gameObject:setAnimation(n)
-    objectInstanceAPI.setAnimation(self.id,n)
-    self.animation = n
+    if tonumber (n) then
+		printAPI.print("Setting basic int anim to ".. n .."\n")
+        objectInstanceAPI.setAnimation(self.id,n)
+        self.animation = n
+    else
+        if(n[1]=="Section") then
+			printAPI.print("Setting section anim\n")
+            objectInstanceAPI.setAnimationSection(self.id, n[2], n[3])
+        end
+
+    end
+	
+	objectInstanceAPI.setAnimationStartTime(self.id,timeAPI.elapsedTimeMs())
+
+
+    
 end
 function gameObject:lookAt(npos)
     debugPrint("Looking at...")
