@@ -21,7 +21,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.currentHealth = newCurrentHealth
 	instance.type = newType
 	instance.alive = true
-    instance.hostileToPlayer = true
+    instance.hostileToPlayer = false
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
@@ -114,7 +114,8 @@ end
 function npc:die()
 	debugLPrint("NPC death.\n")
 	self.alive = false
-	
+	questManager:check(KILL,self)
+
 	currentScene:RemoveInstance(self)
 	--self.updating = false
 	--self.visible = false

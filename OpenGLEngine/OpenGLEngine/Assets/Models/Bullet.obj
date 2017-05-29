@@ -2,6 +2,7 @@
 # www.blender.org
 mtllib Bullet.mtl
 o bullet_Cylinder.001
+usemtl bullet
 v 0.122019 0.455382 -2.193730
 v 0.333363 0.333363 -2.193730
 v 0.455382 0.122019 -2.193730

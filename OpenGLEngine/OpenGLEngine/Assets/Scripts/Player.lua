@@ -197,7 +197,7 @@ function Player:update()
 		newPos = mmath.vec3_Sum(oldPos,self.velocity, context.handle)
 		newPos.x = math.min(math.max(newPos.x, 0), wsTerrainSize)
 		newPos.z = math.min(math.max(newPos.z, 0), wsTerrainSize)
-		desiredHeight = GetHeightAtPoint(newPos.x, newPos.z) + 1.8
+		desiredHeight = GetHeightAtPoint(newPos.x, newPos.z)
 		newPos.y = math.max(newPos.y, desiredHeight)		
 		if(newPos.y == desiredHeight) then
 			self.velocity.y = 0
@@ -289,12 +289,13 @@ function Player:update()
 			goList[i].playerLookAt = false
 
         end
-        if firstLook == nil then
-		debugPrint("Removed look at text. \n")
-		lookAtText = " "
-		self.lookTarget = nil
-		self.inDialogue = false
-        end
+        --[[
+            if firstLook == nil then
+		    debugPrint("Removed look at text. \n")
+		    lookAtText = " "
+		    self.lookTarget = nil
+		    self.inDialogue = false
+        end]]
         end 
 
 end

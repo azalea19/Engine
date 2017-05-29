@@ -10,6 +10,8 @@ require 'ReadAndWriteInstances'
 require 'Terrain'
 ]]--
 
+difficulty = 1
+
 local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 local AABoundingBox = dofile '../Assets/Scripts/AABoundingBox.lua'
@@ -107,14 +109,18 @@ function Initialize()
 
     -- Initialise scene objects
 	printAPI.print('Initialising Scenes...\n')
-	local GOData = LoadInstances("../SaveData/GO_Data.csv", "gameObject")
-	local NPCData = LoadInstances("../SaveData/NPC_Data.csv", "npc")
+	local GOData = LoadInstances("../SaveData/GO_Data.csv", "gameObject",difficulty)
+	local NPCData = LoadInstances("../SaveData/NPC_Data.csv", "npc",difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene = Scene.new("Level1", startPos, startDir)
     scene2 = Scene.new("Level2", startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
+
+
+
+    --[[
 	for y = 1, worldWidthChunks, 1 do
 		for x = 1, worldWidthChunks, 1 do
 			--modelLibraryAPI.addModel("Terrain_" .. x .. "_" .. y,"../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj",false)
@@ -126,6 +132,7 @@ function Initialize()
 			table.insert(scene.terrainChunks, terrainChunckID)
 		end
 	end
+    ]]
     
     local loc = {x=20,y=0,z=20}
     local scale = {x=1,y=1,z=1}
@@ -189,8 +196,8 @@ function Initialize()
 
     local quest1 = Topic.new("Quest1Return","I have something from the observatory.")
     local mylines = {}
-    mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
-    mylines[2] = "Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
+    mylines[1] = "Yes, yes, I know, it's terrible... having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
+    mylines[2] = "Listen, I can help you with your eyes... there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
     mylines[3] = "If you can bring back anything high-tech you find there, I'll happily repair your eyes."
 
     quest1:setLines(mylines)
@@ -217,7 +224,18 @@ function Initialize()
 
     quest2return:setLines(mylines)
     
+    local teleport1 = Topic.new("Teleport1","Can you take me to the observatory?")
+    local mylines = {}
+    mylines[1] = "Fine, I guess so."
+
+    teleport1:setLines(mylines)
     
+    local teleport2 = Topic.new("Teleport2","Can you take me to the airship?")
+    local mylines = {}
+    mylines[1] = "Fine, I guess so."
+
+    teleport2:setLines(mylines)
+
 
     quest1.questEvent = true
     quest2.questEvent = true
@@ -226,11 +244,15 @@ function Initialize()
 
 
 
+
     diag:addTopic(greeting)
     diag:addTopic(quest1)
-    diag:addTopic(quest2)
-    diag:addTopic(quest1return)
-    diag:addTopic(quest2return)
+    --diag:addTopic(quest2)
+    --diag:addTopic(quest1return)
+    --diag:addTopic(quest2return)
+    diag:addTopic(teleport1)
+    diag:addTopic(teleport2)
+
 
     NPC01.dialogue = diag
     NPC01:setDialogue(diag)
@@ -287,6 +309,18 @@ function Initialize()
 	world:AddScene(scene)
     world:AddScene(scene2)
 
+    
+    local currentGOs = world:GetGameObjects()
+
+	for i = 1, world:GetGameObjectCount() do
+		if(currentGOs[i].name == "Robot Mech") then
+            debugLPrint("Changing robot mech")
+            currentGOs[i].hostileToPlayer = true
+            currentGOs[i]:makeIdle()
+        end
+    end
+
+   
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 	objectInstanceAPI.setTranslation(skybox, 0,0,0);
 	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
@@ -303,15 +337,18 @@ function Initialize()
     --renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
-	player0 = Player:new(camera0,100,100)
+	player0 = Player.new(camera0,100,100)
 
 	player0:setPosition(Vector3.new(1000,0,1000))
 
-    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.001,0.001,0.001),0)
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,-10,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 
     scene:AddInstance(gun)
     scene:AddInstance(bullet)
+
+    observatory = gameObject.new("Observatory","Observatory","Observatory",Vector3.new(1000,0,0),Vector3.new(0,0,0),Vector3.new(0.001,0.001,0.001),0)
+
 
 
 
@@ -327,8 +364,9 @@ function Initialize()
     player0:setWeapon(basicGun)
 
     
-
-
+    objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 0, 0, Vector3.new(1, 1, 1))
+    objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, -90, 0, Vector3.new(1, 1, 1))
+    
 	initMenu()
 	
     printAPI.print('Initialization finished.\n')
@@ -350,14 +388,31 @@ function StartDialogueTopic(playr,topicn)
 
     if(playr.inDialogue) then
         local topic = playr.lookTarget.dialogue.topics[topicn]
-        if(topic ~= nil and topic.textLines ~= nil and topic.textLines[topicn] ~= nil) then
-            dialogueText = topic.textLines[topicn]
+        if(topic ~= nil and topic.textLines ~= nil and topic.textLines[1] ~= nil) then
+            dialogueText = topic.textLines[1]
             dCurrentTopic = topic
             dCurrentLine = 1
             dInMenu = false
 
             if topic.questEvent then
                 questManager:check(TALK,playr.lookTarget,topic.id)
+            end
+
+            
+
+            if(topic.id == "Teleport1") then
+                dInMenu = false
+                debugLPrint("Closing dialogue - teleporting.\n")
+
+                player0.inDialogue = false
+                player0.position = Vector3.new(500,0,1500)
+            end
+            if(topic.id == "Teleport2") then
+                dInMenu = false
+                debugLPrint("Closing dialogue - teleporting.\n")
+
+                player0.inDialogue = false
+                player0.position = Vector3.new(1000,0,0)
             end
 
         else
@@ -454,6 +509,12 @@ function Update()
 	
 
             end
+
+            if(player0.lookTarget.stringID == "obsTech") then
+                printAPI.print("Picked up quest item.\n")
+                questManager:check(GET,playr.lookTarget)
+
+            end
         end
         
         
@@ -484,6 +545,26 @@ function Update()
         StartDialogueTopic(player0,5)
         
     end
+    if inputManagerAPI.isKeyPressed(QuickSlot6_Input) then
+
+        StartDialogueTopic(player0,6)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot7_Input) then
+
+        StartDialogueTopic(player0,7)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot8_Input) then
+
+        StartDialogueTopic(player0,8)
+        
+    end
+    if inputManagerAPI.isKeyPressed(QuickSlot9_Input) then
+
+        StartDialogueTopic(player0,9)
+        
+    end
     if inputManagerAPI.isMousePressedLeft() then
 
         debugLPrint("Clicked LMB.\n")
@@ -502,16 +583,13 @@ function Update()
 
 
         if(player0.inDialogue == true and dInMenu == false) then
+          debugLPrint("In dialogue...")
+
             if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
                 dCurrentLine = dCurrentLine + 1
                 dialogueText = dCurrentTopic.textLines[dCurrentLine]
                 dInMenu = false
-
-                if(dCurrentTopic.name == "Teleport1") then
-                    dInMenu = false
-                    player0.inDalogue = false
-                    player0.position = Vector3.new(500,0,1500)
-                end
+                
                 
 
 
@@ -521,6 +599,7 @@ function Update()
             end
         else
             if(dInMenu) then
+                    debugLPrint("Closing dialogue - clicked in main menu.\n")
                     player0.inDialogue = false
             end
         end
@@ -543,8 +622,8 @@ function Update()
 		cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
 
 		printAPI.print('Initialising objects...\n')
-		local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject")
-		local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc")
+		local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject",difficulty)
+		local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc",difficulty)
 
 		world:AddInstances(GOData)
 		world:AddInstances(NPCData)
@@ -636,20 +715,23 @@ function Update()
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
 
-    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,player0:getPosition(),context.handle),10*deltaTime))
+    local playerPos = Vector3.new(player0.position.x,player0.position.y+1.8,player0.position.z)
 
-    gun:setPosition(player0.position)
-    local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
-    local sum = mmath.vec3_Sum(player0.position, pos,context.handle)
-    gun:lookAt(cameraAPI.forward(camera0,context.handle))
+    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
+    
+    local closerpos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),1,context.handle),context.handle)
+    local pos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle),context.handle)
+    gun:setPosition(closerpos)
+    gun:lookAt(pos)
 
 
 end
 
 function FireBullet()
+    local playerPos = Vector3.new(player0.position.x,player0.position.y+1.8,player0.position.z)
 
     local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
-    local sum = mmath.vec3_Sum(player0.position, pos,context.handle)
+    local sum = mmath.vec3_Sum(playerPos, pos,context.handle)
     bullet:setPosition(sum)
     bullet:lookAt(cameraAPI.forward(camera0,context.handle))
 
@@ -668,14 +750,14 @@ function StartDialogue(npc)
     debugPrint("Starting Dialogue... ")
     if(npc ~= nil) then
         if(npc.dialogue ~= nil) then
-    
+            debugLPrint("Dialogue available.\n")
             dInMenu= true
-            local str = npc.name.."\n\nTopics: \n"
+            local str = npc.name.."Topics: "
             local topics
             local count
             topics, count = npc:readTopics()
             for i=1,count do
-                str = str .. topics[i]
+                str = str .. i ..". ".. topics[i] .. " "
             end
 
             dialogueText = str
@@ -688,8 +770,6 @@ function StartDialogue(npc)
             debugPrint("NPC has no dialogue.\n")
         end
     end
-    
-
 
 
 end
@@ -763,7 +843,11 @@ function Render()
 
 				
 				-- Draw UI text --DrawTextLua(int size, string const& filePath, string const& text, LuaRef pos, LuaRef color, int centered, int screenWidth, int screenHeight)
-				display2DAPI.drawText(10,font1path,lookAtText,{x=100,y=300},white,0,screenWidth,screenHeight)
+				
+                if(player0.lookTarget ~= nil) then
+                    display2DAPI.drawText(10,font1path,lookAtText,{x=100,y=300},white,0,screenWidth,screenHeight)
+
+                end
 
 				if(player0.inDialogue) then 
 					display2DAPI.drawText(10,font1path,dialogueText,{x=200,y=300},white,0,screenWidth,screenHeight)
