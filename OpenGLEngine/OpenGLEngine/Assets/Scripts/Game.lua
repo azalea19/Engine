@@ -115,7 +115,17 @@ function Initialize()
     scene2 = Scene.new("Level2", startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
-
+	for y = 1, worldWidthChunks, 1 do
+		for x = 1, worldWidthChunks, 1 do
+			--modelLibraryAPI.addModel("Terrain_" .. x .. "_" .. y,"../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj",false)
+			local terrainChunckID = luaObjInstManager.addNewInstance("Terrain_" .. x .. "_" .. y)
+			objectInstanceAPI.setTranslation(terrainChunckID,(x - 1) * wsChunkSize,0,(y - 1) * wsChunkSize)
+			objectInstanceAPI.setOrientation(terrainChunckID,0,0,0)
+			objectInstanceAPI.setScale(terrainChunckID,1,1,1)
+			objectInstanceAPI.setAnimation(terrainChunckID,0)
+			table.insert(scene.terrainChunks, terrainChunckID)
+		end
+	end
     
     local loc = {x=20,y=0,z=20}
     local scale = {x=1,y=1,z=1}
@@ -479,10 +489,11 @@ function Update()
         debugLPrint("Clicked LMB.\n")
 
         if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
+			
             if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-                    if(player0.weapon:attack(player0.lookTarget)) then
+                    --if(player0.weapon:attack(player0.lookTarget)) then
                         FireBullet()
-                    end
+                    --end
             
             end
         end
@@ -617,7 +628,7 @@ function Update()
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
 
-    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 500,context.handle) ,player0:getPosition(),context.handle),10*deltaTime))
+    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,player0:getPosition(),context.handle),10*deltaTime))
 
     gun:setPosition(player0.position)
     local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
