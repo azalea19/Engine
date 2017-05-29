@@ -65,7 +65,6 @@ function LoadAssets()
 	--modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
     --modelLibraryAPI.addModel("ObsTech","../Assets/Models/scifi box/scifibox.obj",false)
 
-
 	soundAPI.addSound("HappyHour",'../Assets/Sounds/HappyHour.wav')
 
 

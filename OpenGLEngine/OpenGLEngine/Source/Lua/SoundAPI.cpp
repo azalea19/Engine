@@ -30,3 +30,4 @@ void SoundAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "pauseChannel", PauseChannel);
   pContext->ExposeFunction(luaAPIName, "resumeChannel", ResumeChannel);
 }
+
