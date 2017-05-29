@@ -55,7 +55,8 @@ end
 
 function Player:setPosition(newPos)
 	self.position = newPos
-	cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
+	cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
+
 end
 
 function Player:setAABB(minx,maxx,miny,maxy,minz,maxz)
@@ -132,7 +133,7 @@ function Player:update()
 			self.velocity.z = 0
 		end
 		 
-		oldPos = cameraAPI.getPosition(camera0,context.handle);
+		oldPos = self.position
 		forward = cameraAPI.forward(camera0,context.handle);
 		right = cameraAPI.right(camera0,context.handle);
 		up = cameraAPI.up(camera0,context.handle);
@@ -202,7 +203,6 @@ function Player:update()
 			self.velocity.y = 0
 		end
 		cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
-
 		self.position = newPos
       
         debugPrint("Resolving player collisions...\n")
@@ -221,9 +221,7 @@ function Player:update()
 
 
 		--printAPI.print(self.position.y .. "\n")
-		cameraAPI.setPosition(camera0,self.position.x,self.position.y,self.position.z)
-
-
+		cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
 	end
 
 

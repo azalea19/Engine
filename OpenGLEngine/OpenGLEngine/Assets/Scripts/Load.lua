@@ -44,7 +44,6 @@ function LoadAssets()
 	modelLibraryAPI.addModel("Crate","../Assets/Models/Crate/crate.obj",false)
 	modelLibraryAPI.addModel("Titan","../Assets/Models/Titan/Titan class II cargo ship landed.obj",false)
 	modelLibraryAPI.addModel("GunShop","../Assets/Models/GunsShop/GunsShop.obj",false)
-	--modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
     modelLibraryAPI.addModel("Pistol","../Assets/Models/Peacemaker.fbx",false)
     modelLibraryAPI.addModel("Bullet","../Assets/Models/Bullet.obj",false)
     modelLibraryAPI.addModel("btnNewGame","../Assets/Models/UI/newgame.obj",false)
@@ -57,6 +56,7 @@ function LoadAssets()
     modelLibraryAPI.addModel("btnReturn","../Assets/Models/UI/backToGame.obj",false)
     modelLibraryAPI.addModel("btnContinue","../Assets/Models/UI/continue.obj",false)
     modelLibraryAPI.addModel("whiteCube","../Assets/Models/UI/whitecube.obj",false)
+    modelLibraryAPI.addModel("Observatory","../Assets/Models/ObservatoryOutpost/ObservatoryOutpost_fin.obj",false)
 
 
 

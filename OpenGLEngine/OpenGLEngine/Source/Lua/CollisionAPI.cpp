@@ -3,7 +3,7 @@
 #include "LuaObjectInstanceManager.h"
 #include "KDTree.h"
 
-static KDTree* collisionTree;
+static KDTree* collisionTree = nullptr;
 
 bool CollisionAPI::RayToAABB(LuaRef ray, LuaRef aabb)
 {
@@ -34,6 +34,7 @@ void CollisionAPI::CreateCollisionTree(LuaRef objectInstanceHandles)
     objects.push_back(newObject);
   }
 
+  delete collisionTree;
   collisionTree = new KDTree(objects, 32);
 
   //KD Tree created now have a bounding volume hierarchy of all objects that were passed in to the tree

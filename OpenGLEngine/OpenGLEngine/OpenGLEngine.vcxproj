@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Collisions\GeometricPrimitives.cpp" />
     <ClCompile Include="Source\Data Structures\KDTree.cpp" />
     <ClCompile Include="Source\Data Structures\TriangleTree.cpp" />
     <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
@@ -194,16 +195,20 @@
     <None Include="Assets\Scripts\gameObject.lua" />
     <None Include="Assets\Scripts\GameWorld.lua" />
     <None Include="Assets\Scripts\Load.lua" />
+    <None Include="Assets\Scripts\Menu.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
-	<None Include="Assets\Scripts\Weapon.lua" />    <None Include="Assets\Scripts\Player.lua" />
+    <None Include="Assets\Scripts\npc.lua" />
+    <None Include="Assets\Scripts\Player.lua" />
     <None Include="Assets\Scripts\QuestManager.lua" />
     <None Include="Assets\Scripts\ReadAndWriteInstances.lua" />
     <None Include="Assets\Scripts\Scene.lua" />
     <None Include="Assets\Scripts\Terrain.lua" />
     <None Include="Assets\Scripts\Vector3.lua" />
+    <None Include="Assets\Scripts\Weapon.lua" />
     <None Include="Assets\Scripts\World.lua" />
   </ItemGroup>
-  <PropertyGroup Label="Globals">    <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{23F4FD3C-C762-4FD6-B9D5-35E32513D570}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OpenGLEngine</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>

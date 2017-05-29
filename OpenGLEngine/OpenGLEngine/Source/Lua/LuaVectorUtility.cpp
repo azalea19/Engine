@@ -5,15 +5,7 @@
 //vec3 * 1/magnitude
 LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHandle)
 {
-	vec3 vec = FromLuaTable<vec3>(value);
-	//vec = normalize(vec);
-
-	float mag = sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
-
-	vec.x = vec.x / mag;
-	vec.y = vec.y / mag;
-	vec.z = vec.z / mag;
-	
+	vec3 vec = normalize(FromLuaTable<vec3>(value));
 
 	return ToLuaTable(vec, contextHandle);
 }
@@ -21,13 +13,8 @@ LuaRef LuaVectorUtility::vec3_Normalize(LuaRef value, LuaContextHandle contextHa
 float LuaVectorUtility::vec3_DotProduct(LuaRef a, LuaRef b)
 {
 	vec3 vec1 = FromLuaTable<vec3>(a);
-	vec3 vec2 = FromLuaTable<vec3>(b);
-
-	float c[] = { vec1.x,vec1.y,vec1.z };
-	float d[] = { vec2.x,vec2.y,vec2.z };
-
-	return std::inner_product(std::begin(c), std::end(c), std::begin(d), 0.0);
-	//return std::inner_product(c, c + sizeof(c) / sizeof(c[0]), d, 0);
+  vec3 vec2 = FromLuaTable<vec3>(b);
+  return dot(vec1, vec2);
 }
 
 //vec3 + vec3

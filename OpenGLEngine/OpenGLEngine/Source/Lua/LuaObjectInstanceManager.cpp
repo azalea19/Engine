@@ -25,7 +25,7 @@ void LuaObjectInstanceManager::DeleteInstance(int instanceHandle)
 
 	if (got == m_instanceMap.end())
 	{
-		printf("Instance with name %n not found.", instanceHandle);
+		printf("Instance with name %d not found.", instanceHandle);
 	}
 	else {
 		m_instanceMap.erase(instanceHandle);
@@ -40,9 +40,8 @@ ObjectInstance * LuaObjectInstanceManager::GetInstance(int instanceHandle)
 
 	if (got == m_instanceMap.end())
 	{
-		printf("Instance with name %n not found.", instanceHandle);
-		ObjectInstance * nullInst;
-		return nullInst;
+		printf("Instance with name %d not found.", instanceHandle);
+		return nullptr;
 	}
 	
 	return got->second;

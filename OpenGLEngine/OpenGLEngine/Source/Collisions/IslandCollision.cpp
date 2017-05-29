@@ -109,7 +109,7 @@ vec3 IslandCollision::Resolve(vec3 position, mAABB box)
 
   //Find initial Range
   float minRange = 0;
-  float maxRange = accuracy * 1;
+  float maxRange = accuracy * 128;
   while (true)
   {
     if (!CheckDirections(position, box, maxRange, &result))

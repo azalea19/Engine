@@ -1,4 +1,4 @@
---[[local Vector3 = require 'Vector3'
+﻿--[[local Vector3 = require 'Vector3'
 local gameObject = require 'gameObject'
 local AABoundingBox = require 'AABoundingBox'
 local npc = require 'npc'
@@ -141,12 +141,12 @@ function Initialize()
 	local b = Vector3.new(1,1,1)
 
     loc = {x=1100,y=0,z=1100}
-    scale = {x=10,y=10,z=10}
+    scale = {x=0.5,y=0.5,z=0.5}
     dir = {x=0,y=1,z=0}
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
 
-    NPC01 = npc.new("NPC01","Bob the Human","Warrior",loc,dir,scale,0,100,100)
+    NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100)
     local anim = {"Section",0,5}
     local anim2 = {"Section",0,10}
     NPC01.defaultAnim = anim2
@@ -158,34 +158,145 @@ function Initialize()
     local upVector = {x=0,y=1,z=0}
     NPC01.upVector = upVector
     local diag = Dialogue.new()
-    local topic01 = Topic.new("Greeting","Greeting")
-    topic01.questEvent = true
-    local topic02 = Topic.new("Quest1","Help find organs")
 
+    local quest1 = Topic.new("Quest1","I need my organs back")
     local mylines = {}
-    mylines[1] = "line 1\n"
-    mylines[2] = "line 2\n"
-    mylines[3] = "line 3\n"
+    mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
+    mylines[2] = "Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
+    mylines[3] = "If you can bring back anything high-tech you find there, I'll happily repair your eyes."
 
-    topic01:setLines(mylines)
-
+    quest1:setLines(mylines)
+    
+    local greeting = Topic.new("Greeting","Greeting")
     local mylines2 = {}
-    mylines2[1] = "t2line 1\n"
-    mylines2[2] = "t2line 2\n"
-    mylines2[3] = "t2line 3\n"
+    mylines2[1] = "Oh, it's you. I heard you came a long way to get here."
 
-    topic02:setLines(mylines2)
+    greeting:setLines(mylines2)
 
-    diag:addTopic(topic01)
-    diag:addTopic(topic02)
+    local quest1 = Topic.new("Quest1Return","I have something from the observatory.")
+    local mylines = {}
+    mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
+    mylines[2] = "Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
+    mylines[3] = "If you can bring back anything high-tech you find there, I'll happily repair your eyes."
+
+    quest1:setLines(mylines)
+
+    local quest1return = Topic.new("Quest1Return","I have something from the observatory.")
+    local mylines = {}
+    mylines[1] = "Oh, excellent! Come right this way, I'll fix your eyes up for you."
+
+    quest1return:setLines(mylines)
+    
+
+    local quest2 = Topic.new("Quest1Return","What about my lungs? My heart?")
+    local mylines = {}
+    mylines[1] = "You don't quit, do you... While you were gone, the nearby raiders tried to launch another attack. I am too busy helping these people to fix your faulty cybernetics."
+    mylines[2] = "Look, the raiders came from an airship north of here. Tell you what, if you can kill their leader and force them to retreat, I'll happily repair the rest of your organs."
+
+    quest2:setLines(mylines)
+    
+
+    local quest2return = Topic.new("Quest2Return","I killed their leader.")
+    local mylines = {}
+    mylines[1] = "What, really? Good on you! Excellent! Thank you so much! For a while at least, the people of this town will no longer have to suffer and fear when the next raid will come."
+    mylines[2] = "Please, come with me, I'll fix the rest of your organs for you"
+
+    quest2return:setLines(mylines)
+    
+    
+
+    quest1.questEvent = true
+    quest2.questEvent = true
+    quest1return.questEvent = true
+    quest2return.questEvent = true
+
+
+
+    diag:addTopic(greeting)
+    diag:addTopic(quest1)
+    diag:addTopic(quest2)
+    diag:addTopic(quest1return)
+    diag:addTopic(quest2return)
 
     NPC01.dialogue = diag
     NPC01:setDialogue(diag)
+
+
+
+    --[[
+    
+    Oh, it's you. I heard you came a long way to get here.
+
+    I need my organs back
+
+    Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal...
+    Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself. If you can bring back anything high-tech you find there, I'll happily repair your eyes.
+
+    Take me to the observatory / to the airship / back to town
+
+    If you insist, I can show you the way there. Come on.
+
+    Hello again. Any luck?
+
+    I have something from the observatory.
+
+    Oh, excellent! Come right this way, I'll fix your eyes up for you.
+
+    Your cybernetic eyes have been restored. With your improved accuracy, you deal +10 damage with your gun.
+
+    What about my lungs? My heart?
+
+    You don't quit, do you... While you were gone, the nearby raiders tried to launch another attack. I am too busy helping these people to fix your faulty cybernetics.
+
+    Please.
+
+    Look, the raiders came from an airship north of here. Tell you what, if you can kill their leader and force them to retreat, I'll happily repair the rest of your organs.
+
+    Okay.
+
+    What, really? Good on you! I'll see you later, then.
+
+    Hello again. Any news?
+
+    I killed their leader.
+
+    Excellent! Thank you so much! For a while at least, the people of this town will no longer have to suffer and fear when the next raid will come. Please, come with me, I'll fix the rest of your organs for you.
+
+
+
+    ]]
 
     NPC01:makeIdle()
 
 
     scene:AddInstance(NPC01) 
+
+    
+    --Initialise quests
+    questManager = QuestManager.new()
+    local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
+    local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
+    local stage3 = QuestStage.new("ObsReturn",TALK,"NPC01","Quest1Return")
+
+    local stage4 = QuestStage.new("AirGetQuest",TALK,"NPC01","Quest2")
+    local stage5 = QuestStage.new("AirKillBoss",KILL,"Boss")
+    local stage6 = QuestStage.new("AirReturn",TALK,"NPC01","Quest2Return")
+    
+
+    local stages = {stage1,stage2,stage3,stage4,stage5,stage6}
+    local talkToBob = Quest.new("TalkToBob",stages,6)
+    questManager:addQuest(talkToBob)
+
+	LoadQuests("../SaveData/QUE_Data.csv")
+
+    
+    loc = {x=900,y=0,z=900}
+    scale = {x=25,y=25,z=25}
+    dir = {x=0,y=1,z=0}
+    boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
+
+
+
 
     emptyVec = {x=0,y=0,z=0}
     scale = {x=10,y=10,z=10}
@@ -246,15 +357,8 @@ function Initialize()
     player0:setWeapon(basicGun)
 
     
-    --Initialise quests
-    questManager = QuestManager.new()
-    local stage1 = QuestStage.new("MeetBob",TALK,"NPC01","Greeting")
-    local stage2 = QuestStage.new("GetQuest",TALK,"NPC01","Quest1")
 
-    local stages = {stage1,stage2}
-    local talkToBob = Quest.new("TalkToBob",stages,2)
-    questManager:addQuest(talkToBob)
-	LoadQuests("../SaveData/QUE_Data.csv")
+
 	initMenu()
 	
     printAPI.print('Initialization finished.\n')
