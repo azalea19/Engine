@@ -1,6 +1,6 @@
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 dofile '../Assets/Scripts/3DUtility.lua'
-dofile '../Assets/Scripts/Weapon.lua'
+local Weapon = dofile '../Assets/Scripts/Weapon.lua'
 
 --local gameObject = require 'gameObject'
 

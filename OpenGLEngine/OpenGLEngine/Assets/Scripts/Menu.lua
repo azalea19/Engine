@@ -142,6 +142,8 @@ function updateMenu()
 					SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
+					savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
+					saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
 					changeMenu(0)
 				end
 				if currentSaveFile == 2 then
@@ -149,6 +151,8 @@ function updateMenu()
 					SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
+					savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
+					saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
 					changeMenu(0)
 				end
 				if currentSaveFile == 3 then
@@ -156,6 +160,8 @@ function updateMenu()
 					SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
+					savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
+					saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
 					changeMenu(0)
 				end
 				
@@ -176,15 +182,15 @@ function updateMenu()
 						--end
 					--end
 					if currentSaveFile == 1 then
-						newGame("../Saves/Slot1")
+						newGame("../Saves/Slot1/")
 						inMenu = false
 					end
 					if currentSaveFile == 2 then
-						newGame("../Saves/Slot2")
+						newGame("../Saves/Slot2/")
 						inMenu = false
 					end
 					if currentSaveFile == 3 then
-						newGame("../Saves/Slot3")
+						newGame("../Saves/Slot3/")
 						inMenu = false
 					end
 
@@ -206,15 +212,15 @@ function updateMenu()
 						--end
 						
 						if currentSaveFile == 1 then
-							newGame("../InitialData")
+							newGame("../SaveData/")
 							inMenu = false
 						end
 						if currentSaveFile == 2 then
-							newGame("../InitialData")
+							newGame("../SaveData/")
 							inMenu = false
 						end
 						if currentSaveFile == 3 then
-							newGame("../InitialData")
+							newGame("../SaveData/")
 							inMenu = false
 						end
 						end
@@ -228,8 +234,8 @@ end
 
 function newGame(folder)
 	printAPI.print('Initialising Scenes...\n')
-	local GOData = LoadInstances("../Saves/Slot1/GO_Data.csv", "gameObject")
-	local NPCData = LoadInstances("../Saves/Slot1/NPC_Data.csv", "npc")
+	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject")
+	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc")
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
@@ -257,6 +263,9 @@ function newGame(folder)
     -- Initialise weapon
     basicGun = Weapon.new("basicGun","Gun",100,1)
     player0:setWeapon(basicGun)
+	
+	loadWeapons(folder .. "WEAPON_Data.csv")
+	loadPlayer(folder .. "PLAYER_Data.csv", player0)
 
     --Initialise quests
     questManager = QuestManager.new()
@@ -270,105 +279,105 @@ function newGameButton()
 end
 
 function changeMenu(num)
-currentSaveFile = 0
-if num == 0 then
-	ButtonOne.active = false
-	ButtonTwo.active = false
-	ButtonThree.active = false
-	BackButton.active = false
-	StartNewButton.active = true
-	ContinueButton.active = true
-	SaveButton.active = true
-	LoadButton.active = true
-	ExitButton.active = true
-	currentMenu = 0
-	MenuButtons = {}
-	MenuButtonsBox = {}
-	table.insert(MenuButtons, StartNewButton)
-	table.insert(MenuButtons, ContinueButton)
-	table.insert(MenuButtons, LoadButton)
-	table.insert(MenuButtons, SaveButton)
-	table.insert(MenuButtons, ExitButton)
-	
-	table.insert(MenuButtonBoxes, StartNewButton:BBToWorld())
-	table.insert(MenuButtonBoxes, ContinueButton:BBToWorld())
-	table.insert(MenuButtonBoxes, LoadButton:BBToWorld())
-	table.insert(MenuButtonBoxes, SaveButton:BBToWorld())
-	table.insert(MenuButtonBoxes, ExitButton:BBToWorld())
-	totalButtons = 5
-end
-if num == 1 then
-	ButtonOne.active = true
-	ButtonTwo.active = true
-	ButtonThree.active = true
-	BackButton.active = true
-	StartNewButton.active = false
-	ContinueButton.active = false
-	SaveButton.active = false
-	LoadButton.active = false
-	ExitButton.active = false
-	currentMenu = 1
-	MenuButtons = {}
-	MenuButtonsBox = {}
-	table.insert(MenuButtons, ButtonOne)
-	table.insert(MenuButtons, ButtonTwo)
-	table.insert(MenuButtons, ButtonThree)
-	table.insert(MenuButtons, BackButton)
-	
-	table.insert(MenuButtonBoxes, ButtonOne:BBToWorld())
-	table.insert(MenuButtonBoxes, ButtonTwo:BBToWorld())
-	table.insert(MenuButtonBoxes, ButtonThree:BBToWorld())
-	table.insert(MenuButtonBoxes, BackButton:BBToWorld())
-	totalButtons = 4
-end
-if num == 2 then
-	ButtonOne.active = true
-	ButtonTwo.active = true
-	ButtonThree.active = true
-	BackButton.active = true
-	StartNewButton.active = false
-	ContinueButton.active = false
-	SaveButton.active = false
-	LoadButton.active = false
-	ExitButton.active = false
-	currentMenu = 2
-	MenuButtons = {}
-	MenuButtonsBox = {}
-	table.insert(MenuButtons, ButtonOne)
-	table.insert(MenuButtons, ButtonTwo)
-	table.insert(MenuButtons, ButtonThree)
-	table.insert(MenuButtons, BackButton)
-	
-	table.insert(MenuButtonBoxes, ButtonOne:BBToWorld())
-	table.insert(MenuButtonBoxes, ButtonTwo:BBToWorld())
-	table.insert(MenuButtonBoxes, ButtonThree:BBToWorld())
-	table.insert(MenuButtonBoxes, BackButton:BBToWorld())
-	totalButtons = 4
-end
-if num == 3 then
-	ButtonOne.active = true
-	ButtonTwo.active = true
-	ButtonThree.active = true
-	BackButton.active = true
-	StartNewButton.active = false
-	ContinueButton.active = false
-	SaveButton.active = false
-	LoadButton.active = false
-	ExitButton.active = false
-	currentMenu = 3
-	MenuButtons = {}
-	MenuButtonsBox = {}
-	table.insert(MenuButtons, ButtonOne)
-	table.insert(MenuButtons, ButtonTwo)
-	table.insert(MenuButtons, ButtonThree)
-	table.insert(MenuButtons, BackButton)
-	
-	table.insert(MenuButtonBoxes, ButtonOne:BBToWorld())
-	table.insert(MenuButtonBoxes, ButtonTwo:BBToWorld())
-	table.insert(MenuButtonBoxes, ButtonThree:BBToWorld())
-	table.insert(MenuButtonBoxes, BackButton:BBToWorld())
-	totalButtons = 4
-end
+	currentSaveFile = 0
+	if num == 0 then
+		ButtonOne.active = false
+		ButtonTwo.active = false
+		ButtonThree.active = false
+		BackButton.active = false
+		StartNewButton.active = true
+		ContinueButton.active = true
+		SaveButton.active = true
+		LoadButton.active = true
+		ExitButton.active = true
+		currentMenu = 0
+		MenuButtons = {}
+		MenuButtonsBox = {}
+		table.insert(MenuButtons, StartNewButton)
+		table.insert(MenuButtons, ContinueButton)
+		table.insert(MenuButtons, LoadButton)
+		table.insert(MenuButtons, SaveButton)
+		table.insert(MenuButtons, ExitButton)
+		
+		table.insert(MenuButtonBoxes, StartNewButton:BBToWorld())
+		table.insert(MenuButtonBoxes, ContinueButton:BBToWorld())
+		table.insert(MenuButtonBoxes, LoadButton:BBToWorld())
+		table.insert(MenuButtonBoxes, SaveButton:BBToWorld())
+		table.insert(MenuButtonBoxes, ExitButton:BBToWorld())
+		totalButtons = 5
+	end
+	if num == 1 then
+		ButtonOne.active = true
+		ButtonTwo.active = true
+		ButtonThree.active = true
+		BackButton.active = true
+		StartNewButton.active = false
+		ContinueButton.active = false
+		SaveButton.active = false
+		LoadButton.active = false
+		ExitButton.active = false
+		currentMenu = 1
+		MenuButtons = {}
+		MenuButtonsBox = {}
+		table.insert(MenuButtons, ButtonOne)
+		table.insert(MenuButtons, ButtonTwo)
+		table.insert(MenuButtons, ButtonThree)
+		table.insert(MenuButtons, BackButton)
+		
+		table.insert(MenuButtonBoxes, ButtonOne:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonTwo:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonThree:BBToWorld())
+		table.insert(MenuButtonBoxes, BackButton:BBToWorld())
+		totalButtons = 4
+	end
+	if num == 2 then
+		ButtonOne.active = true
+		ButtonTwo.active = true
+		ButtonThree.active = true
+		BackButton.active = true
+		StartNewButton.active = false
+		ContinueButton.active = false
+		SaveButton.active = false
+		LoadButton.active = false
+		ExitButton.active = false
+		currentMenu = 2
+		MenuButtons = {}
+		MenuButtonsBox = {}
+		table.insert(MenuButtons, ButtonOne)
+		table.insert(MenuButtons, ButtonTwo)
+		table.insert(MenuButtons, ButtonThree)
+		table.insert(MenuButtons, BackButton)
+		
+		table.insert(MenuButtonBoxes, ButtonOne:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonTwo:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonThree:BBToWorld())
+		table.insert(MenuButtonBoxes, BackButton:BBToWorld())
+		totalButtons = 4
+	end
+	if num == 3 then
+		ButtonOne.active = true
+		ButtonTwo.active = true
+		ButtonThree.active = true
+		BackButton.active = true
+		StartNewButton.active = false
+		ContinueButton.active = false
+		SaveButton.active = false
+		LoadButton.active = false
+		ExitButton.active = false
+		currentMenu = 3
+		MenuButtons = {}
+		MenuButtonsBox = {}
+		table.insert(MenuButtons, ButtonOne)
+		table.insert(MenuButtons, ButtonTwo)
+		table.insert(MenuButtons, ButtonThree)
+		table.insert(MenuButtons, BackButton)
+		
+		table.insert(MenuButtonBoxes, ButtonOne:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonTwo:BBToWorld())
+		table.insert(MenuButtonBoxes, ButtonThree:BBToWorld())
+		table.insert(MenuButtonBoxes, BackButton:BBToWorld())
+		totalButtons = 4
+	end
 
 
 end
@@ -379,32 +388,32 @@ function loadGame()
 end
 
 function saveGame()
-			printAPI.print("SaveGame")
+	printAPI.print("SaveGame")
 	changeMenu(1)
 end
 
 function back()
-			printAPI.print("Back")
+	printAPI.print("Back")
 	changeMenu(0)
 end
 
 function quitGame()
-			printAPI.print("Quit")
+	printAPI.print("Quit")
 	run = false
 end
 
 function buttonOne()
-			printAPI.print("One")
+	printAPI.print("One")
 	currentSaveFile = 1
 end
 
 function buttonTwo()
-			printAPI.print("Two")
+	printAPI.print("Two")
 	currentSaveFile = 2
 end
 
 function buttonThree()
-			printAPI.print("Three")
+	printAPI.print("Three")
 	currentSaveFile = 3
 end
 

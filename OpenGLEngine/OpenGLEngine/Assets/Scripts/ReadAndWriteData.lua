@@ -6,6 +6,7 @@ local Player = require 'Player'
 require 'FileIO'
 ]]
 local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
+local Weapon = dofile '../Assets/Scripts/Weapon.lua'
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 local AABoundingBox = dofile '../Assets/Scripts/AABoundingBox.lua'
 local npc = dofile '../Assets/Scripts/npc.lua'
@@ -152,6 +153,102 @@ function LoadInstances(filePath, fileType)
 	end	
 	
 	return outputData
+end
+
+function loadWeapons(filePath)	--data is an array of weapons
+	local outputData = {}
+	local fileData= read(filePath, ',')
+	local numRows = 0
+
+	for k,v in next, fileData do 
+		numRows = numRows + 1
+	end
+	
+	local i = 1
+	while i <= numRows do
+		local nWeaponID = fileData[i][1]
+		local nName = fileData[i][2]
+		local nDamage = fileData[i][3]
+		local nInterval = fileData[i][4]
+		local nRange = fileData[i][5]
+		
+		local newWeapon = Weapon.new(nWeaponID, nName, nDamage, nInterval, nRange)
+		
+		table.insert(outputData, newWeapon)
+		
+		i = i + 1
+	end
+	
+	printAPI.print(numRows .. ' weapons loaded.\n')
+	
+	return outputData
+end
+
+function savePlayer(filePath, data)
+	local numRows = 0
+
+	local saveTable = {}
+	local saveString = ""
+
+	clearFile(filePath)
+
+	saveTable[#saveTable + 1] =  data.position.x 
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.position.y
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.position.z
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data:getYaw()
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data:getPitch()
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.currentHealth
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  data.weapon
+	
+	saveString = table.concat(saveTable)
+	write(filePath, saveString)
+	
+	printAPI.print('Player saved.\n')
+end
+
+function saveWeapons(filePath, data)	--data is a array of weapons
+	local saveTable = {}
+	local saveString = ""
+
+	clearFile(filePath)
+	
+	for i = 1, #data do
+		saveTable[#saveTable + 1] =  data.id
+		saveTable[#saveTable + 1] =  "," 
+		saveTable[#saveTable + 1] =  data.name
+		saveTable[#saveTable + 1] =  "," 
+		saveTable[#saveTable + 1] =  data.damage
+		saveTable[#saveTable + 1] =  "," 
+		saveTable[#saveTable + 1] =  data.shootInterval
+		saveTable[#saveTable + 1] =  "," 
+		saveTable[#saveTable + 1] =  data.range
+		saveTable[#saveTable + 1] =  "\n" 
+	end
+	
+	saveString = table.concat(saveTable)
+	write(filePath, saveString)
+	
+	printAPI.print(#data .. 'Weapons saved.\n')
+end
+
+function loadPlayer(filePath, player)	--player is a ref to the player
+	local fileData= read(filePath, ',')
+
+	pos = {x=fileData[1][1],y=fileData[1][2],z=fileData[1][3]}
+
+	player:setPosition(pos)
+	player:setYaw(fileData[1][4])
+	player:setPitch(fileData[1][5])
+	player.currentHealth = fileData[1][6]
+	player.weapon = fileData[1][7]
+	
+	printAPI.print('Player loaded.\n')
 end
 
 function SaveQuests(filePath, data)

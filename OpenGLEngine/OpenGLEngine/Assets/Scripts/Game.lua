@@ -17,6 +17,7 @@ local npc = dofile '../Assets/Scripts/npc.lua'
 local Player = dofile '../Assets/Scripts/Player.lua'
 local Scene = dofile '../Assets/Scripts/Scene.lua'
 local World = dofile '../Assets/Scripts/World.lua'
+local Weapon = dofile '../Assets/Scripts/Weapon.lua'
 
 --local QuestManager = require '../Assets/Scripts/QuestManager'
 dofile '../Assets/Scripts/Dialogue.lua'
