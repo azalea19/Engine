@@ -57,10 +57,6 @@ function LoadAssets()
     modelLibraryAPI.addModel("btnContinue","../Assets/Models/UI/continue.obj",false)
     modelLibraryAPI.addModel("whiteCube","../Assets/Models/UI/whitecube.obj",false)
     modelLibraryAPI.addModel("Observatory","../Assets/Models/ObservatoryOutpost/ObservatoryOutpost_fin.obj",false)
-
-
-
-
 	modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
 	modelLibraryAPI.addModel("GeneralStore","../Assets/Models/GeneralStore/gs.obj",false)
 	modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon.obj",false)

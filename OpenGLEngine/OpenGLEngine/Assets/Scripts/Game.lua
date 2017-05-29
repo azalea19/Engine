@@ -496,6 +496,14 @@ function Update()
                 dialogueText = dCurrentTopic.textLines[dCurrentLine]
                 dInMenu = false
 
+                if(dCurrentTopic.name == "Teleport1") then
+                    dInMenu = false
+                    player0.inDalogue = false
+                    player0.position = Vector3.new(500,0,1500)
+                end
+                
+
+
             else
                 debugLPrint("Next line in topic is nil.\n")
                 StartDialogue(player0.lookTarget)
