@@ -36,6 +36,7 @@ OPEN_GL = 0
 
 gameObjects = {}
 world = {}
+weaponList = {}
 debug = true
 debugdetail = false
 
@@ -324,7 +325,9 @@ function Initialize()
     -- Initialise weapon
 
     basicGun = Weapon.new("basicGun","Gun",1,1)
-    player0:setWeapon(basicGun)
+	table.insert(weaponList,basicGun);
+	
+    player0:setWeapon("basicGun")
 
     
 
@@ -519,9 +522,10 @@ function Update()
     end
 
 	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
-		local currentGOs = world:GetGameObjects()
-		SaveInstances("../SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
-		SaveInstances("../SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
+		--local currentGOs = world:GetGameObjects()
+		saveAllToCurrentSave()
+		--SaveInstances("../SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
+		--SaveInstances("../SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
 	end
 
 	if inputManagerAPI.isKeyPressed(Quickload_Input) then
@@ -537,7 +541,11 @@ function Update()
 		printAPI.print('Initialising objects...\n')
 		local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject")
 		local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc")
-
+		loadWeapons("../SaveData/WEAPON_Data.csv")
+		loadPlayer("../SaveData/PLAYER_Data.csv", player0)
+		questManager = QuestManager.new()
+		LoadQuests("../SaveData/QUE_Data.csv")
+		LoadTopics("../SaveData/DIA_Data.csv")
 		world:AddInstances(GOData)
 		world:AddInstances(NPCData)
 		world:SetupInstances()

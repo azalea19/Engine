@@ -21,7 +21,8 @@ function Player.new(newCam,newCurrentHealth,newMaxHealth)
 		weapon = nil,
 		lastTimeShot = nil, -- Last time player shot ranged weapon
         trackTerrain = true,
-		weapon = nil
+		weapon = {},
+		weaponID
 	}
 
 	setmetatable(instance, Player)
@@ -31,8 +32,15 @@ end
 
 
 function Player:setWeapon(newWeapon)
-	self.weapon = newWeapon
+	for i=1,#weaponList do
+		if(weaponList[i].id == newWeapon) then
+			debugLPrint("Found weapon\n")
+			self.weapon = weaponList[i]
+		end
+	end
+	self.weaponID = newWeapon
 end
+
 function Player:getPosition()
 	return self.position
 end

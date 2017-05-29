@@ -10,7 +10,7 @@ MenuButtons = {}
 MenuButtonBoxes = {}
 currentMenu = 1 -- 0MainMenu, 1SaveGame, 2LoadGame
 currentSelectedSaveFile = 0
-currentSaveFile = 0
+currentSaveFile = 1
 inMenu = false
 menuCount = 0
 currentDifficulty = 1
@@ -301,11 +301,13 @@ function newGame(folder, difficulty)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
     -- Initialise weapon
-    basicGun = Weapon.new("basicGun","Gun",100,1)
-    player0:setWeapon(basicGun)
-	
+
+	weaponList = {}
 	loadWeapons(folder .. "WEAPON_Data.csv")
 	loadPlayer(folder .. "PLAYER_Data.csv", player0)
+	
+    basicGun = Weapon.new("basicGun","Gun",100,1)
+    player0:setWeapon("basicGun")
 
     --Initialise quests
     questManager = QuestManager.new()
