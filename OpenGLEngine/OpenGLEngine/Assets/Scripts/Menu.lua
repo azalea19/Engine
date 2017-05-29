@@ -131,9 +131,9 @@ function updateMenu()
 	MouseObject:setPosition(newPos)
 
 	if currentMenu == 0 then
-		--if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+		if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 		
-						local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+				local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 				printAPI.print(MenuButtons[colIndex].name .. "\n")
 
 			if(inputManagerAPI.isMousePressedLeft()) then
@@ -144,10 +144,10 @@ function updateMenu()
 				end
 				last = true
 			end
-		--end
+		end
 	else
 		if currentMenu == 1 then
-			--if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+			if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 			
 							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 					printAPI.print(MenuButtons[colIndex].name .. "\n")
@@ -192,10 +192,10 @@ function updateMenu()
 				end
 				
 				end
-			--end
+			end
 		else
 			if currentMenu == 2 then
-				--if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+				if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 				
 								local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 						printAPI.print(MenuButtons[colIndex].name .. "\n")
@@ -224,11 +224,11 @@ function updateMenu()
 					end
 
 					end
-				--end
+				end
 			else
 				if currentMenu == 3 then
-					--if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
-					
+					if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+						
 						local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 						printAPI.print(MenuButtons[colIndex].name .. "\n")
 					
@@ -255,7 +255,7 @@ function updateMenu()
 					end
 				else
 					if currentMenu == 4 then
-						if(islandCollisionAPI.checkAnyCollision(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+						if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 						
 							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 							printAPI.print(MenuButtons[colIndex].name .. "\n")
@@ -268,7 +268,7 @@ function updateMenu()
 					end	
 				end
 			end
-		--end
+		end
 	end
 end
 

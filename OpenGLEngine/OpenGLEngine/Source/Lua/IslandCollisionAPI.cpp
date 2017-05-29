@@ -24,6 +24,7 @@ bool Check(mAABB a, std::vector<mAABB> list, int listSize)
 	}
 	return false;
 }
+
 int IslandCollisionAPI::CheckAnyCollisionGetIndex(LuaRef thisbox, LuaRef manyList, int listSize)
 {
 	mAABB toMoveBB;
@@ -62,7 +63,7 @@ void IslandCollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPINam
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
 	pContext->ExposeFunction(luaAPIName, "checkAnyCollision", CheckAnyCollision);
 	pContext->ExposeFunction(luaAPIName, "checkAnyCollisionGetIndex", CheckAnyCollisionGetIndex);
-
+	pContext->ExposeFunction(luaAPIName, "check", Check);
 	pContext->ExposeFunction(luaAPIName, "resolve", Resolve);
 }
 
