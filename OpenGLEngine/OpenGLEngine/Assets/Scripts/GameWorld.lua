@@ -53,13 +53,9 @@ function CreateTown(myscene)
 	--Terrain01 = luaObjInstManager.addNewInstance("Terrain")
 	--objectInstanceAPI.setTranslation(Terrain01,0,0,0)
 
-	skybox = luaObjInstManager.addNewInstance("Skybox")
-	DealWith(skybox, 0,0, 1000,1000,1000, 0,0,0)
+	soundAPI.playSound("HappyHour",0)
 
-	--gunShop = luaObjInstManager.addNewInstance("GunShop")
-	--objectInstanceAPI.setScale(gunShop, 1, 1, 1)
-	--objectInstanceAPI.setTranslation(gunShop, 200, GetHeightAtPoint(50, 50) - 10, 200)
-	--collidableObjects[#collidableObjects + 1] = gunShop
+	 --function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 	gunShop = gameObject.new("0","GunShop","GunShop",Vector3.new(1024,0,1029),Vector3.new(0,0,0), Vector3.new(.008,.008,.008),0)
 	myscene:AddInstance(gunShop)
 
