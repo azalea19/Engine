@@ -130,145 +130,95 @@ function updateMenu()
 	MouseObject:setPosition(newPos)
 --printAPI.print(currentPos.x .. "," .. currentPos.y .. "\n")
 --printAPI.print(StartNewButton:BBToWorld().min.x .. "," .. StartNewButton:BBToWorld().min.y .. " " .. StartNewButton:BBToWorld().max.x .. "," .. StartNewButton:BBToWorld().max.y .. "\n\n")
-	if currentMenu == 0 then
-		if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
-		
-			local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-			printAPI.print(MenuButtons[colIndex].name .. "\n")
+  if(inputManagerAPI.isMousePressedLeft()) then
+    local colIndex = 0
+    for i = 1, #MenuButtons, 1 do
+      if collisionAPI.objectCollidesWithObject(MouseObject.id, MenuButtons[i].id) then
+        colIndex = i
+      end
+    end
 
-			if(inputManagerAPI.isMousePressedLeft()) then
-				local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-				printAPI.print(MenuButtons[colIndex].name)
-				if  MenuButtons[colIndex].active then
-					MenuButtons[colIndex].option()
-				end
-			end
-		end
-	else
-		if currentMenu == 1 then
-			if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
-			
-							local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-					printAPI.print(MenuButtons[colIndex].name .. "\n")
-					
-				if(inputManagerAPI.isMousePressedLeft()) then
-					local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-					--if  MenuButtons[colIndex].active == true then
-						printAPI.print("SUCC")
-						MenuButtons[colIndex].option()
-					--end
-				--end
-				
-				if currentSelectedSaveFile == 1 then
-					local tmp = world:GetGameObjects()
-					SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
-					SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
-					SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
-					savePlayer("../Saves/Slot1/PLAYER_Data.csv", player0)
-					saveWeapons("../Saves/Slot1/WEAPON_Data.csv", weaponList)
-					currentSaveFile = 1
-					changeMenu(0)
-				end
-				if currentSelectedSaveFile == 2 then
-					local tmp = world:GetGameObjects()
-					SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
-					SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
-					SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
-					savePlayer("../Saves/Slot2/PLAYER_Data.csv", player0)
-					saveWeapons("../Saves/Slot2/WEAPON_Data.csv", weaponList)
-					currentSaveFile = 2
-					changeMenu(0)
-				end
-				if currentSelectedSaveFile == 3 then
-					local tmp = world:GetGameObjects()
-					SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
-					SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
-					SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
-					savePlayer("../Saves/Slot3/PLAYER_Data.csv", player0)
-					saveWeapons("../Saves/Slot3/WEAPON_Data.csv", weaponList)
-					currentSaveFile = 3
-					changeMenu(0)
-				end
-				
-				end
-			end
-		else
-			if currentMenu == 2 then
-				if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
-				
-								local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-						printAPI.print(MenuButtons[colIndex].name .. "\n")
-				
-					if(inputManagerAPI.isMousePressedLeft()) then
-						local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-						--if  MenuButtons[colIndex].active == true then
-						printAPI.print("SUCC")
-							MenuButtons[colIndex].option()
-						--end
-					--end
-					if currentSelectedSaveFile == 1 then
-						newGame("../Saves/Slot1/", 1)
-						currentSaveFile = 1
-						inMenu = false
-					end
-					if currentSelectedSaveFile == 2 then
-						newGame("../Saves/Slot2/", 1)
-						currentSaveFile = 2
-						inMenu = false
-					end
-					if currentSelectedSaveFile == 3 then
-						newGame("../Saves/Slot3/", 1)
-						currentSaveFile = 3
-						inMenu = false
-					end
-
-					end
-				end
-			else
-				if currentMenu == 3 then
-					if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
-						
-						local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-						printAPI.print(MenuButtons[colIndex].name .. "\n")
-					
-						if(inputManagerAPI.isMousePressedLeft()) then
-							local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-							MenuButtons[colIndex].option()
-						
-							if currentSelectedSaveFile == 1 then
-								newGame("../SaveData/", currentDifficulty)
-								currentSaveFile = 1
-								inMenu = false
-							end
-							if currentSelectedSaveFile == 2 then
-								newGame("../SaveData/", currentDifficulty)
-								currentSaveFile = 2
-								inMenu = false
-							end
-							if currentSelectedSaveFile == 3 then
-								newGame("../SaveData/", currentDifficulty)
-								currentSaveFile = 3
-								inMenu = false
-							end
-						end
-					end
-				else
-					if currentMenu == 4 then
-						if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
-						
-							local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-							printAPI.print(MenuButtons[colIndex].name .. "\n")
-						
-							if(inputManagerAPI.isMousePressedLeft()) then
-								local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-								MenuButtons[colIndex].option()
-							end
-						end
-					end	
-				end
-			end
-		end
-	end
+    if(colIndex > 0) then
+    	printAPI.print(MenuButtons[colIndex].name .. "\n")
+	  	if  MenuButtons[colIndex].active then
+	  		MenuButtons[colIndex].option()
+        if currentMenu == 0 then
+	      else
+	      	if currentMenu == 1 then
+	      	  if currentSelectedSaveFile == 1 then
+	      	  	local tmp = world:GetGameObjects()
+	      	  	SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
+	      	  	SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
+	      	  	SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
+	      	  	savePlayer("../Saves/Slot1/PLAYER_Data.csv", player0)
+	      	  	saveWeapons("../Saves/Slot1/WEAPON_Data.csv", weaponList)
+	      	  	currentSaveFile = 1
+	      	  	changeMenu(0)
+	      	  end
+	      	  if currentSelectedSaveFile == 2 then
+	      	  	local tmp = world:GetGameObjects()
+	      	  	SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
+	      	  	SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
+	      	  	SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
+	      	  	savePlayer("../Saves/Slot2/PLAYER_Data.csv", player0)
+	      	  	saveWeapons("../Saves/Slot2/WEAPON_Data.csv", weaponList)
+	      	  	currentSaveFile = 2
+	      	  	changeMenu(0)
+	      	  end
+	      	  if currentSelectedSaveFile == 3 then
+	      	  	local tmp = world:GetGameObjects()
+	      	  	SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
+	      	  	SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
+	      	  	SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
+	      	  	savePlayer("../Saves/Slot3/PLAYER_Data.csv", player0)
+	      	  	saveWeapons("../Saves/Slot3/WEAPON_Data.csv", weaponList)
+	      	  	currentSaveFile = 3
+	      	  	changeMenu(0)
+	      	  end
+	      	else
+	      		if currentMenu == 2 then
+	      		  if currentSelectedSaveFile == 1 then
+	      			  newGame("../Saves/Slot1/", 1)
+	      			  currentSaveFile = 1
+	      			  inMenu = false
+	      		  end
+	      		  if currentSelectedSaveFile == 2 then
+	      			  newGame("../Saves/Slot2/", 1)
+	      			  currentSaveFile = 2
+	      			  inMenu = false
+	      		  end
+	      		  if currentSelectedSaveFile == 3 then
+	      			  newGame("../Saves/Slot3/", 1)
+	      			  currentSaveFile = 3
+	      			  inMenu = false
+	      		  end
+	      		else
+	      			if currentMenu == 3 then 					
+	      			  if currentSelectedSaveFile == 1 then
+	      				  newGame("../SaveData/", currentDifficulty)
+	      				  currentSaveFile = 1
+	      				  inMenu = false
+	      			  end
+	      			  if currentSelectedSaveFile == 2 then
+	      				  newGame("../SaveData/", currentDifficulty)
+	      				  currentSaveFile = 2
+	      				  inMenu = false
+	      			  end
+	      			  if currentSelectedSaveFile == 3 then
+	      				  newGame("../SaveData/", currentDifficulty)
+	      				  currentSaveFile = 3
+	      				  inMenu = false
+	      			  end
+	      			else
+	      				if currentMenu == 4 then
+	      				end	
+	      			end
+	      		end
+	      	end
+	      end
+      end
+    end
+  end
 end
 
 function newGame(folder, difficulty)

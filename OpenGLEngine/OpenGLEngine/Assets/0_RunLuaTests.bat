@@ -16,4 +16,5 @@ lua Scripts\Vector3.lua
 lua Scripts\World.lua
 lua Scripts\Load.lua
 lua Scripts\GameWorld.lua
+lua Scripts\Menu.lua
 pause

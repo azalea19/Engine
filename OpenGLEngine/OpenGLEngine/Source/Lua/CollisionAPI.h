@@ -35,6 +35,8 @@ public:
 
   static bool ObjectInstance_CollidingInTree(InstanceHandle objectInstance);
 
+  static bool ObjectCollidesWithObject(InstanceHandle a, InstanceHandle b);
+
 
 	/// <summary>
 	/// Exposes this lua API.

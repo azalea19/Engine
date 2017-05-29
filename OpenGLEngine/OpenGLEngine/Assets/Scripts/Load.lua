@@ -65,7 +65,7 @@ function LoadAssets()
 	modelLibraryAPI.addModel("GeneralStore","../Assets/Models/GeneralStore/gs.obj",false)
 	modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon.obj",false)
 	modelLibraryAPI.addModel("Blacksmith","../Assets/Models/Blacksmith/bs.obj",false)
-	modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
+	--modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
     
