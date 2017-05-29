@@ -280,6 +280,7 @@ function newGame(folder, difficulty)
 	scene = Scene.new("Level1", Terrain01, startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
+	CreateTerrain(scene)
     currentScene = scene
 	world = World.new(player0)
 	world:AddScene(scene)
@@ -291,13 +292,12 @@ function newGame(folder, difficulty)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
     -- Initialise weapo
 	weaponList = {}
-	loadWeapons(folder .. "WEAPON_Data.csv")
+	weaponList = loadWeapons(folder .. "WEAPON_Data.csv")
 	loadPlayer(folder .. "PLAYER_Data.csv", player0)
-    basicGun = Weapon.new("basicGun","Gun",100,1)
     player0:setWeapon("basicGun")
     --Initialise quests
     questManager = QuestManager.new()
-	LoadQuests("../Saves/Slot1/QUE_Data.csv")
+	LoadQuests(folder .. "QUE_Data.csv")
 end
 
 function newGameButton()

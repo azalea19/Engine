@@ -299,16 +299,20 @@ function saveWeapons(filePath, data)	--data is a array of weapons
 	clearFile(filePath)
 	
 	for i = 1, #data do
-		saveTable[#saveTable + 1] =  data.id
+		saveTable[#saveTable + 1] =  data[i].id
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.name
+		saveTable[#saveTable + 1] =  data[i].name
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.damage
+		saveTable[#saveTable + 1] =  data[i].damage
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.shootInterval
-		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.range
-		saveTable[#saveTable + 1] =  "\n" 
+		saveTable[#saveTable + 1] =  data[i].shootInterval
+		if(data[i].range == nil) then
+			saveTable[#saveTable + 1] =  "\n" 
+		else
+			saveTable[#saveTable + 1] =  "," 
+			saveTable[#saveTable + 1] =  data[i].range
+			saveTable[#saveTable + 1] =  "\n" 
+		end
 	end
 	
 	saveString = table.concat(saveTable)
