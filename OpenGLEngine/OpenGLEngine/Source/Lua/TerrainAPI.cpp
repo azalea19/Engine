@@ -20,9 +20,9 @@ LuaRef TerrainAPI::GenerateTerrain(uint terrainWidth, uint terrainHeight, uint h
   float temp;
   float temp2;
 
-	for (int y = 0; y < heightMapSize; y++)
+	for (uint y = 0; y < heightMapSize; y++)
 	{
-		for(int x = 0; x < heightMapSize; x++)
+		for(uint x = 0; x < heightMapSize; x++)
 		{
 			temp = tempTerrain.GetHeightMap()->GetHeightValueAtPixel(vec2(x,y)) * heightScale;
       temp2 = tempTerrain.GetAlphaMap()->GetHeightValueAtPixel(vec2(x, y));
@@ -31,8 +31,7 @@ LuaRef TerrainAPI::GenerateTerrain(uint terrainWidth, uint terrainHeight, uint h
 		}
 	}
 	LuaRef result = ToLuaTable(hmData, alphaData, heightMapSize, heightMapSize, contextHandle);
-	OBJWriter tempWriter;
-	tempWriter.SaveMeshToOBJ(tempTerrain, objPath);
+	OBJWriter::SaveMeshToOBJ(tempTerrain, objPath);
 
 	return result;
 }

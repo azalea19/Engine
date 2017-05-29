@@ -1,6 +1,6 @@
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 dofile '../Assets/Scripts/3DUtility.lua'
-dofile '../Assets/Scripts/Weapon.lua'
+local Weapon = dofile '../Assets/Scripts/Weapon.lua'
 
 --local gameObject = require 'gameObject'
 
@@ -47,15 +47,26 @@ end
 function idle(anpc)
 	debugPrint("NPC is Idling... ")
 	
-	
-    if (anpc.hostileToPlayer and anpc.seenPlayer) then
-    	debugPrint("NPC state changed to chasing during idle. ")
-
-        anpc.state = chasing
+	if(anpc.seenPlayer) then
+        if (anpc.hostileToPlayer) then
+    	    debugPrint("NPC state changed to chasing during idle. ")
+            anpc.state = chasing
+        else
+            anpc.state = looking
+        end
     end
+    
+    
+    
     debugPrint("NPC idling complete.\n")
 end
 
+
+function chasing(anpc)
+	debugPrint("NPC is Looking at player... ")
+    anpc:lookAt(player0.position)
+
+end
 
 function chasing(anpc)
 	debugPrint("NPC is Chasing... ")
@@ -174,20 +185,18 @@ function npc:Update()
 		end
 	end
 	
-	if
-	(
-	AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg
-	--or 
-	--Distance(npc:getPosition(), player:getPosition()) <= self.hearDist
-	) 
-	then
+	if (AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg) then
+		self.seenPlayer = true
+	end
+
+    if (Distance(self:getPosition(), player0:getPosition()) <= self.hearDist) then
 		self.seenPlayer = true
 	end
 	
 	if self.state ~= nil then
 		debugPrint("Running NPC state...")
 		self.state(self)
-		local an ={ x=self:getPosition().x, y = GetHeightAtPoint(self:getPosition().x , self:getPosition().z) +10, z = self:getPosition().z}
+		local an ={ x=self:getPosition().x, y = GetHeightAtPoint(self:getPosition().x , self:getPosition().z), z = self:getPosition().z}
 		self:setPosition(an)
 
 	end

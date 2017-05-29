@@ -110,9 +110,9 @@ float mTriangleArea(float a2, float b2, float c2)
 
 bool Intersects(LineSegment1D const & a, LineSegment1D const & b)
 {
-  if (b.start - a.end > FLT_EPSILON)
+  if (b.start >= a.end)
     return false;
-  if (a.start - b.end > FLT_EPSILON)
+  if (a.start >= b.end)
     return false;
 
 	return true;
@@ -126,7 +126,7 @@ bool Intersects(ConvexHull const & a, ConvexHull const & b)
 
   for (int i = 0; i < a.edgeDirs.size(); i++)
     for (int j = 0; j < b.edgeDirs.size(); j++)
-      temp.axes[originalAxisCount + i * b.edgeDirs.size() + j] = glm::cross(a.edgeDirs[i], b.edgeDirs[j]);
+      temp.axes[originalAxisCount + i * b.edgeDirs.size() + j] = normalize(glm::cross(a.edgeDirs[i], b.edgeDirs[j]));
 
   return SeperatingAxisTest(temp, b);
 }

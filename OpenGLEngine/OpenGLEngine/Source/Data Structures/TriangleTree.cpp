@@ -1,5 +1,6 @@
 #include "TriangleTree.h"
 #include "PrimitiveCollisions.h"
+#include "MMath.h"
 
 
 enum Axis;
@@ -59,10 +60,7 @@ static bool Intersects(mAABB const& box, Node const* node, std::vector<ConvexHul
     if (node->left)
     {
       //Pass box down to my children
-      if (!Intersects(box, node->left, collideables) && !Intersects(box, node->right, collideables))
-        return false;
-      else
-        return true;
+      return Intersects(box, node->left, collideables) || Intersects(box, node->right, collideables);
     }
     else
     {
@@ -87,10 +85,7 @@ static bool Intersects(mOBB const& box, Node const* node, std::vector<ConvexHull
     if (node->left)
     {
       //Pass box down to my children
-      if (!Intersects(box, node->left, collideables) && !Intersects(box, node->right, collideables))
-        return false;
-      else
-        return true;
+      return Intersects(box, node->left, collideables) || Intersects(box, node->right, collideables);
     }
     else
     {
@@ -164,24 +159,24 @@ static void SplitZ(Node* node)
 
 static void Split(Node* node, std::vector<int> &triangleIndexes, std::vector<ConvexHull> const& collideables, Axis axis, int depth)
 {
-  float xLength = node->box.max.x - node->box.min.x;
-  float yLength = node->box.max.y - node->box.min.y;
-  float zLength = node->box.max.z - node->box.min.z;
-  float longestAxis = xLength;
-  axis = X;
-  if (yLength > longestAxis)
-  {
-    axis = Y;
-    longestAxis = yLength;
-  }
-  if (zLength > longestAxis)
-  {
-    axis = Z;
-    longestAxis = zLength;
-  }
+  //float xLength = node->box.max.x - node->box.min.x;
+  //float yLength = node->box.max.y - node->box.min.y;
+  //float zLength = node->box.max.z - node->box.min.z;
+  //float longestAxis = xLength;
+  //axis = X;
+  //if (yLength > longestAxis)
+  //{
+  //  axis = Y;
+  //  longestAxis = yLength;
+  //}
+  //if (zLength > longestAxis)
+  //{
+  //  axis = Z;
+  //  longestAxis = zLength;
+  //}
 
   //Check if we have reached the depth limit for the tree
-  if (depth > 0 && triangleIndexes.size() > 20)
+  if (depth > 0 && triangleIndexes.size() > 5)
   {
     node->left = new Node();
     node->right = new Node();
@@ -196,75 +191,49 @@ static void Split(Node* node, std::vector<int> &triangleIndexes, std::vector<Con
     std::vector<int> leftPairs = GetObjectsInNode(node->left, triangleIndexes, collideables);
     std::vector<int> rightPairs = GetObjectsInNode(node->right, triangleIndexes,collideables);
 
-    //if (leftPairs.size() + rightPairs.size() < triangleIndexes.size())
-    //{
-      //std::vector<int> missingIndices;
-      //for (int i = 0; i < triangleIndexes.size(); i++)
-      //{
-      //  bool found = false;
-      //  for (int j = 0; j < leftPairs.size() && !found; j++)
-      //    if (leftPairs[j] == triangleIndexes[i])
-      //      found = true;
-
-      //  for (int j = 0; j < rightPairs.size() && !found; j++)
-      //    if (rightPairs[j] == triangleIndexes[i])
-      //      found = true;
-
-      //  if (!found)
-      //    missingIndices.push_back(triangleIndexes[i]);
-      //}
-
-      //if (missingIndices.size() > 0)
-      //{
-      //  missingIndices = missingIndices;
-      //}
-
-    //}
-
     //We are done with 'pairs' now, free the memory before the recursive calls to avoid stack overflow
-    int indexParentCount = triangleIndexes.size();
+    int indexParentCount = (int)triangleIndexes.size();
     triangleIndexes.clear();
     triangleIndexes.shrink_to_fit();
 
-    //if (leftPairs.size() == rightPairs.size() && leftPairs.size() == indexParentCount)
-    //{
-    //  delete node->left;
-    //  delete node->right;
-    //  node->left = nullptr;
-    //  node->right = nullptr;
-    //  leftPairs.clear();
-    //  leftPairs.shrink_to_fit();
-    //  Split(node, rightPairs, collideables, Axis((axis + 1) % 3), 0);
-    //}
-    //else if (leftPairs.empty())
-    //{
-    //  node->box = node->right->box;
-    //  delete node->left;
-    //  delete node->right;
-    //  node->left = nullptr;
-    //  node->right = nullptr;
-    //  Split(node, rightPairs, collideables, Axis((axis + 1) % 3), depth);
-    //}
-    //else if (rightPairs.empty())
-    //{
-    //  node->box = node->left->box;
-    //  delete node->left;
-    //  delete node->right;
-    //  node->left = nullptr;
-    //  node->right = nullptr;
-    //  Split(node, leftPairs, collideables, Axis((axis + 1) % 3), depth);
-    //}
-    //else
-    //{
+    if (leftPairs.size() == rightPairs.size() && leftPairs.size() == indexParentCount)
+    {
+      delete node->left;
+      delete node->right;
+      node->left = nullptr;
+      node->right = nullptr;
+      leftPairs.clear();
+      leftPairs.shrink_to_fit();
+      Split(node, rightPairs, collideables, Axis((axis + 1) % 3), depth - 1);
+    }
+    else if (leftPairs.empty())
+    {
+      node->box = node->right->box;
+      delete node->left;
+      delete node->right;
+      node->left = nullptr;
+      node->right = nullptr;
+      Split(node, rightPairs, collideables, Axis((axis + 1) % 3), depth - 1);
+    }
+    else if (rightPairs.empty())
+    {
+      node->box = node->left->box;
+      delete node->left;
+      delete node->right;
+      node->left = nullptr;
+      node->right = nullptr;
+      Split(node, leftPairs, collideables, Axis((axis + 1) % 3), depth - 1);
+    }
+    else
+    {
       Split(node->left, leftPairs,collideables, Axis((axis + 1) % 3), depth - 1);
       Split(node->right, rightPairs,collideables, Axis((axis + 1) % 3), depth - 1);
-   // }
+    }
 
   }
   else
   {
-    for (int i = 0; i < triangleIndexes.size(); i++)
-      node->triangleIndexes.push_back(triangleIndexes[i]);
+    node->triangleIndexes = std::move(triangleIndexes);
   }
 }
 
@@ -278,14 +247,13 @@ static mAABB MergeBoundingBoxes(std::vector<ConvexHull> const& collideables)
   {
     for (int j = 0; j < collideables[i].vertices.size(); j++)
     {
-      finalBox.min = glm::min(finalBox.min, collideables[i].vertices[j]);
-      finalBox.max = glm::max(finalBox.max, collideables[i].vertices[j]);
+      for (int k = 0; k < 3; k++)
+      {
+        finalBox.min[k] = mMin(finalBox.min[k], collideables[i].vertices[j][k]);
+        finalBox.max[k] = mMax(finalBox.max[k], collideables[i].vertices[j][k]);
+      }
     }
   }
-
-  for (int i = 0; i < 3; i++)
-    if (finalBox.max[i] == finalBox.min[i])
-      finalBox.max[i] += 0.1f;
 
   return finalBox;
 }

@@ -5,7 +5,6 @@ end
 function biLerp(p00, p10, p01, p11, tx,ty)
 	local h0 = lerp(p00,p10,tx);
 	local h1 = lerp(p01,p11,tx);
-
 	return lerp(h0,h1,ty);
 end
 
@@ -17,8 +16,8 @@ end
 function WSToHeightMapSpace(wsX,wsZ)
 	debugPrint("Getting world to heightmap space... ")
 
-	local hmX = mapRange(0,terrainSizeX, 0.5, heightMapSize-0.5, wsX)
-	local hmY = mapRange(0, terrainSizeY, 0.5, heightMapSize-0.5, wsZ)
+	local hmX = mapRange(0,wsTerrainSize, 0.5, totalMapSize-0.5, wsX)
+	local hmY = mapRange(0, wsTerrainSize, 0.5, totalMapSize-0.5, wsZ)
 	
 	debugPrint("World to height map space: " .. hmX .." " .. hmY .. " ...")
 	debugPrint("Complete gwths\n")
@@ -27,101 +26,48 @@ function WSToHeightMapSpace(wsX,wsZ)
 end
 
 function GetHeightAtPoint(nx,ny)
-	debugPrint("Getting height at point... ")
-	--returned as floating value
-	local hmX, hmY = WSToHeightMapSpace(nx,ny)
-	hmX = hmX - 0.5	+ 1
-	hmY = hmY - 0.5 + 1
+debugPrint("Getting height at point... ")
+--returned as floating value
+local hmX, hmY = WSToHeightMapSpace(nx,ny)
+hmX = hmX - 0.5	+ 1
+hmY = hmY - 0.5 + 1
 
-	local sampleX = math.floor(hmX) 
-	local sampleY = math.floor(hmY) 
+local sampleX = math.floor(hmX) 
+local sampleY = math.floor(hmY) 
 
-	local lerpFactorX = hmX - sampleX
-	local lerpFactorY = hmY - sampleY
+local lerpFactorX = hmX - sampleX
+local lerpFactorY = hmY - sampleY
 
-	local h00 = terrainHeightData["heightMap"][sampleY][sampleX]
-	local h10 = terrainHeightData["heightMap"][sampleY][sampleX+1]
-    local h01 = terrainHeightData["heightMap"][sampleY + 1][sampleX]
-	local h11 = terrainHeightData["heightMap"][sampleY + 1]	[sampleX + 1]
-	
-	local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
-	debugPrint("Complete\n")
+local h00 = terrainHeightData["heightMap"][sampleY][sampleX]
+local h10 = terrainHeightData["heightMap"][sampleY][sampleX+1]
+local h01 = terrainHeightData["heightMap"][sampleY + 1][sampleX]
+local h11 = terrainHeightData["heightMap"][sampleY + 1][sampleX + 1]
 
-	return val
+local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
+debugPrint("Complete\n")
+return val
 end
 
+function GetAlphaMapValue(nx,ny)
 
-function GetHeightAtPointNathan(x, y)
-	local z1, z2, z3, x1, x2, x3, y1, y2, y3, first, second, third, resultHeight
+debugPrint("Getting alpha map value at point... ")
+--returned as floating value
+local hmX, hmY = WSToHeightMapSpace(nx,ny)
+hmX = hmX - 0.5	+ 1
+hmY = hmY - 0.5 + 1
 
-	if(x < 0) then
-		x = 0
-	end
-	if(x > terrainSizeX) then
-		x = terrainSizeX - 2
-	end
-	if(y < 0) then
-		y = 0
-	end
-	if(y > terrainSizeY) then
-		y = terrainSizeY - 2
-	end
+local sampleX = math.floor(hmX) 
+local sampleY = math.floor(hmY) 
 
-	local xScale = terrainSizeX / heightMapSize
-	local yScale = terrainSizeY / heightMapSize
+local lerpFactorX = hmX - sampleX
+local lerpFactorY = hmY - sampleY
 
-	local xPixel = (x / terrainSizeX) * heightMapSize - 1
-	local yPixel = (y / terrainSizeY) * heightMapSize - 1
-
-	local BottomLeft = terrainHeightData["heightMap"][math.floor(xPixel) + 1][math.floor(yPixel) + 1]
-	local BottomRight = terrainHeightData["heightMap"][math.floor(xPixel) + 2][math.floor(yPixel) + 1]
-	local TopLeft = terrainHeightData["heightMap"][math.floor(xPixel) + 1][math.floor(yPixel) + 2]
-	local TopRight = terrainHeightData["heightMap"][math.floor(xPixel) + 2][math.floor(yPixel) + 2]
-	if(x + y <= xPixel * xScale + yScale * yScale ) then
-		z1 = TopLeft
-		z2 = BottomRight
-		z3 = BottomLeft
-		x1 = (math.floor(xPixel) + 1) * xScale
-		x2 = (math.floor(xPixel) + 2) * xScale
-		x3 = (math.floor(xPixel) + 1) * xScale
-		y1 = (math.floor(yPixel) + 2) * yScale
-		y2 = (math.floor(yPixel) + 1) * yScale
-		y3 = (math.floor(yPixel) + 1) * yScale
-
-		first = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-		second = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-		third = 1 - first - second
-		resultHeight = first * z1 + second * z2 + third * z3
-	else
-		z1 = TopLeft
-		z2 = TopRight
-		z3 = BottomRight
-		x1 = (math.floor(xPixel) + 1) * xScale
-		x2 = (math.floor(xPixel) + 2) * xScale
-		x3 = (math.floor(xPixel) + 2) * xScale
-		y1 = (math.floor(yPixel) + 2) * yScale
-		y2 = (math.floor(yPixel) + 2) * yScale
-		y3 = (math.floor(yPixel) + 1) * yScale
-
-		first = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-		second = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-		third = 1 - first - second
-		resultHeight = first * z1 + second * z2 + third * z3
-	end
-			--[[differenceInHeight = TopLeft - BottomLeft
-		decimalPart = yPixel - math.floor(yPixel)
-		changeBy = differenceInHeight * decimalPart
-		leftSide = BottomLeft + changeBy
-
-		differenceInHeight = TopRight - BottomRight
-		decimalPart = yPixel - math.floor(yPixel)
-		changeBy = differenceInHeight * decimalPart
-		rightSide = BottomRight + changeBy
-
-		differenceInHeight = leftSide - rightSide
-		decimalPart = xPixel - math.floor(xPixel)
-		changeBy = differenceInHeight * decimalPart
-		resultHeight = leftSide + changeBy]]
-
-	return resultHeight
+local h00 = terrainHeightData["alphaMap"][sampleY][sampleX]
+local h10 = terrainHeightData["alphaMap"][sampleY][sampleX+1]
+local h01 = terrainHeightData["alphaMap"][sampleY + 1][sampleX]
+local h11 = terrainHeightData["alphaMap"][sampleY + 1][sampleX + 1]
+	
+local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
+debugPrint("Complete\n")
+return val
 end

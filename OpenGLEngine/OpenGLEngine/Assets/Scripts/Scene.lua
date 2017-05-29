@@ -14,6 +14,7 @@ function Scene.new(newSceneName, newPlayerStartPos, newPlayerStartDir)
 		checkpoints = {},	--A gameObject with a boolean used
 		playerStartPos = newPlayerStartPos,
 		playerStartDir = newPlayerStartDir,
+		terrainChunks = nil
 	}
 	
 	setmetatable(instance,Scene)

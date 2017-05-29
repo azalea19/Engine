@@ -1,3 +1,5 @@
+terrainHeightData = {}
+
 
 function LoadAPIs()
 	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
@@ -21,28 +23,105 @@ function LoadAssets()
 
 	printAPI.print('Loading Models...\n')
 
-	--printAPI.print = function() end
-	--modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
+	--modelLibraryAPI.addModel("Plant","../Assets/Models/SmallPlant/SmallPlant.obj",false)
+	--modelLibraryAPI.addModel("Horse","../Assets/Models/Horse/horse.3ds",false)
+	--modelLibraryAPI.addModel("Drone","../Assets/Models/Drone/PA_drone.fbx",false)
+	--modelLibraryAPI.addModel("Bomber","../Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
+	--modelLibraryAPI.addModel("DropPod","../Assets/Models/DropPod/PA_DropPod.fbx",false)
+	--modelLibraryAPI.addModel("Tank","../Assets/Models/Tank/PA_ArchfireTank.fbx",false)
+	--modelLibraryAPI.addModel("Warrior","../Assets/Models/Warrior/PA_Warrior.fbx",false)
+	--modelLibraryAPI.addModel("Rabbit","../Assets/Models/Rabbit/rabbit.fbx",false)
+	--modelLibraryAPI.addModel("Spider","../Assets/Models/Spider/spider.fbx",false)
+    modelLibraryAPI.addModel("Warrior","../Assets/Models/Characters/PA_SciFiCombatants/PA_SciFiCombatants/_Imported3D/Characters/lizabc.FBX",false)
+    modelLibraryAPI.addModel("CaveDoor","../Assets/Models/Liz_Dungeons/CAVEDOOR.obj",false)
+    modelLibraryAPI.addModel("Dungeon1Interior","../Assets/Models/Liz_Dungeons/Dungeon1Interior.obj",false)
+    modelLibraryAPI.addModel("Dungeon1InteriorEntrance","../Assets/Models/Liz_Dungeons/Dungeon1InteriorEntrance.obj",false)
+	modelLibraryAPI.addModel("Rock","../Assets/Models/Rocks/Boulder/Rock.obj",false)
+	modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
 	modelLibraryAPI.addModel("Skybox","../Assets/Models/SkyBox/skybox.obj",false)
 	modelLibraryAPI.addModel("Bob","../Assets/Models/Bob/Bob.md5mesh",false)
 	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
 	modelLibraryAPI.addModel("Crate","../Assets/Models/Crate/crate.obj",false)
-	--modelLibraryAPI.addModel("Titan","../Assets/Models/Titan/Titan class II cargo ship landed.obj",false)
+	modelLibraryAPI.addModel("Titan","../Assets/Models/Titan/Titan class II cargo ship landed.obj",false)
 	modelLibraryAPI.addModel("GunShop","../Assets/Models/GunsShop/GunsShop.obj",false)
-	--modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
+    modelLibraryAPI.addModel("Pistol","../Assets/Models/Peacemaker.fbx",false)
+    modelLibraryAPI.addModel("Bullet","../Assets/Models/Bullet.obj",false)
+    modelLibraryAPI.addModel("btnNewGame","../Assets/Models/UI/newgame.obj",false)
+    modelLibraryAPI.addModel("btnLoad","../Assets/Models/UI/load.obj",false)
+    modelLibraryAPI.addModel("btnGame1","../Assets/Models/UI/game1.obj",false)
+    modelLibraryAPI.addModel("btnGame2","../Assets/Models/UI/game2.obj",false)
+    modelLibraryAPI.addModel("btnGame3","../Assets/Models/UI/game3.obj",false)
+    modelLibraryAPI.addModel("btnBack","../Assets/Models/UI/back.obj",false)
+    modelLibraryAPI.addModel("btnSave","../Assets/Models/UI/save.obj",false)
+    modelLibraryAPI.addModel("btnReturn","../Assets/Models/UI/backToGame.obj",false)
+    modelLibraryAPI.addModel("btnContinue","../Assets/Models/UI/continue.obj",false)
+    modelLibraryAPI.addModel("whiteCube","../Assets/Models/UI/whitecube.obj",false)
+    modelLibraryAPI.addModel("Observatory","../Assets/Models/ObservatoryOutpost/ObservatoryOutpost_fin.obj",false)
 
+
+
+
+	modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
+	modelLibraryAPI.addModel("GeneralStore","../Assets/Models/GeneralStore/gs.obj",false)
+	modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon.obj",false)
+	modelLibraryAPI.addModel("Blacksmith","../Assets/Models/Blacksmith/bs.obj",false)
+	modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
 
 	printAPI.print('Loading Terrain...\n')
+    
+	--
+	worldWidthChunks = 8
+	--The world space size of a terrain chunk
+	wsChunkSize = 256
 
-    hMapPath = "../Assets/HeightMaps/perlin_noise.png"
-	alphaMapPath = "../Assets/HeightMaps/alphaMap.png"
-    terrainSizeX = 1024
-    terrainSizeY = 1024
-    heightMapSize = 256
-    heightMapHeight = 50
+	--The pixel width of a heightmap piece
+	mapPieceSize = 257
+	--The total pixel width of the heightmap
+	totalMapSize = worldWidthChunks * (mapPieceSize-1) + 1
+    
+	--The total worldspace size of the terrain
+	wsTerrainSize = totalMapSize - 1
 
+	--The world space maximum height of the terrain
+    heightScale = 50
 
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath, alphaMapPath, "../Assets/Models/Terrain/Terrain.obj", context.handle)	
-	modelLibraryAPI.addModel("Terrain","../Assets/Models/Terrain/Terrain.obj",false)
+	terrainHeightData = {}
+	terrainHeightData["heightMap"] = {}
+	terrainHeightData["alphaMap"] = {}
+
+	local j
+	for j = 1, 2057, 1 do
+	terrainHeightData["heightMap"][j]= {}
+	terrainHeightData["alphaMap"][j]= {}
+	end
+
+	local x
+	local y
+	for y = 1, worldWidthChunks, 1 do
+		for x = 1, worldWidthChunks, 1 do
+			--Get the terrain chunk data from the map piece		
+			hmPath = "../Assets/HeightMaps/HM_Pieces/map_" .. x .. "_" .. y .. ".png"
+			alphaMapPath = "../Assets/HeightMaps/AM_Pieces/map_" .. x .. "_" .. y .. ".png"
+
+			terrainChunkData = terrainAPI.generateTerrain(wsChunkSize, wsChunkSize, mapPieceSize, heightScale, hmPath, alphaMapPath, "../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj", context.handle)			
+			--Iterate through the height data and add it to the main table of values
+			for yy = 1, mapPieceSize, 1 do
+				for xx = 1, mapPieceSize, 1 do
+					terrainHeightData["heightMap"][(y-1)*(mapPieceSize-1) + yy][(x-1)*(mapPieceSize-1) + xx] = terrainChunkData["heightMap"][yy][xx]					
+					terrainHeightData["alphaMap"][(y-1)*(mapPieceSize-1) + yy][(x-1)*(mapPieceSize-1) + xx] = terrainChunkData["alphaMap"][yy][xx]					
+				end
+			end
+			printAPI.print('Chunk ')
+			printAPI.print((y-1)*8 + x)
+			printAPI.print('loaded. \n')
+			--modelLibraryAPI.addModel("Terrain_" .. x .. "_" .. y,"../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj",false)
+		end
+	end	
+
+	for y = 1, worldWidthChunks, 1 do
+		for x = 1, worldWidthChunks, 1 do
+			modelLibraryAPI.addModel("Terrain_" .. x .. "_" .. y,"../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj",false)
+		end
+	end
 end
 

@@ -143,7 +143,7 @@ private:
   /// <summary>
   /// The renderable object
   /// </summary>
-  IRenderableObject * m_pRenderableObject;
+  IRenderableObject *m_pRenderableObject;
 
   /// <summary>
   /// The active animation

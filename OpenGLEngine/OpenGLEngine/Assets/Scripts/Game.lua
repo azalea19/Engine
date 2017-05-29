@@ -1,4 +1,4 @@
---[[local Vector3 = require 'Vector3'
+﻿--[[local Vector3 = require 'Vector3'
 local gameObject = require 'gameObject'
 local AABoundingBox = require 'AABoundingBox'
 local npc = require 'npc'
@@ -17,6 +17,7 @@ local npc = dofile '../Assets/Scripts/npc.lua'
 local Player = dofile '../Assets/Scripts/Player.lua'
 local Scene = dofile '../Assets/Scripts/Scene.lua'
 local World = dofile '../Assets/Scripts/World.lua'
+local Weapon = dofile '../Assets/Scripts/Weapon.lua'
 
 --local QuestManager = require '../Assets/Scripts/QuestManager'
 dofile '../Assets/Scripts/Dialogue.lua'
@@ -26,6 +27,10 @@ dofile '../Assets/Scripts/Terrain.lua'
 dofile '../Assets/Scripts/Controls.lua'
 dofile '../Assets/Scripts/QuestManager.lua'
 dofile '../Assets/Scripts/Menu.lua'
+dofile '../Assets/Scripts/Load.lua'
+dofile '../Assets/Scripts/GameWorld.lua'
+
+
 
 OPEN_GL = 0
 
@@ -33,7 +38,6 @@ gameObjects = {}
 world = {}
 debug = true
 debugdetail = false
-loadSmallTestTerrain = true
 
 time = 0
 lastTime = 0
@@ -60,84 +64,6 @@ function debugLPrint(string)
     end
 end
 
-function LoadAPIs()
-	GetAPI(context.handle, 'objectInstanceAPI', 'objectInstanceAPI')
-	GetAPI(context.handle, 'luaObjInstManager', 'luaObjectInstanceManager')
-	GetAPI(context.handle, 'printAPI', 'printAPI')
-	GetAPI(context.handle, 'modelLibraryAPI', 'modelLibraryAPI')
-	GetAPI(context.handle, 'renderManagerAPI', 'renderManagerAPI')
-	GetAPI(context.handle, 'inputManagerAPI', 'inputManagerAPI')
-    GetAPI(context.handle, 'mmath', 'luaVectorUtility')
-    GetAPI(context.handle, 'engineAPI', 'engineAPI')
-    GetAPI(context.handle, 'cameraAPI', 'cameraAPI')
-    GetAPI(context.handle, 'timeAPI', 'timeAPI')
-    GetAPI(context.handle, 'terrainAPI', 'terrainAPI')
-    GetAPI(context.handle, 'AABBAPI', 'AABBAPI')
-    GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
-    GetAPI(context.handle, 'display2DAPI', 'display2DAPI')
-    GetAPI(context.handle, 'collisionAPI', 'collisionAPI')
-
-
-end
-
-	
-function LoadAssets()
-	printAPI.print('Loading Models...\n')
-	--modelLibraryAPI.addModel("Plant","../Assets/Models/SmallPlant/SmallPlant.obj",false)
-	--modelLibraryAPI.addModel("Horse","../Assets/Models/Horse/horse.3ds",false)
-	--modelLibraryAPI.addModel("Drone","../Assets/Models/Drone/PA_drone.fbx",false)
-	--modelLibraryAPI.addModel("Bomber","../Assets/Models/Bomber/PA_ArchlightBomber.fbx",false)
-	--modelLibraryAPI.addModel("DropPod","../Assets/Models/DropPod/PA_DropPod.fbx",false)
-	--modelLibraryAPI.addModel("Tank","../Assets/Models/Tank/PA_ArchfireTank.fbx",false)
-	--modelLibraryAPI.addModel("Warrior","../Assets/Models/Warrior/PA_Warrior.fbx",false)
-	--modelLibraryAPI.addModel("Rabbit","../Assets/Models/Rabbit/rabbit.fbx",false)
-	--modelLibraryAPI.addModel("Spider","../Assets/Models/Spider/spider.fbx",false)
-	--modelLibraryAPI.addModel("Cactus1","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
-	--modelLibraryAPI.addModel("Cactus2","../Assets/Models/DesertPlants/Cactus/cactus_02.FBX",false)BROKEN
-	--modelLibraryAPI.addModel("Cactus3","../Assets/Models/DesertPlants/Cactus/cactus_01.FBX",false)BROKEN
-
-    modelLibraryAPI.addModel("Warrior","../Assets/Models/Characters/PA_SciFiCombatants/PA_SciFiCombatants/_Imported3D/Characters/lizabc.FBX",false)
-    modelLibraryAPI.addModel("CaveDoor","../Assets/Models/Liz_Dungeons/CAVEDOOR.obj",false)
-
-    modelLibraryAPI.addModel("Dungeon1Interior","../Assets/Models/Liz_Dungeons/Dungeon1Interior.obj",false)
-    modelLibraryAPI.addModel("Dungeon1InteriorEntrance","../Assets/Models/Liz_Dungeons/Dungeon1InteriorEntrance.obj",false)
-
-
-
-
-	modelLibraryAPI.addModel("Rock","../Assets/Models/Rocks/Boulder/Rock.obj",false)
-	--modelLibraryAPI.addModel("Stone","../Assets/Models/Rocks/SmallRock/stone.fbx",false)BROKEN
-	modelLibraryAPI.addModel("Airship","../Assets/Models/Airship/airship.lwo",false)
-	modelLibraryAPI.addModel("Skybox","../Assets/Models/SkyBox/skybox.obj",false)
-	modelLibraryAPI.addModel("Bob","../Assets/Models/Alfred.obj",false)
-	modelLibraryAPI.addModel("Cactus","../Assets/Models/Cactus1/cactus.obj",false)
-
-	printAPI.print('Loading Terrain...\n')
-
-    if loadSmallTestTerrain then
-        hMapPath = "../Assets/HeightMaps/heightmap.png"
-        terrainSizeX = 1024
-        terrainSizeY = 1024
-        heightMapSize = 257
-        heightMapHeight = 100
-    else
-        hMapPath = "../Assets/HeightMaps/testmap.png"
-        terrainSizeX = 1024
-        terrainSizeY = 1024
-        heightMapSize = 1024
-        heightMapHeight = 100
-    end
-
-
-
-	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "../Assets/Models/Terrain/Terrain.obj", context.handle)	
-	modelLibraryAPI.addModel("Terrain","../Assets/Models/Terrain/Terrain.obj",false)
-
-	printAPI.print('Loading Skybox...\n')
-
-end
-
-
 
 function BBToLocal(bb,scalea,loca)
     bb.min = mmath.vec3_Multiply(bb.min,scalea,context.handle)
@@ -162,7 +88,9 @@ function Initialize()
 	wireindex = 1
 
 	printAPI.print('Creating...\n')
-	engineAPI.Initialise(1280,720);
+    screenWidth = 1280
+    screenHeight = 720
+	engineAPI.Initialise(screenWidth,screenHeight);
 
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
@@ -183,11 +111,8 @@ function Initialize()
 	local NPCData = LoadInstances("../SaveData/NPC_Data.csv", "npc")
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
-	scene = Scene.new("Level1", Terrain01, startPos, startDir)
-
-    scene2 = Scene.new("Level2", Terrain01, startPos, startDir)
-
-
+	scene = Scene.new("Level1", startPos, startDir)
+    scene2 = Scene.new("Level2", startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
 
@@ -215,48 +140,122 @@ function Initialize()
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
-    loc = {x=40,y=0,z=40}
-    scale = {x=10,y=10,z=10}
+    loc = {x=1100,y=0,z=1100}
+    scale = {x=0.5,y=0.5,z=0.5}
     dir = {x=0,y=1,z=0}
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
 
-    NPC01 = npc.new("NPC01","Bob the Human","Warrior",loc,dir,scale,0,100,100)
-    NPC01.hurtAnim = 4
+    NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100)
+    local anim = {"Section",0,5}
+    local anim2 = {"Section",0,10}
+    NPC01.defaultAnim = anim2
+    NPC01.hurtAnim = {"Section",0,5}
+    NPC01:setAnimation(anim2)
+    objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+
+    --NPC01.hurtAnim = 4
     local upVector = {x=0,y=1,z=0}
     NPC01.upVector = upVector
     local diag = Dialogue.new()
-    local topic01 = Topic.new("Greeting","Greeting")
-    topic01.questEvent = true
-    local topic02 = Topic.new("Quest1","Help find organs")
 
+    local quest1 = Topic.new("Quest1","I need my organs back")
     local mylines = {}
-    mylines[1] = "line 1\n"
-    mylines[2] = "line 2\n"
-    mylines[3] = "line 3\n"
+    mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
+    mylines[2] = "Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
+    mylines[3] = "If you can bring back anything high-tech you find there, I'll happily repair your eyes."
 
-    topic01:setLines(mylines)
-
+    quest1:setLines(mylines)
+    
+    local greeting = Topic.new("Greeting","Greeting")
     local mylines2 = {}
-    mylines2[1] = "t2line 1\n"
-    mylines2[2] = "t2line 2\n"
-    mylines2[3] = "t2line 3\n"
+    mylines2[1] = "Oh, it's you. I heard you came a long way to get here."
 
-    topic02:setLines(mylines2)
+    greeting:setLines(mylines2)
 
-    diag:addTopic(topic01)
-    diag:addTopic(topic02)
+    -- USE THE SCIFI BOX MODEL PLACE IT IN THE OBSERVATORY INTERIOR
+
+
+
+    local quest1 = Topic.new("Quest1Return","I have something from the observatory.")
+    local mylines = {}
+    mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
+    mylines[2] = "Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
+    mylines[3] = "If you can bring back anything high-tech you find there, I'll happily repair your eyes."
+
+    quest1:setLines(mylines)
+
+    local quest1return = Topic.new("Quest1Return","I have something from the observatory.")
+    local mylines = {}
+    mylines[1] = "Oh, excellent! Come right this way, I'll fix your eyes up for you."
+
+    quest1return:setLines(mylines)
+    
+
+    local quest2 = Topic.new("Quest1Return","What about my lungs? My heart?")
+    local mylines = {}
+    mylines[1] = "You don't quit, do you... While you were gone, the nearby raiders tried to launch another attack. I am too busy helping these people to fix your faulty cybernetics."
+    mylines[2] = "Look, the raiders came from an airship north of here. Tell you what, if you can kill their leader and force them to retreat, I'll happily repair the rest of your organs."
+
+    quest2:setLines(mylines)
+    
+
+    local quest2return = Topic.new("Quest2Return","I killed their leader.")
+    local mylines = {}
+    mylines[1] = "What, really? Good on you! Excellent! Thank you so much! For a while at least, the people of this town will no longer have to suffer and fear when the next raid will come."
+    mylines[2] = "Please, come with me, I'll fix the rest of your organs for you"
+
+    quest2return:setLines(mylines)
+    
+    
+
+    quest1.questEvent = true
+    quest2.questEvent = true
+    quest1return.questEvent = true
+    quest2return.questEvent = true
+
+
+
+    diag:addTopic(greeting)
+    diag:addTopic(quest1)
+    diag:addTopic(quest2)
+    diag:addTopic(quest1return)
+    diag:addTopic(quest2return)
 
     NPC01.dialogue = diag
     NPC01:setDialogue(diag)
+
 
     NPC01:makeIdle()
 
 
     scene:AddInstance(NPC01) 
 
+    
+    --Initialise quests
+    questManager = QuestManager.new()
+    local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
+    local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
+    local stage3 = QuestStage.new("ObsReturn",TALK,"NPC01","Quest1Return")
 
-	--scene:SpawnRandomObjects("Bob", a, b,100)
+    local stage4 = QuestStage.new("AirGetQuest",TALK,"NPC01","Quest2")
+    local stage5 = QuestStage.new("AirKillBoss",KILL,"Boss")
+    local stage6 = QuestStage.new("AirReturn",TALK,"NPC01","Quest2Return")
+    
+
+    local stages = {stage1,stage2,stage3,stage4,stage5,stage6}
+    local talkToBob = Quest.new("TalkToBob",stages,6)
+    questManager:addQuest(talkToBob)
+
+	LoadQuests("../SaveData/QUE_Data.csv")
+
+    
+    loc = {x=900,y=0,z=900}
+    scale = {x=25,y=25,z=25}
+    dir = {x=0,y=1,z=0}
+    boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
+
+
 
 
     emptyVec = {x=0,y=0,z=0}
@@ -269,41 +268,45 @@ function Initialize()
 
 	printAPI.print('Initialising terrain...\n')
 
-	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
+	CreateTerrain(scene)
+	CreateCactusField(scene)
+	CreateTown(scene)
 
-	--wont work
-
-	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-	scene:SetTerrain(Terrain01)
+	--objectInstanceAPI.setTranslation(Terrain01,0,0,0)
+	--scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
     world:AddScene(scene2)
 
 	skybox = luaObjInstManager.addNewInstance("Skybox")
-
-	--wont work
-
 	objectInstanceAPI.setTranslation(skybox, 0,0,0);
+	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
+	--function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-	--wont work
-
-	objectInstanceAPI.setScale(skybox, 1000,1000,1000)
-
-	--wont work
-
-	--Wont work
+	titan = gameObject.new("titan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	scene:AddInstance(titan)
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
-    cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
+    --cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
 
     printAPI.print('Initialising rendermanager...\n')
     --renderManagerAPI.initialise()
 
     printAPI.print('Initialising player...\n')
 	player0 = Player:new(camera0,100,100)
-	cameraAPI.setPosition(camera0,0,0,0)
-	cameraAPI.setYaw(camera0,225)
-	cameraAPI.setPitch(camera0,0)
+
+	player0:setPosition(Vector3.new(1000,0,1000))
+
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.001,0.001,0.001),0)
+    bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
+
+    scene:AddInstance(gun)
+    scene:AddInstance(bullet)
+
+
+
+	--cameraAPI.setYaw(camera0,225)
+	--cameraAPI.setPitch(camera0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
 	--test = luaObjInstManager.addNewInstance("Bob")
@@ -314,15 +317,8 @@ function Initialize()
     player0:setWeapon(basicGun)
 
     
-    --Initialise quests
-    questManager = QuestManager.new()
-    local stage1 = QuestStage.new("MeetBob",TALK,"NPC01","Greeting")
-    local stage2 = QuestStage.new("GetQuest",TALK,"NPC01","Quest1")
 
-    local stages = {stage1,stage2}
-    local talkToBob = Quest.new("TalkToBob",stages,2)
-    questManager:addQuest(talkToBob)
-	LoadQuests("../SaveData/QUE_Data.csv")
+
 	initMenu()
 	
     printAPI.print('Initialization finished.\n')
@@ -378,7 +374,7 @@ function Update()
         if(inMenu == false) then
             inMenu = true
 			preCameraPos = player0:getPosition()
-			printVec3(preCameraPos)
+			--printVec3(preCameraPos)
 			preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
 			preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
 			
@@ -484,7 +480,9 @@ function Update()
 
         if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
             if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-                    player0.weapon:attack(player0.lookTarget)
+                    if(player0.weapon:attack(player0.lookTarget)) then
+                        FireBullet()
+                    end
             
             end
         end
@@ -534,6 +532,8 @@ function Update()
 		world:SetupInstances()
 	end
 
+
+
     if debug then
 
         if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
@@ -559,6 +559,8 @@ function Update()
     
         if inputManagerAPI.isKeyPressed(TestInput3) then
             -- spawn bob
+
+            --[[
             local newX = player0["position"]["x"] 
 		    local newZ = player0["position"]["z"]
 		    local newY = GetHeightAtPoint(newX , newZ)
@@ -584,6 +586,7 @@ function Update()
 
 		    world:AddInstance(item)
 		    --renderManagerAPI.addObject(tempID)
+            ]]
 
 	    end
     
@@ -604,7 +607,7 @@ function Update()
 
 	local currentGOs = world:GetGameObjects()
 	for i = 1, world:GetGameObjectCount() do
-        --printAPI.print(currentGOs[i].name .. "\n")
+        --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
 		local a = currentGOs[i]:Update()
 	end
     --printAPI.print("Updating player\n")
@@ -613,6 +616,23 @@ function Update()
 	end
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
+
+    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 500,context.handle) ,player0:getPosition(),context.handle),10*deltaTime))
+
+    gun:setPosition(player0.position)
+    local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
+    local sum = mmath.vec3_Sum(player0.position, pos,context.handle)
+    gun:lookAt(cameraAPI.forward(camera0,context.handle))
+
+
+end
+
+function FireBullet()
+
+    local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
+    local sum = mmath.vec3_Sum(player0.position, pos,context.handle)
+    bullet:setPosition(sum)
+    bullet:lookAt(cameraAPI.forward(camera0,context.handle))
 
 end
 
@@ -707,19 +727,32 @@ function Render()
 						renderManagerAPI.renderObject(camera0,time,currentGOs[i]["id"], 1)
 					end
 				end
-				local currentTerrainID = world:GetTerrainID()
-				renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+				--local currentTerrainID = world:GetTerrainID()
+
+
+				local i
+			for i = 1, #scene.terrainChunks, 1 do
+				renderManagerAPI.renderObject(camera0,time,scene.terrainChunks[i], 1);
+			end
+
+
+
+				--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
 				renderManagerAPI.renderObject(camera0,time,skybox, 0)
 				renderManagerAPI.present(camera0)
 
 				
-				-- Draw UI text
-				--display2DAPI.drawText(10,font1path,lookAtText,100,300,white)
+				-- Draw UI text --DrawTextLua(int size, string const& filePath, string const& text, LuaRef pos, LuaRef color, int centered, int screenWidth, int screenHeight)
+				display2DAPI.drawText(10,font1path,lookAtText,{x=100,y=300},white,0,screenWidth,screenHeight)
 
 				if(player0.inDialogue) then 
-					--display2DAPI.drawText(10,font1path,dialogueText,200,300,white)
+					display2DAPI.drawText(10,font1path,dialogueText,{x=200,y=300},white,0,screenWidth,screenHeight)
 				end
+
+                hpDisplay = "Health: ".. player0.currentHealth .. " / " .. player0.maxHealth
+                display2DAPI.drawText(10,font1path,hpDisplay,{x=400,y=100},white,0,screenWidth,screenHeight)
+
 
 			end
 		end

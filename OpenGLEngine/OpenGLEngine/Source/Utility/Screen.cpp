@@ -4,7 +4,7 @@ static SDL_Surface* screen;
 static int SCREEN_WIDTH = 1280;
 static int SCREEN_HEIGHT = 720;
 static float NEAR_PLANE = 0.01f;
-static float FAR_PLANE = 10000.0f;
+static float FAR_PLANE = 100000.0f;
 
 
 SDL_Surface* GetScreenSurface()
