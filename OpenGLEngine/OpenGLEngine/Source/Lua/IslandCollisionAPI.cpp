@@ -11,6 +11,43 @@ bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox)
 	return false;
 }
 
+bool IslandCollisionAPI::DoesCollisionOccur(LuaRef thisbox, LuaRef manyList, int listSize)
+{
+	mAABB toMoveBB;
+	toMoveBB.max = FromLuaTable<vec3>(thisbox["max"]);
+	toMoveBB.min = FromLuaTable<vec3>(thisbox["min"]);
+
+	mAABB bbox;
+	for (int i = 0; i < listSize; i++)
+	{
+		bbox.max = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["max"]);
+		bbox.min = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["min"]);
+		if (IslandCollision::Check(toMoveBB, bbox)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+int IslandCollisionAPI::GetCollisionIndex(LuaRef thisbox, LuaRef manyList, int listSize)
+{
+	mAABB toMoveBB;
+	toMoveBB.max = FromLuaTable<vec3>(thisbox["max"]);
+	toMoveBB.min = FromLuaTable<vec3>(thisbox["min"]);
+
+	mAABB bbox;
+	for (int i = 0; i < listSize; i++)
+	{
+		bbox.max = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["max"]);
+		bbox.min = FromLuaTable<vec3>(LuaRef(manyList[i + 1])["min"]);
+		if (IslandCollision::Check(toMoveBB, bbox)) {
+			return i;
+		}
+	}
+
+	return 0;
+}
 
 bool Check(mAABB a, std::vector<mAABB> list, int listSize)
 {
@@ -64,6 +101,8 @@ void IslandCollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPINam
 	pContext->ExposeFunction(luaAPIName, "checkAnyCollision", CheckAnyCollision);
 	pContext->ExposeFunction(luaAPIName, "checkAnyCollisionGetIndex", CheckAnyCollisionGetIndex);
 	pContext->ExposeFunction(luaAPIName, "check", Check);
+	pContext->ExposeFunction(luaAPIName, "doesCollisionOccur", DoesCollisionOccur);
+	pContext->ExposeFunction(luaAPIName, "getCollisionIndex", GetCollisionIndex);
 	pContext->ExposeFunction(luaAPIName, "resolve", Resolve);
 }
 

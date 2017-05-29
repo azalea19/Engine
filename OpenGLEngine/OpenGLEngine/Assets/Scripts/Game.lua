@@ -116,7 +116,7 @@ function Initialize()
     scene2 = Scene.new("Level2", startPos, startDir)
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
-	for y = 1, worldWidthChunks, 1 do
+	--[[for y = 1, worldWidthChunks, 1 do
 		for x = 1, worldWidthChunks, 1 do
 			--modelLibraryAPI.addModel("Terrain_" .. x .. "_" .. y,"../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj",false)
 			local terrainChunckID = luaObjInstManager.addNewInstance("Terrain_" .. x .. "_" .. y)
@@ -126,7 +126,7 @@ function Initialize()
 			objectInstanceAPI.setAnimation(terrainChunckID,0)
 			table.insert(scene.terrainChunks, terrainChunckID)
 		end
-	end
+	end]]--
     
     local loc = {x=20,y=0,z=20}
     local scale = {x=1,y=1,z=1}

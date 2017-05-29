@@ -18,12 +18,12 @@ currentDifficulty = 1
 function initMenu()
 	-- Background
     local newPos = {x=0,y=1,z=40}
-    local newScale = {x=5,y=5,z=0.01}
+    local newScaleBG = {x=5,y=5,z=0.01}
     local newDir = {x=0,y=1,z=0}
-	Background = gameObject.new("Background", "Background", "btnBack", newPos, newDir, newScale, newAnim)
+	Background = gameObject.new("Background", "Background", "btnBack", newPos, newDir, newScaleBG, newAnim)
 	-- Start New, 0
     local newPos = {x=0,y=1,z=20}
-    local newScale = {x=2,y=2,z=2}
+    local newScale = {x=1,y=1,z=1}
     local newDir = {x=0,y=1,z=0}
     StartNewButton = gameObject.new("StartNewButton", "StartNewButton", "btnNewGame", newPos, newDir, newScale, newAnim)
 	StartNewButton.option = newGameButton -- initialise a new game
@@ -78,7 +78,7 @@ function initMenu()
 	ButtonThree.active = false
 	-- Button Easy, 4
     local newPos = {x=10,y=1,z=20}
-    local newScale = {x=0.75,y=0.75,z=0.75}
+    --local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
     ButtonEasy = gameObject.new("ButtonEasy", "ButtonEasy", "Bob", newPos, newDir, newScale, newAnim)
 	ButtonEasy.option = buttonEasy -- set selected to 1
@@ -92,7 +92,7 @@ function initMenu()
 	ButtonMedium.active = false
 	-- Button Hard, 4
     local newPos = {x=0,y=1,z=20}
-    local newScale = {x=0.75,y=0.75,z=0.75}
+    --local newScale = {x=0.75,y=0.75,z=0.75}
     local newDir = {x=0,y=1,z=0}
     ButtonHard = gameObject.new("ButtonHard", "ButtonHard", "Bob", newPos, newDir, newScale, newAnim)
 	ButtonHard.option = buttonHard -- set selected to 3
@@ -105,10 +105,9 @@ function initMenu()
 	ReturnButton.active = false
 	-- Mouse cursor
     local newPos = {x=0,y=1,z=20}
-    local newScale = {x=0.2,y=0.2,z=0.2}
+    --local newScale = {x=0.2,y=0.2,z=0.2}
     local newDir = {x=0,y=1,z=0}
 	MouseObject = gameObject.new("MouseObject", "MouseObject", "whiteCube", newPos, newDir, newScale, newAnim)
-	
 	
 	table.insert(MenuButtons, StartNewButton)
 	table.insert(MenuButtons, ContinueButton)
@@ -129,31 +128,31 @@ function updateMenu()
 	local currentPos = MouseObject:getPosition()
 	local newPos = {x=currentPos.x - (inputManagerAPI.mouseDeltaX() / 50),y=currentPos.y - (inputManagerAPI.mouseDeltaY() / 50),z=currentPos.z}
 	MouseObject:setPosition(newPos)
-
+--printAPI.print(currentPos.x .. "," .. currentPos.y .. "\n")
+--printAPI.print(StartNewButton:BBToWorld().min.x .. "," .. StartNewButton:BBToWorld().min.y .. " " .. StartNewButton:BBToWorld().max.x .. "," .. StartNewButton:BBToWorld().max.y .. "\n\n")
 	if currentMenu == 0 then
-		if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+		if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 		
-				local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
-				printAPI.print(MenuButtons[colIndex].name .. "\n")
+			local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+			printAPI.print(MenuButtons[colIndex].name .. "\n")
 
 			if(inputManagerAPI.isMousePressedLeft()) then
-				local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+				local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 				printAPI.print(MenuButtons[colIndex].name)
 				if  MenuButtons[colIndex].active then
 					MenuButtons[colIndex].option()
 				end
-				last = true
 			end
 		end
 	else
 		if currentMenu == 1 then
-			if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+			if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 			
-							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+							local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 					printAPI.print(MenuButtons[colIndex].name .. "\n")
 					
 				if(inputManagerAPI.isMousePressedLeft()) then
-					local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+					local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 					--if  MenuButtons[colIndex].active == true then
 						printAPI.print("SUCC")
 						MenuButtons[colIndex].option()
@@ -165,8 +164,8 @@ function updateMenu()
 					SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
-					savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
-					saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
+					savePlayer("../Saves/Slot1/PLAYER_Data.csv", player0)
+					saveWeapons("../Saves/Slot1/WEAPON_Data.csv", weaponList)
 					currentSaveFile = 1
 					changeMenu(0)
 				end
@@ -175,8 +174,8 @@ function updateMenu()
 					SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
-					savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
-					saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
+					savePlayer("../Saves/Slot2/PLAYER_Data.csv", player0)
+					saveWeapons("../Saves/Slot2/WEAPON_Data.csv", weaponList)
 					currentSaveFile = 2
 					changeMenu(0)
 				end
@@ -185,8 +184,8 @@ function updateMenu()
 					SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
 					SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
 					SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
-					savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
-					saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
+					savePlayer("../Saves/Slot3/PLAYER_Data.csv", player0)
+					saveWeapons("../Saves/Slot3/WEAPON_Data.csv", weaponList)
 					currentSaveFile = 3
 					changeMenu(0)
 				end
@@ -195,13 +194,13 @@ function updateMenu()
 			end
 		else
 			if currentMenu == 2 then
-				if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+				if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 				
-								local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+								local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 						printAPI.print(MenuButtons[colIndex].name .. "\n")
 				
 					if(inputManagerAPI.isMousePressedLeft()) then
-						local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+						local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 						--if  MenuButtons[colIndex].active == true then
 						printAPI.print("SUCC")
 							MenuButtons[colIndex].option()
@@ -227,13 +226,13 @@ function updateMenu()
 				end
 			else
 				if currentMenu == 3 then
-					if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+					if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 						
-						local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+						local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 						printAPI.print(MenuButtons[colIndex].name .. "\n")
 					
 						if(inputManagerAPI.isMousePressedLeft()) then
-							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+							local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 							MenuButtons[colIndex].option()
 						
 							if currentSelectedSaveFile == 1 then
@@ -255,13 +254,13 @@ function updateMenu()
 					end
 				else
 					if currentMenu == 4 then
-						if(islandCollisionAPI.check(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
+						if(islandCollisionAPI.doesCollisionOccur(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)) then
 						
-							local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+							local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 							printAPI.print(MenuButtons[colIndex].name .. "\n")
 						
 							if(inputManagerAPI.isMousePressedLeft()) then
-								local colIndex  = 1 + islandCollisionAPI.checkAnyCollisionGetIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
+								local colIndex  = 1 + islandCollisionAPI.getCollisionIndex(MouseObject:BBToWorld(), MenuButtonBoxes, totalButtons)
 								MenuButtons[colIndex].option()
 							end
 						end
@@ -273,7 +272,7 @@ function updateMenu()
 end
 
 function newGame(folder, difficulty)
-	printAPI.print('Initialising Scenes...\n')
+	local tmp = world:GetGameObjects()
 	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject")
 	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc", difficulty)
 	local startPos = Vector3.new(0,0,0)
@@ -283,36 +282,22 @@ function newGame(folder, difficulty)
 	scene:AddInstances(NPCData)
     currentScene = scene
 	world = World.new(player0)
-	Terrain01 = luaObjInstManager.addNewInstance("Terrain")
-	objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-	scene:SetTerrain(Terrain01)
 	world:AddScene(scene)
 	LoadTopics("../SaveData/DIA_Data.csv")
-
 	--Initialise camera
-    printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
-    cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
-
 	-- Initialise player
-    printAPI.print('Initialising player...\n')
-	player0 = Player:new(camera0)
-	cameraAPI.setPosition(camera0,0,0,0)
+	player0 = Player.new(camera0,100,100)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
-
-    -- Initialise weapon
-
+    -- Initialise weapo
 	weaponList = {}
 	loadWeapons(folder .. "WEAPON_Data.csv")
 	loadPlayer(folder .. "PLAYER_Data.csv", player0)
-	
     basicGun = Weapon.new("basicGun","Gun",100,1)
     player0:setWeapon("basicGun")
-
     --Initialise quests
     questManager = QuestManager.new()
 	LoadQuests("../Saves/Slot1/QUE_Data.csv")
-    printAPI.print('Initialization finished.\n')
 end
 
 function newGameButton()
