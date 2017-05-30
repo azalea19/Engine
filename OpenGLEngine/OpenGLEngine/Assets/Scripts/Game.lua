@@ -41,6 +41,7 @@ world = {}
 weaponList = {}
 debug = true
 debugdetail = false
+playerInScene = 1
 
 time = 0
 lastTime = 0
@@ -95,16 +96,16 @@ function BBToLocal(bb,scalea,loca)
     return bb
 end
 
-function InitScene1()
+function InitScene1(goPath, npcPath, diff)
 
  -- Initialise scene objects
 	printAPI.print('Initialising Scenes...\n')
-	local GOData = LoadInstances("../SaveData/GO_Data.csv", "gameObject",difficulty)
-	local NPCData = LoadInstances("../SaveData/NPC_Data.csv", "npc",difficulty)
+	local GOData = LoadInstances(goPath, "gameObject",difficulty)
+	local NPCData = LoadInstances(npcPath, "npc",difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene = Scene.new("Level1", startPos, startDir)
-    scene2 = Scene.new("Level2", startPos, startDir)
+    
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
 
@@ -112,13 +113,14 @@ function InitScene1()
     local scale = {x=10,y=10,z=10}
     local dir = {x=0,y=1,z=0}
 
-    Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
-    scene:AddInstance(Dungeon1Door)
-    loc = Vector3.new(1500,0,1500)
-    scale = {x=0.1,y=0.1,z=0.1}
-    obs = gameObject.new("Observatory","Observatory","Observatory",loc,dir,scale,0)
-    scene:AddInstance(obs)
-
+	if(scene:FindInstance("Dungeon1Door") == false) then
+		Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
+		scene:AddInstance(Dungeon1Door)
+		loc = Vector3.new(1500,0,1500)
+		scale = {x=0.1,y=0.1,z=0.1}
+		obs = gameObject.new("Observatory","Observatory","Observatory",loc,dir,scale,0)
+		scene:AddInstance(obs)
+	end
 
     currentScene = scene
 
@@ -131,28 +133,32 @@ function InitScene1()
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
 
-    NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100)
-    local anim = {"Section",0,5}
-    local anim2 = {"Section",0,10}
-    NPC01.defaultAnim = anim2
-    NPC01.hurtAnim = {"Section",0,5}
-    NPC01:setAnimation(anim2)
-    objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-
-    InitAirship()
-
-    --NPC01.hurtAnim = 4
-    local upVector = {x=0,y=1,z=0}
-    NPC01.upVector = upVector
-    NPC01:makeIdle()
-
-    
-    
-
+	if(scene:FindInstance("NPC01") == false) then
+		NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100)
+		local anim = {"Section",0,5}
+		local anim2 = {"Section",0,10}
+		NPC01.defaultAnim = anim2
+		NPC01.hurtAnim = {"Section",0,5}
+		NPC01:setAnimation(anim2)
+		objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+		local upVector = {x=0,y=1,z=0}
+		NPC01.upVector = upVector
+		NPC01:makeIdle()
+		scene:AddInstance(NPC01) 
+	end
+	
+	if(scene:FindInstance("COLtitan") == false) then
+		titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+		scene:AddInstance(titan)
+		local loc = {x=500,y=0,z=1500}
+		local scale = {x=2,y=2,z=2}
+		local dir = {x=0,y=1,z=0}
+		npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+		loc = {x=500,y=100,z=1500}
+		npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+	end
+	
     FixRobots(scene)
-
-
-
 end
 
 function FixRobots(thisScene)
@@ -178,32 +184,31 @@ end
 
 function InitAirship()
 
-
-	titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
-	scene:AddInstance(titan)
-
-    local loc = {x=500,y=0,z=1500}
-    local scale = {x=2,y=2,z=2}
-    local dir = {x=0,y=1,z=0}
-    npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
-    loc = {x=500,y=100,z=1500}
-    npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
 end
 
 
-function InitScene2()
+function InitScene2(pathNPC, diff)
 
     local loc = {x=100,y=100,z=100}
     local scale = {x=5,y=5,z=5}
     local dir = {x=0,y=1,z=0}
-    Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
 
-    local NPCData = LoadInstances("../SaveData/NPC_Data_Scene2.csv", "npc",difficulty)
+    local NPCData = LoadInstances(, "npc",difficulty)
+	local startPos = Vector3.new(0,0,0)
+	local startDir = Vector3.new(0,0,0)
+	scene2 = Scene.new("Level2", startPos, startDir)
+	
+	if(scene:FindInstance("COLDungeon1") == false) then
+	    Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
+	end
+	
     scene2:AddInstances(NPCData);
     scene2:AddInstance(Dungeon1Intr);
 
-    Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
-    scene2:AddInstance(Dungeon1IntrDoor);
+	if(scene:FindInstance("Dungeon1IntrDoor") == false) then
+		Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
+		scene2:AddInstance(Dungeon1IntrDoor)
+	end
 
     --obsTech = gameObject.new("ObsTech","The Observatory","ObsTech",loc,dir,scale,0)
 
@@ -211,7 +216,6 @@ function InitScene2()
 
 	for i = 1, scene2:GetGameObjectCount() do
 		if(currentGOs[i].name == "Robot Mech") then
-
             debugLPrint("Changing robot mech")
             currentGOs[i].hostileToPlayer = true
             currentGOs[i]:makeIdle()
@@ -221,14 +225,15 @@ function InitScene2()
             currentGOs[i].defaultAnim = anim2
             currentGOs[i]:setAnimation(anim2)
             currentGOs[i].hurtAnim = {"Section",0,5}
-
         end
     end
 end
 
-function InitQuests()
+function InitQuests(quePath)
 
     local diag = Dialogue.new()
+	questManager = QuestManager.new()
+	LoadQuests(quePath)
 
     local quest1 = Topic.new("Quest1","I need my organs back")
     local mylines = {}
@@ -303,29 +308,26 @@ function InitQuests()
     diag:addTopic(teleport2)
 
 
-    NPC01.dialogue = diag
-    NPC01:setDialogue(diag)
+	local npc_01 = scene:FindInstance("NPC01")
+    npc_01.dialogue = diag
+    npc_01:setDialogue(diag)
 
-    questManager = QuestManager.new()
-    local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
-    local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
-    local stage3 = QuestStage.new("ObsReturn",TALK,"NPC01","Quest1Return")
+	if(~doesQuestExist("TalkToBob")) then
+		local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
+		local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
+		local stage3 = QuestStage.new("ObsReturn",TALK,"NPC01","Quest1Return")
 
-    local stage4 = QuestStage.new("AirGetQuest",TALK,"NPC01","Quest2")
-    local stage5 = QuestStage.new("AirKillBoss",KILL,"Boss")
-    local stage6 = QuestStage.new("AirReturn",TALK,"NPC01","Quest2Return")
-    
-
-    local stages = {stage1,stage2,stage3,stage4,stage5,stage6}
-    local talkToBob = Quest.new("TalkToBob",stages,6)
-    questManager:addQuest(talkToBob)
-
-	LoadQuests("../SaveData/QUE_Data.csv")
-
+		local stage4 = QuestStage.new("AirGetQuest",TALK,"NPC01","Quest2")
+		local stage5 = QuestStage.new("AirKillBoss",KILL,"Boss")
+		local stage6 = QuestStage.new("AirReturn",TALK,"NPC01","Quest2Return")
+		
+		local stages = {stage1,stage2,stage3,stage4,stage5,stage6}
+		local talkToBob = Quest.new("TalkToBob",stages,6)
+		questManager:addQuest(talkToBob)
+	end
 end
 
 function Initialize()
-
 	LoadAPIs()
 	printAPI.print('Initializing...\n')
     printAPI.print('Initialising engine...\n')
@@ -341,21 +343,12 @@ function Initialize()
 	printAPI.print('Loading Assets...\n')
 	LoadAssets()
 
-
     printAPI.print("Initialising text...\n")
     lookAtText = " "
     dialogueText = " "
     dInMenu = false
     dCurrentTopic = nil
     dCurrentLine = 0
-
-
-    InitScene1()
-    InitScene2()
-    InitQuests()
-
-    scene:AddInstance(NPC01) 
-
     
     loc = {x=900,y=0,z=900}
     scale = {x=25,y=25,z=25}
@@ -369,22 +362,10 @@ function Initialize()
 	world = World.new(player0)
 
 	printAPI.print('Initialising terrain...\n')
-
-	CreateTerrain(scene)
-	CreateCactusField(scene)
-	CreateTown(scene)
-
-	--objectInstanceAPI.setTranslation(Terrain01,0,0,0)
-	--scene:SetTerrain(Terrain01)
-	world:AddScene(scene)
-    world:AddScene(scene2)
-
    
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 	objectInstanceAPI.setTranslation(skybox, 0,0,0);
 	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
-	--function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
-
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
@@ -392,10 +373,6 @@ function Initialize()
 
     printAPI.print('Initialising rendermanager...\n')
     --renderManagerAPI.initialise()
-
-    
-    InitPlayer()
-    InitWeapon()
 
 	initMenu()
 	
@@ -417,7 +394,6 @@ function InitPlayer()
 end
 
 function InitWeapon()
-
     basicGun = Weapon.new("basicGun","Gun",1,1)
 	table.insert(weaponList,basicGun);
 	
@@ -453,8 +429,6 @@ function StartDialogueTopic(playr,topicn)
             if topic.questEvent then
                 questManager:check(TALK,playr.lookTarget,topic.id)
             end
-
-            
 
             if(topic.id == "Teleport1") then
                 dInMenu = false

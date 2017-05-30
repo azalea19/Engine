@@ -143,36 +143,21 @@ function updateMenu()
 				else
 					if currentMenu == 1 then
 						if currentSelectedSaveFile == 1 then
-							local tmp = world:GetGameObjects()
-							SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
-							SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
-							SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
-							savePlayer("../Saves/Slot1/PLAYER_Data.csv", player0)
-							saveWeapons("../Saves/Slot1/WEAPON_Data.csv", weaponList)
-							currentSelectedSaveFile = 0
 							currentSaveFile = 1
+							currentSelectedSaveFile = 0
+							saveAllToCurrentSave()
 							changeMenu(0)
 						end
 						if currentSelectedSaveFile == 2 then
-							local tmp = world:GetGameObjects()
-							SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
-							SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
-							SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
-							savePlayer("../Saves/Slot2/PLAYER_Data.csv", player0)
-							saveWeapons("../Saves/Slot2/WEAPON_Data.csv", weaponList)
 							currentSaveFile = 2
 							currentSelectedSaveFile = 0
+							saveAllToCurrentSave()
 							changeMenu(0)
 						end
 						if currentSelectedSaveFile == 3 then
-							local tmp = world:GetGameObjects()
-							SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
-							SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
-							SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
-							savePlayer("../Saves/Slot3/PLAYER_Data.csv", player0)
-							saveWeapons("../Saves/Slot3/WEAPON_Data.csv", weaponList)
 							currentSaveFile = 3
 							currentSelectedSaveFile = 0
+							saveAllToCurrentSave()
 							changeMenu(0)
 						end
 					else
@@ -233,14 +218,30 @@ function newGame(folder, difficulty)
 	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc", difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
-	scene = Scene.new("Level1", Terrain01, startPos, startDir)
-	scene:AddInstances(GOData)
-	scene:AddInstances(NPCData)
+	
+    
+    initPlayer(folder .. "PLAYER_Data.csv")	--REMOVE AFTER DEFAULT SAVE SET UP
+    InitWeapon(folder .. "WEAPON_Data.csv")	--REMOVE AFTER DEFAULT SAVE SET UP
+	
+    InitScene1(folder .. "GO_Data.csv", folder .. "NPC_Data.csv", difficulty)
+    InitScene2(folder .. "NPC_Data_Scene2.csv", difficulty)
+    InitQuests(folder .. "QUE_Data.csv")
+
+
 	CreateTerrain(scene)
-    currentScene = scene
+	CreateCactusField(scene)	--REMOVE AFTER DEFAULT SAVE SET UP
+	CreateTown(scene)			--REMOVE AFTER DEFAULT SAVE SET UP
+	
+	world:AddScene(scene)
+    world:AddScene(scene2)
+	
+    world.currentScene = playerInScene
+	
 	world = World.new(player0)
 	world:AddScene(scene)
-	LoadTopics("../SaveData/DIA_Data.csv")
+	world:AddScene(scene2)
+	
+	--LoadTopics("../SaveData/DIA_Data.csv")
 	--Initialise camera
     camera0 = cameraAPI.addNewInstance()
 	-- Initialise player
@@ -251,15 +252,9 @@ function newGame(folder, difficulty)
 	weaponList = loadWeapons(folder .. "WEAPON_Data.csv")
 	loadPlayer(folder .. "PLAYER_Data.csv", player0)
     player0:setWeapon("basicGun")
-
     
     gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
-
-
-    --Initialise quests
-    questManager = QuestManager.new()
-	LoadQuests(folder .. "QUE_Data.csv")
 end
 
 function newGameButton()
