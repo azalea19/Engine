@@ -1,5 +1,5 @@
 TalkToBob,6,6
-ObsGetQuest,1,NPC01,Quest1,0
+ObsGetQuest,1,NPC01,Quest1,1
 ObsGetTech,2,ObsTech,none,0
 ObsReturn,1,NPC01,Quest1Return,0
 AirGetQuest,1,NPC01,Quest2,0

@@ -316,7 +316,7 @@ function SaveQuests(filePath, data)
 			saveTable[#saveTable + 1] =  "," 
 			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].action
 			saveTable[#saveTable + 1] =  "," 
-			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].targetName
+			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].target
 			saveTable[#saveTable + 1] =  "," 
 			saveTable[#saveTable + 1] =  data.quests[i]["stages"][k].extraInfo
 			saveTable[#saveTable + 1] =  "," 
@@ -417,6 +417,11 @@ function LoadQuests(filePath)
 			local t = {}
 			t = QuestStage.new(fileData[i + k][1], fileData[i + k][2], fileData[i + k][3], fileData[i + k][4])
 			t.isComplete = fileData[i + k][5]
+            if(fileData[i + k][5] == 1) then
+                t.isComplete = true
+            else
+                t.isComplete = false
+            end
 			table.insert(Stages, t)
 		end
 		

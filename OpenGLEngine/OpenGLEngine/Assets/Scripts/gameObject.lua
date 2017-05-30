@@ -129,12 +129,19 @@ function gameObject:getDir()
 end
 
 function gameObject:setDir(newDir)
-	objectInstanceAPI.setOrientation(newDir.x,newDir.y,newDir.z,context.handle)
+	objectInstanceAPI.setOrientation(self.id,newDir.x,newDir.y,newDir.z)
 end
 
 function gameObject:getScale()
 	return gameObject.scale
 end
+
+
+
+function gameObject:setScale(newScale)
+	objectInstanceAPI.setScale(instanceID,newScale.x,newScale.y,newScale.z)
+end
+
 
 function gameObject:getAnim()
 	return gameObject.animation

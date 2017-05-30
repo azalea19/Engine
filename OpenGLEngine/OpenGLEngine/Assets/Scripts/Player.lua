@@ -59,7 +59,7 @@ function Player:die()
     printAPI.print("Player has died.")
 
     inMenu = true
-	preCameraPos = player0:getPosition()
+	preCameraPos = self:getPosition()
 	--printVec3(preCameraPos)
 	preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
 	preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
@@ -111,7 +111,9 @@ function Player:setPitch(newPitch);
 end
 
 function Player:update()
-   -- printVec3(self:getPosition())
+
+    if(self.currentHealth>0) then 
+    -- printVec3(self:getPosition())
 	
 	-- written by liz translated from maddys c++ code
 	--printAPI.print("Updating player\n")
@@ -307,6 +309,8 @@ function Player:update()
 	if self.lookTarget == nil then
 		self.inDialogue = false
     end
+    end
+   
 end
 
 return Player

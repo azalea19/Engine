@@ -15,10 +15,29 @@ function Dialogue.new()
 	return instance
 end
 
+function Dialogue:getTopic(topicid)
+
+for i=1,#self.topics do
+        if self.topics[i].id == topicId then
+            return self.topics[i]
+        end
+    end
+
+end
+
 function Dialogue:addTopic(newTopic)
 	printAPI.print("Setting Dialogue...\n");
 	self.topicCount = self.topicCount+1
 	self.topics[self.topicCount] = newTopic	
+    self.topics.active=true
+end
+
+function Dialogue:deleteTopic(topicId)
+	for i=1,#self.topics do
+        if self.topics[i].id == topicId then
+            self.topics[i].active = false
+        end
+    end
 end
 
 Topic = {}
@@ -36,8 +55,9 @@ function Topic.new(topicID, topicName)
 		unlockReq = nil, -- Unlock Requirements, set this to a QuestManager check (stages complete) to see if topic is available. 
 		isAvailable = true,
 		hasRead = false, -- Whether the player has read this topic in the dialogue
-		deleteOnRead = false -- Whether the topic becomes unavailable once the player reads it
-	}
+		deleteOnRead = false, -- Whether the topic becomes unavailable once the player reads it
+        active = true
+	} --delete on read not implemented
 
 	setmetatable(instance, Topic)
 	return instance

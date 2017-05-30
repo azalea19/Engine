@@ -82,6 +82,10 @@ function World:RemoveInstances()
 	self.scenes[self.currentScene]:RemoveInstances()
 end
 
+function World:RemoveInstance(instName)
+	self.scenes[self.currentScene]:RemoveInstance(instName)
+end
+
 function World:GetTerrainID()
 	return self.scenes[self.currentScene]:GetTerrainID()
 end

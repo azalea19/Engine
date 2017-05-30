@@ -45,7 +45,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
-    instance.moveSpeed = 0.6
+    instance.moveSpeed = 1.5
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
@@ -146,7 +146,7 @@ end
 function npc:die()
 	debugLPrint("NPC death.\n")
 	self.alive = false
-	questManager:check(KILL,self)
+	questManager:check(KILL,self,"none")
 
 	currentScene:RemoveInstance(self)
 	--self.updating = false
@@ -246,6 +246,7 @@ function npc:readTopics()
 	local length = 0
 	if self.dialogue ~= nil then
 		for i=1,self.dialogue.topicCount do
+            printAPI.print("1\n")
 			local topic = self.dialogue.topics[i]
 			local topicName
 			if topic.name~= nil then
@@ -254,6 +255,7 @@ function npc:readTopics()
 				topicName = topic.id
 			end
 			length = length + 1
+            printAPI.print(topicName)
 			str[length] = topicName
 
 		end

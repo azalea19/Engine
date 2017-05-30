@@ -123,6 +123,10 @@ function initMenu()
 end
 
 function updateMenu()
+    cameraAPI.setPosition(camera0,10,-1,30)
+	cameraAPI.setYaw(camera0,0)
+	cameraAPI.setPitch(camera0,0)
+
 	local currentPos = MouseObject:getPosition()
     local newXPos = currentPos.x + (inputManagerAPI.mouseDeltaX() / 50)
     local newYPos = currentPos.y - (inputManagerAPI.mouseDeltaY() / 50)

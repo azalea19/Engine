@@ -1,7 +1,7 @@
 TalkToBob,6,6
 ObsGetQuest,1,,Quest1,1
-ObsGetTech,2,,none,1
-ObsReturn,1,,Quest1Return,1
-AirGetQuest,1,,Quest2,1
-AirKillBoss,0,,none,1
-AirReturn,1,,Quest2Return,1
+ObsGetTech,2,,none,0
+ObsReturn,1,,Quest1Return,0
+AirGetQuest,1,,Quest2,0
+AirKillBoss,0,,none,0
+AirReturn,1,,Quest2Return,0

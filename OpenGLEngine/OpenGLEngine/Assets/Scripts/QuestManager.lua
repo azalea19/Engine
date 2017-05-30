@@ -40,19 +40,36 @@ function QuestManager:check(action,target,extraInfo)
                 	debugLPrint(action .. " " .. target.stringID .. " " .. extraInfo .. "\n")
 
                 end
+
+                if(thisStage.name == "ObsGetQuest") then
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "ObsGetTech") then
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "ObsReturn") then
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "AirGetQuest") then
+
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "AirKillBoss") then
+                            saveAllToCurrentSave()
+                        end
 				
 				if(action==thisStage.action and target.stringID == thisStage.target and extraInfo == thisStage.extraInfo) then
-                	printAPI.print("You completed quest stage: " .. thisStage.name .. " But it is already complete.\n")
+                	printAPI.print("You completed quest stage: " .. thisStage.name .. " But it still may be already complete.\n")
 
 					if(thisStage.isComplete == false) then
 						self.quests[i].stages[a].isComplete = true
 						printAPI.print("You completed quest stage: " .. thisStage.name .. "\n")
-						ShowMessageBox("You completed quest stage: " .. thisStage.name .. "\n")
+
+                        if(thisStage.name == "ObsGetTech" or thisStage.id == "AirKillBoss") then
+						    ShowMessageBox("You completed quest stage " .. thisStage.name .. "\n")
+                        end
 
 
-                        if(thisStage.id == "Quest1Return") then
-                            diag:addTopic(quest2)
-                            saveAllToCurrentSave()
 
                         --[[diag:addTopic(greeting)
     diag:addTopic(quest1)
@@ -62,10 +79,10 @@ function QuestManager:check(action,target,extraInfo)
     diag:addTopic(teleport1)
     diag:addTopic(teleport2)]]
 
-                         end
+                         
 						if(self.quests[i]:isComplete()) then
 							printAPI.print("You completed quest: " .. self.quests[i].name .. "\n")
-                           	ShowMessageBox("You completed quest: " .. self.quests[i].name .. "\n")
+                           	--ShowMessageBox("You completed quest: " .. self.quests[i].name .. "\n")
 
 						end
 					end
@@ -84,6 +101,14 @@ function QuestManager:addQuest(newQuest)
 
 
     --printAPI.print(newQuestnewQuest.targetName .. " " .. newQuest.
+end
+
+function QuestManager:getQuest(questName)
+    for i=1,#self.quests do
+		if(self.quests[i].name == questName) then
+			return self.quests[i]
+		end
+	end
 end
 
 function QuestManager:doesQuestExist(questName)
@@ -112,6 +137,13 @@ function Quest.new(name,questStages, iEndStage)
 	return instance
 end
 
+function Quest:getStage(stageName)
+    for i=0,#instance.stages do
+        if (instance.stages[i].name == stageName) then
+            return instance.stages[i]
+        end
+    end
+end
 function Quest:isComplete()
 	for i=1,#self.stages-1 do
 		debugLPrint("Checking Quests ... ")

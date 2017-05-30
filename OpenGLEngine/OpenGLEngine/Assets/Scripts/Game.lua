@@ -114,8 +114,8 @@ function InitScene1(goPath, npcPath, diff)
     local dir = {x=0,y=1,z=0}
 
 	if(scene:FindInstance("Dungeon1Door") == false) then
-		Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
-		scene:AddInstance(Dungeon1Door)
+		--Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
+		--scene:AddInstance(Dungeon1Door)
 		loc = Vector3.new(1500,0,1500)
 		scale = {x=0.1,y=0.1,z=0.1}
 		obs = gameObject.new("Observatory","Observatory","Observatory",loc,dir,scale,0)
@@ -152,6 +152,7 @@ function InitScene1(goPath, npcPath, diff)
 		bob.defaultAnim = anim2
 		bob.hurtAnim = {"Section",0,5}
 		bob:setAnimation(anim2)
+        bob:setScale(scale)
 		objectInstanceAPI.setBaseTransform(bob.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
 		local upVector = {x=0,y=1,z=0}
 		bob.upVector = upVector
@@ -247,15 +248,15 @@ function InitScene2(pathNPC, diff)
 	scene2 = Scene.new("Level2", startPos, startDir)
 	
 	if(scene2:FindInstance("COLDungeon1") == false) then
-	    Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
+	    --Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
 	end
 	
     scene2:AddInstances(NPCData);
     scene2:AddInstance(Dungeon1Intr);
 
 	if(scene2:FindInstance("Dungeon1IntrDoor") == false) then
-		Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
-		scene2:AddInstance(Dungeon1IntrDoor)
+		--Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
+		--scene2:AddInstance(Dungeon1IntrDoor)
 	end
 
     --obsTech = gameObject.new("ObsTech","The Observatory","ObsTech",loc,dir,scale,0)
@@ -279,25 +280,17 @@ end
 
 function InitQuests(quePath)
 
-    local diag = Dialogue.new()
+    diag = Dialogue.new()
 	questManager = QuestManager.new()
 	LoadQuests(quePath)
 
-    local quest1 = Topic.new("Quest1","I need my organs back")
-    local mylines = {}
-    mylines[1] = "Yes, yes, I know, it's terrible – having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
-    mylines[2] = "Listen, I can help you with your eyes – there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
-    mylines[3] = "If you can bring back anything high-tech you find there, I'll happily repair your eyes."
-
-    quest1:setLines(mylines)
-    
-    local greeting = Topic.new("Greeting","Greeting")
+    greeting = Topic.new("Greeting","Greeting")
     local mylines2 = {}
     mylines2[1] = "Oh, it's you. I heard you came a long way to get here."
 
     greeting:setLines(mylines2)
 
-    local quest1 = Topic.new("Quest1Return","I have something from the observatory.")
+    quest1 = Topic.new("Quest1","I need my organs back.")
     local mylines = {}
     mylines[1] = "Yes, yes, I know, it's terrible... having that foul industry stealing your organs and replacing them with barely-working, recycled pieces of scrap metal..."
     mylines[2] = "Listen, I can help you with your eyes... there's a nearby observatory that I hear has some equipment of interest to me, but it's far too dangerous to go myself."
@@ -305,14 +298,14 @@ function InitQuests(quePath)
 
     quest1:setLines(mylines)
 
-    local quest1return = Topic.new("Quest1Return","I have something from the observatory.")
+    quest1return = Topic.new("Quest1Return","I have something from the observatory.")
     local mylines = {}
     mylines[1] = "Oh, excellent! Come right this way, I'll fix your eyes up for you."
 
     quest1return:setLines(mylines)
     
 
-    local quest2 = Topic.new("Quest1Return","What about my lungs? My heart?")
+    quest2 = Topic.new("Quest2","What about my lungs? My heart?")
     local mylines = {}
     mylines[1] = "You don't quit, do you... While you were gone, the nearby raiders tried to launch another attack. I am too busy helping these people to fix your faulty cybernetics."
     mylines[2] = "Look, the raiders came from an airship north of here. Tell you what, if you can kill their leader and force them to retreat, I'll happily repair the rest of your organs."
@@ -320,20 +313,20 @@ function InitQuests(quePath)
     quest2:setLines(mylines)
     
 
-    local quest2return = Topic.new("Quest2Return","I killed their leader.")
+    quest2return = Topic.new("Quest2Return","I killed their leader.")
     local mylines = {}
     mylines[1] = "What, really? Good on you! Excellent! Thank you so much! For a while at least, the people of this town will no longer have to suffer and fear when the next raid will come."
     mylines[2] = "Please, come with me, I'll fix the rest of your organs for you"
 
     quest2return:setLines(mylines)
     
-    local teleport1 = Topic.new("Teleport1","Can you take me to the observatory?")
+    teleport1 = Topic.new("Teleport1","Can you take me to the observatory?")
     local mylines = {}
     mylines[1] = "Fine, I guess so."
 
     teleport1:setLines(mylines)
     
-    local teleport2 = Topic.new("Teleport2","Can you take me to the airship?")
+    teleport2 = Topic.new("Teleport2","Can you take me to the airship?")
     local mylines = {}
     mylines[1] = "Fine, I guess so."
 
@@ -497,14 +490,14 @@ function StartDialogueTopic(playr,topicn)
                 debugLPrint("Closing dialogue - teleporting.\n")
 
                 player0.inDialogue = false
-                player0.position = Vector3.new(500,0,1500)
+                player0.position = Vector3.new(1200,0,1200)
             end
             if(topic.id == "Teleport2") then
                 dInMenu = false
                 debugLPrint("Closing dialogue - teleporting.\n")
 
                 player0.inDialogue = false
-                player0.position = Vector3.new(1000,0,0)
+                player0.position = Vector3.new(900,1100,0)
             end
 
         else
@@ -595,7 +588,8 @@ function Update()
 
                 if(player0.lookTarget.stringID == "ObsTech") then
                     printAPI.print("Picked up quest item.\n")
-                    questManager:check(GET,player0.lookTarget)
+                    questManager:check(GET,player0.lookTarget,"none")
+                    world:RemoveInstance(player0.lookTarget)
 
                 end
             end
@@ -880,7 +874,7 @@ function TestChangeNPCState()
 end
 
 function StartDialogue(npc)
-    debugPrint("Starting Dialogue... ")
+    debugLPrint("Starting Dialogue... ")
     if(npc ~= nil) then
         if(npc.dialogue ~= nil) then
             debugLPrint("Dialogue available.\n")
@@ -889,8 +883,51 @@ function StartDialogue(npc)
             local topics
             local count
             topics, count = npc:readTopics()
+
             for i=1,count do
-                str = str .. i ..". ".. topics[i] .. " "
+                
+
+                --[[
+                
+                        if(thisStage.name == "ObsGetQuest") then
+                            world:FindObject("NPC01").dialogue:addTopic(teleport1)
+                            world:FindObject("NPC01").dialogue:deleteTopic(quest1.id)
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "ObsGetTech") then
+                            world:FindObject("NPC01").dialogue:addTopic(quest1return)
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "ObsReturn") then
+                            world:FindObject("NPC01").dialogue:addTopic(quest2)
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "AirGetQuest") then
+                            world:FindObject("NPC01").dialogue:addTopic(teleport2)
+                            world:FindObject("NPC01").dialogue:deleteTopic(quest2.id)
+
+                            saveAllToCurrentSave()
+                        end
+                        if(thisStage.name == "AirKillBoss") then
+                            world:FindObject("NPC01").dialogue:addTopic(quest2return)
+                            saveAllToCurrentSave()
+                        end
+                ]]
+
+                topics[i].active = true
+
+                if(questManager.quests[1].getStage("ObsGetQuest").isComplete) then
+                    quests[1].getTopic("Quest1").active = false
+                    --world:FindObject("NPC01").dialogue:addTopic(teleport1)
+                    --world:FindObject("NPC01").dialogue:deleteTopic(quest1.id)
+                end
+
+            printAPI.print(topics[i])
+                 if(topics[i].active) then
+                    str = str .. i ..". ".. topics[i] .. " "
+                else
+                    printAPI.print("Nil topic")
+                end
             end
 
             dialogueText = str
