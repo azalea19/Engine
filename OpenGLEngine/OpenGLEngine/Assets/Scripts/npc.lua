@@ -37,6 +37,8 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.justSeen = false
     instance.alertDist = 10000
 
+    instance.currentStateID = "idle"
+
 	--printAPI.print("Testing NPC instantiate bounding box: " .. instance.boundingBox.min.x .. "\n")
 	--setmetatable(instance, { __index = gameObject } )
 
@@ -59,13 +61,11 @@ function idle(anpc)
         end
     end
     
-    
-    
     debugPrint("NPC idling complete.\n")
 end
 
 
-function chasing(anpc)
+function looking(anpc)
 	debugPrint("NPC is Looking at player... ")
     anpc:lookAt(player0.position)
 
@@ -128,11 +128,14 @@ end
 
 function npc:makeIdle()
 	printAPI.print("Made NPC idle.")
+    self.currentState = "idle"
 	self.state = idle
 end
 
 function npc:makeChasing()
 	debugLPrint("Making NPC chase... ")
+    self.currentState = "chasing"
+
 	self.state = chasing
 	debugLPrint("Chase success\n")
 
@@ -189,31 +192,30 @@ function npc:Update()
 		end
 	end
 	
-    if (AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg) then
-        if(self.seenPlayer == false) then
-            self.justSeen = true
-        else
-            self.justSeen = false
-        end
-        
-        self.seenPlayer = true
-    else
-        if (Distance(self:getPosition(), player0:getPosition()) <= self.hearDist) then
-            if(self.seenPlayer == false) then
-                self.justSeen = true
-            else
-                self.justSeen = false
-            end
-            self.seenPlayer = true
-        end
-    end
+	if (AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg) and Distance(self:getPosition(), player0:getPosition()) <= self.viewDist then
+		if(self.seenPlayer == false) then
+			self.justSeen = true
+		else
+			self.justSeen = false
+		end
+		
+		self.seenPlayer = true
+	else
+		if (Distance(self:getPosition(), player0:getPosition()) <= self.hearDist) then
+			if(self.seenPlayer == false) then
+				self.justSeen = true
+			else
+				self.justSeen = false
+			end
+			self.seenPlayer = true
+		end
+	end
 	
 	if self.state ~= nil then
 		debugPrint("Running NPC state...")
 		self.state(self)
 		local an ={ x=self:getPosition().x, y = GetHeightAtPoint(self:getPosition().x , self:getPosition().z), z = self:getPosition().z}
 		self:setPosition(an)
-
 	end
 	
 	

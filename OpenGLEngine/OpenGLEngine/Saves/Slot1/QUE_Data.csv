@@ -1,5 +1,9 @@
-TalkToBob,2,2
-MeetBob,1,NPC01,Greeting,0
-GetQuest,1,NPC01,Quest1,0
+TalkToBob,6,6
+ObsGetQuest,1,NPC01,Quest1,0
+ObsGetTech,2,ObsTech,none,0
+ObsReturn,1,NPC01,Quest1Return,0
+AirGetQuest,1,NPC01,Quest2,0
+AirKillBoss,0,Boss,none,0
+AirReturn,1,NPC01,Quest2Return,0
 TalkToBob,1,1
 MeetBob,1,Fargrim01,Greeting,1

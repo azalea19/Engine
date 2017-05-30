@@ -58,6 +58,12 @@ bool CollisionAPI::ObjectInstance_CollidingInTree(InstanceHandle instanceHandle)
   return collisionTree->Intersects(box);
 }
 
+bool CollisionAPI::ObjectCollidesWithObject(InstanceHandle a, InstanceHandle b)
+{
+  ObjectInstance *A = LuaObjectInstanceManager::GetInstance(a);
+  ObjectInstance *B = LuaObjectInstanceManager::GetInstance(b);
+  return Intersects(A->GetBoundingBox(), B->GetBoundingBox());
+}
 
 void CollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
@@ -66,4 +72,5 @@ void CollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "createCollisionTree", CreateCollisionTree);
   pContext->ExposeFunction(luaAPIName, "box_collidingInTree", Box_CollidingInTree);
   pContext->ExposeFunction(luaAPIName, "objectInstance_collidingInTree", ObjectInstance_CollidingInTree);
+  pContext->ExposeFunction(luaAPIName, "objectCollidesWithObject", ObjectCollidesWithObject);
 }

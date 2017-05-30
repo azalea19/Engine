@@ -61,7 +61,6 @@ bool SeperatingAxisTest(const vec3* object1Corners, int num1Corners, const vec3*
 	return true;
 }
 
-
 bool SeperatingAxisTest(ConvexHull const& a, ConvexHull const& b)
 {
   bool result = SeperatingAxisTest(a.vertices.data(), a.vertices.size(), b.vertices.data(), b.vertices.size(), a.axes.data(), a.axes.size());

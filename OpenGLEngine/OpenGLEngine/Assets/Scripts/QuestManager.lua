@@ -101,7 +101,7 @@ function QuestStage.new(name, myAction, myTargetName, myExtraInfo)
 	instance.action = myAction
 	instance.target = myTarget
 	instance.targetName = myTargetName
-	instance.extraInfo = myExtraInfo
+	instance.extraInfo = myExtraInfo or "none"
 	instance.isComplete = false
 
 	setmetatable(instance, QuestStage)

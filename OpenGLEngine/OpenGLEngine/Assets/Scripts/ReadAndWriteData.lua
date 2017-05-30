@@ -231,7 +231,7 @@ function savePlayer(filePath, data)
 	saveTable[#saveTable + 1] =  "," 
 	saveTable[#saveTable + 1] =  data.currentHealth
 	saveTable[#saveTable + 1] =  "," 
-	saveTable[#saveTable + 1] =  data.weapon
+	saveTable[#saveTable + 1] =  data.weaponID
 	
 	saveString = table.concat(saveTable)
 	write(filePath, saveString)
@@ -246,16 +246,20 @@ function saveWeapons(filePath, data)	--data is a array of weapons
 	clearFile(filePath)
 	
 	for i = 1, #data do
-		saveTable[#saveTable + 1] =  data.id
+		saveTable[#saveTable + 1] =  data[i].id
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.name
+		saveTable[#saveTable + 1] =  data[i].name
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.damage
+		saveTable[#saveTable + 1] =  data[i].damage
 		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.shootInterval
-		saveTable[#saveTable + 1] =  "," 
-		saveTable[#saveTable + 1] =  data.range
-		saveTable[#saveTable + 1] =  "\n" 
+		saveTable[#saveTable + 1] =  data[i].shootInterval
+		if(data[i].range == nil) then
+			saveTable[#saveTable + 1] =  "\n" 
+		else
+			saveTable[#saveTable + 1] =  "," 
+			saveTable[#saveTable + 1] =  data[i].range
+			saveTable[#saveTable + 1] =  "\n" 
+		end
 	end
 	
 	saveString = table.concat(saveTable)
@@ -273,7 +277,7 @@ function loadPlayer(filePath, player)	--player is a ref to the player
 	player:setYaw(fileData[1][4])
 	player:setPitch(fileData[1][5])
 	player.currentHealth = fileData[1][6]
-	player.weapon = fileData[1][7]
+	player:setWeapon(fileData[1][7])
 	
 	printAPI.print('Player loaded.\n')
 end

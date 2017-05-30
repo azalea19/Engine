@@ -38,6 +38,7 @@ OPEN_GL = 0
 
 gameObjects = {}
 world = {}
+weaponList = {}
 debug = true
 debugdetail = false
 
@@ -125,7 +126,7 @@ function InitScene1()
 	local b = Vector3.new(1,1,1)
 
     local loc = {x=1100,y=0,z=1100}
-    local scale = {x=0.5,y=0.5,z=0.5}
+    local scale = {x=0.1,y=0.1,z=0.1}
     local dir = {x=0,y=1,z=0}
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
@@ -406,15 +407,9 @@ function InitPlayer()
 	player0 = Player.new(camera0,100,100)
 
 	player0:setPosition(Vector3.new(1000,0,1000))
-
+    
     gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
-
-    scene:AddInstance(gun)
-    scene:AddInstance(bullet)
-
-    observatory = gameObject.new("Observatory","Observatory","Observatory",Vector3.new(1000,0,0),Vector3.new(0,0,0),Vector3.new(0.1,0.1,0.1),0)
-
 
 
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
@@ -424,7 +419,9 @@ end
 function InitWeapon()
 
     basicGun = Weapon.new("basicGun","Gun",1,1)
-    player0:setWeapon(basicGun)
+	table.insert(weaponList,basicGun);
+	
+    player0:setWeapon("basicGun")
 
     objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 90, 0, Vector3.new(1, 1, 1))
     objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
@@ -502,8 +499,8 @@ function Update()
 			preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
 			preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
 			
-			cameraAPI.setPosition(camera0,0,10,0)
-			cameraAPI.setYaw(camera0,180)
+			cameraAPI.setPosition(camera0,10,-1,30)
+			cameraAPI.setYaw(camera0,0)
 			cameraAPI.setPitch(camera0,0)
 			changeMenu(0)
         else
@@ -517,240 +514,249 @@ function Update()
 	if(inMenu) then
 	
 	else
-    local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
-	if quitIn then
-		printAPI.print("Quitting - pressed input to quit.\n")
-        quitting = true
-    end
-
-    local helpIn = inputManagerAPI.isKeyDown(Help_Input)
-	if helpIn then
-        helpMenu = true
-    end
-
-    if helpMenu then
-        if inputManagerAPI.isMousePressedLeft() then
-            helpMenu = false
+        local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
+	    if quitIn then
+		    printAPI.print("Quitting - pressed input to quit.\n")
+            quitting = true
         end
-    end
 
-    if(inputManagerAPI.isKeyPressed(Wireframe_Input)) then
-        if(wireindex ==0) then
-            wireindex =1
-        else
-            wireindex =0
+        local helpIn = inputManagerAPI.isKeyDown(Help_Input)
+	    if helpIn then
+            helpMenu = true
         end
-    end
 
-    --printAPI.print("Processing inputs\n")
-
-	e = inputManagerAPI.isKeyPressed(Use_Input)
-	if e then
-        printAPI.print("Interacting.\n")
-
-        
-        if(player0.lookTarget ~= nil) then
-
-            StartDialogue(player0.lookTarget)
-
-            if(player0.lookTarget.stringID == "Dungeon1Door") then
-
-                MoveToDungeon1()
-
-
-            end
-
-            if(player0.lookTarget.stringID == "obsTech") then
-                printAPI.print("Picked up quest item.\n")
-                questManager:check(GET,playr.lookTarget)
-
-            end
-        end
-        
-        
-	end
-
-    if inputManagerAPI.isKeyPressed(QuickSlot1_Input) then
-
-        StartDialogueTopic(player0,1)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot2_Input) then
-
-        StartDialogueTopic(player0,2)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot3_Input) then
-
-        StartDialogueTopic(player0,3)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot4_Input) then
-
-        StartDialogueTopic(player0,4)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot5_Input) then
-
-        StartDialogueTopic(player0,5)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot6_Input) then
-
-        StartDialogueTopic(player0,6)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot7_Input) then
-
-        StartDialogueTopic(player0,7)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot8_Input) then
-
-        StartDialogueTopic(player0,8)
-        
-    end
-    if inputManagerAPI.isKeyPressed(QuickSlot9_Input) then
-
-        StartDialogueTopic(player0,9)
-        
-    end
-    if inputManagerAPI.isMousePressedLeft() then
-
-        debugLPrint("Clicked LMB.\n")
-
-        if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
-			
-            if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-                    if(player0.weapon:attack(player0.lookTarget)) then
-                        FireBullet()
-                    end
-            
+        if helpMenu then
+            if inputManagerAPI.isMousePressedLeft() then
+                helpMenu = false
             end
         end
 
-
-
-
-        if(player0.inDialogue == true and dInMenu == false) then
-          debugLPrint("In dialogue...")
-
-            if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
-                dCurrentLine = dCurrentLine + 1
-                dialogueText = dCurrentTopic.textLines[dCurrentLine]
-                dInMenu = false
-                
-                
-
-
+        if(inputManagerAPI.isKeyPressed(Wireframe_Input)) then
+            if(wireindex ==0) then
+                wireindex =1
             else
-                debugLPrint("Next line in topic is nil.\n")
+                wireindex =0
+            end
+        end
+
+        --printAPI.print("Processing inputs\n")
+
+	    e = inputManagerAPI.isKeyPressed(Use_Input)
+	    if e then
+            printAPI.print("Interacting.\n")
+
+        
+            if(player0.lookTarget ~= nil) then
+
                 StartDialogue(player0.lookTarget)
+
+                if(player0.lookTarget.stringID == "Dungeon1Door") then
+
+                    MoveToDungeon1()
+
+
+                end
+
+                if(player0.lookTarget.stringID == "obsTech") then
+                    printAPI.print("Picked up quest item.\n")
+                    questManager:check(GET,playr.lookTarget)
+
+                end
             end
-        else
-            if(dInMenu) then
-                    debugLPrint("Closing dialogue - clicked in main menu.\n")
-                    player0.inDialogue = false
+        
+        
+	    end
+
+        if inputManagerAPI.isKeyPressed(QuickSlot1_Input) then
+
+            StartDialogueTopic(player0,1)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot2_Input) then
+
+            StartDialogueTopic(player0,2)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot3_Input) then
+
+            StartDialogueTopic(player0,3)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot4_Input) then
+
+            StartDialogueTopic(player0,4)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot5_Input) then
+
+            StartDialogueTopic(player0,5)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot6_Input) then
+
+            StartDialogueTopic(player0,6)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot7_Input) then
+
+            StartDialogueTopic(player0,7)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot8_Input) then
+
+            StartDialogueTopic(player0,8)
+        
+        end
+        if inputManagerAPI.isKeyPressed(QuickSlot9_Input) then
+
+            StartDialogueTopic(player0,9)
+        
+        end
+        if inputManagerAPI.isMousePressedLeft() then
+
+            debugLPrint("Clicked LMB.\n")
+
+            if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
+			
+                if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
+                        if(player0.weapon:attack(player0.lookTarget)) then
+                            FireBullet()
+                        end
+            
+                end
+            end
+
+
+
+
+            if(player0.inDialogue == true and dInMenu == false) then
+              debugLPrint("In dialogue...")
+
+                if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
+                    dCurrentLine = dCurrentLine + 1
+                    dialogueText = dCurrentTopic.textLines[dCurrentLine]
+                    dInMenu = false
+                
+                
+
+
+                else
+                    debugLPrint("Next line in topic is nil.\n")
+                    StartDialogue(player0.lookTarget)
+                end
+            else
+                if(dInMenu) then
+                        debugLPrint("Closing dialogue - clicked in main menu.\n")
+                        player0.inDialogue = false
+                end
             end
         end
-    end
 
-	if inputManagerAPI.isKeyPressed(Quicksave_Input) then
-		local currentGOs = world:GetGameObjects()
-		SaveInstances("../SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
-		SaveInstances("../SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
-	end
-
-	if inputManagerAPI.isKeyPressed(Quickload_Input) then
-		local currentScene = world:GetScene()
-
-		currentScene:RemoveInstances()
-
-		player0["position"]["x"] = 500
-		player0["position"]["z"] = 500
-		player0["position"]["y"] = GetHeightAtPoint(500 , 500)
-		cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
-
-		printAPI.print('Initialising objects...\n')
-		local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject",difficulty)
-		local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc",difficulty)
-
-		world:AddInstances(GOData)
-		world:AddInstances(NPCData)
-		world:SetupInstances()
-	end
-
-
-
-    if debug then
-
-        if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
-            printAPI.print("Force quitting.\n")
-            os.exit()
-
+	    if inputManagerAPI.isKeyPressed(Quicksave_Input) then
+		    --local currentGOs = world:GetGameObjects()
+		    saveAllToCurrentSave()
+		    --SaveInstances("../SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
+		    --SaveInstances("../SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
 	    end
-        if inputManagerAPI.isKeyPressed(TestInput1) then
+
+	    if inputManagerAPI.isKeyPressed(Quickload_Input) then
+		    local currentScene = world:GetScene()
+
+		    currentScene:RemoveInstances()
+
+		    player0["position"]["x"] = 500
+		    player0["position"]["z"] = 500
+		    player0["position"]["y"] = GetHeightAtPoint(500 , 500)
+		    cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
+
+		    printAPI.print('Initialising objects...\n')
+		    local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject",difficulty)
+		    local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc",difficulty)
+
+		    loadWeapons("../SaveData/WEAPON_Data.csv")
+		    loadPlayer("../SaveData/PLAYER_Data.csv", player0)
+		    questManager = QuestManager.new()
+		    LoadQuests("../SaveData/QUE_Data.csv")
+		    LoadTopics("../SaveData/DIA_Data.csv")
+
+		    world:AddInstances(GOData)
+		    world:AddInstances(NPCData)
+		    world:SetupInstances()
+	    end
+
+
+
+        if debug then
+
+            if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
+                printAPI.print("Force quitting.\n")
+                os.exit()
+
+	        end
+            if inputManagerAPI.isKeyPressed(TestInput1) then
             
             
 
-	    end
+	        end
     
-        if inputManagerAPI.isKeyPressed(TestInput2) then
+            if inputManagerAPI.isKeyPressed(TestInput2) then
         
-            TestChangeNPCState()
+                TestChangeNPCState()
 
-	    end
+	        end
 		
-		if inputManagerAPI.isKeyPressed(TestInput3) then
+		    if inputManagerAPI.isKeyPressed(TestInput3) then
 		
-		end
+		    end
     
-        if inputManagerAPI.isKeyPressed(TestInput3) then
-            -- spawn bob
+            if inputManagerAPI.isKeyPressed(TestInput3) then
+                -- spawn bob
 
-            --SpawnBob()
+                --SpawnBob()
             
 
-	    end
+	        end
     
-        -- switch whether debug detail printing is on or off
-        if inputManagerAPI.isKeyPressed(TestInput4) then
-            if debugdetail == true then
-                debugdetail = false
-            else
-                debugdetail = true
-            end
-	    end
+            -- switch whether debug detail printing is on or off
+            if inputManagerAPI.isKeyPressed(TestInput4) then
+                if debugdetail == true then
+                    debugdetail = false
+                else
+                    debugdetail = true
+                end
+	        end
 
-    end
+        end
 
     
-    --printAPI.print("Updating gameobjects\n")
+        --printAPI.print("Updating gameobjects\n")
 
 
-    local currentGOs = world:GetGameObjects()
-    for i = 1, world:GetGameObjectCount() do
-        --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
-        local a = currentGOs[i]:Update()
-        if(currentGOs[i]["currentHealth"] ~= nil) then
-            if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
-                for k = 1, world:GetGameObjectCount() do
-                    if(currentGOs[k]["currentHealth"] ~= nil) then
-                        if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
-                            currentGOs[k]:makeChasing()
+        local currentGOs = world:GetGameObjects()
+        for i = 1, world:GetGameObjectCount() do
+            --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
+            local a = currentGOs[i]:Update()
+            if(currentGOs[i]["currentHealth"] ~= nil) then
+                if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
+                    for k = 1, world:GetGameObjectCount() do
+                        if(currentGOs[k]["currentHealth"] ~= nil) then
+                            if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
+                                currentGOs[k]:makeChasing()
+                            end
                         end
                     end
                 end
             end
         end
-    end
-    --printAPI.print("Updating player\n")
 
-    player0:update();
+        --printAPI.print("Updating player\n")
+
+        player0:update();
+        AdjustGunAndBullet()
 	end
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
-    AdjustGunAndBullet()
+
     
 
 
@@ -791,6 +797,7 @@ function AdjustGunAndBullet()
 
     bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
     
+
     local closerpos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),1,context.handle),context.handle)
     closerpos.y = closerpos.y - 0.5
     local pos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle),context.handle)
@@ -902,6 +909,15 @@ function Render()
 			if ExitButton.active then
 				renderManagerAPI.renderObject(camera0,time,ExitButton.id, 1)
 			end
+			if ButtonEasy.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonEasy.id, 1)
+			end
+			if ButtonMedium.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonMedium.id, 1)
+			end
+			if ButtonHard.active then
+				renderManagerAPI.renderObject(camera0,time,ButtonHard.id, 1)
+			end
 			renderManagerAPI.present(camera0)
 		else
 			if(helpMenu) then
@@ -916,6 +932,9 @@ function Render()
 					end
 				end
 				--local currentTerrainID = world:GetTerrainID()
+
+                renderManagerAPI.renderObject(camera0,time,gun.id,1)
+                renderManagerAPI.renderObject(camera0,time,bullet.id,1)
 
 
 				local i

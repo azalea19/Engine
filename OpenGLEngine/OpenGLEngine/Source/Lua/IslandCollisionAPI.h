@@ -52,6 +52,9 @@ public:
 	/// <param name="handle">Lua context handle</param>
 	static bool IslandCollisionAPI::CheckAnyCollision(LuaRef thisbox);
 
+	static bool IslandCollisionAPI::DoesCollisionOccur(LuaRef thisbox, LuaRef manyList, int listSize);
+
+	static int IslandCollisionAPI::GetCollisionIndex(LuaRef thisbox, LuaRef manyList, int listSize);
 
 	static int IslandCollisionAPI::CheckAnyCollisionGetIndex(LuaRef thisbox, LuaRef manyList, int listSize);
 };
