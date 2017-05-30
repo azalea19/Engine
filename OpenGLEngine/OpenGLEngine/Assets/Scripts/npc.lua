@@ -32,6 +32,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.weapon = Weapon.new("melee","melee",10,100,100)
     instance.hurtAnim = nil
     instance.timeHurtAnimTriggered = 0
+    instance.viewDist = 200
     printAPI.print(instance.currentHealth.."\n")
 
 	--printAPI.print("Testing NPC instantiate bounding box: " .. instance.boundingBox.min.x .. "\n")
@@ -186,7 +187,7 @@ function npc:Update()
 		end
 	end
 	
-	if (AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg) then
+	if (AngleDiffDeg(self:getForward(),Direction(player0:getPosition(),self:getPosition()) ) <= self.lookAngleDeg and Distance(self:getPosition(),player0:getPosition())<= self.viewDist) then
 		self.seenPlayer = true
 	end
 

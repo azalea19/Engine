@@ -113,6 +113,11 @@ function InitScene1()
 
     Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
     scene:AddInstance(Dungeon1Door)
+    loc = Vector3.new(1500,0,1500)
+    scale = {x=0.1,y=0.1,z=0.1}
+    obs = gameObject.new("Observatory","Observatory","Observatory",loc,dir,scale,0)
+    scene:AddInstance(obs)
+
 
     currentScene = scene
 
@@ -142,6 +147,14 @@ function InitScene1()
 
     
     
+
+    FixRobots(scene)
+
+
+
+end
+
+function FixRobots(thisScene)
     local currentGOs = scene:GetGameObjects()
 
 	for i = 1, scene:GetGameObjectCount() do
@@ -151,8 +164,8 @@ function InitScene1()
             currentGOs[i]:makeIdle()
             --current[i].setOrientation(Vector3.new(180, -90, 0))
             objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-            local anim = {"Section",0,5}
-            local anim2 = {"Section",0,10}
+            local anim = {"Section",0,0.1}
+            local anim2 = {"Section",1,0.2}
             currentGOs[i].defaultAnim = anim2
             currentGOs[i]:setAnimation(anim2)
 
@@ -160,10 +173,7 @@ function InitScene1()
 
         end
     end
-
-
 end
-
 
 function InitAirship()
 
@@ -382,6 +392,16 @@ function Initialize()
     printAPI.print('Initialising rendermanager...\n')
     --renderManagerAPI.initialise()
 
+    
+    InitPlayer()
+    InitWeapon()
+
+	initMenu()
+	
+    printAPI.print('Initialization finished.\n')
+end
+
+function InitPlayer()
     printAPI.print('Initialising player...\n')
 	player0 = Player.new(camera0,100,100)
 
@@ -399,11 +419,6 @@ function Initialize()
 
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
-    InitWeapon()
-
-	initMenu()
-	
-    printAPI.print('Initialization finished.\n')
 end
 
 function InitWeapon()
@@ -766,7 +781,7 @@ function AdjustGunAndBullet()
     bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
     
     local closerpos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),1,context.handle),context.handle)
-    closerpos.y = closerpos.y - 5
+    closerpos.y = closerpos.y - 0.1
     local pos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle),context.handle)
     gun:setPosition(closerpos)
     gun:lookAt(pos)
