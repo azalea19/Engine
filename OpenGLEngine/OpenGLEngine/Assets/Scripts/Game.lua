@@ -317,6 +317,13 @@ function Initialize()
             debugLPrint("Changing robot mech")
             currentGOs[i].hostileToPlayer = true
             currentGOs[i]:makeIdle()
+            objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+            local anim = {"Section",0,5}
+            local anim2 = {"Section",0,10}
+            currentGOs[i].defaultAnim = anim2
+            currentGOs[i].hurtAnim = {"Section",0,5}
+            currentGOs[i]:setAnimation(anim2)
+
         end
     end
 
@@ -341,7 +348,7 @@ function Initialize()
 
 	player0:setPosition(Vector3.new(1000,0,1000))
 
-    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,-10,0),Vector3.new(0.01,0.01,0.01),0)
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,-100,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 
     scene:AddInstance(gun)
@@ -365,7 +372,7 @@ function Initialize()
 
     
     objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 0, 0, Vector3.new(1, 1, 1))
-    objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, -90, 0, Vector3.new(1, 1, 1))
+    objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
     
 	initMenu()
 	
@@ -572,9 +579,9 @@ function Update()
         if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
 			
             if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-                    --if(player0.weapon:attack(player0.lookTarget)) then
+                    if(player0.weapon:attack(player0.lookTarget)) then
                         FireBullet()
-                    --end
+                    end
             
             end
         end
