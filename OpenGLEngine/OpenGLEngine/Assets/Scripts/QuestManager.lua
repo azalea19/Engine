@@ -54,9 +54,27 @@ end
 -- Expects Quest as param
 function QuestManager:addQuest(newQuest)
 	self.quests[#self.quests +1] = newQuest
+end
+
+function QuestManager:doesQuestExist(questName)
+	for i=1,#self.quests do
+		if(self.quests[i].name == questName) then
+			return true
+		end
+	end
 	
-	
-	
+	return false
+end
+
+function Scene:FindInstance(name)
+	for i=1,#self.objects do
+		if(self.objects[i].stringID == name) then
+			debugLPrint("Found object " .. name .." in " .. self.name .. "\n")
+			return self.objects[i]
+		end
+	end
+	debugLPrint("Could not find ".. name .. " in " .. self.name .. "\n")
+	return false
 end
 
 -- QUEST

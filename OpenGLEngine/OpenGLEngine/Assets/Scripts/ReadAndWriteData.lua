@@ -112,28 +112,34 @@ end
 
 function saveAllToCurrentSave()
 	if currentSaveFile == 1 then
-		local tmp = world:GetGameObjects()
+		local tmp = world:getSceneSpecific(1)
 		SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
 		SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
 		SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
 		savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
 		saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
+		local tmp = world:getSceneSpecific(2)		
+		SaveInstances("../Saves/Slot1/NPC_Data_Scene2.csv", tmp, "npc")
 	end
 	if currentSaveFile == 2 then
-		local tmp = world:GetGameObjects()
+		local tmp = world:getSceneSpecific(2)
 		SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
 		SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
 		SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
 		savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
 		saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
+		local tmp = world:getSceneSpecific(2)		
+		SaveInstances("../Saves/Slot3/NPC_Data_Scene2.csv", tmp, "npc")
 	end
 	if currentSaveFile == 3 then
-		local tmp = world:GetGameObjects()
+		local tmp = world:getSceneSpecific(3)
 		SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
 		SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
 		SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
 		savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
 		saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
+		local tmp = world:getSceneSpecific(2)		
+		SaveInstances("../Saves/Slot3/NPC_Data_Scene2.csv", tmp, "npc")
 	end
 end
 
@@ -232,6 +238,8 @@ function savePlayer(filePath, data)
 	saveTable[#saveTable + 1] =  data.currentHealth
 	saveTable[#saveTable + 1] =  "," 
 	saveTable[#saveTable + 1] =  data.weaponID
+	saveTable[#saveTable + 1] =  "," 
+	saveTable[#saveTable + 1] =  playerInScene
 	
 	saveString = table.concat(saveTable)
 	write(filePath, saveString)
@@ -278,6 +286,7 @@ function loadPlayer(filePath, player)	--player is a ref to the player
 	player:setPitch(fileData[1][5])
 	player.currentHealth = fileData[1][6]
 	player:setWeapon(fileData[1][7])
+	playerInScene = fileData[1][8]
 	
 	printAPI.print('Player loaded.\n')
 end

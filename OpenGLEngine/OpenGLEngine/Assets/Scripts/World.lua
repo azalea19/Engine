@@ -41,6 +41,10 @@ function World:GetScene()
 	return self.scenes[self.currentScene]
 end
 
+function World:GetSceneSpecific(sce)
+	return self.scenes[sce]
+end
+
 function World:AddScene(newScene)
 	self.scenes[#self.scenes + 1] = newScene
 end
