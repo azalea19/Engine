@@ -24,7 +24,14 @@ function QuestManager:check(action,target,extraInfo)
 
 			for a=1,#self.quests[i].stages do
 				thisStage = self.quests[i].stages[a]
-				debugLPrint(action .. " " .. target.stringID .. " " .. extraInfo .. "\n")
+
+                if(extraInfo == nil) then
+                	debugLPrint(action .. " " .. target.stringID .. "\n")
+
+                else
+                	debugLPrint(action .. " " .. target.stringID .. " " .. extraInfo .. "\n")
+
+                end
 				
 				if(action==thisStage.action and target.stringID == thisStage.targetName and extraInfo == thisStage.extraInfo) then
 					if(thisStage.isComplete == false) then

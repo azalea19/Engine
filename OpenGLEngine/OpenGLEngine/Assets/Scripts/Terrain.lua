@@ -26,26 +26,31 @@ function WSToHeightMapSpace(wsX,wsZ)
 end
 
 function GetHeightAtPoint(nx,ny)
-debugPrint("Getting height at point... ")
---returned as floating value
-local hmX, hmY = WSToHeightMapSpace(nx,ny)
-hmX = hmX - 0.5	+ 1
-hmY = hmY - 0.5 + 1
+    debugPrint("Getting height at point... ")
+    --returned as floating value
+    local hmX, hmY = WSToHeightMapSpace(nx,ny)
+    hmX = hmX - 0.5	+ 1
+    hmY = hmY - 0.5 + 1
 
-local sampleX = math.floor(hmX) 
-local sampleY = math.floor(hmY) 
+    local sampleX = math.floor(hmX) 
+    local sampleY = math.floor(hmY) 
 
-local lerpFactorX = hmX - sampleX
-local lerpFactorY = hmY - sampleY
+    local lerpFactorX = hmX - sampleX
+    local lerpFactorY = hmY - sampleY
 
-local h00 = terrainHeightData["heightMap"][sampleY][sampleX]
-local h10 = terrainHeightData["heightMap"][sampleY][sampleX+1]
-local h01 = terrainHeightData["heightMap"][sampleY + 1][sampleX]
-local h11 = terrainHeightData["heightMap"][sampleY + 1][sampleX + 1]
+    debugPrint("Terrain get: "..sampleX..","..sampleY.."\n")
+    --if(sampleX~= nil and sampleX>0 and sampleY ~= nil and sampleY>0) then
+        local h00 = terrainHeightData["heightMap"][sampleY][sampleX]
+        local h10 = terrainHeightData["heightMap"][sampleY][sampleX+1]
+        local h01 = terrainHeightData["heightMap"][sampleY + 1][sampleX]
+        local h11 = terrainHeightData["heightMap"][sampleY + 1][sampleX + 1]
 
-local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
-debugPrint("Complete\n")
-return val
+        local val = biLerp(h00,h10, h01, h11, lerpFactorX,lerpFactorY)	
+    --else
+        --val =0
+    --end
+    debugPrint("Complete\n")
+    return val
 end
 
 function GetAlphaMapValue(nx,ny)

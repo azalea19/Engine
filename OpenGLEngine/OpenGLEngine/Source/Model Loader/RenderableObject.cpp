@@ -21,14 +21,9 @@ RenderableObject::RenderableObject(string const& name, string const& filename)
   CreateBoundingBox();
   CreateTriangleFaces();
 
-  /*
-<<<<<<< HEAD
-  //m_collisionTree = new TriangleTree(this, 16);
-=======
-  if(strncmp(name.c_str(), "TestObject", 10) == 0)
+  if(strncmp(name.c_str(), "COL", 3) == 0)
     m_collisionTree = new TriangleTree(this, 32);
->>>>>>> b3d3b0fccebfe4a05f738eaf3a5bda086432277e
-*/
+
 }
 
 RenderableObject::~RenderableObject()

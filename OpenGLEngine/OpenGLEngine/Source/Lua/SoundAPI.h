@@ -14,16 +14,16 @@
 class SoundAPI
 {
 public:
-	static void InitSoundManager();
 
-	static void AddSound(string name, string filePath, LuaContextHandle cHandle);
+  static void AddSound(string const& name, string filePath);
 
-	static ChannelHandle PlaySound(string name, int loopCount, LuaContextHandle cHandle);
+  static ChannelHandle PlaySound(string const& name, int loopCount);
 
-	//static void PauseChannel(ChannelHandle sound, LuaContextHandle cHandle);
-	//static void ResumeChannel(ChannelHandle sound, LuaContextHandle cHandle);
+  static void PauseChannel(ChannelHandle sound);
 
-	static void Expose(LuaContextHandle contextHandle, string luaAPIName);
+  static void ResumeChannel(ChannelHandle sound);
+
+  static void Expose(LuaContextHandle contextHandle, string luaAPIName);
 };
 
 #endif

@@ -91,6 +91,11 @@ function Scene:GetGameObjectCount()
 	return #self.objects
 end
 
+function Scene:GetGameObjects()
+	return self.objects
+end
+
+
 function Scene:SpawnRandomObjects(type, rotationMod, scale, amount)
 	for k = 0, amount do
 		local xRand = math.random(5, terrainSizeX - 5)

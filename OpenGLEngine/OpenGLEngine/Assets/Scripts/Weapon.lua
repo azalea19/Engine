@@ -20,7 +20,9 @@ end
 
 function Weapon:attack(myObj)
 
+    debugLPrint("Weapon attacking ")
     if(self.lastTimeShot ==0 or self.lastTimeShot>= self.shootInterval) then
+        debugLPrint("Weapon attack success")
     	myObj:takeDamage(self.damage)
         self.lastTimeShot = timeAPI.elapsedTimeMs()
         return true

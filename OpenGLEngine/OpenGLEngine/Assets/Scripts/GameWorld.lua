@@ -60,6 +60,10 @@ function CreateTown(myscene)
 	--objectInstanceAPI.setScale(gunShop, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(gunShop, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = gunShop
+	soundAPI.playSound("HappyHour",0)
+
+	 --function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
+
 	gunShop = gameObject.new("0","GunShop","GunShop",Vector3.new(1024,0,1029),Vector3.new(0,0,0), Vector3.new(.008,.008,.008),0)
 	myscene:AddInstance(gunShop)
 
@@ -114,8 +118,8 @@ function CreateTown(myscene)
 	--objectInstanceAPI.setScale(waterwell, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(waterwell, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = waterwell
-	waterwell = gameObject.new("0","WaterWell","WaterWell",Vector3.new(1124,0,1024),Vector3.new(0,0,0), Vector3.new(.001,.001,.001),0)
-	myscene:AddInstance(waterwell)
+	--waterwell = gameObject.new("0","WaterWell","WaterWell",Vector3.new(1124,0,1024),Vector3.new(0,0,0), Vector3.new(.001,.001,.001),0)
+	--myscene:AddInstance(waterwell)
 
   --if createCollisionTree then
 	--  collisionAPI.createCollisionTree(collidableObjects);

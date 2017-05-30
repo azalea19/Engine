@@ -9,7 +9,7 @@ lua Scripts\Game.lua
 lua Scripts\FileIO.lua
 lua Scripts\NPC.lua
 lua Scripts\QuestManager.lua
-lua Scripts\ReadAndWriteInstances.lua
+lua Scripts\ReadAndWriteData.lua
 lua Scripts\Scene.lua
 lua Scripts\Terrain.lua
 lua Scripts\Vector3.lua

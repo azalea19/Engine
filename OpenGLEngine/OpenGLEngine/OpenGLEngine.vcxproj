@@ -24,8 +24,10 @@
     <ClCompile Include="Source\Data Structures\TriangleTree.cpp" />
     <ClCompile Include="Source\Engine Components\Independant\Renderer.cpp" />
     <ClCompile Include="Source\Engine Components\OpenGL\GLRenderManager.cpp" />
+    <ClCompile Include="Source\Engine Components\OpenGL\GLSoundManager.cpp" />
     <ClCompile Include="Source\Lua\AABBAPI.cpp" />
     <ClCompile Include="Source\Effects\AdditiveBlendEffect.cpp" />
+    <ClCompile Include="Source\Lua\SoundAPI.cpp" />
     <ClCompile Include="Source\Plug-Ins\AffineTransformable.cpp" />
     <ClCompile Include="Source\Plug-Ins\Animatable.cpp" />
     <ClCompile Include="Source\Animation\Animation.cpp" />
@@ -102,8 +104,10 @@
     <ClInclude Include="Source\Data Structures\TriangleTree.h" />
     <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
     <ClInclude Include="Source\Engine Components\OpenGL\GLRenderManager.h" />
+    <ClInclude Include="Source\Engine Components\OpenGL\GLSoundManager.h" />
     <ClInclude Include="Source\Lua\AABBAPI.h" />
     <ClInclude Include="Source\Effects\AdditiveBlendEffect.h" />
+    <ClInclude Include="Source\Lua\SoundAPI.h" />
     <ClInclude Include="Source\Plug-Ins\AffineTransformable.h" />
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Animation\AssimpToGLM.h" />
@@ -200,6 +204,7 @@
     <None Include="Assets\Scripts\npc.lua" />
     <None Include="Assets\Scripts\Player.lua" />
     <None Include="Assets\Scripts\QuestManager.lua" />
+    <None Include="Assets\Scripts\ReadAndWriteData.lua" />
     <None Include="Assets\Scripts\ReadAndWriteInstances.lua" />
     <None Include="Assets\Scripts\Scene.lua" />
     <None Include="Assets\Scripts\Terrain.lua" />

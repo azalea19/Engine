@@ -17,6 +17,7 @@ function LoadAPIs()
     GetAPI(context.handle, 'islandCollisionAPI', 'islandCollisionAPI')
     GetAPI(context.handle, 'display2DAPI', 'display2DAPI')
     GetAPI(context.handle, 'collisionAPI', 'collisionAPI')
+	GetAPI(context.handle, 'soundAPI', 'soundAPI')
 end
 
 function LoadAssets()
@@ -61,10 +62,14 @@ function LoadAssets()
 	modelLibraryAPI.addModel("GeneralStore","../Assets/Models/GeneralStore/gs.obj",false)
 	modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon.obj",false)
 	modelLibraryAPI.addModel("Blacksmith","../Assets/Models/Blacksmith/bs.obj",false)
-	modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
+	--modelLibraryAPI.addModel("WaterWell","../Assets/Models/WaterWell/Fountain.obj",false)
+    --modelLibraryAPI.addModel("ObsTech","../Assets/Models/scifi box/scifibox.obj",false)
 
-	printAPI.print('Loading Terrain...\n')
-    
+
+	soundAPI.addSound("HappyHour",'../Assets/Sounds/HappyHour.wav')
+
+
+	printAPI.print('Loading Terrain...\n')    
 	--
 	worldWidthChunks = 8
 	--The world space size of a terrain chunk

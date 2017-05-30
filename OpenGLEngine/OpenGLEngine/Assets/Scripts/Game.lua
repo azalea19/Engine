@@ -67,6 +67,7 @@ function debugLPrint(string)
 end
 
 
+
 function BBToLocal(bb,scalea,loca)
     bb.min = mmath.vec3_Multiply(bb.min,scalea,context.handle)
     bb.min = mmath.vec3_Sum(bb.min,loca,context.handle)
@@ -80,34 +81,9 @@ function BBToLocal(bb,scalea,loca)
     return bb
 end
 
-function Initialize()
+function InitScene1()
 
-	LoadAPIs()
-	printAPI.print('Initializing...\n')
-    printAPI.print('Initialising engine...\n')
-
-	engineAPI.Create(OPEN_GL);
-	wireindex = 1
-
-	printAPI.print('Creating...\n')
-    screenWidth = 1280
-    screenHeight = 720
-	engineAPI.Initialise(screenWidth,screenHeight);
-
-	printAPI.print('Loading Assets...\n')
-	LoadAssets()
-
-
-    printAPI.print("Initialising text...\n")
-    lookAtText = " "
-    dialogueText = " "
-    dInMenu = false
-    dCurrentTopic = nil
-    dCurrentLine = 0
-
-
-
-    -- Initialise scene objects
+ -- Initialise scene objects
 	printAPI.print('Initialising Scenes...\n')
 	local GOData = LoadInstances("../SaveData/GO_Data.csv", "gameObject",difficulty)
 	local NPCData = LoadInstances("../SaveData/NPC_Data.csv", "npc",difficulty)
@@ -118,48 +94,21 @@ function Initialize()
 	scene:AddInstances(GOData)
 	scene:AddInstances(NPCData)
 
-
-
-    --[[
-	for y = 1, worldWidthChunks, 1 do
-		for x = 1, worldWidthChunks, 1 do
-			--modelLibraryAPI.addModel("Terrain_" .. x .. "_" .. y,"../Assets/Models/Terrain/Terrain_" .. x .. "_" .. y .. ".obj",false)
-			local terrainChunckID = luaObjInstManager.addNewInstance("Terrain_" .. x .. "_" .. y)
-			objectInstanceAPI.setTranslation(terrainChunckID,(x - 1) * wsChunkSize,0,(y - 1) * wsChunkSize)
-			objectInstanceAPI.setOrientation(terrainChunckID,0,0,0)
-			objectInstanceAPI.setScale(terrainChunckID,1,1,1)
-			objectInstanceAPI.setAnimation(terrainChunckID,0)
-			table.insert(scene.terrainChunks, terrainChunckID)
-		end
-	end
-    ]]
-    
-    local loc = {x=20,y=0,z=20}
-    local scale = {x=1,y=1,z=1}
+    local loc = {x=1100,y=0,z=1000}
+    local scale = {x=10,y=10,z=10}
     local dir = {x=0,y=1,z=0}
-
 
     Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
     scene:AddInstance(Dungeon1Door)
-
-    loc = {x=0,y=0,z=0}
-    Dungeon1Intr = gameObject.new("Dungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
-    scene2:AddInstance(Dungeon1Intr);
-
-    Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
-    scene2:AddInstance(Dungeon1IntrDoor);
-
-
-    
 
     currentScene = scene
 
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
-    loc = {x=1100,y=0,z=1100}
-    scale = {x=0.5,y=0.5,z=0.5}
-    dir = {x=0,y=1,z=0}
+    local loc = {x=1100,y=0,z=1100}
+    local scale = {x=0.5,y=0.5,z=0.5}
+    local dir = {x=0,y=1,z=0}
 
     local emptyVec = mmath.vec3_CreateEmpty(context.handle)
 
@@ -171,9 +120,90 @@ function Initialize()
     NPC01:setAnimation(anim2)
     objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
 
+    InitAirship()
+
     --NPC01.hurtAnim = 4
     local upVector = {x=0,y=1,z=0}
     NPC01.upVector = upVector
+    NPC01:makeIdle()
+
+    
+    
+    local currentGOs = scene:GetGameObjects()
+
+	for i = 1, scene:GetGameObjectCount() do
+		if(currentGOs[i].name == "Robot Mech") then
+            debugLPrint("Changing robot mech")
+            currentGOs[i].hostileToPlayer = true
+            currentGOs[i]:makeIdle()
+            --current[i].setOrientation(Vector3.new(180, -90, 0))
+            objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+            local anim = {"Section",0,5}
+            local anim2 = {"Section",0,10}
+            currentGOs[i].defaultAnim = anim2
+            currentGOs[i]:setAnimation(anim2)
+
+            currentGOs[i].hurtAnim = {"Section",0,5}
+
+        end
+    end
+
+
+end
+
+
+function InitAirship()
+
+
+	titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	scene:AddInstance(titan)
+
+    local loc = {x=500,y=0,z=1500}
+    local scale = {x=2,y=2,z=2}
+    local dir = {x=0,y=1,z=0}
+    npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+    loc = {x=500,y=100,z=1500}
+    npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+end
+
+
+function InitScene2()
+
+    local loc = {x=100,y=100,z=100}
+    local scale = {x=5,y=5,z=5}
+    local dir = {x=0,y=1,z=0}
+    Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
+
+    local NPCData = LoadInstances("../SaveData/NPC_Data_Scene2.csv", "npc",difficulty)
+    scene2:AddInstances(NPCData);
+    scene2:AddInstance(Dungeon1Intr);
+
+    Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
+    scene2:AddInstance(Dungeon1IntrDoor);
+
+    --obsTech = gameObject.new("ObsTech","The Observatory","ObsTech",loc,dir,scale,0)
+
+    local currentGOs = scene2:GetGameObjects()
+
+	for i = 1, scene2:GetGameObjectCount() do
+		if(currentGOs[i].name == "Robot Mech") then
+
+            debugLPrint("Changing robot mech")
+            currentGOs[i].hostileToPlayer = true
+            currentGOs[i]:makeIdle()
+            objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+            local anim = {"Section",0,5}
+            local anim2 = {"Section",0,10}
+            currentGOs[i].defaultAnim = anim2
+            currentGOs[i]:setAnimation(anim2)
+            currentGOs[i].hurtAnim = {"Section",0,5}
+
+        end
+    end
+end
+
+function InitQuests()
+
     local diag = Dialogue.new()
 
     local quest1 = Topic.new("Quest1","I need my organs back")
@@ -189,10 +219,6 @@ function Initialize()
     mylines2[1] = "Oh, it's you. I heard you came a long way to get here."
 
     greeting:setLines(mylines2)
-
-    -- USE THE SCIFI BOX MODEL PLACE IT IN THE OBSERVATORY INTERIOR
-
-
 
     local quest1 = Topic.new("Quest1Return","I have something from the observatory.")
     local mylines = {}
@@ -242,8 +268,7 @@ function Initialize()
     quest1return.questEvent = true
     quest2return.questEvent = true
 
-
-
+    
 
     diag:addTopic(greeting)
     diag:addTopic(quest1)
@@ -257,14 +282,6 @@ function Initialize()
     NPC01.dialogue = diag
     NPC01:setDialogue(diag)
 
-
-    NPC01:makeIdle()
-
-
-    scene:AddInstance(NPC01) 
-
-    
-    --Initialise quests
     questManager = QuestManager.new()
     local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
     local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
@@ -281,6 +298,40 @@ function Initialize()
 
 	LoadQuests("../SaveData/QUE_Data.csv")
 
+end
+
+function Initialize()
+
+	LoadAPIs()
+	printAPI.print('Initializing...\n')
+    printAPI.print('Initialising engine...\n')
+
+	engineAPI.Create(OPEN_GL);
+	wireindex = 1
+
+	printAPI.print('Creating...\n')
+    screenWidth = 1280
+    screenHeight = 720
+	engineAPI.Initialise(screenWidth,screenHeight);
+
+	printAPI.print('Loading Assets...\n')
+	LoadAssets()
+
+
+    printAPI.print("Initialising text...\n")
+    lookAtText = " "
+    dialogueText = " "
+    dInMenu = false
+    dCurrentTopic = nil
+    dCurrentLine = 0
+
+
+    InitScene1()
+    InitScene2()
+    InitQuests()
+
+    scene:AddInstance(NPC01) 
+
     
     loc = {x=900,y=0,z=900}
     scale = {x=25,y=25,z=25}
@@ -288,15 +339,10 @@ function Initialize()
     boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
 
 
-
-
     emptyVec = {x=0,y=0,z=0}
     scale = {x=10,y=10,z=10}
     
-
 	world = World.new(player0)
-
-
 
 	printAPI.print('Initialising terrain...\n')
 
@@ -309,32 +355,12 @@ function Initialize()
 	world:AddScene(scene)
     world:AddScene(scene2)
 
-    
-    local currentGOs = world:GetGameObjects()
-
-	for i = 1, world:GetGameObjectCount() do
-		if(currentGOs[i].name == "Robot Mech") then
-            debugLPrint("Changing robot mech")
-            currentGOs[i].hostileToPlayer = true
-            currentGOs[i]:makeIdle()
-            objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-            local anim = {"Section",0,5}
-            local anim2 = {"Section",0,10}
-            currentGOs[i].defaultAnim = anim2
-            currentGOs[i].hurtAnim = {"Section",0,5}
-            currentGOs[i]:setAnimation(anim2)
-
-        end
-    end
-
    
 	skybox = luaObjInstManager.addNewInstance("Skybox")
 	objectInstanceAPI.setTranslation(skybox, 0,0,0);
 	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
 	--function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-	titan = gameObject.new("titan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
-	scene:AddInstance(titan)
 
     printAPI.print('Initialising camera...\n')
     camera0 = cameraAPI.addNewInstance()
@@ -348,35 +374,33 @@ function Initialize()
 
 	player0:setPosition(Vector3.new(1000,0,1000))
 
-    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,-100,0),Vector3.new(0.01,0.01,0.01),0)
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 
     scene:AddInstance(gun)
     scene:AddInstance(bullet)
 
-    observatory = gameObject.new("Observatory","Observatory","Observatory",Vector3.new(1000,0,0),Vector3.new(0,0,0),Vector3.new(0.001,0.001,0.001),0)
+    observatory = gameObject.new("Observatory","Observatory","Observatory",Vector3.new(1000,0,0),Vector3.new(0,0,0),Vector3.new(0.1,0.1,0.1),0)
 
 
 
-
-	--cameraAPI.setYaw(camera0,225)
-	--cameraAPI.setPitch(camera0,0)
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
-	--test = luaObjInstManager.addNewInstance("Bob")
+    InitWeapon()
 
-    -- Initialise weapon
+	initMenu()
+	
+    printAPI.print('Initialization finished.\n')
+end
+
+function InitWeapon()
 
     basicGun = Weapon.new("basicGun","Gun",1,1)
     player0:setWeapon(basicGun)
 
-    
-    objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 0, 0, Vector3.new(1, 1, 1))
+    objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 90, 0, Vector3.new(1, 1, 1))
     objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
     
-	initMenu()
-	
-    printAPI.print('Initialization finished.\n')
 end
 
 function GameLoop()
@@ -502,18 +526,9 @@ function Update()
             StartDialogue(player0.lookTarget)
 
             if(player0.lookTarget.stringID == "Dungeon1Door") then
-                printAPI.print("Entering dungeon 1.\n")
-                world:enterScene(scene2.name)
-                player0.trackTerrain = true
-                player0.position = {x=0,y=50,z=0}
 
-                hMapPath = "../Assets/HeightMaps/flatmaphigh.png"
-                terrainSizeX = 1024
-                terrainSizeY = 1024
-                heightMapSize = 256
-                heightMapHeight = 35
-	            terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "../Assets/Models/Terrain/Terrain.obj", context.handle)	
-	
+                MoveToDungeon1()
+
 
             end
 
@@ -665,33 +680,8 @@ function Update()
         if inputManagerAPI.isKeyPressed(TestInput3) then
             -- spawn bob
 
-            --[[
-            local newX = player0["position"]["x"] 
-		    local newZ = player0["position"]["z"]
-		    local newY = GetHeightAtPoint(newX , newZ)
-		    local xRotRand = math.random(360)
-		    local tempID = luaObjInstManager.addNewInstance("Bob")
-		    local objPosTemp = Vector3.new(newX, newY, newZ )
-		    local dirTemp = Vector3.new(xRotRand, 0, 0)
-		    local scaTemp = Vector3.new(1, 1, 1)
-
-		    local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
-
-		    objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
-		    objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
-		    objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
-		    objectInstanceAPI.setAnimation(tempID,0)
-
-		    local nscale = objectInstanceAPI.getScale(tempID, context.handle)
-
-            local abox = AABBAPI.getAABB(tempID, context.handle)
-		    abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
-		    abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
-		    item["boundingBox"] = abox
-
-		    world:AddInstance(item)
-		    --renderManagerAPI.addObject(tempID)
-            ]]
+            --SpawnBob()
+            
 
 	    end
     
@@ -721,17 +711,70 @@ function Update()
 	end
 	engineAPI.EndUpdate();
     --printAPI.print("Update complete\n")
+    AdjustGunAndBullet()
+    
 
+
+end
+
+function SpawnBob()
+--[[
+            local newX = player0["position"]["x"] 
+		    local newZ = player0["position"]["z"]
+		    local newY = GetHeightAtPoint(newX , newZ)
+		    local xRotRand = math.random(360)
+		    local tempID = luaObjInstManager.addNewInstance("Bob")
+		    local objPosTemp = Vector3.new(newX, newY, newZ )
+		    local dirTemp = Vector3.new(xRotRand, 0, 0)
+		    local scaTemp = Vector3.new(1, 1, 1)
+
+		    local item = gameObject.new("Bob", "Bob", objPosTemp, dirTemp, scaTemp, 0, tempID)
+
+		    objectInstanceAPI.setTranslation(tempID, newX, newY, newZ)
+		    objectInstanceAPI.setOrientation(tempID,dirTemp.x,dirTemp.y,dirTemp.z)
+		    objectInstanceAPI.setScale(tempID,scaTemp.x,scaTemp.y,scaTemp.z)
+		    objectInstanceAPI.setAnimation(tempID,0)
+
+		    local nscale = objectInstanceAPI.getScale(tempID, context.handle)
+
+            local abox = AABBAPI.getAABB(tempID, context.handle)
+		    abox.min = mmath.vec3_Multiply(abox.min,nscale,context.handle)
+		    abox.max = mmath.vec3_Multiply(abox.max,nscale,context.handle)
+		    item["boundingBox"] = abox
+
+		    world:AddInstance(item)
+		    --renderManagerAPI.addObject(tempID)
+            ]]
+end
+
+function AdjustGunAndBullet()
     local playerPos = Vector3.new(player0.position.x,player0.position.y+1.8,player0.position.z)
 
     bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
     
     local closerpos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),1,context.handle),context.handle)
+    closerpos.y = closerpos.y - 5
     local pos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle),context.handle)
     gun:setPosition(closerpos)
     gun:lookAt(pos)
+end
 
+function MoveToDungeon1()
 
+    printAPI.print("Entering dungeon 1.\n")
+    world:enterScene(scene2.name)
+    player0.trackTerrain = true
+    player0.position = {x=100,y=150,z=100}
+
+    
+    --[[
+    hMapPath = "../Assets/HeightMaps/flatmaphigh.png"
+    terrainSizeX = 1024
+    terrainSizeY = 1024
+    heightMapSize = 256
+    heightMapHeight = 35
+	terrainHeightData = terrainAPI.generateTerrain(terrainSizeX, terrainSizeY, heightMapSize, heightMapHeight, hMapPath , "../Assets/Models/Terrain/Terrain.obj", context.handle)	
+	]]
 end
 
 function FireBullet()

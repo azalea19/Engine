@@ -25,11 +25,11 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
-    instance.moveSpeed = 0.1
+    instance.moveSpeed = 1
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
-    instance.weapon = Weapon.new("melee","melee",1000,100,1)
+    instance.weapon = Weapon.new("melee","melee",10,100,100)
     instance.hurtAnim = nil
     instance.timeHurtAnimTriggered = 0
     printAPI.print(instance.currentHealth.."\n")

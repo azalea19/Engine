@@ -93,14 +93,18 @@ vec3 AffineTransformable::Backward() const
 
 void AffineTransformable::LookAt(vec3 targetTranslation, vec3 upVector)
 {
+	if (GetTranslation() == targetTranslation)
+	{
+		return;
+	}
 	targetTranslation.y = GetTranslation().y;
 	SetTransform(glm::inverse(glm::lookAt(GetTranslation(), targetTranslation, upVector)) * glm::scale(m_scale));
 }
 
 void AffineTransformable::LookAt(vec3 targetTranslation)
 {
-	targetTranslation.y = GetTranslation().y;
-	SetTransform(glm::inverse(glm::lookAt(GetTranslation(), targetTranslation, vec3(0, 1, 0))) * glm::scale(m_scale));
+	
+	LookAt(targetTranslation, vec3(0, 1, 0));
 }
 
 

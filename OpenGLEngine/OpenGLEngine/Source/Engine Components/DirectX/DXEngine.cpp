@@ -50,6 +50,11 @@ IRenderManager* DXEngine::CreateRenderManager()
   throw std::logic_error("The method or operation is not implemented.");
 }
 
+ISoundManager* DXEngine::CreateSoundManager()
+{
+  throw std::logic_error("The method or operation is not implemented.");
+}
+
 DXEngine::DXEngine()
 {
 

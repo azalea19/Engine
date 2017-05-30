@@ -48,8 +48,8 @@ end
 function Player:die()
     printAPI.print("Player has died.")
 
-    inMenu = true
-    inGame = false
+    --inMenu = true
+    --inGame = false
 end
 
 
@@ -289,13 +289,12 @@ function Player:update()
 			goList[i].playerLookAt = false
 
         end
-        --[[
-            if firstLook == nil then
+        if firstLook == nil then
 		    debugPrint("Removed look at text. \n")
 		    lookAtText = " "
 		    self.lookTarget = nil
 		    self.inDialogue = false
-        end]]
+        end
         end 
 
 end
