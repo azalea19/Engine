@@ -42,7 +42,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
-    instance.moveSpeed = 1.2
+    instance.moveSpeed = 4
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
@@ -162,8 +162,6 @@ function getPatrolPoint(anpc)
 	return xRand,zRand
 end
 
-local startTime = 0
-local totalTripTime = 5
 function patrol(anpc,timeElapsed)
 
 	--if npc position equal to the new way point we have reached destination
@@ -185,10 +183,10 @@ function patrol(anpc,timeElapsed)
 		anpc:lookAt(generatedWayPoint)
 
 		local distance = math.sqrt(math.pow(anpc.newWayPointX - anpc:getPosition().x, 2) + math.pow(anpc.newWayPointZ - anpc:getPosition().z, 2))
-		totalTripTime = distance / anpc.moveSpeed
+		anpc.patrolTime = distance / anpc.moveSpeed
 
 		--reset our start time
-		startTime = time
+		anpc.patrolStartTime = time
 
 		printAPI.print('way point reached\n')
 
@@ -200,12 +198,12 @@ function patrol(anpc,timeElapsed)
 
 
 	
-	local journeyTime = time - startTime
+	local journeyTime = time - anpc.patrolStartTime
 
 	printAPI.print(journeyTime ..'journey time << \n')
 
 	--Gets how far through moving we are based on the time
-	local interpolationFactor = math.min(journeyTime / totalTripTime, 1)--lerp(0, totalTripTime, journeyTime)
+	local interpolationFactor = math.min(journeyTime / anpc.patrolTime, 1)--lerp(0, totalTripTime, journeyTime)
 		
 	
 
