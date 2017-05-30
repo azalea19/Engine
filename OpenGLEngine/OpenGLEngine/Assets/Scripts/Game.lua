@@ -66,6 +66,19 @@ function debugLPrint(string)
     end
 end
 
+function printVec3(veca)
+    printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
+end
+
+function printVec3After(string,veca)
+    printAPI.print(string)
+    printVec3(veca)
+
+end
+
+function printVec3s(vecc,vecb)
+    printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. "\n")
+end
 
 
 function BBToLocal(bb,scalea,loca)

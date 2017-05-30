@@ -223,8 +223,7 @@ function Player:update()
 		--printAPI.print(self.position.y .. "\n")
 		cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
 	end
-
-
+    
     -- Fill bounding box/collision data for use
 	local goList = {} -- list of gameobjects with bounding boxes
 	local bbList = {} -- list of all bounding boxes (corresponds to gameobjects)
@@ -237,8 +236,8 @@ function Player:update()
 			debugPrint("Warning: Tried to check collisions, but World's GameObjects is nil\n")
 			else
 			
-				--debugPrint(world:GetGameObjectCount() .. " game objects in scene to check AABBs\n")
-				--debugPrint(currentGOs[i].name .. "is name of current object\n")
+				debugPrint(world:GetGameObjectCount() .. " game objects in scene to check AABBs\n")
+				debugPrint(currentGOs[i].name .. "is name of current object\n")
 
 				local bbo = currentGOs[i]:BBToWorld()
 				
@@ -270,7 +269,9 @@ function Player:update()
 		--printVec3After("GameObject BB Max: ",goList[i].boundingBox.max)
 
 		if collisionAPI.rayToAABB(self.lookRay,bbList[i]) then
-			debugPrint("Player is looking at something! ")
+			debugLPrint("Player is looking at something! Ray is ...")
+            printVec3After("pos ",self.lookRay.pos)
+            printVec3After("dir ",self.lookRay.dir)
 			goList[i].playerLookAt = true
 			if firstLook == nil then
 				firstLook = goList[i]
