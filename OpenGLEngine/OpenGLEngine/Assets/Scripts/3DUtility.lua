@@ -25,8 +25,6 @@ end
 
 
 function AngleDiffDeg(vec1,vec2)
-
-
 	if(debugdetail) then
 	printVec3s(vec1,vec2)
 	end

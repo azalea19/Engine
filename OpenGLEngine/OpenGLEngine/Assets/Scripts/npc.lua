@@ -1,6 +1,7 @@
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
 dofile '../Assets/Scripts/3DUtility.lua'
 local Weapon = dofile '../Assets/Scripts/Weapon.lua'
+local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 
 --local gameObject = require 'gameObject'
 
@@ -15,6 +16,22 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	
 	local instance = gameObject.new(strID, newName,newModel,newPos,newDir,newScale,newAnim)
 	printAPI.print(strID.." hp "..newCurrentHealth .."/"..newMaxHealth.."\n")
+	
+	instance.initialPos = newPos
+
+	instance.lastPosX = newPos.x
+	instance.lastPosY = newPos.y 
+	instance.lastPosZ = newPos.z
+
+	instance.newPosX = newPos.x
+	instance.newPosY = newPos.y
+	instance.newPosZ = newPos.z
+
+	instance.lastWayPointX = newPos.x
+	instance.lastWayPointZ = newPos.z
+
+	instance.newWayPointX = newPos.x + 1
+	instance.newWayPointZ = newPos.z + 1
 
 	instance.dialogue = nil
 	instance.maxHealth = newMaxHealth
@@ -25,7 +42,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
-    instance.moveSpeed = 0.1
+    instance.moveSpeed = 1.2
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
@@ -45,18 +62,19 @@ end
 	setmetatable(npc,{__index = gameObject})
 
 function idle(anpc)
-	debugPrint("NPC is Idling... ")
+
+	--debugPrint("NPC is Idling... ")
+	--
+	--if(anpc.seenPlayer) then
+    --    if (anpc.hostileToPlayer) then
+    --	    debugPrint("NPC state changed to chasing during idle. ")
+    --        anpc.state = chasing
+    --    else
+    --        anpc.state = looking
+    --    end
+    --end   
 	
-	if(anpc.seenPlayer) then
-        if (anpc.hostileToPlayer) then
-    	    debugPrint("NPC state changed to chasing during idle. ")
-            anpc.state = chasing
-        else
-            anpc.state = looking
-        end
-    end
-    
-    
+	patrol(anpc,time)
     
     debugPrint("NPC idling complete.\n")
 end
@@ -133,6 +151,91 @@ function npc:makeChasing()
 	self.state = chasing
 	debugLPrint("Chase success\n")
 
+end
+
+function getPatrolPoint(anpc)
+
+	local patrolRadius = 50
+	local xRand = math.random(anpc.initialPos.x - patrolRadius,anpc.initialPos.x + patrolRadius)
+	local zRand = math.random(anpc.initialPos.z - patrolRadius, anpc.initialPos.z + patrolRadius)
+	return xRand,zRand
+end
+
+local startTime = 0
+local totalTripTime = 5
+function patrol(anpc,timeElapsed)
+
+	--if npc position equal to the new way point we have reached destination
+	--generate a new way point
+	if (anpc:getPosition().x == anpc.newWayPointX) and (anpc:getPosition().z == anpc.newWayPointZ) then
+	--Waypoint reached generate a new one
+		--Get the x,z of new way point
+		local xx, zz = getPatrolPoint(anpc)
+		--Get the y of new way point
+		local yy = GetHeightAtPoint(xx,zz)
+		--last way point equal to the new one we had generated previously
+		anpc.lastWayPointX = anpc.newWayPointX
+		anpc.lastWayPointZ = anpc.newWayPointZ
+
+		--generate an entirely different new way point
+		local generatedWayPoint = Vector3.new(xx,yy,zz)
+		anpc.newWayPointX = generatedWayPoint.x
+		anpc.newWayPointZ = generatedWayPoint.z
+		anpc:lookAt(generatedWayPoint)
+
+		local distance = math.sqrt(math.pow(anpc.newWayPointX - anpc:getPosition().x, 2) + math.pow(anpc.newWayPointZ - anpc:getPosition().z, 2))
+		totalTripTime = distance / anpc.moveSpeed
+
+		--reset our start time
+		startTime = time
+
+		printAPI.print('way point reached\n')
+
+	end
+
+
+
+
+
+
+	
+	local journeyTime = time - startTime
+
+	printAPI.print(journeyTime ..'journey time << \n')
+
+	--Gets how far through moving we are based on the time
+	local interpolationFactor = math.min(journeyTime / totalTripTime, 1)--lerp(0, totalTripTime, journeyTime)
+		
+	
+
+	printAPI.print(interpolationFactor ..'interp factor <<\n')
+
+	--Last pos equal to the new pos we generated last time
+	anpc.lastPosX = anpc.newPosX
+	anpc.lastPosZ = anpc.newPosZ
+	anpc.lastPosY = anpc.newPosY
+
+	--New position equal to a brand new position
+	anpc.newPosX = lerp(anpc.lastWayPointX, anpc.newWayPointX, interpolationFactor)
+	anpc.newPosZ = lerp(anpc.lastWayPointZ, anpc.newWayPointZ, interpolationFactor)
+	anpc.newPosY = GetHeightAtPoint(anpc.newPosX,anpc.newPosZ)
+
+
+	
+	lastPosition = Vector3.new(anpc.lastPosX,anpc.lastPosY,anpc.lastPosZ)
+	newPosition = Vector3.new(anpc.newPosX, anpc.newPosY, anpc.newPosZ)
+
+	local xDiff = anpc.newPosX - anpc.lastPosX
+	local yDiff = anpc.newPosY - anpc.lastPosY
+	local zDiff = anpc.newPosZ - anpc.lastPosZ
+
+	--increment = Vector3.new(xDiff,yDiff,zDiff)
+
+	--printAPI.print(xDiff ..'\n')
+	--printAPI.print(yDiff .. '\n')
+	--printAPI.print(zDiff .. '\n')
+
+	anpc:setPosition(newPosition)
 end
 
 
