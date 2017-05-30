@@ -728,11 +728,22 @@ function Update()
     --printAPI.print("Updating gameobjects\n")
 
 
-	local currentGOs = world:GetGameObjects()
-	for i = 1, world:GetGameObjectCount() do
+    local currentGOs = world:GetGameObjects()
+    for i = 1, world:GetGameObjectCount() do
         --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
-		local a = currentGOs[i]:Update()
-	end
+        local a = currentGOs[i]:Update()
+        if(currentGOs[i]["currentHealth"] ~= nil) then
+            if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
+                for k = 1, world:GetGameObjectCount() do
+                    if(currentGOs[k]["currentHealth"] ~= nil) then
+                        if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
+                            currentGOs[k]:makeChasing()
+                        end
+                    end
+                end
+            end
+        end
+    end
     --printAPI.print("Updating player\n")
 
     player0:update();
@@ -781,7 +792,7 @@ function AdjustGunAndBullet()
     bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
     
     local closerpos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),1,context.handle),context.handle)
-    closerpos.y = closerpos.y - 0.1
+    closerpos.y = closerpos.y - 0.5
     local pos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle),context.handle)
     gun:setPosition(closerpos)
     gun:lookAt(pos)
