@@ -413,7 +413,7 @@ function InitPlayer()
     scene:AddInstance(gun)
     scene:AddInstance(bullet)
 
-    observatory = gameObject.new("Observatory","Observatory","Observatory",Vector3.new(1000,0,0),Vector3.new(0,0,0),Vector3.new(0.1,0.1,0.1),0)
+
 
 
 
@@ -815,8 +815,8 @@ function FireBullet()
 
 end
 
-font1path = "../Assets/Fonts/verdanab.ttf"
-white = {x=1,y=1,z=1}
+font1path = "../Assets/Fonts/WesternBangBang.otf"
+black = {x=0,y=0,z=0}
 
 
 function TestChangeNPCState()
@@ -912,8 +912,6 @@ function Render()
 				renderManagerAPI.renderObject(camera0,time,scene.terrainChunks[i], 1);
 			end
 
-
-
 				--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
 				renderManagerAPI.renderObject(camera0,time,skybox, 0)
@@ -923,16 +921,16 @@ function Render()
 				-- Draw UI text --DrawTextLua(int size, string const& filePath, string const& text, LuaRef pos, LuaRef color, int centered, int screenWidth, int screenHeight)
 				
                 if(player0.lookTarget ~= nil) then
-                    display2DAPI.drawText(10,font1path,lookAtText,{x=100,y=300},white,0,screenWidth,screenHeight)
+                    display2DAPI.drawText(32,font1path,lookAtText,{x=100,y=300},black,0,screenWidth,screenHeight)
 
                 end
 
 				if(player0.inDialogue) then 
-					display2DAPI.drawText(10,font1path,dialogueText,{x=200,y=300},white,0,screenWidth,screenHeight)
+					display2DAPI.drawText(32,font1path,dialogueText,{x=200,y=300},black,0,screenWidth,screenHeight)
 				end
 
                 hpDisplay = "Health: ".. player0.currentHealth .. " / " .. player0.maxHealth
-                display2DAPI.drawText(10,font1path,hpDisplay,{x=400,y=100},white,0,screenWidth,screenHeight)
+                display2DAPI.drawText(32,font1path,hpDisplay,{x=50,y=50},black,0,screenWidth,screenHeight)
 
 
 			end
