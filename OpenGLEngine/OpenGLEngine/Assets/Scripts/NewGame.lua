@@ -11,7 +11,7 @@ dofile  '../Assets/Scripts/Load.lua'
 
 dofile '../Assets/Scripts/Dialogue.lua'
 dofile '../Assets/Scripts/FileIO.lua'
-dofile '../Assets/Scripts/ReadAndWriteInstances.lua'
+dofile '../Assets/Scripts/ReadAndWriteData.lua'
 dofile '../Assets/Scripts/Terrain.lua'
 dofile '../Assets/Scripts/Controls.lua'
 dofile '../Assets/Scripts/QuestManager.lua'
@@ -195,6 +195,6 @@ end
 
 local status, err = pcall(Run)
 if not status then
-	printAPI.print(err)
-    read(1)
+	--printAPI.print(err)
+    --read(1)
 end

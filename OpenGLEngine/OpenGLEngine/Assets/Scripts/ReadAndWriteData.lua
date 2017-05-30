@@ -27,6 +27,7 @@ function SaveInstances(filePath, data, fileType)
 	clearFile(filePath)
 
 	for i = 1, numRows do
+        printAPI.print(data[i]["name"])
 		if(fileType == "gameObject") then
 			if data[i]["currentHealth"] == nil then
 				total = total + 1
@@ -112,33 +113,33 @@ end
 
 function saveAllToCurrentSave()
 	if currentSaveFile == 1 then
-		local tmp = world:getSceneSpecific(1)
+		local tmp = world.scenes[1].objects
 		SaveInstances("../Saves/Slot1/GO_Data.csv", tmp, "gameObject")
 		SaveInstances("../Saves/Slot1/NPC_Data.csv", tmp, "npc")
 		SaveQuests("../Saves/Slot1/QUE_Data.csv", questManager)
-		savePlayer("../Saves/Slot1/QUE_PLAYER.csv", player0)
-		saveWeapons("../Saves/Slot1/QUE_WEAPON.csv", weaponList)
-		local tmp = world:getSceneSpecific(2)		
+		savePlayer("../Saves/Slot1/PLAYER_Data.csv", player0)
+		saveWeapons("../Saves/Slot1/WEAPON_Data.csv", weaponList)
+		local tmp = world.scenes[2].objects		
 		SaveInstances("../Saves/Slot1/NPC_Data_Scene2.csv", tmp, "npc")
 	end
 	if currentSaveFile == 2 then
-		local tmp = world:getSceneSpecific(2)
+		local tmp = world.scenes[1].objects
 		SaveInstances("../Saves/Slot2/GO_Data.csv", tmp, "gameObject")
 		SaveInstances("../Saves/Slot2/NPC_Data.csv", tmp, "npc")
 		SaveQuests("../Saves/Slot2/QUE_Data.csv", questManager)
-		savePlayer("../Saves/Slot2/QUE_PLAYER.csv", player0)
-		saveWeapons("../Saves/Slot2/QUE_WEAPON.csv", weaponList)
-		local tmp = world:getSceneSpecific(2)		
+		savePlayer("../Saves/Slot2/PLAYER_Data.csv", player0)
+		saveWeapons("../Saves/Slot2/WEAPON_Data.csv", weaponList)
+		local tmp = world.scenes[2].objects			
 		SaveInstances("../Saves/Slot3/NPC_Data_Scene2.csv", tmp, "npc")
 	end
 	if currentSaveFile == 3 then
-		local tmp = world:getSceneSpecific(3)
+		local tmp = world.scenes[1].objects	
 		SaveInstances("../Saves/Slot3/GO_Data.csv", tmp, "gameObject")
 		SaveInstances("../Saves/Slot3/NPC_Data.csv", tmp, "npc")
 		SaveQuests("../Saves/Slot3/QUE_Data.csv", questManager)
-		savePlayer("../Saves/Slot3/QUE_PLAYER.csv", player0)
-		saveWeapons("../Saves/Slot3/QUE_WEAPON.csv", weaponList)
-		local tmp = world:getSceneSpecific(2)		
+		savePlayer("../Saves/Slot3/PLAYER_Data.csv", player0)
+		saveWeapons("../Saves/Slot3/WEAPON_Data.csv", weaponList)
+		local tmp = world.scenes[2].objects			
 		SaveInstances("../Saves/Slot3/NPC_Data_Scene2.csv", tmp, "npc")
 	end
 end

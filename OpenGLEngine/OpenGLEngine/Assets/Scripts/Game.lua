@@ -145,7 +145,18 @@ function InitScene1(goPath, npcPath, diff)
 		NPC01.upVector = upVector
 		NPC01:makeIdle()
 		scene:AddInstance(NPC01) 
-	end
+	else
+        local bob = scene:FindInstance("NPC01")
+		local anim = {"Section",0,5}
+		local anim2 = {"Section",0,10}
+		bob.defaultAnim = anim2
+		bob.hurtAnim = {"Section",0,5}
+		bob:setAnimation(anim2)
+		objectInstanceAPI.setBaseTransform(bob.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+		local upVector = {x=0,y=1,z=0}
+		bob.upVector = upVector
+		bob:makeIdle()
+    end
 	
 	if(scene:FindInstance("COLtitan") == false) then
 		titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
@@ -153,9 +164,11 @@ function InitScene1(goPath, npcPath, diff)
 		local loc = {x=500,y=0,z=1500}
 		local scale = {x=2,y=2,z=2}
 		local dir = {x=0,y=1,z=0}
-		npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+		local spid1 = npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+        scene:AddInstance(spid1)
 		loc = {x=500,y=100,z=1500}
-		npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+		local spid2 = npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+        scene:AddInstance(spid2)
 	end
 	
     FixRobots(scene)
@@ -193,19 +206,19 @@ function InitScene2(pathNPC, diff)
     local scale = {x=5,y=5,z=5}
     local dir = {x=0,y=1,z=0}
 
-    local NPCData = LoadInstances(, "npc",difficulty)
+    local NPCData = LoadInstances(pathNPC, "npc",difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene2 = Scene.new("Level2", startPos, startDir)
 	
-	if(scene:FindInstance("COLDungeon1") == false) then
+	if(scene2:FindInstance("COLDungeon1") == false) then
 	    Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
 	end
 	
     scene2:AddInstances(NPCData);
     scene2:AddInstance(Dungeon1Intr);
 
-	if(scene:FindInstance("Dungeon1IntrDoor") == false) then
+	if(scene2:FindInstance("Dungeon1IntrDoor") == false) then
 		Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
 		scene2:AddInstance(Dungeon1IntrDoor)
 	end
@@ -312,7 +325,7 @@ function InitQuests(quePath)
     npc_01.dialogue = diag
     npc_01:setDialogue(diag)
 
-	if(~doesQuestExist("TalkToBob")) then
+	if(questManager:doesQuestExist("TalkToBob") == false) then
 		local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
 		local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
 		local stage3 = QuestStage.new("ObsReturn",TALK,"NPC01","Quest1Return")
@@ -358,8 +371,13 @@ function Initialize()
 
     emptyVec = {x=0,y=0,z=0}
     scale = {x=10,y=10,z=10}
-    
-	world = World.new(player0)
+    scene = Scene.new("test", startPos, startDir)
+printAPI.print("1\n")
+    camera0 = cameraAPI.addNewInstance()
+--	world = World.new(player0)
+--    newGame("../SaveData/", 1)
+--printAPI.print("2\n")
+
 
 	printAPI.print('Initialising terrain...\n')
    
@@ -368,16 +386,17 @@ function Initialize()
 	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
 
     printAPI.print('Initialising camera...\n')
-    camera0 = cameraAPI.addNewInstance()
     --cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
 
     printAPI.print('Initialising rendermanager...\n')
+    InitPlayer()
+    InitWeapon()
     --renderManagerAPI.initialise()
 
 	initMenu()
-
+    soundAPI.playSound("HappyHour",0)
     
-    --[[
+
     -- load menu
     inMenu = true
 	preCameraPos = player0:getPosition()
@@ -389,17 +408,13 @@ function Initialize()
 	cameraAPI.setYaw(camera0,0)
 	cameraAPI.setPitch(camera0,0)
 	changeMenu(0)
-	]]
+	
     printAPI.print('Initialization finished.\n')
 end
 
 function InitPlayer()
     printAPI.print('Initialising player...\n')
 	player0 = Player.new(camera0,100,100)
-
-	player0:setPosition(Vector3.new(1000,0,1000))
-    
-
 
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
 
@@ -855,8 +870,6 @@ function StartDialogue(npc)
             debugPrint("NPC has no dialogue.\n")
         end
     end
-
-
 end
 
 function Render()

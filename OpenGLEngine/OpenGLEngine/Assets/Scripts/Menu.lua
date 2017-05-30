@@ -11,9 +11,10 @@ MenuButtonBoxes = {}
 currentMenu = 1 -- 0MainMenu, 1SaveGame, 2LoadGame
 currentSelectedSaveFile = 0
 currentSaveFile = 1
-inMenu = false
+inMenu = true
 menuCount = 0
 currentDifficulty = 1
+inGame = false
 
 function initMenu()
 	-- Background
@@ -95,7 +96,7 @@ function initMenu()
 	ButtonHard.option = buttonHard -- set selected to 3
 	ButtonHard.active = false
 	-- Return button, 0 during game
-    local newPos = {x=30,y=-1,z=12}
+    local newPos = {x=25,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
     ReturnButton = gameObject.new("ReturnButton", "ReturnButton", "btnBack", newPos, newDir, newScale, newAnim)
 	ReturnButton.option = ReturnButton -- return to game
@@ -166,18 +167,21 @@ function updateMenu()
 								newGame("../Saves/Slot1/", 1)
 								currentSelectedSaveFile = 0
 								currentSaveFile = 1
+                                inGame = true
 								inMenu = false
 							end
 							if currentSelectedSaveFile == 2 then
 								newGame("../Saves/Slot2/", 1)
 								currentSelectedSaveFile = 0
 								currentSaveFile = 2
+                                inGame = true
 								inMenu = false
 							end
 							if currentSelectedSaveFile == 3 then
 								newGame("../Saves/Slot3/", 1)
 								currentSelectedSaveFile = 0
 								currentSaveFile = 3
+                                inGame = true
 								inMenu = false
 							end
 						else
@@ -186,18 +190,21 @@ function updateMenu()
 									newGame("../SaveData/", currentDifficulty)
 									currentSelectedSaveFile = 0
 									currentSaveFile = 1
+                                    inGame = true
 									inMenu = false
 								end
 								if currentSelectedSaveFile == 2 then
 									newGame("../SaveData/", currentDifficulty)
 									currentSelectedSaveFile = 0
 									currentSaveFile = 2
+                                    inGame = true
 									inMenu = false
 								end
 								if currentSelectedSaveFile == 3 then
 									newGame("../SaveData/", currentDifficulty)
 									currentSelectedSaveFile = 0
 									currentSaveFile = 3
+                                    inGame = true
 									inMenu = false
 								end
 							else
@@ -213,46 +220,42 @@ function updateMenu()
 end
 
 function newGame(folder, difficulty)
-	local tmp = world:GetGameObjects()
 	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject")
 	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc", difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	
-    
-    initPlayer(folder .. "PLAYER_Data.csv")	--REMOVE AFTER DEFAULT SAVE SET UP
-    InitWeapon(folder .. "WEAPON_Data.csv")	--REMOVE AFTER DEFAULT SAVE SET UP
-	
+    printAPI.print("3\n")
+
+	printAPI.print("4\n")
     InitScene1(folder .. "GO_Data.csv", folder .. "NPC_Data.csv", difficulty)
     InitScene2(folder .. "NPC_Data_Scene2.csv", difficulty)
     InitQuests(folder .. "QUE_Data.csv")
-
+    printAPI.print("5\n")
 
 	CreateTerrain(scene)
 	CreateCactusField(scene)	--REMOVE AFTER DEFAULT SAVE SET UP
 	CreateTown(scene)			--REMOVE AFTER DEFAULT SAVE SET UP
 	
-	world:AddScene(scene)
-    world:AddScene(scene2)
-	
-    world.currentScene = playerInScene
-	
 	world = World.new(player0)
 	world:AddScene(scene)
 	world:AddScene(scene2)
+    printAPI.print("8\n")
 	
 	--LoadTopics("../SaveData/DIA_Data.csv")
 	--Initialise camera
     camera0 = cameraAPI.addNewInstance()
 	-- Initialise player
-	player0 = Player.new(camera0,100,100)
-    player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
+    InitPlayer()	
+    InitWeapon()	
     -- Initialise weapo
 	weaponList = {}
+    printAPI.print("9\n")
 	weaponList = loadWeapons(folder .. "WEAPON_Data.csv")
 	loadPlayer(folder .. "PLAYER_Data.csv", player0)
+    world.currentScene = playerInScene
     player0:setWeapon("basicGun")
-    
+    printAPI.print("10\n")
     gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 end
@@ -280,18 +283,39 @@ function changeMenu(num)
 		currentMenu = 0
 		MenuButtons = {}
 		MenuButtonsBox = {}
+
+        totalButtons = 4
+
+        if(inGame) then
+            ReturnButton.active = true
+            table.insert(MenuButtons, ReturnButton)
+            table.insert(MenuButtonBoxes, ReturnButton:BBToWorld())
+            totalButtons = totalButtons +1
+        else
+            ReturnButton.active = false
+        end
+        if(inGame) then
+            SaveButton.active = true
+            table.insert(MenuButtons, SaveButton)
+            table.insert(MenuButtonBoxes, SaveButton:BBToWorld())
+            totalButtons = totalButtons +1
+        else
+            SaveButton.active = false
+
+        end
+
 		table.insert(MenuButtons, StartNewButton)
 		table.insert(MenuButtons, ContinueButton)
 		table.insert(MenuButtons, LoadButton)
-		table.insert(MenuButtons, SaveButton)
+		
 		table.insert(MenuButtons, ExitButton)
 		
 		table.insert(MenuButtonBoxes, StartNewButton:BBToWorld())
 		table.insert(MenuButtonBoxes, ContinueButton:BBToWorld())
 		table.insert(MenuButtonBoxes, LoadButton:BBToWorld())
-		table.insert(MenuButtonBoxes, SaveButton:BBToWorld())
+		
 		table.insert(MenuButtonBoxes, ExitButton:BBToWorld())
-		totalButtons = 5
+		
 	end
 	if num == 1 then
 		ButtonOne.active = true
@@ -306,6 +330,8 @@ function changeMenu(num)
 		ButtonEasy.active = false
 		ButtonMedium.active = false
 		ButtonHard.active = false
+        ReturnButton.active = false
+
 		currentMenu = 1
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -333,6 +359,8 @@ function changeMenu(num)
 		ButtonEasy.active = false
 		ButtonMedium.active = false
 		ButtonHard.active = false
+        ReturnButton.active = false
+
 		currentMenu = 2
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -360,6 +388,8 @@ function changeMenu(num)
 		ButtonEasy.active = false
 		ButtonMedium.active = false
 		ButtonHard.active = false
+        ReturnButton.active = false
+
 		currentMenu = 3
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -387,6 +417,8 @@ function changeMenu(num)
 		ButtonEasy.active = true
 		ButtonMedium.active = true
 		ButtonHard.active = true
+        ReturnButton.active = false
+
 		currentMenu = 4
 		MenuButtons = {}
 		MenuButtonsBox = {}
@@ -439,7 +471,7 @@ end
 
 function quitGame()
 	printAPI.print("Quit")
-	run = false
+	quitting = true
 end
 
 function buttonOne()

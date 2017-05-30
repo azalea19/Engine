@@ -17,6 +17,7 @@ function World:enterScene(sceneToEnter)
 	for i = 1, #self.scenes do
 		if(self.scenes[i]["name"] == sceneToEnter) then
 			self.currentScene = i
+            playerInScene = i
             printAPI.print("Successfuly changed scenes\n")
 		end
 	end
@@ -42,7 +43,11 @@ function World:GetScene()
 end
 
 function World:GetSceneSpecific(sce)
-	return self.scenes[sce]
+	for i=1,#self.scenes do
+	    if(sce == self.scenes.name) then
+		    return self.scenes[i]
+	    end
+	end
 end
 
 function World:AddScene(newScene)

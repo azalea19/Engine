@@ -60,7 +60,6 @@ function CreateTown(myscene)
 	--objectInstanceAPI.setScale(gunShop, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(gunShop, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = gunShop
-	soundAPI.playSound("HappyHour",0)
 
 	 --function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
