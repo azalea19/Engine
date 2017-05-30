@@ -202,6 +202,7 @@
     <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\Menu.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
+    <None Include="Assets\Scripts\Particle.lua" />
     <None Include="Assets\Scripts\ParticleEmitter.lua" />
     <None Include="Assets\Scripts\Weapon.lua" />
     <None Include="Assets\Scripts\Player.lua" />

@@ -20,6 +20,8 @@ local Player = dofile '../Assets/Scripts/Player.lua'
 local Scene = dofile '../Assets/Scripts/Scene.lua'
 local World = dofile '../Assets/Scripts/World.lua'
 local Weapon = dofile '../Assets/Scripts/Weapon.lua'
+local ParticleEmitter = dofile "../Assets/Scripts/ParticleEmitter.lua"
+local WaterParticle = dofile "../Assets/Scripts/Particle.lua"
 
 --local QuestManager = require '../Assets/Scripts/QuestManager'
 dofile '../Assets/Scripts/Dialogue.lua'
@@ -254,6 +256,7 @@ function InitAirship()
 
 
 	titan = gameObject.new("titan","Titan","COL_Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	objectInstanceAPI.setTranslation(titan.id,500,GetHeightAtPoint(500,1500) - 15,1500)
 	scene:AddInstance(titan)
 
     local loc = {x=500,y=0,z=1500}
@@ -462,6 +465,8 @@ function Initialize()
 	changeMenu(0)
 
 	InitialiseCollisionTree()
+
+	--fountainEmitter = ParticleEmitter.new(WaterParticle, 5, Vector3.new(1000, 200, 1000), 0)
 	
     printAPI.print('Initialization finished.\n')
 end
@@ -1083,6 +1088,8 @@ function Render()
 			end
 
 				--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
+
+				--fountainEmitter:render(camera0, time, 1)
 
 				renderManagerAPI.renderObject(camera0,time,skybox, 0)
 				renderManagerAPI.present(camera0)

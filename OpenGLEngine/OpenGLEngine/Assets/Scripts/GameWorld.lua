@@ -103,7 +103,7 @@ function CreateTown(myscene)
 	--objectInstanceAPI.setScale(blacksmith, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(blacksmith, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = blacksmith
-	blacksmith = gameObject.new("0","Blacksmith","COL_Blacksmith",Vector3.new(1024,0,990),Vector3.new(0,0,0), Vector3.new(.06,.06,.06),0)
+	blacksmith = gameObject.new("0","Blacksmith","COL_Blacksmith",Vector3.new(1034,0,990),Vector3.new(0,0,0), Vector3.new(.07,.07,.07),0)
 	myscene:AddInstance(blacksmith)
 
     printAPI.print('Initialising player...\n')
