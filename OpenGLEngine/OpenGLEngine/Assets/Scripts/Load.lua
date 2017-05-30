@@ -66,7 +66,6 @@ function LoadAssets()
     modelLibraryAPI.addModel("ObsTech","../Assets/Models/scifi box/scifibox.obj",false)
 
 
-
 	soundAPI.addSound("HappyHour",'../Assets/Sounds/HappyHour.wav')
     soundAPI.addSound("Gunshot",'../Assets/Sounds/341255__jeremysykes__gunshot00.wav')
     soundAPI.addSound("Hit",'../Assets/Sounds/387434__blosche__hard-hit.wav')

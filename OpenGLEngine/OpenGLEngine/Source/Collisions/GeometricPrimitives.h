@@ -40,7 +40,7 @@ struct mRay
 	vec3 direction;	
 };
 
-
+mRay operator*(mat4 const& lhs, mRay rhs);
 
 mOBB operator*(mat4 const& lhs, mOBB rhs);
 

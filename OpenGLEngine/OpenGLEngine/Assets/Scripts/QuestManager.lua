@@ -25,6 +25,14 @@ function QuestManager:check(action,target,extraInfo)
 			for a=1,#self.quests[i].stages do
 				thisStage = self.quests[i].stages[a]
 
+                if(thisStage.extraInfo ~= nil) then
+                    debugLPrint("QUEST STAGE DATA: " .. thisStage.action .. " " .. thisStage.target .. " " .. thisStage.extraInfo .. "\n")
+
+                 else
+                    debugLPrint("QUEST STAGE DATA: " .. thisStage.action .. " " .. thisStage.target .. "\n")
+
+                end
+
                 if(extraInfo == nil) then
                 	debugLPrint(action .. " " .. target.stringID .. "\n")
 
@@ -33,13 +41,32 @@ function QuestManager:check(action,target,extraInfo)
 
                 end
 				
-				if(action==thisStage.action and target.stringID == thisStage.targetName and extraInfo == thisStage.extraInfo) then
+				if(action==thisStage.action and target.stringID == thisStage.target and extraInfo == thisStage.extraInfo) then
+                	printAPI.print("You completed quest stage: " .. thisStage.name .. " But it is already complete.\n")
+
 					if(thisStage.isComplete == false) then
 						self.quests[i].stages[a].isComplete = true
 						printAPI.print("You completed quest stage: " .. thisStage.name .. "\n")
-						
+						ShowMessageBox("You completed quest stage: " .. thisStage.name .. "\n")
+
+
+                        if(thisStage.id == "Quest1Return") then
+                            diag:addTopic(quest2)
+                            saveAllToCurrentSave()
+
+                        --[[diag:addTopic(greeting)
+    diag:addTopic(quest1)
+    diag:addTopic(quest2)
+    diag:addTopic(quest1return)
+    diag:addTopic(quest2return)
+    diag:addTopic(teleport1)
+    diag:addTopic(teleport2)]]
+
+                         end
 						if(self.quests[i]:isComplete()) then
 							printAPI.print("You completed quest: " .. self.quests[i].name .. "\n")
+                           	ShowMessageBox("You completed quest: " .. self.quests[i].name .. "\n")
+
 						end
 					end
 				end
@@ -54,6 +81,9 @@ end
 -- Expects Quest as param
 function QuestManager:addQuest(newQuest)
 	self.quests[#self.quests +1] = newQuest
+
+
+    --printAPI.print(newQuestnewQuest.targetName .. " " .. newQuest.
 end
 
 function QuestManager:doesQuestExist(questName)
@@ -106,8 +136,7 @@ function QuestStage.new(name, myAction, myTargetName, myExtraInfo)
 	local instance = {}
 	instance.name = name -- Name of quest stage, assume visible to player.
 	instance.action = myAction
-	instance.target = myTarget
-	instance.targetName = myTargetName
+	instance.target = myTargetName
 	instance.extraInfo = myExtraInfo or "none"
 	instance.isComplete = false
 

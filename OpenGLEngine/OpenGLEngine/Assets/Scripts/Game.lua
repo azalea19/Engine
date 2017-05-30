@@ -160,6 +160,7 @@ function InitScene1(goPath, npcPath, diff)
 	
 	if(scene:FindInstance("COLtitan") == false) then
 		titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+        titan.setBaseTransform(bob.id, Vector3.new(0, -25, 0), 0, 0, 0, Vector3.new(1, 1, 1))
 		scene:AddInstance(titan)
 		local loc = {x=500,y=0,z=1500}
 		local scale = {x=2,y=2,z=2}
@@ -171,6 +172,40 @@ function InitScene1(goPath, npcPath, diff)
         scene:AddInstance(spid2)
 	end
 	
+    
+    local loc = {x=900,y=0,z=900}
+    local scale = {x=25,y=25,z=25}
+    local dir = {x=0,y=1,z=0}
+
+    if(scene:FindInstance("Boss") == false) then
+
+        boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
+        debugLPrint("Changing robot mech")
+        boss.hostileToPlayer = true
+        boss:makeIdle()
+        objectInstanceAPI.setBaseTransform(boss.id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+        local anim = {"Section",0,1}
+        local anim2 = {"Section",1,2}
+        boss.defaultAnim = anim2
+        boss:setAnimation(anim2)
+
+        boss.hurtAnim = {"Section",0,5}
+        scene:AddInstance(boss)
+    else
+        local oldBoss = scene:FindInstance("Boss")
+        debugLPrint("Changing robot mech")
+        oldBoss.hostileToPlayer = true
+        oldBoss:makeIdle()
+        objectInstanceAPI.setBaseTransform(oldBoss.id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+        local anim = {"Section",0,1}
+        local anim2 = {"Section",1,2}
+        oldBoss.defaultAnim = anim2
+        oldBoss:setAnimation(anim2)
+
+        oldBoss.hurtAnim = {"Section",0,5}
+        scene:AddInstance(boss)
+    end
+    
     FixRobots(scene)
 end
 
@@ -184,7 +219,7 @@ function FixRobots(thisScene)
             currentGOs[i]:makeIdle()
             --current[i].setOrientation(Vector3.new(180, -90, 0))
             objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-            local anim = {"Section",0,1}
+            local anim = {"Section",0,0.3}
             local anim2 = {"Section",1,2}
             currentGOs[i].defaultAnim = anim2
             currentGOs[i]:setAnimation(anim2)
@@ -318,13 +353,13 @@ function InitQuests(quePath)
     --diag:addTopic(quest1return)
     --diag:addTopic(quest2return)
     diag:addTopic(teleport1)
-    diag:addTopic(teleport2)
+    --diag:addTopic(teleport2)
 
 
 	local npc_01 = scene:FindInstance("NPC01")
     npc_01.dialogue = diag
     npc_01:setDialogue(diag)
-
+    --[[
 	if(questManager:doesQuestExist("TalkToBob") == false) then
 		local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
 		local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
@@ -338,6 +373,7 @@ function InitQuests(quePath)
 		local talkToBob = Quest.new("TalkToBob",stages,6)
 		questManager:addQuest(talkToBob)
 	end
+    ]]
 end
 
 function Initialize()
@@ -363,16 +399,9 @@ function Initialize()
     dCurrentTopic = nil
     dCurrentLine = 0
     
-    loc = {x=900,y=0,z=900}
-    scale = {x=25,y=25,z=25}
-    dir = {x=0,y=1,z=0}
-    boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
-
-
     emptyVec = {x=0,y=0,z=0}
     scale = {x=10,y=10,z=10}
     scene = Scene.new("test", startPos, startDir)
-printAPI.print("1\n")
     camera0 = cameraAPI.addNewInstance()
 --	world = World.new(player0)
 --    newGame("../SaveData/", 1)
@@ -428,8 +457,12 @@ function InitWeapon()
     gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 
+    scene:AddInstance(gun)
+    scene:AddInstance(bullet)
     objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 90, 0, Vector3.new(1, 1, 1))
+	bullet.displayNameOnLook = false
     objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
+	gun.displayNameOnLook = false
     
 end
 
@@ -560,9 +593,9 @@ function Update()
 
                 end
 
-                if(player0.lookTarget.stringID == "obsTech") then
+                if(player0.lookTarget.stringID == "ObsTech") then
                     printAPI.print("Picked up quest item.\n")
-                    questManager:check(GET,playr.lookTarget)
+                    questManager:check(GET,player0.lookTarget)
 
                 end
             end
@@ -740,7 +773,7 @@ function Update()
             if(currentGOs[i]["currentHealth"] ~= nil) then
                 if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
                     for k = 1, world:GetGameObjectCount() do
-                        if(currentGOs[k]["currentHealth"] ~= nil) then
+                        if(currentGOs[k]["currentHealth"] ~= nil and currentGOs[k].hostileToPlayer) then
                             if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
                                 currentGOs[k]:makeChasing()
                             end
@@ -837,8 +870,8 @@ function FireBullet()
 
 end
 
-font1path = "../Assets/Fonts/verdanab.ttf"
-white = {x=1,y=1,z=1}
+font1path = "../Assets/Fonts/WesternBangBang.otf"
+black = {x=0,y=0,z=0}
 
 
 function TestChangeNPCState()
@@ -878,7 +911,7 @@ function Render()
     renderManagerAPI.setFillMode(wireindex)
 
     if(quitting) then
-        display2DAPI.drawFullScreen("faces.png")
+        display2DAPI.drawFullScreen("../Assets/Images/faces.png")
     else
 		if(inMenu) then
 			updateMenu()
@@ -923,7 +956,7 @@ function Render()
 			renderManagerAPI.present(camera0)
 		else
 			if(helpMenu) then
-				display2DAPI.drawFullScreen("rules.png")
+				display2DAPI.drawFullScreen("../Assets/Images/rules.png")
 			else
 
 				-- Draw object
@@ -944,8 +977,6 @@ function Render()
 				renderManagerAPI.renderObject(camera0,time,scene.terrainChunks[i], 1);
 			end
 
-
-
 				--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
 				renderManagerAPI.renderObject(camera0,time,skybox, 0)
@@ -955,16 +986,16 @@ function Render()
 				-- Draw UI text --DrawTextLua(int size, string const& filePath, string const& text, LuaRef pos, LuaRef color, int centered, int screenWidth, int screenHeight)
 				
                 if(player0.lookTarget ~= nil) then
-                    display2DAPI.drawText(10,font1path,lookAtText,{x=100,y=300},white,0,screenWidth,screenHeight)
+                    display2DAPI.drawText(32,font1path,lookAtText,{x=100,y=300},black,0,screenWidth,screenHeight)
 
                 end
 
 				if(player0.inDialogue) then 
-					display2DAPI.drawText(10,font1path,dialogueText,{x=200,y=300},white,0,screenWidth,screenHeight)
+					display2DAPI.drawText(15,font1path,dialogueText,{x=200,y=300},black,0,screenWidth,screenHeight)
 				end
 
                 hpDisplay = "Health: ".. player0.currentHealth .. " / " .. player0.maxHealth
-                display2DAPI.drawText(10,font1path,hpDisplay,{x=400,y=100},white,0,screenWidth,screenHeight)
+                display2DAPI.drawText(32,font1path,hpDisplay,{x=50,y=50},black,0,screenWidth,screenHeight)
 
 
 			end
@@ -973,6 +1004,12 @@ function Render()
 
 
     renderManagerAPI.endRender()
+end
+
+function ShowMessageBox(string)
+    player0.inDialogue = true
+    dialogueText = string
+    dInMenu = true
 end
 
 local status, err = pcall(Run)

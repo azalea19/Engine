@@ -145,6 +145,11 @@ int Model::GetMeshCount() const
   return int(m_meshes.size());
 }
 
+Skeleton const* Model::GetSkeleton() const
+{
+  return pSkeleton;
+}
+
 bool Model::HasAnimation() const
 {
   return m_hasAnimation;

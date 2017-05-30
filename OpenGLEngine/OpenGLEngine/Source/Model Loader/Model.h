@@ -140,6 +140,8 @@ public:
   /// <returns>int</returns>
   virtual int GetMeshCount() const override;
 
+  Skeleton const* GetSkeleton() const;
+
 private:
 
   /// <summary>

@@ -1,4 +1,5 @@
 dofile '../Assets/Scripts/Weapon.lua'
+local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 
 local Player = {}
 Player.__index = Player
@@ -57,8 +58,16 @@ end
 function Player:die()
     printAPI.print("Player has died.")
 
-    --inMenu = true
-    --inGame = false
+    inMenu = true
+	preCameraPos = player0:getPosition()
+	--printVec3(preCameraPos)
+	preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
+	preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
+			
+	cameraAPI.setPosition(camera0,10,-1,30)
+	cameraAPI.setYaw(camera0,0)
+	cameraAPI.setPitch(camera0,0)
+	changeMenu(0)
 end
 
 
@@ -102,7 +111,7 @@ function Player:setPitch(newPitch);
 end
 
 function Player:update()
-
+   -- printVec3(self:getPosition())
 	
 	-- written by liz translated from maddys c++ code
 	--printAPI.print("Updating player\n")
@@ -230,83 +239,74 @@ function Player:update()
 
 
 		--printAPI.print(self.position.y .. "\n")
-		cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
+
 	end
     
+	cameraAPI.setPosition(camera0,self.position.x,self.position.y + 1.8,self.position.z)
     -- Fill bounding box/collision data for use
 	local goList = {} -- list of gameobjects with bounding boxes
-	local bbList = {} -- list of all bounding boxes (corresponds to gameobjects)
 	local listCount =0 -- number in these list
 			
-		local currentGOs = world:GetGameObjects()
+	local currentGOs = world:GetGameObjects()
 
-		for i = 1, world:GetGameObjectCount() do
-			if(currentGOs == nil) then
-			debugPrint("Warning: Tried to check collisions, but World's GameObjects is nil\n")
-			else
+	for i = 1, world:GetGameObjectCount() do
+		if(currentGOs == nil) then
+		debugPrint("Warning: Tried to check collisions, but World's GameObjects is nil\n")
+		else
 			
-				debugPrint(world:GetGameObjectCount() .. " game objects in scene to check AABBs\n")
-				debugPrint(currentGOs[i].name .. "is name of current object\n")
-
-				local bbo = currentGOs[i]:BBToWorld()
-				
-				if bbo ~= nil then
-					goList[i] = currentGOs[i]
-					bbList[i] = bbo
-					listCount = listCount + 1
-				else
-					debugPrint(manyList[i].name .. " has nil aabb\n")
-				end
+			debugPrint(world:GetGameObjectCount() .. " game objects in scene to check AABBs\n")
+			debugPrint(currentGOs[i].name .. "is name of current object\n")	
+						
+			if currentGOs[i].displayNameOnLook then
+				goList[i] = currentGOs[i]
+				listCount = listCount + 1
 			end
 		end
+	end
 
     debugPrint("Setting player ray\n")
 	
-	self.lookRay = {pos = self:getPosition(),dir = cameraAPI.forward(camera0,context.handle)}
+	self.lookRay = {pos = cameraAPI.getPosition(camera0, context.handle), dir = cameraAPI.forward(camera0,context.handle)}
 	
 	debugPrint("Checking ray collisions\n")
 	
 	if(debugdetail) then
 		printAPI.print("Ray data: ")
-		printVec3s(self:getPosition(), cameraAPI.forward(camera0,context.handle))
 	end
-	
-	local firstLook = nil
-	for i=1,listCount do
-		--debugPrint("Checking ray vs object " ..i.."\n")
-		--printVec3After("GameObject BB Min: ",goList[i].boundingBox.min)
-		--printVec3After("GameObject BB Max: ",goList[i].boundingBox.max)
 
-		if collisionAPI.rayToAABB(self.lookRay,bbList[i]) then
-			debugLPrint("Player is looking at something! Ray is ...")
-            printVec3After("pos ",self.lookRay.pos)
-            printVec3After("dir ",self.lookRay.dir)
+	self.lookTarget =  nil
+	lookAtText = " "
+
+	local lookAtIndex = 0;
+	local lookAtDist = 99999999;
+	--printAPI.print("Object count " ..listCount .. '\n')
+	for i=1,listCount, 1 do
+		local dist = collisionAPI.rayOnObject(self.lookRay, goList[i].id);
+		if((dist > 0) and (dist < lookAtDist)) then
+			lookAtIndex = i
+			lookAtDist = dist
+		end
+	end
+
+	for i=1,listCount, 1 do
+		if lookAtIndex == i then
 			goList[i].playerLookAt = true
-			if firstLook == nil then
-				firstLook = goList[i]
-				debugPrint("It is  " .. firstLook.name .. " ... ")
-				self.lookTarget = firstLook
-				if(firstLook.displayNameOnLook) then
-				
-					lookAtText = firstLook.name
-					debugPrint("Displayed to screen.")
-				end
-				
-				debugPrint("\n")
-
+			self.lookTarget =  goList[i]
+			if goList[i].displayNameOnLook  then		
+				lookAtText = goList[i].name
 			end
 		else
 			goList[i].playerLookAt = false
+		end
+	end
 
-        end
-        if firstLook == nil then
-		    debugPrint("Removed look at text. \n")
-		    lookAtText = " "
-		    self.lookTarget = nil
-		    self.inDialogue = false
-        end
-        end 
+	if(self.lookTarget) then
+		--printAPI.print(lookAtDist .. '\n')
+	end
 
+	if self.lookTarget == nil then
+		self.inDialogue = false
+    end
 end
 
 return Player

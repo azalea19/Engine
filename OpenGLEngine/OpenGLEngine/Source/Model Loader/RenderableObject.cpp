@@ -10,6 +10,7 @@
 #include "InputManager.h"
 #include <memory>
 #include "TriangleTree.h"
+#include "Skeleton.h"
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
@@ -100,14 +101,39 @@ void RenderableObject::CreateBoundingBox()
 {
   std::vector<vec3> const& vertices = m_pModel->GetVertices();
 
-  m_boundingBox.min = vertices[0];
-  m_boundingBox.max = vertices[0];
-
-  for (int i = 1; i < vertices.size(); i++)
+  if (!m_pModel->HasAnimation())
   {
-    m_boundingBox.min = min(m_boundingBox.min, vertices[i]);
-    m_boundingBox.max = max(m_boundingBox.max, vertices[i]);
+    m_boundingBox.min = vec3(FLT_MAX);
+    m_boundingBox.max = vec3(-FLT_MAX);
+
+    for (int i = 0; i < vertices.size(); i++)
+    {
+      m_boundingBox.min = min(m_boundingBox.min, vertices[i]);
+      m_boundingBox.max = max(m_boundingBox.max, vertices[i]);
+    }
   }
+  else
+  {
+    std::vector<mat4> boneTransforms = m_pModel->GetBoneTransforms(0, 0);
+    std::vector<VertexBoneIDs> const& boneIDs = m_pModel->GetBoneIDs();
+    std::vector<VertexBoneWeights> const& boneWeights = m_pModel->GetBoneWeights();
+
+    m_boundingBox.min = vec3(FLT_MAX);
+    m_boundingBox.max = vec3(-FLT_MAX);
+
+    for (int i = 0; i < vertices.size(); i++)
+    {
+      vec3 transformed = vec3(0);
+      for (int j = 0; j < 4; j++)
+        transformed += vec3(boneTransforms[boneIDs[i].boneIDs[j]] * vec4(vertices[i], 1)) * boneWeights[i].boneWeights[j];
+      m_boundingBox.min = min(m_boundingBox.min, transformed);
+      m_boundingBox.max = max(m_boundingBox.max, transformed);
+    }
+  }
+
+
+
+
 }
 
 void RenderableObject::CreateTriangleFaces()

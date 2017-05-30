@@ -19,9 +19,9 @@ inGame = false
 function initMenu()
 	-- Background
     local newPos = {x=10,y=-1,z=0}
-    local newScaleBG = {x=5,y=5,z=0.01}
+    local newScaleBG = {x=500,y=500,z=0.01}
     local newDir = {x=0,y=1,z=0}
-	Background = gameObject.new("Background", "Background", "btnBack", newPos, newDir, newScaleBG, newAnim)
+	Background = gameObject.new("Background", "Background", "whiteCube", newPos, newDir, newScaleBG, newAnim)
 	-- Start New, 0
     local newPos = {x=0,y=-1,z=12}
     local newScale = {x=2,y=2,z=2}
@@ -62,19 +62,19 @@ function initMenu()
 	-- Button One, 1/2
     local newPos = {x=10,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ButtonOne = gameObject.new("ButtonOne", "ButtonOne", "whiteCube", newPos, newDir, newScale, newAnim)
+    ButtonOne = gameObject.new("ButtonOne", "ButtonOne", "btnGame1", newPos, newDir, newScale, newAnim)
 	ButtonOne.option = buttonOne -- set selected to 1
 	ButtonOne.active = false
 	-- Button Two, 1/2
     local newPos = {x=15,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ButtonTwo = gameObject.new("ButtonTwo", "ButtonTwo", "whiteCube", newPos, newDir, newScale, newAnim)
+    ButtonTwo = gameObject.new("ButtonTwo", "ButtonTwo", "btnGame2", newPos, newDir, newScale, newAnim)
 	ButtonTwo.option = buttonTwo -- set selected to 2
 	ButtonTwo.active = false
 	-- Button Three, 1/2
     local newPos = {x=20,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ButtonThree = gameObject.new("ButtonThree", "ButtonThree", "whiteCube", newPos, newDir, newScale, newAnim)
+    ButtonThree = gameObject.new("ButtonThree", "ButtonThree", "btnGame3", newPos, newDir, newScale, newAnim)
 	ButtonThree.option = buttonThree -- set selected to 3
 	ButtonThree.active = false
 	-- Button Easy, 4
@@ -98,7 +98,7 @@ function initMenu()
 	-- Return button, 0 during game
     local newPos = {x=25,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ReturnButton = gameObject.new("ReturnButton", "ReturnButton", "btnBack", newPos, newDir, newScale, newAnim)
+    ReturnButton = gameObject.new("ReturnButton", "ReturnButton", "btnReturn", newPos, newDir, newScale, newAnim)
 	ReturnButton.option = ReturnButton -- return to game
 	ReturnButton.active = false
 	-- Mouse cursor
@@ -124,8 +124,27 @@ end
 
 function updateMenu()
 	local currentPos = MouseObject:getPosition()
-	local newPos = {x=currentPos.x + (inputManagerAPI.mouseDeltaX() / 50),y=currentPos.y - (inputManagerAPI.mouseDeltaY() / 50),z=currentPos.z}
-	MouseObject:setPosition(newPos)
+    local newXPos = currentPos.x + (inputManagerAPI.mouseDeltaX() / 50)
+    local newYPos = currentPos.y - (inputManagerAPI.mouseDeltaY() / 50)
+
+    if(newXPos < -4) then
+        newXPos = -4
+    end
+    if(newXPos > 25) then
+        newXPos = 25
+    end
+    if(newYPos > 8) then
+        newYPos = 8
+    end
+    if(newYPos < -8) then
+        newYPos = -8
+    end
+    
+    local newPos = {x=newXPos,y=newYPos,z=currentPos.z}
+    MouseObject:setPosition(newPos)
+
+
+
 --printAPI.print(currentPos.x .. "," .. currentPos.y .. "\n")
 --printAPI.print(StartNewButton:BBToWorld().min.x .. "," .. StartNewButton:BBToWorld().min.y .. " " .. StartNewButton:BBToWorld().max.x .. "," .. StartNewButton:BBToWorld().max.y .. "\n\n")
 	if(inputManagerAPI.isMousePressedLeft()) then
@@ -220,7 +239,7 @@ function updateMenu()
 end
 
 function newGame(folder, difficulty)
-	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject")
+	local GOData = LoadInstances(folder .. "GO_Data.csv", "gameObject", difficulty)
 	local NPCData = LoadInstances(folder .. "NPC_Data.csv", "npc", difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
@@ -230,16 +249,18 @@ function newGame(folder, difficulty)
 	printAPI.print("4\n")
     InitScene1(folder .. "GO_Data.csv", folder .. "NPC_Data.csv", difficulty)
     InitScene2(folder .. "NPC_Data_Scene2.csv", difficulty)
-    InitQuests(folder .. "QUE_Data.csv")
     printAPI.print("5\n")
 
 	CreateTerrain(scene)
-	CreateCactusField(scene)	--REMOVE AFTER DEFAULT SAVE SET UP
-	CreateTown(scene)			--REMOVE AFTER DEFAULT SAVE SET UP
+	--CreateCactusField(scene)	--REMOVE AFTER DEFAULT SAVE SET UP
+	--CreateTown(scene)			--REMOVE AFTER DEFAULT SAVE SET UP
 	
 	world = World.new(player0)
 	world:AddScene(scene)
 	world:AddScene(scene2)
+
+    InitQuests(folder .. "QUE_Data.csv")
+
     printAPI.print("8\n")
 	
 	--LoadTopics("../SaveData/DIA_Data.csv")
@@ -276,7 +297,7 @@ function changeMenu(num)
 		ButtonHard.active = false
 		BackButton.active = false
 		StartNewButton.active = true
-		ContinueButton.active = true
+		ContinueButton.active = false
 		SaveButton.active = true
 		LoadButton.active = true
 		ExitButton.active = true
@@ -284,15 +305,15 @@ function changeMenu(num)
 		MenuButtons = {}
 		MenuButtonsBox = {}
 
-        totalButtons = 4
+        totalButtons = 3
 
         if(inGame) then
+            ReturnButton.active = false
+        else
             ReturnButton.active = true
             table.insert(MenuButtons, ReturnButton)
             table.insert(MenuButtonBoxes, ReturnButton:BBToWorld())
             totalButtons = totalButtons +1
-        else
-            ReturnButton.active = false
         end
         if(inGame) then
             SaveButton.active = true
@@ -305,13 +326,10 @@ function changeMenu(num)
         end
 
 		table.insert(MenuButtons, StartNewButton)
-		table.insert(MenuButtons, ContinueButton)
 		table.insert(MenuButtons, LoadButton)
-		
 		table.insert(MenuButtons, ExitButton)
 		
 		table.insert(MenuButtonBoxes, StartNewButton:BBToWorld())
-		table.insert(MenuButtonBoxes, ContinueButton:BBToWorld())
 		table.insert(MenuButtonBoxes, LoadButton:BBToWorld())
 		
 		table.insert(MenuButtonBoxes, ExitButton:BBToWorld())

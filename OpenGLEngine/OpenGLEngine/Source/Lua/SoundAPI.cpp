@@ -9,7 +9,7 @@ void SoundAPI::AddSound(string const& name, string filePath)
 
 ChannelHandle SoundAPI::PlaySound(string const& name, int loopCount)
 {
-  SoundManager::GetInstance().PlaySound(name, loopCount);
+  return SoundManager::GetInstance().PlaySound(name, loopCount);
 }
 
 void SoundAPI::PauseChannel(ChannelHandle sound)
@@ -30,3 +30,4 @@ void SoundAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
   pContext->ExposeFunction(luaAPIName, "pauseChannel", PauseChannel);
   pContext->ExposeFunction(luaAPIName, "resumeChannel", ResumeChannel);
 }
+

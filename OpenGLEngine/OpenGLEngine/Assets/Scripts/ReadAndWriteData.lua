@@ -160,7 +160,6 @@ function LoadInstances(filePath, fileType, difficulty)
 		dir = Vector3.new(fileData[i][7], fileData[i][8], fileData[i][9])
 		sca = Vector3.new(fileData[i][10], fileData[i][11], fileData[i][12])
 		anim = fileData[i][13]
-
 		
 		local stringID = fileData[i][1]
 			
@@ -170,7 +169,7 @@ function LoadInstances(filePath, fileType, difficulty)
 		else
 			if(fileType == "npc") then
 			
-				n = npc.new(stringID, fileData[i][2],fileData[i][3], objpos, dir, sca, anim, fileData[i][13] * difficulty, fileData[i][14] * difficulty)
+				n = npc.new(stringID, fileData[i][2],fileData[i][3], objpos, dir, sca, anim, fileData[i][14] * difficulty, fileData[i][15] * difficulty)
 			end
 		end
 		

@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Base Classes\IRenderManager.h" />
+    <ClInclude Include="Source\Base Classes\ISoundManager.h" />
     <ClInclude Include="Source\Data Structures\KDTree.h" />
     <ClInclude Include="Source\Data Structures\TriangleTree.h" />
     <ClInclude Include="Source\Engine Components\Independant\Renderer.h" />
@@ -201,15 +202,16 @@
     <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\Menu.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
-    <None Include="Assets\Scripts\npc.lua" />
+	<None Include="Assets\Scripts\Weapon.lua" />
     <None Include="Assets\Scripts\Player.lua" />
+    <None Include="Assets\Scripts\npc.lua" />
+
     <None Include="Assets\Scripts\QuestManager.lua" />
     <None Include="Assets\Scripts\ReadAndWriteData.lua" />
     <None Include="Assets\Scripts\ReadAndWriteInstances.lua" />
     <None Include="Assets\Scripts\Scene.lua" />
     <None Include="Assets\Scripts\Terrain.lua" />
     <None Include="Assets\Scripts\Vector3.lua" />
-    <None Include="Assets\Scripts\Weapon.lua" />
     <None Include="Assets\Scripts\World.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
