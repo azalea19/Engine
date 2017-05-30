@@ -48,6 +48,7 @@ end
 function Player:takeDamage(dmg)
     debugLPrint("Player Taking damage " .. dmg .. "\n")
 	self.currentHealth = self.currentHealth - dmg
+    soundAPI.playSound("Gunshot",1)
 	if(self.currentHealth <= 0) then
 		self:die()
 	end

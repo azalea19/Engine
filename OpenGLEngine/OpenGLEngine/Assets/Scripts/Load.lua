@@ -57,7 +57,7 @@ function LoadAssets()
     modelLibraryAPI.addModel("btnReturn","../Assets/Models/UI/backToGame.obj",false)
     modelLibraryAPI.addModel("btnContinue","../Assets/Models/UI/continue.obj",false)
     modelLibraryAPI.addModel("whiteCube","../Assets/Models/UI/whitecube.obj",false)
-    modelLibraryAPI.addModel("Observatory","../Assets/Models/ObservatoryOutpost/ObservatoryOutpost_fin.obj",false)
+    modelLibraryAPI.addModel("Observatory","../Assets/Models/ObservatoryOutpost/obs.obj",false)
 	modelLibraryAPI.addModel("FarmHouse","../Assets/Models/Farmhouse/farmhouse_obj.obj",false)
 	modelLibraryAPI.addModel("GeneralStore","../Assets/Models/GeneralStore/gs.obj",false)
 	modelLibraryAPI.addModel("Saloon","../Assets/Models/Saloon/saloon.obj",false)
@@ -68,6 +68,9 @@ function LoadAssets()
 
 
 	soundAPI.addSound("HappyHour",'../Assets/Sounds/HappyHour.wav')
+    soundAPI.addSound("Gunshot",'../Assets/Sounds/341255__jeremysykes__gunshot00.wav')
+    soundAPI.addSound("Hit",'../Assets/Sounds/387434__blosche__hard-hit.wav')
+
 
 
 	printAPI.print('Loading Terrain...\n')    

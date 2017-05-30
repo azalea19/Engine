@@ -165,8 +165,8 @@ function FixRobots(thisScene)
             currentGOs[i]:makeIdle()
             --current[i].setOrientation(Vector3.new(180, -90, 0))
             objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-            local anim = {"Section",0,0.1}
-            local anim2 = {"Section",1,0.2}
+            local anim = {"Section",0,1}
+            local anim2 = {"Section",1,2}
             currentGOs[i].defaultAnim = anim2
             currentGOs[i]:setAnimation(anim2)
 
@@ -398,7 +398,21 @@ function Initialize()
     InitWeapon()
 
 	initMenu()
-	
+
+    
+    --[[
+    -- load menu
+    inMenu = true
+	preCameraPos = player0:getPosition()
+
+	preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
+	preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
+			
+	cameraAPI.setPosition(camera0,10,-1,30)
+	cameraAPI.setYaw(camera0,0)
+	cameraAPI.setPitch(camera0,0)
+	changeMenu(0)
+	]]
     printAPI.print('Initialization finished.\n')
 end
 
@@ -408,8 +422,6 @@ function InitPlayer()
 
 	player0:setPosition(Vector3.new(1000,0,1000))
     
-    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
-    bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 
 
     player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
@@ -420,8 +432,10 @@ function InitWeapon()
 
     basicGun = Weapon.new("basicGun","Gun",1,1)
 	table.insert(weaponList,basicGun);
-	
     player0:setWeapon("basicGun")
+    
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
+    bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
 
     objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 90, 0, Vector3.new(1, 1, 1))
     objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
@@ -695,13 +709,11 @@ function Update()
 	        end
             if inputManagerAPI.isKeyPressed(TestInput1) then
             
-            
 
 	        end
     
             if inputManagerAPI.isKeyPressed(TestInput2) then
         
-                TestChangeNPCState()
 
 	        end
 		
@@ -794,13 +806,12 @@ end
 
 function AdjustGunAndBullet()
     local playerPos = Vector3.new(player0.position.x,player0.position.y+1.8,player0.position.z)
-
-    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
-    
-
     local closerpos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),1,context.handle),context.handle)
     closerpos.y = closerpos.y - 0.5
     local pos = mmath.vec3_Sum(playerPos,mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle),context.handle)
+     
+    bullet:setPosition(MoveTowards(bullet:getPosition(),mmath.vec3_Sum(mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle), 1000,context.handle) ,playerPos,context.handle),100*deltaTime))
+
     gun:setPosition(closerpos)
     gun:lookAt(pos)
 end
@@ -824,12 +835,16 @@ function MoveToDungeon1()
 end
 
 function FireBullet()
+
     local playerPos = Vector3.new(player0.position.x,player0.position.y+1.8,player0.position.z)
 
     local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
     local sum = mmath.vec3_Sum(playerPos, pos,context.handle)
     bullet:setPosition(sum)
-    bullet:lookAt(cameraAPI.forward(camera0,context.handle))
+    bullet:lookAt(pos)
+    soundAPI.playSound("Gunshot",1)
+
+
 
 end
 

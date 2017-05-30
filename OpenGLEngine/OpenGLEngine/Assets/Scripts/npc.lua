@@ -25,17 +25,18 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
-    instance.moveSpeed = 1
+    instance.moveSpeed = 0.6
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
     instance.weapon = Weapon.new("melee","melee",10,100,100)
     instance.hurtAnim = nil
     instance.timeHurtAnimTriggered = 0
-    instance.viewDist = 200
+    instance.viewDist = 100
     printAPI.print(instance.currentHealth.."\n")
     instance.justSeen = false
     instance.alertDist = 10000
+    instance.minDistFromPlayer = 8
 
     instance.currentStateID = "idle"
 
@@ -77,22 +78,24 @@ function chasing(anpc)
     --printAPI.print(anpc.currentHealth.."\n")
 
 	if player0 ~= nil then
-		anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
-		debugPrint("Looking at player position.\n")
-		anpc:lookAt(player0.position)
 
-        if(anpc.weapon ~= nil) then
-            if(Distance(anpc:getPosition(),player0:getPosition()) < anpc.weapon.range) then
-            	debugPrint("Ready to attack.\n")
+        if Distance(anpc:getPosition(),player0.position) > anpc.minDistFromPlayer then
+	        anpc:setPosition(MoveTowards(anpc:getPosition(),player0.position,anpc.moveSpeed))
+	        debugPrint("Looking at player position.\n")
+	        anpc:lookAt(player0.position)
 
-                anpc.weapon:attack(player0)
+            if(anpc.weapon ~= nil) then
+                if(Distance(anpc:getPosition(),player0:getPosition()) < anpc.weapon.range) then
+                    debugPrint("Ready to attack.\n")
+
+                    anpc.weapon:attack(player0)
+                end
             end
+       
+            --printAPI.print("Got distance~!")
+        
+
         end
-        
-        --printAPI.print("Got distance~!")
-        
-
-
 	else
 		printAPI.print("Warning: Player is nil\n")
 	end

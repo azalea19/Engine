@@ -38,7 +38,7 @@ ChannelHandle GLSoundManager::PlaySound(string const& name, int loopCount) const
   ChannelHandle channel = channels[channels.size() - 1];
   channels.pop_back();
 
-  Mix_PlayChannel(channel, got->second, loopCount);
+  Mix_PlayChannel(channel, got->second, loopCount-1);
 
   return channel;
 }
