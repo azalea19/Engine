@@ -112,3 +112,8 @@ string const& Skeleton::GetAnimationName(int animationIndex) const
 {
   return m_animationLookup.GetKey(animationIndex);
 }
+
+mat4 const& Skeleton::GetGlobalInverseBoneTransform() const
+{
+  return m_globalInverseTransform;
+}

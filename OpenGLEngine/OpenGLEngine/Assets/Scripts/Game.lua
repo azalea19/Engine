@@ -427,7 +427,9 @@ function InitWeapon()
     player0:setWeapon(basicGun)
 
     objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 90, 0, Vector3.new(1, 1, 1))
+	bullet.displayNameOnLook = false
     objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
+	gun.displayNameOnLook = false
     
 end
 

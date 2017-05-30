@@ -33,6 +33,9 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 	instance.newWayPointX = newPos.x + 1
 	instance.newWayPointZ = newPos.z + 1
 
+	instance.patrolStartTime = 0
+	instance.patrolTime = 0.1
+
 	instance.dialogue = nil
 	instance.maxHealth = newMaxHealth
 	instance.currentHealth = newCurrentHealth
@@ -190,19 +193,14 @@ function patrol(anpc,timeElapsed)
 		--reset our start time
 		anpc.patrolStartTime = time
 
-		printAPI.print('way point reached\n')
 
 	end
 
 	local journeyTime = time - anpc.patrolStartTime
 
-	printAPI.print(journeyTime ..'journey time << \n')
-
 	--Gets how far through moving we are based on the time
 	local interpolationFactor = math.min(journeyTime / anpc.patrolTime, 1)--lerp(0, totalTripTime, journeyTime)
 		
-	printAPI.print(interpolationFactor ..'interp factor <<\n')
-
 	--Last pos equal to the new pos we generated last time
 	anpc.lastPosX = anpc.newPosX
 	anpc.lastPosZ = anpc.newPosZ

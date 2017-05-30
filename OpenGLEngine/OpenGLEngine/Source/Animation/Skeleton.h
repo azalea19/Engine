@@ -83,6 +83,8 @@ public:
   /// <returns>string</returns>
   virtual string const& GetAnimationName(int animationIndex) const override;
 
+  mat4 const& GetGlobalInverseBoneTransform() const;
+
 private:
 
   /// <summary>

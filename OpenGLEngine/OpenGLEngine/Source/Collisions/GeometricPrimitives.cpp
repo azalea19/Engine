@@ -132,3 +132,10 @@ mOBB operator*(mat4 const& lhs, mAABB const& rhs)
 {
   return lhs * mOBB(rhs);
 }
+
+mRay operator*(mat4 const& lhs, mRay rhs)
+{
+  rhs.position = vec3(lhs * vec4(rhs.position,1));
+  rhs.direction = normalize(vec3(inverseTranspose(lhs) * vec4(rhs.direction, 0)));
+  return rhs;
+}

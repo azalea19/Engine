@@ -25,7 +25,7 @@ public:
 	/// <param name="ray">The ray.</param>
 	/// <param name="aabb">The AABB.</param>
 	/// <returns></returns>
-	static bool RayToAABB(LuaRef ray, LuaRef aabb);
+	static float RayOnObject(LuaRef ray, InstanceHandle object);
 
   static void CreateCollisionTree(LuaRef objectInstanceHandles);
 

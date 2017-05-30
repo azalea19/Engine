@@ -5,14 +5,25 @@
 
 static KDTree* collisionTree = nullptr;
 
-bool CollisionAPI::RayToAABB(LuaRef ray, LuaRef aabb)
+float CollisionAPI::RayOnObject(LuaRef ray, InstanceHandle instanceHandle)
 {
+  ObjectInstance* object = LuaObjectInstanceManager::GetInstance(instanceHandle);
 	mRay myRay = FromLuaTable<mRay>(ray);
-	mAABB myAABB = FromLuaTable<mAABB>(aabb);
-	bool a = Intersects(myAABB, myRay);
+  mRay transformedRay = myRay;
+  transformedRay.direction = normalize(myRay.direction);
+  transformedRay = inverse(object->GetTransform()) * transformedRay;
+  mAABB myAABB = object->GetRenderableObject()->GetBoundingBox();
+  float distance;
+  if (!Intersects(myAABB, transformedRay, &distance))
+    return -1;
 
-	return a;
+  vec3 rayEnd = transformedRay.position + transformedRay.direction * distance;
+
+  rayEnd = vec3(object->GetTransform() * vec4(rayEnd, 1));
+
+  return length(rayEnd - myRay.position);
 }
+
 
 void CollisionAPI::CreateCollisionTree(LuaRef objectInstanceHandles)
 {
@@ -62,7 +73,7 @@ bool CollisionAPI::ObjectInstance_CollidingInTree(InstanceHandle instanceHandle)
 void CollisionAPI::Expose(LuaContextHandle contextHandle, string luaAPIName)
 {
 	LuaContext* pContext = LuaManager::GetInstance().GetContext(contextHandle);
-	pContext->ExposeFunction(luaAPIName, "rayToAABB", RayToAABB);
+	pContext->ExposeFunction(luaAPIName, "rayOnObject", RayOnObject);
   pContext->ExposeFunction(luaAPIName, "createCollisionTree", CreateCollisionTree);
   pContext->ExposeFunction(luaAPIName, "box_collidingInTree", Box_CollidingInTree);
   pContext->ExposeFunction(luaAPIName, "objectInstance_collidingInTree", ObjectInstance_CollidingInTree);
