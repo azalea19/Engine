@@ -8,7 +8,7 @@ MultiplicativeBlendEffect::MultiplicativeBlendEffect()
   
 }
 
-void MultiplicativeBlendEffect::Apply(GLuint inputTex0, GLuint inputTex1, GLuint outputTex)
+void MultiplicativeBlendEffect::Apply(GLuint inputTex0, GLuint inputTex1, GLuint inverseDepthBuffer, GLuint outputTex)
 {
   m_fb.Bind();
 
@@ -24,6 +24,11 @@ void MultiplicativeBlendEffect::Apply(GLuint inputTex0, GLuint inputTex1, GLuint
   glActiveTexture(GL_TEXTURE0 + 1);
   glBindTexture(GL_TEXTURE_2D, inputTex1);
   m_pShader->TransmitUniform("inputTex1", 1);
+
+  glActiveTexture(GL_TEXTURE0 + 2);
+  glBindTexture(GL_TEXTURE_2D, inverseDepthBuffer);
+  m_pShader->TransmitUniform("inverseDepthBuffer", 2);
+
 
   glDrawArrays(GL_QUADS, 0, 4);
   glBindVertexArray(NULL);

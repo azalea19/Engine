@@ -27,7 +27,7 @@ function CreateCactusField(myscene)
 		printAPI.print(alphaVal)
 		if alphaVal > 0 then		
 			--collidableObjects[#collidableObjects + 1] = cactus
-			cactus = gameObject.new("0","Cactus","Cactus",Vector3.new(xRand,0,zRand),Vector3.new(xRotRand,0,0), Vector3.new(.1,.1,.1),0)
+			cactus = gameObject.new("0","Cactus","COL_Cactus",Vector3.new(xRand,0,zRand),Vector3.new(xRotRand,0,0), Vector3.new(.1,.1,.1),0)
 			--function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
 			myscene:AddInstance(cactus)
@@ -62,21 +62,21 @@ function CreateTown(myscene)
 
 	 --function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newAnim)
 
-	gunShop = gameObject.new("0","GunShop","GunShop",Vector3.new(1024,0,1029),Vector3.new(0,0,0), Vector3.new(.008,.008,.008),0)
+	gunShop = gameObject.new("0","GunShop","COL_GunShop",Vector3.new(1024,0,1029),Vector3.new(0,0,0), Vector3.new(.008,.008,.008),0)
 	myscene:AddInstance(gunShop)
 
 	--farmHouse = luaObjInstManager.addNewInstance("FarmHouse")
 	--objectInstanceAPI.setScale(farmHouse, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(farmHouse, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = farmHouse
-	farmHouse = gameObject.new("0","FarmHouse","FarmHouse",Vector3.new(1034,0,1024),Vector3.new(0,0,0), Vector3.new(.25,.25,.25),0)
+	farmHouse = gameObject.new("0","FarmHouse","COL_FarmHouse",Vector3.new(1034,0,1024),Vector3.new(0,0,0), Vector3.new(.25,.25,.25),0)
 	myscene:AddInstance(farmHouse)
 
 	--generalStore = luaObjInstManager.addNewInstance("GeneralStore")
 	--objectInstanceAPI.setScale(generalStore, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(generalStore, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = generalStore
-	generalStore = gameObject.new("0","GeneralStore","GeneralStore",Vector3.new(1044,0,1020),Vector3.new(0,0,0), Vector3.new(.15,.15,.15),0)
+	generalStore = gameObject.new("0","GeneralStore","COL_GeneralStore",Vector3.new(1044,0,1020),Vector3.new(0,0,0), Vector3.new(.15,.15,.15),0)
 	myscene:AddInstance(generalStore)
   --BoxTest = luaObjInstManager.addNewInstance("TestObject");
   --objectInstanceAPI.setTranslation(BoxTest, 50, GetHeightAtPoint(50, 50) + 10, 50)
@@ -96,14 +96,14 @@ function CreateTown(myscene)
 	--objectInstanceAPI.setScale(saloon, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(saloon, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = saloon
-	saloon = gameObject.new("0","Saloon","Saloon",Vector3.new(1034,0,990),Vector3.new(0,0,0), Vector3.new(.1,.1,.1),0)
+	saloon = gameObject.new("0","Saloon","COL_Saloon",Vector3.new(1034,0,990),Vector3.new(0,0,0), Vector3.new(.1,.1,.1),0)
 	myscene:AddInstance(saloon)
 
 	--blacksmith = luaObjInstManager.addNewInstance("Blacksmith")
 	--objectInstanceAPI.setScale(blacksmith, 1, 1, 1)
 	--objectInstanceAPI.setTranslation(blacksmith, 200, GetHeightAtPoint(50, 50) - 10, 200)
 	--collidableObjects[#collidableObjects + 1] = blacksmith
-	blacksmith = gameObject.new("0","Blacksmith","Blacksmith",Vector3.new(1024,0,990),Vector3.new(0,0,0), Vector3.new(.06,.06,.06),0)
+	blacksmith = gameObject.new("0","Blacksmith","COL_Blacksmith",Vector3.new(1024,0,990),Vector3.new(0,0,0), Vector3.new(.06,.06,.06),0)
 	myscene:AddInstance(blacksmith)
 
     printAPI.print('Initialising player...\n')

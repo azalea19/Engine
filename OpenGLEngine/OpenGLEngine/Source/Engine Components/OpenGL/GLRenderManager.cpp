@@ -55,7 +55,7 @@ void GLRenderManager::Present(int camID) const
   }
   else
   {
-    vec3 sunPosition = vec3(10000, 10000, 10000);
+    vec3 sunPosition = vec3(1000000, 1000000, 1000000);
     vec4 projectedSun = cam->getProjectionMatrix() * cam->getViewMatrix() * vec4(sunPosition, 1);
     projectedSun.x /= projectedSun.z;
     projectedSun.y /= projectedSun.z;
@@ -65,7 +65,7 @@ void GLRenderManager::Present(int camID) const
     if (glm::dot(dir, cam->Forward()) > 0)
     {
       pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.3), normalize(-sunPosition));
-      pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);
+      pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), buffers->GetLinearDepthBuffer(), tempTex2);
       pRayEffect->Apply(tempTex2, buffers->GetLinearDepthBuffer(), tempTex, vec3(projectedSun.x, projectedSun.y, projectedSun.z));
       pBloomEffect->Apply(tempTex, finalTex, 2);
       pFXAAEffect->Apply(finalTex, tempTex, 8);
@@ -74,8 +74,8 @@ void GLRenderManager::Present(int camID) const
     else
     {
       pLightingEffect->Apply(buffers->GetNormalBuffer(), tempTex, vec3(0.5, 0.5, 0.3), normalize(-sunPosition));
-      pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), tempTex2);   
-      pFXAAEffect->Apply(tempTex2, finalTex, 8);
+      pBlendEffect->Apply(tempTex, buffers->GetColorBuffer(), buffers->GetLinearDepthBuffer(), tempTex2);
+      pFXAAEffect->Apply(tempTex2,finalTex, 8);
       FrameBuffer::Display(finalTex);
     }
   }

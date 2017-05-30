@@ -19,7 +19,7 @@ void ShaderLibrary::InitShaderLibrary(IEngine const *pEngine)
 	shaderLibrary.AddShader("BlurEffect", CreateVector(string("inputTex0"), string("blurRadius")), CreateVector(string("Position"), string("TexCoord")));
 	shaderLibrary.AddShader("DirectionalLightingEffect", CreateVector(string("inputTex0"), string("inputTex1"), string("CAMERA_POSITION"), string("LIGHT_COLOUR"), string("LIGHT_DIRECTION"), string("AMBIENT_COLOUR")), CreateVector(string("Position"), string("TexCoord")));
 	shaderLibrary.AddShader("AdditiveBlendEffect", CreateVector(string("inputTex0"), string("inputTex1")), CreateVector(string("Position"), string("TexCoord")));
-	shaderLibrary.AddShader("MultiplicativeBlendEffect", CreateVector(string("inputTex0"), string("inputTex1")), CreateVector(string("Position"), string("TexCoord")));
+	shaderLibrary.AddShader("MultiplicativeBlendEffect", CreateVector(string("inputTex0"), string("inverseDepthBuffer"),string("inputTex1")), CreateVector(string("Position"), string("TexCoord")));
 	shaderLibrary.AddShader("FXAAEffect", CreateVector(string("inputTex0"), string("FXAA_SPAN")), CreateVector(string("Position"), string("TexCoord")));
 	shaderLibrary.AddShader("DepthThresholdEffect", CreateVector(string("inputTex0"), string("threshold")), CreateVector(string("Position"), string("TexCoord")));
 	shaderLibrary.AddShader("RayEffect", CreateVector(string("inputTex0"), string("lightPos")), CreateVector(string("Position"), string("TexCoord")));

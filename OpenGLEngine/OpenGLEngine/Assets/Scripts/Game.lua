@@ -36,6 +36,10 @@ dofile '../Assets/Scripts/GameWorld.lua'
 
 OPEN_GL = 0
 
+
+collisionObjects = {}
+collisionsEnabled = true
+
 gameObjects = {}
 world = {}
 weaponList = {}
@@ -114,15 +118,12 @@ function InitScene1(goPath, npcPath, diff)
     local dir = {x=0,y=1,z=0}
 
 	if(scene:FindInstance("Dungeon1Door") == false) then
-		--Dungeon1Door = gameObject.new("Dungeon1Door","Cave Door to The Observatory","CaveDoor",loc,dir,scale,0)
-		--scene:AddInstance(Dungeon1Door)
-		loc = Vector3.new(1500,0,1500)
-		scale = {x=0.1,y=0.1,z=0.1}
-		obs = gameObject.new("Observatory","Observatory","Observatory",loc,dir,scale,0)
-		objectInstanceAPI.setBaseTransform(obs.id, Vector3.new(0, -50, 0), 0, 0, 0, Vector3.new(1, 1, 1))
-		scene:AddInstance(obs)
-	end
 
+    loc = Vector3.new(1500,0,1500)
+    scale = {x=0.1,y=0.1,z=0.1}
+    obs = gameObject.new("Observatory","Observatory","COL_Observatory",loc,dir,scale,0)
+	objectInstanceAPI.setBaseTransform(obs.id, Vector3.new(0, -50, 0), 0, 0, 0, Vector3.new(1, 1, 1))
+    scene:AddInstance(obs)	end
     currentScene = scene
 
 	local a = Vector3.new(0,0,0)
@@ -210,6 +211,23 @@ function InitScene1(goPath, npcPath, diff)
     FixRobots(scene)
 end
 
+
+function InitialiseCollisionTree()
+	if collisionsEnabled then
+	local currentGOs = scene:GetGameObjects()
+
+	for i = 1, scene:GetGameObjectCount() do
+		if currentGOs[i].collidable == true then
+			table.insert(collisionObjects,currentGOs[i].id)
+		end
+	end
+	printAPI.print("Number of collision objects " .. #collisionObjects .. '\n')
+	collisionAPI.createCollisionTree(collisionObjects,#collisionObjects)
+	end
+
+end
+
+
 function FixRobots(thisScene)
     local currentGOs = scene:GetGameObjects()
 
@@ -218,6 +236,7 @@ function FixRobots(thisScene)
             debugLPrint("Changing robot mech")
             currentGOs[i].hostileToPlayer = true
             currentGOs[i]:makeIdle()
+			currentGOs[i].collidable = false
             --current[i].setOrientation(Vector3.new(180, -90, 0))
             objectInstanceAPI.setBaseTransform(currentGOs[i].id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
             local anim = {"Section",0,0.3}
@@ -233,6 +252,16 @@ end
 
 function InitAirship()
 
+
+	titan = gameObject.new("titan","Titan","COL_Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	scene:AddInstance(titan)
+
+    local loc = {x=500,y=0,z=1500}
+    local scale = {x=2,y=2,z=2}
+    local dir = {x=0,y=1,z=0}
+    npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
+    loc = {x=500,y=100,z=1500}
+    npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
 end
 
 
@@ -241,6 +270,7 @@ function InitScene2(pathNPC, diff)
     local loc = {x=100,y=100,z=100}
     local scale = {x=5,y=5,z=5}
     local dir = {x=0,y=1,z=0}
+    Dungeon1Intr = gameObject.new("Dungeon1","The Observatory","COL_Dungeon1Interior",loc,dir,scale,0)
 
     local NPCData = LoadInstances(pathNPC, "npc",difficulty)
 	local startPos = Vector3.new(0,0,0)
@@ -255,8 +285,7 @@ function InitScene2(pathNPC, diff)
     scene2:AddInstance(Dungeon1Intr);
 
 	if(scene2:FindInstance("Dungeon1IntrDoor") == false) then
-		--Dungeon1IntrDoor = gameObject.new("Dungeon1IntrDoor","The Observatory","Dungeon1InteriorEntrance",loc,dir,scale,0)
-		--scene2:AddInstance(Dungeon1IntrDoor)
+
 	end
 
     --obsTech = gameObject.new("ObsTech","The Observatory","ObsTech",loc,dir,scale,0)
@@ -405,8 +434,8 @@ function Initialize()
 	printAPI.print('Initialising terrain...\n')
    
 	skybox = luaObjInstManager.addNewInstance("Skybox")
-	objectInstanceAPI.setTranslation(skybox, 0,0,0);
-	objectInstanceAPI.setScale(skybox, 10000,10000,10000)
+	objectInstanceAPI.setTranslation(skybox, wsTerrainSize / 2,0, wsTerrainSize / 2);
+	objectInstanceAPI.setScale(skybox, 3000,3000,3000)
 
     printAPI.print('Initialising camera...\n')
     --cameraAPI.setPosition(camera0,terrainSizeX / 2, 30, terrainSizeY / 2)
@@ -431,15 +460,28 @@ function Initialize()
 	cameraAPI.setYaw(camera0,0)
 	cameraAPI.setPitch(camera0,0)
 	changeMenu(0)
+
+	InitialiseCollisionTree()
 	
     printAPI.print('Initialization finished.\n')
 end
 
 function InitPlayer()
+
     printAPI.print('Initialising player...\n')
 	player0 = Player.new(camera0,100,100)
 
-    player0:setAABB(-0.5,0.5,-1.8,0,-0.5,0.5) 
+
+	player0:setPosition(Vector3.new(1000,0,1000))
+
+    gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
+    gun.collidable = false
+	bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
+	bullet.collidable = false
+    scene:AddInstance(gun)
+    scene:AddInstance(bullet)
+
+    player0:setAABB(-0.3,0.3,0,1.8,-0.3,0.3) 
 
 end
 
@@ -509,7 +551,7 @@ end
 
 function Update()
 	--printAPI.print("Update begun\n")
-
+	for step = 1, 1, 1 do
     engineAPI.BeginUpdate()
 	lastTime = time
     time = timeAPI.elapsedTimeMs()
@@ -666,7 +708,6 @@ function Update()
 
 
 
-
             if(player0.inDialogue == true and dInMenu == false) then
               debugLPrint("In dialogue...")
 
@@ -721,7 +762,6 @@ function Update()
 		    world:AddInstances(NPCData)
 		    world:SetupInstances()
 	    end
-
 
 
         if debug then

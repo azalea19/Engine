@@ -25,29 +25,20 @@ float CollisionAPI::RayOnObject(LuaRef ray, InstanceHandle instanceHandle)
 }
 
 
-void CollisionAPI::CreateCollisionTree(LuaRef objectInstanceHandles)
+void CollisionAPI::CreateCollisionTree(LuaRef objectInstanceHandles, int numberOfHandles)
 {
-  std::vector<InstanceHandle> handles;
   std::vector<ObjectInstance*> objects;
-
-  int length = objectInstanceHandles["length"];
-
-  for (int i = 0; i < length; i++)
-  {
-    handles.push_back(objectInstanceHandles[i + 1]);
-  }
 
   ObjectInstance* newObject;
   
-  for (int i = 0; i < handles.size(); i++)
+  for (int i = 0; i < numberOfHandles; i++)
   {
-    newObject = LuaObjectInstanceManager::GetInstance(handles[i]);
+    newObject = LuaObjectInstanceManager::GetInstance(objectInstanceHandles[i + 1]);
     objects.push_back(newObject);
   }
 
   delete collisionTree;
   collisionTree = new KDTree(objects, 32);
-
   //KD Tree created now have a bounding volume hierarchy of all objects that were passed in to the tree
 }
 

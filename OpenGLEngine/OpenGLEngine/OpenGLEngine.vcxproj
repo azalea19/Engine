@@ -202,10 +202,10 @@
     <None Include="Assets\Scripts\Load.lua" />
     <None Include="Assets\Scripts\Menu.lua" />
     <None Include="Assets\Scripts\NewGame.lua" />
-	<None Include="Assets\Scripts\Weapon.lua" />
+    <None Include="Assets\Scripts\ParticleEmitter.lua" />
+    <None Include="Assets\Scripts\Weapon.lua" />
     <None Include="Assets\Scripts\Player.lua" />
     <None Include="Assets\Scripts\npc.lua" />
-
     <None Include="Assets\Scripts\QuestManager.lua" />
     <None Include="Assets\Scripts\ReadAndWriteData.lua" />
     <None Include="Assets\Scripts\ReadAndWriteInstances.lua" />

@@ -127,8 +127,8 @@ function Player:update()
 			moveSpeed = moveSpeed * 0.5
 		end
 	end
-	local jumpHeight = 0.1
-	local gravitySpeed = 0.003
+	local jumpHeight = 0.2
+	local gravitySpeed = 0.012
 	local terminalVelocity = -10
 	local friction = 0.5
 	local minimumSpeed = 0.001
@@ -222,25 +222,27 @@ function Player:update()
 		if(newPos.y == desiredHeight) then
 			self.velocity.y = 0
 		end
-		cameraAPI.setPosition(camera0,newPos.x,newPos.y,newPos.z);  
-		self.position = newPos
+		self:setPosition(newPos)
       
         debugPrint("Resolving player collisions...\n")
 
 
-        if createCollisionTree then
+        if collisionsEnabled then
+				printAPI.print("checking collisions")
 		      if collisionAPI.box_collidingInTree(self:BBToWorld()) then
 			      self.velocity.y = 0
+				  printAPI.print("colliding")
 		      end
-
 
 		      if self.boundingBox ~= nil then
-			      self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
+				local oldPosition = self:getPosition()
+				local newPosition = islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle)
+				printAPI.print("\noldPosition (" .. oldPosition.x .. ", " .. oldPosition.y .. ", " .. oldPosition.z .. ")\n")
+				printAPI.print("newPosition (" .. newPosition.x .. ", " .. newPosition.y .. ", " .. newPosition.z .. ")\n")
+				self:setPosition(newPosition)
+			      --self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
 		      end
         end
-
-
-		--printAPI.print(self.position.y .. "\n")
 
 	end
     

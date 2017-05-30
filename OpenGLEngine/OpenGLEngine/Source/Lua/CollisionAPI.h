@@ -27,7 +27,7 @@ public:
 	/// <returns></returns>
 	static float RayOnObject(LuaRef ray, InstanceHandle object);
 
-  static void CreateCollisionTree(LuaRef objectInstanceHandles);
+  static void CreateCollisionTree(LuaRef objectInstanceHandles, int numberOfHandles);
 
   static bool Box_CollidingInTree(LuaRef box);
 

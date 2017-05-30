@@ -11,6 +11,7 @@
 #include <memory>
 #include "TriangleTree.h"
 #include "Skeleton.h"
+#include "MMath.h"
 
 RenderableObject::RenderableObject(string const& name, string const& filename)
   : m_VAO(0)
@@ -108,8 +109,11 @@ void RenderableObject::CreateBoundingBox()
 
     for (int i = 0; i < vertices.size(); i++)
     {
-      m_boundingBox.min = min(m_boundingBox.min, vertices[i]);
-      m_boundingBox.max = max(m_boundingBox.max, vertices[i]);
+      for (int j = 0; j < 3; j++)
+      {
+        m_boundingBox.min[j] = mMin(m_boundingBox.min[j], vertices[i][j]);
+        m_boundingBox.max[j] = mMax(m_boundingBox.max[j], vertices[i][j]);
+      }
     }
   }
   else
@@ -126,14 +130,13 @@ void RenderableObject::CreateBoundingBox()
       vec3 transformed = vec3(0);
       for (int j = 0; j < 4; j++)
         transformed += vec3(boneTransforms[boneIDs[i].boneIDs[j]] * vec4(vertices[i], 1)) * boneWeights[i].boneWeights[j];
-      m_boundingBox.min = min(m_boundingBox.min, transformed);
-      m_boundingBox.max = max(m_boundingBox.max, transformed);
+      for (int j = 0; j < 3; j++)
+      {
+        m_boundingBox.min[j] = mMin(m_boundingBox.min[j], transformed[j]);
+        m_boundingBox.max[j] = mMax(m_boundingBox.max[j], transformed[j]);
+      }
     }
   }
-
-
-
-
 }
 
 void RenderableObject::CreateTriangleFaces()

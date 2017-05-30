@@ -21,7 +21,8 @@ function gameObject.new(strID, newName, newModel, newPos, newDir, newScale, newA
 		displayNameOnLook = true,
 		visible = true,
 		objType = "GameObject",
-        defaultAnim = newAnim
+        defaultAnim = newAnim,
+		collidable = true
 		
 	}	
 	instance.upVector = {x=0,y=1,z=0}
@@ -77,9 +78,14 @@ function gameObject:setAnimation(n)
 
     
 end
-function gameObject:lookAt(npos)
+function gameObject:lookAt(npos, up)
+
+	if up == nil then
+		up = self.upVector
+	end
+
     debugPrint("Looking at...")
-	objectInstanceAPI.lookAt(self.id,self.upVector,npos)
+	objectInstanceAPI.lookAt(self.id,up,npos)
     debugPrint("Look at complete.\n")
 end
 

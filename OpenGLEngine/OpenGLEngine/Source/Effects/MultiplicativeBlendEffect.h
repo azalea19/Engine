@@ -25,7 +25,7 @@ public:
   /// <param name="inputTex0">The input tex0.</param>
   /// <param name="inputTex1">The input tex1.</param>
   /// <param name="outputTex">The output tex.</param>
-  void Apply(GLuint inputTex0, GLuint inputTex1, GLuint outputTex);
+  void Apply(GLuint inputTex0, GLuint inputTex1, GLuint inverseDepthBuffer, GLuint outputTex);
 
 private:
 

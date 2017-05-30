@@ -2,6 +2,7 @@
 
 
 uniform sampler2D inputTex0;
+
 uniform vec2 resolution = vec2(1.0 / 1280, 1.0 / 720);
 uniform int FXAA_SPAN;
 in vec2 TexCoord0;
@@ -10,6 +11,7 @@ layout (location = 0) out vec4 color;
 
 #define FXAA_REDUCE_MIN (1.0 / 128.0) 
 #define FXAA_REDUCE_MUL (1.0 / 8.0) 
+
 
 void main() 
 {
@@ -48,9 +50,11 @@ void main()
 
 	float lumaB = dot(rgbB, luma);
 
+
 	if ((lumaB < lumaMin) || (lumaB > lumaMax)) {
 		color = vec4(rgbA, 1.0);
 	} else {
 		color = vec4(rgbB, 1.0);
 	}
+
 }
