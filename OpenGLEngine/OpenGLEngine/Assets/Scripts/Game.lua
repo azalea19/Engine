@@ -628,6 +628,15 @@ function Update()
 	for i = 1, world:GetGameObjectCount() do
         --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
 		local a = currentGOs[i]:Update()
+		if(currentGOs[i]["currentHealth"] ~= nil) then
+			if(currentGOs[i]["justSeen"] == true && currentGOs[i]["hostileToPlayer"] == true) then
+				for k = 1, world:GetGameObjectCount() do
+					if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < Distance(currentGOs[i]["hearDist"])
+						currentGOs[k]:makeChasing()
+					end
+				end
+			end
+		end
 	end
     --printAPI.print("Updating player\n")
 
