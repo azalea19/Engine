@@ -237,8 +237,8 @@ function Player:update()
 		      if self.boundingBox ~= nil then
 				local oldPosition = self:getPosition()
 				local newPosition = islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle)
-				printAPI.print("\noldPosition (" .. oldPosition.x .. ", " .. oldPosition.y .. ", " .. oldPosition.z .. ")\n")
-				printAPI.print("newPosition (" .. newPosition.x .. ", " .. newPosition.y .. ", " .. newPosition.z .. ")\n")
+				--printAPI.print("\noldPosition (" .. oldPosition.x .. ", " .. oldPosition.y .. ", " .. oldPosition.z .. ")\n")
+				--printAPI.print("newPosition (" .. newPosition.x .. ", " .. newPosition.y .. ", " .. newPosition.z .. ")\n")
 				self:setPosition(newPosition)
 			      --self:setPosition( islandCollisionAPI.resolve(self.position,self:BBToWorld(),context.handle))
 		      end

@@ -562,7 +562,6 @@ function Update()
 		end
 	end
 
-
 	if(inputManagerAPI.isKeyPressed(Menu_Input)) then
         
 		if(inMenu == false) then
@@ -598,27 +597,6 @@ function Update()
         player0.inDialogue = true
         dialogueText = messageBoxStr
         dInMenu = true
-    end
-	
-	if(inputManagerAPI.isKeyPressed(Menu_Input)) then
-        if(inMenu == false) then
-            inMenu = true
-			preCameraPos = player0:getPosition()
-			--printVec3(preCameraPos)
-			preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
-			preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
-			
-			cameraAPI.setPosition(camera0,10,-1,30)
-			cameraAPI.setYaw(camera0,0)
-			cameraAPI.setPitch(camera0,0)
-			changeMenu(0)
-			printAPI.print("Entering Menu\n")
-        else
-            inMenu = false
-			cameraAPI.setPosition(camera0,preCameraPos.x,preCameraPos.y,preCameraPos.z)
-			cameraAPI.setYaw(camera0,preCameraYaw)
-			cameraAPI.setPitch(camera0,preCameraPitch)
-        end
     end
 	
 	if(inMenu) then
