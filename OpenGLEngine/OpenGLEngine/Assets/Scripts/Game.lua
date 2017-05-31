@@ -165,8 +165,8 @@ function InitScene1(goPath, npcPath, diff)
 	end
 
 	if(scene:FindInstance("COLtitan") == false) then
-		titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
-	    titan.setBaseTransform(bob.id, Vector3.new(0, -25, 0), 0, 0, 0, Vector3.new(1, 1, 1))
+		titan = gameObject.new("titan","Titan","COL_Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
+	    objectInstanceAPI.setBaseTransform(titan.id, Vector3.new(0, -25, 0), 0, 0, 0, Vector3.new(1, 1, 1))
 		scene:AddInstance(titan)
 		local loc = {x=500,y=0,z=1500}
 		local scale = {x=2,y=2,z=2}
@@ -283,7 +283,7 @@ function InitScene2(pathNPC, diff)
 	scene2 = Scene.new("Level2", startPos, startDir)
 	
 	if(scene2:FindInstance("COLDungeon1") == false) then
-	    --Dungeon1Intr = gameObject.new("COLDungeon1","The Observatory","Dungeon1Interior",loc,dir,scale,0)
+
 	end
 	
     scene2:AddInstances(NPCData);
@@ -720,75 +720,76 @@ function Update()
 		    saveAllToCurrentSave()
 	    end
 
-	    if inputManagerAPI.isKeyPressed(Quickload_Input) then
-		    local currentScene = world:GetScene()
+			if inputManagerAPI.isKeyPressed(Quickload_Input) then
+			    local currentScene = world:GetScene()
 
-		    currentScene:RemoveInstances()
+			    currentScene:RemoveInstances()
 
-		    player0["position"]["x"] = 500
-		    player0["position"]["z"] = 500
-		    player0["position"]["y"] = GetHeightAtPoint(500 , 500)
-		    cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
+			    player0["position"]["x"] = 500
+			    player0["position"]["z"] = 500
+			    player0["position"]["y"] = GetHeightAtPoint(500 , 500)
+			    cameraAPI.setPosition(camera0,player0["position"]["x"],player0["position"]["y"],player0["position"]["z"]); 
 
-		    printAPI.print('Initialising objects...\n')
-		    local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject",difficulty)
-		    local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc",difficulty)
+			    printAPI.print('Initialising objects...\n')
+			    local GOData = LoadInstances("../SaveData/GO_Save.csv", "gameObject",difficulty)
+			    local NPCData = LoadInstances("../SaveData/NPC_Save.csv", "npc",difficulty)
 
-		    loadWeapons("../SaveData/WEAPON_Data.csv")
-		    loadPlayer("../SaveData/PLAYER_Data.csv", player0)
-		    questManager = QuestManager.new()
-		    LoadQuests("../SaveData/QUE_Data.csv")
-		    LoadTopics("../SaveData/DIA_Data.csv")
+			    loadWeapons("../SaveData/WEAPON_Data.csv")
+			    loadPlayer("../SaveData/PLAYER_Data.csv", player0)
+			    questManager = QuestManager.new()
+			    LoadQuests("../SaveData/QUE_Data.csv")
+			    LoadTopics("../SaveData/DIA_Data.csv")
 
-		    world:AddInstances(GOData)
-		    world:AddInstances(NPCData)
-		    world:SetupInstances()
-	    end
+			    world:AddInstances(GOData)
+			    world:AddInstances(NPCData)
+			    world:SetupInstances()
+			end
 
 
-        if debug then
-            if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
-                printAPI.print("Force quitting.\n")
-                os.exit()
-	        end
-            if inputManagerAPI.isKeyPressed(TestInput1) then
-	        end
+			if debug then
+			    if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
+			        printAPI.print("Force quitting.\n")
+			        os.exit()
+			    end
+			    if inputManagerAPI.isKeyPressed(TestInput1) then
+			    end
     
-            if inputManagerAPI.isKeyPressed(TestInput2) then
-	        end
-		
-		    if inputManagerAPI.isKeyPressed(TestInput3) then
-		    end
+			    if inputManagerAPI.isKeyPressed(TestInput2) then
+			    end
+			
+			    if inputManagerAPI.isKeyPressed(TestInput3) then
+			    end
     
-            if inputManagerAPI.isKeyPressed(TestInput3) then
-	        end
+			    if inputManagerAPI.isKeyPressed(TestInput3) then
+			    end
     
-            -- switch whether debug detail printing is on or off
-            if inputManagerAPI.isKeyPressed(TestInput4) then
-                if debugdetail == true then
-                    debugdetail = false
-                else
-                    debugdetail = true
-                end
-	        end
-        end
-        --local currentGOs = world:GetGameObjects()
-        --for i = 1, world:GetGameObjectCount() do
-        --    local a = currentGOs[i]:Update()
-        --    if(currentGOs[i]["currentHealth"] ~= nil) then
-        --        if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
-        --            for k = 1, world:GetGameObjectCount() do
-        --                if(currentGOs[k]["currentHealth"] ~= nil and currentGOs[k].hostileToPlayer) then
-        --                    if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
-        --                        currentGOs[k]:makeChasing()
-        --                    end
-        --                end
-        --            end
-        --        end
-        --    end
-        --end
-        player0:update();
-        AdjustGunAndBullet()
+			    -- switch whether debug detail printing is on or off
+			    if inputManagerAPI.isKeyPressed(TestInput4) then
+			        if debugdetail == true then
+			            debugdetail = false
+			        else
+			            debugdetail = true
+			        end
+			    end
+			end
+			local currentGOs = world:GetGameObjects()
+			for i = 1, world:GetGameObjectCount() do
+			    local a = currentGOs[i]:Update()
+			    if(currentGOs[i]["currentHealth"] ~= nil) then
+			        if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
+			            for k = 1, world:GetGameObjectCount() do
+			                if(currentGOs[k]["currentHealth"] ~= nil and currentGOs[k].hostileToPlayer) then
+			                    if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
+			                        currentGOs[k]:makeChasing()
+			                    end
+			                end
+			            end
+			        end
+			    end
+			end
+			player0:update();
+			AdjustGunAndBullet()
+		end
 	end
 	engineAPI.EndUpdate();
 end
