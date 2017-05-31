@@ -45,7 +45,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
     instance.seenPlayer = false
     instance.alertedToPlayer = false
     instance.state = nil -- Function to call for to the players state
-    instance.moveSpeed = 1.5
+    instance.moveSpeed = 2
 	instance.objType = "NPC"
 	instance.hearDist = 10
 	instance.lookAngleDeg = 45
@@ -102,7 +102,7 @@ function chasing(anpc)
 
     --printAPI.print(anpc.currentHealth.."\n")
 
-	if player0 ~= nil then
+	if player0 ~= nil and player0.inDialogue ~= true then
 
         if(anpc.weapon ~= nil) then
             if(Distance(anpc:getPosition(),player0:getPosition()) < anpc.weapon.range) then
@@ -128,6 +128,9 @@ function chasing(anpc)
 end
 function npc:takeDamage(mydmg)
     --debugLPrint(self.currentHealth .. " hp remains\n")
+
+    self.seenPlayer = true
+    self.justSeen = true
 
     if (self.hurtAnim~= nil) then
     	debugLPrint("NPC playing hurt anim ".."\n")
@@ -256,7 +259,7 @@ function npc:readTopics()
 			end
 			length = length + 1
             printAPI.print(topicName)
-			str[length] = topicName
+			str[length] = topic
 
 		end
 		return str,length

@@ -41,32 +41,46 @@ function QuestManager:check(action,target,extraInfo)
 
                 end
 
-                if(thisStage.name == "ObsGetQuest") then
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "ObsGetTech") then
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "ObsReturn") then
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "AirGetQuest") then
-
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "AirKillBoss") then
-                            saveAllToCurrentSave()
-                        end
-				
+               
 				if(action==thisStage.action and target.stringID == thisStage.target and extraInfo == thisStage.extraInfo) then
+
+                     if(thisStage.name == "ObsGetQuest") then
+                        saveAllToCurrentSave()
+                    end
+                    if(thisStage.name == "ObsGetTech") then
+                        saveAllToCurrentSave()
+                        ShowMessageBox("Well done - you found some technology for Bob. If you bring it back to him he should restore your eyes.")
+
+                    end
+                    if(thisStage.name == "ObsReturn") then
+                        saveAllToCurrentSave()
+                    end
+                    if(thisStage.name == "AirGetQuest") then
+
+                        saveAllToCurrentSave()
+                    end
+                    if(thisStage.name == "AirKillBoss") then
+                        saveAllToCurrentSave()
+                        ShowMessageBox("Well done - you killed the raider boss. Return to Bob for your reward.")
+
+                    end
+
+                    if(thisStage.name == "AirReturn") then
+                       ShowMessageBox("Congratulations! You have restored your organs and completed the game. You are free to keep playing.")
+
+                    end
+				
+
+
                 	printAPI.print("You completed quest stage: " .. thisStage.name .. " But it still may be already complete.\n")
+                    player0.currentHealth = player0.maxHealth
 
 					if(thisStage.isComplete == false) then
 						self.quests[i].stages[a].isComplete = true
 						printAPI.print("You completed quest stage: " .. thisStage.name .. "\n")
 
                         if(thisStage.name == "ObsGetTech" or thisStage.id == "AirKillBoss") then
-						    ShowMessageBox("You completed quest stage " .. thisStage.name .. "\n")
+						    --ShowMessageBox("You completed quest stage " .. thisStage.name .. "\n")
                         end
 
 
@@ -138,9 +152,9 @@ function Quest.new(name,questStages, iEndStage)
 end
 
 function Quest:getStage(stageName)
-    for i=0,#instance.stages do
-        if (instance.stages[i].name == stageName) then
-            return instance.stages[i]
+    for i=1,#self.stages do
+        if (self.stages[i].name == stageName) then
+            return self.stages[i]
         end
     end
 end

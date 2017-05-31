@@ -1,4 +1,5 @@
-TalkToBob,6,6
+TalkToBob,7,7
+Greeting,1,NPC01,Greeting,0
 ObsGetQuest,1,NPC01,Quest1,0
 ObsGetTech,2,ObsTech,none,0
 ObsReturn,1,NPC01,Quest1Return,0

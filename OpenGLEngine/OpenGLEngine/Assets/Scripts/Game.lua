@@ -40,7 +40,7 @@ gameObjects = {}
 world = {}
 weaponList = {}
 debug = true
-debugdetail = false
+debugdetail = trfalseue
 playerInScene = 1
 
 time = 0
@@ -119,6 +119,7 @@ function InitScene1(goPath, npcPath, diff)
 		loc = Vector3.new(1500,0,1500)
 		scale = {x=0.1,y=0.1,z=0.1}
 		obs = gameObject.new("Observatory","Observatory","Observatory",loc,dir,scale,0)
+		objectInstanceAPI.setBaseTransform(obs.id, Vector3.new(0, -50, 0), 0, 0, 0, Vector3.new(1, 1, 1))
 		scene:AddInstance(obs)
 	end
 
@@ -140,7 +141,7 @@ function InitScene1(goPath, npcPath, diff)
 		NPC01.defaultAnim = anim2
 		NPC01.hurtAnim = {"Section",0,5}
 		NPC01:setAnimation(anim2)
-		objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+		objectInstanceAPI.setBaseTransform(NPC01.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(0.1, 0.1, 0.1))
 		local upVector = {x=0,y=1,z=0}
 		NPC01.upVector = upVector
 		NPC01:makeIdle()
@@ -152,8 +153,7 @@ function InitScene1(goPath, npcPath, diff)
 		bob.defaultAnim = anim2
 		bob.hurtAnim = {"Section",0,5}
 		bob:setAnimation(anim2)
-        bob:setScale(scale)
-		objectInstanceAPI.setBaseTransform(bob.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+		objectInstanceAPI.setBaseTransform(bob.id, Vector3.new(0, 0.1, 0), 180, -90, 0, Vector3.new(0.1, 0.1, 0.1))
 		local upVector = {x=0,y=1,z=0}
 		bob.upVector = upVector
 		bob:makeIdle()
@@ -337,16 +337,17 @@ function InitQuests(quePath)
     quest2.questEvent = true
     quest1return.questEvent = true
     quest2return.questEvent = true
+    greeting.questEvent = true
 
     
 
     diag:addTopic(greeting)
     diag:addTopic(quest1)
-    --diag:addTopic(quest2)
-    --diag:addTopic(quest1return)
-    --diag:addTopic(quest2return)
+    diag:addTopic(quest2)
+    diag:addTopic(quest1return)
+    diag:addTopic(quest2return)
     diag:addTopic(teleport1)
-    --diag:addTopic(teleport2)
+    diag:addTopic(teleport2)
 
 
 	local npc_01 = scene:FindInstance("NPC01")
@@ -454,7 +455,7 @@ function InitWeapon()
     scene:AddInstance(bullet)
     objectInstanceAPI.setBaseTransform(bullet.id, Vector3.new(0, 0, 0), -90, 90, 0, Vector3.new(1, 1, 1))
 	bullet.displayNameOnLook = false
-    objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 0, 0, 0, Vector3.new(1, 1, 1))
+    objectInstanceAPI.setBaseTransform(gun.id, Vector3.new(0, 0, 0), 90, 0, 0, Vector3.new(1, 1, 1))
 	gun.displayNameOnLook = false
     
 end
@@ -497,7 +498,7 @@ function StartDialogueTopic(playr,topicn)
                 debugLPrint("Closing dialogue - teleporting.\n")
 
                 player0.inDialogue = false
-                player0.position = Vector3.new(900,1100,0)
+                player0.position = Vector3.new(900,0,1100)
             end
 
         else
@@ -518,6 +519,13 @@ function Update()
         if inputManagerAPI.isMousePressedLeft() then
             run = false
         end
+    end
+
+    if(awaitingMessageBox and player0.inDialogue == false) then
+        awaitingMessageBox = false
+        player0.inDialogue = true
+        dialogueText = messageBoxStr
+        dInMenu = true
     end
 	
 	if(inputManagerAPI.isKeyPressed(Menu_Input)) then
@@ -857,7 +865,7 @@ function FireBullet()
     local pos = mmath.vec3_ScalarMultiply(cameraAPI.forward(camera0,context.handle),2,context.handle)
     local sum = mmath.vec3_Sum(playerPos, pos,context.handle)
     bullet:setPosition(sum)
-    bullet:lookAt(pos)
+    bullet:lookAt(sum)
     soundAPI.playSound("Gunshot",1)
 
 
@@ -883,50 +891,70 @@ function StartDialogue(npc)
             local topics
             local count
             topics, count = npc:readTopics()
-
             for i=1,count do
-                
+                if(topics[i]~= nil) then
+                        npc.dialogue:getTopic("Quest1").active = false
+                        npc.dialogue:getTopic("Quest1Return").active = false
+                        npc.dialogue:getTopic("Quest2").active = false
+                        npc.dialogue:getTopic("Quest2Return").active = false
+                    -- enable quest1 if you have greeted bob
+                    if(questManager.quests[1]:getStage("Greeting").isComplete) then
+                        debugLPrint("Activating Quest1 \n")
+                         npc.dialogue:getTopic("Quest1").active = true
 
-                --[[
-                
-                        if(thisStage.name == "ObsGetQuest") then
-                            world:FindObject("NPC01").dialogue:addTopic(teleport1)
-                            world:FindObject("NPC01").dialogue:deleteTopic(quest1.id)
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "ObsGetTech") then
-                            world:FindObject("NPC01").dialogue:addTopic(quest1return)
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "ObsReturn") then
-                            world:FindObject("NPC01").dialogue:addTopic(quest2)
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "AirGetQuest") then
-                            world:FindObject("NPC01").dialogue:addTopic(teleport2)
-                            world:FindObject("NPC01").dialogue:deleteTopic(quest2.id)
+                         if(questManager.quests[1]:getStage("ObsGetQuest").isComplete) then
+                             debugLPrint("Disabling Quest1 \n")
+                             npc.dialogue:getTopic("Quest1").active = false
 
-                            saveAllToCurrentSave()
-                        end
-                        if(thisStage.name == "AirKillBoss") then
-                            world:FindObject("NPC01").dialogue:addTopic(quest2return)
-                            saveAllToCurrentSave()
-                        end
-                ]]
+                            -- enable return Quest 1 once quest done
+                            if(questManager.quests[1]:getStage("ObsGetTech").isComplete) then
+                                debugLPrint("Activating Quest1Return \n")
+                                npc.dialogue:getTopic("Quest1Return").active = true
 
-                topics[i].active = true
+                                if(questManager.quests[1]:getStage("ObsReturn").isComplete) then
+                                    debugLPrint("Removing Quest1Return \n")
+                                    npc.dialogue:getTopic("Quest1Return").active = false
 
-                if(questManager.quests[1].getStage("ObsGetQuest").isComplete) then
-                    quests[1].getTopic("Quest1").active = false
-                    --world:FindObject("NPC01").dialogue:addTopic(teleport1)
-                    --world:FindObject("NPC01").dialogue:deleteTopic(quest1.id)
-                end
+                                    debugLPrint("Adding Quest2\n")
+                                    npc.dialogue:getTopic("Quest2").active = true
 
-            printAPI.print(topics[i])
-                 if(topics[i].active) then
-                    str = str .. i ..". ".. topics[i] .. " "
-                else
-                    printAPI.print("Nil topic")
+                                    -- disable quest2 once got
+                                    if(questManager.quests[1]:getStage("AirGetQuest").isComplete) then
+                                        debugLPrint("Disabling Quest2 \n")
+                                        npc.dialogue:getTopic("Quest2").active = false
+                                         -- enable return Quest 2 once quest done
+
+                                        if(questManager.quests[1]:getStage("AirKillBoss").isComplete) then
+                                            debugLPrint("Activating Quest2Return \n")
+                                            npc.dialogue:getTopic("Quest2Return").active = true
+
+                                            if(questManager.quests[1]:getStage("AirReturn").isComplete) then
+                                                debugLPrint("Disabling Quest2Return \n")
+                                                npc.dialogue:getTopic("Quest2Return").active = false
+                                            end
+
+                                        else
+                                            debugLPrint("Disabling Quest2Return \n")
+                                            npc.dialogue:getTopic("Quest2Return").active = false
+
+                                        end
+                                    end
+                                end
+                             end
+                         end
+                    else
+                        debugLPrint("Disabling Quest1 \n")
+                        npc.dialogue:getTopic("Quest1").active = false
+                    end
+
+                    
+
+                    printAPI.print("TOPIC INFO" ..topics[i].name .. topics[i].id)
+                     if(topics[i].active) then
+                        str = str .. i ..". ".. topics[i].name .. " "
+                    else
+                        printAPI.print("Nil topic")
+                    end
                 end
             end
 
@@ -1028,7 +1056,7 @@ function Render()
                 end
 
 				if(player0.inDialogue) then 
-					display2DAPI.drawText(15,font1path,dialogueText,{x=200,y=300},black,0,screenWidth,screenHeight)
+					display2DAPI.drawText(15,font1path,dialogueText,{x=200,y=200},black,0,screenWidth,screenHeight)
 				end
 
                 hpDisplay = "Health: ".. player0.currentHealth .. " / " .. player0.maxHealth
@@ -1044,9 +1072,9 @@ function Render()
 end
 
 function ShowMessageBox(string)
-    player0.inDialogue = true
-    dialogueText = string
-    dInMenu = true
+    awaitingMessageBox = true
+    messageBoxStr = string
+    
 end
 
 local status, err = pcall(Run)

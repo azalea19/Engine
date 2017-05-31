@@ -50,7 +50,7 @@ function initMenu()
 	-- Exit button, 0
     local newPos = {x=20,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ExitButton = gameObject.new("ExitButton", "ExitButton", "btnBack", newPos, newDir, newScale, newAnim)
+    ExitButton = gameObject.new("ExitButton", "ExitButton", "btnQuit", newPos, newDir, newScale, newAnim)
 	ExitButton.option = quitGame -- Exit game
 	ExitButton.active = true
 	-- Back Button, 1/2
@@ -80,19 +80,19 @@ function initMenu()
 	-- Button Easy, 4
     local newPos = {x=10,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ButtonEasy = gameObject.new("ButtonEasy", "ButtonEasy", "whiteCube", newPos, newDir, newScale, newAnim)
+    ButtonEasy = gameObject.new("ButtonEasy", "ButtonEasy", "btnEasy", newPos, newDir, newScale, newAnim)
 	ButtonEasy.option = buttonEasy -- set selected to 1
 	ButtonEasy.active = false
 	-- Button Medium, 4
     local newPos = {x=15,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ButtonMedium = gameObject.new("ButtonMedium", "ButtonMedium", "whiteCube", newPos, newDir, newScale, newAnim)
+    ButtonMedium = gameObject.new("ButtonMedium", "ButtonMedium", "btnMedium", newPos, newDir, newScale, newAnim)
 	ButtonMedium.option = buttonMedium -- set selected to 2
 	ButtonMedium.active = false
 	-- Button Hard, 4
     local newPos = {x=20,y=-1,z=12}
     local newDir = {x=0,y=1,z=0}
-    ButtonHard = gameObject.new("ButtonHard", "ButtonHard", "whiteCube", newPos, newDir, newScale, newAnim)
+    ButtonHard = gameObject.new("ButtonHard", "ButtonHard", "btnHard", newPos, newDir, newScale, newAnim)
 	ButtonHard.option = buttonHard -- set selected to 3
 	ButtonHard.active = false
 	-- Return button, 0 during game

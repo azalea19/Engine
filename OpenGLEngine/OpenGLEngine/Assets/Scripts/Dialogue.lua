@@ -18,7 +18,8 @@ end
 function Dialogue:getTopic(topicid)
 
 for i=1,#self.topics do
-        if self.topics[i].id == topicId then
+        if self.topics[i].id == topicid then
+            debugLPrint("Got topic "..topicid.."\n")
             return self.topics[i]
         end
     end
