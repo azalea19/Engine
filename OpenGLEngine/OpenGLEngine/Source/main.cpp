@@ -10,5 +10,5 @@ int main(int argc, char **argv)
   LuaManager::Initialize();
   LuaManager::GetInstance().CreateContext("../Assets/Scripts/Game.lua");
 	std::cout << "Main has finished execution.\n" << std::endl;
-	getchar();
+	//getchar();
 }
