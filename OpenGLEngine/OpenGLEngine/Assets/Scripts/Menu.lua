@@ -19,7 +19,7 @@ inGame = false
 function initMenu()
 	-- Background
     local newPos = {x=10,y=-1,z=0}
-    local newScaleBG = {x=500,y=500,z=0.01}
+    local newScaleBG = {x=60,y=60,z=0.01}
     local newDir = {x=0,y=1,z=0}
 	Background = gameObject.new("Background", "Background", "mainMenu", newPos, newDir, newScaleBG, newAnim)
 	-- Start New, 0
