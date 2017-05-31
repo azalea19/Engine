@@ -533,14 +533,14 @@ function StartDialogueTopic(playr,topicn)
                 debugLPrint("Closing dialogue - teleporting.\n")
 
                 player0.inDialogue = false
-                player0.position = Vector3.new(1200,0,1200)
+                player0.position = Vector3.new(1300,0,1300)
             end
             if(topic.id == "Teleport2") then
                 dInMenu = false
                 debugLPrint("Closing dialogue - teleporting.\n")
 
                 player0.inDialogue = false
-                player0.position = Vector3.new(900,0,1100)
+                player0.position = Vector3.new(1000,0,1200)
             end
 
         else
