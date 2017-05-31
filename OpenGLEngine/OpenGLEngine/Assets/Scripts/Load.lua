@@ -58,6 +58,8 @@ function LoadAssets()
     modelLibraryAPI.addModel("btnContinue","../Assets/Models/UI/continue.obj",false)
     modelLibraryAPI.addModel("btnQuit","../Assets/Models/UI/quit.obj",false)
     modelLibraryAPI.addModel("btnEasy","../Assets/Models/UI/easy.obj",false)
+    modelLibraryAPI.addModel("mainMenu","../Assets/Models/UI/scrapmetalmenu.obj",false)
+
     modelLibraryAPI.addModel("btnMedium","../Assets/Models/UI/med.obj",false)
     modelLibraryAPI.addModel("btnHard","../Assets/Models/UI/hard.obj",false)
     modelLibraryAPI.addModel("whiteCube","../Assets/Models/UI/whitecube.obj",false)

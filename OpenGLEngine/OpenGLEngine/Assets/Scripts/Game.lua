@@ -563,6 +563,7 @@ function Update()
 	end
 
 	if(inputManagerAPI.isKeyPressed(Menu_Input)) then
+        
 		if(inMenu == false) then
 		    inMenu = true
 			preCameraPos = player0:getPosition()
