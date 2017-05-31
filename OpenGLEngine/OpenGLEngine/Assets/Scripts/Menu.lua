@@ -283,6 +283,7 @@ function newGame(folder, difficulty)
     printAPI.print("10\n")
     gun = gameObject.new("gun","Pistol","Pistol",player0.position,Vector3.new(0,0,0),Vector3.new(0.01,0.01,0.01),0)
     bullet = gameObject.new("bullet","Bullet","Bullet",Vector3.new(0,0,0),Vector3.new(0,0,0),Vector3.new(0.05,0.05,0.05),0)
+	InitialiseCollisionTree()
 end
 
 function newGameButton()

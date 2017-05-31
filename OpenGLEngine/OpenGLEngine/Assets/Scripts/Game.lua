@@ -41,6 +41,7 @@ OPEN_GL = 0
 
 collisionObjects = {}
 collisionsEnabled = true
+collisionTreeCreated = false
 
 gameObjects = {}
 world = {}
@@ -121,21 +122,22 @@ function InitScene1(goPath, npcPath, diff)
 
 	if(scene:FindInstance("Dungeon1Door") == false) then
 
-    loc = Vector3.new(1500,0,1500)
-    scale = {x=0.1,y=0.1,z=0.1}
-    obs = gameObject.new("Observatory","Observatory","COL_Observatory",loc,dir,scale,0)
-	objectInstanceAPI.setBaseTransform(obs.id, Vector3.new(0, -50, 0), 0, 0, 0, Vector3.new(1, 1, 1))
-    scene:AddInstance(obs)	end
-    currentScene = scene
+		loc = Vector3.new(1500,0,1500)
+		scale = {x=0.1,y=0.1,z=0.1}
+		obs = gameObject.new("Observatory","Observatory","COL_Observatory",loc,dir,scale,0)
+		scene:AddInstance(obs)
+	end
+
+	currentScene = scene
 
 	local a = Vector3.new(0,0,0)
 	local b = Vector3.new(1,1,1)
 
-    local loc = {x=1100,y=0,z=1100}
-    local scale = {x=0.1,y=0.1,z=0.1}
-    local dir = {x=0,y=1,z=0}
+	local loc = {x=1100,y=0,z=1100}
+	local scale = {x=0.1,y=0.1,z=0.1}
+	local dir = {x=0,y=1,z=0}
 
-    local emptyVec = mmath.vec3_CreateEmpty(context.handle)
+	local emptyVec = mmath.vec3_CreateEmpty(context.handle)
 
 	if(scene:FindInstance("NPC01") == false) then
 		NPC01 = npc.new("NPC01","Bob the Human","Bob",loc,dir,scale,0,100,100)
@@ -150,7 +152,7 @@ function InitScene1(goPath, npcPath, diff)
 		NPC01:makeIdle()
 		scene:AddInstance(NPC01) 
 	else
-        local bob = scene:FindInstance("NPC01")
+	    local bob = scene:FindInstance("NPC01")
 		local anim = {"Section",0,5}
 		local anim2 = {"Section",0,10}
 		bob.defaultAnim = anim2
@@ -160,73 +162,73 @@ function InitScene1(goPath, npcPath, diff)
 		local upVector = {x=0,y=1,z=0}
 		bob.upVector = upVector
 		bob:makeIdle()
-    end
-	
+	end
+
 	if(scene:FindInstance("COLtitan") == false) then
 		titan = gameObject.new("COLtitan","Titan","Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
-        titan.setBaseTransform(bob.id, Vector3.new(0, -25, 0), 0, 0, 0, Vector3.new(1, 1, 1))
+	    titan.setBaseTransform(bob.id, Vector3.new(0, -25, 0), 0, 0, 0, Vector3.new(1, 1, 1))
 		scene:AddInstance(titan)
 		local loc = {x=500,y=0,z=1500}
 		local scale = {x=2,y=2,z=2}
 		local dir = {x=0,y=1,z=0}
 		local spid1 = npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
-        scene:AddInstance(spid1)
+	    scene:AddInstance(spid1)
 		loc = {x=500,y=100,z=1500}
 		local spid2 = npc.new("W1","Robot Mech","Warrior",loc,dir,scale,0,100,100)
-        scene:AddInstance(spid2)
+	    scene:AddInstance(spid2)
 	end
 	
-    
-    local loc = {x=900,y=0,z=900}
-    local scale = {x=25,y=25,z=25}
-    local dir = {x=0,y=1,z=0}
+	
+	local loc = {x=900,y=0,z=900}
+	local scale = {x=25,y=25,z=25}
+	local dir = {x=0,y=1,z=0}
 
-    if(scene:FindInstance("Boss") == false) then
+	if(scene:FindInstance("Boss") == false) then
 
-        boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
-        debugLPrint("Changing robot mech")
-        boss.hostileToPlayer = true
-        boss:makeIdle()
-        objectInstanceAPI.setBaseTransform(boss.id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-        local anim = {"Section",0,1}
-        local anim2 = {"Section",1,2}
-        boss.defaultAnim = anim2
-        boss:setAnimation(anim2)
+	    boss = npc.new("Boss","Boss","Warrior",loc,dir,scale,0,200,200)
+	    debugLPrint("Changing robot mech")
+	    boss.hostileToPlayer = true
+	    boss:makeIdle()
+	    objectInstanceAPI.setBaseTransform(boss.id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+	    local anim = {"Section",0,1}
+	    local anim2 = {"Section",1,2}
+	    boss.defaultAnim = anim2
+	    boss:setAnimation(anim2)
 
-        boss.hurtAnim = {"Section",0,5}
-        scene:AddInstance(boss)
-    else
-        local oldBoss = scene:FindInstance("Boss")
-        debugLPrint("Changing robot mech")
-        oldBoss.hostileToPlayer = true
-        oldBoss:makeIdle()
-        objectInstanceAPI.setBaseTransform(oldBoss.id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
-        local anim = {"Section",0,1}
-        local anim2 = {"Section",1,2}
-        oldBoss.defaultAnim = anim2
-        oldBoss:setAnimation(anim2)
+	    boss.hurtAnim = {"Section",0,5}
+	    scene:AddInstance(boss)
+	else
+	    local oldBoss = scene:FindInstance("Boss")
+	    debugLPrint("Changing robot mech")
+	    oldBoss.hostileToPlayer = true
+	    oldBoss:makeIdle()
+	    objectInstanceAPI.setBaseTransform(oldBoss.id, Vector3.new(0, 0, 0), 180, -90, 0, Vector3.new(1, 1, 1))
+	    local anim = {"Section",0,1}
+	    local anim2 = {"Section",1,2}
+	    oldBoss.defaultAnim = anim2
+	    oldBoss:setAnimation(anim2)
 
-        oldBoss.hurtAnim = {"Section",0,5}
-        scene:AddInstance(boss)
-    end
-    
-    FixRobots(scene)
+	    oldBoss.hurtAnim = {"Section",0,5}
+	    scene:AddInstance(boss)
+	end
+	
+	FixRobots(scene)
 end
 
 
 function InitialiseCollisionTree()
 	if collisionsEnabled then
-	local currentGOs = scene:GetGameObjects()
+		local currentGOs = scene:GetGameObjects()
 
-	for i = 1, scene:GetGameObjectCount() do
-		if currentGOs[i].collidable == true then
-			table.insert(collisionObjects,currentGOs[i].id)
+		for i = 1, scene:GetGameObjectCount() do
+			if currentGOs[i].collidable == true then
+				table.insert(collisionObjects,currentGOs[i].id)
+			end
 		end
+		printAPI.print("Number of collision objects " .. #collisionObjects .. '\n')
+		collisionAPI.createCollisionTree(collisionObjects,#collisionObjects)
 	end
-	printAPI.print("Number of collision objects " .. #collisionObjects .. '\n')
-	collisionAPI.createCollisionTree(collisionObjects,#collisionObjects)
-	end
-
+	collisionTreeCreated = true
 end
 
 
@@ -429,7 +431,7 @@ function Initialize()
     scale = {x=10,y=10,z=10}
     scene = Scene.new("test", startPos, startDir)
     camera0 = cameraAPI.addNewInstance()
---	world = World.new(player0)
+	--world = World.new(player0)
 --    newGame("../SaveData/", 1)
 --printAPI.print("2\n")
 
@@ -463,8 +465,6 @@ function Initialize()
 	cameraAPI.setYaw(camera0,0)
 	cameraAPI.setPitch(camera0,0)
 	changeMenu(0)
-
-	InitialiseCollisionTree()
 
 	--fountainEmitter = ParticleEmitter.new(WaterParticle, 5, Vector3.new(1000, 200, 1000), 0)
 	
@@ -557,14 +557,42 @@ end
 function Update()
 	--printAPI.print("Update begun\n")
 	for step = 1, 1, 1 do
-    engineAPI.BeginUpdate()
-	lastTime = time
-    time = timeAPI.elapsedTimeMs()
-	deltaTime = time - lastTime
+		engineAPI.BeginUpdate()
+		lastTime = time
+		time = timeAPI.elapsedTimeMs()
+		deltaTime = time - lastTime
 	
-    if(quitting) then
-        if inputManagerAPI.isMousePressedLeft() then
-            run = false
+		if(quitting) then
+			if inputManagerAPI.isMousePressedLeft() then
+				run = false
+			end
+		end
+		if(inputManagerAPI.isKeyPressed(Menu_Input)) then
+		    if(inMenu == false) then
+		        inMenu = true
+				preCameraPos = player0:getPosition()
+				--printVec3(preCameraPos)
+				preCameraYaw = cameraAPI.getYaw(camera0,context.handle)
+				preCameraPitch = cameraAPI.getPitch(camera0,context.handle)
+				
+				cameraAPI.setPosition(camera0,10,-1,30)
+				cameraAPI.setYaw(camera0,0)
+				cameraAPI.setPitch(camera0,0)
+				changeMenu(0)
+		    else
+		        inMenu = false
+				cameraAPI.setPosition(camera0,preCameraPos.x,preCameraPos.y,preCameraPos.z)
+				cameraAPI.setYaw(camera0,preCameraYaw)
+				cameraAPI.setPitch(camera0,preCameraPitch)
+		    end
+		end
+		if(inMenu) then
+		else
+			local quitIn = inputManagerAPI.isKeyDown(Exit_Input)
+			if quitIn then
+				printAPI.print("Quitting - pressed input to quit.\n")
+				quitting = true
+			end
         end
     end
 
@@ -608,13 +636,11 @@ function Update()
 	    if helpIn then
             helpMenu = true
         end
-
         if helpMenu then
             if inputManagerAPI.isMousePressedLeft() then
                 helpMenu = false
             end
         end
-
         if(inputManagerAPI.isKeyPressed(Wireframe_Input)) then
             if(wireindex ==0) then
                 wireindex =1
@@ -622,125 +648,76 @@ function Update()
                 wireindex =0
             end
         end
-
-        --printAPI.print("Processing inputs\n")
-
 	    e = inputManagerAPI.isKeyPressed(Use_Input)
 	    if e then
             printAPI.print("Interacting.\n")
-
-        
             if(player0.lookTarget ~= nil) then
-
                 StartDialogue(player0.lookTarget)
-
                 if(player0.lookTarget.stringID == "Dungeon1Door") then
-
                     MoveToDungeon1()
-
-
                 end
-
                 if(player0.lookTarget.stringID == "ObsTech") then
                     printAPI.print("Picked up quest item.\n")
                     questManager:check(GET,player0.lookTarget,"none")
                     world:RemoveInstance(player0.lookTarget)
-
                 end
             end
-        
-        
 	    end
-
         if inputManagerAPI.isKeyPressed(QuickSlot1_Input) then
-
             StartDialogueTopic(player0,1)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot2_Input) then
-
             StartDialogueTopic(player0,2)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot3_Input) then
-
             StartDialogueTopic(player0,3)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot4_Input) then
-
             StartDialogueTopic(player0,4)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot5_Input) then
-
             StartDialogueTopic(player0,5)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot6_Input) then
-
             StartDialogueTopic(player0,6)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot7_Input) then
-
             StartDialogueTopic(player0,7)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot8_Input) then
-
             StartDialogueTopic(player0,8)
-        
         end
         if inputManagerAPI.isKeyPressed(QuickSlot9_Input) then
-
             StartDialogueTopic(player0,9)
-        
         end
         if inputManagerAPI.isMousePressedLeft() then
-
             debugLPrint("Clicked LMB.\n")
-
             if(player0.inDialogue == false and player0.lookTarget ~= nil and player0.lookTarget.objType == "NPC") then
-			
                 if(player0.rangedWeaponEquipped and player0.lookTarget.hostileToPlayer) then
-                        if(player0.weapon:attack(player0.lookTarget)) then
-                            FireBullet()
-                        end
-            
+                    if(player0.weapon:attack(player0.lookTarget)) then
+                        FireBullet()
+                    end
                 end
             end
-
-
-
             if(player0.inDialogue == true and dInMenu == false) then
-              debugLPrint("In dialogue...")
-
-                if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
-                    dCurrentLine = dCurrentLine + 1
-                    dialogueText = dCurrentTopic.textLines[dCurrentLine]
-                    dInMenu = false
-                
-                
-
-
-                else
-                    debugLPrint("Next line in topic is nil.\n")
-                    StartDialogue(player0.lookTarget)
-                end
+				debugLPrint("In dialogue...")
+				if(dCurrentTopic.textLines[dCurrentLine+1] ~= nil) then
+					dCurrentLine = dCurrentLine + 1
+					dialogueText = dCurrentTopic.textLines[dCurrentLine]
+					dInMenu = false
+				else
+					debugLPrint("Next line in topic is nil.\n")
+					StartDialogue(player0.lookTarget)
+				end
             else
                 if(dInMenu) then
-                        debugLPrint("Closing dialogue - clicked in main menu.\n")
-                        player0.inDialogue = false
+                    debugLPrint("Closing dialogue - clicked in main menu.\n")
+                    player0.inDialogue = false
                 end
             end
         end
-
 	    if inputManagerAPI.isKeyPressed(Quicksave_Input) then
-		    --local currentGOs = world:GetGameObjects()
 		    saveAllToCurrentSave()
-		    --SaveInstances("../SaveData/GO_Save.csv", world:GetGameObjects(), "gameObject")
-		    --SaveInstances("../SaveData/NPC_Save.csv", world:GetGameObjects(), "npc")
 	    end
 
 	    if inputManagerAPI.isKeyPressed(Quickload_Input) then
@@ -770,32 +747,20 @@ function Update()
 
 
         if debug then
-
             if inputManagerAPI.isKeyPressed(SDL_SCANCODE_DELETE) then
                 printAPI.print("Force quitting.\n")
                 os.exit()
-
 	        end
             if inputManagerAPI.isKeyPressed(TestInput1) then
-            
-
 	        end
     
             if inputManagerAPI.isKeyPressed(TestInput2) then
-        
-
 	        end
 		
 		    if inputManagerAPI.isKeyPressed(TestInput3) then
-		
 		    end
     
             if inputManagerAPI.isKeyPressed(TestInput3) then
-                -- spawn bob
-
-                --SpawnBob()
-            
-
 	        end
     
             -- switch whether debug detail printing is on or off
@@ -806,41 +771,26 @@ function Update()
                     debugdetail = true
                 end
 	        end
-
         end
-
-    
-        --printAPI.print("Updating gameobjects\n")
-
-
-        local currentGOs = world:GetGameObjects()
-        for i = 1, world:GetGameObjectCount() do
-            --printAPI.print("Current GO: "..currentGOs[i].name .. "\n")
-            local a = currentGOs[i]:Update()
-            if(currentGOs[i]["currentHealth"] ~= nil) then
-                if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
-                    for k = 1, world:GetGameObjectCount() do
-                        if(currentGOs[k]["currentHealth"] ~= nil and currentGOs[k].hostileToPlayer) then
-                            if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
-                                currentGOs[k]:makeChasing()
-                            end
-                        end
-                    end
-                end
-            end
-        end
-
-        --printAPI.print("Updating player\n")
-
+        --local currentGOs = world:GetGameObjects()
+        --for i = 1, world:GetGameObjectCount() do
+        --    local a = currentGOs[i]:Update()
+        --    if(currentGOs[i]["currentHealth"] ~= nil) then
+        --        if(currentGOs[i]["justSeen"] == true and currentGOs[i]["hostileToPlayer"] == true) then
+        --            for k = 1, world:GetGameObjectCount() do
+        --                if(currentGOs[k]["currentHealth"] ~= nil and currentGOs[k].hostileToPlayer) then
+        --                    if(Distance(currentGOs[i]:getPosition(), currentGOs[k]:getPosition()) < currentGOs[k]["alertDist"]) then
+        --                        currentGOs[k]:makeChasing()
+        --                    end
+        --                end
+        --            end
+        --        end
+        --    end
+        --end
         player0:update();
         AdjustGunAndBullet()
 	end
 	engineAPI.EndUpdate();
-    --printAPI.print("Update complete\n")
-
-    
-
-
 end
 
 function SpawnBob()
@@ -1083,9 +1033,9 @@ function Render()
 
 
 				local i
-			for i = 1, #scene.terrainChunks, 1 do
-				renderManagerAPI.renderObject(camera0,time,scene.terrainChunks[i], 1);
-			end
+				for i = 1, #scene.terrainChunks, 1 do
+					renderManagerAPI.renderObject(camera0,time,scene.terrainChunks[i], 1);
+				end
 
 				--renderManagerAPI.renderObject(camera0,time,currentTerrainID, 1)
 
@@ -1113,8 +1063,6 @@ function Render()
 			end
 		end
 	end
-
-
     renderManagerAPI.endRender()
 end
 

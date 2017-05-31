@@ -227,7 +227,7 @@ function Player:update()
         debugPrint("Resolving player collisions...\n")
 
 
-        if collisionsEnabled then
+        if collisionsEnabled and collisionTreeCreated then
 				printAPI.print("checking collisions")
 		      if collisionAPI.box_collidingInTree(self:BBToWorld()) then
 			      self.velocity.y = 0
