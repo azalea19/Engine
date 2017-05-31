@@ -275,23 +275,19 @@ function InitScene2(pathNPC, diff)
     local loc = {x=100,y=100,z=100}
     local scale = {x=5,y=5,z=5}
     local dir = {x=0,y=1,z=0}
-    Dungeon1Intr = gameObject.new("Dungeon1","The Observatory","COL_Dungeon1Interior",loc,dir,scale,0)
+    --Dungeon1Intr = gameObject.new("Dungeon1","The Observatory","COL_Dungeon1Interior",loc,dir,scale,0)
 
     local NPCData = LoadInstances(pathNPC, "npc",difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene2 = Scene.new("Level2", startPos, startDir)
 	
-	if(scene2:FindInstance("COLDungeon1") == false) then
 
-	end
 	
     scene2:AddInstances(NPCData);
     scene2:AddInstance(Dungeon1Intr);
 
-	if(scene2:FindInstance("Dungeon1IntrDoor") == false) then
 
-	end
 
     --obsTech = gameObject.new("ObsTech","The Observatory","ObsTech",loc,dir,scale,0)
 

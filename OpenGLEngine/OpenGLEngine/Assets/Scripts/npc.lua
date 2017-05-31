@@ -35,6 +35,7 @@ function npc.new(strID, newName, newModel, newPos, newDir, newScale, newAnim, ne
 
 	instance.patrolStartTime = 0
 	instance.patrolTime = 0.1
+	instance.patrolSpeed = 4
 
 	instance.dialogue = nil
 	instance.maxHealth = newMaxHealth
@@ -202,7 +203,7 @@ function patrol(anpc,timeElapsed)
 		anpc:lookAt(generatedWayPoint)
 
 		local distance = math.sqrt(math.pow(anpc.newWayPointX - anpc:getPosition().x, 2) + math.pow(anpc.newWayPointZ - anpc:getPosition().z, 2))
-		anpc.patrolTime = distance / anpc.moveSpeed
+		anpc.patrolTime = distance / anpc.patrolSpeed
 
 		--reset our start time
 		anpc.patrolStartTime = time
