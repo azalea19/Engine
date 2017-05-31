@@ -118,10 +118,10 @@ function Player:update()
 	-- written by liz translated from maddys c++ code
 	--printAPI.print("Updating player\n")
 	local turnSpeed = 0.3
-	local moveSpeed = 3.5 * deltaTime
+	local moveSpeed = 3.2 * deltaTime
 	--printAPI.print("DeltaTime: " .. deltaTime .. "\n")
 	if(inputManagerAPI.isKeyDown(Sprint_Input)) then
-		moveSpeed = moveSpeed * 4
+		moveSpeed = moveSpeed * 2
 	else
 		if(inputManagerAPI.isKeyDown(Walk_Input)) then
 			moveSpeed = moveSpeed * 0.5

@@ -21,7 +21,7 @@ function initMenu()
     local newPos = {x=10,y=-1,z=0}
     local newScaleBG = {x=500,y=500,z=0.01}
     local newDir = {x=0,y=1,z=0}
-	Background = gameObject.new("Background", "Background", "whiteCube", newPos, newDir, newScaleBG, newAnim)
+	Background = gameObject.new("Background", "Background", "mainMenu", newPos, newDir, newScaleBG, newAnim)
 	-- Start New, 0
     local newPos = {x=0,y=-1,z=12}
     local newScale = {x=2,y=2,z=2}
