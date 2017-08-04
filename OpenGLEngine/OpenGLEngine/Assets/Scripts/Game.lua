@@ -1,16 +1,4 @@
-﻿--[[local Vector3 = require 'Vector3'
-local gameObject = require 'gameObject'
-local AABoundingBox = require 'AABoundingBox'
-local npc = require 'npc'
-local Player = require 'Player'
-local Scene = require 'Scene'
-local World = require 'World'
-require 'FileIO'
-require 'ReadAndWriteInstances'
-require 'Terrain'
-]]--
-
-difficulty = 1
+﻿difficulty = 1
 
 local Vector3 = dofile '../Assets/Scripts/Vector3.lua'
 local gameObject = dofile '../Assets/Scripts/gameObject.lua'
@@ -34,10 +22,7 @@ dofile '../Assets/Scripts/Menu.lua'
 dofile '../Assets/Scripts/Load.lua'
 dofile '../Assets/Scripts/GameWorld.lua'
 
-
-
 OPEN_GL = 0
-
 
 collisionObjects = {}
 collisionsEnabled = true
@@ -53,7 +38,6 @@ playerInScene = 1
 time = 0
 lastTime = 0
 deltaTime = 0
-
 
 function Run()
 	Initialize()
@@ -75,21 +59,24 @@ function debugLPrint(string)
     end
 end
 
+-- For debugging purposes. Simple function for printing vec3
 function printVec3(veca)
     printAPI.print(veca.x .. "," .. veca.y .. "," .. veca.z .. "\n")
 end
 
+-- For debugging purposes. Prints vec3 after a string, usually which identifies the vec3.
 function printVec3After(string,veca)
     printAPI.print(string)
     printVec3(veca)
 
 end
 
+-- For debugging purposes. Prints 2 vec3s side by side.
 function printVec3s(vecc,vecb)
     printAPI.print(vecc.x .. "," .. vecc.y .. "," .. vecc.z .. " // " .. vecb.x .. "," .. vecb.y .. "," .. vecb.z .. "\n")
 end
 
-
+-- Transfers bounding box in world space to loacl space
 function BBToLocal(bb,scalea,loca)
     bb.min = mmath.vec3_Multiply(bb.min,scalea,context.handle)
     bb.min = mmath.vec3_Sum(bb.min,loca,context.handle)
@@ -214,7 +201,7 @@ function InitScene1(goPath, npcPath, diff)
 	FixRobots(scene)
 end
 
-
+-- Initialise the collision tree
 function InitialiseCollisionTree()
 	if collisionsEnabled then
 		local currentGOs = scene:GetGameObjects()
@@ -230,7 +217,8 @@ function InitialiseCollisionTree()
 	collisionTreeCreated = true
 end
 
-
+-- Goes through and adds logic etc specific to robots that is not stored in the save data - 
+-- only done due to time constraints. We should add this to object information saved to file. todo
 function FixRobots(thisScene)
     local currentGOs = scene:GetGameObjects()
 
@@ -254,8 +242,6 @@ function FixRobots(thisScene)
 end
 
 function InitAirship()
-
-
 	titan = gameObject.new("titan","Titan","COL_Titan",Vector3.new(500,0,1500),Vector3.new(0,0,0),Vector3.new(1,1,1),0)
 	objectInstanceAPI.setTranslation(titan.id,500,GetHeightAtPoint(500,1500) - 15,1500)
 	scene:AddInstance(titan)
@@ -270,25 +256,18 @@ end
 
 
 function InitScene2(pathNPC, diff)
-
     local loc = {x=100,y=100,z=100}
     local scale = {x=5,y=5,z=5}
     local dir = {x=0,y=1,z=0}
-    --Dungeon1Intr = gameObject.new("Dungeon1","The Observatory","COL_Dungeon1Interior",loc,dir,scale,0)
 
     local NPCData = LoadInstances(pathNPC, "npc",difficulty)
 	local startPos = Vector3.new(0,0,0)
 	local startDir = Vector3.new(0,0,0)
 	scene2 = Scene.new("Level2", startPos, startDir)
 	
-
 	
     scene2:AddInstances(NPCData);
     scene2:AddInstance(Dungeon1Intr);
-
-
-
-    --obsTech = gameObject.new("ObsTech","The Observatory","ObsTech",loc,dir,scale,0)
 
     local currentGOs = scene2:GetGameObjects()
 
@@ -382,21 +361,6 @@ function InitQuests(quePath)
 	local npc_01 = scene:FindInstance("NPC01")
     npc_01.dialogue = diag
     npc_01:setDialogue(diag)
-    --[[
-	if(questManager:doesQuestExist("TalkToBob") == false) then
-		local stage1 = QuestStage.new("ObsGetQuest",TALK,"NPC01","Quest1")
-		local stage2 = QuestStage.new("ObsGetTech",GET,"ObsTech")
-		local stage3 = QuestStage.new("ObsReturn",TALK,"NPC01","Quest1Return")
-
-		local stage4 = QuestStage.new("AirGetQuest",TALK,"NPC01","Quest2")
-		local stage5 = QuestStage.new("AirKillBoss",KILL,"Boss")
-		local stage6 = QuestStage.new("AirReturn",TALK,"NPC01","Quest2Return")
-		
-		local stages = {stage1,stage2,stage3,stage4,stage5,stage6}
-		local talkToBob = Quest.new("TalkToBob",stages,6)
-		questManager:addQuest(talkToBob)
-	end
-    ]]
 end
 
 function Initialize()
@@ -750,6 +714,8 @@ function Update()
 			end
 		end
 
+
+        -- player chasing logic - todo should be moved to AI logic
 		local currentGOs = world:GetGameObjects()
 		for i = 1, world:GetGameObjectCount() do
 			local a = currentGOs[i]:Update()
@@ -841,7 +807,6 @@ function FireBullet()
     bullet:setPosition(sum)
     bullet:lookAt(sum)
     soundAPI.playSound("Gunshot",1)
-
 
 
 end
